@@ -19,9 +19,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Checkout verified content catalog
+        uses: actions/checkout@v4
+        with:
+          repository: chizyo43-debug/alika-icerik
+          path: _content
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Validate source content packages
+        shell: bash
+        run: |
+          for file in _content/turkiye/*/*/*.jsonl; do
+            python _content/tools/pack_validate.py --strict "$file"
+          done
       - name: Build
         run: python tools/build.py
       - name: Validate

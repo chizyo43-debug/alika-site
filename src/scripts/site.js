@@ -161,4 +161,29 @@
       }
     });
   });
+
+  document.querySelectorAll("[data-content-filters]").forEach((filters) => {
+    const country = filters.querySelector("[data-content-country]");
+    const grade = filters.querySelector("[data-content-grade]");
+    const items = [...document.querySelectorAll("[data-content-item]")];
+    if (!country || !grade) return;
+
+    const refresh = () => {
+      const countryValue = country.value;
+      const gradeOptions = [...grade.options];
+      gradeOptions.forEach((option) => {
+        option.hidden = option.dataset.countryOption !== countryValue;
+      });
+      if (grade.selectedOptions[0]?.hidden) {
+        const firstVisible = gradeOptions.find((option) => !option.hidden);
+        if (firstVisible) grade.value = firstVisible.value;
+      }
+      items.forEach((item) => {
+        item.hidden = item.dataset.country !== countryValue || item.dataset.grade !== grade.value;
+      });
+    };
+    country.addEventListener("change", refresh);
+    grade.addEventListener("change", refresh);
+    refresh();
+  });
 })();

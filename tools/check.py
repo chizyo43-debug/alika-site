@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import zipfile
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
@@ -99,11 +100,47 @@ def main() -> None:
             content_text = content_page.read_text(encoding="utf-8")
             if "data-direct-download" not in content_text:
                 errors.append(f"Direct content download is missing: {content_page}")
-            if "alika-icerik/archive/refs/heads/main.zip" not in content_text:
-                errors.append(f"Content download does not target the ZIP archive: {content_page}")
+            if "data-content-country" not in content_text or "data-content-grade" not in content_text:
+                errors.append(f"Country/grade catalog controls are missing: {content_page}")
 
     if expected_pages != 90:
         errors.append(f"Internal checker error, expected page count is {expected_pages}")
+
+    catalog_path = DIST / "icerik" / "catalog-v1.json"
+    alias_path = DIST / "icerik" / "index.html"
+    if not alias_path.exists():
+        errors.append("Turkish /icerik/ alias is missing")
+    if not catalog_path.exists():
+        errors.append("Content catalog JSON is missing")
+    else:
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        if catalog.get("schema") != "alika-content-catalog/v1":
+            errors.append("Content catalog schema is invalid")
+        if not catalog.get("grades") or not catalog.get("subjects"):
+            errors.append("Content catalog is empty")
+        for subject in catalog.get("subjects", []):
+            target = DIST / subject["download_url"].lstrip("/")
+            if not target.exists() or digest(target) != subject["sha256"]:
+                errors.append(f"Subject artifact missing or hash mismatch: {target}")
+        for grade in catalog.get("grades", []):
+            target = DIST / grade["download_url"].lstrip("/")
+            if not target.exists() or digest(target) != grade["sha256"]:
+                errors.append(f"Grade artifact missing or hash mismatch: {target}")
+                continue
+            try:
+                with zipfile.ZipFile(target) as archive:
+                    manifest = json.loads(archive.read("MANIFEST.json"))
+                    if manifest.get("schema") != "alika-class-bundle/v1":
+                        errors.append(f"Grade bundle manifest schema is invalid: {target}")
+                    declared = {row["path"] for row in manifest.get("packages", [])}
+                    if set(archive.namelist()) != declared | {"MANIFEST.json"}:
+                        errors.append(f"Grade bundle entries differ from manifest: {target}")
+                    for package in manifest.get("packages", []):
+                        actual = hashlib.sha256(archive.read(package["path"])).hexdigest()
+                        if actual != package["sha256"]:
+                            errors.append(f"Grade bundle member hash mismatch: {target}:{package['path']}")
+            except (KeyError, json.JSONDecodeError, zipfile.BadZipFile) as exc:
+                errors.append(f"Grade bundle is invalid: {target}: {exc}")
 
     for name in ("privacy", "eula"):
         source = ROOT / "legal" / f"{name}.html"
@@ -126,7 +163,7 @@ def main() -> None:
         print("\n".join(f"ERROR: {error}" for error in errors))
         raise SystemExit(1)
     print(
-        f"OK: {expected_pages} localized pages, 108 guide animations, direct content downloads, "
+        f"OK: {expected_pages} localized pages, 108 guide animations, verified catalog downloads, "
         "fixed legal routes, local links and tracker fence"
     )
 
