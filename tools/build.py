@@ -7,6 +7,8 @@ import shutil
 import stat
 from pathlib import Path
 
+from content_catalog import build_content_catalog
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
@@ -533,7 +535,46 @@ def guide_atlas(lang: str, c: dict) -> str:
     """
 
 
-def inner_content(lang: str, slug: str, c: dict) -> str:
+def content_library(catalog: dict, lang: str) -> str:
+    labels = {
+        "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Makine doğrulamalı · İnsan incelemesi yok", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
+        "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Machine validated · No human review", "Grade {}", "Do not extract the ZIP. Select the class ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
+    }.get(lang, ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Machine validated · No human review", "Grade {}", "Do not extract the ZIP. Select it directly from Add content in AliKa or scan it from the prepared folder."))
+    countries = sorted({row["country_slug"]: row["country"] for row in catalog["grades"]}.items())
+    grades = sorted({(row["country_slug"], row["grade_slug"], row["grade"]) for row in catalog["grades"]})
+    country_options = "".join(f'<option value="{esc(slug)}">{esc(name)}</option>' for slug, name in countries)
+    grade_options = "".join(
+        f'<option value="{esc(grade_slug)}" data-country-option="{esc(country)}">{esc(labels[7].format(grade))}</option>'
+        for country, grade_slug, grade in grades
+    )
+    grade_cards = "".join(f"""
+      <article class="grade-download-card" data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
+        <div><small>{esc(row['country'])} · {esc(labels[7].format(row['grade']))}</small>
+          <h3>{row['subject_count']} ders · {row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}</h3>
+          <p>{esc(labels[6])}</p></div>
+        <a class="button direct-download" href="{esc(row['download_url'])}" download
+           data-direct-download>{esc(labels[2])}</a>
+      </article>""" for row in catalog["grades"])
+    subject_cards = "".join(f"""
+      <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
+        <small>{esc(row['country_code'])} · {row['grade']}. sınıf</small>
+        <h3>{esc(row['subject'])}</h3>
+        <p>{row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}<br>{esc(labels[6])}</p>
+        <a class="package-cta" href="{esc(row['download_url'])}" download>{esc(labels[3])}</a>
+      </article>""" for row in catalog["subjects"])
+    return f"""
+      <div class="content-filters" data-content-filters>
+        <label>{esc(labels[0])}<select data-content-country>{country_options}</select></label>
+        <label>{esc(labels[1])}<select data-content-grade>{grade_options}</select></label>
+      </div>
+      <p class="honesty-note">{esc(labels[8])}</p>
+      <div class="grade-downloads">{grade_cards}</div>
+      <div class="package-grid" data-content-grid>{subject_cards}</div>
+      <p class="honesty-note">{esc(catalog['quality_disclosure'])} · <a href="{esc(catalog['source_repository'])}">GitHub</a></p>
+    """
+
+
+def inner_content(lang: str, slug: str, c: dict, catalog: dict) -> str:
     title, desc = c["pages"][slug]
     if slug == "how-it-works":
         flow = "".join(
@@ -555,20 +596,7 @@ def inner_content(lang: str, slug: str, c: dict) -> str:
         )
         detail = f'<div class="age-detail-grid">{cards}</div>'
     elif slug == "content":
-        download = DOWNLOAD_LABELS[lang]
-        detail = f"""
-        <div class="content-download reveal">
-          <div><span class="status status-dev">{esc(c["status_dev"])}</span><h2>{esc(download[0])}</h2><p>{esc(download[1])}</p></div>
-          <a class="button direct-download" href="https://github.com/chizyo43-debug/alika-icerik/archive/refs/heads/main.zip"
-             download="alika-icerik-main.zip" data-direct-download
-             data-loading="{esc(download[3])}" data-ready="{esc(download[4])}" data-error="{esc(download[5])}">{esc(download[2])}</a>
-        </div>
-        <div class="library-toolbar"><button>Türkiye</button><button>5. sınıf</button><button>Matematik</button></div>
-        <div class="package-grid">
-          <article><small>TR · 5 · Matematik</small><h3>Doğal Sayılar</h3><p>JSONL · CC BY-NC 4.0</p><span>{esc(c["status_dev"])}</span></article>
-          <article><small>TR · 5 · Matematik</small><h3>Kesirler</h3><p>JSONL · CC BY-NC 4.0</p><span>{esc(c["status_dev"])}</span></article>
-          <article><small>TR · 5 · Matematik</small><h3>Geometrik Şekiller</h3><p>JSONL · CC BY-NC 4.0</p><span>{esc(c["status_dev"])}</span></article>
-        </div>"""
+        detail = content_library(catalog, lang)
     elif slug == "features":
         detail = f'{guide_atlas(lang, c)}<div class="section-divider"></div>{status_cards(c)}'
     elif slug == "roadmap":
@@ -628,7 +656,8 @@ def write_page(path: Path, content: str) -> None:
 def build() -> None:
     locales = load_locales()
     if DIST.exists():
-        shutil.rmtree(DIST, onexc=clear_readonly_and_retry)
+        # Python 3.11 yerel geliştirme ortamıyla ve Pages'in 3.12 ortamıyla uyumlu.
+        shutil.rmtree(DIST, onerror=clear_readonly_and_retry)
     DIST.mkdir(parents=True)
 
     shutil.copytree(PUBLIC, DIST / "assets")
@@ -636,6 +665,8 @@ def build() -> None:
     shutil.copy2(SRC / "scripts" / "site.js", DIST / "assets" / "site.js")
     shutil.copy2(ROOT / "CNAME", DIST / "CNAME")
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
+    content_root = Path(os.environ.get("ALIKA_CONTENT_ROOT", ROOT / "_content"))
+    catalog = build_content_catalog(content_root, DIST)
 
     for lang in LANGS:
         c = locales[lang]
@@ -644,7 +675,11 @@ def build() -> None:
         for slug in SLUGS:
             title, desc = c["pages"][slug]
             path = DIST / slug / "index.html" if lang == "tr" else DIST / lang / slug / "index.html"
-            write_page(path, document(locales, lang, f"{title} — AliKa", desc, inner_content(lang, slug, c), slug))
+            write_page(path, document(locales, lang, f"{title} — AliKa", desc, inner_content(lang, slug, c, catalog), slug))
+
+    # Uygulamadaki sabit, Türkçe ve anlaşılır içerik adresi.
+    (DIST / "icerik").mkdir(exist_ok=True)
+    shutil.copy2(DIST / "content" / "index.html", DIST / "icerik" / "index.html")
 
     for name in ("privacy", "eula"):
         source = ROOT / "legal" / f"{name}.html"

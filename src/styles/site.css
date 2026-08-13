@@ -1871,6 +1871,64 @@ h3 {
   background: #a43131;
 }
 
+.content-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+}
+
+.content-filters label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.content-filters select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--snow);
+  color: var(--ink);
+  font: inherit;
+}
+
+.grade-downloads {
+  margin-bottom: 26px;
+}
+
+.grade-download-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  padding: 26px;
+  border-radius: 24px;
+  background: var(--ink);
+  color: var(--snow);
+}
+
+.grade-download-card h3 {
+  margin: 6px 0;
+}
+
+.grade-download-card p,
+.grade-download-card small {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+[data-content-item][hidden] {
+  display: none !important;
+}
+
 .update-list {
   display: grid;
   gap: 18px;
@@ -2298,6 +2356,16 @@ h3 {
     align-items: flex-start;
     flex-direction: column;
     padding: 32px 18px;
+  }
+
+  .content-filters {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .grade-download-card {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .guide-card {
