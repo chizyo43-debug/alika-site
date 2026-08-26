@@ -50,37 +50,44 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
     bundle_output.mkdir(parents=True, exist_ok=True)
 
     subjects: list[dict] = []
-    for source in sorted(content_root.glob("*/*/*/*.jsonl")):
-        rel = source.relative_to(content_root)
-        country_slug, grade_slug, subject_slug, filename = rel.parts
-        if subject_slug == "soru-bankasi":
-            continue
-        parsed = _read_package(source)
-        pack = parsed["pack"]
-        grade = int(pack.get("grade") or grade_slug.split("-")[0])
-        target = data_output / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        subjects.append({
-            "country_slug": country_slug,
-            "country": COUNTRY_NAMES.get(country_slug, country_slug.replace("-", " ").title()),
-            "country_code": str(pack.get("country") or "").upper(),
-            "grade_slug": grade_slug,
-            "grade": grade,
-            "subject_slug": subject_slug,
-            "subject": str(pack.get("subject") or subject_slug.replace("-", " ").title()),
-            "filename": filename,
-            "download_url": f"/icerik/veri/{rel.as_posix()}",
-            "sha256": _sha256(source),
-            "size_bytes": source.stat().st_size,
-            "notes": parsed["notes"],
-            "questions": parsed["questions"],
-            "schema_version": str(pack.get("schemaVersion") or ""),
-            "package_version": int(pack.get("version") or 1),
-            "review_status": str(pack.get("reviewStatus") or "unreviewed"),
-            "human_reviewed": bool(pack.get("humanReviewed", False)),
-            "license": str(pack.get("license") or ""),
-        })
+    # Yalnız yayınlanan ülke köklerini tara. ``staging/`` ve ``reports/``
+    # çalışma alanları aynı dört-seviyeli dizilimi içerebilir; bunları kataloğa
+    # almak Pages dağıtımını taslak/boş bir JSONL yüzünden kırar.
+    for country_slug in sorted(COUNTRY_NAMES):
+        country_root = content_root / country_slug
+        for source in sorted(country_root.glob("*/*/*.jsonl")):
+            rel = source.relative_to(content_root)
+            _, grade_slug, subject_slug, filename = rel.parts
+            if subject_slug == "soru-bankasi":
+                continue
+            parsed = _read_package(source)
+            pack = parsed["pack"]
+            grade = int(pack.get("grade") or grade_slug.split("-")[0])
+            target = data_output / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
+            subjects.append({
+                "country_slug": country_slug,
+                "country": COUNTRY_NAMES[country_slug],
+                "country_code": str(pack.get("country") or "").upper(),
+                "grade_slug": grade_slug,
+                "grade": grade,
+                "subject_slug": subject_slug,
+                "subject": str(pack.get("subject") or subject_slug.replace("-", " ").title()),
+                "filename": filename,
+                "download_url": f"/icerik/veri/{rel.as_posix()}",
+                "sha256": _sha256(source),
+                "size_bytes": source.stat().st_size,
+                "notes": parsed["notes"],
+                "questions": parsed["questions"],
+                "schema_version": str(pack.get("schemaVersion") or ""),
+                # İçerik sözleşmesi hem eski sayısal sürümleri hem SemVer
+                # (ör. ``5.0.0``) kabul eder. Katalogda kayıpsız metin tut.
+                "package_version": str(pack.get("version") or "1"),
+                "review_status": str(pack.get("reviewStatus") or "unreviewed"),
+                "human_reviewed": bool(pack.get("humanReviewed", False)),
+                "license": str(pack.get("license") or ""),
+            })
 
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for subject in subjects:

@@ -16,7 +16,7 @@ footer{margin-top:48px;color:#777;font-size:.9em;border-top:1px solid #ddd;paddi
 <body>
 <p><a href="index.html">← AliKa Legal</a></p>
 <h1>Privacy Policy — AliKa</h1>
-<p class="meta"><strong>Last updated:</strong> 17.07.2026<br>
+<p class="meta"><strong>Last updated:</strong> 26.08.2026<br>
 <strong>Publisher:</strong> ErenKa Software<br>
 <strong>Contact:</strong> alika.destek@gmail.com</p>
 
@@ -42,24 +42,43 @@ the device (locally)</strong>:</p>
 
 <h2>3. Storage and sharing of data</h2>
 <ul>
-<li><strong>All data is stored locally on the device only.</strong></li>
+<li><strong>All data is stored locally on the device only.</strong> Machine-wide
+settings and reports are stored under <code>%ProgramData%\AliKa\</code>; the
+current Windows user's learning library and local state are stored under
+<code>%LocalAppData%\AliKa\</code>.</li>
 <li>Data is <strong>never sent to any server, sold, or shared with third parties</strong>.</li>
 <li>The app contains <strong>no</strong> advertising networks or third-party analytics SDKs.</li>
 <li>The PIN is not stored in plain text; it is hashed with PBKDF2-HMAC-SHA256.</li>
 </ul>
+
+<h3>Android web filter (local VPN)</h3>
+<p>On Android the web filter uses a <strong>local</strong> VPN (VpnService) on the
+device. It only inspects DNS requests (the domain names of visited sites) to block
+listed sites and non-safe-search content. No encrypted tunnel is created and no
+traffic is routed to an AliKa server; only ordinary DNS resolution goes to a public
+resolver. Page content is not read. Visited domain names remain on the device. The
+parent must enable the filter after an in-app prominent disclosure and explicit
+consent, and can turn it off at any time.</p>
 <p><em>(If cloud sync is added in the future, this section will be updated and separate,
 explicit consent will be requested.)</em></p>
 
 <h2>4. Children's privacy (COPPA / GDPR-K)</h2>
 <p>This app processes data on behalf of a legal guardian, for the sole purpose of
 managing their own child's device. Data is not used for marketing, profiling, or
-third-party sharing. The guardian can delete the data at any time through the app.</p>
+third-party sharing. The guardian can delete history and library items through the
+parent panel; the steps for deleting all local data are stated below.</p>
 
 <h2>5. User rights</h2>
 <ul>
 <li><strong>Access:</strong> The parent panel displays all collected data.</li>
-<li><strong>Deletion:</strong> Deleting the app data removes all records; uninstalling
-the app removes all local data.</li>
+<li><strong>Deletion:</strong> The parent panel can delete history records and imported
+library content. Uninstalling the Microsoft Store/MSIX package removes the package,
+service, and running processes, but deliberately retains
+<code>%ProgramData%\AliKa\</code> and <code>%LocalAppData%\AliKa\</code> so a
+reinstall can resume without data loss. To erase everything, delete the first
+directory as an administrator and the second as the relevant Windows user after
+uninstall. The classic Setup uninstaller separately offers to delete
+<code>%ProgramData%\AliKa\</code>; silent update/uninstall retains data.</li>
 <li><strong>Consent:</strong> An explicit consent screen is shown at first setup; functions do not
 start until it is accepted.</li>
 </ul>
