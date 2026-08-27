@@ -612,7 +612,7 @@ def inner_content(lang: str, slug: str, c: dict, catalog: dict) -> str:
         detail = f"""
         <div class="download-card">
           <div><span class="status status-today">Microsoft Store</span><h3>AliKa · Windows</h3><p>{esc(c["proof_body"])}</p></div>
-          <a class="button" href="https://github.com/chizyo43-debug/alika/releases">{esc(c["get"])}</a>
+          <a class="button" href="https://apps.microsoft.com/detail/9N3P9F5ZKR5S" target="_blank" rel="noopener noreferrer">{esc(c["get"])}</a>
         </div>
         <p class="honesty-note">{esc(c["planned_note"])}</p>"""
     elif slug == "contact":

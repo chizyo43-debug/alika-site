@@ -23,6 +23,7 @@ SLUGS = (
     "downloads",
     "contact",
 )
+MICROSOFT_STORE_ID = "9N3P9F5ZKR5S"
 
 
 class LinkParser(HTMLParser):
@@ -103,6 +104,12 @@ def main() -> None:
             if "data-content-country" not in content_text or "data-content-grade" not in content_text:
                 errors.append(f"Country/grade catalog controls are missing: {content_page}")
 
+        downloads_page = base / "downloads" / "index.html"
+        if downloads_page.exists():
+            downloads_text = downloads_page.read_text(encoding="utf-8")
+            if "apps.microsoft.com" not in downloads_text or MICROSOFT_STORE_ID not in downloads_text:
+                errors.append(f"Microsoft Store link is missing: {downloads_page}")
+
     if expected_pages != 90:
         errors.append(f"Internal checker error, expected page count is {expected_pages}")
 
@@ -153,6 +160,12 @@ def main() -> None:
 
     if (DIST / "CNAME").read_text(encoding="utf-8").strip() != "www.alika.tr":
         errors.append("CNAME is not www.alika.tr")
+
+    book_bundles = tuple((DIST / "assets").glob("index-*.js"))
+    if not book_bundles or not any(
+        MICROSOFT_STORE_ID in bundle.read_text(encoding="utf-8") for bundle in book_bundles
+    ):
+        errors.append("Microsoft Store link is missing from the book experience")
 
     forbidden = re.compile(r"(google-analytics|googletagmanager|facebook\.net|hotjar|segment\.com)", re.I)
     for page in DIST.rglob("*.html"):

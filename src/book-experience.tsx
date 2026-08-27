@@ -87,6 +87,8 @@ interface GuideLanguage {
   emptyDescription: string;
 }
 
+const MICROSOFT_STORE_URL = 'https://apps.microsoft.com/detail/9N3P9F5ZKR5S';
+
 const BOOK_PAGES: BookPage[] = [
   { id: 'baslangic', chapter: 'Başlangıç', kind: 'contents', title: 'Bırakın ekran, onu öğrenmeye yakınlaştırsın.', summary: 'AliKa’nın ailelere sözü.' },
   { id: 'neden-alika', chapter: 'AliKa nedir?', kind: 'method', navLabel: 'Soru çöz, süre kazan', title: 'Çocuk soru çözerek ekran süresi kazanır.', summary: 'AliKa’nın temel farkı: doğru cevapları güvenli ve sınırlı ek süreye dönüştüren öğrenme akışı.' },
@@ -965,7 +967,7 @@ function PageContent({ page, onNavigate }: { page: BookPage; onNavigate: (index:
           <h2 tabIndex={-1}>Ekran süresini birlikte yönetin.</h2>
           <p className="pageLead">Kuralları önceden belirleyin, çocuğun kalan süreyi görmesini sağlayın ve doğru cevapları kontrollü ek süreye dönüştürün.</p>
           <div className="closingActions">
-            <a className="primaryCta" href="https://www.alika.tr/downloads/" target="_blank" rel="noreferrer">AliKa’yı edinin <span>↗</span></a>
+            <a className="primaryCta" href={MICROSOFT_STORE_URL} target="_blank" rel="noreferrer" aria-label="AliKa’yı Microsoft Store’da aç">Microsoft Store’dan edinin <span>↗</span></a>
             <a className="supportLink" href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
           </div>
           <div className="closingMark"><img src="/brand/alika-logo.png" alt="" width="74" height="52" /><p>Ekranı kapatmak için değil,<br /><strong>zamanı daha iyi kullanmak için.</strong></p></div>
