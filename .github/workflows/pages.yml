@@ -27,6 +27,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install book experience dependencies
+        run: npm ci
       - name: Validate source content packages
         shell: bash
         run: |
@@ -35,6 +41,10 @@ jobs:
           done
       - name: Build
         run: python tools/build.py
+      - name: Build interactive book homepage
+        run: npm run build:book
+      - name: Type check interactive book
+        run: npm run typecheck
       - name: Validate
         run: python tools/check.py
       - uses: actions/configure-pages@v5
