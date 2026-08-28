@@ -1,0 +1,68 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.009
+Cihazlar ve Aile Ağı bölümü üç alandan oluşur: telefon bağlantısı, eşleşmiş cihazlar ve ağ işlemleri.
+
+00:00:06.009 --> 00:00:11.840
+Bu bölüm, ebeveynin telefonundaki AliKa ile Windows bilgisayarını aynı ev ağı üzerinde buluşturur.
+
+00:00:12.040 --> 00:00:14.952
+Bağlantı isteğe bağlıdır ve başlangıçta kapalıdır.
+
+00:00:14.952 --> 00:00:20.018
+Ekosistem bağlantısını aç seçeneğini yalnız kullanmak istediğinizde etkinleştirirsiniz.
+
+00:00:20.018 --> 00:00:26.540
+Veriler ev ağında uçtan uca şifreli taşınır; eşleştirme ve cihaz komutları için internet sunucusuna gönderilmez.
+
+00:00:26.740 --> 00:00:30.048
+Telefonla eşleştir düğmesi geçici bir karekod oluşturur.
+
+00:00:30.048 --> 00:00:33.770
+Telefonda AliKa'nın Eşleştirme ekranını açın ve bu kodu okutun.
+
+00:00:33.770 --> 00:00:36.664
+Telefonla bilgisayar aynı Wi-Fi ağında olmalıdır.
+
+00:00:36.664 --> 00:00:42.040
+Güvenlik için gerçek eşleştirme kodu bu videoda gizlenmiştir ve süre dolunca geçersiz olur.
+
+00:00:42.240 --> 00:00:45.636
+Eşleştirme tamamlandığında cihaz, Cihazlar kartında görünür.
+
+00:00:45.636 --> 00:00:48.749
+Henüz bağlantı kurulmadıysa AliKa bunu açıkça belirtir.
+
+00:00:48.749 --> 00:00:54.240
+Böylece hangi telefon veya bilgisayarın aile ağına katıldığını tek ekranda kontrol edebilirsiniz.
+
+00:00:54.440 --> 00:01:00.013
+Ağ İşlemleri bölümünde önce Hedef cihaz listesinden işlem yapacağınız cihazı seçersiniz.
+
+00:01:00.013 --> 00:01:02.483
+Liste yalnız eşleşmiş cihazlarla dolar.
+
+00:01:02.483 --> 00:01:09.260
+Ekosistem kapalıysa veya hedef cihaz çevrimdışıysa komutlar kullanılamaz; AliKa bağlantı durumunu saklamaz.
+
+00:01:09.460 --> 00:01:21.184
+Seçili cihazın adını düzenleyebilir, Aileme mesaj düğmesiyle yerel ağ üzerinden kısa bir aile iletisi gönderebilir, Zaman Yönetimi ekranını açabilir veya Son Yedi Gün Ekran Süresi özetini görüntüleyebilirsiniz.
+
+00:01:21.184 --> 00:01:23.640
+Her işlem seçtiğiniz hedef cihaza uygulanır.
+
+00:01:23.840 --> 00:01:27.542
+Bu yapı bir bulut hesabı ya da uzaktan internet takibi değildir.
+
+00:01:27.542 --> 00:01:30.434
+Telefon ve bilgisayar aynı yerel ağdayken çalışır.
+
+00:01:30.434 --> 00:01:36.160
+Eşleştirme yapılmadan cihaz listesi oluşmaz; bağlantıyı kapattığınızda aile ağı iletişimi de durur.
+
+00:01:36.360 --> 00:01:42.778
+Sonuç olarak AliKa, aile cihazlarını gizli izleme yerine açık eşleştirme ve görünür komutlarla yönetir.
+
+00:01:42.778 --> 00:01:49.320
+Önce bağlantıyı açın, telefonu eşleştirin, hedef cihazı seçin ve yalnız ihtiyacınız olan işlemi kullanın.
+

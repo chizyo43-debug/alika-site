@@ -3,11 +3,18 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type TouchEvent } from 'react';
+import {
+  GUIDE_LANGUAGES,
+  GUIDE_VIDEO_GROUP_ORDER,
+  getPublishedGuideVideos,
+  type GuideLanguage,
+  type GuideLanguageCode,
+  type GuideVideo,
+} from './data/video-guides';
 
 type BookPhase = 'closed' | 'morphing' | 'opening' | 'reading' | 'flipping';
 type PageKind = 'contents' | 'method' | 'difference' | 'day-story' | 'platforms' | 'android-mobile' | 'android-tv' | 'learning' | 'evidence' | 'age-intro' | 'age-band' | 'planning' | 'routine' | 'family' | 'ecosystem-actions' | 'games-intro' | 'games-group' | 'trust' | 'status' | 'content' | 'content-catalog' | 'feedback' | 'closing';
 type PageStatus = 'Bugün kullanılabilir' | 'Geliştiriliyor' | 'Planlandı';
-type GuideLanguageCode = 'tr' | 'en' | 'de' | 'es' | 'fr' | 'pt' | 'ru' | 'ja' | 'ko';
 
 interface BookPage {
   id: string;
@@ -68,24 +75,6 @@ interface AgeBandInfo {
   tone: 'young' | 'mid' | 'teen' | 'senior';
 }
 
-interface GuideVideo {
-  id: string;
-  duration: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  poster: string;
-}
-
-interface GuideLanguage {
-  code: GuideLanguageCode;
-  nativeName: string;
-  locale: string;
-  playLabel: string;
-  youtubeLabel: string;
-  emptyTitle: string;
-  emptyDescription: string;
-}
 
 const MICROSOFT_STORE_URL = 'https://apps.microsoft.com/detail/9N3P9F5ZKR5S';
 
@@ -173,73 +162,6 @@ const AGE_BANDS: AgeBandInfo[] = [
     rhythm: '30 dakikada bir mola önerisi · günde 10 kısa soru kartı', quizCards: 10,
   },
 ];
-
-const WINDOWS_VIDEOS = [
-  {
-    id: 'yaxrITEsqyI',
-    duration: '0:57',
-    eyebrow: '01 · Genel bakış',
-    title: 'AliKa Windows ne işe yarar?',
-    description: 'Ekran süresi, öğrenme, görev ve aile düzeninin tek panelde nasıl birleştiğini kısa bir turla görün.',
-    poster: '/videos/windows-overview.jpg',
-  },
-  {
-    id: 'RZDOb072nyk',
-    duration: '1:29',
-    eyebrow: '02 · Kurulum ve güvenlik',
-    title: 'AliKa Windows nasıl kurulur?',
-    description: 'Microsoft Store kurulumu, ebeveyn PIN’i ve Güvenli Mod adımlarını baştan sona izleyin.',
-    poster: '/videos/windows-setup.jpg',
-  },
-  {
-    id: 'sXvHkeOegIo',
-    duration: '4:39',
-    eyebrow: '03 · Çocuk ve kurallar',
-    title: 'Çocuk profili ve ekran kuralları nasıl yönetilir?',
-    description: 'Çocuk profillerini; ekran süresi, uygulama, site, uyku ve öğrenme kurallarıyla birlikte nasıl yöneteceğinizi görün.',
-    poster: '/videos/windows-child-rules.jpg',
-  },
-  {
-    id: '8cCkgvU3AJs',
-    duration: '1:50',
-    eyebrow: '04 · Cihazlar ve aile ağı',
-    title: 'Aile cihazları nasıl eşleştirilir?',
-    description: 'Windows bilgisayarını aile cihazlarına bağlamayı, cihaz durumlarını izlemeyi ve uzaktan işlemleri kullanmayı öğrenin.',
-    poster: '/videos/windows-family-network.jpg',
-  },
-  {
-    id: '2ooX93agqDo',
-    duration: '1:49',
-    eyebrow: '05 · Raporlar ve bildirimler',
-    title: 'Kullanım ve öğrenme sonuçları nereden görülür?',
-    description: 'Ekran kullanımını, soru sonuçlarını, olay geçmişini ve önemli bildirimleri nereden okuyacağınızı görün.',
-    poster: '/videos/windows-reports.jpg',
-  },
-] as const satisfies readonly GuideVideo[];
-
-const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
-  { code: 'tr', nativeName: 'Türkçe', locale: 'tr', playLabel: 'Videoyu oynat', youtubeLabel: 'YouTube’da aç', emptyTitle: 'Türkçe rehberler hazırlanıyor.', emptyDescription: 'Bu dilde yayımlanan rehberler burada görünecek.' },
-  { code: 'en', nativeName: 'English', locale: 'en', playLabel: 'Play video', youtubeLabel: 'Open on YouTube', emptyTitle: 'English video guides are being prepared.', emptyDescription: 'AliKa supports English in the app. The YouTube guides have not been published yet.' },
-  { code: 'de', nativeName: 'Deutsch', locale: 'de', playLabel: 'Video abspielen', youtubeLabel: 'Auf YouTube öffnen', emptyTitle: 'Deutsche Videoanleitungen werden vorbereitet.', emptyDescription: 'AliKa unterstützt Deutsch in der App. Die YouTube-Anleitungen sind noch nicht veröffentlicht.' },
-  { code: 'es', nativeName: 'Español', locale: 'es', playLabel: 'Reproducir vídeo', youtubeLabel: 'Abrir en YouTube', emptyTitle: 'Las guías en vídeo en español están en preparación.', emptyDescription: 'AliKa admite español en la aplicación. Las guías de YouTube aún no se han publicado.' },
-  { code: 'fr', nativeName: 'Français', locale: 'fr', playLabel: 'Lire la vidéo', youtubeLabel: 'Ouvrir sur YouTube', emptyTitle: 'Les guides vidéo en français sont en préparation.', emptyDescription: 'AliKa prend en charge le français dans l’application. Les guides YouTube ne sont pas encore publiés.' },
-  { code: 'pt', nativeName: 'Português', locale: 'pt', playLabel: 'Reproduzir vídeo', youtubeLabel: 'Abrir no YouTube', emptyTitle: 'Os guias em vídeo em português estão sendo preparados.', emptyDescription: 'O AliKa oferece suporte a português no aplicativo. Os guias do YouTube ainda não foram publicados.' },
-  { code: 'ru', nativeName: 'Русский', locale: 'ru', playLabel: 'Воспроизвести видео', youtubeLabel: 'Открыть на YouTube', emptyTitle: 'Видеоинструкции на русском языке готовятся.', emptyDescription: 'AliKa поддерживает русский язык в приложении. Инструкции на YouTube пока не опубликованы.' },
-  { code: 'ja', nativeName: '日本語', locale: 'ja', playLabel: '動画を再生', youtubeLabel: 'YouTubeで開く', emptyTitle: '日本語の動画ガイドを準備しています。', emptyDescription: 'AliKaアプリは日本語に対応しています。YouTubeガイドはまだ公開されていません。' },
-  { code: 'ko', nativeName: '한국어', locale: 'ko', playLabel: '동영상 재생', youtubeLabel: 'YouTube에서 열기', emptyTitle: '한국어 동영상 가이드를 준비하고 있습니다.', emptyDescription: 'AliKa 앱은 한국어를 지원합니다. YouTube 가이드는 아직 게시되지 않았습니다.' },
-];
-
-const VIDEO_GUIDES_BY_LANGUAGE: Record<GuideLanguageCode, readonly GuideVideo[]> = {
-  tr: WINDOWS_VIDEOS,
-  en: [],
-  de: [],
-  es: [],
-  fr: [],
-  pt: [],
-  ru: [],
-  ja: [],
-  ko: [],
-};
 
 function getVideoLibraryDuration(videos: readonly GuideVideo[]) {
   const totalSeconds = videos.reduce((total, video) => {
@@ -444,8 +366,8 @@ function VideoGuideCard({ video, language }: { video: GuideVideo; language: Guid
         ) : (
           <>
             <img className="videoPoster" src={video.poster} alt="" loading="lazy" decoding="async" />
-            <button className="videoGate" type="button" onClick={() => setPlaying(true)} aria-label={`${video.title} — ${language.playLabel}`}>
-              <span lang={language.locale}><b aria-hidden="true">▶</b> {language.playLabel}</span>
+            <button className="videoGate" type="button" onClick={() => setPlaying(true)} aria-label={`${video.title} — ${language.copy.playLabel}`}>
+              <span lang={language.youtubeLocale}><b aria-hidden="true">▶</b> {language.copy.playLabel}</span>
             </button>
           </>
         )}
@@ -455,7 +377,7 @@ function VideoGuideCard({ video, language }: { video: GuideVideo; language: Guid
         <small>{video.eyebrow}</small>
         <h3>{video.title}</h3>
         <p>{video.description}</p>
-        <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer" lang={language.locale}>{language.youtubeLabel} ↗</a>
+        <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer" lang={language.youtubeLocale}>{language.copy.youtubeLabel} ↗</a>
       </div>
     </article>
   );
@@ -464,18 +386,19 @@ function VideoGuideCard({ video, language }: { video: GuideVideo; language: Guid
 function LocalizedVideoLibrary() {
   const [languageCode, setLanguageCode] = useState<GuideLanguageCode>('tr');
   const language = GUIDE_LANGUAGES.find((item) => item.code === languageCode) ?? GUIDE_LANGUAGES[0];
-  const videos = VIDEO_GUIDES_BY_LANGUAGE[language.code];
+  const videos = getPublishedGuideVideos(language);
+  const copy = language.copy;
 
   return (
     <section className="platformVideoSection" aria-labelledby="windows-video-title">
       <div className="platformVideoHeading">
-        <div><small>AliKa YouTube rehberleri · 9 uygulama dili</small><h3 id="windows-video-title">Rehberleri kendi dilinizde izleyin.</h3></div>
-        <a href="https://www.youtube.com/@AliKaApp" target="_blank" rel="noreferrer">AliKa kanalını aç ↗</a>
+        <div lang={language.youtubeLocale}><small>{copy.sectionEyebrow}</small><h3 id="windows-video-title">{copy.sectionTitle}</h3></div>
+        <a href="https://www.youtube.com/@AliKaApp" target="_blank" rel="noreferrer" lang={language.youtubeLocale}>{copy.channelLabel} ↗</a>
       </div>
-      <p className="platformVideoLead">AliKa Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, Portekizce, Rusça, Japonca ve Korece kullanılabilir. Bir dil seçtiğinizde yalnız o dilde yayımlanmış YouTube rehberleri gösterilir.</p>
+      <p className="platformVideoLead" lang={language.youtubeLocale}>{copy.sectionLead}</p>
       <div className="videoLanguageTabs" role="tablist" aria-label="Rehber video dili">
         {GUIDE_LANGUAGES.map((item) => {
-          const count = VIDEO_GUIDES_BY_LANGUAGE[item.code].length;
+          const count = getPublishedGuideVideos(item).length;
           const selected = item.code === language.code;
           return (
             <button
@@ -488,8 +411,8 @@ function LocalizedVideoLibrary() {
               className={selected ? 'active' : ''}
               onClick={() => setLanguageCode(item.code)}
             >
-              <span lang={item.locale}>{item.nativeName}</span>
-              <small>{count > 0 ? `${count} video` : 'Hazırlanıyor'}</small>
+              <span lang={item.youtubeLocale}>{item.nativeName}</span>
+              <small lang={item.youtubeLocale}>{count > 0 ? `${count} video` : item.copy.preparingLabel}</small>
             </button>
           );
         })}
@@ -502,22 +425,32 @@ function LocalizedVideoLibrary() {
       >
         <div className="videoLanguageStatus">
           <span aria-hidden="true">{language.code.toUpperCase()}</span>
-          <p><b lang={language.locale}>{language.nativeName}</b><small>{videos.length > 0 ? 'Yayımlanan rehberler' : 'Uygulamada destekleniyor · video bekleniyor'}</small></p>
+          <p lang={language.youtubeLocale}><b>{language.nativeName}</b><small>{videos.length > 0 ? copy.publishedLabel : copy.preparingLabel}</small></p>
         </div>
         {videos.length > 0 ? (
           <>
-            <div className="videoLibrary platformVideoLibrary">{videos.map((video) => <VideoGuideCard key={`${language.code}-${video.id}`} video={video} language={language} />)}</div>
-            <p className="youtubeFootnote"><span>Video yalnız oynat düğmesine bastığınızda YouTube’a bağlanır.</span><span>{videos.length} açıklamalı rehber · toplam {getVideoLibraryDuration(videos)}</span></p>
+            <div className="videoGuideGroups" lang={language.youtubeLocale}>
+              {GUIDE_VIDEO_GROUP_ORDER.map((group) => {
+                const groupVideos = videos.filter((video) => video.group === group);
+                if (groupVideos.length === 0) return null;
+                return (
+                  <section className="videoGuideGroup" key={group} aria-labelledby={`video-group-${language.code}-${group}`}>
+                    <h4 id={`video-group-${language.code}-${group}`}>{copy.groupLabels[group]}</h4>
+                    <div className="videoLibrary platformVideoLibrary">{groupVideos.map((video) => <VideoGuideCard key={`${language.code}-${video.id}`} video={video} language={language} />)}</div>
+                  </section>
+                );
+              })}
+            </div>
+            <p className="youtubeFootnote" lang={language.youtubeLocale}><span>{copy.privacyLabel}</span><span>{copy.totalLabel(videos.length, getVideoLibraryDuration(videos))}</span></p>
           </>
         ) : (
-          <div className="videoLanguageEmpty" lang={language.locale}>
+          <div className="videoLanguageEmpty" lang={language.youtubeLocale}>
             <span aria-hidden="true">{language.code.toUpperCase()}</span>
-            <div><h4>{language.emptyTitle}</h4><p>{language.emptyDescription}</p></div>
-            <a href="https://www.youtube.com/@AliKaApp" target="_blank" rel="noreferrer">{language.youtubeLabel} ↗</a>
+            <div><h4>{copy.emptyTitle}</h4><p>{copy.emptyDescription}</p></div>
+            <a href="https://www.youtube.com/@AliKaApp" target="_blank" rel="noreferrer">{copy.youtubeLabel} ↗</a>
           </div>
         )}
       </div>
-      <p className="videoLanguageTruth"><b>Şu an yayımlanan:</b> Türkçe Windows rehberleri. Diğer diller için yanlış veya otomatik çevrilmiş video gösterilmez; yayınlandığında ilgili dilin altında açılır.</p>
     </section>
   );
 }

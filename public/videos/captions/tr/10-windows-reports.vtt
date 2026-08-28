@@ -1,0 +1,71 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.450
+Raporlar ve Bildirimler bölümü, seçili çocuk profilindeki kullanım ve öğrenme özetlerini anlaşılır ekranlara ayırır.
+
+00:00:06.450 --> 00:00:12.900
+Raporlar sekmesinde haftalık karne, saatlik kullanım, soru sonuçları, web ve video geçmişi ile olay günlüğü bulunur.
+
+00:00:13.100 --> 00:00:21.626
+Haftalık Rapor ekranında çözülen soru sayısını, doğruluk oranını, çalışılan günleri, sınav özetini ve günlere göre ekran süresini birlikte görürsünüz.
+
+00:00:21.626 --> 00:00:24.468
+Haftalık ve Aylık düğmeleriyle dönem değiştirilir.
+
+00:00:24.468 --> 00:00:28.560
+Karneyi dışa aktar seçeneği, görünen özeti HTML dosyası olarak kaydeder.
+
+00:00:28.760 --> 00:00:34.539
+Saatlik görünüm, bugünkü bilgisayar kullanımının günün hangi saatlerinde yoğunlaştığını gösterir.
+
+00:00:34.539 --> 00:00:39.960
+Grafik, süre limitinin kendisi değildir; gerçekleşen kullanımın zaman içindeki dağılımıdır.
+
+00:00:40.160 --> 00:00:44.510
+Soru Sonuçları ekranı toplam doğru ve yanlış sayılarını derslere göre ayırır.
+
+00:00:44.510 --> 00:00:47.956
+Başarı yüzdeleri konu bazlı ilerlemeyi görmenize yardım eder.
+
+00:00:47.956 --> 00:00:53.380
+Soru ile süre kazanma alanı ise hangi soruların ek süre oluşturduğunu ayrı bir bölümde gösterir.
+
+00:00:53.580 --> 00:01:01.262
+Web ve Video Geçmişi ekranında kaydedilen tarayıcı başlıkları zaman sırasıyla listelenir; Tümü ve Video filtreleri kullanılabilir.
+
+00:01:01.262 --> 00:01:03.921
+AliKa tarayıcı geçmişini canlı olarak okumaz.
+
+00:01:03.921 --> 00:01:07.407
+Kayıt yalnız desteklenen tarayıcı etkin durumdayken oluşur.
+
+00:01:07.407 --> 00:01:10.480
+Temizle düğmesi görünen geçmiş kayıtlarını kaldırır.
+
+00:01:10.680 --> 00:01:16.996
+Olay Günlüğü, sistem uyarıları, kural güncellemeleri, limitler ve engelleme olaylarını zaman sırasıyla toplar.
+
+00:01:16.996 --> 00:01:19.292
+Yenile düğmesi güncel kayıtları getirir.
+
+00:01:19.292 --> 00:01:22.680
+Teknik ayrıntılar yalnız sorun giderme gerektiğinde açılır.
+
+00:01:22.880 --> 00:01:26.780
+Bildirimler sekmesi son önemli olayları kısa bir liste halinde sunar.
+
+00:01:26.780 --> 00:01:30.002
+Tümünü gör düğmesi ayrıntılı Olay Günlüğü ekranına geçer.
+
+00:01:30.002 --> 00:01:33.280
+Böylece özet bildirim ile teknik kayıt birbirine karışmaz.
+
+00:01:33.480 --> 00:01:38.320
+Bu videodaki sayılar ve kayıt satırları tanıtım amacıyla oluşturulmuş örnek verilerdir.
+
+00:01:38.320 --> 00:01:42.716
+AliKa raporları seçili profil ve bu Windows cihazında oluşan kayıtlara dayanır.
+
+00:01:42.716 --> 00:01:48.780
+Raporlar, çocuğun günlük düzenini anlamak için kullanılır; gizli ve sınırsız internet takibi anlamına gelmez.
+

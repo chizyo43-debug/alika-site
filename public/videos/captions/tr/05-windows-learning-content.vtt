@@ -1,0 +1,113 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.480
+AliKa'nın Öğrenme ekranında içerikler iki alanda düzenlenir.
+
+00:00:03.480 --> 00:00:07.888
+Ders Arşivi konu anlatımlarını, Soru Bankam ise çalışma sorularını gösterir.
+
+00:00:07.888 --> 00:00:10.498
+İçerikler ihtiyacınıza göre sonradan eklenir.
+
+00:00:10.498 --> 00:00:14.500
+Şimdi bütün ekleme seçeneklerini gerçek Windows ekranlarıyla görelim.
+
+00:00:14.692 --> 00:00:17.731
+İçerik Ekle ekranında iki kolay başlangıç yolu var.
+
+00:00:17.731 --> 00:00:21.903
+Doğrulanmış içerik kataloğu, alika.tr üzerindeki hazır paketleri açar.
+
+00:00:21.903 --> 00:00:29.948
+ChatGPT ile soru bankası hazırlarken AliKa ayrıntılı bir istem oluşturur ve tamamlanan çalışmayı tek bir ZIP dosyası olarak kabul eder.
+
+00:00:30.148 --> 00:00:34.590
+Konu anlatımı eklemek için bilgisayarınızdaki kaynakları kullanabilirsiniz.
+
+00:00:34.590 --> 00:00:38.736
+AliKa XLSX V1 çalışma kitabı konu anlatımıyla soruları birlikte taşır.
+
+00:00:38.736 --> 00:00:43.000
+Nokta alika paketi, PDF, EPUB ve metin belgeleri de bu bölümden seçilir.
+
+00:00:43.200 --> 00:00:52.404
+Diğer yöntemlerde boş XLSX şablonunu indirebilir, eşleştirilmiş konu anlatımı ve soru CSV dosyalarını seçebilir ya da hazır bir klasörü taratabilirsiniz.
+
+00:00:52.404 --> 00:00:58.360
+Bu dosya yollarında AliKa içeriği önce doğrular; gereken içerikler inceleme ve onay akışına alınır.
+
+00:00:58.560 --> 00:01:01.359
+Soru hazırlamak için Soru Bankam sekmesine geçin.
+
+00:01:01.359 --> 00:01:07.187
+ChatGPT seçeneği yirmi beşten iki yüze kadar soru için adım adım ilerleyen bir hazırlama ekranı sunar.
+
+00:01:07.187 --> 00:01:10.786
+Hızlı CSV seçeneği elinizdeki soru dosyasını doğrudan denetler.
+
+00:01:10.786 --> 00:01:13.700
+Teknik denetimden geçen bankalar burada listelenir.
+
+00:01:13.894 --> 00:01:19.227
+Soru bankası hazırlama ekranında ülke ve dili, sınıfı, kapsamı, dersi ve soru sayısını seçin.
+
+00:01:19.227 --> 00:01:22.611
+Model, API anahtarı veya dosya şeması ayarlamanız gerekmez.
+
+00:01:22.611 --> 00:01:27.084
+AliKa gerekli teknik kuralları oluşturacağı istemin içine kendisi yerleştirir.
+
+00:01:27.284 --> 00:01:33.124
+Kapsam için üç seçenek bulunur: yalnız bir konu, seçilen dersin tamamı veya sınıftaki tüm dersler.
+
+00:01:33.124 --> 00:01:38.964
+Böylece kısa bir çalışma bankası da, daha geniş bir tekrar paketi de aynı ekrandan hazırlanabilir.
+
+00:01:39.164 --> 00:01:43.593
+Örnekte Türkiye, birinci sınıf Hayat Bilgisi ve Sağlıklı Yaşam konusunu seçtik.
+
+00:01:43.593 --> 00:01:46.733
+Banka adı ve yüz soru dışında kişisel bilgi kullanmadık.
+
+00:01:46.733 --> 00:01:51.275
+Videodaki ekranlarda çocuk adı, profil ayrıntısı ve kullanım geçmişi gösterilmez.
+
+00:01:51.475 --> 00:01:57.972
+İstemi kopyaladığınızda AliKa bekleme ekranına geçer ve kabul edeceği ZIP dosyasının tam adını gösterir.
+
+00:01:57.972 --> 00:02:03.595
+Uygulama ChatGPT'ye kendiliğinden bağlanmaz, istemi göndermez ve öğrenci verisi paylaşmaz.
+
+00:02:03.595 --> 00:02:05.719
+İşlem sizin denetiminizde ilerler.
+
+00:02:05.919 --> 00:02:10.817
+ChatGPT'de yeni bir sohbet açın, AliKa'nın hazırladığı istemi yapıştırıp gönderin.
+
+00:02:10.817 --> 00:02:14.162
+Üretim tamamlanınca yanıttaki tek ZIP dosyasını indirin.
+
+00:02:14.162 --> 00:02:18.881
+Metni veya dosyaları ayrı ayrı kopyalamayın; AliKa tam paket yapısını denetler.
+
+00:02:19.081 --> 00:02:22.808
+AliKa'ya dönüp İndirilen dosyayı bul ve denetle düğmesine basın.
+
+00:02:22.808 --> 00:02:32.706
+Uygulama paket kimliğini, dosya listesini, soru sayısını, benzersizliği, dört seçeneği, doğru cevapları, açıklamaları, zorluk dağılımını ve varsa görselleri kontrol eder.
+
+00:02:32.706 --> 00:02:35.501
+Paket geçerliyse soru bankasının tamamı kurulur.
+
+00:02:35.682 --> 00:02:40.387
+Kurulan banka Soru Bankam ekranında teknik denetimden geçti bilgisiyle görünür.
+
+00:02:40.387 --> 00:02:46.105
+Konu anlatımı ayrı bir içerik türüdür; katalog, XLSX, CSV, belge veya paket yoluyla eklenebilir.
+
+00:02:46.105 --> 00:02:49.916
+Aynı ders ve konuya ait anlatım varsa sorular otomatik bağlanır.
+
+00:02:49.916 --> 00:02:54.264
+Böylece konu anlatımları ve sorular düzenli biçimde kullanıma hazırlanır.
+

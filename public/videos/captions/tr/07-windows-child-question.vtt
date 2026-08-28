@@ -1,0 +1,65 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.547
+Çocuk, Öğrenme Merkezi'ndeki Soru ve Pratik bölümünden Soru çöz düğmesine basarak çalışma ekranını açar.
+
+00:00:05.547 --> 00:00:10.240
+Buradaki sorular yalnızca ebeveynin eklediği ve kullanıma açtığı soru bankasından gelir.
+
+00:00:10.425 --> 00:00:18.354
+Üst kartta bugün kazanılan süre, ebeveynin belirlediği günlük kazanım sınırı, çözülen soru sayısı ve bankada kalan sorular birlikte görünür.
+
+00:00:18.354 --> 00:00:22.658
+İlerleme çubuğu çocuğun günlük sınırı ne kadar kullandığını açıkça gösterir.
+
+00:00:22.858 --> 00:00:27.805
+Soru kartında ders ve konu, soru metni ve dört ya da beş cevap seçeneği bulunur.
+
+00:00:27.805 --> 00:00:33.741
+Çocuk seçeneğe tıklayabilir veya klavyedeki A, B, C, D ve gerektiğinde E tuşlarını kullanabilir.
+
+00:00:33.941 --> 00:00:39.128
+Ebeveyn soru süresini açtıysa sayaç üstte görünür ve süre dolduğunda soru yanlış kabul edilir.
+
+00:00:39.128 --> 00:00:44.039
+Alt bölümde oturumu kapatma ve işlem yapmak için Çözüm Kağıdı'nı açma seçenekleri vardır.
+
+00:00:44.239 --> 00:00:48.603
+Doğru cevap yeşil renkle işaretlenir ve kazanıma kaç doğru kaldığı yazılır.
+
+00:00:48.603 --> 00:00:54.654
+Ödüllü çalışmada doğru tamamlanan soru öğrenildi olarak kaydedilir; aynı soru durmadan yeniden sorulmaz.
+
+00:00:54.854 --> 00:00:57.620
+Bu örnekte iki doğru cevap bir dakika kazandırır.
+
+00:00:57.620 --> 00:01:05.016
+Doğru artı bir dakika bildirimi önce görünür; kazanım kaydedildikten sonra bir sonraki soruda üst sayaç ve günlük toplam yenilenir.
+
+00:01:05.016 --> 00:01:07.274
+Oranı ve günlük sınırı ebeveyn belirler.
+
+00:01:07.474 --> 00:01:12.568
+Yanlış cevapta veya süre dolduğunda doğru seçenek gösterilir ve açıklama ekranı açılır.
+
+00:01:12.568 --> 00:01:15.846
+Soruyla bağlantılı konu anlatımı varsa çocuk okuyabilir.
+
+00:01:15.846 --> 00:01:22.111
+Yalnız kısa açıklama varsa AliKa, konu anlatımı mevcut değil diyerek olmayan içeriği varmış gibi göstermez.
+
+00:01:22.290 --> 00:01:28.305
+Yanlış cevaplanan soru hemen ezberletilmez; araya en az iki farklı soru girdikten sonra yeniden gelir.
+
+00:01:28.305 --> 00:01:31.962
+Üç yanlış üst üste verilirse otuz saniyelik bekleme uygulanır.
+
+00:01:31.962 --> 00:01:35.854
+Amaç rastgele işaretlemek değil, açıklamayı okuyarak ilerlemektir.
+
+00:01:36.054 --> 00:01:39.689
+Soru bankası bittiğinde çocuk ebeveynden yeni banka isteyebilir.
+
+00:01:39.689 --> 00:01:48.777
+Böylece soru kaynağı, doğru ve yanlış geri bildirimi, kazanılan süre ve günlük sınır tek ekranda görünür; kontrol her zaman ebeveynin belirlediği kurallardadır.
+
