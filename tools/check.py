@@ -24,6 +24,12 @@ SLUGS = (
     "contact",
 )
 MICROSOFT_STORE_ID = "9N3P9F5ZKR5S"
+MICROSOFT_STORE_CID = "cid=site_home_tr"
+GUIDE_SLUGS = (
+    "windows-11-cocuk-ekran-suresi",
+    "soru-cozerek-ekran-suresi-kazanma",
+    "bulutsuz-ebeveyn-kontrolu",
+)
 
 
 class LinkParser(HTMLParser):
@@ -107,11 +113,38 @@ def main() -> None:
         downloads_page = base / "downloads" / "index.html"
         if downloads_page.exists():
             downloads_text = downloads_page.read_text(encoding="utf-8")
-            if "apps.microsoft.com" not in downloads_text or MICROSOFT_STORE_ID not in downloads_text:
+            if (
+                "apps.microsoft.com" not in downloads_text
+                or MICROSOFT_STORE_ID not in downloads_text
+                or MICROSOFT_STORE_CID not in downloads_text
+            ):
                 errors.append(f"Microsoft Store link is missing: {downloads_page}")
+            if '"@type":"SoftwareApplication"' not in downloads_text:
+                errors.append(f"SoftwareApplication schema is missing: {downloads_page}")
 
     if expected_pages != 90:
         errors.append(f"Internal checker error, expected page count is {expected_pages}")
+
+    guide_pages = [DIST / "rehber" / "index.html", *(DIST / "rehber" / slug / "index.html" for slug in GUIDE_SLUGS)]
+    for page in guide_pages:
+        if not page.exists():
+            errors.append(f"Missing Turkish guide page: {page}")
+            continue
+        guide_text = page.read_text(encoding="utf-8")
+        if '<link rel="canonical"' not in guide_text:
+            errors.append(f"No canonical: {page}")
+        if 'type="application/ld+json"' not in guide_text:
+            errors.append(f"Structured data is missing: {page}")
+        parser = LinkParser()
+        parser.feed(guide_text)
+        for attr, value in parser.links:
+            if not route_exists(value):
+                errors.append(f"Broken {attr} in {page}: {value}")
+
+    for slug in GUIDE_SLUGS:
+        page = DIST / "rehber" / slug / "index.html"
+        if page.exists() and MICROSOFT_STORE_CID not in page.read_text(encoding="utf-8"):
+            errors.append(f"Campaign CID is missing from guide CTA: {page}")
 
     catalog_path = DIST / "icerik" / "catalog-v1.json"
     alias_path = DIST / "icerik" / "index.html"
@@ -163,9 +196,21 @@ def main() -> None:
 
     book_bundles = tuple((DIST / "assets").glob("index-*.js"))
     if not book_bundles or not any(
-        MICROSOFT_STORE_ID in bundle.read_text(encoding="utf-8") for bundle in book_bundles
+        MICROSOFT_STORE_ID in bundle.read_text(encoding="utf-8")
+        and MICROSOFT_STORE_CID in bundle.read_text(encoding="utf-8")
+        for bundle in book_bundles
     ):
         errors.append("Microsoft Store link is missing from the book experience")
+
+    root_page = (DIST / "index.html").read_text(encoding="utf-8")
+    if '<script type="application/ld+json">' not in root_page or '"SoftwareApplication"' not in root_page:
+        errors.append("SoftwareApplication schema is missing from the Turkish home page")
+    if "Ekran süresini kavgaya değil öğrenmeye dönüştürün." not in root_page:
+        errors.append("Turkish home page is not pre-rendered with the campaign message")
+    if "yalnız Windows sürümünü kapsar" not in root_page:
+        errors.append("Windows-only Store purchase scope is missing from the Turkish home page")
+    if MICROSOFT_STORE_CID not in root_page:
+        errors.append("Campaign CID is missing from the Turkish home page")
 
     forbidden = re.compile(r"(google-analytics|googletagmanager|facebook\.net|hotjar|segment\.com)", re.I)
     for page in DIST.rglob("*.html"):
@@ -176,8 +221,8 @@ def main() -> None:
         print("\n".join(f"ERROR: {error}" for error in errors))
         raise SystemExit(1)
     print(
-        f"OK: {expected_pages} localized pages, 108 guide animations, verified catalog downloads, "
-        "fixed legal routes, local links and tracker fence"
+        f"OK: {expected_pages} localized pages, {len(guide_pages)} Turkish guide pages, "
+        "108 guide animations, verified catalog downloads, fixed legal routes, local links and tracker fence"
     )
 
 

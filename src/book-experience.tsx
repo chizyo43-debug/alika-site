@@ -76,7 +76,7 @@ interface AgeBandInfo {
 }
 
 
-const MICROSOFT_STORE_URL = 'https://apps.microsoft.com/detail/9N3P9F5ZKR5S';
+const MICROSOFT_STORE_URL = 'https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_tr';
 
 const BOOK_PAGES: BookPage[] = [
   { id: 'baslangic', chapter: 'Başlangıç', kind: 'contents', title: 'Bırakın ekran, onu öğrenmeye yakınlaştırsın.', summary: 'AliKa’nın ailelere sözü.' },
@@ -102,7 +102,7 @@ const BOOK_PAGES: BookPage[] = [
   { id: 'oyunlar-yaraticilik', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Sahne & hikâye', title: 'Sahne, çizim ve hikâye oyunları.', summary: 'Bu Kim, Sessiz Sinema, Çiz ve Bil, Hikâye Macerası ve Ritim Sahnesi.' },
   { id: 'oyunlar-aile', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Aile gecesi', title: 'Ailece oynanan oyunlar.', summary: 'Yalancı, Aile Kaçış Gecesi, İsim Şehir, Kelime Bahçesi ve Renkli Pazar.' },
   { id: 'oyunlar-stem', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'STEM & strateji', title: 'STEM ve strateji oyunları.', summary: 'Rota Ustaları, Denge Atölyesi, Bahçe Ustaları, Işık Laboratuvarı ve Robot Kodlama Arenası.' },
-  { id: 'guven', chapter: 'Güven', kind: 'trust', navLabel: 'Yerel çalışma', title: 'Veri dışarı çıkmaz.', summary: 'Bulut hesabı, reklam ve izleyici gerektirmeyen yerel çalışma.' },
+  { id: 'guven', chapter: 'Güven', kind: 'trust', navLabel: 'Yerel çalışma', title: 'Temel veriler cihazda kalır.', summary: 'Bulut hesabı, reklam ve ürün telemetrisi gerektirmeyen yerel çalışma; aile cihazları arasında isteğe bağlı şifreli ev ağı.' },
   { id: 'durum', chapter: 'Güven', kind: 'status', navLabel: 'Ürün durumu', title: 'Ne hazırsa onu söylüyoruz.', summary: 'Bugün çalışan, geliştirilen ve planlanan özelliklerin dürüst ayrımı.' },
   { id: 'hazir-icerik', chapter: 'Hazır içerik', kind: 'content', navLabel: 'Kütüphane', title: 'Ders, konu ve soru içerikleri tek kütüphanede.', summary: 'Hazırlanan eğitim içeriklerinin güncel görünümü.' },
   { id: 'icerik-katalogu', chapter: 'Hazır içerik', kind: 'content-catalog', navLabel: 'Ders ve konular', title: 'Öğrenme yolu hazır.', summary: 'Ders, konu anlatımı ve soru paketlerinin paylaşım alanı.' },
@@ -901,8 +901,10 @@ function PageContent({ page, onNavigate }: { page: BookPage; onNavigate: (index:
           <p className="pageLead">Kuralları önceden belirleyin, çocuğun kalan süreyi görmesini sağlayın ve doğru cevapları kontrollü ek süreye dönüştürün.</p>
           <div className="closingActions">
             <a className="primaryCta" href={MICROSOFT_STORE_URL} target="_blank" rel="noreferrer" aria-label="AliKa’yı Microsoft Store’da aç">Microsoft Store’dan edinin <span>↗</span></a>
+            <a className="textLink" href="/rehber/">Türkçe ebeveyn rehberlerini okuyun <span>→</span></a>
             <a className="supportLink" href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
           </div>
+          <p className="storeScopeNote">Bu Microsoft Store satın alımı yalnız Windows sürümünü kapsar; Android ve Android TV bu satın alıma dahil değildir.</p>
           <div className="closingMark"><img src="/brand/alika-logo.png" alt="" width="74" height="52" /><p>Ekranı kapatmak için değil,<br /><strong>zamanı daha iyi kullanmak için.</strong></p></div>
         </>
       );

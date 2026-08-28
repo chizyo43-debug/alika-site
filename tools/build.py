@@ -16,6 +16,8 @@ DIST = ROOT / "dist"
 PUBLIC = ROOT / "public"
 BASE_URL = "https://www.alika.tr"
 LANGS = ("tr", "en", "de", "es", "fr", "pt", "ru", "ja", "ko")
+MICROSOFT_STORE_URL = "https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_tr"
+GUIDE_BASE = "rehber"
 SLUGS = (
     "how-it-works",
     "ecosystem",
@@ -26,6 +28,138 @@ SLUGS = (
     "roadmap",
     "downloads",
     "contact",
+)
+
+GUIDES = (
+    {
+        "slug": "windows-11-cocuk-ekran-suresi",
+        "title": "Windows 11’de Çocuk Ekran Süresi Nasıl Sınırlandırılır?",
+        "description": "Windows 11’de günlük süre, uygulama ve web sitesi limitlerini görünür kurallarla ayarlayın. AliKa ebeveyn panelini adım adım inceleyin.",
+        "video": "https://youtu.be/sXvHkeOegIo",
+        "video_label": "Çocuk ve kurallar video rehberini izleyin",
+        "lede": (
+            "Ekran süresi tartışması çoğu zaman “şimdi kapat” cümlesi söylendiğinde başlar. "
+            "Daha sakin bir düzen için sınırın önceden belirlenmesi, çocuğun kalan süreyi görebilmesi "
+            "ve kilidin nedenini açıkça anlaması gerekir."
+        ),
+        "sections": (
+            ("Windows 11’de önce aile kuralını netleştirin", (
+                "Uygulamayı açmadan önce günlük toplam süreyi, uyku aralığını ve hangi uygulamaların ayrıca sınırlandırılacağını çocukla konuşun. AliKa gizli izleme için değil, önceden bilinen aile kurallarını görünür kılmak için tasarlanmıştır.",
+                "İlk hafta çok sayıda kural yerine tek bir günlük limit ve bir uyku aralığıyla başlayın. Çocuğun kalan süreyi ve kuralın nedenini anlayıp anlamadığını gözleyin.",
+            )),
+            ("Günlük ve haftalık ekran süresi nasıl ayarlanır?", (
+                "Ebeveyn panelinde her çocuk için günlük toplam dakika belirlenebilir. Haftanın yedi gününe ayrı süre yazılabilir; 0 değeri sınır olmadığı anlamına gelir.",
+                "Hafta içi ve hafta sonu düzeniniz farklıysa günleri tek tek ayarlayın. Değişikliği kaydettikten sonra çocuk ekranında kalan sürenin doğru göründüğünü kontrol edin.",
+            )),
+            ("Uygulama limiti ile tam engel arasındaki fark", (
+                "Bir uygulamaya günlük dakika vermek, o uygulamayı tamamen engellemekten farklıdır. Limit dolunca kullanım durur; tam engelde uygulama izin verilene kadar açılamaz.",
+                "Önce süre limitiyle başlayın. Tam engeli yalnız aile kuralınız gerçekten bunu gerektiriyorsa kullanın ve nedenini çocuğa açıkça anlatın.",
+            )),
+            ("Web sitesi süre limiti ve web filtresi aynı şey değildir", (
+                "Site süre limiti belirli bir alan adına günlük dakika verir. Süre dolduğunda alan adı gün sonuna kadar engellenir. Web filtresi ise kalıcı engel listesi ve güvenli arama kurallarını yönetir.",
+                "Windows, web kuralının uygulanması için yönetici onayı isteyebilir. Yalnız ihtiyacınız olan özelliği açın; gereksiz filtre eklemeyin.",
+            )),
+            ("Uyku saatini ve geçici ebeveyn iznini ayarlama", (
+                "Uyku aralığı gece yarısını geçebilir. Örneğin 21.00–07.00 aralığı tek kural olarak tanımlanabilir.",
+                "İstisnai bir durumda geçici izin verirseniz bunun günlük aile kuralını kalıcı olarak değiştirmediğini çocuğa söyleyin.",
+            )),
+            ("Çocuk süre dolduğunda ne görür?", (
+                "AliKa süre dolduğunda görünür bir kilit ekranı gösterir. Çocuk hangi kuralın uygulandığını ve sonraki adımın ne olduğunu görür; engel gizlice çalışmaz.",
+                "Kilit metnini ilk kurulumda birlikte inceleyin. Çocuğun ne zaman yeniden kullanabileceğini kendi cümlesiyle anlatabilmesi iyi bir açıklık kontrolüdür.",
+            )),
+            ("İlk 7 günde kontrol edilmesi gerekenler", (
+                "Kurulumun tamamlandığını, ilk kuralın doğru saatte çalıştığını, çocuk ekranındaki kalan sürenin anlaşılır olduğunu ve uyku aralığının aile düzeninize uyduğunu kontrol edin.",
+                "Beklenmeyen bir engel veya lisans sorunu görürseniz reklam ya da geniş tanıtım yapmadan önce alika.destek@gmail.com adresine bildirin.",
+            )),
+        ),
+    },
+    {
+        "slug": "soru-cozerek-ekran-suresi-kazanma",
+        "title": "Soru Çözerek Ekran Süresi Kazanma: AliKa Nasıl Çalışır?",
+        "description": "Çocuğun soru çözerek kontrollü ek süre kazanmasını; soru bankası, ödül oranı ve günlük tavan ayarlarıyla adım adım öğrenin.",
+        "video": "https://youtu.be/cMxuoJaG77E",
+        "video_label": "Soru çözerek süre kazanma video rehberini izleyin",
+        "lede": (
+            "Ekran süresini yalnızca kesmek yerine bir kısmını öğrenmeyle ilişkilendirmek mümkün. "
+            "AliKa’da çocuk, ebeveynin eklediği soru bankasından sorular çözer; doğru cevaplar "
+            "ebeveynin belirlediği orana göre kontrollü ek süreye dönüşür."
+        ),
+        "sections": (
+            ("Sorular nereden gelir?", (
+                "Sorular yalnız ebeveynin ekleyip kullanıma açtığı bankadan gelir. Hazır ödev veya otomatik olarak çocuğa gönderilen sınırsız içerik iddiası yoktur.",
+                "Soruları tek tek ekleyebilir veya CSV/XLSX soru bankası içe aktarabilirsiniz. PDF ve EPUB dosyaları ise Kütüphane belgesi olarak kullanılır; soru bankasıyla aynı şey değildir.",
+            )),
+            ("Kaç doğru cevap kaç dakika kazandırır?", (
+                "Ödül oranını ebeveyn belirler. Bir videoda görülen “iki doğru, bir dakika” yalnız örnek ayardır; ürünün değişmez kuralı değildir.",
+                "Başlangıçta küçük bir ödül oranı seçin ve çocuğun soruyu okuyarak mı, rastgele mi ilerlediğini gözleyin.",
+            )),
+            ("Günlük kazanım tavanı neden önemlidir?", (
+                "Doğru cevaplar sınırsız süre üretmez. Çocuğun bir günde kazanabileceği en yüksek ek süreyi ebeveyn belirler.",
+                "Bu tavan, öğrenme akışının ailece konuşulan toplam ekran düzenini bozmasını önler.",
+            )),
+            ("Çocuk soru ekranında ne görür?", (
+                "Çocuk soruyu, seçenekleri, ilerlemeyi ve varsa açıklamayı görür. Kazanılan süre, günlük üst sınırla birlikte görünür tutulur.",
+                "İlk turda çocuğun yanında olun; düğmelerin, açıklamanın ve süre kazanımının doğru anlaşıldığını kontrol edin.",
+            )),
+            ("Yanlış cevap ve tekrar akışı nasıl çalışır?", (
+                "Yanlış cevap ek süre kazandırmaz. Doğru seçenek ve varsa açıklama gösterilir. Aynı soru hemen yeniden gelmez; araya en az iki farklı soru girer.",
+                "Üç yanlış üst üste olduğunda 30 saniyelik bekleme uygulanır. Amaç rastgele işaretleme yerine açıklamayı okuyarak ilerlemektir.",
+            )),
+            ("Kazanılan süre ve sonuçlar nereden izlenir?", (
+                "Ebeveyn panelinde soru sonuçları, ders ve konu gelişimi ile kazanılan süre birlikte incelenebilir. Yeterli örnek bulunmayan konular güçlü ya da zayıf diye etiketlenmez.",
+                "Tek bir oturuma dayanarak başarı yorumu yapmayın; düzenli ve yeterli örnek birikmesini bekleyin.",
+            )),
+            ("Sağlıklı bir başlangıç ayarı örneği", (
+                "Kısa bir soru bankası, düşük ödül oranı ve küçük bir günlük kazanım tavanıyla başlayın. Bir hafta sonra hem doğru cevapları hem ekran düzenini birlikte değerlendirin.",
+                "Amaç daha çok ekran süresi dağıtmak değil, çocuğa sınır içinde anlamlı bir sonraki adım sunmaktır.",
+            )),
+        ),
+    },
+    {
+        "slug": "bulutsuz-ebeveyn-kontrolu",
+        "title": "Bulut Hesabı Olmadan Ebeveyn Kontrolü Nasıl Çalışır?",
+        "description": "AliKa’nın cihazda kalan verilerle, reklamsız ve zorunlu bulut hesabı olmadan nasıl çalıştığını; yerel aile ağının sınırlarını öğrenin.",
+        "video": "https://youtu.be/cxzZrfLhJjE",
+        "video_label": "Gizlilik ve yerel veri video rehberini izleyin",
+        "lede": (
+            "Bir ebeveyn kontrolü uygulamasında yalnız “ne yapıyor?” değil, “veri nereye gidiyor?” sorusu da önemlidir. "
+            "AliKa’nın temel kullanım kayıtları cihazda tutulur; reklam, üçüncü taraf analitik ve zorunlu AliKa bulut hesabı bulunmaz."
+        ),
+        "sections": (
+            ("Hangi kayıtlar cihazda tutulur?", (
+                "Ekran süresi kuralları, uygulama kullanım süreleri, öğrenme sonuçları ve raporlar cihazda işlenir. Ebeveyn paneli toplanan kayıtları görünür kılar.",
+                "AliKa’nın kendi bulut eşitleme hizmeti veya ürün kullanım telemetrisi yoktur.",
+            )),
+            ("AliKa neyi görür, neyi görmez?", (
+                "Ürün, ebeveynin belirlediği kuralları uygulamak ve raporlamak için gereken yerel bilgiyi işler. Gizli takip, reklam profili veya üçüncü taraf pazarlama amacıyla veri toplamaz.",
+                "Çocuk profili ve gerçek gezinme geçmişi tanıtım, ölçüm veya reklam dosyalarına taşınmamalıdır.",
+            )),
+            ("Tarayıcı geçmişi ile görünür sekme kaydı arasındaki fark", (
+                "AliKa tarayıcının geçmiş dosyasını okumaz. Uygulama çalışırken önde olan sekmenin başlığına ilişkin görünürlük sunabilir; bu, geçmiş arşivini içe aktarmak değildir.",
+                "Web görünürlüğünün sınırını çocuğa anlatın ve yalnız sahibi olduğunuz ya da velisi olduğunuz cihazlarda kullanın.",
+            )),
+            ("Reklam, telemetri ve zorunlu hesap neden yok?", (
+                "Yerel öncelikli tasarım, aile kuralları ve kullanım kayıtları için AliKa hesabı açmayı zorunlu kılmaz. Uygulamada reklam ağı veya üçüncü taraf analitik SDK’sı bulunmaz.",
+                "Microsoft Store lisansı ve dağıtımı işletim sisteminin kendi hizmetleridir; “internete hiçbir zaman ihtiyaç duymaz” iddiası bu nedenle doğru değildir.",
+            )),
+            ("Yerel aile ağı nasıl açılır?", (
+                "Aile Ağı başlangıçta kapalıdır. Ebeveyn özelliği açıkça etkinleştirip cihazları geçici QR kodla eşleştirir.",
+                "Yalnız desteklenen veriler, onaylanan yerel ağda eşleştirilmiş cihazlar arasında şifreli biçimde taşınır; bu aktarım AliKa’ya ait bir bulut sunucusundan geçmez.",
+            )),
+            ("Aynı Wi-Fi ve açık eşleştirme neden gereklidir?", (
+                "Yerel ağ modeli cihazların aynı ev ağına bağlı olmasını ve ebeveynin eşleştirmeyi bilerek başlatmasını gerektirir.",
+                "Cihaz çevrimdışıysa durum açıkça gösterilir; gizli veya internet üzerinden sınırsız erişim kurulmaz.",
+            )),
+            ("Bulutsuz yapının gerçek sınırları", (
+                "AliKa internet üzerinden ev dışından takip veya uzaktan komut hizmeti değildir. Cihazların aynı yerel ağda olmadığı senaryolarda Aile Ağı iletişimi beklenmemelidir.",
+                "İsteğe bağlı haricî yapay zekâ akışında AliKa yalnız istem hazırlar. Kullanıcı bunu kendi seçtiği hizmete gönderirse o hizmetin hesabı ve gizlilik koşulları geçerlidir.",
+            )),
+            ("Kurulumdan önce ebeveyn gizlilik kontrol listesi", (
+                "Çocuğu bilgilendirin, rıza ekranını birlikte okuyun, yalnız gereken kuralları açın, Aile Ağı’nı kullanmıyorsanız kapalı bırakın ve raporlara erişimi ebeveyn PIN’iyle koruyun.",
+                "Gerçek çocuk verisini destek mesajına, tanıtım görseline veya haricî yapay zekâ istemine eklemeyin.",
+            )),
+        ),
+    },
 )
 
 SCREEN_LABELS = {
@@ -263,14 +397,7 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
-  <script type="application/ld+json">{{
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"AliKa",
-    "applicationCategory":"ParentalControlApplication",
-    "operatingSystem":"Windows, Android",
-    "url":"{BASE_URL}"
-  }}</script>
+  {software_application_schema(description) if slug in ("", "downloads") else ""}
 </head>
 <body>
   {header(locales, lang, slug)}
@@ -280,6 +407,114 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
 </body>
 </html>
 """
+
+
+def software_application_schema(description: str) -> str:
+    data = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AliKa Parental Control",
+        "description": description,
+        "applicationCategory": "UtilitiesApplication",
+        "applicationSubCategory": "Parental control",
+        "operatingSystem": "Windows 10, Windows 11",
+        "softwareVersion": "1.1.68",
+        "url": BASE_URL,
+        "downloadUrl": MICROSOFT_STORE_URL,
+        "publisher": {"@type": "Organization", "name": "ErenKa Software"},
+        "offers": {
+            "@type": "Offer",
+            "price": "80.00",
+            "priceCurrency": "TRY",
+            "availability": "https://schema.org/InStock",
+            "url": MICROSOFT_STORE_URL,
+        },
+    }
+    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False, separators=(",", ":"))}</script>'
+
+
+def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str) -> str:
+    article_schema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "description": description,
+        "mainEntityOfPage": canonical,
+        "inLanguage": "tr-TR",
+        "author": {"@type": "Organization", "name": "ErenKa Software"},
+        "publisher": {"@type": "Organization", "name": "ErenKa Software"},
+        "dateModified": "2026-08-28",
+    }
+    return f"""<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0A1631">
+  <title>{esc(title)} — AliKa</title>
+  <meta name="description" content="{esc(description)}">
+  <link rel="canonical" href="{canonical}">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="icon" href="/assets/brand/alika-logo.png">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="AliKa">
+  <meta property="og:title" content="{esc(title)}">
+  <meta property="og:description" content="{esc(description)}">
+  <meta property="og:url" content="{canonical}">
+  <meta property="og:image" content="{BASE_URL}/og.png">
+  <script type="application/ld+json">{json.dumps(article_schema, ensure_ascii=False, separators=(",", ":"))}</script>
+</head>
+<body>
+  {header(locales, "tr")}
+  {body}
+  {footer(locales, "tr")}
+  <script src="/assets/site.js" defer></script>
+</body>
+</html>
+"""
+
+
+def guide_index_body() -> str:
+    cards = "".join(
+        f'<article class="article-card"><p class="eyebrow">AliKa rehberi</p><h2>{esc(guide["title"])}</h2>'
+        f'<p>{esc(guide["description"])}</p><a class="text-link" href="/{GUIDE_BASE}/{guide["slug"]}/">Rehberi okuyun →</a></article>'
+        for guide in GUIDES
+    )
+    return f"""
+    <main id="main" class="guide-main">
+      <header class="guide-index-hero">
+        <p class="eyebrow">Windows 10/11 · Dijital ebeveynlik</p>
+        <h1>Ekran süresi için açık, uygulanabilir rehberler.</h1>
+        <p>Kuralları önceden konuşmak, öğrenme akışını sınırlı tutmak ve verinin nereye gittiğini bilmek için hazırlanmış Türkçe kaynaklar.</p>
+      </header>
+      <section class="article-grid" aria-label="Türkçe ebeveyn rehberleri">{cards}</section>
+      <aside class="guide-disclosure"><strong>Açıklık notu:</strong> Bu rehberler AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa ücretli bir Windows uygulamasıdır; Microsoft Store’da 7 günlük deneme ve ₺80 fiyat gösterilir.</aside>
+    </main>
+    """
+
+
+def guide_article_body(guide: dict) -> str:
+    sections = "".join(
+        f'<section><h2>{esc(heading)}</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in paragraphs)}</section>'
+        for heading, paragraphs in guide["sections"]
+    )
+    return f"""
+    <main id="main" class="guide-main">
+      <article class="guide-article">
+        <nav class="guide-breadcrumb" aria-label="Sayfa yolu"><a href="/">AliKa</a><span>›</span><a href="/{GUIDE_BASE}/">Rehberler</a></nav>
+        <header>
+          <p class="eyebrow">Windows 10/11 · AliKa ebeveyn rehberi</p>
+          <h1>{esc(guide["title"])}</h1>
+          <p class="guide-lede">{esc(guide["lede"])}</p>
+          <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa ücretli bir Windows uygulamasıdır.</p>
+        </header>
+        {sections}
+        <aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>Video yalnız bağlantıya tıkladığınızda YouTube’da açılır.</span></div><a href="{esc(guide["video"])}" target="_blank" rel="noopener noreferrer">{esc(guide["video_label"])} ↗</a></aside>
+        <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{MICROSOFT_STORE_URL}" target="_blank" rel="noopener noreferrer">Microsoft Store’da açın</a></section>
+      </article>
+    </main>
+    """
 
 
 def screenshot_card(src: str, title: str, tab: str, active: bool = False) -> str:
@@ -609,12 +844,18 @@ def inner_content(lang: str, slug: str, c: dict, catalog: dict) -> str:
           <article><time>2026-07</time><span class="status status-dev">{esc(c["status_dev"])}</span><h2>{esc(c["ecosystem_title"])}</h2><p>{esc(c["planned_note"])}</p></article>
         </div>"""
     elif slug == "downloads":
+        store_scope = (
+            "Bu Microsoft Store satın alımı yalnız Windows sürümünü kapsar; Android ve Android TV "
+            "bu satın alıma dahil değildir."
+            if lang == "tr"
+            else c["planned_note"]
+        )
         detail = f"""
         <div class="download-card">
           <div><span class="status status-today">Microsoft Store</span><h3>AliKa · Windows</h3><p>{esc(c["proof_body"])}</p></div>
-          <a class="button" href="https://apps.microsoft.com/detail/9N3P9F5ZKR5S" target="_blank" rel="noopener noreferrer">{esc(c["get"])}</a>
+          <a class="button" href="{MICROSOFT_STORE_URL}" target="_blank" rel="noopener noreferrer">{esc(c["get"])}</a>
         </div>
-        <p class="honesty-note">{esc(c["planned_note"])}</p>"""
+        <p class="honesty-note">{esc(store_scope)}</p>"""
     elif slug == "contact":
         detail = f"""
         <div class="contact-card"><span>{esc(c["support"])}</span><a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a></div>
@@ -677,6 +918,24 @@ def build() -> None:
             path = DIST / slug / "index.html" if lang == "tr" else DIST / lang / slug / "index.html"
             write_page(path, document(locales, lang, f"{title} — AliKa", desc, inner_content(lang, slug, c, catalog), slug))
 
+    guide_index_url = f"{BASE_URL}/{GUIDE_BASE}/"
+    write_page(
+        DIST / GUIDE_BASE / "index.html",
+        guide_document(
+            locales,
+            "Türkçe Ebeveyn Rehberleri",
+            "Windows 10/11 ekran süresi, öğrenerek süre kazanma ve bulutsuz ebeveyn kontrolü için uygulanabilir Türkçe rehberler.",
+            guide_index_url,
+            guide_index_body(),
+        ),
+    )
+    for guide in GUIDES:
+        canonical = f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/"
+        write_page(
+            DIST / GUIDE_BASE / guide["slug"] / "index.html",
+            guide_document(locales, guide["title"], guide["description"], canonical, guide_article_body(guide)),
+        )
+
     # Uygulamadaki sabit, Türkçe ve anlaşılır içerik adresi.
     (DIST / "icerik").mkdir(exist_ok=True)
     shutil.copy2(DIST / "content" / "index.html", DIST / "icerik" / "index.html")
@@ -693,7 +952,8 @@ def build() -> None:
     for lang in LANGS:
         urls.append(f"{BASE_URL}{href(lang)}")
         urls.extend(f"{BASE_URL}{href(lang, slug)}" for slug in SLUGS)
-    urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/"))
+    urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
+    urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in GUIDES)
     unique_urls = list(dict.fromkeys(urls))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join(f"  <url><loc>{esc(url)}</loc></url>\n" for url in unique_urls)

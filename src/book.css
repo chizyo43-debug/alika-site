@@ -28,6 +28,36 @@ a { color: inherit; text-decoration: none; }
 img { max-width: 100%; }
 button:disabled { cursor: default; }
 
+.staticEntry {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: 24px;
+  padding: clamp(32px, 7vw, 88px);
+  color: #f8f4e8;
+  background:
+    radial-gradient(circle at 86% 12%, rgba(89,197,234,.22), transparent 28%),
+    linear-gradient(145deg, var(--navy-deep), var(--navy));
+}
+.staticEntryHero { max-width: 840px; }
+.staticEntryHero > p:first-child { margin: 0 0 12px; color: var(--cyan); font-size: 13px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+.staticEntryHero h1 { max-width: 780px; margin: 0; font-family: Georgia, serif; font-size: clamp(38px, 6vw, 76px); line-height: 1.02; }
+.staticEntryHero h1 + p { max-width: 720px; margin: 20px 0; color: #dbe5ee; font-size: clamp(17px, 2vw, 23px); line-height: 1.55; }
+.staticEntryHero > a { display: inline-flex; min-height: 48px; align-items: center; padding: 12px 18px; border-radius: 9px; color: var(--navy-deep); background: var(--amber); font-weight: 900; }
+.staticEntryHero > small { display: block; margin-top: 9px; color: #b9c6d4; }
+.storeScopeNote { max-width: 620px; margin: 10px 0 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.staticEntryGrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; max-width: 1120px; }
+.staticEntryGrid article { padding: 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; background: rgba(255,255,255,.055); }
+.staticEntryGrid h2 { margin: 0 0 8px; font-size: 17px; }
+.staticEntryGrid p { margin: 0; color: #cbd6e1; line-height: 1.55; }
+.staticEntryLinks { display: flex; flex-wrap: wrap; gap: 12px 20px; color: #e7eef5; font-weight: 800; }
+.staticEntryLinks a { text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 760px) {
+  .staticEntry { align-content: start; padding: 34px 22px; }
+  .staticEntryGrid { grid-template-columns: 1fr; }
+}
+
 .bookStage {
   position: relative;
   min-height: 100svh;
