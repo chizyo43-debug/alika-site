@@ -1157,16 +1157,16 @@ export default function BookExperience() {
         <p>{activeChapter.label}</p>
         <span>{String(pageIndex + 1).padStart(2, '0')} / {BOOK_PAGES.length}</span>
       </header>
-      <details className="bookLanguagePicker">
-        <summary aria-label="Site dilini değiştir"><span>Dil</span><b>TR</b><i aria-hidden="true">⌄</i></summary>
-        <nav className="bookLanguageMenu" aria-label="Site dili">
+      <aside className="bookLanguageDock" aria-label="Site dilini değiştir">
+        <p><span>Site dili</span><b>Türkçe</b></p>
+        <nav className="bookLanguageMenu" aria-label="Dil seçenekleri">
           {SITE_LANGUAGES.map((language) => (
             <a key={language.code} href={language.href} lang={language.code} aria-current={language.code === 'tr' ? 'page' : undefined}>
               <b>{language.code.toUpperCase()}</b><span>{language.label}</span>
             </a>
           ))}
         </nav>
-      </details>
+      </aside>
 
       <section
         className={`bookScene direction-${direction}`}

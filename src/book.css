@@ -974,68 +974,46 @@ button:disabled { cursor: default; }
   }
 }
 
-/* Kitap ana sayfasındaki görünür site dili seçici. */
-.bookLanguagePicker {
+/* Kitabın dışında, her zaman görünür site dili paneli. */
+.bookLanguageDock {
   position: fixed;
-  top: 12px;
-  right: 16px;
+  top: 16px;
+  left: 18px;
   z-index: 70;
-  color: var(--navy);
+  width: 210px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 15px;
+  color: #edf3f7;
+  background: rgba(9,23,42,.95);
+  box-shadow: 0 18px 42px rgba(24,20,17,.25);
+  backdrop-filter: blur(12px);
 }
-.bookLanguagePicker summary {
+.bookLanguageDock > p {
   display: flex;
-  min-width: 96px;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 8px 11px;
-  border: 1px solid rgba(16,35,62,.22);
-  border-radius: 999px;
-  background: rgba(248,241,226,.96);
-  box-shadow: 0 7px 20px rgba(34,29,25,.17);
-  cursor: pointer;
-  list-style: none;
-  touch-action: manipulation;
-  backdrop-filter: blur(8px);
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 2px 8px;
 }
-.bookLanguagePicker summary::-webkit-details-marker { display: none; }
-.bookLanguagePicker summary::marker { content: ''; }
-.bookLanguagePicker summary span { font-size: 11px; font-weight: 850; }
-.bookLanguagePicker summary b { color: #a7503d; font-size: 11px; letter-spacing: .08em; }
-.bookLanguagePicker summary i { font-size: 15px; font-style: normal; line-height: 1; transition: transform .18s ease; }
-.bookLanguagePicker[open] summary i { transform: rotate(180deg); }
-.bookLanguagePicker summary:hover,
-.bookLanguagePicker summary:focus-visible { color: #fff; border-color: var(--navy); background: var(--navy); }
-.bookLanguagePicker summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
-.bookLanguagePicker[open] summary { color: #fff; border-color: var(--navy); background: var(--navy); }
-.bookLanguagePicker[open] summary b { color: var(--cyan); }
+.bookLanguageDock > p span { color: #b9c9d6; font-size: 9px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+.bookLanguageDock > p b { color: var(--cyan); font-size: 11px; }
 .bookLanguageMenu {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: min(248px, calc(100vw - 28px));
   display: grid;
   grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 5px;
-  padding: 8px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 14px;
-  background: rgba(9,23,42,.98);
-  box-shadow: 0 18px 42px rgba(24,20,17,.3);
-  backdrop-filter: blur(12px);
 }
 .bookLanguageMenu a {
   display: grid;
-  grid-template-columns: 27px 1fr;
-  gap: 6px;
+  grid-template-columns: 24px 1fr;
+  gap: 5px;
   min-height: 44px;
   align-items: center;
-  padding: 8px 9px;
+  padding: 7px 8px;
   border: 1px solid transparent;
   border-radius: 8px;
   color: #e8eef4;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.2;
   touch-action: manipulation;
 }
@@ -1045,15 +1023,55 @@ button:disabled { cursor: default; }
 .bookLanguageMenu a[aria-current="page"] { border-color: rgba(89,197,234,.5); background: rgba(89,197,234,.13); }
 .bookLanguageMenu a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
 
+@media (max-width: 1180px) and (min-width: 901px) {
+  .bookLanguageDock { top: 58px; left: 10px; width: 106px; padding: 8px; }
+  .bookLanguageDock > p { display: block; margin-bottom: 6px; text-align: center; }
+  .bookLanguageDock > p b { display: none; }
+  .bookLanguageMenu { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px; }
+  .bookLanguageMenu a { display: grid; min-height: 44px; padding: 5px; place-items: center; }
+  .bookLanguageMenu a span { display: none; }
+}
+
 @media (max-width: 1050px) {
   .readingHeader > span { display: none; }
 }
 
+@media (max-width: 900px) {
+  .bookLanguageDock {
+    top: 7px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 9px;
+    align-items: center;
+    padding: 7px 9px;
+  }
+  .bookLanguageDock > p { display: grid; gap: 1px; margin: 0; white-space: nowrap; }
+  .bookLanguageDock > p b { font-size: 10px; }
+  .bookLanguageMenu { grid-template-columns: repeat(9,minmax(44px,1fr)); gap: 3px; }
+  .bookLanguageMenu a { display: grid; min-height: 44px; padding: 4px; place-items: center; }
+  .bookLanguageMenu a span { display: none; }
+  .readingHeader { top: 71px; }
+}
+
 @media (max-width: 760px) {
-  .bookLanguagePicker { top: 7px; right: 10px; }
-  .bookLanguagePicker summary { min-width: 86px; min-height: 42px; padding: 7px 10px; }
-  .readingHeader { width: calc(100vw - 124px); left: 15px; transform: none; }
-  .phase-closed .readingHeader,
-  .phase-morphing .readingHeader,
-  .phase-opening .readingHeader { transform: translateY(-12px); }
+  .bookStage { padding-top: 82px; }
+  .readingHeader { top: 68px; width: calc(100vw - 30px); left: 50%; transform: translateX(-50%); }
+  .phase-closed .readingHeader, .phase-morphing .readingHeader, .phase-opening .readingHeader { transform: translate(-50%,-10px); }
+}
+
+@media (max-width: 520px) {
+  .bookStage { padding-top: 130px; }
+  .bookLanguageDock { display: block; }
+  .bookLanguageDock > p { display: flex; justify-content: space-between; margin: 0 2px 6px; }
+  .bookLanguageMenu { grid-template-columns: repeat(5,minmax(44px,1fr)); }
+  .readingHeader { display: none; }
+  .bookScene, .phase-closed .bookScene, .phase-morphing .bookScene, .phase-opening .bookScene, .phase-reading .bookScene, .phase-flipping .bookScene { height: min(63svh,560px); }
+}
+
+@media (max-width: 520px) and (max-height: 620px) {
+  .bookStage { padding: 116px 12px 52px; }
+  .bookScene, .phase-closed .bookScene, .phase-morphing .bookScene, .phase-opening .bookScene, .phase-reading .bookScene, .phase-flipping .bookScene { height: min(58svh,430px); }
 }
