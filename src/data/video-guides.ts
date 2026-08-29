@@ -12,7 +12,7 @@ export interface GuideVideo {
   title: string;
   description: string;
   poster: string;
-  captions: string;
+  captions?: string;
 }
 
 interface GuideLanguageCopy {
@@ -122,6 +122,87 @@ const trVideos = [
   },
 ] as const satisfies readonly GuideVideo[];
 
+const enVideos = [
+  {
+    key: 'windows-overview', order: 1, group: 'start', id: 'SdS-m7unbX0', duration: '0:59',
+    eyebrow: '01/13 · Overview', title: 'What Is AliKa for Windows?',
+    description: 'See how visible screen-time rules, parent-approved learning, tasks and family reports come together in one Windows app.',
+    poster: '/videos/en/01-windows-overview.jpg',
+  },
+  {
+    key: 'windows-installation', order: 2, group: 'start', id: 'RM_sQN-AvcE', duration: '1:25',
+    eyebrow: '02/13 · Setup and safety', title: 'Windows Installation and First Setup',
+    description: 'Install from Microsoft Store, choose English, create the parent PIN and complete consent, recovery and optional Safe Mode setup.',
+    poster: '/videos/en/02-windows-installation.jpg',
+  },
+  {
+    key: 'windows-panel', order: 3, group: 'panel', id: '-wdMQzfUnOk', duration: '1:17',
+    eyebrow: '03/13 · Dashboard', title: 'Dashboard and Daily Summary',
+    description: 'Review remaining time, reward values, hourly use, top apps, device health and the upcoming family schedule.',
+    poster: '/videos/en/03-windows-panel.jpg',
+  },
+  {
+    key: 'windows-child-rules', order: 4, group: 'rules', id: 'sySIxlhd3yU', duration: '3:45',
+    eyebrow: '04/13 · Child and Rules', title: 'Child & Rules: Every Tab Explained',
+    description: 'Explore time, apps, websites, bedtime, weekly planning, web protection and Exam Mode using the real English interface.',
+    poster: '/videos/en/04-windows-child-rules.jpg',
+  },
+  {
+    key: 'windows-learning-content', order: 5, group: 'learning', id: 'mfHmGjd_auc', duration: '2:24',
+    eyebrow: '05/13 · Learning', title: 'Add Lessons and Questions',
+    description: 'Add parent-approved lessons and question banks from supported files or a ChatGPT-created AliKa package. Content is not included by default.',
+    poster: '/videos/en/05-windows-learning-content.jpg',
+  },
+  {
+    key: 'windows-child-learning', order: 6, group: 'learning', id: '3Yj3fwIk7Io', duration: '1:56',
+    eyebrow: '06/13 · Learning', title: 'The Child Learning Screen',
+    description: 'See today’s work, approved lesson notes, question practice, progress, earned time and assigned tasks from the child’s view.',
+    poster: '/videos/en/06-windows-child-learning.jpg',
+  },
+  {
+    key: 'windows-child-question', order: 7, group: 'learning', id: 'DvnCY3BCqt4', duration: '1:31',
+    eyebrow: '07/13 · Learning', title: 'Questions, Explanations and Earned Time',
+    description: 'Follow the complete answer flow: daily reward limits, feedback, explanations, retries and controlled earned screen time.',
+    poster: '/videos/en/07-windows-child-question.jpg',
+  },
+  {
+    key: 'windows-task-homework-exam', order: 8, group: 'learning', id: 'PYBYdRCCvOg', duration: '2:02',
+    eyebrow: '08/13 · Learning', title: 'Create Tasks, Homework and Exams',
+    description: 'Learn the difference between tasks, content-based homework and scheduled exams, then create each one step by step.',
+    poster: '/videos/en/08-windows-task-homework-exam.jpg',
+  },
+  {
+    key: 'windows-devices-family', order: 9, group: 'devices', id: '1QsuK4jYReY', duration: '1:27',
+    eyebrow: '09/13 · Devices and Family Network', title: 'Devices and Family Network',
+    description: 'Pair a family device locally, inspect its status and send only the visible actions supported for the selected device.',
+    poster: '/videos/en/09-windows-devices-family.jpg',
+  },
+  {
+    key: 'windows-reports', order: 10, group: 'reports', id: '-cNjtPRs7os', duration: '1:29',
+    eyebrow: '10/13 · Reports and Notifications', title: 'Reports and Notifications',
+    description: 'Read weekly or monthly summaries, hourly use, subject results, event history and notifications without mixing usage and learning data.',
+    poster: '/videos/en/10-windows-reports.jpg',
+  },
+  {
+    key: 'windows-privacy', order: 11, group: 'system', id: 'kh5pMIuRk68', duration: '1:55',
+    eyebrow: '11/13 · Privacy', title: 'Privacy and Local Data',
+    description: 'Understand consent, on-device storage, auditable records, parent-controlled deletion, PIN protection and the optional local family network.',
+    poster: '/videos/en/11-windows-privacy.jpg',
+  },
+  {
+    key: 'windows-settings', order: 12, group: 'system', id: 'NddzxRlQLAk', duration: '1:55',
+    eyebrow: '12/13 · Settings', title: 'Settings, Profiles and Protection',
+    description: 'Configure language, profiles, age presets, wellbeing, PIN recovery, encrypted backup and the Windows protection engine.',
+    poster: '/videos/en/12-windows-settings.jpg',
+  },
+  {
+    key: 'windows-auxiliary', order: 13, group: 'system', id: 'F2be4BPfqLw', duration: '1:28',
+    eyebrow: '13/13 · Windows tools', title: 'System Tray, Quick Panel and Lock Screen',
+    description: 'Use the system tray and Quick Panel, understand lock reasons and see which safe actions remain available to the child.',
+    poster: '/videos/en/13-windows-auxiliary.jpg',
+  },
+] as const satisfies readonly GuideVideo[];
+
 const groupLabels = (
   start: string, panel: string, rules: string, learning: string, devices: string, reports: string, system: string,
 ): Record<GuideVideoGroup, string> => ({ start, panel, rules, learning, devices, reports, system });
@@ -139,7 +220,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'en', youtubeLocale: 'en', nativeName: 'English', playlistId: '', status: 'preparing', videos: [],
+    code: 'en', youtubeLocale: 'en', nativeName: 'English', playlistId: 'PLcfP4qWx0x4k', status: 'public', videos: enVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube guides · 9 app languages', sectionTitle: 'Watch the guides in your language.',
       sectionLead: 'Choose a language to see only the published Windows guides in that language.', channelLabel: 'Open the AliKa channel',
