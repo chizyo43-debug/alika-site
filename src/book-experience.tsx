@@ -11,10 +11,13 @@ import {
   type GuideLanguageCode,
   type GuideVideo,
 } from './data/video-guides';
+import localeData from './data/locales.json';
 
 type BookPhase = 'closed' | 'morphing' | 'opening' | 'reading' | 'flipping';
 type PageKind = 'contents' | 'method' | 'difference' | 'day-story' | 'platforms' | 'android-mobile' | 'android-tv' | 'learning' | 'evidence' | 'age-intro' | 'age-band' | 'planning' | 'routine' | 'family' | 'ecosystem-actions' | 'games-intro' | 'games-group' | 'trust' | 'status' | 'content' | 'content-catalog' | 'feedback' | 'closing';
 type PageStatus = 'Bugün kullanılabilir' | 'Geliştiriliyor' | 'Planlandı';
+type SiteLanguage = keyof typeof localeData;
+type LocaleCopy = (typeof localeData)[SiteLanguage];
 
 interface BookPage {
   id: string;
@@ -76,18 +79,49 @@ interface AgeBandInfo {
 }
 
 
-const MICROSOFT_STORE_URL = 'https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_tr';
 const SITE_LANGUAGES = [
-  { code: 'tr', label: 'Türkçe', href: '/' },
-  { code: 'en', label: 'English', href: '/en/' },
-  { code: 'de', label: 'Deutsch', href: '/de/' },
-  { code: 'es', label: 'Español', href: '/es/' },
-  { code: 'fr', label: 'Français', href: '/fr/' },
-  { code: 'pt', label: 'Português', href: '/pt/' },
-  { code: 'ru', label: 'Русский', href: '/ru/' },
-  { code: 'ja', label: '日本語', href: '/ja/' },
-  { code: 'ko', label: '한국어', href: '/ko/' },
+  { code: 'tr', label: 'Türkçe', href: '/', flag: '/flags/tr.svg' },
+  { code: 'en', label: 'English', href: '/en/', flag: '/flags/en.svg' },
+  { code: 'de', label: 'Deutsch', href: '/de/', flag: '/flags/de.svg' },
+  { code: 'es', label: 'Español', href: '/es/', flag: '/flags/es.svg' },
+  { code: 'fr', label: 'Français', href: '/fr/', flag: '/flags/fr.svg' },
+  { code: 'pt', label: 'Português', href: '/pt/', flag: '/flags/pt.svg' },
+  { code: 'ru', label: 'Русский', href: '/ru/', flag: '/flags/ru.svg' },
+  { code: 'ja', label: '日本語', href: '/ja/', flag: '/flags/ja.svg' },
+  { code: 'ko', label: '한국어', href: '/ko/', flag: '/flags/ko.svg' },
 ] as const;
+
+const BOOK_UI_COPY: Record<SiteLanguage, {
+  bookLabel: string;
+  openBook: string;
+  touchLogo: string;
+  previous: string;
+  next: string;
+  previousSection: string;
+  nextSection: string;
+  scrollDown: string;
+  coverEyebrow: string;
+}> = {
+  tr: { bookLabel: 'AliKa etkileşimli ürün kitabı', openBook: 'Kitabı aç', touchLogo: 'Logo üzerine dokunun', previous: 'Önceki', next: 'Sonraki', previousSection: 'Önceki bölüm', nextSection: 'Sonraki bölüm', scrollDown: 'Aşağı kaydır', coverEyebrow: 'Aile için dijital denge' },
+  en: { bookLabel: 'AliKa interactive product book', openBook: 'Open the book', touchLogo: 'Tap the logo', previous: 'Previous', next: 'Next', previousSection: 'Previous section', nextSection: 'Next section', scrollDown: 'Scroll down', coverEyebrow: 'Digital balance for families' },
+  de: { bookLabel: 'Interaktives AliKa-Produktbuch', openBook: 'Buch öffnen', touchLogo: 'Logo antippen', previous: 'Zurück', next: 'Weiter', previousSection: 'Vorheriger Abschnitt', nextSection: 'Nächster Abschnitt', scrollDown: 'Nach unten', coverEyebrow: 'Digitale Balance für Familien' },
+  es: { bookLabel: 'Libro interactivo de AliKa', openBook: 'Abrir el libro', touchLogo: 'Toque el logotipo', previous: 'Anterior', next: 'Siguiente', previousSection: 'Sección anterior', nextSection: 'Sección siguiente', scrollDown: 'Desplazar', coverEyebrow: 'Equilibrio digital familiar' },
+  fr: { bookLabel: 'Livre produit interactif AliKa', openBook: 'Ouvrir le livre', touchLogo: 'Touchez le logo', previous: 'Précédent', next: 'Suivant', previousSection: 'Section précédente', nextSection: 'Section suivante', scrollDown: 'Faire défiler', coverEyebrow: 'Équilibre numérique familial' },
+  pt: { bookLabel: 'Livro interativo AliKa', openBook: 'Abrir o livro', touchLogo: 'Toque no logótipo', previous: 'Anterior', next: 'Seguinte', previousSection: 'Secção anterior', nextSection: 'Secção seguinte', scrollDown: 'Descer', coverEyebrow: 'Equilíbrio digital familiar' },
+  ru: { bookLabel: 'Интерактивная книга AliKa', openBook: 'Открыть книгу', touchLogo: 'Нажмите на логотип', previous: 'Назад', next: 'Далее', previousSection: 'Предыдущий раздел', nextSection: 'Следующий раздел', scrollDown: 'Прокрутить', coverEyebrow: 'Цифровой баланс семьи' },
+  ja: { bookLabel: 'AliKaインタラクティブ製品ブック', openBook: '本を開く', touchLogo: 'ロゴをタップ', previous: '前へ', next: '次へ', previousSection: '前のセクション', nextSection: '次のセクション', scrollDown: '下へスクロール', coverEyebrow: '家族のデジタルバランス' },
+  ko: { bookLabel: 'AliKa 인터랙티브 제품 책', openBook: '책 열기', touchLogo: '로고를 누르세요', previous: '이전', next: '다음', previousSection: '이전 섹션', nextSection: '다음 섹션', scrollDown: '아래로 스크롤', coverEyebrow: '가족을 위한 디지털 균형' },
+};
+
+function resolveSiteLanguage(): SiteLanguage {
+  if (typeof window === 'undefined') return 'tr';
+  const segment = window.location.pathname.split('/').filter(Boolean)[0];
+  return segment && segment in localeData ? segment as SiteLanguage : 'tr';
+}
+
+function microsoftStoreUrl(language: SiteLanguage) {
+  return `https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_${language}`;
+}
 
 const BOOK_PAGES: BookPage[] = [
   { id: 'baslangic', chapter: 'Başlangıç', kind: 'contents', title: 'Bırakın ekran, onu öğrenmeye yakınlaştırsın.', summary: 'AliKa’nın ailelere sözü.' },
@@ -134,6 +168,93 @@ const CHAPTERS: BookChapter[] = [
   { id: 'hazir-icerik', label: 'Hazır içerik', start: 25 },
   { id: 'iletisim', label: 'Edinin', start: 27 },
 ];
+
+function localizedChapters(language: SiteLanguage, copy: LocaleCopy): BookChapter[] {
+  if (language === 'tr') return CHAPTERS;
+  const labels = [
+    copy.hero_kicker,
+    copy.approach_kicker,
+    copy.pages['how-it-works'][0],
+    copy.content_kicker,
+    copy.pages['age-groups'][0],
+    copy.pill[1],
+    copy.ecosystem_kicker,
+    copy.eco_items[4],
+    copy.trust_kicker,
+    copy.content_kicker,
+    copy.pages.contact[0],
+  ];
+  return CHAPTERS.map((chapter, index) => ({ ...chapter, label: labels[index] }));
+}
+
+function localizedPages(language: SiteLanguage, copy: LocaleCopy, chapters: BookChapter[]): BookPage[] {
+  if (language === 'tr') return BOOK_PAGES;
+  const ageIds = ['yas-5-7', 'yas-8-11', 'yas-12-14', 'yas-15-18'];
+  const gameIds = ['oyunlar-bilgi', 'oyunlar-yaraticilik', 'oyunlar-aile', 'oyunlar-stem'];
+
+  return BOOK_PAGES.map((page, index) => {
+    const chapter = [...chapters].reverse().find((item) => index >= item.start)?.label ?? chapters[0].label;
+    let title = page.title;
+    let summary = page.summary;
+    let navLabel = page.navLabel;
+
+    switch (page.id) {
+      case 'baslangic':
+        title = copy.hero_title; summary = copy.hero_body; navLabel = copy.hero_kicker; break;
+      case 'neden-alika':
+        title = copy.approach_title; summary = copy.approach_body; navLabel = copy.pill[0]; break;
+      case 'alika-farki':
+        title = copy.proof_title; summary = copy.proof_body; navLabel = copy.pages.features[0]; break;
+      case 'bir-gun-alika':
+        title = copy.pages['how-it-works'][0]; summary = copy.pages['how-it-works'][1]; navLabel = copy.hero_alt; break;
+      case 'windows':
+        title = `${copy.proof_title} · Windows`; summary = copy.proof_body; navLabel = 'Windows'; break;
+      case 'android-mobil':
+        title = `${copy.proof_title} · Android`; summary = copy.proof_body; navLabel = 'Android'; break;
+      case 'android-tv':
+        title = `${copy.ecosystem_title} · Android TV`; summary = copy.ecosystem_body; navLabel = 'Android TV'; break;
+      case 'ogrenme':
+        title = copy.content_title; summary = copy.content_body; navLabel = copy.pill[0]; break;
+      case 'urun-kaniti':
+        title = copy.proof_title; summary = copy.proof_body; navLabel = copy.proof_kicker; break;
+      case 'yas-gruplari':
+        title = copy.age_title; summary = copy.age_body; navLabel = copy.pages['age-groups'][0]; break;
+      case 'planlama':
+        title = copy.approach_title; summary = copy.approach_body; navLabel = copy.pill[1]; break;
+      case 'gunluk-duzen':
+        title = copy.pages['how-it-works'][0]; summary = copy.pages['how-it-works'][1]; navLabel = copy.pill[2]; break;
+      case 'aile':
+        title = copy.ecosystem_title; summary = copy.ecosystem_body; navLabel = copy.ecosystem_kicker; break;
+      case 'ekosistem-olanaklari':
+        title = copy.pages.ecosystem[0]; summary = copy.pages.ecosystem[1]; navLabel = copy.learn_more; break;
+      case 'oyunlar':
+        title = copy.eco_items[4]; summary = copy.ecosystem_body; navLabel = copy.eco_items[4]; break;
+      case 'guven':
+        title = copy.trust_title; summary = copy.trust_body; navLabel = copy.trust_kicker; break;
+      case 'durum':
+        title = copy.pages.roadmap[0]; summary = copy.pages.roadmap[1]; navLabel = copy.pages.roadmap[0]; break;
+      case 'hazir-icerik':
+        title = copy.content_title; summary = copy.content_body; navLabel = copy.pages.content[0]; break;
+      case 'icerik-katalogu':
+        title = copy.pages.content[0]; summary = copy.pages.content[1]; navLabel = copy.learn_more; break;
+      case 'iletisim':
+        title = copy.pages.contact[0]; summary = copy.pages.contact[1]; navLabel = copy.pages.contact[0]; break;
+      case 'edin':
+        title = copy.final_title; summary = copy.final_body; navLabel = copy.get; break;
+      default: {
+        const ageIndex = ageIds.indexOf(page.id);
+        const gameIndex = gameIds.indexOf(page.id);
+        if (ageIndex >= 0) {
+          title = copy.age_labels[ageIndex]; summary = copy.age_body; navLabel = `${['5–7', '8–11', '12–14', '15–18'][ageIndex]}`;
+        } else if (gameIndex >= 0) {
+          title = copy.eco_items[gameIndex]; summary = copy.ecosystem_body; navLabel = copy.eco_items[gameIndex];
+        }
+      }
+    }
+
+    return { ...page, chapter, title, summary, navLabel };
+  });
+}
 
 const AGE_BANDS: AgeBandInfo[] = [
   {
@@ -394,8 +515,8 @@ function VideoGuideCard({ video, language }: { video: GuideVideo; language: Guid
   );
 }
 
-function LocalizedVideoLibrary() {
-  const [languageCode, setLanguageCode] = useState<GuideLanguageCode>('tr');
+function LocalizedVideoLibrary({ initialLanguageCode = 'tr' }: { initialLanguageCode?: GuideLanguageCode }) {
+  const [languageCode, setLanguageCode] = useState<GuideLanguageCode>(initialLanguageCode);
   const language = GUIDE_LANGUAGES.find((item) => item.code === languageCode) ?? GUIDE_LANGUAGES[0];
   const videos = getPublishedGuideVideos(language);
   const copy = language.copy;
@@ -499,7 +620,92 @@ function GameCard({ game, index }: { game: GameInfo; index: number }) {
   );
 }
 
-function PageContent({ page, onNavigate }: { page: BookPage; onNavigate: (index: number) => void }) {
+function localizedStatus(status: PageStatus | undefined, copy: LocaleCopy) {
+  if (status === 'Bugün kullanılabilir') return copy.status_today;
+  if (status === 'Geliştiriliyor') return copy.status_dev;
+  if (status === 'Planlandı') return copy.status_plan;
+  return '';
+}
+
+function localizedHighlights(page: BookPage, copy: LocaleCopy): string[] {
+  switch (page.kind) {
+    case 'contents': return copy.pill;
+    case 'method':
+    case 'difference':
+    case 'day-story':
+    case 'planning':
+    case 'routine': return [copy.approach_title, ...copy.pill];
+    case 'platforms':
+    case 'android-mobile':
+    case 'android-tv':
+    case 'learning':
+    case 'evidence': return [copy.proof_title, copy.proof_body, copy.status_today];
+    case 'age-intro':
+    case 'age-band': return copy.age_labels;
+    case 'family':
+    case 'ecosystem-actions':
+    case 'games-intro':
+    case 'games-group': return copy.eco_items;
+    case 'trust': return copy.trust_items;
+    case 'status': return [copy.status_today, copy.status_dev, copy.status_plan];
+    case 'content':
+    case 'content-catalog': return [copy.content_title, copy.content_body, copy.learn_more];
+    case 'feedback': return [copy.pages.contact[1], copy.support, 'alika.destek@gmail.com'];
+    case 'closing': return [copy.final_body, copy.privacy, copy.support];
+  }
+}
+
+function localizedEvidenceImage(page: BookPage) {
+  if (page.kind === 'platforms') return '/screens/platform/windows-panel.png';
+  if (page.kind === 'android-mobile') return '/screens/platform/android-parent.webp';
+  if (page.kind === 'android-tv') return '/screens/platform/tv-live-home.webp';
+  if (page.kind === 'learning' || page.kind === 'evidence') return '/screens/platform/android-quiz.webp';
+  if (page.kind === 'family' || page.kind === 'ecosystem-actions') return '/screens/windows-family.jpg';
+  if (page.kind === 'games-intro' || page.kind === 'games-group') return '/games/alika-game-night.webp';
+  return '';
+}
+
+function LocalizedPageContent({ page, language, copy }: { page: BookPage; language: SiteLanguage; copy: LocaleCopy }) {
+  const highlights = localizedHighlights(page, copy);
+  const evidenceImage = localizedEvidenceImage(page);
+  const status = localizedStatus(page.status, copy);
+  const isOpening = page.kind === 'contents';
+  const isClosing = page.kind === 'closing';
+  const isFeedback = page.kind === 'feedback';
+  const isContent = page.kind === 'content' || page.kind === 'content-catalog';
+
+  return (
+    <div className={`localizedBookPage localized-${page.kind}`} lang={language}>
+      <div className="pageTopline"><p className="folio">{page.chapter}</p>{status && <span className="statusStamp ready">{status}</span>}</div>
+      {isOpening ? <h1 tabIndex={-1}>{page.title}</h1> : <h2 tabIndex={-1}>{page.title}</h2>}
+      <p className="pageLead">{page.summary}</p>
+
+      {evidenceImage && (
+        <figure className="localizedEvidence">
+          <img src={evidenceImage} alt={page.title} loading="lazy" decoding="async" />
+          <figcaption>{copy.proof_kicker} · {copy.proof_title}</figcaption>
+        </figure>
+      )}
+
+      <div className="localizedHighlights" aria-label={page.title}>
+        {highlights.slice(0, 5).map((item, index) => <p key={`${page.id}-${index}`}><b>{String(index + 1).padStart(2, '0')}</b><span>{item}</span></p>)}
+      </div>
+
+      {page.kind === 'platforms' && <LocalizedVideoLibrary initialLanguageCode={language} />}
+      {isContent && <a className="textLink localizedAction" href={`${language === 'tr' ? '' : `/${language}`}/content/`}>{copy.learn_more} <span>→</span></a>}
+      {isFeedback && <a className="feedbackMail localizedAction" href="mailto:alika.destek@gmail.com"><small>{copy.support}</small><strong>alika.destek@gmail.com</strong><span>↗</span></a>}
+      {isClosing && (
+        <div className="closingActions localizedClosingActions">
+          <a className="primaryCta" href={microsoftStoreUrl(language)} target="_blank" rel="noreferrer">{copy.get} <span>↗</span></a>
+          <a className="supportLink" href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onNavigate: (index: number) => void; language: SiteLanguage; copy: LocaleCopy }) {
+  if (language !== 'tr') return <LocalizedPageContent page={page} language={language} copy={copy} />;
   switch (page.kind) {
     case 'contents':
       return (
@@ -911,7 +1117,7 @@ function PageContent({ page, onNavigate }: { page: BookPage; onNavigate: (index:
           <h2 tabIndex={-1}>Ekran süresini birlikte yönetin.</h2>
           <p className="pageLead">Kuralları önceden belirleyin, çocuğun kalan süreyi görmesini sağlayın ve doğru cevapları kontrollü ek süreye dönüştürün.</p>
           <div className="closingActions">
-            <a className="primaryCta" href={MICROSOFT_STORE_URL} target="_blank" rel="noreferrer" aria-label="AliKa’yı Microsoft Store’da aç">Microsoft Store’dan edinin <span>↗</span></a>
+            <a className="primaryCta" href={microsoftStoreUrl('tr')} target="_blank" rel="noreferrer" aria-label="AliKa’yı Microsoft Store’da aç">Microsoft Store’dan edinin <span>↗</span></a>
             <a className="textLink" href="/rehber/">Türkçe ebeveyn rehberlerini okuyun <span>→</span></a>
             <a className="supportLink" href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
           </div>
@@ -938,6 +1144,12 @@ function isInteractiveTarget(target: EventTarget | null) {
 }
 
 export default function BookExperience() {
+  const language = resolveSiteLanguage();
+  const copy = localeData[language] as LocaleCopy;
+  const ui = BOOK_UI_COPY[language];
+  const chapters = useMemo(() => localizedChapters(language, copy), [copy, language]);
+  const pages = useMemo(() => localizedPages(language, copy, chapters), [chapters, copy, language]);
+  const activeLanguage = SITE_LANGUAGES.find((item) => item.code === language) ?? SITE_LANGUAGES[0];
   const [phase, setPhase] = useState<BookPhase>('closed');
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
@@ -948,6 +1160,11 @@ export default function BookExperience() {
   const focusTarget = useRef<HTMLDivElement | null>(null);
   const chapterTabsRef = useRef<HTMLElement | null>(null);
   const [scrollInfo, setScrollInfo] = useState({ scrollable: false, progress: 0 });
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.title = `${copy.name} | AliKa`;
+  }, [copy.name, language]);
 
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -961,21 +1178,21 @@ export default function BookExperience() {
     initialTarget.current = pageIndexFromHash(window.location.hash) ?? 0;
   }, []);
 
-  const currentPage = BOOK_PAGES[pageIndex];
-  const activeChapter = useMemo(() => [...CHAPTERS].reverse().find((chapter) => pageIndex >= chapter.start) ?? CHAPTERS[0], [pageIndex]);
-  const activeChapterIndex = CHAPTERS.findIndex((chapter) => chapter.id === activeChapter.id);
-  const chapterEnd = CHAPTERS[activeChapterIndex + 1]?.start ?? BOOK_PAGES.length;
-  const chapterPages = BOOK_PAGES.slice(activeChapter.start, chapterEnd);
-  const lastStart = BOOK_PAGES.length - 1;
+  const currentPage = pages[pageIndex];
+  const activeChapter = useMemo(() => [...chapters].reverse().find((chapter) => pageIndex >= chapter.start) ?? chapters[0], [chapters, pageIndex]);
+  const activeChapterIndex = chapters.findIndex((chapter) => chapter.id === activeChapter.id);
+  const chapterEnd = chapters[activeChapterIndex + 1]?.start ?? pages.length;
+  const chapterPages = pages.slice(activeChapter.start, chapterEnd);
+  const lastStart = pages.length - 1;
   const step = 1;
 
   const writeHash = useCallback((index: number, replace = false) => {
-    const targetChapter = [...CHAPTERS].reverse().find((chapter) => index >= chapter.start) ?? CHAPTERS[0];
-    const hash = index === targetChapter.start ? targetChapter.id : BOOK_PAGES[index].id;
+    const targetChapter = [...chapters].reverse().find((chapter) => index >= chapter.start) ?? chapters[0];
+    const hash = index === targetChapter.start ? targetChapter.id : pages[index].id;
     const url = `${window.location.pathname}${window.location.search}#${hash}`;
     if (replace) window.history.replaceState({ page: index }, '', url);
     else window.history.pushState({ page: index }, '', url);
-  }, []);
+  }, [chapters, pages]);
 
   const focusCurrentPage = useCallback(() => {
     window.requestAnimationFrame(() => {
@@ -1140,7 +1357,7 @@ export default function BookExperience() {
     'hazir-icerik': 'Hazır içerikleri keşfedin.',
     iletisim: 'Bize yazın; birlikte geliştirelim.',
   };
-  const guideText = guideTextByChapter[activeChapter.id];
+  const guideText = language === 'tr' ? guideTextByChapter[activeChapter.id] : currentPage.summary;
   const showGuide = phase === 'reading' && pageIndex === activeChapter.start;
   const showScrollCue = phase === 'reading' && scrollInfo.scrollable && scrollInfo.progress < .97;
 
@@ -1148,29 +1365,35 @@ export default function BookExperience() {
     <main className={`bookStage phase-${phase}`}>
       <div className="ambientGrain" aria-hidden="true" />
       <div className="workspaceStillLife" aria-hidden="true">
-        <span className="deskNote"><i>AliKa</i><b>Aile çalışma kitabı</b><small>Plan · Öğrenme · Birlikte zaman</small></span>
+        <span className="deskNote"><i>AliKa</i><b>{copy.hero_kicker}</b><small>{copy.pill.join(' · ')}</small></span>
         <span className="deskPencil"><i /></span>
         <span className="ribbonTrail" />
       </div>
       <header className="readingHeader" aria-hidden={!['reading', 'flipping'].includes(phase)}>
         <a className="miniBrand" href="#baslangic" onClick={(event) => { event.preventDefault(); turnTo(0); }}><img src="/brand/alika-logo.png" alt="" />AliKa</a>
         <p>{activeChapter.label}</p>
-        <span>{String(pageIndex + 1).padStart(2, '0')} / {BOOK_PAGES.length}</span>
+        <span>{String(pageIndex + 1).padStart(2, '0')} / {pages.length}</span>
       </header>
-      <aside className="bookLanguageDock" aria-label="Site dilini değiştir">
-        <p><span>Site dili</span><b>Türkçe</b></p>
-        <nav className="bookLanguageMenu" aria-label="Dil seçenekleri">
-          {SITE_LANGUAGES.map((language) => (
-            <a key={language.code} href={language.href} lang={language.code} aria-current={language.code === 'tr' ? 'page' : undefined}>
-              <b>{language.code.toUpperCase()}</b><span>{language.label}</span>
+      <details className="bookLanguagePicker">
+        <summary aria-label={`${activeLanguage.label} · Site language`}>
+          <img src={activeLanguage.flag} alt="" width="28" height="19" />
+          <span>{activeLanguage.label}</span>
+          <i aria-hidden="true">⌄</i>
+        </summary>
+        <nav className="bookLanguageMenu" aria-label="Language options">
+          {SITE_LANGUAGES.map((option) => (
+            <a key={option.code} href={`${option.href}#${currentPage.id}`} lang={option.code} aria-current={option.code === language ? 'page' : undefined}>
+              <img src={option.flag} alt="" width="28" height="19" />
+              <span>{option.label}</span>
+              <b>{option.code.toUpperCase()}</b>
             </a>
           ))}
         </nav>
-      </aside>
+      </details>
 
       <section
         className={`bookScene direction-${direction}`}
-        aria-label="AliKa etkileşimli ürün kitabı"
+        aria-label={ui.bookLabel}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -1190,7 +1413,7 @@ export default function BookExperience() {
                 })}
               </nav>
             )}
-            <PageContent page={currentPage} onNavigate={turnTo} />
+            <PageContent page={currentPage} onNavigate={turnTo} language={language} copy={copy} />
             <span className="pageNumber">{pageIndex + 1}</span>
           </article>
           <button
@@ -1202,43 +1425,43 @@ export default function BookExperience() {
               event.preventDefault();
               scrollActivePage(1);
             }}
-            aria-label="Kitap sayfasında aşağı kaydır"
+            aria-label={ui.scrollDown}
             aria-hidden={!showScrollCue}
             tabIndex={showScrollCue ? 0 : -1}
-          ><span><i style={{ width: `${Math.max(12, scrollInfo.progress * 100)}%` }} /></span><b>Aşağı kaydır</b></button>
+          ><span><i style={{ width: `${Math.max(12, scrollInfo.progress * 100)}%` }} /></span><b>{ui.scrollDown}</b></button>
         </div>
 
-        {phase === 'flipping' && <div className="turningSheet" aria-hidden="true"><div className="sheetFront"><span>{direction === 'forward' ? 'Sonraki bölüm' : 'Önceki bölüm'}</span></div><div className="sheetBack" /></div>}
+        {phase === 'flipping' && <div className="turningSheet" aria-hidden="true"><div className="sheetFront"><span>{direction === 'forward' ? ui.nextSection : ui.previousSection}</span></div><div className="sheetBack" /></div>}
 
-        <button className="bookCover" type="button" onClick={openBook} aria-label="AliKa ürün kitabını aç" aria-hidden={['reading', 'flipping'].includes(phase)} tabIndex={phase === 'closed' ? 0 : -1} disabled={phase !== 'closed'}>
+        <button className="bookCover" type="button" onClick={openBook} aria-label={ui.openBook} aria-hidden={['reading', 'flipping'].includes(phase)} tabIndex={phase === 'closed' ? 0 : -1} disabled={phase !== 'closed'}>
           <span className="coverRule coverRuleTop" />
-          <span className="coverEyebrow">Aile için dijital denge</span>
+          <span className="coverEyebrow">{ui.coverEyebrow}</span>
           <span className="morphMark">
             <span className="logoHalo" aria-hidden="true" />
             <img className="officialLogo" src="/brand/alika-logo.png" alt="AliKa" width="208" height="144" />
             <AMascot />
           </span>
           <span className="coverTitle">AliKa</span>
-          <span className="coverSubtitle">Ekranı öğrenmeye, planı aile zamanına dönüştüren ekosistem.</span>
-          <span className="openPrompt"><i aria-hidden="true">↗</i><b>Kitabı aç</b><small>Logo üzerine dokunun</small></span>
+          <span className="coverSubtitle">{copy.meta}</span>
+          <span className="openPrompt"><i aria-hidden="true">↗</i><b>{ui.openBook}</b><small>{ui.touchLogo}</small></span>
           <span className="coverRule coverRuleBottom" />
         </button>
 
         <nav className="chapterTabs" aria-label="Kitap bölümleri" ref={chapterTabsRef}>
-          {CHAPTERS.map((chapter, index) => <button key={chapter.id} type="button" className={activeChapter.id === chapter.id ? 'active' : ''} onClick={() => turnTo(chapter.start)} disabled={phase !== 'reading'} style={{ '--tab-index': index } as CSSProperties}><span>{String(index + 1).padStart(2, '0')}</span>{chapter.label}</button>)}
+          {chapters.map((chapter, index) => <button key={chapter.id} type="button" className={activeChapter.id === chapter.id ? 'active' : ''} onClick={() => turnTo(chapter.start)} disabled={phase !== 'reading'} style={{ '--tab-index': index } as CSSProperties}><span>{String(index + 1).padStart(2, '0')}</span>{chapter.label}</button>)}
         </nav>
 
         <div className={`bookGuide ${showGuide ? 'visible' : ''}`} aria-hidden="true"><AMascot className="aGuide" /><p>{guideText}</p></div>
       </section>
 
-      <nav className="bookControls" aria-label="Sayfa kontrolleri">
-        <button type="button" onClick={() => turnTo(pageIndex - step)} disabled={phase !== 'reading' || pageIndex === 0} aria-label="Önceki sayfa">← <span>Önceki</span></button>
-        <p aria-live="polite">{phase === 'closed' ? 'Kapak' : phase === 'flipping' ? 'Sayfa çevriliyor' : `${currentPage.chapter} · ${currentPage.title}`}</p>
-        <button type="button" onClick={() => turnTo(pageIndex + step)} disabled={phase !== 'reading' || pageIndex >= lastStart} aria-label="Sonraki sayfa"><span>Sonraki</span> →</button>
+      <nav className="bookControls" aria-label={ui.bookLabel}>
+        <button type="button" onClick={() => turnTo(pageIndex - step)} disabled={phase !== 'reading' || pageIndex === 0} aria-label={ui.previous}>← <span>{ui.previous}</span></button>
+        <p aria-live="polite">{phase === 'closed' ? ui.openBook : phase === 'flipping' ? (direction === 'forward' ? ui.nextSection : ui.previousSection) : `${currentPage.chapter} · ${currentPage.title}`}</p>
+        <button type="button" onClick={() => turnTo(pageIndex + step)} disabled={phase !== 'reading' || pageIndex >= lastStart} aria-label={ui.next}><span>{ui.next}</span> →</button>
       </nav>
 
       <section className="seoOutline" aria-label="AliKa ürün kitabı metin özeti">
-        {BOOK_PAGES.map((page) => <article key={page.id}><h2>{page.title}</h2><p>{page.summary}</p></article>)}
+        {pages.map((page) => <article key={page.id}><h2>{page.title}</h2><p>{page.summary}</p></article>)}
       </section>
     </main>
   );

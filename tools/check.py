@@ -197,12 +197,35 @@ def main() -> None:
 
     book_bundles = tuple((DIST / "assets").glob("index-*.js"))
     book_bundle_text = "\n".join(bundle.read_text(encoding="utf-8") for bundle in book_bundles)
-    if not book_bundles or MICROSOFT_STORE_ID not in book_bundle_text or MICROSOFT_STORE_CID not in book_bundle_text:
+    if not book_bundles or MICROSOFT_STORE_ID not in book_bundle_text or "site_home_" not in book_bundle_text:
         errors.append("Microsoft Store link is missing from the book experience")
-    if "Site dilini değiştir" not in book_bundle_text or not all(
+    if "bookLanguagePicker" not in book_bundle_text or not all(
         path in book_bundle_text for path in BOOK_LANGUAGE_PATHS
     ):
         errors.append("Language picker is missing or incomplete in the book experience")
+    for lang in LANGS:
+        flag = DIST / "flags" / f"{lang}.svg"
+        if not flag.exists():
+            errors.append(f"Language flag is missing: {flag}")
+
+    localized_book_pages = [DIST / "index.html", *(DIST / lang / "index.html" for lang in LANGS[1:])]
+    root_bundle_names: set[str] | None = None
+    for page in localized_book_pages:
+        if not page.exists():
+            continue
+        page_text = page.read_text(encoding="utf-8")
+        parser = LinkParser()
+        parser.feed(page_text)
+        bundle_names = {
+            value for attr, value in parser.links
+            if attr == "src" and re.search(r"/assets/index-[^/]+\.js$", value)
+        }
+        if not bundle_names:
+            errors.append(f"Interactive book bundle is missing from language root: {page}")
+        elif root_bundle_names is None:
+            root_bundle_names = bundle_names
+        elif bundle_names != root_bundle_names:
+            errors.append(f"Language root does not use the same book bundle: {page}")
 
     root_page = (DIST / "index.html").read_text(encoding="utf-8")
     if '<script type="application/ld+json">' not in root_page or '"SoftwareApplication"' not in root_page:

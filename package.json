@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build:book": "vite build",
+    "build:book": "vite build && python tools/install_book_routes.py",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
