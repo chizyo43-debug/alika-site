@@ -39,30 +39,22 @@ def replace_meta(document: str, lang: str, copy: dict[str, object]) -> str:
 
 
 def fallback_markup(lang: str, copy: dict[str, object]) -> str:
-    pages = copy["pages"]
-    assert isinstance(pages, dict)
-    links = (
-        ("how-it-works", pages["how-it-works"][0]),
-        ("features", pages["features"][0]),
-        ("age-groups", pages["age-groups"][0]),
-        ("content", pages["content"][0]),
-        ("contact", pages["contact"][0]),
-    )
-    pills = "".join(f"<article><h2>{escaped(item)}</h2></article>" for item in copy["pill"])
-    navigation = "".join(
-        f'<a href="/{lang}/{slug}/">{escaped(label)}</a>' for slug, label in links
-    )
     return (
         '<div id="root">'
-        '<main class="staticEntry">'
-        '<section class="staticEntryHero">'
-        f'<p>{escaped(copy["hero_kicker"])}</p>'
+        '<main class="bookBootStage" aria-label="AliKa product book">'
+        f'<span class="bookBootLang"><img src="/flags/{lang}.svg" alt="" width="28" height="19"><span>{escaped(copy["name"])}</span><i>⌄</i></span>'
+        '<div class="bookBootBook"><div class="bookBootCover">'
+        f'<small>{escaped(copy["hero_kicker"])}</small>'
+        '<img src="/brand/alika-logo.png" alt="AliKa" width="208" height="144">'
+        '<strong>AliKa</strong>'
+        f'<p>{escaped(copy["meta"])}</p>'
+        f'<span class="bookBootPrompt">{escaped(copy["hero_alt"])}</span>'
+        '</div></div>'
+        '<section class="bootSeoText">'
         f'<h1>{escaped(copy["hero_title"])}</h1>'
         f'<p>{escaped(copy["hero_body"])}</p>'
-        f'<a href="https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_{lang}" target="_blank" rel="noopener noreferrer">{escaped(copy["get"])}</a>'
+        f'<a href="https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_{lang}">{escaped(copy["get"])}</a>'
         '</section>'
-        f'<section class="staticEntryGrid">{pills}</section>'
-        f'<nav class="staticEntryLinks">{navigation}</nav>'
         '</main>'
         '</div>'
     )
