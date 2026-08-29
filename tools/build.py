@@ -16,6 +16,32 @@ DIST = ROOT / "dist"
 PUBLIC = ROOT / "public"
 BASE_URL = "https://www.alika.tr"
 LANGS = ("tr", "en", "de", "es", "fr", "pt", "ru", "ja", "ko")
+LANGUAGE_FLAGS = {
+    "tr": "🇹🇷", "en": "🇬🇧", "de": "🇩🇪", "es": "🇪🇸", "fr": "🇫🇷",
+    "pt": "🇵🇹", "ru": "🇷🇺", "ja": "🇯🇵", "ko": "🇰🇷",
+}
+CONTENT_LIBRARY_LABELS = {
+    "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Makine doğrulamalı · İnsan incelemesi yok", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
+    "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Machine validated · No human review", "Grade {}", "Do not extract the ZIP. Select the class ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
+    "de": ("Land", "Klasse", "Alle Fächer herunterladen", "Fach herunterladen", "Lektionen", "Fragen", "Maschinell geprüft · Keine menschliche Prüfung", "Klasse {}", "ZIP nicht entpacken. Wählen Sie die Klassen-ZIP direkt über Inhalte hinzufügen in AliKa oder legen Sie sie im vorbereiteten Ordner ab und starten Sie den Scan."),
+    "es": ("País", "Curso", "Descargar todas las asignaturas", "Descargar asignatura", "lecciones", "preguntas", "Validación automática · Sin revisión humana", "Curso {}", "No extraiga el ZIP. Seleccione directamente el ZIP del curso en Añadir contenido de AliKa o colóquelo en la carpeta preparada y analícela."),
+    "fr": ("Pays", "Niveau", "Télécharger toutes les matières", "Télécharger la matière", "leçons", "questions", "Validation automatique · Sans vérification humaine", "Niveau {}", "Ne décompressez pas le ZIP. Sélectionnez-le directement dans Ajouter du contenu d’AliKa ou placez-le dans le dossier préparé puis lancez l’analyse."),
+    "pt": ("País", "Ano", "Transferir todas as disciplinas", "Transferir disciplina", "lições", "perguntas", "Validação automática · Sem revisão humana", "Ano {}", "Não extraia o ZIP. Selecione o ZIP do ano diretamente em Adicionar conteúdo no AliKa ou coloque-o na pasta preparada e faça a leitura."),
+    "ru": ("Страна", "Класс", "Скачать все предметы", "Скачать предмет", "уроков", "вопросов", "Машинная проверка · Без проверки человеком", "Класс {}", "Не распаковывайте ZIP. Выберите архив класса через Добавить материалы в AliKa или поместите его в подготовленную папку и запустите сканирование."),
+    "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "機械検証済み・人による確認なし", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年ZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
+    "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "자동 검증 · 사람의 검토 없음", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년 ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
+}
+CONTENT_BOOK_LABELS = {
+    "tr": ("AliKa kitabına dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
+    "en": ("Back to the AliKa book", "Ready content ledger", "Countries", "Grade packs", "Subject packs", "Found an issue or have an idea? Tell us."),
+    "de": ("Zurück zum AliKa-Buch", "Heft mit fertigen Inhalten", "Länder", "Klassenpakete", "Fachpakete", "Fehler oder Idee? Schreiben Sie uns."),
+    "es": ("Volver al libro de AliKa", "Cuaderno de contenido preparado", "Países", "Paquetes por curso", "Paquetes por asignatura", "¿Ha encontrado un error o tiene una idea? Escríbanos."),
+    "fr": ("Retour au livre AliKa", "Cahier de contenus prêts", "Pays", "Packs par niveau", "Packs par matière", "Une erreur ou une idée ? Écrivez-nous."),
+    "pt": ("Voltar ao livro AliKa", "Caderno de conteúdos prontos", "Países", "Pacotes por ano", "Pacotes por disciplina", "Encontrou um erro ou tem uma ideia? Escreva-nos."),
+    "ru": ("Вернуться к книге AliKa", "Каталог готовых материалов", "Страны", "Пакеты классов", "Пакеты предметов", "Нашли ошибку или есть идея? Напишите нам."),
+    "ja": ("AliKaブックに戻る", "すぐ使える教材ノート", "国", "学年パック", "教科パック", "不具合や改善案がありましたらお知らせください。"),
+    "ko": ("AliKa 책으로 돌아가기", "준비된 콘텐츠 노트", "국가", "학년 패키지", "과목 패키지", "오류나 개선 아이디어가 있나요? 알려주세요."),
+}
 MICROSOFT_STORE_URL = "https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_tr"
 GUIDE_BASE = "rehber"
 SLUGS = (
@@ -318,7 +344,8 @@ def language_menu(locales: dict[str, dict], lang: str, slug: str = "") -> str:
         current = ' aria-current="true"' if code == lang else ""
         links.append(
             f'<a href="{locale_switch_path(code, slug)}" lang="{code}"{current}>'
-            f'{esc(locales[code]["name"])}</a>'
+            f'<span aria-hidden="true">{LANGUAGE_FLAGS[code]}</span>'
+            f'<span>{esc(locales[code]["name"])}</span></a>'
         )
     return "".join(links)
 
@@ -346,7 +373,7 @@ def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
       </nav>
       <div class="header-actions">
         <details class="language-picker">
-          <summary aria-label="Language">{esc(c["name"])}</summary>
+          <summary aria-label="Language"><span aria-hidden="true">{LANGUAGE_FLAGS[lang]}</span><span>{esc(c["name"])}</span></summary>
           <div class="language-list">{language_menu(locales, lang, slug)}</div>
         </details>
         <a class="button button-small" href="{href(lang, 'downloads')}">{esc(c["get"])}</a>
@@ -399,7 +426,7 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   <meta property="og:url" content="{canonical}">
   {software_application_schema(description) if slug in ("", "downloads") else ""}
 </head>
-<body>
+<body{' class="content-route"' if slug == "content" else ''}>
   {header(locales, lang, slug)}
   {body}
   {footer(locales, lang)}
@@ -771,10 +798,7 @@ def guide_atlas(lang: str, c: dict) -> str:
 
 
 def content_library(catalog: dict, lang: str) -> str:
-    labels = {
-        "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Makine doğrulamalı · İnsan incelemesi yok", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
-        "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Machine validated · No human review", "Grade {}", "Do not extract the ZIP. Select the class ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
-    }.get(lang, ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Machine validated · No human review", "Grade {}", "Do not extract the ZIP. Select it directly from Add content in AliKa or scan it from the prepared folder."))
+    labels = CONTENT_LIBRARY_LABELS[lang]
     countries = sorted({row["country_slug"]: row["country"] for row in catalog["grades"]}.items())
     grades = sorted({(row["country_slug"], row["grade_slug"], row["grade"]) for row in catalog["grades"]})
     country_options = "".join(f'<option value="{esc(slug)}">{esc(name)}</option>' for slug, name in countries)
@@ -871,6 +895,43 @@ def inner_content(lang: str, slug: str, c: dict, catalog: dict) -> str:
           <article><span>02</span><h3>{esc(c["pill"][0])}</h3><p>{esc(c["proof_body"])}</p></article>
           <article><span>03</span><h3>{esc(c["pill"][2])}</h3><p>{esc(c["final_body"])}</p></article>
         </div>"""
+    if slug == "content":
+        book_labels = CONTENT_BOOK_LABELS[lang]
+        country_count = len({row["country_slug"] for row in catalog["grades"]})
+        grade_count = len(catalog["grades"])
+        subject_count = len(catalog["subjects"])
+        return f"""
+        <main id="main" class="content-library-main">
+          <section class="content-library-stage">
+            <div class="content-book-shell">
+              <div class="content-book-paper">
+                <a class="content-book-back" href="{href(lang)}"><span aria-hidden="true">←</span> {esc(book_labels[0])}</a>
+                <header class="content-book-heading">
+                  <div>
+                    <p class="eyebrow">{esc(c["content_kicker"])}</p>
+                    <p class="content-book-overline">{esc(book_labels[1])}</p>
+                    <h1>{esc(title)}</h1>
+                    <p>{esc(desc)}</p>
+                  </div>
+                  <img src="/assets/brand/alika-logo.png" width="104" height="104" alt="AliKa">
+                </header>
+                <div class="content-book-stats" aria-label="{esc(c['content_body'])}">
+                  <span><strong>{country_count}</strong>{esc(book_labels[2])}</span>
+                  <span><strong>{grade_count}</strong>{esc(book_labels[3])}</span>
+                  <span><strong>{subject_count}</strong>{esc(book_labels[4])}</span>
+                </div>
+                <section class="content-book-catalog" aria-label="{esc(title)}">
+                  {detail}
+                </section>
+                <footer class="content-book-contact">
+                  <p>{esc(book_labels[5])}</p>
+                  <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
+                </footer>
+              </div>
+            </div>
+          </section>
+        </main>
+        """
     return f"""
     <main id="main" class="inner-main">
       <section class="inner-hero section-dark">

@@ -106,10 +106,14 @@ def main() -> None:
         content_page = base / "content" / "index.html"
         if content_page.exists():
             content_text = content_page.read_text(encoding="utf-8")
+            if 'class="content-route"' not in content_text or "content-book-shell" not in content_text:
+                errors.append(f"Book catalogue shell is missing: {content_page}")
             if "data-direct-download" not in content_text:
                 errors.append(f"Direct content download is missing: {content_page}")
             if "data-content-country" not in content_text or "data-content-grade" not in content_text:
                 errors.append(f"Country/grade catalog controls are missing: {content_page}")
+            if 'aria-label="Language"' not in content_text or "aria-hidden=\"true\">" not in content_text:
+                errors.append(f"Flagged language selector is missing: {content_page}")
 
         downloads_page = base / "downloads" / "index.html"
         if downloads_page.exists():
