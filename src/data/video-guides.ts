@@ -203,6 +203,87 @@ const enVideos = [
   },
 ] as const satisfies readonly GuideVideo[];
 
+const esVideos = [
+  {
+    key: 'windows-overview', order: 1, group: 'start', id: 'FCUzUCOW0Vs', duration: '1:08',
+    eyebrow: '01/13 · Vista general', title: '¿Qué es AliKa para Windows?',
+    description: 'Descubra cómo AliKa reúne reglas visibles de tiempo de pantalla, aprendizaje aprobado por la familia, tareas e informes en Windows.',
+    poster: '/videos/es/01-windows-overview.jpg',
+  },
+  {
+    key: 'windows-installation', order: 2, group: 'start', id: '0CtUlbYO3i0', duration: '1:53',
+    eyebrow: '02/13 · Instalación y seguridad', title: 'Instalación en Windows y configuración inicial',
+    description: 'Instale AliKa desde Microsoft Store y configure el idioma, el PIN parental, el consentimiento, la recuperación y el modo seguro opcional.',
+    poster: '/videos/es/02-windows-installation.jpg',
+  },
+  {
+    key: 'windows-panel', order: 3, group: 'panel', id: 'kuppA30WmCw', duration: '1:45',
+    eyebrow: '03/13 · Panel', title: 'Panel y resumen diario',
+    description: 'Revise el tiempo restante, las recompensas, el uso por horas, las aplicaciones principales, el estado del dispositivo y la agenda familiar.',
+    poster: '/videos/es/03-windows-panel.jpg',
+  },
+  {
+    key: 'windows-child-rules', order: 4, group: 'rules', id: '1OHNLIztKcw', duration: '5:11',
+    eyebrow: '04/13 · Menor y reglas', title: 'Menú del menor y reglas: explicación de cada pestaña',
+    description: 'Conozca las pestañas de tiempo, aplicaciones, sitios, sueño, planificación semanal, protección web y modo de examen.',
+    poster: '/videos/es/04-windows-child-rules.jpg',
+  },
+  {
+    key: 'windows-learning-content', order: 5, group: 'learning', id: 'yhgNkJgfuWc', duration: '3:23',
+    eyebrow: '05/13 · Aprendizaje', title: 'Añadir lecciones y preguntas',
+    description: 'Añada lecciones y bancos de preguntas aprobados por la familia desde archivos compatibles o un paquete de AliKa creado con ChatGPT.',
+    poster: '/videos/es/05-windows-learning-content.jpg',
+  },
+  {
+    key: 'windows-child-learning', order: 6, group: 'learning', id: 'UdwEoYk0nFw', duration: '2:28',
+    eyebrow: '06/13 · Aprendizaje', title: 'Pantalla de aprendizaje del menor',
+    description: 'Vea el trabajo de hoy, las lecciones aprobadas, la práctica, el progreso, el tiempo ganado y las tareas asignadas desde la vista del menor.',
+    poster: '/videos/es/06-windows-child-learning.jpg',
+  },
+  {
+    key: 'windows-child-question', order: 7, group: 'learning', id: 'nHDYR9WYCso', duration: '2:03',
+    eyebrow: '07/13 · Aprendizaje', title: 'Preguntas, explicaciones y tiempo ganado',
+    description: 'Siga el flujo completo de respuesta: límite diario, retroalimentación, explicaciones, nuevos intentos y tiempo de pantalla controlado.',
+    poster: '/videos/es/07-windows-child-question.jpg',
+  },
+  {
+    key: 'windows-task-homework-exam', order: 8, group: 'learning', id: 'd2ExBERYWB8', duration: '2:42',
+    eyebrow: '08/13 · Aprendizaje', title: 'Crear tareas, deberes y exámenes',
+    description: 'Distinga entre tareas, deberes basados en contenido y exámenes programados, y aprenda a crear cada tipo paso a paso.',
+    poster: '/videos/es/08-windows-task-homework-exam.jpg',
+  },
+  {
+    key: 'windows-devices-family', order: 9, group: 'devices', id: 'SXVwe5NArrw', duration: '2:02',
+    eyebrow: '09/13 · Dispositivos y red familiar', title: 'Dispositivos y red familiar',
+    description: 'Vincule un dispositivo en la red local, consulte su estado y envíe únicamente las acciones visibles compatibles con el dispositivo elegido.',
+    poster: '/videos/es/09-windows-devices-family.jpg',
+  },
+  {
+    key: 'windows-reports', order: 10, group: 'reports', id: 'eW9yqxJD-uo', duration: '2:08',
+    eyebrow: '10/13 · Informes y notificaciones', title: 'Informes y notificaciones',
+    description: 'Consulte resúmenes semanales o mensuales, uso por horas, resultados por materia, historial de eventos y notificaciones.',
+    poster: '/videos/es/10-windows-reports.jpg',
+  },
+  {
+    key: 'windows-privacy', order: 11, group: 'system', id: 'RpXs2bI0QF8', duration: '2:43',
+    eyebrow: '11/13 · Privacidad', title: 'Privacidad y datos locales',
+    description: 'Comprenda el consentimiento, el almacenamiento local, los registros auditables, el borrado parental, el PIN y la red familiar opcional.',
+    poster: '/videos/es/11-windows-privacy.jpg',
+  },
+  {
+    key: 'windows-settings', order: 12, group: 'system', id: 'NPuyEnWqNFA', duration: '2:42',
+    eyebrow: '12/13 · Ajustes', title: 'Ajustes, perfiles y protección',
+    description: 'Configure idioma, perfiles, recomendaciones por edad, bienestar, recuperación del PIN, copia cifrada y protección de Windows.',
+    poster: '/videos/es/12-windows-settings.jpg',
+  },
+  {
+    key: 'windows-auxiliary', order: 13, group: 'system', id: 'cKEl4GGeXzA', duration: '2:05',
+    eyebrow: '13/13 · Herramientas de Windows', title: 'Bandeja del sistema, panel rápido y pantalla de bloqueo',
+    description: 'Use la bandeja y el panel rápido, comprenda los motivos del bloqueo y vea qué acciones seguras siguen disponibles para el menor.',
+    poster: '/videos/es/13-windows-auxiliary.jpg',
+  },
+] as const satisfies readonly GuideVideo[];
+
 const groupLabels = (
   start: string, panel: string, rules: string, learning: string, devices: string, reports: string, system: string,
 ): Record<GuideVideoGroup, string> => ({ start, panel, rules, learning, devices, reports, system });
@@ -242,7 +323,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'es', youtubeLocale: 'es', nativeName: 'Español', playlistId: '', status: 'preparing', videos: [],
+    code: 'es', youtubeLocale: 'es', nativeName: 'Español', playlistId: 'PLGs9cZUQyNJg', status: 'public', videos: esVideos,
     copy: {
       sectionEyebrow: 'Guías de AliKa en YouTube · 9 idiomas', sectionTitle: 'Vea las guías en su idioma.',
       sectionLead: 'Elija un idioma para ver únicamente las guías de Windows publicadas en ese idioma.', channelLabel: 'Abrir el canal de AliKa',
