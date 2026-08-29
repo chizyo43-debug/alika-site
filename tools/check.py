@@ -25,6 +25,7 @@ SLUGS = (
 )
 MICROSOFT_STORE_ID = "9N3P9F5ZKR5S"
 MICROSOFT_STORE_CID = "cid=site_home_tr"
+BOOK_LANGUAGE_PATHS = ("/en/", "/de/", "/es/", "/fr/", "/pt/", "/ru/", "/ja/", "/ko/")
 GUIDE_SLUGS = (
     "windows-11-cocuk-ekran-suresi",
     "soru-cozerek-ekran-suresi-kazanma",
@@ -195,12 +196,13 @@ def main() -> None:
         errors.append("CNAME is not www.alika.tr")
 
     book_bundles = tuple((DIST / "assets").glob("index-*.js"))
-    if not book_bundles or not any(
-        MICROSOFT_STORE_ID in bundle.read_text(encoding="utf-8")
-        and MICROSOFT_STORE_CID in bundle.read_text(encoding="utf-8")
-        for bundle in book_bundles
-    ):
+    book_bundle_text = "\n".join(bundle.read_text(encoding="utf-8") for bundle in book_bundles)
+    if not book_bundles or MICROSOFT_STORE_ID not in book_bundle_text or MICROSOFT_STORE_CID not in book_bundle_text:
         errors.append("Microsoft Store link is missing from the book experience")
+    if "Site dilini değiştir" not in book_bundle_text or not all(
+        path in book_bundle_text for path in BOOK_LANGUAGE_PATHS
+    ):
+        errors.append("Language picker is missing or incomplete in the book experience")
 
     root_page = (DIST / "index.html").read_text(encoding="utf-8")
     if '<script type="application/ld+json">' not in root_page or '"SoftwareApplication"' not in root_page:

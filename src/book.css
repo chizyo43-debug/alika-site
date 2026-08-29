@@ -973,3 +973,87 @@ button:disabled { cursor: default; }
     padding-block: 4px;
   }
 }
+
+/* Kitap ana sayfasındaki görünür site dili seçici. */
+.bookLanguagePicker {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 70;
+  color: var(--navy);
+}
+.bookLanguagePicker summary {
+  display: flex;
+  min-width: 96px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid rgba(16,35,62,.22);
+  border-radius: 999px;
+  background: rgba(248,241,226,.96);
+  box-shadow: 0 7px 20px rgba(34,29,25,.17);
+  cursor: pointer;
+  list-style: none;
+  touch-action: manipulation;
+  backdrop-filter: blur(8px);
+}
+.bookLanguagePicker summary::-webkit-details-marker { display: none; }
+.bookLanguagePicker summary::marker { content: ''; }
+.bookLanguagePicker summary span { font-size: 11px; font-weight: 850; }
+.bookLanguagePicker summary b { color: #a7503d; font-size: 11px; letter-spacing: .08em; }
+.bookLanguagePicker summary i { font-size: 15px; font-style: normal; line-height: 1; transition: transform .18s ease; }
+.bookLanguagePicker[open] summary i { transform: rotate(180deg); }
+.bookLanguagePicker summary:hover,
+.bookLanguagePicker summary:focus-visible { color: #fff; border-color: var(--navy); background: var(--navy); }
+.bookLanguagePicker summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.bookLanguagePicker[open] summary { color: #fff; border-color: var(--navy); background: var(--navy); }
+.bookLanguagePicker[open] summary b { color: var(--cyan); }
+.bookLanguageMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(248px, calc(100vw - 28px));
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 5px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 14px;
+  background: rgba(9,23,42,.98);
+  box-shadow: 0 18px 42px rgba(24,20,17,.3);
+  backdrop-filter: blur(12px);
+}
+.bookLanguageMenu a {
+  display: grid;
+  grid-template-columns: 27px 1fr;
+  gap: 6px;
+  min-height: 44px;
+  align-items: center;
+  padding: 8px 9px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #e8eef4;
+  font-size: 11px;
+  line-height: 1.2;
+  touch-action: manipulation;
+}
+.bookLanguageMenu a b { color: var(--cyan); font-size: 9px; letter-spacing: .08em; }
+.bookLanguageMenu a:hover,
+.bookLanguageMenu a:focus-visible,
+.bookLanguageMenu a[aria-current="page"] { border-color: rgba(89,197,234,.5); background: rgba(89,197,234,.13); }
+.bookLanguageMenu a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
+
+@media (max-width: 1050px) {
+  .readingHeader > span { display: none; }
+}
+
+@media (max-width: 760px) {
+  .bookLanguagePicker { top: 7px; right: 10px; }
+  .bookLanguagePicker summary { min-width: 86px; min-height: 42px; padding: 7px 10px; }
+  .readingHeader { width: calc(100vw - 124px); left: 15px; transform: none; }
+  .phase-closed .readingHeader,
+  .phase-morphing .readingHeader,
+  .phase-opening .readingHeader { transform: translateY(-12px); }
+}

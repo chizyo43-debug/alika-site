@@ -77,6 +77,17 @@ interface AgeBandInfo {
 
 
 const MICROSOFT_STORE_URL = 'https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_tr';
+const SITE_LANGUAGES = [
+  { code: 'tr', label: 'Türkçe', href: '/' },
+  { code: 'en', label: 'English', href: '/en/' },
+  { code: 'de', label: 'Deutsch', href: '/de/' },
+  { code: 'es', label: 'Español', href: '/es/' },
+  { code: 'fr', label: 'Français', href: '/fr/' },
+  { code: 'pt', label: 'Português', href: '/pt/' },
+  { code: 'ru', label: 'Русский', href: '/ru/' },
+  { code: 'ja', label: '日本語', href: '/ja/' },
+  { code: 'ko', label: '한국어', href: '/ko/' },
+] as const;
 
 const BOOK_PAGES: BookPage[] = [
   { id: 'baslangic', chapter: 'Başlangıç', kind: 'contents', title: 'Bırakın ekran, onu öğrenmeye yakınlaştırsın.', summary: 'AliKa’nın ailelere sözü.' },
@@ -1146,6 +1157,16 @@ export default function BookExperience() {
         <p>{activeChapter.label}</p>
         <span>{String(pageIndex + 1).padStart(2, '0')} / {BOOK_PAGES.length}</span>
       </header>
+      <details className="bookLanguagePicker">
+        <summary aria-label="Site dilini değiştir"><span>Dil</span><b>TR</b><i aria-hidden="true">⌄</i></summary>
+        <nav className="bookLanguageMenu" aria-label="Site dili">
+          {SITE_LANGUAGES.map((language) => (
+            <a key={language.code} href={language.href} lang={language.code} aria-current={language.code === 'tr' ? 'page' : undefined}>
+              <b>{language.code.toUpperCase()}</b><span>{language.label}</span>
+            </a>
+          ))}
+        </nav>
+      </details>
 
       <section
         className={`bookScene direction-${direction}`}
