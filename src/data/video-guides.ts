@@ -306,7 +306,7 @@ const LOCALIZED_VIDEO_GROUPS: readonly GuideVideoGroup[] = [
   'learning', 'devices', 'reports', 'system', 'system', 'system',
 ];
 
-function createLocalizedGuideVideos(language: 'de' | 'fr' | 'pt', seeds: readonly LocalizedGuideSeed[]): readonly GuideVideo[] {
+function createLocalizedGuideVideos(language: 'de' | 'fr' | 'pt' | 'ru', seeds: readonly LocalizedGuideSeed[]): readonly GuideVideo[] {
   return seeds.map((seed, index) => ({
     key: LOCALIZED_VIDEO_KEYS[index],
     order: index + 1,
@@ -485,6 +485,61 @@ const ptVideos = createLocalizedGuideVideos('pt', [
   },
 ]);
 
+const ruVideos = createLocalizedGuideVideos('ru', [
+  {
+    id: '0-FfzOa4n-U', duration: '1:03', eyebrow: '01/13 · Обзор', title: 'Для чего нужен AliKa для Windows?',
+    description: 'Узнайте, как понятные правила экранного времени, одобренные материалы, задания и семейные отчёты объединяются в одном приложении Windows.',
+  },
+  {
+    id: 'jBs4FF1tAsQ', duration: '1:43', eyebrow: '02/13 · Установка и безопасность', title: 'Установка в Windows и первая настройка',
+    description: 'Установите AliKa из Microsoft Store и настройте русский язык, родительский PIN-код, согласие, восстановление и необязательный безопасный режим.',
+  },
+  {
+    id: 'DvmGYfbFoG4', duration: '1:48', eyebrow: '03/13 · Панель', title: 'Панель и сводка за день',
+    description: 'Проверьте оставшееся время, награды, использование по часам, основные приложения, состояние устройства и семейное расписание.',
+  },
+  {
+    id: 'jbf8xLRd8Q0', duration: '5:08', eyebrow: '04/13 · Ребёнок и правила', title: 'Профиль ребёнка и правила: все вкладки',
+    description: 'Разберите ограничения времени, приложения, сайты, отбой, недельный план, веб-защиту и режим экзамена в настоящем русском интерфейсе.',
+  },
+  {
+    id: 'rlCl18_jlgI', duration: '2:45', eyebrow: '05/13 · Обучение', title: 'Добавление уроков и вопросов',
+    description: 'Добавьте одобренные родителями уроки и банки вопросов из поддерживаемых файлов или пакета AliKa, подготовленного с помощью ChatGPT.',
+  },
+  {
+    id: 'YPBu8_Mxeyk', duration: '2:15', eyebrow: '06/13 · Обучение', title: 'Учебный экран ребёнка',
+    description: 'Посмотрите глазами ребёнка на работу дня, одобренные уроки, практику, прогресс, заработанное время и назначенные задания.',
+  },
+  {
+    id: 'G3NMB8CxDkQ', duration: '1:54', eyebrow: '07/13 · Обучение', title: 'Вопросы, пояснения и заработанное время',
+    description: 'Проследите полный процесс: дневной лимит, ответ, пояснение, повторная попытка и контролируемое начисление экранного времени.',
+  },
+  {
+    id: 'GtTMNW5ftbY', duration: '2:40', eyebrow: '08/13 · Обучение', title: 'Создание заданий, домашних работ и экзаменов',
+    description: 'Различайте ежедневные задания, домашние работы на основе материалов и запланированные экзамены, создавая каждый тип по шагам.',
+  },
+  {
+    id: '7voTN9hKdFk', duration: '1:51', eyebrow: '09/13 · Устройства и семейная сеть', title: 'Устройства и семейная сеть',
+    description: 'Подключите семейное устройство по локальной сети, проверьте его состояние и отправляйте только доступные для него действия.',
+  },
+  {
+    id: '35_CvTNW8es', duration: '2:05', eyebrow: '10/13 · Отчёты и уведомления', title: 'Отчёты и уведомления',
+    description: 'Просматривайте недельные и месячные сводки, использование по часам, результаты по предметам, журнал событий и уведомления.',
+  },
+  {
+    id: 'yJWMdRQ9PlM', duration: '2:27', eyebrow: '11/13 · Конфиденциальность', title: 'Конфиденциальность и локальные данные',
+    description: 'Разберитесь в согласии, локальном хранении, проверяемых записях, удалении родителем, PIN-защите и необязательной семейной сети.',
+  },
+  {
+    id: 'nhEtbYp1EA8', duration: '2:35', eyebrow: '12/13 · Настройки', title: 'Настройки, профили и защита',
+    description: 'Настройте язык, профили, возрастные рекомендации, цифровое благополучие, восстановление PIN, шифрованную копию и защиту Windows.',
+  },
+  {
+    id: 'TjVSglHAYbo', duration: '2:04', eyebrow: '13/13 · Инструменты Windows', title: 'Область уведомлений, быстрая панель и блокировка',
+    description: 'Используйте область уведомлений и быструю панель, понимайте причины блокировки и безопасные действия, доступные ребёнку.',
+  },
+]);
+
 const groupLabels = (
   start: string, panel: string, rules: string, learning: string, devices: string, reports: string, system: string,
 ): Record<GuideVideoGroup, string> => ({ start, panel, rules, learning, devices, reports, system });
@@ -557,7 +612,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'ru', youtubeLocale: 'ru', nativeName: 'Русский', playlistId: '', status: 'preparing', videos: [],
+    code: 'ru', youtubeLocale: 'ru', nativeName: 'Русский', playlistId: 'PLNmRBY5CU7Q8', status: 'public', videos: ruVideos,
     copy: {
       sectionEyebrow: 'Видеоинструкции AliKa · 9 языков приложения', sectionTitle: 'Смотрите инструкции на своём языке.',
       sectionLead: 'Выберите язык, чтобы увидеть только опубликованные инструкции Windows на этом языке.', channelLabel: 'Открыть канал AliKa', playlistLabel: 'Открыть серию из 13 видео',
