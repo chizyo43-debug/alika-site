@@ -544,7 +544,7 @@ function LocalizedVideoLibrary({ initialLanguageCode = 'tr' }: { initialLanguage
               onClick={() => setLanguageCode(item.code)}
             >
               <span lang={item.youtubeLocale}>{item.nativeName}</span>
-              <small lang={item.youtubeLocale}>{count > 0 ? `${count} video` : item.copy.preparingLabel}</small>
+              <small lang={item.youtubeLocale}>{count > 0 ? item.copy.videoCountLabel(count) : item.copy.preparingLabel}</small>
             </button>
           );
         })}
@@ -558,6 +558,9 @@ function LocalizedVideoLibrary({ initialLanguageCode = 'tr' }: { initialLanguage
         <div className="videoLanguageStatus">
           <span aria-hidden="true">{language.code.toUpperCase()}</span>
           <p lang={language.youtubeLocale}><b>{language.nativeName}</b><small>{videos.length > 0 ? copy.publishedLabel : copy.preparingLabel}</small></p>
+          {language.playlistId && videos.length > 0 ? (
+            <a href={`https://www.youtube.com/playlist?list=${language.playlistId}`} target="_blank" rel="noreferrer" lang={language.youtubeLocale}>{copy.playlistLabel} ↗</a>
+          ) : null}
         </div>
         {videos.length > 0 ? (
           <>

@@ -20,6 +20,7 @@ interface GuideLanguageCopy {
   sectionTitle: string;
   sectionLead: string;
   channelLabel: string;
+  playlistLabel: string;
   playLabel: string;
   youtubeLabel: string;
   publishedLabel: string;
@@ -27,6 +28,7 @@ interface GuideLanguageCopy {
   emptyTitle: string;
   emptyDescription: string;
   privacyLabel: string;
+  videoCountLabel: (count: number) => string;
   totalLabel: (count: number, duration: string) => string;
   groupLabels: Record<GuideVideoGroup, string>;
 }
@@ -284,74 +286,273 @@ const esVideos = [
   },
 ] as const satisfies readonly GuideVideo[];
 
+interface LocalizedGuideSeed {
+  id: string;
+  duration: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+}
+
+const LOCALIZED_VIDEO_KEYS = [
+  'windows-overview', 'windows-installation', 'windows-panel', 'windows-child-rules',
+  'windows-learning-content', 'windows-child-learning', 'windows-child-question',
+  'windows-task-homework-exam', 'windows-devices-family', 'windows-reports',
+  'windows-privacy', 'windows-settings', 'windows-auxiliary',
+] as const;
+
+const LOCALIZED_VIDEO_GROUPS: readonly GuideVideoGroup[] = [
+  'start', 'start', 'panel', 'rules', 'learning', 'learning', 'learning',
+  'learning', 'devices', 'reports', 'system', 'system', 'system',
+];
+
+function createLocalizedGuideVideos(language: 'de' | 'fr' | 'pt', seeds: readonly LocalizedGuideSeed[]): readonly GuideVideo[] {
+  return seeds.map((seed, index) => ({
+    key: LOCALIZED_VIDEO_KEYS[index],
+    order: index + 1,
+    group: LOCALIZED_VIDEO_GROUPS[index],
+    id: seed.id,
+    duration: seed.duration,
+    eyebrow: seed.eyebrow,
+    title: seed.title,
+    description: seed.description,
+    poster: `/videos/${language}/${String(index + 1).padStart(2, '0')}-${LOCALIZED_VIDEO_KEYS[index]}.jpg`,
+  }));
+}
+
+const deVideos = createLocalizedGuideVideos('de', [
+  {
+    id: 'wKZss-8oe98', duration: '0:59', eyebrow: '01/13 · Überblick', title: 'Was ist AliKa für Windows?',
+    description: 'Erfahren Sie, wie sichtbare Bildschirmzeitregeln, freigegebene Lerninhalte, Aufgaben und Familienberichte in einer Windows-App zusammenkommen.',
+  },
+  {
+    id: 'zOTSf5zP9aM', duration: '1:33', eyebrow: '02/13 · Installation und Sicherheit', title: 'Windows-Installation und erste Einrichtung',
+    description: 'Installieren Sie AliKa aus dem Microsoft Store und richten Sie Sprache, Eltern-PIN, Einwilligung, Wiederherstellung und den optionalen abgesicherten Modus ein.',
+  },
+  {
+    id: 'Bo7GVv9xwEQ', duration: '1:14', eyebrow: '03/13 · Übersicht', title: 'Übersicht und Tageszusammenfassung',
+    description: 'Prüfen Sie Restzeit, Belohnungswerte, stündliche Nutzung, häufige Apps, Gerätezustand und den kommenden Familienplan.',
+  },
+  {
+    id: 'hZOCbrnrIbE', duration: '4:06', eyebrow: '04/13 · Kind und Regeln', title: 'Kind und Regeln: alle Bereiche erklärt',
+    description: 'Lernen Sie Zeitlimits, Apps, Websites, Schlafenszeit, Wochenplanung, Webschutz und Prüfungsmodus in der echten deutschen Oberfläche kennen.',
+  },
+  {
+    id: 'P1a_rD3xnO0', duration: '2:44', eyebrow: '05/13 · Lernen', title: 'Lerninhalte und Fragen hinzufügen',
+    description: 'Fügen Sie von Eltern geprüfte Lernnotizen und Fragenbanken aus unterstützten Dateien oder einem mit ChatGPT erstellten AliKa-Paket hinzu.',
+  },
+  {
+    id: 'N92Rk8bV-EU', duration: '2:04', eyebrow: '06/13 · Lernen', title: 'Der Lernbereich für Kinder',
+    description: 'Sehen Sie Tagesaufgaben, freigegebene Lernnotizen, Fragenübungen, Fortschritt, verdiente Zeit und zugewiesene Arbeiten aus Kindersicht.',
+  },
+  {
+    id: 'QUbGX9fF5Hw', duration: '1:36', eyebrow: '07/13 · Lernen', title: 'Fragen, Erklärungen und verdiente Zeit',
+    description: 'Verfolgen Sie den vollständigen Ablauf mit Tagesgrenze, Antwortfeedback, Erklärungen, weiteren Versuchen und kontrolliert verdienter Bildschirmzeit.',
+  },
+  {
+    id: 'D0GdYikoq2A', duration: '2:16', eyebrow: '08/13 · Lernen', title: 'Aufgaben, Hausaufgaben und Prüfungen erstellen',
+    description: 'Unterscheiden Sie tägliche Aufgaben, inhaltsbezogene Hausaufgaben und geplante Prüfungen und erstellen Sie jeden Typ Schritt für Schritt.',
+  },
+  {
+    id: '2c32WJIEWsw', duration: '1:39', eyebrow: '09/13 · Geräte und Familiennetzwerk', title: 'Geräte und Familiennetzwerk',
+    description: 'Koppeln Sie ein Familiengerät im lokalen Netz, prüfen Sie seinen Zustand und senden Sie nur die für das gewählte Gerät sichtbaren Aktionen.',
+  },
+  {
+    id: 'HCN70qwVjfE', duration: '1:41', eyebrow: '10/13 · Berichte und Mitteilungen', title: 'Berichte und Mitteilungen',
+    description: 'Lesen Sie Wochen- und Monatsübersichten, stündliche Nutzung, Ergebnisse nach Fach, Ereignisverlauf und wichtige Mitteilungen.',
+  },
+  {
+    id: 'Vi1ylZEIozA', duration: '2:06', eyebrow: '11/13 · Datenschutz', title: 'Datenschutz und lokale Daten',
+    description: 'Verstehen Sie Einwilligung, lokale Datenspeicherung, prüfbare Einträge, elterngesteuertes Löschen, PIN-Schutz und das optionale lokale Familiennetz.',
+  },
+  {
+    id: '7dSyJx3GqvQ', duration: '2:07', eyebrow: '12/13 · Einstellungen', title: 'Einstellungen, Profile und Schutz',
+    description: 'Konfigurieren Sie Sprache, Profile, Altersvorgaben, Wohlbefinden, PIN-Wiederherstellung, verschlüsselte Sicherung und den Windows-Schutzdienst.',
+  },
+  {
+    id: 'enM6lEeSiBA', duration: '1:28', eyebrow: '13/13 · Windows-Werkzeuge', title: 'Infobereich, Schnellübersicht und Sperrbildschirm',
+    description: 'Nutzen Sie Infobereich und Schnellübersicht, verstehen Sie Sperrgründe und sehen Sie, welche sicheren Aktionen dem Kind weiter zur Verfügung stehen.',
+  },
+]);
+
+const frVideos = createLocalizedGuideVideos('fr', [
+  {
+    id: '6rtIT5shmNQ', duration: '1:09', eyebrow: '01/13 · Présentation', title: 'À quoi sert AliKa pour Windows ?',
+    description: 'Découvrez comment les règles de temps d’écran, les contenus approuvés, les tâches et les rapports familiaux se réunissent dans une application Windows.',
+  },
+  {
+    id: '7UvYVK_V-qo', duration: '1:48', eyebrow: '02/13 · Installation et sécurité', title: 'Installation Windows et première configuration',
+    description: 'Installez AliKa depuis le Microsoft Store puis configurez la langue, le PIN parental, le consentement, la récupération et le mode sécurisé facultatif.',
+  },
+  {
+    id: 'fPblmRoDypg', duration: '1:45', eyebrow: '03/13 · Tableau de bord', title: 'Tableau de bord et résumé quotidien',
+    description: 'Consultez le temps restant, les récompenses, l’utilisation horaire, les applications principales, l’état de l’appareil et le programme familial.',
+  },
+  {
+    id: 'wrj8DjzCDCQ', duration: '5:17', eyebrow: '04/13 · Enfant et règles', title: 'Enfant et règles : chaque onglet expliqué',
+    description: 'Parcourez le temps, les applications, les sites, le coucher, le planning hebdomadaire, la protection web et le mode examen dans l’interface française.',
+  },
+  {
+    id: 'Ip8_FnTd9Pw', duration: '3:06', eyebrow: '05/13 · Apprentissage', title: 'Ajouter des leçons et des questions',
+    description: 'Ajoutez des leçons et banques de questions approuvées depuis les fichiers compatibles ou un paquet AliKa créé avec ChatGPT.',
+  },
+  {
+    id: 'QcWtDHnXVc4', duration: '2:15', eyebrow: '06/13 · Apprentissage', title: 'L’écran d’apprentissage de l’enfant',
+    description: 'Découvrez le travail du jour, les leçons approuvées, les exercices, la progression, le temps gagné et les tâches attribuées côté enfant.',
+  },
+  {
+    id: 'zTLApkih1RI', duration: '1:58', eyebrow: '07/13 · Apprentissage', title: 'Questions, explications et temps gagné',
+    description: 'Suivez le parcours complet : limite quotidienne, retour sur la réponse, explication, nouvelle tentative et temps d’écran gagné de façon contrôlée.',
+  },
+  {
+    id: 'Ac1JrRQqsNM', duration: '2:30', eyebrow: '08/13 · Apprentissage', title: 'Créer des tâches, devoirs et examens',
+    description: 'Distinguez les tâches quotidiennes, les devoirs liés à un contenu et les examens programmés, puis créez chaque type étape par étape.',
+  },
+  {
+    id: 'Hf5kwd4Cm14', duration: '1:58', eyebrow: '09/13 · Appareils et réseau familial', title: 'Appareils et réseau familial',
+    description: 'Associez un appareil sur le réseau local, vérifiez son état et envoyez uniquement les actions visibles compatibles avec l’appareil choisi.',
+  },
+  {
+    id: '89htC2N97pA', duration: '2:09', eyebrow: '10/13 · Rapports et notifications', title: 'Rapports et notifications',
+    description: 'Consultez les bilans hebdomadaires ou mensuels, l’utilisation horaire, les résultats par matière, l’historique des événements et les notifications.',
+  },
+  {
+    id: '0jRPD2whdik', duration: '2:30', eyebrow: '11/13 · Confidentialité', title: 'Confidentialité et données locales',
+    description: 'Comprenez le consentement, le stockage local, les données vérifiables, l’effacement parental, le PIN et le réseau familial local facultatif.',
+  },
+  {
+    id: 'cWGb4qciXqk', duration: '2:34', eyebrow: '12/13 · Paramètres', title: 'Paramètres, profils et protection',
+    description: 'Configurez la langue, les profils, les recommandations par âge, le bien-être, la récupération du PIN, la sauvegarde chiffrée et la protection Windows.',
+  },
+  {
+    id: 'dv9QnGzT7QM', duration: '1:56', eyebrow: '13/13 · Outils Windows', title: 'Barre d’état, panneau rapide et écran de verrouillage',
+    description: 'Utilisez la barre d’état et le panneau rapide, comprenez les motifs de verrouillage et les actions sûres encore disponibles pour l’enfant.',
+  },
+]);
+
+const ptVideos = createLocalizedGuideVideos('pt', [
+  {
+    id: 'WYzSbP7lHt8', duration: '1:12', eyebrow: '01/13 · Visão geral', title: 'Para que serve o AliKa para Windows?',
+    description: 'Veja como regras visíveis de tempo de tela, conteúdo aprovado, tarefas e relatórios da família se reúnem em um único aplicativo para Windows.',
+  },
+  {
+    id: '6Pqy5WuA4xI', duration: '1:51', eyebrow: '02/13 · Instalação e segurança', title: 'Instalação no Windows e configuração inicial',
+    description: 'Instale pela Microsoft Store e configure idioma, PIN parental, consentimento, recuperação offline e o Modo Seguro opcional.',
+  },
+  {
+    id: '01QCagdmylU', duration: '1:40', eyebrow: '03/13 · Painel', title: 'Painel e resumo diário',
+    description: 'Confira o tempo restante, recompensas, uso por hora, aplicativos principais, estado do dispositivo e a agenda da família.',
+  },
+  {
+    id: 'yvvJmi3Eq7g', duration: '5:00', eyebrow: '04/13 · Criança e regras', title: 'Criança e regras: todas as abas explicadas',
+    description: 'Conheça tempo, aplicativos, sites, horário de dormir, planejamento semanal, proteção web e Modo Prova na interface real em português.',
+  },
+  {
+    id: 'M0XhV1fgqQ8', duration: '3:31', eyebrow: '05/13 · Aprendizagem', title: 'Adicionar aulas e perguntas',
+    description: 'Adicione aulas e bancos de perguntas aprovados a partir de arquivos compatíveis ou de um pacote AliKa criado com o ChatGPT.',
+  },
+  {
+    id: 'emoYHCau3aw', duration: '2:43', eyebrow: '06/13 · Aprendizagem', title: 'Tela de aprendizagem da criança',
+    description: 'Veja o trabalho do dia, aulas aprovadas, prática de perguntas, progresso, tempo ganho e tarefas atribuídas na visão da criança.',
+  },
+  {
+    id: 'wAwqcrV4rgA', duration: '2:10', eyebrow: '07/13 · Aprendizagem', title: 'Perguntas, explicações e tempo ganho',
+    description: 'Acompanhe o fluxo completo: limite diário, retorno da resposta, explicação, nova tentativa e tempo de tela ganho de forma controlada.',
+  },
+  {
+    id: '9FYGqVpSRMY', duration: '2:49', eyebrow: '08/13 · Aprendizagem', title: 'Criar tarefas, lições de casa e simulados',
+    description: 'Diferencie tarefas diárias, lições de casa baseadas em conteúdo e simulados agendados, criando cada tipo passo a passo.',
+  },
+  {
+    id: 'NVPCtS-m12g', duration: '2:06', eyebrow: '09/13 · Dispositivos e rede familiar', title: 'Dispositivos e rede familiar',
+    description: 'Emparelhe um dispositivo pela rede local, confira seu estado e envie apenas as ações visíveis compatíveis com o dispositivo escolhido.',
+  },
+  {
+    id: 'DQDsbvEj0gM', duration: '2:02', eyebrow: '10/13 · Relatórios e notificações', title: 'Relatórios e notificações',
+    description: 'Consulte resumos semanais ou mensais, uso por hora, resultados por matéria, histórico de eventos e notificações.',
+  },
+  {
+    id: 'EmOQjvXg-_M', duration: '2:50', eyebrow: '11/13 · Privacidade', title: 'Privacidade e dados locais',
+    description: 'Entenda consentimento, armazenamento local, registros verificáveis, exclusão pelos pais, proteção por PIN e a rede familiar local opcional.',
+  },
+  {
+    id: 'alwpqakMLmE', duration: '2:43', eyebrow: '12/13 · Configurações', title: 'Configurações, perfis e proteção',
+    description: 'Configure idioma, perfis, recomendações por idade, bem-estar, recuperação do PIN, backup criptografado e a proteção do Windows.',
+  },
+  {
+    id: 'u8yVQXbTMuc', duration: '2:10', eyebrow: '13/13 · Ferramentas do Windows', title: 'Bandeja do sistema, Painel rápido e Tela de bloqueio',
+    description: 'Use a bandeja e o Painel rápido, entenda os motivos do bloqueio e quais ações seguras continuam disponíveis para a criança.',
+  },
+]);
+
 const groupLabels = (
   start: string, panel: string, rules: string, learning: string, devices: string, reports: string, system: string,
 ): Record<GuideVideoGroup, string> => ({ start, panel, rules, learning, devices, reports, system });
 
 export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
   {
-    code: 'tr', youtubeLocale: 'tr', nativeName: 'Türkçe', playlistId: '', status: 'public', videos: trVideos,
+    code: 'tr', youtubeLocale: 'tr', nativeName: 'Türkçe', playlistId: 'PLb83uFzWZ16Q', status: 'public', videos: trVideos,
     copy: {
-      sectionEyebrow: 'AliKa YouTube rehberleri · 9 uygulama dili', sectionTitle: 'Rehberleri kendi dilinizde izleyin.',
-      sectionLead: 'Bir dil seçtiğinizde yalnız o dilde yayımlanmış Windows rehberleri gösterilir.', channelLabel: 'AliKa kanalını aç',
+      sectionEyebrow: 'AliKa YouTube rehberleri · 9 uygulama dili', sectionTitle: 'AliKa Windows video rehberleri',
+      sectionLead: 'Dilinizi seçin; 01–13 sırasındaki rehberleri konu başlıklarına göre adım adım izleyin.', channelLabel: 'AliKa kanalını aç', playlistLabel: '13 videoluk seriyi aç',
       playLabel: 'Videoyu oynat', youtubeLabel: 'YouTube’da aç', publishedLabel: 'Yayımlanan rehberler', preparingLabel: 'Hazırlanıyor',
       emptyTitle: 'Türkçe rehberler hazırlanıyor.', emptyDescription: 'Bu dilin eksiksiz Windows rehber seti yayımlandığında burada görünecek.',
-      privacyLabel: 'Video yalnız oynat düğmesine bastığınızda YouTube’a bağlanır.', totalLabel: (count, duration) => `${count} açıklamalı rehber · toplam ${duration}`,
+      privacyLabel: 'Video yalnız oynat düğmesine bastığınızda YouTube’a bağlanır.', totalLabel: (count, duration) => `${count} açıklamalı rehber · toplam ${duration}`, videoCountLabel: (count) => `${count} video`,
       groupLabels: groupLabels('Başlangıç ve Kurulum', 'Panel', 'Çocuk ve Kurallar', 'Öğrenme', 'Cihazlar ve Aile Ağı', 'Raporlar ve Bildirimler', 'Ayarlar, Gizlilik ve Windows Yardımcıları'),
     },
   },
   {
     code: 'en', youtubeLocale: 'en', nativeName: 'English', playlistId: 'PLcfP4qWx0x4k', status: 'public', videos: enVideos,
     copy: {
-      sectionEyebrow: 'AliKa YouTube guides · 9 app languages', sectionTitle: 'Watch the guides in your language.',
-      sectionLead: 'Choose a language to see only the published Windows guides in that language.', channelLabel: 'Open the AliKa channel',
+      sectionEyebrow: 'AliKa YouTube guides · 9 app languages', sectionTitle: 'AliKa for Windows video guides',
+      sectionLead: 'Choose your language and follow guides 01–13 step by step, organized by topic.', channelLabel: 'Open the AliKa channel', playlistLabel: 'Open the 13-video series',
       playLabel: 'Play video', youtubeLabel: 'Open on YouTube', publishedLabel: 'Published guides', preparingLabel: 'In preparation',
       emptyTitle: 'English video guides are being prepared.', emptyDescription: 'The complete English Windows guide set will appear here after publication.',
-      privacyLabel: 'YouTube is contacted only after you press play.', totalLabel: (count, duration) => `${count} guided videos · ${duration} total`,
+      privacyLabel: 'YouTube is contacted only after you press play.', totalLabel: (count, duration) => `${count} guided videos · ${duration} total`, videoCountLabel: (count) => `${count} videos`,
       groupLabels: groupLabels('Introduction and Setup', 'Dashboard', 'Child and Rules', 'Learning', 'Devices and Family Network', 'Reports and Notifications', 'Settings, Privacy and Windows Tools'),
     },
   },
   {
-    code: 'de', youtubeLocale: 'de', nativeName: 'Deutsch', playlistId: '', status: 'preparing', videos: [],
+    code: 'de', youtubeLocale: 'de', nativeName: 'Deutsch', playlistId: 'PLeJpTO5eMvbM', status: 'public', videos: deVideos,
     copy: {
-      sectionEyebrow: 'AliKa-YouTube-Anleitungen · 9 App-Sprachen', sectionTitle: 'Anleitungen in Ihrer Sprache ansehen.',
-      sectionLead: 'Wählen Sie eine Sprache, um ausschließlich veröffentlichte Windows-Anleitungen in dieser Sprache zu sehen.', channelLabel: 'AliKa-Kanal öffnen',
+      sectionEyebrow: 'AliKa-YouTube-Anleitungen · 9 App-Sprachen', sectionTitle: 'AliKa Windows-Videoanleitungen',
+      sectionLead: 'Wählen Sie Ihre Sprache und folgen Sie den Anleitungen 01–13 Schritt für Schritt, nach Themen geordnet.', channelLabel: 'AliKa-Kanal öffnen', playlistLabel: 'Alle 13 Videos öffnen',
       playLabel: 'Video abspielen', youtubeLabel: 'Auf YouTube öffnen', publishedLabel: 'Veröffentlichte Anleitungen', preparingLabel: 'In Vorbereitung',
       emptyTitle: 'Deutsche Videoanleitungen werden vorbereitet.', emptyDescription: 'Nach der Veröffentlichung erscheint hier die vollständige deutsche Windows-Serie.',
-      privacyLabel: 'Eine Verbindung zu YouTube wird erst nach dem Klick auf Wiedergabe hergestellt.', totalLabel: (count, duration) => `${count} Anleitungen · insgesamt ${duration}`,
+      privacyLabel: 'Eine Verbindung zu YouTube wird erst nach dem Klick auf Wiedergabe hergestellt.', totalLabel: (count, duration) => `${count} Anleitungen · insgesamt ${duration}`, videoCountLabel: (count) => `${count} Videos`,
       groupLabels: groupLabels('Einführung und Installation', 'Übersicht', 'Kind und Regeln', 'Lernen', 'Geräte und Familiennetzwerk', 'Berichte und Benachrichtigungen', 'Einstellungen, Datenschutz und Windows-Werkzeuge'),
     },
   },
   {
     code: 'es', youtubeLocale: 'es', nativeName: 'Español', playlistId: 'PLGs9cZUQyNJg', status: 'public', videos: esVideos,
     copy: {
-      sectionEyebrow: 'Guías de AliKa en YouTube · 9 idiomas', sectionTitle: 'Vea las guías en su idioma.',
-      sectionLead: 'Elija un idioma para ver únicamente las guías de Windows publicadas en ese idioma.', channelLabel: 'Abrir el canal de AliKa',
+      sectionEyebrow: 'Guías de AliKa en YouTube · 9 idiomas', sectionTitle: 'Guías en vídeo de AliKa para Windows',
+      sectionLead: 'Elija su idioma y siga las guías 01–13 paso a paso, organizadas por tema.', channelLabel: 'Abrir el canal de AliKa', playlistLabel: 'Abrir la serie de 13 vídeos',
       playLabel: 'Reproducir vídeo', youtubeLabel: 'Abrir en YouTube', publishedLabel: 'Guías publicadas', preparingLabel: 'En preparación',
       emptyTitle: 'Las guías en español están en preparación.', emptyDescription: 'La serie completa de Windows en español aparecerá aquí cuando se publique.',
-      privacyLabel: 'YouTube solo se conecta después de pulsar reproducir.', totalLabel: (count, duration) => `${count} guías · ${duration} en total`,
+      privacyLabel: 'YouTube solo se conecta después de pulsar reproducir.', totalLabel: (count, duration) => `${count} guías · ${duration} en total`, videoCountLabel: (count) => `${count} vídeos`,
       groupLabels: groupLabels('Introducción e instalación', 'Panel', 'Niño y reglas', 'Aprendizaje', 'Dispositivos y red familiar', 'Informes y notificaciones', 'Ajustes, privacidad y herramientas de Windows'),
     },
   },
   {
-    code: 'fr', youtubeLocale: 'fr', nativeName: 'Français', playlistId: '', status: 'preparing', videos: [],
+    code: 'fr', youtubeLocale: 'fr', nativeName: 'Français', playlistId: 'PLJfxtPILegJ8', status: 'public', videos: frVideos,
     copy: {
-      sectionEyebrow: 'Guides AliKa sur YouTube · 9 langues', sectionTitle: 'Regardez les guides dans votre langue.',
-      sectionLead: 'Choisissez une langue pour afficher uniquement les guides Windows publiés dans cette langue.', channelLabel: 'Ouvrir la chaîne AliKa',
+      sectionEyebrow: 'Guides AliKa sur YouTube · 9 langues', sectionTitle: 'Guides vidéo AliKa pour Windows',
+      sectionLead: 'Choisissez votre langue et suivez les guides 01–13 étape par étape, classés par thème.', channelLabel: 'Ouvrir la chaîne AliKa', playlistLabel: 'Ouvrir la série de 13 vidéos',
       playLabel: 'Lire la vidéo', youtubeLabel: 'Ouvrir sur YouTube', publishedLabel: 'Guides publiés', preparingLabel: 'En préparation',
       emptyTitle: 'Les guides vidéo en français sont en préparation.', emptyDescription: 'La série Windows complète en français apparaîtra ici après sa publication.',
-      privacyLabel: 'La connexion à YouTube ne se fait qu’après avoir appuyé sur Lecture.', totalLabel: (count, duration) => `${count} guides · ${duration} au total`,
+      privacyLabel: 'La connexion à YouTube ne se fait qu’après avoir appuyé sur Lecture.', totalLabel: (count, duration) => `${count} guides · ${duration} au total`, videoCountLabel: (count) => `${count} vidéos`,
       groupLabels: groupLabels('Présentation et installation', 'Tableau de bord', 'Enfant et règles', 'Apprentissage', 'Appareils et réseau familial', 'Rapports et notifications', 'Paramètres, confidentialité et outils Windows'),
     },
   },
   {
-    code: 'pt', youtubeLocale: 'pt-BR', nativeName: 'Português (Brasil)', playlistId: '', status: 'preparing', videos: [],
+    code: 'pt', youtubeLocale: 'pt-BR', nativeName: 'Português (Brasil)', playlistId: 'PLYDOAXkT60aU', status: 'public', videos: ptVideos,
     copy: {
-      sectionEyebrow: 'Guias do AliKa no YouTube · 9 idiomas', sectionTitle: 'Assista aos guias no seu idioma.',
-      sectionLead: 'Escolha um idioma para ver somente os guias do Windows publicados nesse idioma.', channelLabel: 'Abrir o canal do AliKa',
+      sectionEyebrow: 'Guias do AliKa no YouTube · 9 idiomas', sectionTitle: 'Guias em vídeo do AliKa para Windows',
+      sectionLead: 'Escolha seu idioma e acompanhe os guias 01–13 passo a passo, organizados por assunto.', channelLabel: 'Abrir o canal do AliKa', playlistLabel: 'Abrir a série de 13 vídeos',
       playLabel: 'Reproduzir vídeo', youtubeLabel: 'Abrir no YouTube', publishedLabel: 'Guias publicados', preparingLabel: 'Em preparação',
       emptyTitle: 'Os guias em português estão sendo preparados.', emptyDescription: 'A série completa do Windows em português aparecerá aqui após a publicação.',
-      privacyLabel: 'O YouTube só é conectado depois que você pressiona reproduzir.', totalLabel: (count, duration) => `${count} guias · ${duration} no total`,
+      privacyLabel: 'O YouTube só é conectado depois que você pressiona reproduzir.', totalLabel: (count, duration) => `${count} guias · ${duration} no total`, videoCountLabel: (count) => `${count} vídeos`,
       groupLabels: groupLabels('Introdução e instalação', 'Painel', 'Criança e regras', 'Aprendizagem', 'Dispositivos e rede familiar', 'Relatórios e notificações', 'Configurações, privacidade e ferramentas do Windows'),
     },
   },
@@ -359,10 +560,10 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     code: 'ru', youtubeLocale: 'ru', nativeName: 'Русский', playlistId: '', status: 'preparing', videos: [],
     copy: {
       sectionEyebrow: 'Видеоинструкции AliKa · 9 языков приложения', sectionTitle: 'Смотрите инструкции на своём языке.',
-      sectionLead: 'Выберите язык, чтобы увидеть только опубликованные инструкции Windows на этом языке.', channelLabel: 'Открыть канал AliKa',
+      sectionLead: 'Выберите язык, чтобы увидеть только опубликованные инструкции Windows на этом языке.', channelLabel: 'Открыть канал AliKa', playlistLabel: 'Открыть серию из 13 видео',
       playLabel: 'Воспроизвести видео', youtubeLabel: 'Открыть на YouTube', publishedLabel: 'Опубликованные инструкции', preparingLabel: 'Готовится',
       emptyTitle: 'Видеоинструкции на русском языке готовятся.', emptyDescription: 'Полная серия инструкций Windows появится здесь после публикации.',
-      privacyLabel: 'Соединение с YouTube устанавливается только после нажатия кнопки воспроизведения.', totalLabel: (count, duration) => `${count} инструкций · всего ${duration}`,
+      privacyLabel: 'Соединение с YouTube устанавливается только после нажатия кнопки воспроизведения.', totalLabel: (count, duration) => `${count} инструкций · всего ${duration}`, videoCountLabel: (count) => `${count} видео`,
       groupLabels: groupLabels('Знакомство и установка', 'Панель', 'Ребёнок и правила', 'Обучение', 'Устройства и семейная сеть', 'Отчёты и уведомления', 'Настройки, конфиденциальность и инструменты Windows'),
     },
   },
@@ -370,10 +571,10 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     code: 'ja', youtubeLocale: 'ja', nativeName: '日本語', playlistId: '', status: 'preparing', videos: [],
     copy: {
       sectionEyebrow: 'AliKa YouTube ガイド · アプリ対応9言語', sectionTitle: 'お使いの言語でガイドをご覧ください。',
-      sectionLead: '言語を選ぶと、その言語で公開済みのWindowsガイドだけが表示されます。', channelLabel: 'AliKaチャンネルを開く',
+      sectionLead: '言語を選ぶと、その言語で公開済みのWindowsガイドだけが表示されます。', channelLabel: 'AliKaチャンネルを開く', playlistLabel: '全13本のシリーズを開く',
       playLabel: '動画を再生', youtubeLabel: 'YouTubeで開く', publishedLabel: '公開済みガイド', preparingLabel: '準備中',
       emptyTitle: '日本語の動画ガイドを準備しています。', emptyDescription: '日本語版Windowsガイド全13本の公開後、ここに表示されます。',
-      privacyLabel: '再生ボタンを押すまでYouTubeには接続しません。', totalLabel: (count, duration) => `${count}本のガイド · 合計${duration}`,
+      privacyLabel: '再生ボタンを押すまでYouTubeには接続しません。', totalLabel: (count, duration) => `${count}本のガイド · 合計${duration}`, videoCountLabel: (count) => `${count}本`,
       groupLabels: groupLabels('概要とインストール', 'パネル', '子どもとルール', '学習', 'デバイスとファミリーネットワーク', 'レポートと通知', '設定・プライバシー・Windowsツール'),
     },
   },
@@ -381,10 +582,10 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     code: 'ko', youtubeLocale: 'ko', nativeName: '한국어', playlistId: '', status: 'preparing', videos: [],
     copy: {
       sectionEyebrow: 'AliKa YouTube 가이드 · 앱 지원 9개 언어', sectionTitle: '내 언어로 가이드를 시청하세요.',
-      sectionLead: '언어를 선택하면 해당 언어로 공개된 Windows 가이드만 표시됩니다.', channelLabel: 'AliKa 채널 열기',
+      sectionLead: '언어를 선택하면 해당 언어로 공개된 Windows 가이드만 표시됩니다.', channelLabel: 'AliKa 채널 열기', playlistLabel: '13개 동영상 시리즈 열기',
       playLabel: '동영상 재생', youtubeLabel: 'YouTube에서 열기', publishedLabel: '공개된 가이드', preparingLabel: '준비 중',
       emptyTitle: '한국어 동영상 가이드를 준비하고 있습니다.', emptyDescription: '한국어 Windows 가이드 13편이 모두 공개되면 여기에 표시됩니다.',
-      privacyLabel: '재생 버튼을 누르기 전에는 YouTube에 연결하지 않습니다.', totalLabel: (count, duration) => `가이드 ${count}편 · 총 ${duration}`,
+      privacyLabel: '재생 버튼을 누르기 전에는 YouTube에 연결하지 않습니다.', totalLabel: (count, duration) => `가이드 ${count}편 · 총 ${duration}`, videoCountLabel: (count) => `${count}개 동영상`,
       groupLabels: groupLabels('소개 및 설치', '패널', '자녀와 규칙', '학습', '기기 및 가족 네트워크', '보고서 및 알림', '설정·개인정보·Windows 도구'),
     },
   },
