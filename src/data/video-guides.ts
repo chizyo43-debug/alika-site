@@ -306,7 +306,7 @@ const LOCALIZED_VIDEO_GROUPS: readonly GuideVideoGroup[] = [
   'learning', 'devices', 'reports', 'system', 'system', 'system',
 ];
 
-function createLocalizedGuideVideos(language: 'de' | 'fr' | 'pt' | 'ru' | 'ja', seeds: readonly LocalizedGuideSeed[]): readonly GuideVideo[] {
+function createLocalizedGuideVideos(language: 'de' | 'fr' | 'pt' | 'ru' | 'ja' | 'ko', seeds: readonly LocalizedGuideSeed[]): readonly GuideVideo[] {
   return seeds.map((seed, index) => ({
     key: LOCALIZED_VIDEO_KEYS[index],
     order: index + 1,
@@ -595,6 +595,61 @@ const jaVideos = createLocalizedGuideVideos('ja', [
   },
 ]);
 
+const koVideos = createLocalizedGuideVideos('ko', [
+  {
+    id: '40_M-PYYyFY', duration: '1:03', eyebrow: '01/13 · 소개', title: 'AliKa Windows는 무엇을 하나요?',
+    description: '명확한 화면 시간 규칙, 보호자가 승인한 학습 자료, 과제, 보상 및 가족 보고서가 하나의 Windows 앱에서 어떻게 연결되는지 확인하세요.',
+  },
+  {
+    id: '95-M1Ew6mqY', duration: '1:26', eyebrow: '02/13 · 설치 및 안전', title: 'Windows 설치 및 첫 설정',
+    description: 'Microsoft Store에서 AliKa를 설치하고 한국어, 보호자 PIN, 동의, 오프라인 복구 및 선택형 안전 모드를 설정합니다.',
+  },
+  {
+    id: 'kbFD_mURoRA', duration: '1:19', eyebrow: '03/13 · 대시보드', title: '대시보드와 오늘의 요약',
+    description: '남은 시간, 보상, 시간대별 사용량, 주요 앱, 기기 상태 및 예정된 가족 일정을 한눈에 확인합니다.',
+  },
+  {
+    id: 'rtVYUNCloOs', duration: '3:55', eyebrow: '04/13 · 자녀와 규칙', title: '자녀와 규칙: 모든 탭 안내',
+    description: '실제 한국어 화면에서 시간, 앱, 웹사이트, 취침 시간, 주간 계획, 웹 보호 및 시험 모드 설정을 살펴봅니다.',
+  },
+  {
+    id: 'LNgdQ-iGjPk', duration: '2:35', eyebrow: '05/13 · 학습', title: '학습 콘텐츠와 문제 추가',
+    description: '지원 파일 또는 ChatGPT로 만든 AliKa 패키지에서 보호자가 검토하고 승인할 학습 자료와 문제 은행을 추가합니다.',
+  },
+  {
+    id: 'JAvy2FJKSro', duration: '2:03', eyebrow: '06/13 · 학습', title: '자녀 학습 화면',
+    description: '자녀의 시점에서 오늘의 학습, 승인된 자료, 문제 연습, 진행 상황, 획득 시간 및 할당된 과제를 확인합니다.',
+  },
+  {
+    id: '6GoL_IZhkQY', duration: '1:34', eyebrow: '07/13 · 학습', title: '문제 풀이, 설명과 시간 획득',
+    description: '일일 보상 한도, 답변, 정답·오답 피드백, 설명, 재도전 및 관리된 화면 시간 획득 과정을 확인합니다.',
+  },
+  {
+    id: 'a2-GUC4PElM', duration: '2:08', eyebrow: '08/13 · 학습', title: '과제, 숙제와 시험 만들기',
+    description: '일상 과제, 학습 자료에 연결된 숙제 및 일정이 지정된 시험의 차이를 이해하고 각각 단계별로 만듭니다.',
+  },
+  {
+    id: 'ZEbpxISW9b4', duration: '1:36', eyebrow: '09/13 · 기기 및 가족 네트워크', title: '기기 및 가족 네트워크',
+    description: '로컬 네트워크에서 가족 기기를 페어링하고 상태를 확인한 뒤 선택한 기기에서 지원하는 작업만 전송합니다.',
+  },
+  {
+    id: 'txU6oS9d7o4', duration: '1:34', eyebrow: '10/13 · 보고서 및 알림', title: '보고서 및 알림',
+    description: '주간·월간 요약, 시간대별 사용량, 과목별 학습 결과, 이벤트 기록 및 주요 알림을 확인합니다.',
+  },
+  {
+    id: 'pCH22TF9n0M', duration: '2:00', eyebrow: '11/13 · 개인정보 보호', title: '개인정보 보호와 로컬 데이터',
+    description: '동의, 기기 내 저장, 확인 가능한 기록, 보호자 삭제, PIN 보호 및 선택형 로컬 가족 네트워크를 설명합니다.',
+  },
+  {
+    id: 'oAXdFSVcv5o', duration: '2:02', eyebrow: '12/13 · 설정', title: '설정, 프로필, 디지털 웰빙과 보호',
+    description: '언어, 프로필, 연령별 권장 설정, 디지털 웰빙, PIN 복구, 암호화된 백업 및 Windows 보호를 구성합니다.',
+  },
+  {
+    id: 'MQV6egS3pEk', duration: '1:37', eyebrow: '13/13 · Windows 도구', title: '시스템 트레이, 빠른 패널과 잠금 화면',
+    description: '시스템 트레이와 빠른 패널을 사용하고 잠금 이유와 자녀가 이용할 수 있는 안전한 작업을 확인합니다.',
+  },
+]);
+
 const groupLabels = (
   start: string, panel: string, rules: string, learning: string, devices: string, reports: string, system: string,
 ): Record<GuideVideoGroup, string> => ({ start, panel, rules, learning, devices, reports, system });
@@ -689,7 +744,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'ko', youtubeLocale: 'ko', nativeName: '한국어', playlistId: '', status: 'preparing', videos: [],
+    code: 'ko', youtubeLocale: 'ko', nativeName: '한국어', playlistId: 'PLMC3Z8z69Ujk', status: 'public', videos: koVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube 가이드 · 앱 지원 9개 언어', sectionTitle: '내 언어로 가이드를 시청하세요.',
       sectionLead: '언어를 선택하면 해당 언어로 공개된 Windows 가이드만 표시됩니다.', channelLabel: 'AliKa 채널 열기', playlistLabel: '13개 동영상 시리즈 열기',
