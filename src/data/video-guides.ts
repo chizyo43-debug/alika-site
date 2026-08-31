@@ -306,7 +306,7 @@ const LOCALIZED_VIDEO_GROUPS: readonly GuideVideoGroup[] = [
   'learning', 'devices', 'reports', 'system', 'system', 'system',
 ];
 
-function createLocalizedGuideVideos(language: 'de' | 'fr' | 'pt' | 'ru', seeds: readonly LocalizedGuideSeed[]): readonly GuideVideo[] {
+function createLocalizedGuideVideos(language: 'de' | 'fr' | 'pt' | 'ru' | 'ja', seeds: readonly LocalizedGuideSeed[]): readonly GuideVideo[] {
   return seeds.map((seed, index) => ({
     key: LOCALIZED_VIDEO_KEYS[index],
     order: index + 1,
@@ -540,6 +540,61 @@ const ruVideos = createLocalizedGuideVideos('ru', [
   },
 ]);
 
+const jaVideos = createLocalizedGuideVideos('ja', [
+  {
+    id: 'P_89E1TYVa8', duration: '1:09', eyebrow: '01/13 · 概要', title: 'AliKa for Windowsでできること',
+    description: '明確なスクリーンタイム規則、保護者が承認した教材、タスク、報酬、家族レポートが1つのWindowsアプリにどうまとまるかをご覧ください。',
+  },
+  {
+    id: 'VNCzShdldOw', duration: '1:34', eyebrow: '02/13 · インストールと安全', title: 'Windowsへのインストールと初期設定',
+    description: 'Microsoft StoreからAliKaをインストールし、日本語、保護者PIN、同意、オフライン復旧、任意のセーフモードを設定します。',
+  },
+  {
+    id: 'E-wrWpoy5lA', duration: '1:35', eyebrow: '03/13 · ダッシュボード', title: 'ダッシュボードと今日のまとめ',
+    description: '残り時間、報酬、時間帯別の利用状況、主なアプリ、デバイスの状態、家族の予定を確認します。',
+  },
+  {
+    id: 'Tm6XfHOC1Po', duration: '4:40', eyebrow: '04/13 · 子どもとルール', title: '子どもとルール：すべてのタブを解説',
+    description: '時間、アプリ、Webサイト、就寝時間、週間計画、Web保護、試験モードの各設定を実際の日本語画面で確認します。',
+  },
+  {
+    id: 'VOJvDqWBAl4', duration: '2:58', eyebrow: '05/13 · 学習', title: 'レッスンと問題の追加',
+    description: '対応ファイルやChatGPTで作成したAliKaパッケージから、保護者が確認・承認するレッスンと問題集を追加します。',
+  },
+  {
+    id: 'o8LyU7jtk2k', duration: '2:13', eyebrow: '06/13 · 学習', title: '子どもの学習画面',
+    description: '子どもの視点から、今日の作業、承認済み教材、問題演習、進捗、獲得時間、割り当てられたタスクを確認します。',
+  },
+  {
+    id: 'nENt9Slcb7o', duration: '1:58', eyebrow: '07/13 · 学習', title: '問題・解説と獲得時間',
+    description: '1日の報酬上限、回答、正誤フィードバック、解説、再挑戦、管理されたスクリーンタイム獲得までの流れを確認します。',
+  },
+  {
+    id: 'D3HKk0K7zZk', duration: '2:34', eyebrow: '08/13 · 学習', title: 'タスク、宿題、試験の作成',
+    description: '日常のタスク、教材を使う宿題、日時を指定する試験の違いを理解し、それぞれを手順に沿って作成します。',
+  },
+  {
+    id: 'qrUhafVV4LI', duration: '1:55', eyebrow: '09/13 · デバイスとファミリーネットワーク', title: 'デバイスとファミリーネットワーク',
+    description: '家族のデバイスをローカルネットワークでペアリングし、状態を確認して、対応する操作だけを安全に送信します。',
+  },
+  {
+    id: '5EElgi4sCGI', duration: '1:52', eyebrow: '10/13 · レポートと通知', title: 'レポートと通知',
+    description: '週次・月次の概要、時間帯別の利用状況、科目別の結果、イベント履歴、通知を分かりやすく確認します。',
+  },
+  {
+    id: 'OGRFudDY43Y', duration: '2:19', eyebrow: '11/13 · プライバシー', title: 'プライバシーとローカルデータ',
+    description: '同意、端末内保存、確認可能な記録、保護者による削除、PIN保護、任意のローカル家族ネットワークを解説します。',
+  },
+  {
+    id: 'WHY_2o3KHEQ', duration: '2:21', eyebrow: '12/13 · 設定', title: '設定、プロファイルと保護',
+    description: '言語、プロファイル、年齢別の提案、デジタルウェルビーイング、PIN復旧、暗号化バックアップ、Windows保護を設定します。',
+  },
+  {
+    id: 'KAdWqbYdwZw', duration: '1:42', eyebrow: '13/13 · Windowsツール', title: 'システムトレイ、クイックパネル、ロック画面',
+    description: 'システムトレイとクイックパネルの使い方、ロック理由の確認、子どもが利用できる安全な操作を説明します。',
+  },
+]);
+
 const groupLabels = (
   start: string, panel: string, rules: string, learning: string, devices: string, reports: string, system: string,
 ): Record<GuideVideoGroup, string> => ({ start, panel, rules, learning, devices, reports, system });
@@ -623,7 +678,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'ja', youtubeLocale: 'ja', nativeName: '日本語', playlistId: '', status: 'preparing', videos: [],
+    code: 'ja', youtubeLocale: 'ja', nativeName: '日本語', playlistId: 'PLOPeP3QrjNDg', status: 'public', videos: jaVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube ガイド · アプリ対応9言語', sectionTitle: 'お使いの言語でガイドをご覧ください。',
       sectionLead: '言語を選ぶと、その言語で公開済みのWindowsガイドだけが表示されます。', channelLabel: 'AliKaチャンネルを開く', playlistLabel: '全13本のシリーズを開く',
