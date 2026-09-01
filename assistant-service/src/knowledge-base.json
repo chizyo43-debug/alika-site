@@ -1,0 +1,205 @@
+[
+  {
+    "id": "overview",
+    "title": "AliKa nedir?",
+    "content": "AliKa görünür, rızaya dayalı bir ebeveyn kontrolü ve dijital iyi oluş ürünüdür. Ekran süresini yalnız kesmek yerine önceden konuşulan kurallar, haftalık plan, görevler ve öğrenme araçlarıyla düzenler. Çocuk kalan süreyi ve uygulanan kuralı görür; gizli izleme yaklaşımı kullanılmaz.",
+    "keywords": ["nedir", "ne işe yarar", "alika", "ebeveyn kontrolü", "ekran süresi", "dijital denge"],
+    "links": [{"label": "AliKa nasıl çalışır?", "href": "/how-it-works/"}, {"label": "Özellikleri inceleyin", "href": "/features/"}]
+  },
+  {
+    "id": "platforms",
+    "title": "Desteklenen platformlar ve satın alma kapsamı",
+    "content": "AliKa'nın Windows, Android telefon/tablet ve Android TV deneyimleri ürün sitesinde gerçek ekranlarla gösterilir. Windows, Android ve Android TV temeli bugün kullanılabilir olarak tanımlanır. Microsoft Store'daki satın alma yalnız Windows sürümünü kapsar; Android ve Android TV bu satın almaya dahil değildir. Platformların dağıtım kanalları ve kapsamı birbirinden ayrı değerlendirilmelidir.",
+    "keywords": ["windows", "android", "telefon", "tablet", "android tv", "platform", "hangi cihaz", "satın alma kapsamı"],
+    "links": [{"label": "Platformları görün", "href": "/features/"}, {"label": "İndirme seçenekleri", "href": "/downloads/"}]
+  },
+  {
+    "id": "windows",
+    "title": "Windows özellikleri",
+    "content": "Windows uygulaması günlük toplam süreyi, uygulama ve web sitesi kurallarını, uyku düzenini, öğrenme araçlarını ve raporları ebeveyn panelinde toplar. Çocuk kalan süresini görür. Ebeveyn günlük ve haftalık planları, uygulama limitlerini, engelleri ve geçici izinleri yönetebilir. Windows 10 ve Windows 11 hedeflenir.",
+    "keywords": ["windows", "bilgisayar", "uygulama limiti", "web sitesi", "uyku", "kural", "rapor", "windows 10", "windows 11"],
+    "links": [{"label": "Windows ekranlarını görün", "href": "/features/"}, {"label": "Windows rehberleri", "href": "/rehber/"}]
+  },
+  {
+    "id": "android",
+    "title": "Android telefon ve tablet deneyimi",
+    "content": "Aynı Android uygulaması ebeveyn ve çocuk rolüne göre farklılaşır. Ebeveyn süre, uygulama, uyku ve görevleri yönetir. Çocuk kalan süresini, çalışmalarını ve soru çözerek kazanabileceği kontrollü ek süreyi açıkça görür. Android dağıtımı, Windows Microsoft Store satın alımından ayrı kapsamdadır.",
+    "keywords": ["android", "telefon", "tablet", "ebeveyn telefonu", "çocuk telefonu", "mobil"],
+    "links": [{"label": "Android deneyimini görün", "href": "/features/"}, {"label": "Ekosistemi keşfedin", "href": "/ecosystem/"}]
+  },
+  {
+    "id": "android-tv",
+    "title": "Android TV ve ortak ekran",
+    "content": "AliKa TV oyunları, ortak soruları ve aile panosunu uzaktan okunabilen büyük bir arayüzde gösterir. Telefonlar oyuncu kumandası olabilir; gizli cevap ve seçimler kişisel ekranda kalır. D-pad ile kullanılan oyunlar, Aile Panosu ve Ayarlar gerçek Android TV'de çalışır. Oyun kütüphanesi ve çoklu telefon deneyimi geliştirilmeye devam eder; geliştirme durumu hazır özelliklerle karıştırılmamalıdır.",
+    "keywords": ["tv", "android tv", "ortak ekran", "kumanda", "oyun", "aile panosu", "çoklu telefon"],
+    "links": [{"label": "Android TV deneyimi", "href": "/ecosystem/"}, {"label": "Güncel yol haritası", "href": "/roadmap/"}]
+  },
+  {
+    "id": "learning",
+    "title": "Soru çözerek kontrollü süre kazanma",
+    "content": "Çocuk, ebeveynin eklediği ve kullanıma açtığı soru bankasından sorular çözer. Doğru cevapların kaç dakika kazandıracağını ve günlük kazanım tavanını ebeveyn belirler; süre sınırsız değildir. Yanlış cevap süre kazandırmaz, doğru seçenek ve varsa açıklama gösterilir. Ebeveyn sonuçları ve kazanılan süreyi raporlarda izleyebilir.",
+    "keywords": ["soru", "quiz", "doğru cevap", "süre kazan", "ek süre", "ödül", "soru bankası", "günlük tavan"],
+    "links": [{"label": "Soru sistemi rehberi", "href": "/rehber/soru-cozerek-ekran-suresi-kazanma/"}, {"label": "Hazır içerik kütüphanesi", "href": "/content/"}]
+  },
+  {
+    "id": "planning",
+    "title": "Kurallar, planlar ve görevler",
+    "content": "Ebeveyn günlük toplam süre, haftanın günlerine göre plan, uygulama ve site limitleri, uyku aralığı ve gerektiğinde engel belirleyebilir. Gerçek yaşam görevi atanabilir; çocuk tamamladığını bildirir ve süre ya da ALTIN ödülü yalnız ebeveyn onayından sonra verilir. Kural değişiklikleri çocuğa görünür olmalıdır.",
+    "keywords": ["plan", "haftalık", "günlük", "görev", "ödev", "uyku", "limit", "engel", "izin", "altın"],
+    "links": [{"label": "Adım adım kullanım", "href": "/how-it-works/"}, {"label": "Yaş grubuna göre yaklaşım", "href": "/age-groups/"}]
+  },
+  {
+    "id": "reports",
+    "title": "Raporlar ve görünür ilerleme",
+    "content": "AliKa kullanım, çözülen sorular, görevler ve verilen ek süreyi aynı günlük resmin parçaları olarak gösterir. Haftalık, saatlik ve soru sonuçları incelenebilir. Yeterli örnek bulunmayan bir konu güçlü veya zayıf diye etiketlenmemelidir; tek oturumdan kesin başarı yorumu yapılmamalıdır.",
+    "keywords": ["rapor", "istatistik", "geçmiş", "ilerleme", "haftalık", "saatlik", "sonuç"],
+    "links": [{"label": "Rapor özellikleri", "href": "/features/"}, {"label": "Ekran ekran video rehberleri", "href": "/how-it-works/"}]
+  },
+  {
+    "id": "privacy",
+    "title": "Gizlilik ve yerel öncelikli çalışma",
+    "content": "AliKa'nın temel uygulama işlevleri bulut hesabı olmadan çalışır. Kullanım bilgileri cihazda tutulur; reklam ağı ve üçüncü taraf analitik SDK'sı bulunmaz. Aile Ağı başlangıçta kapalıdır ve yalnız ebeveyn açıkça etkinleştirip cihazları eşleştirirse aynı onaylı yerel ağda şifreli iletişim kurar. Ürün gizli takip için tasarlanmamıştır. Web sitesindeki isteğe bağlı yapay zekâ asistanı uygulamadan ayrıdır; kullanıcı asistanı açıp mesaj gönderdiğinde yalnız o mesaj ve sınırlı sohbet bağlamı Google Gemini'ye yanıt üretmek için iletilir.",
+    "keywords": ["gizlilik", "veri", "bulut", "reklam", "analitik", "yerel", "takip", "gizli", "google", "gemini"],
+    "links": [{"label": "Gizlilik politikasını okuyun", "href": "/privacy/"}, {"label": "Yerel çalışma rehberi", "href": "/rehber/bulutsuz-ebeveyn-kontrolu/"}]
+  },
+  {
+    "id": "family-network",
+    "title": "Aile Ağı ve cihaz eşleştirme",
+    "content": "Aile Ağı isteğe bağlıdır. Aynı ev ağındaki cihazlar ebeveynin başlattığı geçici QR/kod onayıyla eşleştirilir ve desteklenen verileri şifreli biçimde doğrudan paylaşır. Telefon ve Windows cihazlarının çevrim içi durumu görülebilir; kural, aile mesajı, görev ve onaylı süre işlemleri gönderilebilir. Bu, internet üzerinden ev dışından gizli izleme hizmeti değildir.",
+    "keywords": ["aile ağı", "eşleştir", "qr", "aynı wifi", "aynı ağ", "cihaz", "mesaj", "uzaktan"],
+    "links": [{"label": "Aile ekosistemi", "href": "/ecosystem/"}, {"label": "Gizlilik ayrıntıları", "href": "/privacy/"}]
+  },
+  {
+    "id": "content",
+    "title": "Hazır eğitim içeriği ve içe aktarma",
+    "content": "AliKa'nın içerik kütüphanesi ülke, sınıf, ders ve konuya göre düzenlenen paketleri gösterir. Kalite durumu açıkça belirtilir. Sınıf ZIP dosyası çıkarılmadan AliKa'daki İçerik ekle üzerinden seçilebilir veya hazır klasöre konup taranabilir. Hazır içerik ile ebeveynin kendi soru bankası birbirinden ayrıdır.",
+    "keywords": ["içerik", "ders", "sınıf", "ülke", "zip", "indir", "soru bankası", "kütüphane"],
+    "links": [{"label": "Hazır içerikleri açın", "href": "/content/"}, {"label": "Nasıl çalışır?", "href": "/how-it-works/"}]
+  },
+  {
+    "id": "ages",
+    "title": "Yaş gruplarına göre deneyim",
+    "content": "Site AliKa deneyimini 5–7, 8–11, 12–14 ve 15–18 yaş grupları için ayrı anlatır. Küçük yaşlarda büyük dokunma alanları, kısa yönergeler ve yumuşak geri bildirim; daha ileri yaşlarda sade, ciddi, veri odaklı ve gencin alanına saygılı yaklaşım öne çıkar. Ayarların aileye ve çocuğun gelişimine göre ebeveyn tarafından değerlendirilmesi gerekir.",
+    "keywords": ["yaş", "kaç yaş", "5", "7", "8", "11", "12", "14", "15", "18", "genç", "çocuk"],
+    "links": [{"label": "Yaş gruplarını karşılaştırın", "href": "/age-groups/"}]
+  },
+  {
+    "id": "pricing",
+    "title": "Deneme, fiyat ve satın alma",
+    "content": "Microsoft Store sayfasında Windows sürümü için 7 günlük deneme bulunur. AliKa sitesinin güncel pazar işaretlerinde Türkiye için ₺80, Japonya için ¥230 ve Kore için ₩2.500 gösterilir; diğer ülkelerde ve olası değişikliklerde güncel yerel fiyat Microsoft Store'da kontrol edilmelidir. Bu Store satın alımı yalnız Windows sürümünü kapsar; Android ve Android TV dahil değildir. Asistan kesin olmayan indirim veya gelecek fiyat sözü vermemelidir.",
+    "keywords": ["fiyat", "ücret", "kaç para", "deneme", "satın al", "store", "abonelik", "80", "230", "2500"],
+    "links": [{"label": "Microsoft Store ve indirmeler", "href": "/downloads/"}]
+  },
+  {
+    "id": "installation-support",
+    "title": "Kurulum, video rehberleri ve destek",
+    "content": "AliKa'nın dokuz dilde adım adım Windows video rehberleri vardır. Kurulum, panel, çocuk kuralları, öğrenme içeriği, soru sistemi, görev/ödev/sınav, aile cihazları, raporlar, gizlilik ve ayarlar ayrı videolarda anlatılır. Sorun çözülmezse kullanıcıdan çocuk verisi, PIN, parola veya hassas günlük istemeden alika.destek@gmail.com adresine yönlendirilmelidir.",
+    "keywords": ["kurulum", "nasıl kurulur", "hata", "çalışmıyor", "destek", "video", "rehber", "iletişim"],
+    "links": [{"label": "Video rehberlerini açın", "href": "/how-it-works/"}, {"label": "Destek sayfası", "href": "/contact/"}]
+  },
+  {
+    "id": "status-roadmap",
+    "title": "Bugün hazır, geliştiriliyor ve planlanan özellikler",
+    "content": "AliKa ürün sayfası özellikleri 'Bugün kullanılabilir', 'Geliştiriliyor' ve 'Planlanan' olarak ayırır. Asistan bu statüleri birbirine karıştırmamalı, geliştirme hedefini bugün satın alınabilen veya indirilebilen özellik gibi anlatmamalıdır. Katalog kapsamı değişebildiği için oyun sayısı veya indirme durumu tahmin edilmemeli; kullanıcı güncel ürün durumu sayfasına yönlendirilmelidir.",
+    "keywords": ["hazır", "geliştiriliyor", "planlanan", "yol haritası", "ne zaman", "oyun", "premium", "gelecek"],
+    "links": [{"label": "Güncel ürün durumunu görün", "href": "/roadmap/"}, {"label": "Son güncellemeler", "href": "/updates/"}]
+  },
+  {
+    "id": "marketing-fit",
+    "title": "AliKa kimler için uygun?",
+    "content": "AliKa; ekran süresi sınırlarını çocukla önceden konuşmak, kuralları görünür kılmak, öğrenme ve görevleri kontrollü ödülle ilişkilendirmek isteyen ailelere yöneliktir. Gizli izleme, internet üzerinden sınırsız takip, reklam profili veya ebeveyn iletişiminin yerini alan otomatik karar sistemi arayanlar için uygun değildir. En iyi başlangıç tek bir günlük limit, bir uyku aralığı ve kısa deneme döneminde ailece gözlem yapmaktır.",
+    "keywords": ["uygun", "kimler için", "neden alayım", "farkı", "avantaj", "başlangıç", "öneri"],
+    "links": [{"label": "Ailenize uygunluğu değerlendirin", "href": "/age-groups/"}, {"label": "7 günlük denemeyi görün", "href": "/downloads/"}]
+  },
+  {
+    "id": "reward-safety",
+    "title": "Süre kazanmanın değişmeyen güvenlik sınırları",
+    "content": "Yanlış cevap ceza değildir ve mevcut süreyi azaltmaz. Kaç dakikanın, kaç soruyla ve günde en fazla ne kadar kazanılabileceğini ebeveyn belirler. Kazanılan dakika uyku saatini, uygulama engelini veya ebeveyn kilidini aşmaz. Ödül sistemi kapalıysa doğru cevap ilerlemeye yazılır fakat süre üretmez.",
+    "keywords": ["yanlış cevap", "ceza", "süre azalır", "uyku", "engel aşar", "ebeveyn kilidi", "ödül kapalı"],
+    "links": [{"label": "Süre kazanma rehberi", "href": "/rehber/soru-cozerek-ekran-suresi-kazanma/"}]
+  },
+  {
+    "id": "daily-flow",
+    "title": "Örnek bir AliKa günü",
+    "content": "Ebeveyn sabah günlük toplam süreyi, uygulama kurallarını, uyku saatini ve soru ödülünü seçer. Çocuk gün içinde köşe sayacından veya çocuk ekranından kalan süreyi görür. Süre bitince ebeveyn izin verdiyse dört seçenekli soru akışı açılır; doğru cevap belirlenen dakikayı ekler. Akşam uyku saati yine önceliklidir. Kullanım, sorular, görevler ve ek süre ebeveynin günlük görünümünde birlikte gösterilir.",
+    "keywords": ["bir gün", "günlük akış", "sabah", "akşam", "köşe sayacı", "süre bitince", "nasıl işler"],
+    "links": [{"label": "AliKa nasıl çalışır?", "href": "/how-it-works/"}]
+  },
+  {
+    "id": "age-5-7",
+    "title": "5–7 yaş: Şarj Kampı",
+    "content": "5–7 yaş görünümü büyük dokunma alanları, tek seferde tek yönerge, az metin, güçlü görsel işaretler ve daha görünür AliKa maskotu kullanır. Kısa anlatım, çok kısa soru turları ve somut örnekler öne çıkar. Hazır profil 15 dakikada bir mola ve günde 3 kısa soru kartı önerir; bunlar yalnız öneridir ve ebeveyn onayı olmadan kural olmaz.",
+    "keywords": ["5-7", "5 yaş", "6 yaş", "7 yaş", "şarj kampı", "küçük çocuk", "3 soru"],
+    "links": [{"label": "5–7 yaş yaklaşımı", "href": "/age-groups/"}]
+  },
+  {
+    "id": "age-8-11",
+    "title": "8–11 yaş: Süper İrade",
+    "content": "8–11 yaş görünümü kısa açıklamalar, anlaşılır seçimler ve sınırlı bilgi kartları kullanır. Maskot eşlik eder ama içeriğin önüne geçmez. Koleksiyon, seri ve rozetler düzenli çalışmayı görünür kılabilir. Hazır profil 20 dakikada bir mola ve günde 5 kısa soru kartı önerir; ödül miktarı ve günlük üst sınır ebeveyndedir.",
+    "keywords": ["8-11", "8 yaş", "9 yaş", "10 yaş", "11 yaş", "süper irade", "5 soru", "rozet"],
+    "links": [{"label": "8–11 yaş yaklaşımı", "href": "/age-groups/"}]
+  },
+  {
+    "id": "age-12-14",
+    "title": "12–14 yaş: Derin Odak",
+    "content": "12–14 yaş görünümü daha sade arayüz, daha fazla ilerleme bilgisi ve küçük, durağan maskot kullanır; çocukça kutlamalar azalır. Beceri haritası, haftalık hedef ve eksik konu görünümü öne çıkar. Hazır profil 25 dakikada bir mola ve günde 7 kısa soru kartı önerir. Ebeveyn sürekli kontrol yerine gençle haftalık değerlendirme yapmaya yönlendirilir.",
+    "keywords": ["12-14", "12 yaş", "13 yaş", "14 yaş", "derin odak", "7 soru", "genç"],
+    "links": [{"label": "12–14 yaş yaklaşımı", "href": "/age-groups/"}]
+  },
+  {
+    "id": "age-15-18",
+    "title": "15–18 yaş: Gerçek Dünya Modu",
+    "content": "15–18 yaş görünümü maskotsuz, sade, ciddi ve veri odaklıdır. Hız, doğruluk, tamamlanan hedef ve eksik konular açık biçimde gösterilir. Hazır profil 30 dakikada bir mola ve günde 10 kısa soru kartı önerir. Ebeveyn temel sınırları korurken gencin mahremiyetine ve karar alanına saygı göstermeli, ayrıntılı gözetim yerine ortak hedefleri konuşmalıdır.",
+    "keywords": ["15-18", "15 yaş", "16 yaş", "17 yaş", "18 yaş", "gerçek dünya modu", "10 soru", "mahremiyet"],
+    "links": [{"label": "15–18 yaş yaklaşımı", "href": "/age-groups/"}]
+  },
+  {
+    "id": "content-import-formats",
+    "title": "Desteklenen öğrenme içeriği ekleme yolları",
+    "content": "Windows rehberlerinde XLSX, CSV, AliKa paketi, belge ve kullanıcı tarafından bir yapay zekâ hizmetiyle hazırlanmış uyumlu ZIP dosyasını ekleme ve onaylama yolları gösterilir. Çocuk konu anlatımını açabilir, soru bankasını seçebilir, çalışabilir ve ilerlemesini görebilir. Soru ekranında doğru/yanlış geri bildirimi, açıklama, Çözüm Kağıdı ve kontrollü süre kazanma akışı bulunur. Haricî yapay zekâ hizmetine veri gönderme kararı kullanıcıya aittir; gerçek çocuk verisi kullanılmamalıdır.",
+    "keywords": ["xlsx", "csv", "alika paketi", "belge", "zip", "chatgpt", "çözüm kağıdı", "içe aktar"],
+    "links": [{"label": "Öğrenme video rehberleri", "href": "/how-it-works/"}, {"label": "Hazır içerikler", "href": "/content/"}]
+  },
+  {
+    "id": "installation-security",
+    "title": "Windows kurulumu ve ilk güvenlik adımları",
+    "content": "Windows kurulum rehberi Microsoft Store kurulumu, dil seçimi, ebeveyn PIN'i, açık rıza, kurtarma kodu ve Güvenli Mod adımlarını gösterir. Özellikler ilk kurulumdaki rıza kabul edilmeden başlamaz. PIN düz metin saklanmaz; PBKDF2-HMAC-SHA256 ile türetilmiş özet kullanılır. Kullanıcı PIN, kurtarma kodu veya parolasını site asistanına ya da destek mesajına yazmamalıdır.",
+    "keywords": ["ilk kurulum", "pin", "rıza", "kurtarma kodu", "güvenli mod", "pbkdf2", "parola"],
+    "links": [{"label": "Kurulum videosunu bulun", "href": "/how-it-works/"}, {"label": "Lisans koşulları", "href": "/eula/"}]
+  },
+  {
+    "id": "windows-rules-detail",
+    "title": "Windows çocuk profili ve kural sekmeleri",
+    "content": "Çocuk profili altında zaman, uygulama, site, uyku, haftalık plan, web koruması ve sınav ayarları yönetilir. Uygulama günlük dakika limiti ile tam engel farklıdır. Site süre limiti belirli alan adına günlük süre verir; web filtresi kalıcı engel listesi ve güvenli arama kurallarını yönetir. Uyku aralığı gece yarısını geçebilir. Geçici izin günlük aile kuralını kalıcı olarak değiştirmez.",
+    "keywords": ["çocuk profili", "zaman sekmesi", "site limiti", "web koruması", "güvenli arama", "gece yarısı", "geçici izin", "sınav ayarı"],
+    "links": [{"label": "Çocuk ve kurallar rehberi", "href": "/rehber/windows-11-cocuk-ekran-suresi/"}, {"label": "Video rehberleri", "href": "/how-it-works/"}]
+  },
+  {
+    "id": "wellbeing-settings",
+    "title": "Profil, iyi oluş ve koruma ayarları",
+    "content": "Ayarlar bölümünde dil, profiller, yaş önerileri, göz molası, yumuşak iniş, PIN kurtarma, şifreli yedek ve Windows Koruma Motoru bulunur. Hazır yaş profilleri öneridir; ebeveyn onaylamadan etkin kural olmaz. Yaş seçimi günlük süreyi, uyku saatini veya uygulama engelini kendiliğinden gevşetmez. Sistem tepsisi, Kısa Panel ve görünür kilit ekranı günlük erişim sağlar; kilit nedeni çocuğa açık gösterilir.",
+    "keywords": ["göz molası", "yumuşak iniş", "şifreli yedek", "koruma motoru", "sistem tepsisi", "kısa panel", "kilit nedeni", "profil"],
+    "links": [{"label": "Ayarlar ve yardımcılar videoları", "href": "/how-it-works/"}]
+  },
+  {
+    "id": "android-web-filter",
+    "title": "Android yerel VPN web filtresi",
+    "content": "Android web filtresi cihaz üzerindeki yerel VpnService'i kullanır. Yalnız DNS isteklerindeki alan adlarını engel listesi ve güvenli arama için inceler. Şifreli tünel oluşturmaz, trafiği AliKa sunucusuna yönlendirmez ve sayfa içeriğini okumaz. Ziyaret edilen alan adları cihazda kalır. Ebeveyn özelliği belirgin açıklama ve açık onaydan sonra etkinleştirir ve istediği zaman kapatabilir.",
+    "keywords": ["vpn", "android web filtresi", "dns", "alan adı", "tünel", "sayfa içeriği", "güvenli arama"],
+    "links": [{"label": "Gizlilik politikası", "href": "/privacy/"}]
+  },
+  {
+    "id": "data-storage-deletion",
+    "title": "Windows veri konumları ve silme",
+    "content": "Windows'ta makine genelindeki ayarlar ve raporlar %ProgramData%\\AliKa altında; geçerli kullanıcının öğrenme kütüphanesi ve yerel durumu %LocalAppData%\\AliKa altında tutulur. Microsoft Store/MSIX kaldırma, yeniden kurulumda veri kaybını önlemek için bu klasörleri bilerek korur. Tam silme için kaldırma sonrasında ilk klasör yönetici olarak, ikinci klasör ilgili Windows kullanıcısıyla silinir. Klasik Setup kaldırıcı ProgramData verisini silme seçeneği sunar; sessiz güncelleme/kaldırma veriyi korur.",
+    "keywords": ["programdata", "localappdata", "veri nerede", "sil", "kaldır", "uninstall", "yeniden kur", "geçmişi temizle"],
+    "links": [{"label": "Gizlilik ve silme ayrıntıları", "href": "/privacy/"}]
+  },
+  {
+    "id": "legal-use",
+    "title": "İzin verilen ve yasaklanan kullanım",
+    "content": "AliKa yalnız kullanıcının sahibi olduğu cihazlarda ve yasal velisi olduğu çocuğun ekran kullanımını yönetmek için, çocuğun bilgisi dahilinde kullanılabilir. Başkasının cihazına habersiz kurmak, gizli veya aldatıcı biçimde kullanmak ve geçerli gizlilik yasalarını ihlal etmek yasaktır. Kilitleme ve filtreleme özellikleri ebeveyn gözetiminin yerini almaz ve yüzde yüz aşılamazlık garantisi vermez.",
+    "keywords": ["yasal", "izin", "gizli kurulum", "habersiz", "başkasının cihazı", "aşılamaz", "garanti", "eula"],
+    "links": [{"label": "EULA'yı okuyun", "href": "/eula/"}, {"label": "Gizlilik politikası", "href": "/privacy/"}]
+  }
+]
