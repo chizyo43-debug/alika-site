@@ -818,8 +818,19 @@ def guide_atlas(lang: str, c: dict) -> str:
 
 def content_library(catalog: dict, lang: str) -> str:
     labels = CONTENT_LIBRARY_LABELS[lang]
-    countries = sorted({row["country_slug"]: row["country"] for row in catalog["grades"]}.items())
-    grades = sorted({(row["country_slug"], row["grade_slug"], row["grade"]) for row in catalog["grades"]})
+    country_order = {"turkiye": 0, "japonya": 1, "kore": 2}
+    countries = sorted(
+        {row["country_slug"]: row["country"] for row in catalog["grades"]}.items(),
+        key=lambda item: (country_order.get(item[0], 99), item[1]),
+    )
+    grades = sorted(
+        {(row["country_slug"], row["grade_slug"], row["grade"]) for row in catalog["grades"]},
+        key=lambda item: (
+            country_order.get(item[0], 99),
+            float(item[2]) if isinstance(item[2], int) else 11.5,
+            item[1],
+        ),
+    )
     country_options = "".join(f'<option value="{esc(slug)}">{esc(name)}</option>' for slug, name in countries)
     grade_options = "".join(
         f'<option value="{esc(grade_slug)}" data-country-option="{esc(country)}">{esc(labels[7].format(grade))}</option>'

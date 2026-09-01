@@ -11,6 +11,14 @@ from pathlib import Path
 COUNTRY_NAMES = {"turkiye": "Türkiye", "JP": "Japonya", "KR": "Kore"}
 COUNTRY_SLUGS = {"JP": "japonya", "KR": "kore"}
 CONTENT_RELEASE_TAG = "question-banks-2026.09.01"
+COUNTRY_ORDER = {"turkiye": 0, "japonya": 1, "kore": 2}
+
+
+def _grade_group_sort_key(item: tuple[tuple[str, str], list[dict]]) -> tuple[int, float, str]:
+    (country_slug, grade_slug), rows = item
+    grade = rows[0]["grade"]
+    grade_order = float(grade) if isinstance(grade, int) else 11.5
+    return COUNTRY_ORDER.get(country_slug, 99), grade_order, grade_slug
 CONTENT_RELEASE_URL = (
     "https://github.com/chizyo43-debug/alika-icerik/releases/download/"
     f"{CONTENT_RELEASE_TAG}"
@@ -277,7 +285,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
         grouped[(subject["country_slug"], subject["grade_slug"])].append(subject)
 
     grades: list[dict] = []
-    for (country_slug, grade_slug), rows in sorted(grouped.items()):
+    for (country_slug, grade_slug), rows in sorted(grouped.items(), key=_grade_group_sort_key):
         rows.sort(key=lambda row: (row["subject"], row["subject_slug"]))
         zip_name = f"{country_slug}-{grade_slug}-tum-dersler.zip"
         zip_path = bundle_output / zip_name
