@@ -42,7 +42,12 @@ CONTENT_BOOK_LABELS = {
     "ja": ("AliKaブックに戻る", "すぐ使える教材ノート", "国", "学年パック", "教科パック", "不具合や改善案がありましたらお知らせください。"),
     "ko": ("AliKa 책으로 돌아가기", "준비된 콘텐츠 노트", "국가", "학년 패키지", "과목 패키지", "오류나 개선 아이디어가 있나요? 알려주세요."),
 }
-MICROSOFT_STORE_URL = "https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_tr"
+MICROSOFT_STORE_BASE_URL = "https://apps.microsoft.com/detail/9N3P9F5ZKR5S"
+STORE_MARKETS = {
+    "tr": {"cid": "site_home_tr", "price": "80.00", "currency": "TRY"},
+    "ja": {"cid": "site_home_ja", "price": "230", "currency": "JPY"},
+    "ko": {"cid": "site_home_ko", "price": "2500", "currency": "KRW"},
+}
 GUIDE_BASE = "rehber"
 SLUGS = (
     "how-it-works",
@@ -401,6 +406,14 @@ def footer(locales: dict[str, dict], lang: str) -> str:
     """
 
 
+def store_market(lang: str) -> dict[str, str]:
+    return STORE_MARKETS.get(lang, STORE_MARKETS["tr"])
+
+
+def microsoft_store_url(lang: str) -> str:
+    return f'{MICROSOFT_STORE_BASE_URL}?cid={store_market(lang)["cid"]}'
+
+
 def document(locales: dict[str, dict], lang: str, title: str, description: str, body: str, slug: str = "") -> str:
     alternates = "\n".join(
         f'<link rel="alternate" hreflang="{code}" href="{BASE_URL}{href(code, slug)}">'
@@ -424,7 +437,7 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
-  {software_application_schema(description) if slug in ("", "downloads") else ""}
+  {software_application_schema(description, lang) if slug in ("", "downloads") else ""}
 </head>
 <body{' class="content-route"' if slug == "content" else ''}>
   {header(locales, lang, slug)}
@@ -436,7 +449,9 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
 """
 
 
-def software_application_schema(description: str) -> str:
+def software_application_schema(description: str, lang: str) -> str:
+    market = store_market(lang)
+    store_url = microsoft_store_url(lang)
     data = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -447,14 +462,14 @@ def software_application_schema(description: str) -> str:
         "operatingSystem": "Windows 10, Windows 11",
         "softwareVersion": "1.1.68",
         "url": BASE_URL,
-        "downloadUrl": MICROSOFT_STORE_URL,
+        "downloadUrl": store_url,
         "publisher": {"@type": "Organization", "name": "ErenKa Software"},
         "offers": {
             "@type": "Offer",
-            "price": "80.00",
-            "priceCurrency": "TRY",
+            "price": market["price"],
+            "priceCurrency": market["currency"],
             "availability": "https://schema.org/InStock",
-            "url": MICROSOFT_STORE_URL,
+            "url": store_url,
         },
     }
     return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False, separators=(",", ":"))}</script>'
@@ -538,7 +553,7 @@ def guide_article_body(guide: dict) -> str:
         </header>
         {sections}
         <aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>Video yalnız bağlantıya tıkladığınızda YouTube’da açılır.</span></div><a href="{esc(guide["video"])}" target="_blank" rel="noopener noreferrer">{esc(guide["video_label"])} ↗</a></aside>
-        <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{MICROSOFT_STORE_URL}" target="_blank" rel="noopener noreferrer">Microsoft Store’da açın</a></section>
+        <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{microsoft_store_url('tr')}" target="_blank" rel="noopener noreferrer">Microsoft Store’da açın</a></section>
       </article>
     </main>
     """
@@ -877,7 +892,7 @@ def inner_content(lang: str, slug: str, c: dict, catalog: dict) -> str:
         detail = f"""
         <div class="download-card">
           <div><span class="status status-today">Microsoft Store</span><h3>AliKa · Windows</h3><p>{esc(c["proof_body"])}</p></div>
-          <a class="button" href="{MICROSOFT_STORE_URL}" target="_blank" rel="noopener noreferrer">{esc(c["get"])}</a>
+          <a class="button" href="{microsoft_store_url(lang)}" target="_blank" rel="noopener noreferrer">{esc(c["get"])}</a>
         </div>
         <p class="honesty-note">{esc(store_scope)}</p>"""
     elif slug == "contact":

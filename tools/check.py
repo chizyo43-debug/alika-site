@@ -24,7 +24,15 @@ SLUGS = (
     "contact",
 )
 MICROSOFT_STORE_ID = "9N3P9F5ZKR5S"
-MICROSOFT_STORE_CID = "cid=site_home_tr"
+MICROSOFT_STORE_CIDS = {
+    "tr": "cid=site_home_tr",
+    "ja": "cid=site_home_ja",
+    "ko": "cid=site_home_ko",
+}
+STORE_OFFER_MARKERS = {
+    "ja": ('"price":"230"', '"priceCurrency":"JPY"'),
+    "ko": ('"price":"2500"', '"priceCurrency":"KRW"'),
+}
 BOOK_LANGUAGE_PATHS = ("/en/", "/de/", "/es/", "/fr/", "/pt/", "/ru/", "/ja/", "/ko/")
 GUIDE_SLUGS = (
     "windows-11-cocuk-ekran-suresi",
@@ -121,11 +129,15 @@ def main() -> None:
             if (
                 "apps.microsoft.com" not in downloads_text
                 or MICROSOFT_STORE_ID not in downloads_text
-                or MICROSOFT_STORE_CID not in downloads_text
+                or MICROSOFT_STORE_CIDS.get(lang, MICROSOFT_STORE_CIDS["tr"])
+                not in downloads_text
             ):
                 errors.append(f"Microsoft Store link is missing: {downloads_page}")
             if '"@type":"SoftwareApplication"' not in downloads_text:
                 errors.append(f"SoftwareApplication schema is missing: {downloads_page}")
+            for marker in STORE_OFFER_MARKERS.get(lang, ()):
+                if marker not in downloads_text:
+                    errors.append(f"Localized Store offer is missing ({marker}): {downloads_page}")
 
     if expected_pages != 90:
         errors.append(f"Internal checker error, expected page count is {expected_pages}")
@@ -148,7 +160,7 @@ def main() -> None:
 
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
-        if page.exists() and MICROSOFT_STORE_CID not in page.read_text(encoding="utf-8"):
+        if page.exists() and MICROSOFT_STORE_CIDS["tr"] not in page.read_text(encoding="utf-8"):
             errors.append(f"Campaign CID is missing from guide CTA: {page}")
 
     catalog_path = DIST / "icerik" / "catalog-v1.json"
@@ -238,7 +250,7 @@ def main() -> None:
         errors.append("Turkish home page is not pre-rendered with the campaign message")
     if "yalnız Windows sürümünü kapsar" not in root_page:
         errors.append("Windows-only Store purchase scope is missing from the Turkish home page")
-    if MICROSOFT_STORE_CID not in root_page:
+    if MICROSOFT_STORE_CIDS["tr"] not in root_page:
         errors.append("Campaign CID is missing from the Turkish home page")
 
     forbidden = re.compile(r"(google-analytics|googletagmanager|facebook\.net|hotjar|segment\.com)", re.I)
