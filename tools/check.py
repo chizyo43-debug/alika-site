@@ -175,10 +175,33 @@ def main() -> None:
             errors.append("Content catalog schema is invalid")
         if not catalog.get("grades") or not catalog.get("subjects"):
             errors.append("Content catalog is empty")
+        totals = catalog.get("totals") or {}
+        if totals != {
+            "countries": 3,
+            "gradeGroups": 23,
+            "subjects": 197,
+            "notes": 5545,
+            "questions": 99532,
+        }:
+            errors.append(f"Content catalog totals are unexpected: {totals}")
+        excluded = catalog.get("excluded") or []
+        if len(excluded) != 3 or any(row.get("reason") != "publishBlocked=true" for row in excluded):
+            errors.append(f"Blocked content disclosure is unexpected: {excluded}")
         for subject in catalog.get("subjects", []):
-            target = DIST / subject["download_url"].lstrip("/")
-            if not target.exists() or digest(target) != subject["sha256"]:
-                errors.append(f"Subject artifact missing or hash mismatch: {target}")
+            parsed = urlparse(subject["download_url"])
+            if parsed.scheme:
+                if (
+                    parsed.scheme != "https"
+                    or parsed.netloc != "github.com"
+                    or f"/releases/download/{catalog.get('content_release')}/" not in parsed.path
+                ):
+                    errors.append(f"External subject artifact URL is not pinned: {subject['download_url']}")
+                if not re.fullmatch(r"[0-9a-f]{64}", subject.get("sha256", "")):
+                    errors.append(f"External subject hash is invalid: {subject.get('filename')}")
+            else:
+                target = DIST / subject["download_url"].lstrip("/")
+                if not target.exists() or digest(target) != subject["sha256"]:
+                    errors.append(f"Subject artifact missing or hash mismatch: {target}")
         for grade in catalog.get("grades", []):
             target = DIST / grade["download_url"].lstrip("/")
             if not target.exists() or digest(target) != grade["sha256"]:
@@ -187,15 +210,20 @@ def main() -> None:
             try:
                 with zipfile.ZipFile(target) as archive:
                     manifest = json.loads(archive.read("MANIFEST.json"))
-                    if manifest.get("schema") != "alika-class-bundle/v1":
+                    if manifest.get("schema") not in {"alika-class-bundle/v1", "alika-class-bundle/v2"}:
                         errors.append(f"Grade bundle manifest schema is invalid: {target}")
                     declared = {row["path"] for row in manifest.get("packages", [])}
+                    declared.update(row["path"] for row in manifest.get("audioAssets", []))
                     if set(archive.namelist()) != declared | {"MANIFEST.json"}:
                         errors.append(f"Grade bundle entries differ from manifest: {target}")
                     for package in manifest.get("packages", []):
                         actual = hashlib.sha256(archive.read(package["path"])).hexdigest()
                         if actual != package["sha256"]:
                             errors.append(f"Grade bundle member hash mismatch: {target}:{package['path']}")
+                    for asset in manifest.get("audioAssets", []):
+                        actual = hashlib.sha256(archive.read(asset["path"])).hexdigest()
+                        if actual != asset["sha256"]:
+                            errors.append(f"Grade bundle asset hash mismatch: {target}:{asset['path']}")
             except (KeyError, json.JSONDecodeError, zipfile.BadZipFile) as exc:
                 errors.append(f"Grade bundle is invalid: {target}: {exc}")
 
