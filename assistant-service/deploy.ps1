@@ -36,7 +36,7 @@ $envFile = New-TemporaryFile
 $envYaml = @"
 GOOGLE_CLOUD_PROJECT: "$ProjectId"
 GOOGLE_CLOUD_LOCATION: "global"
-ALIKA_GEMINI_MODEL: "gemini-2.5-flash-lite"
+ALIKA_GEMINI_MODEL: "gemini-3.5-flash"
 ALIKA_ALLOWED_ORIGINS: "https://www.alika.tr,https://alika.tr"
 ALIKA_RATE_SALT: "$rateSalt"
 "@

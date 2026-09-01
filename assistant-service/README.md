@@ -27,7 +27,7 @@ the website bundle or GitHub variables.
 
 - `GOOGLE_CLOUD_PROJECT`: billing project for Vertex AI
 - `GOOGLE_CLOUD_LOCATION`: defaults to `global`
-- `ALIKA_GEMINI_MODEL`: defaults to `gemini-2.5-flash-lite`
+- `ALIKA_GEMINI_MODEL`: defaults to `gemini-3.5-flash`
 - `ALIKA_ALLOWED_ORIGINS`: defaults to the production site and local Vite origins
 - `ALIKA_RATE_SALT`: random non-secret salt for short-lived visitor hashes
 

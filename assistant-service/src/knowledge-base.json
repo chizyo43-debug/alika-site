@@ -23,8 +23,8 @@
   {
     "id": "android",
     "title": "Android telefon ve tablet deneyimi",
-    "content": "Aynı Android uygulaması ebeveyn ve çocuk rolüne göre farklılaşır. Ebeveyn süre, uygulama, uyku ve görevleri yönetir. Çocuk kalan süresini, çalışmalarını ve soru çözerek kazanabileceği kontrollü ek süreyi açıkça görür. Android dağıtımı, Windows Microsoft Store satın alımından ayrı kapsamdadır.",
-    "keywords": ["android", "telefon", "tablet", "ebeveyn telefonu", "çocuk telefonu", "mobil"],
+    "content": "Aynı Android uygulaması ebeveyn ve çocuk rolüne göre farklılaşır. Ebeveyn süre, uygulama, uyku ve görevleri yönetir. Android'de belirli bir uygulamaya günlük limit vermenin doğrulanmış yolu, korunan ebeveyn panelinde Kurallar → Uygulama süre limitleri → Uygulama limiti ekle adımlarını açmak, kurulu uygulamayı seçmek ve dakika değerini onaylamaktır. Örneğin YouTube kuruluysa bu listeden ayrıca seçilebilir. Kural cihazda yerel olarak saklanır; web hesabına veya tarayıcı paneline giriş yapılmaz. Çocuk kalan süresini, çalışmalarını ve soru çözerek kazanabileceği kontrollü ek süreyi açıkça görür. Android dağıtımı, Windows Microsoft Store satın alımından ayrı kapsamdadır.",
+    "keywords": ["android", "telefon", "tablet", "ebeveyn telefonu", "çocuk telefonu", "mobil", "youtube", "uygulama süre limitleri", "uygulama limiti ekle"],
     "links": [{"label": "Android deneyimini görün", "href": "/features/"}, {"label": "Ekosistemi keşfedin", "href": "/ecosystem/"}]
   },
   {
@@ -58,8 +58,8 @@
   {
     "id": "privacy",
     "title": "Gizlilik ve yerel öncelikli çalışma",
-    "content": "AliKa'nın temel uygulama işlevleri bulut hesabı olmadan çalışır. Kullanım bilgileri cihazda tutulur; reklam ağı ve üçüncü taraf analitik SDK'sı bulunmaz. Aile Ağı başlangıçta kapalıdır ve yalnız ebeveyn açıkça etkinleştirip cihazları eşleştirirse aynı onaylı yerel ağda şifreli iletişim kurar. Ürün gizli takip için tasarlanmamıştır. Web sitesindeki isteğe bağlı yapay zekâ asistanı uygulamadan ayrıdır; kullanıcı asistanı açıp mesaj gönderdiğinde yalnız o mesaj ve sınırlı sohbet bağlamı Google Gemini'ye yanıt üretmek için iletilir.",
-    "keywords": ["gizlilik", "veri", "bulut", "reklam", "analitik", "yerel", "takip", "gizli", "google", "gemini"],
+    "content": "AliKa'nın temel uygulama işlevleri bulut hesabı olmadan çalışır. İnternet kesildiğinde cihazda kayıtlı kurallar ve yerel temel işlevler çalışmayı sürdürür; internet gerektiren indirme, mağaza, haricî bağlantı ve web sitesindeki yapay zekâ asistanı kullanılamaz. Aile Ağı, internetten bağımsız olarak aynı onaylı yerel ağdaki eşleştirilmiş cihazlar arasında çalışır. Kullanım bilgileri cihazda tutulur; reklam ağı ve üçüncü taraf analitik SDK'sı bulunmaz. Aile Ağı başlangıçta kapalıdır ve yalnız ebeveyn açıkça etkinleştirip cihazları eşleştirirse şifreli iletişim kurar. Ürün gizli takip için tasarlanmamıştır. Web sitesindeki isteğe bağlı yapay zekâ asistanı uygulamadan ayrıdır; kullanıcı asistanı açıp mesaj gönderdiğinde yalnız o mesaj ve sınırlı sohbet bağlamı Google Gemini'ye yanıt üretmek için iletilir.",
+    "keywords": ["gizlilik", "veri", "bulut", "reklam", "analitik", "yerel", "takip", "gizli", "google", "gemini", "internetsiz", "internet yok", "internet kesilirse", "çevrimdışı", "offline"],
     "links": [{"label": "Gizlilik politikasını okuyun", "href": "/privacy/"}, {"label": "Yerel çalışma rehberi", "href": "/rehber/bulutsuz-ebeveyn-kontrolu/"}]
   },
   {
@@ -110,6 +110,13 @@
     "content": "AliKa; ekran süresi sınırlarını çocukla önceden konuşmak, kuralları görünür kılmak, öğrenme ve görevleri kontrollü ödülle ilişkilendirmek isteyen ailelere yöneliktir. Gizli izleme, internet üzerinden sınırsız takip, reklam profili veya ebeveyn iletişiminin yerini alan otomatik karar sistemi arayanlar için uygun değildir. En iyi başlangıç tek bir günlük limit, bir uyku aralığı ve kısa deneme döneminde ailece gözlem yapmaktır.",
     "keywords": ["uygun", "kimler için", "neden alayım", "farkı", "avantaj", "başlangıç", "öneri"],
     "links": [{"label": "Ailenize uygunluğu değerlendirin", "href": "/age-groups/"}, {"label": "7 günlük denemeyi görün", "href": "/downloads/"}]
+  },
+  {
+    "id": "family-coaching",
+    "title": "Kurala geçişi çocukla birlikte yönetme",
+    "content": "AliKa, kuralı aniden verilen bir ceza yerine ailece önceden konuşulan görünür bir plan olarak uygular. En sade başlangıç tek bir günlük limit ve tek bir uyku aralığı seçip kısa deneme boyunca sonucu birlikte gözlemlemektir. Çocuk kalan süreyi ve kilit nedenini kendi ekranında görür. Yaş büyüdükçe ebeveynin sürekli ve ayrıntılı kontrol yerine ortak hedefleri konuşması ve haftalık değerlendirme yapması önerilir. AliKa ebeveyn iletişiminin yerini almaz.",
+    "keywords": ["itiraz", "istemiyor", "direniyor", "karşı çıkıyor", "tartışma", "kavga", "ikna", "nasıl anlatırım", "birlikte konuş", "alışma", "geçiş"],
+    "links": [{"label": "AliKa ile günlük akışı görün", "href": "/how-it-works/"}, {"label": "Yaşa göre yaklaşımı seçin", "href": "/age-groups/"}]
   },
   {
     "id": "reward-safety",
