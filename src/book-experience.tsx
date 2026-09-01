@@ -1139,8 +1139,8 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           <p className="pageLead">Ülkeyi, sınıfı ve dersi seçin. Hazırlanan konu anlatımlarını ve soru paketlerini tek yerde görün.</p>
           <div className="contentNumbers">
             <p><strong>3</strong><span>ülke</span></p>
-            <p><strong>197</strong><span>hazır ders paketi</span></p>
-            <p><strong>99.532</strong><span>soru</span></p>
+            <p><strong>200</strong><span>hazır ders paketi</span></p>
+            <p><strong>101.032</strong><span>soru</span></p>
           </div>
           <button className="contentExploreButton" type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'icerik-katalogu'))}>
             <span><small>Örnek veri ekranı</small><strong>Ülke, sınıf ve ders seçin</strong></span>
