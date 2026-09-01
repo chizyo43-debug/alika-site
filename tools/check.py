@@ -179,14 +179,14 @@ def main() -> None:
         if totals != {
             "countries": 3,
             "gradeGroups": 23,
-            "subjects": 197,
-            "notes": 5545,
-            "questions": 99532,
+            "subjects": 200,
+            "notes": 5618,
+            "questions": 101032,
         }:
             errors.append(f"Content catalog totals are unexpected: {totals}")
         excluded = catalog.get("excluded") or []
-        if len(excluded) != 3 or any(row.get("reason") != "publishBlocked=true" for row in excluded):
-            errors.append(f"Blocked content disclosure is unexpected: {excluded}")
+        if excluded:
+            errors.append(f"Ready content is still unexpectedly excluded: {excluded}")
         for subject in catalog.get("subjects", []):
             parsed = urlparse(subject["download_url"])
             if parsed.scheme:

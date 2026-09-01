@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: chizyo43-debug/alika-icerik
-          ref: 9f71a65ca94daf145df47304f16a87a40d896791
+          ref: 00dcee159888741d4f4caf6097475fede2558529
           path: _content
       - uses: actions/setup-python@v5
         with:
