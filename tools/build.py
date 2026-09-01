@@ -21,15 +21,15 @@ LANGUAGE_FLAGS = {
     "pt": "🇵🇹", "ru": "🇷🇺", "ja": "🇯🇵", "ko": "🇰🇷",
 }
 CONTENT_LIBRARY_LABELS = {
-    "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Makine doğrulamalı · İnsan incelemesi yok", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
-    "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Machine validated · No human review", "Grade {}", "Do not extract the ZIP. Select the class ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
-    "de": ("Land", "Klasse", "Alle Fächer herunterladen", "Fach herunterladen", "Lektionen", "Fragen", "Maschinell geprüft · Keine menschliche Prüfung", "Klasse {}", "ZIP nicht entpacken. Wählen Sie die Klassen-ZIP direkt über Inhalte hinzufügen in AliKa oder legen Sie sie im vorbereiteten Ordner ab und starten Sie den Scan."),
-    "es": ("País", "Curso", "Descargar todas las asignaturas", "Descargar asignatura", "lecciones", "preguntas", "Validación automática · Sin revisión humana", "Curso {}", "No extraiga el ZIP. Seleccione directamente el ZIP del curso en Añadir contenido de AliKa o colóquelo en la carpeta preparada y analícela."),
-    "fr": ("Pays", "Niveau", "Télécharger toutes les matières", "Télécharger la matière", "leçons", "questions", "Validation automatique · Sans vérification humaine", "Niveau {}", "Ne décompressez pas le ZIP. Sélectionnez-le directement dans Ajouter du contenu d’AliKa ou placez-le dans le dossier préparé puis lancez l’analyse."),
-    "pt": ("País", "Ano", "Transferir todas as disciplinas", "Transferir disciplina", "lições", "perguntas", "Validação automática · Sem revisão humana", "Ano {}", "Não extraia o ZIP. Selecione o ZIP do ano diretamente em Adicionar conteúdo no AliKa ou coloque-o na pasta preparada e faça a leitura."),
-    "ru": ("Страна", "Класс", "Скачать все предметы", "Скачать предмет", "уроков", "вопросов", "Машинная проверка · Без проверки человеком", "Класс {}", "Не распаковывайте ZIP. Выберите архив класса через Добавить материалы в AliKa или поместите его в подготовленную папку и запустите сканирование."),
-    "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "機械検証済み・人による確認なし", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年ZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
-    "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "자동 검증 · 사람의 검토 없음", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년 ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
+    "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Codex öz-denetimli · Makine doğrulamalı", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
+    "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Codex self-audited · Machine validated", "Grade {}", "Do not extract the ZIP. Select the class ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
+    "de": ("Land", "Klasse", "Alle Fächer herunterladen", "Fach herunterladen", "Lektionen", "Fragen", "Codex-Selbstprüfung · Maschinell validiert", "Klasse {}", "ZIP nicht entpacken. Wählen Sie die Klassen-ZIP direkt über Inhalte hinzufügen in AliKa oder legen Sie sie im vorbereiteten Ordner ab und starten Sie den Scan."),
+    "es": ("País", "Curso", "Descargar todas las asignaturas", "Descargar asignatura", "lecciones", "preguntas", "Autoauditoría de Codex · Validación automática", "Curso {}", "No extraiga el ZIP. Seleccione directamente el ZIP del curso en Añadir contenido de AliKa o colóquelo en la carpeta preparada y analícela."),
+    "fr": ("Pays", "Niveau", "Télécharger toutes les matières", "Télécharger la matière", "leçons", "questions", "Auto-audit Codex · Validation automatique", "Niveau {}", "Ne décompressez pas le ZIP. Sélectionnez-le directement dans Ajouter du contenu d’AliKa ou placez-le dans le dossier préparé puis lancez l’analyse."),
+    "pt": ("País", "Ano", "Transferir todas as disciplinas", "Transferir disciplina", "lições", "perguntas", "Autoauditoria Codex · Validação automática", "Ano {}", "Não extraia o ZIP. Selecione o ZIP do ano diretamente em Adicionar conteúdo no AliKa ou coloque-o na pasta preparada e faça a leitura."),
+    "ru": ("Страна", "Класс", "Скачать все предметы", "Скачать предмет", "уроков", "вопросов", "Самопроверка Codex · Машинная валидация", "Класс {}", "Не распаковывайте ZIP. Выберите архив класса через Добавить материалы в AliKa или поместите его в подготовленную папку и запустите сканирование."),
+    "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "Codex自己監査済み・機械検証済み", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年ZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
+    "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "Codex 자체 감사 · 자동 검증", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년 ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
 }
 CONTENT_BOOK_LABELS = {
     "tr": ("AliKa kitabına dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
@@ -724,8 +724,8 @@ def home(locales: dict[str, dict], lang: str) -> str:
           <p>{esc(c["content_body"])}</p>
         </div>
         <div class="package-grid reveal">
-          <article><small>TR · 5</small><h3>Matematik</h3><p>Doğal sayılar · pilot</p><span>{esc(c["status_dev"])}</span></article>
-          <article><small>TR · 5</small><h3>Fen Bilimleri</h3><p>Kuvveti tanıyalım · pilot</p><span>{esc(c["status_dev"])}</span></article>
+          <article><small>JP · 5</small><h3>算数</h3><p>23 anlatım · 500 soru</p><span>{esc(c["status_today"])}</span></article>
+          <article><small>KR · 5</small><h3>수학</h3><p>23 anlatım · 500 soru</p><span>{esc(c["status_today"])}</span></article>
           <article class="package-cta"><h3>{esc(c["content_title"])}</h3><a href="{href(lang, 'content')}">{esc(c["learn_more"])} →</a></article>
         </div>
       </section>

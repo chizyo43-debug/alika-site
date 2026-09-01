@@ -50,6 +50,32 @@ interface ContentGrade {
   subjects: ContentSubject[];
 }
 
+interface PublishedContentGrade {
+  country_slug: string;
+  country: string;
+  grade_slug: string;
+  grade: number | string;
+  notes: number;
+  questions: number;
+  download_url: string;
+}
+
+interface PublishedContentSubject {
+  country_slug: string;
+  country: string;
+  grade_slug: string;
+  subject_slug: string;
+  subject: string;
+  notes: number;
+  questions: number;
+  download_url: string;
+}
+
+interface PublishedContentCatalog {
+  grades: PublishedContentGrade[];
+  subjects: PublishedContentSubject[];
+}
+
 interface GameInfo {
   id: string;
   title: string;
@@ -433,25 +459,59 @@ const CONTENT_GRADES: ContentGrade[] = [
 ];
 
 function ContentLibraryPreview() {
-  const [gradeId, setGradeId] = useState('6');
+  const [catalog, setCatalog] = useState<PublishedContentCatalog | null>(null);
+  const [countryId, setCountryId] = useState('turkiye');
+  const [gradeId, setGradeId] = useState('6-sinif');
   const [subjectId, setSubjectId] = useState('all');
-  const grade = CONTENT_GRADES.find((item) => item.id === gradeId) ?? CONTENT_GRADES[1];
-  const subject = grade.subjects.find((item) => item.id === subjectId);
-  const result = subject ?? { label: 'Tüm dersler', topics: grade.topics, questions: grade.questions };
+
+  useEffect(() => {
+    let active = true;
+    fetch('/icerik/catalog-v1.json')
+      .then((response) => {
+        if (!response.ok) throw new Error(`İçerik kataloğu: ${response.status}`);
+        return response.json() as Promise<PublishedContentCatalog>;
+      })
+      .then((value) => { if (active) setCatalog(value); })
+      .catch(() => { if (active) setCatalog(null); });
+    return () => { active = false; };
+  }, []);
+
+  const fallbackGrades: PublishedContentGrade[] = CONTENT_GRADES.map((item) => ({
+    country_slug: 'turkiye', country: 'Türkiye', grade_slug: `${item.id}-sinif`, grade: Number(item.id),
+    notes: item.topics, questions: item.questions, download_url: '/content/',
+  }));
+  const fallbackSubjects: PublishedContentSubject[] = CONTENT_GRADES.flatMap((item) => item.subjects.map((subject) => ({
+    country_slug: 'turkiye', country: 'Türkiye', grade_slug: `${item.id}-sinif`,
+    subject_slug: subject.id, subject: subject.label, notes: subject.topics,
+    questions: subject.questions, download_url: '/content/',
+  })));
+  const grades = catalog?.grades ?? fallbackGrades;
+  const subjects = catalog?.subjects ?? fallbackSubjects;
+  const countries = Array.from(new Map(grades.map((item) => [item.country_slug, item.country])).entries());
+  const countryGrades = grades.filter((item) => item.country_slug === countryId);
+  const grade = countryGrades.find((item) => item.grade_slug === gradeId) ?? countryGrades[0] ?? grades[0];
+  const gradeSubjects = subjects.filter((item) => item.country_slug === countryId && item.grade_slug === grade?.grade_slug);
+  const subject = gradeSubjects.find((item) => item.subject_slug === subjectId);
+  const result = subject ?? {
+    subject: 'Tüm dersler', notes: grade?.notes ?? 0, questions: grade?.questions ?? 0,
+    download_url: grade?.download_url ?? '/content/',
+  };
+  const gradeLabel = typeof grade?.grade === 'number' ? `${grade.grade}. sınıf` : '11–12. sınıf seçmeli';
 
   return (
     <div className="libraryPreview">
       <div className="librarySelectors">
-        <label>Ülke<select defaultValue="turkiye" aria-label="Ülke"><option value="turkiye">Türkiye</option></select></label>
-        <label>Sınıf<select value={gradeId} aria-label="Sınıf" onChange={(event) => { setGradeId(event.target.value); setSubjectId('all'); }}>{CONTENT_GRADES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
-        <label>Ders<select value={subjectId} aria-label="Ders" onChange={(event) => setSubjectId(event.target.value)}><option value="all">Tüm dersler</option>{grade.subjects.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
+        <label>Ülke<select value={countryId} aria-label="Ülke" onChange={(event) => { const next = event.target.value; const first = grades.find((item) => item.country_slug === next); setCountryId(next); setGradeId(first?.grade_slug ?? ''); setSubjectId('all'); }}>{countries.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
+        <label>Sınıf<select value={grade?.grade_slug ?? ''} aria-label="Sınıf" onChange={(event) => { setGradeId(event.target.value); setSubjectId('all'); }}>{countryGrades.map((item) => <option key={item.grade_slug} value={item.grade_slug}>{typeof item.grade === 'number' ? `${item.grade}. sınıf` : '11–12. sınıf seçmeli'}</option>)}</select></label>
+        <label>Ders<select value={subjectId} aria-label="Ders" onChange={(event) => setSubjectId(event.target.value)}><option value="all">Tüm dersler</option>{gradeSubjects.map((item) => <option key={item.subject_slug} value={item.subject_slug}>{item.subject}</option>)}</select></label>
       </div>
       <article className="libraryResult" aria-live="polite">
-        <span>Türkiye · {grade.label}</span>
-        <strong>{result.label}</strong>
-        <p><b>{result.topics.toLocaleString('tr-TR')}</b> konu anlatımı <i>·</i> <b>{result.questions.toLocaleString('tr-TR')}</b> soru</p>
-        <small>Otomatik kontrollerden geçti · İnsan içerik incelemesi bekliyor</small>
+        <span>{grade?.country ?? 'Türkiye'} · {gradeLabel}</span>
+        <strong>{result.subject}</strong>
+        <p><b>{result.notes.toLocaleString('tr-TR')}</b> konu anlatımı <i>·</i> <b>{result.questions.toLocaleString('tr-TR')}</b> soru</p>
+        <small>Codex öz-denetimli · Makine doğrulamalı güvenli kapsam</small>
       </article>
+      <a className="textLink" href={result.download_url} target="_blank" rel="noreferrer">Seçili paketi indirin <span>↓</span></a>
       <a className="textLink" href="https://www.alika.tr/content/" target="_blank" rel="noreferrer">Canlı içerik kütüphanesini açın <span>↗</span></a>
     </div>
   );
@@ -1078,9 +1138,9 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           <h2 tabIndex={-1}>Çocuğun çalışacağı içerik hazır.</h2>
           <p className="pageLead">Ülkeyi, sınıfı ve dersi seçin. Hazırlanan konu anlatımlarını ve soru paketlerini tek yerde görün.</p>
           <div className="contentNumbers">
-            <p><strong>6</strong><span>sınıf düzeyi</span></p>
-            <p><strong>41</strong><span>ders paketi</span></p>
-            <p><strong>19.980</strong><span>soru</span></p>
+            <p><strong>3</strong><span>ülke</span></p>
+            <p><strong>197</strong><span>hazır ders paketi</span></p>
+            <p><strong>99.532</strong><span>soru</span></p>
           </div>
           <button className="contentExploreButton" type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'icerik-katalogu'))}>
             <span><small>Örnek veri ekranı</small><strong>Ülke, sınıf ve ders seçin</strong></span>
