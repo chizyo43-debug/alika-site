@@ -43,7 +43,7 @@
     "planned_note": "Planlanan deneyim — bugün kullanılabilir bir özellik değildir.",
     "pages": {
       "how-it-works": ["Nasıl çalışır?", "AliKa’nın ana menülerini ve günlük kullanım akışını adım adım görün."],
-      "ecosystem": ["Aile ekosistemi", "Telefon, bilgisayar ve planlanan TV deneyiminin aynı ev düzeninde nasıl birleşeceğini keşfedin."],
+      "ecosystem": ["Ailece ekran süresi ve öğrenme oyunları", "Telefon ve Windows PC arasında planlama ve öğrenmeyi birleştiren AliKa’yı; planlanan ailece sorular, bilgi yarışması, düello, imece ve oyun gecesi deneyimlerini keşfedin."],
       "features": ["Özellikler", "Çocuk, ebeveyn ve ortak aile deneyimlerini güncel durumlarıyla inceleyin."],
       "age-groups": ["Yaş grupları", "5–7, 8–11, 12–14 ve 15–18 yaşlarında AliKa’nın nasıl değiştiğini görün."],
       "content": ["İçerik kütüphanesi", "Öğrenme paketleri, doğrudan indirme ve açık kalite durumu."],
@@ -209,7 +209,7 @@
     "trust_kicker": "信頼の約束", "trust_title": "家族のデータは家族の中に。", "trust_body": "広告、第三者分析、隠れた動作はありません。", "trust_items": ["広告なし", "追跡なし", "クラウドアカウントなし", "隠れて動作しない"],
     "content_kicker": "教材センター", "content_title": "品質状態が見える学習コンテンツ。", "content_body": "国・学年・教科・単元ごとの教材と透明な確認状況。",
     "final_title": "画面を止めるためではなく、時間をより良く使うために。", "final_body": "交渉を減らし、成長を見やすくし、一緒の時間を増やします。", "learn_more": "詳しく見る", "support": "サポート", "privacy": "プライバシー", "eula": "EULA", "planned_note": "計画中の体験です。現在利用できる機能ではありません。",
-    "pages": {"how-it-works":["使い方","メニューと日々の流れを順番に説明します。"],"ecosystem":["家族エコシステム","スマートフォン、PC、計画中のTV体験を家庭内でつなぎます。"],"features":["機能","子ども・保護者・家族の機能と現在の状態。"],"age-groups":["年齢グループ","5–7、8–11、12–14、15–18歳に合わせた体験。"],"content":["教材ライブラリ","教材、直接ダウンロード、品質状態。"],"updates":["更新情報","追加・改善・修正内容。"],"roadmap":["ロードマップ","利用可能・開発中・計画中を明確に分けます。"],"downloads":["ダウンロード","確認済みの配布先。"],"contact":["お問い合わせ","サポートとよくある質問。"]}
+    "pages": {"how-it-works":["使い方","メニューと日々の流れを順番に説明します。"],"ecosystem":["家族で学ぶスクリーン時間と学習ゲーム","スマートフォンとWindows PCで計画と学習をつなぐAliKa。家族で取り組む問題、クイズ、対戦、協力、ゲームナイトは今後の提供予定です。"],"features":["機能","子ども・保護者・家族の機能と現在の状態。"],"age-groups":["年齢グループ","5–7、8–11、12–14、15–18歳に合わせた体験。"],"content":["教材ライブラリ","教材、直接ダウンロード、品質状態。"],"updates":["更新情報","追加・改善・修正内容。"],"roadmap":["ロードマップ","利用可能・開発中・計画中を明確に分けます。"],"downloads":["ダウンロード","確認済みの配布先。"],"contact":["お問い合わせ","サポートとよくある質問。"]}
   },
   "ko": {
     "name": "한국어", "locale": "ko_KR", "meta": "AliKa는 화면 시간을 학습, 계획, 가족 목표와 연결합니다.",
@@ -225,6 +225,6 @@
     "trust_kicker": "신뢰 확인", "trust_title": "가족 데이터는 가족 안에 머뭅니다.", "trust_body": "광고, 제3자 분석, 숨겨진 작동이 없습니다.", "trust_items": ["광고 없음", "추적 없음", "클라우드 계정 없음", "숨겨진 모드 없음"],
     "content_kicker": "콘텐츠 센터", "content_title": "품질 상태가 보이는 학습 콘텐츠.", "content_body": "국가, 학년, 과목, 주제별 콘텐츠와 투명한 검토 상태.",
     "final_title": "화면을 끄기 위해서가 아니라, 시간을 더 잘 쓰기 위해.", "final_body": "실랑이는 줄이고, 성장은 더 잘 보이게, 함께하는 시간은 더 많이.", "learn_more": "자세히 보기", "support": "지원", "privacy": "개인정보", "eula": "EULA", "planned_note": "계획 중인 경험이며 현재 제공 기능이 아닙니다.",
-    "pages": {"how-it-works":["사용 방법","메뉴와 일상 사용 흐름을 단계별로 확인하세요."],"ecosystem":["가족 에코시스템","휴대폰, PC, 계획 중인 TV 경험이 가정에서 연결됩니다."],"features":["기능","아이, 부모, 가족 경험과 현재 상태."],"age-groups":["연령대","5–7, 8–11, 12–14, 15–18세에 맞춘 AliKa."],"content":["콘텐츠 라이브러리","패키지, 직접 다운로드, 품질 상태."],"updates":["업데이트","추가, 개선, 수정 내역."],"roadmap":["로드맵","현재 제공, 개발 중, 계획됨을 명확히 구분합니다."],"downloads":["다운로드","검증된 배포 채널."],"contact":["문의","지원 방법과 자주 묻는 질문."]}
+    "pages": {"how-it-works":["사용 방법","메뉴와 일상 사용 흐름을 단계별로 확인하세요."],"ecosystem":["가족이 함께하는 화면 시간과 학습 게임","휴대폰과 Windows PC에서 계획과 학습을 연결하는 AliKa와 가족 문제 풀이, 퀴즈, 대결, 협동, 게임 나이트의 향후 계획을 확인하세요."],"features":["기능","아이, 부모, 가족 경험과 현재 상태."],"age-groups":["연령대","5–7, 8–11, 12–14, 15–18세에 맞춘 AliKa."],"content":["콘텐츠 라이브러리","패키지, 직접 다운로드, 품질 상태."],"updates":["업데이트","추가, 개선, 수정 내역."],"roadmap":["로드맵","현재 제공, 개발 중, 계획됨을 명확히 구분합니다."],"downloads":["다운로드","검증된 배포 채널."],"contact":["문의","지원 방법과 자주 묻는 질문."]}
   }
 }
