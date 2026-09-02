@@ -1,0 +1,635 @@
+{
+  "version": 1,
+  "languages": {
+    "tr": {
+      "playlistId": "PLb83uFzWZ16Q",
+      "videos": {
+        "windows-overview": {
+          "id": "yaxrITEsqyI",
+          "title": "AliKa Windows ne işe yarar?",
+          "description": "Ekran süresi, öğrenme, görev ve aile düzeninin tek Windows panelinde nasıl birleştiğini görün."
+        },
+        "windows-installation": {
+          "id": "RZDOb072nyk",
+          "title": "AliKa Windows nasıl kurulur?",
+          "description": "Microsoft Store kurulumu, dil, ebeveyn PIN’i, rıza, kurtarma kodu ve Güvenli Mod adımlarını izleyin."
+        },
+        "windows-panel": {
+          "id": "c_eggz-1wxQ",
+          "title": "Panelde günlük kullanım ve aile özeti",
+          "description": "Kalan süreyi, puanları, saatlik dağılımı, uygulamaları, cihaz sağlığını ve yaklaşan programı inceleyin."
+        },
+        "windows-child-rules": {
+          "id": "sXvHkeOegIo",
+          "title": "Çocuk profili ve ekran kuralları nasıl yönetilir?",
+          "description": "Zaman, uygulama, site, uyku, haftalık plan, web koruması ve sınav ayarlarının tüm sekmelerini görün."
+        },
+        "windows-learning-content": {
+          "id": "3IOYQxvISlo",
+          "title": "İçerik ve ChatGPT soru bankası nasıl eklenir?",
+          "description": "XLSX, CSV, AliKa paketi, belge ve ChatGPT ile hazırlanan ZIP dosyasını ekleme ve onaylama yollarını görün."
+        },
+        "windows-child-learning": {
+          "id": "PIbXrMdlXDc",
+          "title": "Çocuk çalışma ve öğrenme ekranı",
+          "description": "Çocuğun konu anlatımını açmasını, soru bankasını seçmesini, çalışmasını ve ilerlemesini takip etmesini görün."
+        },
+        "windows-child-question": {
+          "id": "cMxuoJaG77E",
+          "title": "Çocuk soru ekranı ve süre kazanma",
+          "description": "Soru çözme, doğru ve yanlış geri bildirimi, açıklama, Çözüm Kağıdı ve kontrollü süre kazanma akışını görün."
+        },
+        "windows-task-homework-exam": {
+          "id": "XjlLQnRvyjY",
+          "title": "Görev, ödev ve sınav nasıl oluşturulur?",
+          "description": "Görev ödüllerini, içerikten ödev göndermeyi ve planlı deneme sınavı oluşturmayı adım adım izleyin."
+        },
+        "windows-devices-family": {
+          "id": "8cCkgvU3AJs",
+          "title": "Aile cihazları nasıl eşleştirilir?",
+          "description": "Yerel ağı, QR eşleştirmeyi, cihaz durumlarını, aile mesajını ve hedef cihaza gönderilen işlemleri öğrenin."
+        },
+        "windows-reports": {
+          "id": "2ooX93agqDo",
+          "title": "Kullanım ve öğrenme sonuçları nereden görülür?",
+          "description": "Haftalık karneyi, kullanım dağılımını, soru sonuçlarını, olay geçmişini ve bildirimleri inceleyin."
+        },
+        "windows-privacy": {
+          "id": "cxzZrfLhJjE",
+          "title": "Gizlilik ve yerel veri nasıl korunur?",
+          "description": "Açık rızayı, cihaz içi veri saklamayı, PIN korumasını ve isteğe bağlı şifreli yerel aile ağını görün."
+        },
+        "windows-settings": {
+          "id": "2rhPfMD_Jfw",
+          "title": "Profiller, iyi oluş ve koruma ayarları",
+          "description": "Dil, profiller, yaş önerileri, göz molası, yumuşak iniş, PIN kurtarma, yedek ve Koruma Motorunu öğrenin."
+        },
+        "windows-auxiliary": {
+          "id": "97UKyqIPevE",
+          "title": "Sistem tepsisi, Kısa Panel ve kilit ekranı",
+          "description": "Günlük erişim seçeneklerini, Kısa Paneli, açık kilit nedenlerini ve güvenli çocuk eylemlerini görün."
+        }
+      }
+    },
+    "en": {
+      "playlistId": "PLcfP4qWx0x4k",
+      "videos": {
+        "windows-overview": {
+          "id": "SdS-m7unbX0",
+          "title": "What Is AliKa for Windows?",
+          "description": "See how visible screen-time rules, parent-approved learning, tasks and family reports come together in one Windows app."
+        },
+        "windows-installation": {
+          "id": "RM_sQN-AvcE",
+          "title": "Windows Installation and First Setup",
+          "description": "Install from Microsoft Store, choose English, create the parent PIN and complete consent, recovery and optional Safe Mode setup."
+        },
+        "windows-panel": {
+          "id": "-wdMQzfUnOk",
+          "title": "Dashboard and Daily Summary",
+          "description": "Review remaining time, reward values, hourly use, top apps, device health and the upcoming family schedule."
+        },
+        "windows-child-rules": {
+          "id": "sySIxlhd3yU",
+          "title": "Child & Rules: Every Tab Explained",
+          "description": "Explore time, apps, websites, bedtime, weekly planning, web protection and Exam Mode using the real English interface."
+        },
+        "windows-learning-content": {
+          "id": "mfHmGjd_auc",
+          "title": "Add Lessons and Questions",
+          "description": "Add parent-approved lessons and question banks from supported files or a ChatGPT-created AliKa package. Content is not included by default."
+        },
+        "windows-child-learning": {
+          "id": "3Yj3fwIk7Io",
+          "title": "The Child Learning Screen",
+          "description": "See today’s work, approved lesson notes, question practice, progress, earned time and assigned tasks from the child’s view."
+        },
+        "windows-child-question": {
+          "id": "DvnCY3BCqt4",
+          "title": "Questions, Explanations and Earned Time",
+          "description": "Follow the complete answer flow: daily reward limits, feedback, explanations, retries and controlled earned screen time."
+        },
+        "windows-task-homework-exam": {
+          "id": "PYBYdRCCvOg",
+          "title": "Create Tasks, Homework and Exams",
+          "description": "Learn the difference between tasks, content-based homework and scheduled exams, then create each one step by step."
+        },
+        "windows-devices-family": {
+          "id": "1QsuK4jYReY",
+          "title": "Devices and Family Network",
+          "description": "Pair a family device locally, inspect its status and send only the visible actions supported for the selected device."
+        },
+        "windows-reports": {
+          "id": "-cNjtPRs7os",
+          "title": "Reports and Notifications",
+          "description": "Read weekly or monthly summaries, hourly use, subject results, event history and notifications without mixing usage and learning data."
+        },
+        "windows-privacy": {
+          "id": "kh5pMIuRk68",
+          "title": "Privacy and Local Data",
+          "description": "Understand consent, on-device storage, auditable records, parent-controlled deletion, PIN protection and the optional local family network."
+        },
+        "windows-settings": {
+          "id": "NddzxRlQLAk",
+          "title": "Settings, Profiles and Protection",
+          "description": "Configure language, profiles, age presets, wellbeing, PIN recovery, encrypted backup and the Windows protection engine."
+        },
+        "windows-auxiliary": {
+          "id": "F2be4BPfqLw",
+          "title": "System Tray, Quick Panel and Lock Screen",
+          "description": "Use the system tray and Quick Panel, understand lock reasons and see which safe actions remain available to the child."
+        }
+      }
+    },
+    "de": {
+      "playlistId": "PLeJpTO5eMvbM",
+      "videos": {
+        "windows-overview": {
+          "id": "wKZss-8oe98",
+          "title": "Was ist AliKa für Windows?",
+          "description": "Erfahren Sie, wie sichtbare Bildschirmzeitregeln, freigegebene Lerninhalte, Aufgaben und Familienberichte in einer Windows-App zusammenkommen."
+        },
+        "windows-installation": {
+          "id": "zOTSf5zP9aM",
+          "title": "Windows-Installation und erste Einrichtung",
+          "description": "Installieren Sie AliKa aus dem Microsoft Store und richten Sie Sprache, Eltern-PIN, Einwilligung, Wiederherstellung und den optionalen abgesicherten Modus ein."
+        },
+        "windows-panel": {
+          "id": "Bo7GVv9xwEQ",
+          "title": "Übersicht und Tageszusammenfassung",
+          "description": "Prüfen Sie Restzeit, Belohnungswerte, stündliche Nutzung, häufige Apps, Gerätezustand und den kommenden Familienplan."
+        },
+        "windows-child-rules": {
+          "id": "hZOCbrnrIbE",
+          "title": "Kind und Regeln: alle Bereiche erklärt",
+          "description": "Lernen Sie Zeitlimits, Apps, Websites, Schlafenszeit, Wochenplanung, Webschutz und Prüfungsmodus in der echten deutschen Oberfläche kennen."
+        },
+        "windows-learning-content": {
+          "id": "P1a_rD3xnO0",
+          "title": "Lerninhalte und Fragen hinzufügen",
+          "description": "Fügen Sie von Eltern geprüfte Lernnotizen und Fragenbanken aus unterstützten Dateien oder einem mit ChatGPT erstellten AliKa-Paket hinzu."
+        },
+        "windows-child-learning": {
+          "id": "N92Rk8bV-EU",
+          "title": "Der Lernbereich für Kinder",
+          "description": "Sehen Sie Tagesaufgaben, freigegebene Lernnotizen, Fragenübungen, Fortschritt, verdiente Zeit und zugewiesene Arbeiten aus Kindersicht."
+        },
+        "windows-child-question": {
+          "id": "QUbGX9fF5Hw",
+          "title": "Fragen, Erklärungen und verdiente Zeit",
+          "description": "Verfolgen Sie den vollständigen Ablauf mit Tagesgrenze, Antwortfeedback, Erklärungen, weiteren Versuchen und kontrolliert verdienter Bildschirmzeit."
+        },
+        "windows-task-homework-exam": {
+          "id": "D0GdYikoq2A",
+          "title": "Aufgaben, Hausaufgaben und Prüfungen erstellen",
+          "description": "Unterscheiden Sie tägliche Aufgaben, inhaltsbezogene Hausaufgaben und geplante Prüfungen und erstellen Sie jeden Typ Schritt für Schritt."
+        },
+        "windows-devices-family": {
+          "id": "2c32WJIEWsw",
+          "title": "Geräte und Familiennetzwerk",
+          "description": "Koppeln Sie ein Familiengerät im lokalen Netz, prüfen Sie seinen Zustand und senden Sie nur die für das gewählte Gerät sichtbaren Aktionen."
+        },
+        "windows-reports": {
+          "id": "HCN70qwVjfE",
+          "title": "Berichte und Mitteilungen",
+          "description": "Lesen Sie Wochen- und Monatsübersichten, stündliche Nutzung, Ergebnisse nach Fach, Ereignisverlauf und wichtige Mitteilungen."
+        },
+        "windows-privacy": {
+          "id": "Vi1ylZEIozA",
+          "title": "Datenschutz und lokale Daten",
+          "description": "Verstehen Sie Einwilligung, lokale Datenspeicherung, prüfbare Einträge, elterngesteuertes Löschen, PIN-Schutz und das optionale lokale Familiennetz."
+        },
+        "windows-settings": {
+          "id": "7dSyJx3GqvQ",
+          "title": "Einstellungen, Profile und Schutz",
+          "description": "Konfigurieren Sie Sprache, Profile, Altersvorgaben, Wohlbefinden, PIN-Wiederherstellung, verschlüsselte Sicherung und den Windows-Schutzdienst."
+        },
+        "windows-auxiliary": {
+          "id": "enM6lEeSiBA",
+          "title": "Infobereich, Schnellübersicht und Sperrbildschirm",
+          "description": "Nutzen Sie Infobereich und Schnellübersicht, verstehen Sie Sperrgründe und sehen Sie, welche sicheren Aktionen dem Kind weiter zur Verfügung stehen."
+        }
+      }
+    },
+    "es": {
+      "playlistId": "PLGs9cZUQyNJg",
+      "videos": {
+        "windows-overview": {
+          "id": "FCUzUCOW0Vs",
+          "title": "¿Qué es AliKa para Windows?",
+          "description": "Descubra cómo AliKa reúne reglas visibles de tiempo de pantalla, aprendizaje aprobado por la familia, tareas e informes en Windows."
+        },
+        "windows-installation": {
+          "id": "0CtUlbYO3i0",
+          "title": "Instalación en Windows y configuración inicial",
+          "description": "Instale AliKa desde Microsoft Store y configure el idioma, el PIN parental, el consentimiento, la recuperación y el modo seguro opcional."
+        },
+        "windows-panel": {
+          "id": "kuppA30WmCw",
+          "title": "Panel y resumen diario",
+          "description": "Revise el tiempo restante, las recompensas, el uso por horas, las aplicaciones principales, el estado del dispositivo y la agenda familiar."
+        },
+        "windows-child-rules": {
+          "id": "1OHNLIztKcw",
+          "title": "Menú del menor y reglas: explicación de cada pestaña",
+          "description": "Conozca las pestañas de tiempo, aplicaciones, sitios, sueño, planificación semanal, protección web y modo de examen."
+        },
+        "windows-learning-content": {
+          "id": "yhgNkJgfuWc",
+          "title": "Añadir lecciones y preguntas",
+          "description": "Añada lecciones y bancos de preguntas aprobados por la familia desde archivos compatibles o un paquete de AliKa creado con ChatGPT."
+        },
+        "windows-child-learning": {
+          "id": "UdwEoYk0nFw",
+          "title": "Pantalla de aprendizaje del menor",
+          "description": "Vea el trabajo de hoy, las lecciones aprobadas, la práctica, el progreso, el tiempo ganado y las tareas asignadas desde la vista del menor."
+        },
+        "windows-child-question": {
+          "id": "nHDYR9WYCso",
+          "title": "Preguntas, explicaciones y tiempo ganado",
+          "description": "Siga el flujo completo de respuesta: límite diario, retroalimentación, explicaciones, nuevos intentos y tiempo de pantalla controlado."
+        },
+        "windows-task-homework-exam": {
+          "id": "d2ExBERYWB8",
+          "title": "Crear tareas, deberes y exámenes",
+          "description": "Distinga entre tareas, deberes basados en contenido y exámenes programados, y aprenda a crear cada tipo paso a paso."
+        },
+        "windows-devices-family": {
+          "id": "SXVwe5NArrw",
+          "title": "Dispositivos y red familiar",
+          "description": "Vincule un dispositivo en la red local, consulte su estado y envíe únicamente las acciones visibles compatibles con el dispositivo elegido."
+        },
+        "windows-reports": {
+          "id": "eW9yqxJD-uo",
+          "title": "Informes y notificaciones",
+          "description": "Consulte resúmenes semanales o mensuales, uso por horas, resultados por materia, historial de eventos y notificaciones."
+        },
+        "windows-privacy": {
+          "id": "RpXs2bI0QF8",
+          "title": "Privacidad y datos locales",
+          "description": "Comprenda el consentimiento, el almacenamiento local, los registros auditables, el borrado parental, el PIN y la red familiar opcional."
+        },
+        "windows-settings": {
+          "id": "NPuyEnWqNFA",
+          "title": "Ajustes, perfiles y protección",
+          "description": "Configure idioma, perfiles, recomendaciones por edad, bienestar, recuperación del PIN, copia cifrada y protección de Windows."
+        },
+        "windows-auxiliary": {
+          "id": "cKEl4GGeXzA",
+          "title": "Bandeja del sistema, panel rápido y pantalla de bloqueo",
+          "description": "Use la bandeja y el panel rápido, comprenda los motivos del bloqueo y vea qué acciones seguras siguen disponibles para el menor."
+        }
+      }
+    },
+    "fr": {
+      "playlistId": "PLJfxtPILegJ8",
+      "videos": {
+        "windows-overview": {
+          "id": "6rtIT5shmNQ",
+          "title": "À quoi sert AliKa pour Windows ?",
+          "description": "Découvrez comment les règles de temps d’écran, les contenus approuvés, les tâches et les rapports familiaux se réunissent dans une application Windows."
+        },
+        "windows-installation": {
+          "id": "7UvYVK_V-qo",
+          "title": "Installation Windows et première configuration",
+          "description": "Installez AliKa depuis le Microsoft Store puis configurez la langue, le PIN parental, le consentement, la récupération et le mode sécurisé facultatif."
+        },
+        "windows-panel": {
+          "id": "fPblmRoDypg",
+          "title": "Tableau de bord et résumé quotidien",
+          "description": "Consultez le temps restant, les récompenses, l’utilisation horaire, les applications principales, l’état de l’appareil et le programme familial."
+        },
+        "windows-child-rules": {
+          "id": "wrj8DjzCDCQ",
+          "title": "Enfant et règles : chaque onglet expliqué",
+          "description": "Parcourez le temps, les applications, les sites, le coucher, le planning hebdomadaire, la protection web et le mode examen dans l’interface française."
+        },
+        "windows-learning-content": {
+          "id": "Ip8_FnTd9Pw",
+          "title": "Ajouter des leçons et des questions",
+          "description": "Ajoutez des leçons et banques de questions approuvées depuis les fichiers compatibles ou un paquet AliKa créé avec ChatGPT."
+        },
+        "windows-child-learning": {
+          "id": "QcWtDHnXVc4",
+          "title": "L’écran d’apprentissage de l’enfant",
+          "description": "Découvrez le travail du jour, les leçons approuvées, les exercices, la progression, le temps gagné et les tâches attribuées côté enfant."
+        },
+        "windows-child-question": {
+          "id": "zTLApkih1RI",
+          "title": "Questions, explications et temps gagné",
+          "description": "Suivez le parcours complet : limite quotidienne, retour sur la réponse, explication, nouvelle tentative et temps d’écran gagné de façon contrôlée."
+        },
+        "windows-task-homework-exam": {
+          "id": "Ac1JrRQqsNM",
+          "title": "Créer des tâches, devoirs et examens",
+          "description": "Distinguez les tâches quotidiennes, les devoirs liés à un contenu et les examens programmés, puis créez chaque type étape par étape."
+        },
+        "windows-devices-family": {
+          "id": "Hf5kwd4Cm14",
+          "title": "Appareils et réseau familial",
+          "description": "Associez un appareil sur le réseau local, vérifiez son état et envoyez uniquement les actions visibles compatibles avec l’appareil choisi."
+        },
+        "windows-reports": {
+          "id": "89htC2N97pA",
+          "title": "Rapports et notifications",
+          "description": "Consultez les bilans hebdomadaires ou mensuels, l’utilisation horaire, les résultats par matière, l’historique des événements et les notifications."
+        },
+        "windows-privacy": {
+          "id": "0jRPD2whdik",
+          "title": "Confidentialité et données locales",
+          "description": "Comprenez le consentement, le stockage local, les données vérifiables, l’effacement parental, le PIN et le réseau familial local facultatif."
+        },
+        "windows-settings": {
+          "id": "cWGb4qciXqk",
+          "title": "Paramètres, profils et protection",
+          "description": "Configurez la langue, les profils, les recommandations par âge, le bien-être, la récupération du PIN, la sauvegarde chiffrée et la protection Windows."
+        },
+        "windows-auxiliary": {
+          "id": "dv9QnGzT7QM",
+          "title": "Barre d’état, panneau rapide et écran de verrouillage",
+          "description": "Utilisez la barre d’état et le panneau rapide, comprenez les motifs de verrouillage et les actions sûres encore disponibles pour l’enfant."
+        }
+      }
+    },
+    "pt": {
+      "playlistId": "PLYDOAXkT60aU",
+      "videos": {
+        "windows-overview": {
+          "id": "WYzSbP7lHt8",
+          "title": "Para que serve o AliKa para Windows?",
+          "description": "Veja como regras visíveis de tempo de tela, conteúdo aprovado, tarefas e relatórios da família se reúnem em um único aplicativo para Windows."
+        },
+        "windows-installation": {
+          "id": "6Pqy5WuA4xI",
+          "title": "Instalação no Windows e configuração inicial",
+          "description": "Instale pela Microsoft Store e configure idioma, PIN parental, consentimento, recuperação offline e o Modo Seguro opcional."
+        },
+        "windows-panel": {
+          "id": "01QCagdmylU",
+          "title": "Painel e resumo diário",
+          "description": "Confira o tempo restante, recompensas, uso por hora, aplicativos principais, estado do dispositivo e a agenda da família."
+        },
+        "windows-child-rules": {
+          "id": "yvvJmi3Eq7g",
+          "title": "Criança e regras: todas as abas explicadas",
+          "description": "Conheça tempo, aplicativos, sites, horário de dormir, planejamento semanal, proteção web e Modo Prova na interface real em português."
+        },
+        "windows-learning-content": {
+          "id": "M0XhV1fgqQ8",
+          "title": "Adicionar aulas e perguntas",
+          "description": "Adicione aulas e bancos de perguntas aprovados a partir de arquivos compatíveis ou de um pacote AliKa criado com o ChatGPT."
+        },
+        "windows-child-learning": {
+          "id": "emoYHCau3aw",
+          "title": "Tela de aprendizagem da criança",
+          "description": "Veja o trabalho do dia, aulas aprovadas, prática de perguntas, progresso, tempo ganho e tarefas atribuídas na visão da criança."
+        },
+        "windows-child-question": {
+          "id": "wAwqcrV4rgA",
+          "title": "Perguntas, explicações e tempo ganho",
+          "description": "Acompanhe o fluxo completo: limite diário, retorno da resposta, explicação, nova tentativa e tempo de tela ganho de forma controlada."
+        },
+        "windows-task-homework-exam": {
+          "id": "9FYGqVpSRMY",
+          "title": "Criar tarefas, lições de casa e simulados",
+          "description": "Diferencie tarefas diárias, lições de casa baseadas em conteúdo e simulados agendados, criando cada tipo passo a passo."
+        },
+        "windows-devices-family": {
+          "id": "NVPCtS-m12g",
+          "title": "Dispositivos e rede familiar",
+          "description": "Emparelhe um dispositivo pela rede local, confira seu estado e envie apenas as ações visíveis compatíveis com o dispositivo escolhido."
+        },
+        "windows-reports": {
+          "id": "DQDsbvEj0gM",
+          "title": "Relatórios e notificações",
+          "description": "Consulte resumos semanais ou mensais, uso por hora, resultados por matéria, histórico de eventos e notificações."
+        },
+        "windows-privacy": {
+          "id": "EmOQjvXg-_M",
+          "title": "Privacidade e dados locais",
+          "description": "Entenda consentimento, armazenamento local, registros verificáveis, exclusão pelos pais, proteção por PIN e a rede familiar local opcional."
+        },
+        "windows-settings": {
+          "id": "alwpqakMLmE",
+          "title": "Configurações, perfis e proteção",
+          "description": "Configure idioma, perfis, recomendações por idade, bem-estar, recuperação do PIN, backup criptografado e a proteção do Windows."
+        },
+        "windows-auxiliary": {
+          "id": "u8yVQXbTMuc",
+          "title": "Bandeja do sistema, Painel rápido e Tela de bloqueio",
+          "description": "Use a bandeja e o Painel rápido, entenda os motivos do bloqueio e quais ações seguras continuam disponíveis para a criança."
+        }
+      }
+    },
+    "ru": {
+      "playlistId": "PLNmRBY5CU7Q8",
+      "videos": {
+        "windows-overview": {
+          "id": "0-FfzOa4n-U",
+          "title": "Для чего нужен AliKa для Windows?",
+          "description": "Узнайте, как понятные правила экранного времени, одобренные материалы, задания и семейные отчёты объединяются в одном приложении Windows."
+        },
+        "windows-installation": {
+          "id": "jBs4FF1tAsQ",
+          "title": "Установка в Windows и первая настройка",
+          "description": "Установите AliKa из Microsoft Store и настройте русский язык, родительский PIN-код, согласие, восстановление и необязательный безопасный режим."
+        },
+        "windows-panel": {
+          "id": "DvmGYfbFoG4",
+          "title": "Панель и сводка за день",
+          "description": "Проверьте оставшееся время, награды, использование по часам, основные приложения, состояние устройства и семейное расписание."
+        },
+        "windows-child-rules": {
+          "id": "jbf8xLRd8Q0",
+          "title": "Профиль ребёнка и правила: все вкладки",
+          "description": "Разберите ограничения времени, приложения, сайты, отбой, недельный план, веб-защиту и режим экзамена в настоящем русском интерфейсе."
+        },
+        "windows-learning-content": {
+          "id": "rlCl18_jlgI",
+          "title": "Добавление уроков и вопросов",
+          "description": "Добавьте одобренные родителями уроки и банки вопросов из поддерживаемых файлов или пакета AliKa, подготовленного с помощью ChatGPT."
+        },
+        "windows-child-learning": {
+          "id": "YPBu8_Mxeyk",
+          "title": "Учебный экран ребёнка",
+          "description": "Посмотрите глазами ребёнка на работу дня, одобренные уроки, практику, прогресс, заработанное время и назначенные задания."
+        },
+        "windows-child-question": {
+          "id": "G3NMB8CxDkQ",
+          "title": "Вопросы, пояснения и заработанное время",
+          "description": "Проследите полный процесс: дневной лимит, ответ, пояснение, повторная попытка и контролируемое начисление экранного времени."
+        },
+        "windows-task-homework-exam": {
+          "id": "GtTMNW5ftbY",
+          "title": "Создание заданий, домашних работ и экзаменов",
+          "description": "Различайте ежедневные задания, домашние работы на основе материалов и запланированные экзамены, создавая каждый тип по шагам."
+        },
+        "windows-devices-family": {
+          "id": "7voTN9hKdFk",
+          "title": "Устройства и семейная сеть",
+          "description": "Подключите семейное устройство по локальной сети, проверьте его состояние и отправляйте только доступные для него действия."
+        },
+        "windows-reports": {
+          "id": "35_CvTNW8es",
+          "title": "Отчёты и уведомления",
+          "description": "Просматривайте недельные и месячные сводки, использование по часам, результаты по предметам, журнал событий и уведомления."
+        },
+        "windows-privacy": {
+          "id": "yJWMdRQ9PlM",
+          "title": "Конфиденциальность и локальные данные",
+          "description": "Разберитесь в согласии, локальном хранении, проверяемых записях, удалении родителем, PIN-защите и необязательной семейной сети."
+        },
+        "windows-settings": {
+          "id": "nhEtbYp1EA8",
+          "title": "Настройки, профили и защита",
+          "description": "Настройте язык, профили, возрастные рекомендации, цифровое благополучие, восстановление PIN, шифрованную копию и защиту Windows."
+        },
+        "windows-auxiliary": {
+          "id": "TjVSglHAYbo",
+          "title": "Область уведомлений, быстрая панель и блокировка",
+          "description": "Используйте область уведомлений и быструю панель, понимайте причины блокировки и безопасные действия, доступные ребёнку."
+        }
+      }
+    },
+    "ja": {
+      "playlistId": "PLOPeP3QrjNDg",
+      "videos": {
+        "windows-overview": {
+          "id": "P_89E1TYVa8",
+          "title": "AliKa for Windowsでできること",
+          "description": "明確なスクリーンタイム規則、保護者が承認した教材、タスク、報酬、家族レポートが1つのWindowsアプリにどうまとまるかをご覧ください。"
+        },
+        "windows-installation": {
+          "id": "VNCzShdldOw",
+          "title": "Windowsへのインストールと初期設定",
+          "description": "Microsoft StoreからAliKaをインストールし、日本語、保護者PIN、同意、オフライン復旧、任意のセーフモードを設定します。"
+        },
+        "windows-panel": {
+          "id": "E-wrWpoy5lA",
+          "title": "ダッシュボードと今日のまとめ",
+          "description": "残り時間、報酬、時間帯別の利用状況、主なアプリ、デバイスの状態、家族の予定を確認します。"
+        },
+        "windows-child-rules": {
+          "id": "Tm6XfHOC1Po",
+          "title": "子どもとルール：すべてのタブを解説",
+          "description": "時間、アプリ、Webサイト、就寝時間、週間計画、Web保護、試験モードの各設定を実際の日本語画面で確認します。"
+        },
+        "windows-learning-content": {
+          "id": "VOJvDqWBAl4",
+          "title": "レッスンと問題の追加",
+          "description": "対応ファイルやChatGPTで作成したAliKaパッケージから、保護者が確認・承認するレッスンと問題集を追加します。"
+        },
+        "windows-child-learning": {
+          "id": "o8LyU7jtk2k",
+          "title": "子どもの学習画面",
+          "description": "子どもの視点から、今日の作業、承認済み教材、問題演習、進捗、獲得時間、割り当てられたタスクを確認します。"
+        },
+        "windows-child-question": {
+          "id": "nENt9Slcb7o",
+          "title": "問題・解説と獲得時間",
+          "description": "1日の報酬上限、回答、正誤フィードバック、解説、再挑戦、管理されたスクリーンタイム獲得までの流れを確認します。"
+        },
+        "windows-task-homework-exam": {
+          "id": "D3HKk0K7zZk",
+          "title": "タスク、宿題、試験の作成",
+          "description": "日常のタスク、教材を使う宿題、日時を指定する試験の違いを理解し、それぞれを手順に沿って作成します。"
+        },
+        "windows-devices-family": {
+          "id": "qrUhafVV4LI",
+          "title": "デバイスとファミリーネットワーク",
+          "description": "家族のデバイスをローカルネットワークでペアリングし、状態を確認して、対応する操作だけを安全に送信します。"
+        },
+        "windows-reports": {
+          "id": "5EElgi4sCGI",
+          "title": "レポートと通知",
+          "description": "週次・月次の概要、時間帯別の利用状況、科目別の結果、イベント履歴、通知を分かりやすく確認します。"
+        },
+        "windows-privacy": {
+          "id": "OGRFudDY43Y",
+          "title": "プライバシーとローカルデータ",
+          "description": "同意、端末内保存、確認可能な記録、保護者による削除、PIN保護、任意のローカル家族ネットワークを解説します。"
+        },
+        "windows-settings": {
+          "id": "WHY_2o3KHEQ",
+          "title": "設定、プロファイルと保護",
+          "description": "言語、プロファイル、年齢別の提案、デジタルウェルビーイング、PIN復旧、暗号化バックアップ、Windows保護を設定します。"
+        },
+        "windows-auxiliary": {
+          "id": "KAdWqbYdwZw",
+          "title": "システムトレイ、クイックパネル、ロック画面",
+          "description": "システムトレイとクイックパネルの使い方、ロック理由の確認、子どもが利用できる安全な操作を説明します。"
+        }
+      }
+    },
+    "ko": {
+      "playlistId": "PLMC3Z8z69Ujk",
+      "videos": {
+        "windows-overview": {
+          "id": "40_M-PYYyFY",
+          "title": "AliKa Windows는 무엇을 하나요?",
+          "description": "명확한 화면 시간 규칙, 보호자가 승인한 학습 자료, 과제, 보상 및 가족 보고서가 하나의 Windows 앱에서 어떻게 연결되는지 확인하세요."
+        },
+        "windows-installation": {
+          "id": "95-M1Ew6mqY",
+          "title": "Windows 설치 및 첫 설정",
+          "description": "Microsoft Store에서 AliKa를 설치하고 한국어, 보호자 PIN, 동의, 오프라인 복구 및 선택형 안전 모드를 설정합니다."
+        },
+        "windows-panel": {
+          "id": "kbFD_mURoRA",
+          "title": "대시보드와 오늘의 요약",
+          "description": "남은 시간, 보상, 시간대별 사용량, 주요 앱, 기기 상태 및 예정된 가족 일정을 한눈에 확인합니다."
+        },
+        "windows-child-rules": {
+          "id": "rtVYUNCloOs",
+          "title": "자녀와 규칙: 모든 탭 안내",
+          "description": "실제 한국어 화면에서 시간, 앱, 웹사이트, 취침 시간, 주간 계획, 웹 보호 및 시험 모드 설정을 살펴봅니다."
+        },
+        "windows-learning-content": {
+          "id": "LNgdQ-iGjPk",
+          "title": "학습 콘텐츠와 문제 추가",
+          "description": "지원 파일 또는 ChatGPT로 만든 AliKa 패키지에서 보호자가 검토하고 승인할 학습 자료와 문제 은행을 추가합니다."
+        },
+        "windows-child-learning": {
+          "id": "JAvy2FJKSro",
+          "title": "자녀 학습 화면",
+          "description": "자녀의 시점에서 오늘의 학습, 승인된 자료, 문제 연습, 진행 상황, 획득 시간 및 할당된 과제를 확인합니다."
+        },
+        "windows-child-question": {
+          "id": "6GoL_IZhkQY",
+          "title": "문제 풀이, 설명과 시간 획득",
+          "description": "일일 보상 한도, 답변, 정답·오답 피드백, 설명, 재도전 및 관리된 화면 시간 획득 과정을 확인합니다."
+        },
+        "windows-task-homework-exam": {
+          "id": "a2-GUC4PElM",
+          "title": "과제, 숙제와 시험 만들기",
+          "description": "일상 과제, 학습 자료에 연결된 숙제 및 일정이 지정된 시험의 차이를 이해하고 각각 단계별로 만듭니다."
+        },
+        "windows-devices-family": {
+          "id": "ZEbpxISW9b4",
+          "title": "기기 및 가족 네트워크",
+          "description": "로컬 네트워크에서 가족 기기를 페어링하고 상태를 확인한 뒤 선택한 기기에서 지원하는 작업만 전송합니다."
+        },
+        "windows-reports": {
+          "id": "txU6oS9d7o4",
+          "title": "보고서 및 알림",
+          "description": "주간·월간 요약, 시간대별 사용량, 과목별 학습 결과, 이벤트 기록 및 주요 알림을 확인합니다."
+        },
+        "windows-privacy": {
+          "id": "pCH22TF9n0M",
+          "title": "개인정보 보호와 로컬 데이터",
+          "description": "동의, 기기 내 저장, 확인 가능한 기록, 보호자 삭제, PIN 보호 및 선택형 로컬 가족 네트워크를 설명합니다."
+        },
+        "windows-settings": {
+          "id": "oAXdFSVcv5o",
+          "title": "설정, 프로필, 디지털 웰빙과 보호",
+          "description": "언어, 프로필, 연령별 권장 설정, 디지털 웰빙, PIN 복구, 암호화된 백업 및 Windows 보호를 구성합니다."
+        },
+        "windows-auxiliary": {
+          "id": "MQV6egS3pEk",
+          "title": "시스템 트레이, 빠른 패널과 잠금 화면",
+          "description": "시스템 트레이와 빠른 패널을 사용하고 잠금 이유와 자녀가 이용할 수 있는 안전한 작업을 확인합니다."
+        }
+      }
+    }
+  }
+}

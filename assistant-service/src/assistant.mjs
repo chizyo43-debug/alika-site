@@ -1,5 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 import knowledgeBase from './knowledge-base.json' with { type: 'json' };
+import { retrieveVideoGuide } from './video-guides.mjs';
 
 export const SUPPORTED_LANGUAGES = new Set(['tr', 'en', 'de', 'es', 'fr', 'pt', 'ru', 'ja', 'ko']);
 
@@ -124,6 +125,7 @@ Your job:
 - Sound like a perceptive human guide: vary sentence structure and wording. Never use stock praise such as "harika fikir" or routine closings such as "Başka sorunuz var mı?" Do not pad the answer with generic marketing language.
 - Keep the answer concise but complete. Set followUp to an empty string by default. Ask one specific qualifying question only when the missing answer would materially change the recommendation.
 - Suggest up to three ALLOWED LINKS only when they directly help with the current intent. Explain fit honestly; do not use pressure, fear, fake scarcity or claims about competitors.
+- When RECOMMENDED VERIFIED VIDEO GUIDE is present, briefly say why it matches and include its exact URL as an action. It is a Windows guide; never describe it as an Android or Android TV guide. When it is absent, never invent or substitute a video.
 - Never request or repeat a child's name, browsing history, PIN, password, address, school, health information or other personal data. If a user shares sensitive data, tell them to remove it and continue only with a generic description.
 - AliKa is transparent parental control. Do not help with covert surveillance, bypassing consent, spying or hiding the app.
 - Never imply that AliKa replaces parental communication, supervision or judgment, or that software alone will prevent family conflict.
@@ -134,11 +136,12 @@ Return strict JSON with this shape:
 {"answer":"string","actions":[{"label":"string","href":"allowed URL"}],"followUp":"string or empty"}`;
 }
 
-function allowedUrls(articles, language) {
+function allowedUrls(articles, language, videoGuide = null) {
   const urls = new Set(['/contact/', localizedHref('/contact/', language), storeUrl(language)]);
   for (const article of articles) {
     for (const link of article.links) urls.add(localizedHref(link.href, language));
   }
+  if (videoGuide?.href) urls.add(videoGuide.href);
   return urls;
 }
 
@@ -149,7 +152,7 @@ function safeAction(action, allowed) {
   return { label: action.label.trim().slice(0, 80), href };
 }
 
-export function parseModelResponse(text, articles, language) {
+export function parseModelResponse(text, articles, language, videoGuide = null) {
   let parsed;
   try {
     parsed = JSON.parse(text);
@@ -159,7 +162,7 @@ export function parseModelResponse(text, articles, language) {
   if (!parsed || typeof parsed.answer !== 'string' || !parsed.answer.trim()) {
     throw new Error('model_response_invalid');
   }
-  const allowed = allowedUrls(articles, language);
+  const allowed = allowedUrls(articles, language, videoGuide);
   const actions = [];
   if (Array.isArray(parsed.actions)) {
     for (const candidate of parsed.actions) {
@@ -167,6 +170,10 @@ export function parseModelResponse(text, articles, language) {
       if (action && !actions.some((item) => item.href === action.href)) actions.push(action);
       if (actions.length >= 3) break;
     }
+  }
+  if (videoGuide && !actions.some((item) => item.href === videoGuide.href)) {
+    actions.unshift({ label: videoGuide.label, href: videoGuide.href });
+    actions.splice(3);
   }
   const sourceLinks = [];
   for (const article of articles.slice(0, 3)) {
@@ -206,8 +213,9 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
     async answer({ message, history = [], language = 'tr', pagePath = '/' }) {
       const safeLanguage = SUPPORTED_LANGUAGES.has(language) ? language : 'tr';
       const articles = retrieveConversationKnowledge(message, history, 5);
+      const videoGuide = retrieveVideoGuide(message, history, safeLanguage, articles);
       const context = sourceContext(articles, safeLanguage);
-      const allowed = [...allowedUrls(articles, safeLanguage)];
+      const allowed = [...allowedUrls(articles, safeLanguage, videoGuide)];
       const compactHistory = history.slice(-6).map((item) => ({
         role: item.role === 'assistant' ? 'model' : 'user',
         parts: [{ text: String(item.text).slice(0, 800) }],
@@ -216,7 +224,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
         ...compactHistory,
         {
           role: 'user',
-          parts: [{ text: `CURRENT PAGE: ${pagePath}\nUSER QUESTION: ${message}\n\nVERIFIED ALIKA KNOWLEDGE:\n${JSON.stringify(context)}\n\nALLOWED LINKS:\n${JSON.stringify(allowed)}` }],
+          parts: [{ text: `CURRENT PAGE: ${pagePath}\nUSER QUESTION: ${message}\n\nVERIFIED ALIKA KNOWLEDGE:\n${JSON.stringify(context)}\n\nRECOMMENDED VERIFIED VIDEO GUIDE:\n${JSON.stringify(videoGuide)}\n\nALLOWED LINKS:\n${JSON.stringify(allowed)}` }],
         },
       ];
       const response = await client.models.generateContent({
@@ -247,7 +255,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
           },
         },
       });
-      return parseModelResponse(response.text, articles, safeLanguage);
+      return parseModelResponse(response.text, articles, safeLanguage, videoGuide);
     },
   };
 }

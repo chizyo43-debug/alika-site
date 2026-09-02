@@ -6,6 +6,7 @@ import {
   retrieveConversationKnowledge,
   retrieveKnowledge,
 } from '../src/assistant.mjs';
+import { retrieveVideoGuide } from '../src/video-guides.mjs';
 
 test('retrieval prioritizes pricing facts', () => {
   const results = retrieveKnowledge('Fiyatı ne kadar, deneme var mı?', 4);
@@ -37,6 +38,39 @@ test('retrieval uses recent user context for a short follow-up', () => {
 test('family resistance questions use the specific coaching facts', () => {
   const results = retrieveKnowledge('Çocuğum karşı çıkıyor, kavga etmeden nasıl anlatırım?', 4);
   assert.equal(results[0].id, 'family-coaching');
+});
+
+test('video retrieval opens the exact Turkish guide for the requested task', () => {
+  const installationArticles = retrieveKnowledge('Windows kurulumu ve ilk ayarlar', 4);
+  const installation = retrieveVideoGuide('Windows uygulamasını nasıl kurarım?', [], 'tr', installationArticles);
+  assert.equal(installation?.key, 'windows-installation');
+  assert.equal(installation?.href, 'https://www.youtube.com/watch?v=RZDOb072nyk');
+
+  const taskArticles = retrieveKnowledge('görev ödev sınav oluşturma', 4);
+  const task = retrieveVideoGuide('Görev ve sınav nasıl oluşturulur?', [], 'tr', taskArticles);
+  assert.equal(task?.key, 'windows-task-homework-exam');
+  assert.equal(task?.href, 'https://www.youtube.com/watch?v=XjlLQnRvyjY');
+});
+
+test('video retrieval uses the selected language and suppresses Windows guides for Android', () => {
+  const japanese = retrieveVideoGuide('Windowsへのインストール方法を動画で見たい', [], 'ja', []);
+  assert.equal(japanese?.key, 'windows-installation');
+  assert.equal(japanese?.href, 'https://www.youtube.com/watch?v=VNCzShdldOw');
+
+  const androidArticles = retrieveKnowledge('Android telefonda uygulama limiti', 4);
+  assert.equal(retrieveVideoGuide('Android telefonda uygulama limiti nasıl eklenir?', [], 'tr', androidArticles), null);
+  assert.equal(retrieveVideoGuide('Aile içinde çatışma yaşıyoruz', [], 'tr', []), null);
+});
+
+test('verified video action is added and unlisted YouTube URLs are rejected', () => {
+  const articles = retrieveKnowledge('Windows soru çözerek süre kazanma', 4);
+  const video = retrieveVideoGuide('Windows soru çözerek süre kazanmayı göster', [], 'tr', articles);
+  const result = parseModelResponse(JSON.stringify({
+    answer: 'Soru ekranında doğru cevap kontrollü süre kazandırabilir.',
+    actions: [{ label: 'Yanlış video', href: 'https://www.youtube.com/watch?v=AAAAAAAAAAA' }],
+    followUp: '',
+  }), articles, 'tr', video);
+  assert.deepEqual(result.actions, [{ label: video.label, href: 'https://www.youtube.com/watch?v=cMxuoJaG77E' }]);
 });
 
 test('model actions are restricted to retrieved AliKa links', () => {
@@ -88,4 +122,5 @@ test('assistant uses the reasoning model and anti-template conversation rules', 
   assert.match(request.config.systemInstruction, /Do not invent screen names/);
   assert.match(request.config.systemInstruction, /Do not mention an account login/);
   assert.match(request.config.systemInstruction, /Never imply that AliKa replaces parental communication/);
+  assert.match(request.config.systemInstruction, /RECOMMENDED VERIFIED VIDEO GUIDE/);
 });
