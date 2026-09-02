@@ -8,10 +8,21 @@ from collections import defaultdict
 from pathlib import Path
 
 
-COUNTRY_NAMES = {"turkiye": "Türkiye", "JP": "Japonya", "KR": "Kore"}
-COUNTRY_SLUGS = {"JP": "japonya", "KR": "kore"}
+COUNTRY_NAMES = {
+    "turkiye": "Türkiye",
+    "JP": "Japonya",
+    "KR": "Kore",
+    "GB": "İngiltere",
+}
+COUNTRY_SLUGS = {"JP": "japonya", "KR": "kore", "GB": "ingiltere"}
 CONTENT_RELEASE_TAG = "question-banks-2026.09.02-v2"
-COUNTRY_ORDER = {"turkiye": 0, "japonya": 1, "kore": 2}
+GB_CONTENT_RELEASE_TAG = "gb-england-2026.09.02-v1"
+COUNTRY_RELEASE_TAGS = {
+    "JP": CONTENT_RELEASE_TAG,
+    "KR": CONTENT_RELEASE_TAG,
+    "GB": GB_CONTENT_RELEASE_TAG,
+}
+COUNTRY_ORDER = {"turkiye": 0, "japonya": 1, "kore": 2, "ingiltere": 3}
 
 
 def _grade_group_sort_key(item: tuple[tuple[str, str], list[dict]]) -> tuple[int, float, str]:
@@ -24,6 +35,14 @@ CONTENT_RELEASE_URL = (
     f"{CONTENT_RELEASE_TAG}"
 )
 FIXED_ZIP_TIME = (2026, 9, 1, 0, 0, 0)
+
+
+def _release_asset_url(country_code: str, filename: str) -> str:
+    tag = COUNTRY_RELEASE_TAGS[country_code]
+    return (
+        "https://github.com/chizyo43-debug/alika-icerik/releases/download/"
+        f"{tag}/{filename}"
+    )
 
 
 def _sha256(path: Path) -> str:
@@ -66,7 +85,7 @@ def _read_package(path: Path) -> dict:
 def _release_subjects(content_root: Path) -> list[dict]:
     subjects: list[dict] = []
     pointer_root = content_root / "library" / "curriculum"
-    for country_code in ("JP", "KR"):
+    for country_code in ("JP", "KR", "GB"):
         pointer_path = pointer_root / country_code / "current-publish-release.json"
         if not pointer_path.is_file():
             continue
@@ -91,7 +110,8 @@ def _release_subjects(content_root: Path) -> list[dict]:
         ):
             raise ValueError(f"Ülke release kapısı geçmedi: {country_code}")
 
-        for entry in catalog.get("packages", []):
+        entries = catalog.get("packages") or catalog.get("lessonPackages") or []
+        for entry in entries:
             bundle = content_root / entry["bundlePath"]
             if not bundle.is_file():
                 raise FileNotFoundError(bundle)
@@ -131,7 +151,7 @@ def _release_subjects(content_root: Path) -> list[dict]:
                 "subject_slug": entry["subjectCode"],
                 "subject": entry["subject"],
                 "filename": bundle.name,
-                "download_url": f"{CONTENT_RELEASE_URL}/{bundle.name}",
+                "download_url": _release_asset_url(country_code, bundle.name),
                 "sha256": entry["bundleSha256"],
                 "size_bytes": entry["bundleBytes"],
                 "notes": notes,
@@ -351,6 +371,123 @@ def _release_question_banks(content_root: Path) -> list[dict]:
     return banks
 
 
+def _country_release_question_banks(content_root: Path, country_code: str) -> list[dict]:
+    """Read banks embedded in a country's own hash-bound release catalog."""
+    pointer_path = (
+        content_root
+        / "library"
+        / "curriculum"
+        / country_code
+        / "current-publish-release.json"
+    )
+    if not pointer_path.is_file():
+        return []
+    pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
+    catalog_path = content_root / pointer["catalogPath"]
+    audit_path = content_root / pointer["auditPath"]
+    if pointer.get("publishable") is not True or pointer.get("releaseBlockers") != []:
+        raise ValueError(f"Soru bankası ülke işaretçisi yayımlanamaz: {pointer_path}")
+    if (
+        _sha256(catalog_path) != pointer["catalogSha256"]
+        or _sha256(audit_path) != pointer["auditSha256"]
+    ):
+        raise ValueError(f"Soru bankası ülke işaretçisi hash uyuşmazlığı: {country_code}")
+
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    if (
+        catalog.get("publishable") is not True
+        or catalog.get("releaseBlockers") != []
+        or audit.get("publishable") is not True
+        or audit.get("status") != "passed"
+        or audit.get("errors") != []
+        or audit.get("catalogSha256") != pointer["catalogSha256"]
+    ):
+        raise ValueError(f"Soru bankası ülke release kapısı geçmedi: {country_code}")
+
+    banks: list[dict] = []
+    for entry in catalog.get("questionBankPackages") or []:
+        bundle = content_root / entry["bundlePath"]
+        if (
+            not bundle.is_file()
+            or bundle.stat().st_size != entry["bundleBytes"]
+            or _sha256(bundle) != entry["bundleSha256"]
+        ):
+            raise ValueError(f"Soru bankası bundle hash/boyut uyuşmazlığı: {bundle}")
+        if (
+            entry.get("publicationStatus")
+            != "publishable-independent-subject-question-bank"
+            or entry.get("releaseBlockers") != []
+            or entry.get("sourceQuestionReuse") != "forbidden"
+            or entry.get("questionsUsedAsSemanticInputs") != 0
+        ):
+            raise ValueError(f"Soru bankası katalog kaydı geçersiz: {entry.get('cellId')}")
+
+        with zipfile.ZipFile(bundle) as archive:
+            manifest = json.loads(archive.read("MANIFEST.json"))
+            package = manifest["packages"][0]
+            payload = archive.read(package["path"])
+            if (
+                manifest.get("schema") != "alika-question-bank-bundle/v1"
+                or manifest.get("publishable") is not True
+                or manifest.get("humanReviewed") is not False
+                or manifest.get("releaseId") != catalog["releaseId"]
+                or _sha256_bytes(payload) != package["sha256"]
+            ):
+                raise ValueError(f"Soru bankası bundle manifesti geçersiz: {bundle}")
+            rows = [
+                json.loads(line)
+                for line in payload.decode("utf-8").splitlines()
+                if line
+            ]
+            header = rows[0]
+            questions = sum(row.get("type") == "question" for row in rows[1:])
+            notes = sum(row.get("type") == "note" for row in rows[1:])
+            counts = entry["counts"]
+            if (
+                header.get("productType") != "independent-question-bank"
+                or header.get("publishReady") is not True
+                or header.get("generationPolicy", {}).get("sourceQuestionReuse")
+                != "forbidden"
+                or header.get("generationPolicy", {}).get("questionsUsedAsSemanticInputs")
+                != 0
+                or questions != counts.get("questions")
+                or notes != counts.get("notes")
+                or counts.get("questions") != 2000
+                or counts.get("families") != 400
+            ):
+                raise ValueError(f"Soru bankası JSONL sözleşmesi geçersiz: {bundle}")
+
+        grade = entry["grade"]
+        country_slug = COUNTRY_SLUGS[country_code]
+        banks.append({
+            "country_slug": country_slug,
+            "country": COUNTRY_NAMES[country_code],
+            "country_code": country_code,
+            "grade_slug": f"{grade}-sinif" if isinstance(grade, int) else "11-12-sinif-secmeli",
+            "grade": grade,
+            "bank_slug": f"{entry['subjectCode']}-2000",
+            "scope": "country-grade-subject",
+            "subject_code": entry["subjectCode"],
+            "subject": entry["subject"],
+            "title": f"{COUNTRY_NAMES[country_code]} {grade}. sınıf {entry['subject']} — 2.000 Soruluk Soru Bankası",
+            "filename": bundle.name,
+            "download_url": _release_asset_url(country_code, bundle.name),
+            "sha256": entry["bundleSha256"],
+            "size_bytes": entry["bundleBytes"],
+            "questions": counts["questions"],
+            "families": counts["families"],
+            "schema_version": "2.3",
+            "package_version": catalog["releaseId"],
+            "review_status": entry["reviewStatus"],
+            "human_reviewed": False,
+            "license": "AliKa özgün güvenli-kapsam yayını",
+            "independent_from_subject_packages": True,
+            "source_question_reuse": "forbidden",
+        })
+    return banks
+
+
 def _write_member(archive: zipfile.ZipFile, name: str, data: bytes) -> None:
     info = zipfile.ZipInfo(name, FIXED_ZIP_TIME)
     info.compress_type = zipfile.ZIP_DEFLATED
@@ -433,7 +570,11 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
     bundle_output.mkdir(parents=True, exist_ok=True)
 
     legacy_subjects, excluded = _legacy_subjects(content_root, data_output)
-    question_banks = _legacy_question_banks(content_root, data_output) + _release_question_banks(content_root)
+    question_banks = (
+        _legacy_question_banks(content_root, data_output)
+        + _release_question_banks(content_root)
+        + _country_release_question_banks(content_root, "GB")
+    )
     subjects = legacy_subjects + _release_subjects(content_root)
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for subject in subjects:
@@ -467,6 +608,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
         "schema": "alika-content-catalog/v1",
         "source_repository": "https://github.com/chizyo43-debug/alika-icerik",
         "content_release": CONTENT_RELEASE_TAG,
+        "content_releases": COUNTRY_RELEASE_TAGS,
         "quality_disclosure": "Codex öz-denetimli ve makine doğrulamalı güvenli kapsam; insan incelemesi iddiası yoktur.",
         "grades": grades,
         "subjects": public_subjects,

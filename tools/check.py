@@ -175,15 +175,18 @@ def main() -> None:
             errors.append("Content catalog schema is invalid")
         if not catalog.get("grades") or not catalog.get("subjects"):
             errors.append("Content catalog is empty")
+        content_release_tags = set((catalog.get("content_releases") or {}).values())
+        if catalog.get("content_release"):
+            content_release_tags.add(catalog["content_release"])
         totals = catalog.get("totals") or {}
         if totals != {
-            "countries": 3,
-            "gradeGroups": 23,
-            "subjects": 200,
-            "notes": 5618,
-            "questions": 101032,
-            "questionBanks": 52,
-            "questionBankQuestions": 104000,
+            "countries": 4,
+            "gradeGroups": 31,
+            "subjects": 242,
+            "notes": 6572,
+            "questions": 121732,
+            "questionBanks": 94,
+            "questionBankQuestions": 188000,
         }:
             errors.append(f"Content catalog totals are unexpected: {totals}")
         excluded = catalog.get("excluded") or []
@@ -195,7 +198,10 @@ def main() -> None:
                 if (
                     parsed.scheme != "https"
                     or parsed.netloc != "github.com"
-                    or f"/releases/download/{catalog.get('content_release')}/" not in parsed.path
+                    or not any(
+                        f"/releases/download/{tag}/" in parsed.path
+                        for tag in content_release_tags
+                    )
                 ):
                     errors.append(f"External subject artifact URL is not pinned: {subject['download_url']}")
                 if not re.fullmatch(r"[0-9a-f]{64}", subject.get("sha256", "")):
@@ -205,25 +211,25 @@ def main() -> None:
                 if not target.exists() or digest(target) != subject["sha256"]:
                     errors.append(f"Subject artifact missing or hash mismatch: {target}")
         question_banks = catalog.get("question_banks") or []
-        if len(question_banks) != 52:
-            errors.append(f"Expected 52 independent question banks, got {len(question_banks)}")
+        if len(question_banks) != 94:
+            errors.append(f"Expected 94 independent question banks, got {len(question_banks)}")
         bank_country_counts = {
             country: sum(bank.get("country_code") == country for bank in question_banks)
-            for country in ("TR", "JP", "KR")
+            for country in ("TR", "JP", "KR", "GB")
         }
-        if bank_country_counts != {"TR": 8, "JP": 43, "KR": 1}:
+        if bank_country_counts != {"TR": 8, "JP": 43, "KR": 1, "GB": 42}:
             errors.append(f"Independent question bank country coverage is incomplete: {bank_country_counts}")
         subject_bank_keys = [
             (bank.get("country_code"), bank.get("grade"), bank.get("subject_code"))
             for bank in question_banks
             if bank.get("scope") == "country-grade-subject"
         ]
-        if len(subject_bank_keys) != 44 or len(set(subject_bank_keys)) != 44:
-            errors.append("JP/KR independent subject question bank keys are incomplete or duplicated")
+        if len(subject_bank_keys) != 86 or len(set(subject_bank_keys)) != 86:
+            errors.append("JP/KR/GB independent subject question bank keys are incomplete or duplicated")
         for bank in question_banks:
             expected_families = 2000 if bank.get("country_code") == "TR" else 400
             if (
-                bank.get("country_code") not in {"TR", "JP", "KR"}
+                bank.get("country_code") not in {"TR", "JP", "KR", "GB"}
                 or bank.get("questions") != 2000
                 or bank.get("families") != expected_families
                 or bank.get("independent_from_subject_packages") is not True
@@ -235,7 +241,10 @@ def main() -> None:
                 if (
                     parsed.scheme != "https"
                     or parsed.netloc != "github.com"
-                    or f"/releases/download/{catalog.get('content_release')}/" not in parsed.path
+                    or not any(
+                        f"/releases/download/{tag}/" in parsed.path
+                        for tag in content_release_tags
+                    )
                     or not re.fullmatch(r"[0-9a-f]{64}", bank.get("sha256", ""))
                 ):
                     errors.append(f"External question bank URL/hash is invalid: {bank.get('filename')}")
