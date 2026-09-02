@@ -197,6 +197,64 @@ def _legacy_subjects(content_root: Path, data_output: Path) -> tuple[list[dict],
     return subjects, excluded
 
 
+def _legacy_question_banks(content_root: Path, data_output: Path) -> list[dict]:
+    """Yayıma hazır Türkiye soru bankalarını ders paketlerinden ayrı toplar."""
+    banks: list[dict] = []
+    country_slug = "turkiye"
+    country_root = content_root / country_slug
+    for source in sorted(country_root.glob("*/soru-bankasi/*-2000-soru.jsonl")):
+        rel = source.relative_to(content_root)
+        _, grade_slug, bank_dir, filename = rel.parts
+        if bank_dir != "soru-bankasi":
+            continue
+        parsed = _read_package(source)
+        pack = parsed["pack"]
+        policy = pack.get("contractPolicy") or {}
+        generation = pack.get("generationPolicy") or {}
+        source_packages = pack.get("sourcePackages") or []
+        if parsed["publish_blocked"] or pack.get("publishReady") is not True:
+            raise ValueError(f"Soru bankası yayıma hazır değil: {source}")
+        if pack.get("reviewStatus") != "ai-verified" or pack.get("humanReviewed") is not False:
+            raise ValueError(f"Soru bankası inceleme beyanı geçersiz: {source}")
+        if parsed["questions"] != 2000 or policy.get("questionCount") != 2000:
+            raise ValueError(f"Soru bankası tam 2.000 soru taşımıyor: {source}")
+        if policy.get("minFamilies") != 2000 or policy.get("maxPerFamily") != 1:
+            raise ValueError(f"Soru bankası özgün aile sözleşmesini karşılamıyor: {source}")
+        if generation.get("sourceQuestionReuse") != "forbidden":
+            raise ValueError(f"Soru bankasında ders sorusu yeniden kullanımı yasak değil: {source}")
+        if not source_packages or any(row.get("questionsUsedAsSemanticInputs") != 0 for row in source_packages):
+            raise ValueError(f"Soru bankası ders sorularından bağımsız değil: {source}")
+
+        grade = int(pack.get("grade") or grade_slug.split("-")[0])
+        target = data_output / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+        banks.append({
+            "country_slug": country_slug,
+            "country": COUNTRY_NAMES[country_slug],
+            "country_code": str(pack.get("country") or "TR").upper(),
+            "grade_slug": grade_slug,
+            "grade": grade,
+            "bank_slug": "tum-dersler-2000",
+            "scope": "grade-all-subjects",
+            "title": str(pack.get("theme") or f"Türkiye {grade}. Sınıf — 2.000 Soruluk Soru Bankası"),
+            "filename": filename,
+            "download_url": f"/icerik/veri/{rel.as_posix()}",
+            "sha256": _sha256(source),
+            "size_bytes": source.stat().st_size,
+            "questions": parsed["questions"],
+            "families": policy["minFamilies"],
+            "schema_version": str(pack.get("schemaVersion") or ""),
+            "package_version": str(pack.get("version") or "1"),
+            "review_status": str(pack.get("reviewStatus")),
+            "human_reviewed": False,
+            "license": str(pack.get("license") or ""),
+            "independent_from_subject_packages": True,
+            "source_question_reuse": "forbidden",
+        })
+    return banks
+
+
 def _write_member(archive: zipfile.ZipFile, name: str, data: bytes) -> None:
     info = zipfile.ZipInfo(name, FIXED_ZIP_TIME)
     info.compress_type = zipfile.ZIP_DEFLATED
@@ -279,6 +337,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
     bundle_output.mkdir(parents=True, exist_ok=True)
 
     legacy_subjects, excluded = _legacy_subjects(content_root, data_output)
+    question_banks = _legacy_question_banks(content_root, data_output)
     subjects = legacy_subjects + _release_subjects(content_root)
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for subject in subjects:
@@ -315,6 +374,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
         "quality_disclosure": "Codex öz-denetimli ve makine doğrulamalı güvenli kapsam; insan incelemesi iddiası yoktur.",
         "grades": grades,
         "subjects": public_subjects,
+        "question_banks": question_banks,
         "excluded": excluded,
         "totals": {
             "countries": len({row["country_slug"] for row in grades}),
@@ -322,6 +382,8 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
             "subjects": len(public_subjects),
             "notes": sum(row["notes"] for row in public_subjects),
             "questions": sum(row["questions"] for row in public_subjects),
+            "questionBanks": len(question_banks),
+            "questionBankQuestions": sum(row["questions"] for row in question_banks),
         },
     }
     (output / "catalog-v1.json").write_text(

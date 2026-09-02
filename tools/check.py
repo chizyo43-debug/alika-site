@@ -182,6 +182,8 @@ def main() -> None:
             "subjects": 200,
             "notes": 5618,
             "questions": 101032,
+            "questionBanks": 8,
+            "questionBankQuestions": 16000,
         }:
             errors.append(f"Content catalog totals are unexpected: {totals}")
         excluded = catalog.get("excluded") or []
@@ -202,6 +204,21 @@ def main() -> None:
                 target = DIST / subject["download_url"].lstrip("/")
                 if not target.exists() or digest(target) != subject["sha256"]:
                     errors.append(f"Subject artifact missing or hash mismatch: {target}")
+        question_banks = catalog.get("question_banks") or []
+        if len(question_banks) != 8:
+            errors.append(f"Expected 8 independent Türkiye question banks, got {len(question_banks)}")
+        for bank in question_banks:
+            if (
+                bank.get("country_code") != "TR"
+                or bank.get("questions") != 2000
+                or bank.get("families") != 2000
+                or bank.get("independent_from_subject_packages") is not True
+                or bank.get("source_question_reuse") != "forbidden"
+            ):
+                errors.append(f"Question bank contract is invalid: {bank.get('filename')}")
+            target = DIST / bank["download_url"].lstrip("/")
+            if not target.exists() or digest(target) != bank["sha256"]:
+                errors.append(f"Question bank artifact missing or hash mismatch: {target}")
         for grade in catalog.get("grades", []):
             target = DIST / grade["download_url"].lstrip("/")
             if not target.exists() or digest(target) != grade["sha256"]:
