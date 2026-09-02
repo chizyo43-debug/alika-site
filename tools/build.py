@@ -31,6 +31,17 @@ CONTENT_LIBRARY_LABELS = {
     "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "Codex自己監査済み・機械検証済み", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年ZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
     "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "Codex 자체 감사 · 자동 검증", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년 ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
 }
+QUESTION_BANK_LABELS = {
+    "tr": ("Bağımsız soru bankaları", "Ders paketlerindeki sorular kopyalanmadan ayrıca üretilmiş ve doğrulanmış bankalar.", "Soru bankasını indir", "benzersiz soru"),
+    "en": ("Independent question banks", "Separately authored and validated banks that do not copy questions from subject packages.", "Download question bank", "unique questions"),
+    "de": ("Unabhängige Fragenbanken", "Separat erstellte und validierte Sammlungen ohne kopierte Fragen aus den Fachpaketen.", "Fragenbank herunterladen", "einzigartige Fragen"),
+    "es": ("Bancos de preguntas independientes", "Bancos creados y validados por separado, sin copiar preguntas de los paquetes de asignaturas.", "Descargar banco de preguntas", "preguntas únicas"),
+    "fr": ("Banques de questions indépendantes", "Banques créées et validées séparément, sans copier les questions des packs de matière.", "Télécharger la banque", "questions uniques"),
+    "pt": ("Bancos de perguntas independentes", "Bancos criados e validados separadamente, sem copiar perguntas dos pacotes de disciplinas.", "Transferir banco de perguntas", "perguntas únicas"),
+    "ru": ("Независимые банки вопросов", "Отдельно созданные и проверенные банки без копирования вопросов из предметных пакетов.", "Скачать банк вопросов", "уникальных вопросов"),
+    "ja": ("独立問題バンク", "教科パッケージの問題を複製せず、別途作成・検証した問題バンクです。", "問題バンクをダウンロード", "独自問題"),
+    "ko": ("독립 문제은행", "교과 패키지의 문항을 복사하지 않고 별도로 제작·검증한 문제은행입니다.", "문제은행 다운로드", "고유 문항"),
+}
 CONTENT_BOOK_LABELS = {
     "tr": ("AliKa kitabına dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
     "en": ("Back to the AliKa book", "Ready content ledger", "Countries", "Grade packs", "Subject packs", "Found an issue or have an idea? Tell us."),
@@ -818,6 +829,7 @@ def guide_atlas(lang: str, c: dict) -> str:
 
 def content_library(catalog: dict, lang: str) -> str:
     labels = CONTENT_LIBRARY_LABELS[lang]
+    bank_labels = QUESTION_BANK_LABELS[lang]
     country_order = {"turkiye": 0, "japonya": 1, "kore": 2}
     countries = sorted(
         {row["country_slug"]: row["country"] for row in catalog["grades"]}.items(),
@@ -851,6 +863,22 @@ def content_library(catalog: dict, lang: str) -> str:
         <p>{row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}<br>{esc(labels[6])}</p>
         <a class="package-cta" href="{esc(row['download_url'])}" download>{esc(labels[3])}</a>
       </article>""" for row in catalog["subjects"])
+    question_bank_cards = "".join(f"""
+      <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
+        <small>{esc(row['country'])} · {esc(labels[7].format(row['grade']))}</small>
+        <h3>{esc(row['title'])}</h3>
+        <p><strong>{row['questions']:,}</strong> {esc(bank_labels[3])}<br>{esc(bank_labels[1])}</p>
+        <a class="package-cta" href="{esc(row['download_url'])}" download>{esc(bank_labels[2])}</a>
+      </article>""" for row in catalog.get("question_banks", []))
+    question_bank_section = f"""
+      <section class="question-bank-section" data-content-collection>
+        <div class="question-bank-heading">
+          <p class="eyebrow">2.000</p>
+          <h2>{esc(bank_labels[0])}</h2>
+          <p>{esc(bank_labels[1])}</p>
+        </div>
+        <div class="package-grid question-bank-grid">{question_bank_cards}</div>
+      </section>""" if question_bank_cards else ""
     return f"""
       <div class="content-filters" data-content-filters>
         <label>{esc(labels[0])}<select data-content-country>{country_options}</select></label>
@@ -858,6 +886,7 @@ def content_library(catalog: dict, lang: str) -> str:
       </div>
       <p class="honesty-note">{esc(labels[8])}</p>
       <div class="grade-downloads">{grade_cards}</div>
+      {question_bank_section}
       <div class="package-grid" data-content-grid>{subject_cards}</div>
       <p class="honesty-note">{esc(catalog['quality_disclosure'])} · <a href="{esc(catalog['source_repository'])}">GitHub</a></p>
     """

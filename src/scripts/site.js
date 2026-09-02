@@ -181,6 +181,10 @@
       items.forEach((item) => {
         item.hidden = item.dataset.country !== countryValue || item.dataset.grade !== grade.value;
       });
+      document.querySelectorAll("[data-content-collection]").forEach((collection) => {
+        const collectionItems = [...collection.querySelectorAll("[data-content-item]")];
+        collection.hidden = collectionItems.length === 0 || collectionItems.every((item) => item.hidden);
+      });
     };
     country.addEventListener("change", refresh);
     grade.addEventListener("change", refresh);
