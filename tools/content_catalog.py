@@ -10,7 +10,7 @@ from pathlib import Path
 
 COUNTRY_NAMES = {"turkiye": "Türkiye", "JP": "Japonya", "KR": "Kore"}
 COUNTRY_SLUGS = {"JP": "japonya", "KR": "kore"}
-CONTENT_RELEASE_TAG = "question-banks-2026.09.01"
+CONTENT_RELEASE_TAG = "question-banks-2026.09.02-v2"
 COUNTRY_ORDER = {"turkiye": 0, "japonya": 1, "kore": 2}
 
 
