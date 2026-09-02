@@ -255,6 +255,102 @@ def _legacy_question_banks(content_root: Path, data_output: Path) -> list[dict]:
     return banks
 
 
+def _release_question_banks(content_root: Path) -> list[dict]:
+    """Hash-bound JP/KR subject banks remain separate from lesson bundles."""
+    pointer_path = content_root / "library/registry/current-question-bank-release.json"
+    if not pointer_path.is_file():
+        return []
+    pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
+    catalog_path = content_root / pointer["catalogPath"]
+    audit_path = content_root / pointer["auditPath"]
+    if pointer.get("publishable") is not True or pointer.get("releaseBlockers") != []:
+        raise ValueError(f"Soru bankası release işaretçisi yayımlanamaz: {pointer_path}")
+    if _sha256(catalog_path) != pointer["catalogSha256"] or _sha256(audit_path) != pointer["auditSha256"]:
+        raise ValueError("Soru bankası release pointer hash uyuşmazlığı")
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    if (
+        catalog.get("publishable") is not True
+        or catalog.get("releaseBlockers") != []
+        or audit.get("publishable") is not True
+        or audit.get("status") != "passed"
+        or audit.get("errors") != []
+        or audit.get("catalogSha256") != pointer["catalogSha256"]
+    ):
+        raise ValueError("Soru bankası release kapısı geçmedi")
+
+    banks: list[dict] = []
+    for entry in catalog.get("packages") or []:
+        bundle = content_root / entry["bundlePath"]
+        if not bundle.is_file() or bundle.stat().st_size != entry["bundleBytes"] or _sha256(bundle) != entry["bundleSha256"]:
+            raise ValueError(f"Soru bankası bundle hash/boyut uyuşmazlığı: {bundle}")
+        if (
+            entry.get("publicationStatus") != "publishable-independent-subject-question-bank"
+            or entry.get("releaseBlockers") != []
+            or entry.get("sourceQuestionReuse") != "forbidden"
+            or entry.get("questionsUsedAsSemanticInputs") != 0
+        ):
+            raise ValueError(f"Soru bankası katalog kaydı geçersiz: {entry.get('cellId')}")
+        with zipfile.ZipFile(bundle) as archive:
+            manifest = json.loads(archive.read("MANIFEST.json"))
+            package = manifest["packages"][0]
+            payload = archive.read(package["path"])
+            if (
+                manifest.get("schema") != "alika-question-bank-bundle/v1"
+                or manifest.get("publishable") is not True
+                or manifest.get("humanReviewed") is not False
+                or _sha256_bytes(payload) != package["sha256"]
+            ):
+                raise ValueError(f"Soru bankası bundle manifesti geçersiz: {bundle}")
+            rows = [json.loads(line) for line in payload.decode("utf-8").splitlines() if line]
+            header = rows[0]
+            questions = sum(row.get("type") == "question" for row in rows[1:])
+            notes = sum(row.get("type") == "note" for row in rows[1:])
+            if (
+                header.get("productType") != "independent-question-bank"
+                or header.get("publishReady") is not True
+                or header.get("generationPolicy", {}).get("sourceQuestionReuse") != "forbidden"
+                or header.get("generationPolicy", {}).get("questionsUsedAsSemanticInputs") != 0
+                or questions != 2000
+                or notes != 23
+            ):
+                raise ValueError(f"Soru bankası JSONL sözleşmesi geçersiz: {bundle}")
+            for asset in manifest.get("audioAssets") or []:
+                data = archive.read(asset["path"])
+                if len(data) != asset["bytes"] or _sha256_bytes(data) != asset["sha256"]:
+                    raise ValueError(f"Soru bankası ses varlığı geçersiz: {bundle}:{asset['path']}")
+
+        country_code = entry["country"]
+        country_slug = COUNTRY_SLUGS[country_code]
+        grade = entry["grade"]
+        banks.append({
+            "country_slug": country_slug,
+            "country": COUNTRY_NAMES[country_code],
+            "country_code": country_code,
+            "grade_slug": f"{grade}-sinif" if isinstance(grade, int) else "11-12-sinif-secmeli",
+            "grade": grade,
+            "bank_slug": f"{entry['subjectCode']}-2000",
+            "scope": "country-grade-subject",
+            "subject_code": entry["subjectCode"],
+            "subject": entry["subject"],
+            "title": entry["title"],
+            "filename": bundle.name,
+            "download_url": f"{CONTENT_RELEASE_URL}/{bundle.name}",
+            "sha256": entry["bundleSha256"],
+            "size_bytes": entry["bundleBytes"],
+            "questions": 2000,
+            "families": 400,
+            "schema_version": "2.3",
+            "package_version": catalog["releaseId"],
+            "review_status": entry["reviewStatus"],
+            "human_reviewed": False,
+            "license": "AliKa özgün güvenli-kapsam yayını",
+            "independent_from_subject_packages": True,
+            "source_question_reuse": "forbidden",
+        })
+    return banks
+
+
 def _write_member(archive: zipfile.ZipFile, name: str, data: bytes) -> None:
     info = zipfile.ZipInfo(name, FIXED_ZIP_TIME)
     info.compress_type = zipfile.ZIP_DEFLATED
@@ -337,7 +433,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
     bundle_output.mkdir(parents=True, exist_ok=True)
 
     legacy_subjects, excluded = _legacy_subjects(content_root, data_output)
-    question_banks = _legacy_question_banks(content_root, data_output)
+    question_banks = _legacy_question_banks(content_root, data_output) + _release_question_banks(content_root)
     subjects = legacy_subjects + _release_subjects(content_root)
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for subject in subjects:

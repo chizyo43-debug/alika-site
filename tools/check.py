@@ -182,8 +182,8 @@ def main() -> None:
             "subjects": 200,
             "notes": 5618,
             "questions": 101032,
-            "questionBanks": 8,
-            "questionBankQuestions": 16000,
+            "questionBanks": 14,
+            "questionBankQuestions": 28000,
         }:
             errors.append(f"Content catalog totals are unexpected: {totals}")
         excluded = catalog.get("excluded") or []
@@ -205,20 +205,31 @@ def main() -> None:
                 if not target.exists() or digest(target) != subject["sha256"]:
                     errors.append(f"Subject artifact missing or hash mismatch: {target}")
         question_banks = catalog.get("question_banks") or []
-        if len(question_banks) != 8:
-            errors.append(f"Expected 8 independent Türkiye question banks, got {len(question_banks)}")
+        if len(question_banks) != 14:
+            errors.append(f"Expected 14 independent question banks, got {len(question_banks)}")
         for bank in question_banks:
+            expected_families = 2000 if bank.get("country_code") == "TR" else 400
             if (
-                bank.get("country_code") != "TR"
+                bank.get("country_code") not in {"TR", "JP", "KR"}
                 or bank.get("questions") != 2000
-                or bank.get("families") != 2000
+                or bank.get("families") != expected_families
                 or bank.get("independent_from_subject_packages") is not True
                 or bank.get("source_question_reuse") != "forbidden"
             ):
                 errors.append(f"Question bank contract is invalid: {bank.get('filename')}")
-            target = DIST / bank["download_url"].lstrip("/")
-            if not target.exists() or digest(target) != bank["sha256"]:
-                errors.append(f"Question bank artifact missing or hash mismatch: {target}")
+            parsed = urlparse(bank["download_url"])
+            if parsed.scheme:
+                if (
+                    parsed.scheme != "https"
+                    or parsed.netloc != "github.com"
+                    or f"/releases/download/{catalog.get('content_release')}/" not in parsed.path
+                    or not re.fullmatch(r"[0-9a-f]{64}", bank.get("sha256", ""))
+                ):
+                    errors.append(f"External question bank URL/hash is invalid: {bank.get('filename')}")
+            else:
+                target = DIST / bank["download_url"].lstrip("/")
+                if not target.exists() or digest(target) != bank["sha256"]:
+                    errors.append(f"Question bank artifact missing or hash mismatch: {target}")
         for grade in catalog.get("grades", []):
             target = DIST / grade["download_url"].lstrip("/")
             if not target.exists() or digest(target) != grade["sha256"]:
