@@ -15,8 +15,12 @@ async function withServer(handler, callback) {
 }
 
 test('chat endpoint enforces origin and returns assistant response', async () => {
+  let receivedPayload;
   const handler = createRequestHandler({
-    assistant: { answer: async ({ message }) => ({ answer: `Yanıt: ${message}`, actions: [], sources: [], followUp: '' }) },
+    assistant: { answer: async (payload) => {
+      receivedPayload = payload;
+      return { answer: `Yanıt: ${payload.message}`, actions: [], sources: [], followUp: '' };
+    } },
     allowedOrigins: ['https://www.alika.tr'],
     rateSalt: 'test',
   });
@@ -27,11 +31,12 @@ test('chat endpoint enforces origin and returns assistant response', async () =>
     assert.equal(forbidden.status, 403);
 
     const response = await fetch(`${baseUrl}/v1/chat`, {
-      method: 'POST', headers: { 'content-type': 'application/json', origin: 'https://www.alika.tr' }, body: JSON.stringify({ message: 'AliKa nedir?', language: 'tr' }),
+      method: 'POST', headers: { 'content-type': 'application/json', origin: 'https://www.alika.tr' }, body: JSON.stringify({ message: 'AliKa nedir?', language: 'tr', journey: 'fit' }),
     });
     assert.equal(response.status, 200);
     assert.equal(response.headers.get('access-control-allow-origin'), 'https://www.alika.tr');
     assert.equal((await response.json()).answer, 'Yanıt: AliKa nedir?');
+    assert.equal(receivedPayload.journey, 'fit');
   });
 });
 

@@ -3,10 +3,22 @@ import knowledgeBase from './knowledge-base.json' with { type: 'json' };
 import { retrieveVideoGuide } from './video-guides.mjs';
 
 export const SUPPORTED_LANGUAGES = new Set(['tr', 'en', 'de', 'es', 'fr', 'pt', 'ru', 'ja', 'ko']);
+export const SUPPORTED_JOURNEYS = new Set(['general', 'fit', 'plan', 'tour']);
 
 const LANGUAGE_NAMES = {
   tr: 'Türkçe', en: 'English', de: 'Deutsch', es: 'Español', fr: 'Français',
   pt: 'Português', ru: 'Русский', ja: '日本語', ko: '한국어',
+};
+
+const PAGE_KNOWLEDGE_QUERIES = {
+  '': 'AliKa nedir özellikler',
+  features: 'özellikler Windows Android öğrenme',
+  'how-it-works': 'nasıl çalışır günlük akış',
+  'age-groups': 'yaş grubu aile yaklaşımı',
+  ecosystem: 'ekosistem platformlar aile ağı',
+  downloads: 'indirme kurulum Windows',
+  privacy: 'gizlilik yerel veri',
+  contact: 'destek iletişim',
 };
 
 const SAFE_EXTERNAL_PREFIXES = [
@@ -123,7 +135,14 @@ Your job:
 - Do not mention an account login, cloud synchronization, browser control panel or data syncing unless those exact mechanisms are present in VERIFIED ALIKA KNOWLEDGE. AliKa's local-first architecture must not be rewritten as a cloud product.
 - Use the conversation history naturally. Do not repeat facts already given unless the new question depends on them, and do not restart the conversation on every turn.
 - Sound like a perceptive human guide: vary sentence structure and wording. Never use stock praise such as "harika fikir" or routine closings such as "Başka sorunuz var mı?" Do not pad the answer with generic marketing language.
+- Do not open with ceremonial service phrases such as "memnuniyet duyarım", "hoş geldiniz" or their equivalents. At the start of a guided journey, use one brief sentence explaining what the next answer will unlock, then ask the question through followUp.
 - Keep the answer concise but complete. Set followUp to an empty string by default. Ask one specific qualifying question only when the missing answer would materially change the recommendation.
+- ACTIVE GUIDED JOURNEY may be general, fit, plan or tour. Follow the matching journey without announcing its internal name:
+  - fit: learn only the device platform, broad age band and main family goal. Ask for exactly one information item per question; never combine age and goal in one question. Reuse answers already given and stop after at most three questions. Then give an honest verdict (good fit, partial fit, or cannot confirm), explain the strongest match and any verified limitation, and offer one useful page or video.
+  - plan: learn the broad age band, school-day/weekend rhythm and the family's priority. Ask for exactly one information item per question and stop after at most three questions. Then create a flexible, concise starter routine with separate learning, free-time, break and wind-down ideas. Label it as a starting point for family agreement, not medical or developmental advice, and never imply that the website changed a device setting.
+  - tour: ask only what topic, feature or task the visitor wants to find; never ask their age or device merely to navigate the site. If that goal is missing, ask one topic question and return no actions. Otherwise orient them to the current page in one sentence and offer the most relevant verified page or video. Do not force a tour step the visitor does not need.
+  - general: answer normally without forcing a guided questionnaire.
+- When more journey information is needed, keep answer to a brief acknowledgement, put the one next question only in followUp, keep followUp under 160 characters, and do not repeat that question in answer. Once the journey result is ready, leave followUp empty.
 - Suggest up to three ALLOWED LINKS only when they directly help with the current intent. Explain fit honestly; do not use pressure, fear, fake scarcity or claims about competitors.
 - When RECOMMENDED VERIFIED VIDEO GUIDE is present, briefly say why it matches and include its exact URL as an action. It is a Windows guide; never describe it as an Android or Android TV guide. When it is absent, never invent or substitute a video.
 - Never request or repeat a child's name, browsing history, PIN, password, address, school, health information or other personal data. If a user shares sensitive data, tell them to remove it and continue only with a generic description.
@@ -188,7 +207,7 @@ export function parseModelResponse(text, articles, language, videoGuide = null) 
     answer: parsed.answer.trim().slice(0, 2400),
     actions,
     sources: sourceLinks,
-    followUp: typeof parsed.followUp === 'string' ? parsed.followUp.trim().slice(0, 240) : '',
+    followUp: typeof parsed.followUp === 'string' ? parsed.followUp.trim().slice(0, 320) : '',
   };
 }
 
@@ -210,10 +229,22 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
   }
 
   return {
-    async answer({ message, history = [], language = 'tr', pagePath = '/' }) {
+    async answer({ message, history = [], language = 'tr', pagePath = '/', journey = 'general' }) {
       const safeLanguage = SUPPORTED_LANGUAGES.has(language) ? language : 'tr';
+      const safeJourney = SUPPORTED_JOURNEYS.has(journey) ? journey : 'general';
       const articles = retrieveConversationKnowledge(message, history, 5);
-      const videoGuide = retrieveVideoGuide(message, history, safeLanguage, articles);
+      if (safeJourney === 'tour') {
+        const routeParts = pagePath.split(/[?#]/, 1)[0].split('/').filter((part) => part && !SUPPORTED_LANGUAGES.has(part));
+        const route = routeParts.at(-1) || '';
+        const pageQuery = PAGE_KNOWLEDGE_QUERIES[route] || route.replace(/[-_]+/g, ' ');
+        for (const article of retrieveKnowledge(pageQuery || 'AliKa overview', 3)) {
+          if (!articles.some((item) => item.id === article.id)) articles.push(article);
+          if (articles.length >= 5) break;
+        }
+      }
+      const videoGuide = safeJourney === 'tour' && history.length === 0
+        ? null
+        : retrieveVideoGuide(message, history, safeLanguage, articles);
       const context = sourceContext(articles, safeLanguage);
       const allowed = [...allowedUrls(articles, safeLanguage, videoGuide)];
       const compactHistory = history.slice(-6).map((item) => ({
@@ -224,7 +255,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
         ...compactHistory,
         {
           role: 'user',
-          parts: [{ text: `CURRENT PAGE: ${pagePath}\nUSER QUESTION: ${message}\n\nVERIFIED ALIKA KNOWLEDGE:\n${JSON.stringify(context)}\n\nRECOMMENDED VERIFIED VIDEO GUIDE:\n${JSON.stringify(videoGuide)}\n\nALLOWED LINKS:\n${JSON.stringify(allowed)}` }],
+          parts: [{ text: `CURRENT PAGE: ${pagePath}\nACTIVE GUIDED JOURNEY: ${safeJourney}\nUSER QUESTION: ${message}\n\nVERIFIED ALIKA KNOWLEDGE:\n${JSON.stringify(context)}\n\nRECOMMENDED VERIFIED VIDEO GUIDE:\n${JSON.stringify(videoGuide)}\n\nALLOWED LINKS:\n${JSON.stringify(allowed)}` }],
         },
       ];
       const response = await client.models.generateContent({

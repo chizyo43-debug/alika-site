@@ -110,7 +110,7 @@ test('assistant uses the reasoning model and anti-template conversation rules', 
   };
   const assistant = createAssistantClient({}, { client: fakeClient });
 
-  await assistant.answer({ message: 'AliKa nedir?', language: 'tr' });
+  await assistant.answer({ message: 'Ailemiz için bir başlangıç planı hazırlayalım.', language: 'tr', journey: 'plan' });
 
   assert.equal(request.model, 'gemini-3.5-flash');
   assert.equal(request.config.temperature, 1);
@@ -123,4 +123,24 @@ test('assistant uses the reasoning model and anti-template conversation rules', 
   assert.match(request.config.systemInstruction, /Do not mention an account login/);
   assert.match(request.config.systemInstruction, /Never imply that AliKa replaces parental communication/);
   assert.match(request.config.systemInstruction, /RECOMMENDED VERIFIED VIDEO GUIDE/);
+  assert.match(request.config.systemInstruction, /ACTIVE GUIDED JOURNEY/);
+  assert.match(request.config.systemInstruction, /exactly one information item per question/);
+  assert.match(request.contents.at(-1).parts[0].text, /ACTIVE GUIDED JOURNEY: plan/);
+});
+
+test('site tour is grounded in the current page and does not invent an opening video', async () => {
+  let request;
+  const fakeClient = {
+    models: {
+      async generateContent(value) {
+        request = value;
+        return { text: JSON.stringify({ answer: 'Bu sayfa gizlilik yaklaşımını açıklar.', actions: [], followUp: 'En çok hangi konuyu bulmak istiyorsunuz?' }) };
+      },
+    },
+  };
+  const assistant = createAssistantClient({}, { client: fakeClient });
+  await assistant.answer({ message: 'Siteyi birlikte gezelim.', language: 'tr', pagePath: '/privacy/', journey: 'tour' });
+  const prompt = request.contents.at(-1).parts[0].text;
+  assert.match(prompt, /"id":"privacy"/);
+  assert.match(prompt, /RECOMMENDED VERIFIED VIDEO GUIDE:\nnull/);
 });

@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 const MAX_BODY_BYTES = 32_768;
 const TEN_MINUTES_MS = 10 * 60 * 1000;
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const SUPPORTED_JOURNEYS = new Set(['general', 'fit', 'plan', 'tour']);
 
 function json(res, status, body, origin = '') {
   res.writeHead(status, {
@@ -42,6 +43,7 @@ function validatePayload(body) {
   const message = typeof body.message === 'string' ? body.message.trim() : '';
   if (message.length < 2 || message.length > 800) throw new Error('invalid_message');
   const language = typeof body.language === 'string' ? body.language.slice(0, 2).toLowerCase() : 'tr';
+  const journey = typeof body.journey === 'string' && SUPPORTED_JOURNEYS.has(body.journey) ? body.journey : 'general';
   const history = Array.isArray(body.history) ? body.history.slice(-6) : [];
   const safeHistory = history.map((item) => {
     if (!item || !['user', 'assistant'].includes(item.role) || typeof item.text !== 'string') {
@@ -49,7 +51,7 @@ function validatePayload(body) {
     }
     return { role: item.role, text: item.text.trim().slice(0, 800) };
   }).filter((item) => item.text);
-  return { message, language, history: safeHistory, pagePath: cleanPath(body.pagePath) };
+  return { message, language, journey, history: safeHistory, pagePath: cleanPath(body.pagePath) };
 }
 
 function requestKey(req, secret) {

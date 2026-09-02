@@ -20,8 +20,8 @@
     ko: { open: 'AliKa에 질문', title: 'AliKa 사이트 도우미', subtitle: '제품을 이해하고 알맞은 페이지를 찾으세요', close: '닫기', consentTitle: '시작하기 전에', consent: '답변 생성을 위해 메시지와 최근 대화가 Google Gemini로 전송됩니다. 대화는 저장하지 않습니다. 자녀 이름, PIN, 비밀번호, 학교, 건강 또는 탐색 데이터를 입력하지 마세요.', accept: '이해했어요, 도우미 열기', hello: '안녕하세요! AliKa 기능, 설치, 가격 또는 가족에게 맞는지 물어보세요.', placeholder: 'AliKa에 대해 질문…', send: '보내기', sending: '답변 준비 중…', error: '지금은 답변할 수 없습니다. 다시 시도하거나 지원 페이지를 여세요.', limit: '짧은 시간에 너무 많은 질문이 전송되었습니다. 몇 분 뒤 다시 시도하세요.', sources: '관련 페이지', privacy: 'Google Gemini에서 처리 · 개인정보를 입력하지 마세요', q1: 'AliKa가 우리 가족에게 맞나요?', q2: '문제를 풀어 시간을 얻는 방법은?', q3: '가격과 7일 체험은 어떻게 되나요?' },
   };
   const NUDGE = {
-    tr: ['AliKa ailenize uygun mu?', 'Özellikleri ve fiyatı yapay zekâ asistana sorun.'],
-    en: ['Is AliKa right for your family?', 'Ask the AI assistant about features and pricing.'],
+    tr: ['30 saniyede doğru yolu bulun', 'Ailenize uygun özellik, plan ve videoyu birlikte seçelim.'],
+    en: ['Find the right path in 30 seconds', 'Choose the right feature, plan and video for your family.'],
     de: ['Passt AliKa zu Ihrer Familie?', 'Fragen Sie den KI-Assistenten nach Funktionen und Preis.'],
     es: ['¿AliKa encaja con su familia?', 'Pregunte al asistente de IA por funciones y precio.'],
     fr: ['AliKa convient-il à votre famille ?', 'Demandez les fonctions et le prix à l’assistant IA.'],
@@ -30,8 +30,20 @@
     ja: ['AliKaはご家庭に合いますか？', '機能や価格をAIアシスタントに質問できます。'],
     ko: ['AliKa가 우리 가족에게 맞을까요?', '기능과 가격을 AI 도우미에게 물어보세요.'],
   };
+  const JOURNEY_COPY = {
+    tr: { heading: 'Nereden başlayalım?', fitTitle: 'AliKa aileme uygun mu?', fitDesc: 'Cihaz ve hedeflerinize göre dürüst değerlendirme', fitPrompt: 'AliKa aileme uygun mu, birlikte değerlendirelim.', fitQuestion: 'AliKa’yı hangi cihazda kullanmayı düşünüyorsunuz: Windows bilgisayar, Android telefon/tablet veya Android TV?', planTitle: 'Dijital denge planı hazırla', planDesc: 'Ailenize göre esnek bir başlangıç rutini', planPrompt: 'Ailemiz için dijital denge başlangıç planı hazırlayalım.', planQuestion: 'Planı hangi geniş yaş grubu için hazırlayalım: okul öncesi, ilkokul, ortaokul veya lise?', tourTitle: 'Siteyi birlikte gez', tourDesc: 'Doğru sayfayı ve kullanım videosunu bulun', tourPrompt: 'İhtiyacıma göre AliKa sitesini birlikte gezmek istiyorum.', tourQuestion: 'Sitede en çok neyi bulmak istiyorsunuz: özellikler, kurulum, fiyat, gizlilik veya kullanım videosu?', restart: 'Yeni görüşme', next: 'Sıradaki kısa soru' },
+    en: { heading: 'Where shall we start?', fitTitle: 'Is AliKa right for us?', fitDesc: 'An honest fit check for your devices and goals', fitPrompt: 'Help me assess whether AliKa fits my family.', fitQuestion: 'Which device would use AliKa: a Windows computer, Android phone/tablet, or Android TV?', planTitle: 'Create a balance plan', planDesc: 'A flexible starter routine for your family', planPrompt: 'Let us create a digital balance starter plan for my family.', planQuestion: 'Which broad age group is this plan for: preschool, primary, middle school, or teen?', tourTitle: 'Guide me through the site', tourDesc: 'Find the right page and how-to video', tourPrompt: 'Guide me through the AliKa site based on what I need.', tourQuestion: 'What do you most want to find: features, setup, pricing, privacy, or a how-to video?', restart: 'New conversation', next: 'One short question' },
+    de: { heading: 'Womit möchten Sie beginnen?', fitTitle: 'Passt AliKa zu uns?', fitDesc: 'Ehrliche Einschätzung nach Geräten und Zielen', fitPrompt: 'Prüfen wir gemeinsam, ob AliKa zu meiner Familie passt.', fitQuestion: 'Auf welchem Gerät soll AliKa laufen: Windows-PC, Android-Handy/Tablet oder Android TV?', planTitle: 'Balanceplan erstellen', planDesc: 'Ein flexibler Startplan für Ihre Familie', planPrompt: 'Erstellen wir einen digitalen Balanceplan für meine Familie.', planQuestion: 'Für welche Altersgruppe ist der Plan: Vorschule, Grundschule, Mittelstufe oder Jugendliche?', tourTitle: 'Website gemeinsam erkunden', tourDesc: 'Die richtige Seite und Anleitung finden', tourPrompt: 'Führen Sie mich passend zu meinem Bedarf durch die AliKa-Website.', tourQuestion: 'Was möchten Sie finden: Funktionen, Einrichtung, Preis, Datenschutz oder ein Anleitungsvideo?', restart: 'Neues Gespräch', next: 'Eine kurze Frage' },
+    es: { heading: '¿Por dónde empezamos?', fitTitle: '¿AliKa encaja con nosotros?', fitDesc: 'Evaluación honesta según dispositivos y objetivos', fitPrompt: 'Ayúdeme a evaluar si AliKa encaja con mi familia.', fitQuestion: '¿En qué dispositivo usaría AliKa: PC Windows, teléfono/tableta Android o Android TV?', planTitle: 'Crear un plan de equilibrio', planDesc: 'Una rutina inicial flexible para su familia', planPrompt: 'Preparemos un plan inicial de equilibrio digital para mi familia.', planQuestion: '¿Para qué grupo de edad es el plan: preescolar, primaria, secundaria o adolescente?', tourTitle: 'Recorrer el sitio juntos', tourDesc: 'Encuentre la página y el vídeo adecuados', tourPrompt: 'Guíeme por el sitio de AliKa según lo que necesito.', tourQuestion: '¿Qué desea encontrar: funciones, instalación, precio, privacidad o un vídeo de uso?', restart: 'Nueva conversación', next: 'Una pregunta breve' },
+    fr: { heading: 'Par où commencer ?', fitTitle: 'AliKa nous convient-il ?', fitDesc: 'Une évaluation honnête selon vos appareils et objectifs', fitPrompt: 'Aidez-moi à évaluer si AliKa convient à ma famille.', fitQuestion: 'Sur quel appareil utiliser AliKa : PC Windows, téléphone/tablette Android ou Android TV ?', planTitle: 'Créer un plan d’équilibre', planDesc: 'Une routine de départ souple pour votre famille', planPrompt: 'Créons un plan de départ pour l’équilibre numérique de ma famille.', planQuestion: 'Pour quel groupe d’âge : maternelle, primaire, collège ou adolescent ?', tourTitle: 'Explorer le site ensemble', tourDesc: 'Trouvez la bonne page et la bonne vidéo', tourPrompt: 'Guidez-moi sur le site AliKa selon mon besoin.', tourQuestion: 'Que cherchez-vous : fonctions, installation, prix, confidentialité ou vidéo pratique ?', restart: 'Nouvelle conversation', next: 'Une question courte' },
+    pt: { heading: 'Por onde começamos?', fitTitle: 'A AliKa é adequada para nós?', fitDesc: 'Avaliação honesta por dispositivos e objetivos', fitPrompt: 'Ajude-me a avaliar se a AliKa é adequada para a minha família.', fitQuestion: 'Em que dispositivo usaria a AliKa: PC Windows, telemóvel/tablet Android ou Android TV?', planTitle: 'Criar plano de equilíbrio', planDesc: 'Uma rotina inicial flexível para a sua família', planPrompt: 'Vamos criar um plano inicial de equilíbrio digital para a minha família.', planQuestion: 'Para que grupo etário: pré-escolar, primário, secundário ou adolescente?', tourTitle: 'Explorar o site em conjunto', tourDesc: 'Encontre a página e o vídeo certos', tourPrompt: 'Guie-me pelo site da AliKa conforme a minha necessidade.', tourQuestion: 'O que procura: funcionalidades, instalação, preço, privacidade ou vídeo de utilização?', restart: 'Nova conversa', next: 'Uma pergunta breve' },
+    ru: { heading: 'С чего начнём?', fitTitle: 'Подойдёт ли нам AliKa?', fitDesc: 'Честная оценка по устройствам и целям', fitPrompt: 'Помогите понять, подходит ли AliKa моей семье.', fitQuestion: 'На каком устройстве нужна AliKa: ПК Windows, телефон/планшет Android или Android TV?', planTitle: 'Составить план баланса', planDesc: 'Гибкий стартовый распорядок для семьи', planPrompt: 'Составим стартовый план цифрового баланса для моей семьи.', planQuestion: 'Для какой возрастной группы: дошкольник, младшая, средняя или старшая школа?', tourTitle: 'Пройти по сайту вместе', tourDesc: 'Найдите нужную страницу и видео', tourPrompt: 'Проведите меня по сайту AliKa с учётом моей цели.', tourQuestion: 'Что вы хотите найти: функции, установку, цену, конфиденциальность или видео?', restart: 'Новый разговор', next: 'Один короткий вопрос' },
+    ja: { heading: 'どこから始めますか？', fitTitle: 'AliKaはわが家に合う？', fitDesc: '端末と目的に合わせて正直にご案内', fitPrompt: 'AliKaがわが家に合うか一緒に確認したいです。', fitQuestion: '利用予定の端末はWindows PC、Androidスマホ／タブレット、Android TVのどれですか？', planTitle: 'デジタルバランス計画', planDesc: 'ご家庭に合う柔軟な最初の習慣', planPrompt: '家族向けのデジタルバランス開始プランを作りたいです。', planQuestion: '対象は未就学、小学生、中学生、高校生のどの年齢層ですか？', tourTitle: 'サイトを一緒に見る', tourDesc: '適切なページと使い方動画をご案内', tourPrompt: '目的に合わせてAliKaサイトを案内してください。', tourQuestion: '機能、設定、価格、プライバシー、使い方動画のうち何を探していますか？', restart: '新しい会話', next: '次の短い質問' },
+    ko: { heading: '어디서 시작할까요?', fitTitle: 'AliKa가 우리 가족에게 맞을까?', fitDesc: '기기와 목표에 맞춘 솔직한 안내', fitPrompt: 'AliKa가 우리 가족에게 맞는지 함께 확인하고 싶어요.', fitQuestion: '사용할 기기는 Windows PC, Android 휴대폰/태블릿, Android TV 중 무엇인가요?', planTitle: '디지털 균형 계획 만들기', planDesc: '가족에게 맞는 유연한 시작 루틴', planPrompt: '우리 가족을 위한 디지털 균형 시작 계획을 만들고 싶어요.', planQuestion: '계획 대상은 미취학, 초등학생, 중학생, 고등학생 중 어느 연령대인가요?', tourTitle: '사이트 함께 둘러보기', tourDesc: '알맞은 페이지와 사용 영상을 찾아보세요', tourPrompt: '필요에 맞게 AliKa 사이트를 안내해 주세요.', tourQuestion: '기능, 설치, 가격, 개인정보 보호, 사용 영상 중 무엇을 찾고 있나요?', restart: '새 대화', next: '다음 짧은 질문' },
+  };
   const copy = COPY[lang];
   const nudgeCopy = NUDGE[lang];
+  const journeyCopy = JOURNEY_COPY[lang];
   const host = document.createElement('div');
   host.id = 'alika-site-assistant';
   document.body.append(host);
@@ -39,14 +51,14 @@
   root.innerHTML = `
     <style>
       :host{--navy:#07172d;--blue:#54c7ea;--gold:#e4b84c;--paper:#fffaf0;--ink:#14243a;position:fixed;z-index:2147483000;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));font-family:Nunito,'Segoe UI',system-ui,sans-serif;color:var(--ink)}
-      *{box-sizing:border-box}[hidden]{display:none!important}.nudge{position:absolute;right:0;bottom:68px;display:grid;grid-template-columns:1fr auto;gap:12px;width:min(300px,calc(100vw - 24px));padding:14px 15px;border:1px solid #e4b84c80;border-radius:18px;color:#fff;background:linear-gradient(135deg,#102f52,#0b203a);box-shadow:0 18px 50px #07172d66;cursor:pointer;text-align:left}.nudge b,.nudge small{display:block}.nudge b{color:#ffe08a;font-size:13px}.nudge small{margin-top:4px;color:#e3edf4;font-size:11px;line-height:1.35}.nudge i{align-self:center;color:#59c5ea;font-size:22px;font-style:normal}.launcher{position:relative;display:flex;align-items:center;gap:9px;min-height:52px;padding:10px 16px 10px 11px;border:1px solid #ffffff2b;border-radius:999px;color:#fff;background:linear-gradient(135deg,#0a2140,#102f52);box-shadow:0 14px 38px #07172d55;cursor:pointer;font:800 14px/1 inherit}.launcher:after{position:absolute;top:-7px;right:8px;padding:3px 6px;border-radius:999px;content:'AI';color:#07172d;background:#ffe08a;box-shadow:0 4px 12px #07172d40;font-size:8px;font-weight:950;letter-spacing:.08em}.launcher img{width:32px;height:32px;border-radius:50%;object-fit:contain;background:#fff;padding:2px}.launcher:hover{transform:translateY(-1px);box-shadow:0 18px 42px #07172d66}.panel{position:absolute;right:0;bottom:66px;width:min(390px,calc(100vw - 24px));height:min(650px,calc(100vh - 104px));overflow:hidden;border:1px solid #ffffff26;border-radius:22px;background:var(--paper);box-shadow:0 24px 80px #06142670;display:grid;grid-template-rows:auto 1fr auto;transform-origin:bottom right}.head{display:flex;align-items:center;gap:10px;padding:14px 15px;color:#fff;background:linear-gradient(135deg,#081a33,#123b61)}.head img{width:38px;height:38px;object-fit:contain;border-radius:11px;background:#fff;padding:3px}.head div{min-width:0;flex:1}.head strong,.head small{display:block}.head strong{font-size:15px}.head small{margin-top:2px;color:#cfeaf4;font-size:11px}.head button{width:34px;height:34px;border:1px solid #ffffff2a;border-radius:50%;color:#fff;background:#ffffff0f;cursor:pointer;font-size:19px}.body{min-height:0;overflow:auto;padding:14px;scroll-behavior:smooth}.consent{display:grid;gap:13px;align-content:start;padding:7px 2px}.consentMark{display:grid;width:48px;height:48px;place-items:center;border-radius:16px;color:#08233c;background:#dff6fc;font-size:24px}.consent h2{margin:0;font-size:20px}.consent p{margin:0;color:#4b5b6c;font-size:13px;line-height:1.55}.consent button,.send{min-height:44px;border:0;border-radius:13px;color:#fff;background:#0d789d;cursor:pointer;font:800 13px/1 inherit}.conversation{display:grid;gap:11px}.message{max-width:88%;padding:10px 12px;border-radius:15px;font-size:13px;line-height:1.48;white-space:pre-wrap;overflow-wrap:anywhere}.assistant{justify-self:start;border:1px solid #d9e3e8;background:#fff}.user{justify-self:end;color:#fff;background:#123d60}.waiting{color:#677789;font-style:italic}.links{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 3px}.links a{padding:8px 10px;border:1px solid #9acddd;border-radius:999px;color:#075c78;background:#effbfe;text-decoration:none;font-size:11px;font-weight:800}.links a.videoLink{border-color:#0d789d;color:#fff;background:#0d789d;box-shadow:0 6px 16px #0d789d30}.sourceLabel{width:100%;margin:4px 0 -1px;color:#71808d;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.quick{display:flex;flex-wrap:wrap;gap:7px}.quick button{padding:8px 10px;border:1px solid #d6dde2;border-radius:999px;color:#304659;background:#fff;cursor:pointer;font:700 11px/1.25 inherit}.form{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 12px 7px;border-top:1px solid #dfe5e8;background:#fff}.form textarea{width:100%;min-height:44px;max-height:100px;resize:none;padding:11px 12px;border:1px solid #c9d3da;border-radius:13px;color:#10243a;background:#fff;font:600 13px/1.35 inherit;outline:none}.form textarea:focus{border-color:#1594be;box-shadow:0 0 0 3px #36bce52b}.send{min-width:70px;padding:0 13px}.send:disabled,.consent button:disabled{opacity:.55;cursor:wait}.privacy{grid-column:1/-1;margin:0;color:#71808d;font-size:9px;line-height:1.35}.trap{position:absolute;left:-9999px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+      *{box-sizing:border-box}[hidden]{display:none!important}.nudge{position:absolute;right:0;bottom:68px;display:grid;grid-template-columns:1fr auto;gap:12px;width:min(315px,calc(100vw - 24px));padding:14px 15px;border:1px solid #e4b84c80;border-radius:18px;color:#fff;background:linear-gradient(135deg,#102f52,#0b203a);box-shadow:0 18px 50px #07172d66;cursor:pointer;text-align:left}.nudge b,.nudge small{display:block}.nudge b{color:#ffe08a;font-size:13px}.nudge small{margin-top:4px;color:#e3edf4;font-size:11px;line-height:1.35}.nudge i{align-self:center;color:#59c5ea;font-size:22px;font-style:normal}.launcher{position:relative;display:flex;align-items:center;gap:9px;min-height:52px;padding:10px 16px 10px 11px;border:1px solid #ffffff2b;border-radius:999px;color:#fff;background:linear-gradient(135deg,#0a2140,#102f52);box-shadow:0 14px 38px #07172d55;cursor:pointer;font:800 14px/1 inherit}.launcher:after{position:absolute;top:-7px;right:8px;padding:3px 6px;border-radius:999px;content:'AI';color:#07172d;background:#ffe08a;box-shadow:0 4px 12px #07172d40;font-size:8px;font-weight:950;letter-spacing:.08em}.launcher img{width:32px;height:32px;border-radius:50%;object-fit:contain;background:#fff;padding:2px}.launcher:hover{transform:translateY(-1px);box-shadow:0 18px 42px #07172d66}.panel{position:absolute;right:0;bottom:66px;width:min(410px,calc(100vw - 24px));height:min(680px,calc(100vh - 104px));overflow:hidden;border:1px solid #ffffff26;border-radius:22px;background:var(--paper);box-shadow:0 24px 80px #06142670;display:grid;grid-template-rows:auto 1fr auto;transform-origin:bottom right}.head{display:flex;align-items:center;gap:10px;padding:14px 15px;color:#fff;background:linear-gradient(135deg,#081a33,#123b61)}.head img{width:38px;height:38px;object-fit:contain;border-radius:11px;background:#fff;padding:3px}.head>div:not(.headActions){min-width:0;flex:1}.head strong,.head small{display:block}.head strong{font-size:15px}.head small{margin-top:2px;color:#cfeaf4;font-size:11px}.headActions{display:flex;gap:6px}.headActions button{width:34px;height:34px;border:1px solid #ffffff2a;border-radius:50%;color:#fff;background:#ffffff0f;cursor:pointer;font-size:18px}.body{min-height:0;overflow:auto;padding:14px;scroll-behavior:smooth}.consent{display:grid;gap:13px;align-content:start;padding:7px 2px}.consentMark{display:grid;width:48px;height:48px;place-items:center;border-radius:16px;color:#08233c;background:#dff6fc;font-size:24px}.consent h2{margin:0;font-size:20px}.consent p{margin:0;color:#4b5b6c;font-size:13px;line-height:1.55}.consent button,.send{min-height:44px;border:0;border-radius:13px;color:#fff;background:#0d789d;cursor:pointer;font:800 13px/1 inherit}.conversation{display:grid;gap:11px}.message{max-width:88%;padding:10px 12px;border-radius:15px;font-size:13px;line-height:1.48;white-space:pre-wrap;overflow-wrap:anywhere}.assistant{justify-self:start;border:1px solid #d9e3e8;background:#fff}.user{justify-self:end;color:#fff;background:#123d60}.waiting{color:#677789;font-style:italic}.links{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 3px}.links a{padding:8px 10px;border:1px solid #9acddd;border-radius:999px;color:#075c78;background:#effbfe;text-decoration:none;font-size:11px;font-weight:800}.links a.videoLink{border-color:#0d789d;color:#fff;background:#0d789d;box-shadow:0 6px 16px #0d789d30}.sourceLabel{width:100%;margin:4px 0 -1px;color:#71808d;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.journeys{display:grid;gap:8px}.journeyHeading{margin:3px 1px 0;color:#6c7a86;font-size:11px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}.journey{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;width:100%;padding:11px;border:1px solid #d7e6eb;border-radius:15px;color:#17324c;background:linear-gradient(135deg,#fff,#f4fbfd);cursor:pointer;text-align:left;font:inherit}.journey:hover,.journey:focus-visible{border-color:#55bddd;box-shadow:0 7px 20px #0d789d18;transform:translateY(-1px);outline:none}.journeyIcon{display:grid;width:36px;height:36px;place-items:center;border-radius:12px;color:#0c6380;background:#dff6fc;font-size:18px}.journey b,.journey small{display:block}.journey b{font-size:12px}.journey small{margin-top:3px;color:#667889;font-size:10px;line-height:1.35}.journeyArrow{color:#0d789d;font-size:18px}.nextPrompt{padding:10px 12px;border-left:3px solid var(--gold);border-radius:4px 13px 13px 4px;background:#fff6d9;color:#253b50}.nextPrompt small,.nextPrompt strong{display:block}.nextPrompt small{color:#80651b;font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.nextPrompt strong{margin-top:4px;font-size:12px;line-height:1.4}.form{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 12px 7px;border-top:1px solid #dfe5e8;background:#fff}.form textarea{width:100%;min-height:44px;max-height:100px;resize:none;padding:11px 12px;border:1px solid #c9d3da;border-radius:13px;color:#10243a;background:#fff;font:600 13px/1.35 inherit;outline:none}.form textarea:focus{border-color:#1594be;box-shadow:0 0 0 3px #36bce52b}.send{min-width:70px;padding:0 13px}.send:disabled,.consent button:disabled{opacity:.55;cursor:wait}.privacy{grid-column:1/-1;margin:0;color:#71808d;font-size:9px;line-height:1.35}.trap{position:absolute;left:-9999px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
       @media(max-width:520px){:host{right:8px;bottom:8px}.nudge{right:0;bottom:62px;width:min(280px,calc(100vw - 16px))}.launcher{min-height:48px;padding:8px 13px 8px 9px}.panel{position:fixed;inset:8px;width:auto;height:auto;border-radius:20px;transform-origin:bottom center}.message{max-width:92%}}
       @media(prefers-reduced-motion:no-preference){.nudge{animation:nudgeIn .45s .5s both}.panel{animation:appear .18s ease-out}.launcher,.links a{transition:transform .16s ease,box-shadow .16s ease}.launcher{animation:launcherGlow 2.8s 1.2s 2}@keyframes appear{from{opacity:0;transform:translateY(8px) scale(.98)}}@keyframes nudgeIn{from{opacity:0;transform:translateY(10px) scale(.97)}}@keyframes launcherGlow{50%{box-shadow:0 14px 38px #07172d55,0 0 0 8px #59c5ea24}}}
     </style>
     <button class="nudge" type="button"><span><b>${nudgeCopy[0]}</b><small>${nudgeCopy[1]}</small></span><i aria-hidden="true">→</i></button>
     <button class="launcher" type="button" aria-expanded="false"><img src="/brand/alika-logo.png" alt=""><span>${copy.open}</span></button>
     <section class="panel" role="dialog" aria-modal="false" aria-labelledby="alika-assistant-title" hidden>
-      <header class="head"><img src="/brand/alika-logo.png" alt=""><div><strong id="alika-assistant-title">${copy.title}</strong><small>${copy.subtitle} · AI beta</small></div><button type="button" aria-label="${copy.close}">×</button></header>
+      <header class="head"><img src="/brand/alika-logo.png" alt=""><div><strong id="alika-assistant-title">${copy.title}</strong><small>${copy.subtitle} · AI beta</small></div><div class="headActions"><button class="restart" type="button" aria-label="${journeyCopy.restart}" title="${journeyCopy.restart}" hidden>↺</button><button class="close" type="button" aria-label="${copy.close}">×</button></div></header>
       <div class="body"><div class="consent"><span class="consentMark" aria-hidden="true">✦</span><h2>${copy.consentTitle}</h2><p>${copy.consent}</p><button type="button">${copy.accept}</button></div><div class="conversation" hidden aria-live="polite"></div></div>
       <form class="form" hidden><label class="sr" for="alika-assistant-input">${copy.placeholder}</label><textarea id="alika-assistant-input" maxlength="800" rows="1" placeholder="${copy.placeholder}" required></textarea><button class="send" type="submit">${copy.send}</button><input class="trap" name="website" tabindex="-1" autocomplete="off"><p class="privacy">${copy.privacy}</p></form>
     </section>`;
@@ -54,7 +66,8 @@
   const launcher = root.querySelector('.launcher');
   const nudge = root.querySelector('.nudge');
   const panel = root.querySelector('.panel');
-  const closeButton = root.querySelector('.head button');
+  const closeButton = root.querySelector('.close');
+  const restartButton = root.querySelector('.restart');
   const consent = root.querySelector('.consent');
   const consentButton = consent.querySelector('button');
   const conversation = root.querySelector('.conversation');
@@ -63,6 +76,7 @@
   const send = root.querySelector('.send');
   const history = [];
   let busy = false;
+  let activeJourney = 'general';
 
   function addMessage(role, text, links = [], sourceLinks = []) {
     const item = document.createElement('div');
@@ -102,23 +116,62 @@
     return '';
   }
 
+  function renderJourneyMenu() {
+    const group = document.createElement('div');
+    group.className = 'journeys';
+    const heading = document.createElement('p');
+    heading.className = 'journeyHeading';
+    heading.textContent = journeyCopy.heading;
+    group.append(heading);
+    const choices = [
+      ['fit', '◎', journeyCopy.fitTitle, journeyCopy.fitDesc, journeyCopy.fitPrompt, journeyCopy.fitQuestion],
+      ['plan', '◷', journeyCopy.planTitle, journeyCopy.planDesc, journeyCopy.planPrompt, journeyCopy.planQuestion],
+      ['tour', '↗', journeyCopy.tourTitle, journeyCopy.tourDesc, journeyCopy.tourPrompt, journeyCopy.tourQuestion],
+    ];
+    for (const [journey, icon, title, description, prompt, firstQuestion] of choices) {
+      const button = document.createElement('button');
+      button.className = 'journey';
+      button.type = 'button';
+      button.innerHTML = `<span class="journeyIcon" aria-hidden="true">${icon}</span><span><b>${title}</b><small>${description}</small></span><span class="journeyArrow" aria-hidden="true">→</span>`;
+      button.addEventListener('click', () => startJourney(journey, title, prompt, firstQuestion));
+      group.append(button);
+    }
+    conversation.append(group);
+  }
+
+  function renderWelcome() {
+    addMessage('assistant', copy.hello);
+    renderJourneyMenu();
+  }
+
+  function renderNextPrompt(text) {
+    const prompt = document.createElement('div');
+    prompt.className = 'nextPrompt';
+    const label = document.createElement('small');
+    label.textContent = journeyCopy.next;
+    const question = document.createElement('strong');
+    question.textContent = text;
+    prompt.append(label, question);
+    conversation.append(prompt);
+    conversation.parentElement.scrollTop = conversation.parentElement.scrollHeight;
+  }
+
+  function startJourney(journey, title, prompt, firstQuestion) {
+    if (busy) return;
+    activeJourney = journey;
+    conversation.querySelector('.journeys')?.remove();
+    addMessage('user', title);
+    renderNextPrompt(firstQuestion);
+    history.push({ role: 'user', text: prompt }, { role: 'assistant', text: firstQuestion });
+    input.focus();
+  }
+
   function showConversation() {
     consent.hidden = true;
     conversation.hidden = false;
     form.hidden = false;
-    if (!conversation.childElementCount) {
-      addMessage('assistant', copy.hello);
-      const quick = document.createElement('div');
-      quick.className = 'quick';
-      [copy.q1, copy.q2, copy.q3].forEach((question) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.textContent = question;
-        button.addEventListener('click', () => submitQuestion(question));
-        quick.append(button);
-      });
-      conversation.append(quick);
-    }
+    restartButton.hidden = false;
+    if (!conversation.childElementCount) renderWelcome();
     window.setTimeout(() => input.focus(), 0);
   }
 
@@ -140,13 +193,24 @@
     launcher.focus();
   }
 
-  async function submitQuestion(question) {
+  function resetConversation() {
+    if (busy) return;
+    history.splice(0);
+    activeJourney = 'general';
+    conversation.replaceChildren();
+    renderWelcome();
+    input.value = '';
+    input.focus();
+  }
+
+  async function submitQuestion(question, displayText = question) {
     const message = String(question || '').trim();
     if (busy || message.length < 2) return;
     busy = true;
     input.value = '';
     send.disabled = true;
-    addMessage('user', message);
+    conversation.querySelector('.journeys')?.remove();
+    addMessage('user', String(displayText || message));
     const waiting = addMessage('assistant waiting', copy.sending);
     try {
       const response = await fetch(`${endpoint}/v1/chat`, {
@@ -156,7 +220,7 @@
         cache: 'no-store',
         referrerPolicy: 'no-referrer',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, language: lang, pagePath: location.pathname, history: history.slice(-6), website: form.elements.website.value }),
+        body: JSON.stringify({ message, language: lang, journey: activeJourney, pagePath: location.pathname, history: history.slice(-6), website: form.elements.website.value }),
       });
       const data = await response.json().catch(() => ({}));
       waiting.remove();
@@ -165,17 +229,10 @@
         return;
       }
       addMessage('assistant', data.answer, data.actions, data.sources);
-      history.push({ role: 'user', text: message }, { role: 'assistant', text: data.answer });
-      if (data.followUp) {
-        const quick = document.createElement('div');
-        quick.className = 'quick';
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.textContent = data.followUp;
-        button.addEventListener('click', () => submitQuestion(data.followUp));
-        quick.append(button);
-        conversation.append(quick);
-      }
+      const assistantHistory = data.followUp ? `${data.answer}\n${data.followUp}` : data.answer;
+      history.push({ role: 'user', text: message }, { role: 'assistant', text: assistantHistory });
+      if (data.followUp) renderNextPrompt(data.followUp);
+      if (!data.followUp) activeJourney = 'general';
     } catch {
       waiting.remove();
       addMessage('assistant', copy.error, [{ label: copy.sources, href: lang === 'tr' ? '/contact/' : `/${lang}/contact/` }]);
@@ -189,6 +246,7 @@
   launcher.addEventListener('click', () => panel.hidden ? openPanel() : closePanel());
   nudge.addEventListener('click', openPanel);
   closeButton.addEventListener('click', closePanel);
+  restartButton.addEventListener('click', resetConversation);
   consentButton.addEventListener('click', () => {
     try { sessionStorage.setItem('alika-ai-consent-v1', 'yes'); } catch { /* Session storage may be unavailable. */ }
     showConversation();
