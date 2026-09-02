@@ -98,6 +98,16 @@ test('localized internal links retain the selected language', () => {
   assert.deepEqual(result.actions, [{ label: 'Guides', href: '/en/how-it-works/' }]);
 });
 
+test('a guided follow-up question is not repeated inside the answer', () => {
+  const result = parseModelResponse(JSON.stringify({
+    answer: 'Windows 11 AliKa tarafından desteklenir. Çocuğunuzun yaş grubunu paylaşabilir misiniz?',
+    actions: [],
+    followUp: 'Çocuğunuzun yaş grubu nedir?',
+  }), [], 'tr');
+  assert.equal(result.answer, 'Windows 11 AliKa tarafından desteklenir.');
+  assert.equal(result.followUp, 'Çocuğunuzun yaş grubu nedir?');
+});
+
 test('assistant uses the reasoning model and anti-template conversation rules', async () => {
   let request;
   const fakeClient = {

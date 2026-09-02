@@ -171,6 +171,21 @@ function safeAction(action, allowed) {
   return { label: action.label.trim().slice(0, 80), href };
 }
 
+function removeRepeatedFollowUp(answer, followUp) {
+  const cleanAnswer = answer.trim();
+  if (!followUp) return cleanAnswer;
+  const sentences = cleanAnswer.match(/[^.!?。！？]+[.!?。！？]?/gu)?.map((item) => item.trim()).filter(Boolean) || [cleanAnswer];
+  if (sentences.length < 2) return cleanAnswer;
+  const last = sentences.at(-1);
+  const followTokens = tokens(followUp);
+  const lastTokens = tokens(last);
+  let common = 0;
+  for (const token of lastTokens) if (followTokens.has(token)) common += 1;
+  const overlap = common / Math.max(1, Math.min(followTokens.size, lastTokens.size));
+  if (/[?？]$/u.test(last) || overlap >= 0.5) sentences.pop();
+  return sentences.join(' ').trim() || cleanAnswer;
+}
+
 export function parseModelResponse(text, articles, language, videoGuide = null) {
   let parsed;
   try {
@@ -203,11 +218,12 @@ export function parseModelResponse(text, articles, language, videoGuide = null) 
     }
     if (sourceLinks.length >= 3) break;
   }
+  const followUp = typeof parsed.followUp === 'string' ? parsed.followUp.trim().slice(0, 320) : '';
   return {
-    answer: parsed.answer.trim().slice(0, 2400),
+    answer: removeRepeatedFollowUp(parsed.answer, followUp).slice(0, 2400),
     actions,
     sources: sourceLinks,
-    followUp: typeof parsed.followUp === 'string' ? parsed.followUp.trim().slice(0, 320) : '',
+    followUp,
   };
 }
 
