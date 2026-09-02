@@ -185,8 +185,8 @@ def main() -> None:
             "subjects": 242,
             "notes": 6572,
             "questions": 121732,
-            "questionBanks": 94,
-            "questionBankQuestions": 188000,
+            "questionBanks": 187,
+            "questionBankQuestions": 374000,
         }:
             errors.append(f"Content catalog totals are unexpected: {totals}")
         excluded = catalog.get("excluded") or []
@@ -211,20 +211,20 @@ def main() -> None:
                 if not target.exists() or digest(target) != subject["sha256"]:
                     errors.append(f"Subject artifact missing or hash mismatch: {target}")
         question_banks = catalog.get("question_banks") or []
-        if len(question_banks) != 94:
-            errors.append(f"Expected 94 independent question banks, got {len(question_banks)}")
+        if len(question_banks) != 187:
+            errors.append(f"Expected 187 independent question banks, got {len(question_banks)}")
         bank_country_counts = {
             country: sum(bank.get("country_code") == country for bank in question_banks)
             for country in ("TR", "JP", "KR", "GB")
         }
-        if bank_country_counts != {"TR": 8, "JP": 43, "KR": 1, "GB": 42}:
+        if bank_country_counts != {"TR": 8, "JP": 43, "KR": 94, "GB": 42}:
             errors.append(f"Independent question bank country coverage is incomplete: {bank_country_counts}")
         subject_bank_keys = [
             (bank.get("country_code"), bank.get("grade"), bank.get("subject_code"))
             for bank in question_banks
             if bank.get("scope") == "country-grade-subject"
         ]
-        if len(subject_bank_keys) != 86 or len(set(subject_bank_keys)) != 86:
+        if len(subject_bank_keys) != 179 or len(set(subject_bank_keys)) != 179:
             errors.append("JP/KR/GB independent subject question bank keys are incomplete or duplicated")
         for bank in question_banks:
             expected_families = 2000 if bank.get("country_code") == "TR" else 400
