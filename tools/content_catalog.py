@@ -15,7 +15,7 @@ COUNTRY_NAMES = {
     "GB": "İngiltere",
 }
 COUNTRY_SLUGS = {"JP": "japonya", "KR": "kore", "GB": "ingiltere"}
-CONTENT_RELEASE_TAG = "question-banks-2026.09.02-v2"
+CONTENT_RELEASE_TAG = "question-banks-2026.09.02-v3"
 GB_CONTENT_RELEASE_TAG = "gb-england-2026.09.02-v1"
 COUNTRY_RELEASE_TAGS = {
     "JP": CONTENT_RELEASE_TAG,
