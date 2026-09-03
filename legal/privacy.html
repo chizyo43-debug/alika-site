@@ -16,7 +16,7 @@ footer{margin-top:48px;color:#777;font-size:.9em;border-top:1px solid #ddd;paddi
 <body>
 <p><a href="index.html">← AliKa Legal</a></p>
 <h1>Privacy Policy — AliKa</h1>
-<p class="meta"><strong>Last updated:</strong> 01.09.2026<br>
+<p class="meta"><strong>Last updated:</strong> 04.09.2026<br>
 <strong>Publisher:</strong> ErenKa Software<br>
 <strong>Contact:</strong> alika.destek@gmail.com</p>
 
@@ -42,12 +42,17 @@ the device (locally)</strong>:</p>
 
 <h2>3. Storage and sharing of data</h2>
 <ul>
-<li><strong>All data is stored locally on the device only.</strong> Machine-wide
-settings and reports are stored under <code>%ProgramData%\AliKa\</code>; the
+<li><strong>Parental-control content stays on the family's devices.</strong> Machine-wide
+Windows settings and reports are stored under <code>%ProgramData%\AliKa\</code>; the
 current Windows user's learning library and local state are stored under
-<code>%LocalAppData%\AliKa\</code>.</li>
-<li>AliKa does <strong>not</strong> send data to an AliKa-operated cloud service, sell it,
-or share it with advertising or analytics providers.</li>
+<code>%LocalAppData%\AliKa\</code>. Android usage history, child profiles, messages,
+learning content, rules and visited-domain history remain on the device or move directly
+between paired family devices on the approved local network.</li>
+<li>AliKa sends only the limited Android family-subscription metadata described below to
+an AliKa-operated licensing service. It does <strong>not</strong> send child content,
+usage history, messages, visited domains, location, Google account name or email, IMEI or
+Android ID to that service.</li>
+<li>AliKa does not sell user data or share it with advertising or analytics providers.</li>
 <li>The app contains <strong>no</strong> advertising networks or third-party analytics SDKs.</li>
 <li>The PIN is not stored in plain text; it is hashed with PBKDF2-HMAC-SHA256.</li>
 </ul>
@@ -57,6 +62,20 @@ or share it with advertising or analytics providers.</li>
 supported data is transferred directly between the paired devices on the approved
 local network using encrypted communication. This optional transfer does not pass
 through an AliKa-operated cloud service. The feature can be turned off by the parent.</p>
+
+<h3>Android family subscription verification</h3>
+<p>To let one Google Play family subscription work on up to 10 paired Android phones,
+tablets and TVs, AliKa uses a limited licensing service. It processes a random AliKa
+family identifier, a random AliKa device identifier, a SHA-256 digest of the device
+public key, the device role, revocation status, and the Google Play product,
+subscription status and paid-period end time. Purchase and refresh tokens are retained
+only as SHA-256 digests; their plain values are not stored. Google account names and
+email addresses are not collected by the licensing service.</p>
+<p>This metadata is used only for app functionality, subscription verification,
+fraud prevention and enforcement of the 10-device limit. Transfers use HTTPS/TLS.
+Inactive or expired family-license records and their device records are permanently
+deleted within 90 days. Google Play separately processes purchases under Google's own
+privacy terms.</p>
 
 <h3>Android web filter (local VPN)</h3>
 <p>On Android the web filter uses a <strong>local</strong> VPN (VpnService) on the
@@ -97,7 +116,9 @@ parent panel; the steps for deleting all local data are stated below.</p>
 
 <h2>5. User rights</h2>
 <ul>
-<li><strong>Access:</strong> The parent panel displays all collected data.</li>
+<li><strong>Access:</strong> The parent panel displays locally collected parental-control
+data. The Android subscription screen shows the family and device identifiers needed to
+identify licensing metadata.</li>
 <li><strong>Deletion:</strong> The parent panel can delete history records and imported
 library content. Uninstalling the Microsoft Store/MSIX package removes the package,
 service, and running processes, but deliberately retains
@@ -106,13 +127,30 @@ reinstall can resume without data loss. To erase everything, delete the first
 directory as an administrator and the second as the relevant Windows user after
 uninstall. The classic Setup uninstaller separately offers to delete
 <code>%ProgramData%\AliKa\</code>; silent update/uninstall retains data.</li>
+<li><strong>Android local-data deletion:</strong> The parent can clear history, family chat
+and imported learning content from the parent panel. Removing AliKa from an Android
+device removes that app's local data from the device.</li>
+<li><strong>Android licensing-metadata deletion request:</strong> Email
+<a href="mailto:alika.destek@gmail.com?subject=AliKa%20Android%20data%20deletion%20request">alika.destek@gmail.com</a>
+with the subject “AliKa Android data deletion request” and include the AliKa Family ID
+and Device ID shown on the app's subscription screen. Do not send a child's name, PIN,
+messages, browsing history or purchase token. ErenKa Software may ask for a
+device-bound verification response before deletion so another person cannot delete a
+family's record. After verification, the random family/device identifiers, public-key
+digest, device role, revocation state, token digests and retained subscription-status
+metadata are permanently deleted. Records for an inactive or expired family are also
+deleted automatically within 90 days. Data that Google retains for Play purchases is
+controlled by Google and is not deleted by AliKa.</li>
 <li><strong>Consent:</strong> An explicit consent screen is shown at first setup; functions do not
 start until it is accepted.</li>
 </ul>
 
 <h2>6. Security</h2>
-<p>Data is kept locally; settings are protected by a parent PIN. Device security
-(disk encryption, operating-system updates) is the user's responsibility.</p>
+<p>Local settings are protected by a parent PIN. Android licensing-service transfers use
+HTTPS/TLS, device public keys and hashed tokens; access to production records is limited
+to the service identities required for verification and retention cleanup. Device
+security (disk encryption and operating-system updates) remains the user's
+responsibility.</p>
 
 <h2>7. Changes</h2>
 <p>If this policy changes, this document will be updated and the change announced in
