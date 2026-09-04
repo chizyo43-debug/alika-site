@@ -7,6 +7,8 @@ import knowledgeBase from '../src/knowledge-base.json' with { type: 'json' };
 import productKnowledge from '../src/product-knowledge.json' with { type: 'json' };
 import productKnowledgeIndex from '../src/product-knowledge-index.json' with { type: 'json' };
 import videoCatalog from '../src/video-guide-catalog.json' with { type: 'json' };
+import knowledgeVerification from '../src/knowledge-verification.json' with { type: 'json' };
+import { verifyKnowledgeSnapshot } from '../tools/knowledge-verification.mjs';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -44,6 +46,27 @@ test('product manual is indexed, detailed, and public-safe', () => {
     assert.ok(article.keywords.length >= 5, `${article.id}: retrieval keywords are incomplete`);
     for (const link of article.links) assert.match(link.href, /^\//);
   }
+});
+
+test('knowledge verification date and source hashes are current', () => {
+  assert.equal(knowledgeVerification.verifiedAt, productKnowledge.version);
+  assert.equal(knowledgeVerification.sourceVersions.productKnowledgeIndex, productKnowledgeIndex.sourceVersion);
+  assert.deepEqual(verifyKnowledgeSnapshot(), []);
+});
+
+test('knowledge verification rejects a source changed after review', () => {
+  const staleManifest = structuredClone(knowledgeVerification);
+  staleManifest.sources['knowledge-base.json'] = '0'.repeat(64);
+  assert.deepEqual(verifyKnowledgeSnapshot(staleManifest), [
+    'knowledge-base.json changed after the recorded verification',
+  ]);
+});
+
+test('both site and assistant deployments enforce knowledge freshness', () => {
+  const pagesWorkflow = fs.readFileSync(path.join(siteRoot, '.github', 'workflows', 'pages.yml'), 'utf8');
+  const cloudRunDeploy = fs.readFileSync(path.join(siteRoot, 'assistant-service', 'deploy.ps1'), 'utf8');
+  assert.match(pagesWorkflow, /npm run knowledge:verify/);
+  assert.match(cloudRunDeploy, /npm run knowledge:verify/);
 });
 
 test('high-risk product claims remain synchronized with public source copy', () => {

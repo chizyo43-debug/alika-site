@@ -18,6 +18,19 @@ if (-not (Get-Command gcloud -ErrorAction SilentlyContinue)) {
     throw 'Google Cloud CLI (gcloud) bulunamadı. Cloud Shell kullanın veya gcloud kurun.'
 }
 
+if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
+    throw 'Node.js/npm bulunamadı; bilgi doğrulama kapısı çalıştırılamadı.'
+}
+
+Push-Location (Split-Path -Parent $PSScriptRoot)
+try {
+    & npm run knowledge:verify
+    if ($LASTEXITCODE -ne 0) { throw 'Bilgi doğrulama kapısı başarısız oldu; dağıtım durduruldu.' }
+}
+finally {
+    Pop-Location
+}
+
 $serviceAccountName = 'alika-site-assistant'
 $serviceAccount = "$serviceAccountName@$ProjectId.iam.gserviceaccount.com"
 $rateSalt = [Guid]::NewGuid().ToString('N')

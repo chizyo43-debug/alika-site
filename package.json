@@ -9,6 +9,8 @@
   "scripts": {
     "dev": "vite",
     "build:book": "vite build && python tools/install_book_routes.py",
+    "knowledge:verify": "node assistant-service/tools/knowledge-verification.mjs --check",
+    "knowledge:refresh": "node assistant-service/tools/knowledge-verification.mjs --refresh",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

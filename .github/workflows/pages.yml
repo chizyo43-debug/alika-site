@@ -34,6 +34,8 @@ jobs:
           cache: npm
       - name: Install book experience dependencies
         run: npm ci
+      - name: Verify assistant knowledge freshness
+        run: npm run knowledge:verify
       - name: Validate source content packages
         shell: bash
         run: |

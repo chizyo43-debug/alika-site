@@ -2,6 +2,7 @@ import { GoogleGenAI } from '@google/genai';
 import knowledgeBase from './knowledge-base.json' with { type: 'json' };
 import productKnowledge from './product-knowledge.json' with { type: 'json' };
 import productKnowledgeIndex from './product-knowledge-index.json' with { type: 'json' };
+import knowledgeVerification from './knowledge-verification.json' with { type: 'json' };
 import { retrieveVideoGuide } from './video-guides.mjs';
 
 export const SUPPORTED_LANGUAGES = new Set(['tr', 'en', 'de', 'es', 'fr', 'pt', 'ru', 'ja', 'ko']);
@@ -12,7 +13,7 @@ const LANGUAGE_NAMES = {
   pt: 'Português', ru: 'Русский', ja: '日本語', ko: '한국어',
 };
 
-const KNOWLEDGE_VERIFIED_AT = productKnowledge.version || productKnowledgeIndex.sourceVersion;
+const KNOWLEDGE_VERIFIED_AT = knowledgeVerification.verifiedAt;
 
 const SUPPORT_LINK_LABELS = {
   tr: 'Destek sayfasını aç', en: 'Open support', de: 'Support öffnen', es: 'Abrir soporte',

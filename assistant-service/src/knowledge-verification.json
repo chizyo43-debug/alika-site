@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-04",
+  "sourceVersions": {
+    "productKnowledge": "2026-09-04",
+    "productKnowledgeIndex": "2026-09-04",
+    "videoGuideCatalog": "1"
+  },
+  "sources": {
+    "knowledge-base.json": "add9aee6edec4c5c7ebb47dec11214c0006c230df7b46230af91cd1e6d9ba7bf",
+    "product-knowledge.json": "e7ed83f44f86db2aef2ccecd3b586bf18be57d563df463a05b15692c6dadd02d",
+    "product-knowledge-index.json": "6fc009e5670149c9d12d1bca93dbf90678c0785f214d1821c6d54e418111294c",
+    "video-guide-catalog.json": "c0f5130e9dd6eefb7c181f18fe24c69c67064d5c408cae1fbbfa55b1253f826d"
+  }
+}

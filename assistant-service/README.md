@@ -12,6 +12,21 @@ npm ci
 npm test
 ```
 
+## Knowledge verification date
+
+The visible `Last verified` date comes from `src/knowledge-verification.json`.
+Its source hashes cover the public fact base, detailed product manual, search
+index, and video catalog. Tests, the Pages workflow, and the Cloud Run deploy
+script reject publication when one of those files changes without a fresh
+verification.
+
+After reviewing a knowledge change, refresh the versions, date, and hashes from
+the repository root:
+
+```powershell
+npm run knowledge:refresh
+```
+
 ## Authentication
 
 Production should use Vertex AI and the Cloud Run service identity. Set
