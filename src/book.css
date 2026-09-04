@@ -630,7 +630,7 @@ button:disabled { cursor: default; }
 .coverRule { position: absolute; left: 50%; width: 84px; height: 1px; transform: translateX(-50%); background: var(--amber); }
 .coverRuleTop { top: 54px; }.coverRuleBottom { bottom: 20px; }
 .coverEyebrow { margin-top: 4px; color: #47768b; font-size: 10px; font-weight: 850; letter-spacing: .22em; text-transform: uppercase; }
-.coverChildCharacter { position: absolute; top: 88px; left: 82%; z-index: 3; width: clamp(88px,10vw,122px); height: auto; pointer-events: none; filter: drop-shadow(0 14px 12px rgba(16,35,62,.18)); transform: translateX(-50%) translateZ(1px); }
+.coverChildCharacter { position: absolute; top: 88px; left: calc(75% + 42px); z-index: 3; width: clamp(88px,10vw,122px); height: auto; pointer-events: none; filter: drop-shadow(0 14px 12px rgba(16,35,62,.18)); transform: translateX(-50%) translateZ(1px); }
 .morphMark { position: relative; display: grid; width: 212px; height: 178px; margin-top: clamp(32px,4.5vh,56px); place-items: center; }
 .officialLogo { position: relative; z-index: 2; width: 208px; height: auto; object-fit: contain; transition: opacity .3s ease, transform .6s cubic-bezier(.3,.7,.2,1); }
 .logoHalo { position: absolute; inset: 13px; overflow: hidden; border: 1px solid rgba(89,197,234,.38); border-radius: 50%; opacity: .72; filter: blur(2px); box-shadow: 0 0 35px rgba(89,197,234,.22); animation: haloBreath 2.8s ease-in-out infinite; }
@@ -749,7 +749,7 @@ button:disabled { cursor: default; }
   .bookCover::after { left: 21px; }
   .morphMark { width: 170px; height: 145px; margin-top: 38px; }
   .officialLogo { width: 166px; }
-  .coverChildCharacter { top: 76px; width: 76px; }
+  .coverChildCharacter { top: 76px; left: calc(75% + 32px); width: 76px; }
   .coverTitle { font-size: 53px; }
   .coverStatement { font-size: 14px; }
   .coverSubtitle { max-width: 310px; font-size: 13px; }
@@ -803,7 +803,7 @@ button:disabled { cursor: default; }
   .coverEyebrow { margin-top: 0; font-size: 8px; }
   .morphMark { width: 126px; height: 94px; margin-top: 12px; }
   .officialLogo { width: 122px; }
-  .coverChildCharacter { top: 42px; width: 58px; }
+  .coverChildCharacter { top: 42px; left: calc(75% + 23px); width: 58px; }
   .aMascot { transform: translateY(5px) scale(.5); }
   .phase-morphing .aMascot, .phase-opening .morphMark .aMascot { transform: translateY(-8px) scale(.68); }
   .coverTitle { margin-top: 0; font-size: 42px; }
