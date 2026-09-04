@@ -1492,6 +1492,7 @@ export default function BookExperience() {
         <button className="bookCover" type="button" onClick={openBook} aria-label={ui.openBook} aria-hidden={['reading', 'flipping'].includes(phase)} tabIndex={phase === 'closed' ? 0 : -1} disabled={phase !== 'closed'}>
           <span className="coverRule coverRuleTop" />
           <span className="coverEyebrow">{ui.coverEyebrow}</span>
+          <img className="coverChildCharacter" src="/brand/alika-child-character-v2.png" alt="" aria-hidden="true" width="530" height="1239" />
           <span className="morphMark">
             <span className="logoHalo" aria-hidden="true" />
             <img className="officialLogo" src="/brand/alika-logo.png" alt="AliKa" width="208" height="144" />
