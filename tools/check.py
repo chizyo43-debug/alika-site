@@ -34,15 +34,15 @@ STORE_OFFER_MARKERS = {
     "ko": ('"price":"2500"', '"priceCurrency":"KRW"'),
 }
 QUIZ_REWARD_MARKERS = {
-    "tr": "Üç doğru cevap ödül ilerlemesini tamamlar ve en fazla 3 dakika ek süre kazandırır.",
-    "en": "Three correct answers complete reward progress and grant up to 3 extra minutes.",
-    "de": "Drei richtige Antworten schließen den Belohnungsfortschritt ab und bringen bis zu 3 zusätzliche Minuten.",
-    "es": "Tres aciertos completan el progreso y conceden hasta 3 minutos extra.",
-    "fr": "Trois bonnes réponses complètent la progression et accordent jusqu’à 3 minutes supplémentaires.",
-    "pt": "Três respostas certas completam o progresso e concedem até 3 minutos extra.",
-    "ru": "Три верных ответа завершают прогресс и дают не более 3 дополнительных минут.",
-    "ja": "3問正解すると進捗が完了し、追加時間は最大3分です。",
-    "ko": "세 문제를 맞히면 보상 진행이 완료되고 추가 시간은 최대 3분입니다.",
+    "tr": "Ebeveyn, 1 dakika için gereken doğru soru sayısını belirler; çocuk bu kurala göre ek süre kazanır.",
+    "en": "The parent sets how many correct answers earn 1 minute; the child gains time only by that rule.",
+    "de": "Eltern legen fest, wie viele richtige Antworten 1 Minute bringen; nur nach dieser Regel wird Zeit verdient.",
+    "es": "La familia define cuántos aciertos dan 1 minuto; el menor gana tiempo solo con esa regla.",
+    "fr": "Le parent fixe le nombre de bonnes réponses pour gagner 1 minute ; le temps suit cette règle.",
+    "pt": "Os pais definem quantas respostas certas valem 1 minuto; o tempo segue essa regra.",
+    "ru": "Родитель задаёт, сколько верных ответов дают 1 минуту; время начисляется только по этому правилу.",
+    "ja": "保護者が1分を得るために必要な正解数を設定し、そのルールに沿って追加時間を獲得します。",
+    "ko": "보호자가 1분을 얻는 데 필요한 정답 수를 정하고, 아이는 그 규칙에 따라 추가 시간을 얻습니다.",
 }
 BOOK_LANGUAGE_PATHS = ("/en/", "/de/", "/es/", "/fr/", "/pt/", "/ru/", "/ja/", "/ko/")
 GUIDE_SLUGS = (
@@ -156,10 +156,10 @@ def main() -> None:
                     errors.append(f"Guide animation coverage is incomplete: {guide_page}")
                 if QUIZ_REWARD_MARKERS[lang] not in guide_text:
                     errors.append(f"Exact 3-question reward copy is missing: {guide_page}")
-                if 'class="demo-reward">+3</div>' not in guide_text:
-                    errors.append(f"Exact +3 reward visual is missing: {guide_page}")
-                if 'class="demo-reward">+5</div>' in guide_text:
-                    errors.append(f"Stale +5 reward visual remains: {guide_page}")
+                if 'class="demo-reward">1/3</div>' not in guide_text:
+                    errors.append(f"Configurable reward progress visual is missing: {guide_page}")
+                if any(stale in guide_text for stale in ('class="demo-reward">+3</div>', 'class="demo-reward">+5</div>')):
+                    errors.append(f"Stale fixed reward visual remains: {guide_page}")
 
         content_page = base / "content" / "index.html"
         if content_page.exists():
