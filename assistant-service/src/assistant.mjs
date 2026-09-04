@@ -177,7 +177,8 @@ Your job:
 - ACTIVE GUIDED JOURNEY may be general, fit, plan, tour or feedback. Follow the matching journey without announcing its internal name:
   - fit: act as a concise, perceptive product-fit coach. Learn only the device platform, broad age band and one main family goal, in that order. Ask for exactly one missing information item per question; never combine age and goal in one question. Reuse answers already present in the history. JOURNEY PROGRESS reports how many visitor answers, including the current one, have been received; it is a stopping guard, not product evidence. Never continue questioning after three visitor answers. If one message already supplies all three facts, conclude immediately.
     When enough information is available, leave followUp empty and give a tailored result with four compact parts in the reply language: (1) a clear verdict equivalent to "Strong fit", "Partial fit", or "Cannot confirm"; (2) the strongest verified match between the family's goal and AliKa; (3) one relevant verified limitation or condition; and (4) a two-step low-friction start. Recommend a trial or download only when the verified platform and availability support it. For Android or Android TV, state any verified distribution limitation instead of implying that the Windows Store purchase covers it. For iOS, macOS, covert monitoring, internet-wide remote control, perfect filtering or medical/developmental guarantees, do not sell around the mismatch: use partial fit or cannot confirm. Be persuasive through specificity and relevance, never pressure, fear, fake urgency or competitor attacks.
-  - plan: learn the broad age band, school-day/weekend rhythm and the family's priority. Ask for exactly one information item per question and stop after at most three questions. Then create a flexible, concise starter routine with separate learning, free-time, break and wind-down ideas. Label it as a starting point for family agreement, not medical or developmental advice, and never imply that the website changed a device setting.
+  - plan: act as a practical family routine coach. Learn the broad age band, the school-day/weekend rhythm, and one family priority, in that order. Ask for exactly one missing information item per question and reuse facts already in history. JOURNEY PROGRESS reports how many visitor answers, including the current one, have been received. Never continue questioning after three visitor answers; if one message already supplies all three facts, conclude immediately.
+    When enough information is available, leave followUp empty and write a concise, tailored starter plan in the reply language. It must include: (1) a clear label that this is a flexible starting point for family agreement, not medical or developmental advice; (2) a school-day routine and, when the visitor described it, a distinct weekend adjustment; (3) separately labelled learning, free-screen-time, screen-free-break and wind-down blocks; (4) one bounded reward rule where a verified learning/task reward fits, with a daily cap and no penalty for wrong answers; and (5) two small AliKa setup actions using only verified capabilities. Use concrete times or durations only as adjustable suggestions, explain what family input they respond to, and never present them as official age-based health guidance. Do not claim the website applied settings. Keep the plan realistic rather than filling every hour, and end with one simple review point after the first week.
   - tour: ask only what topic, feature or task the visitor wants to find; never ask their age or device merely to navigate the site. If that goal is missing, ask one topic question and return no actions. Otherwise orient them to the current page in one sentence and offer the most relevant verified page or video. Do not force a tour step the visitor does not need.
   - feedback: help the visitor prepare either an issue report or an improvement idea for alika.destek@gmail.com. Collect only: report type, affected platform or website page, a concise description, and the expected result or suggested improvement when it adds clarity. Ask for exactly one information item per question, reuse answers already given, and stop after at most four visitor answers. Never ask for an email address, child information, PIN, password, recovery code, exact device identifier, screenshot, private log or browsing data. If sensitive data appears, tell the visitor to remove it and do not copy it into the draft. When enough safe detail is available, write a concise email draft in the reply language. Set emailSubject to a specific subject beginning with [AliKa Issue] or [AliKa Improvement] translated naturally into the reply language, set emailBody to the complete polite email, leave followUp empty, and return no actions. The body must state that the draft was prepared with the AliKa website assistant. In answer, say only that the draft is ready and should be reviewed before opening it in the visitor's email app; do not tell the visitor to copy it manually. Never claim the email was sent.
   - general: answer normally without forcing a guided questionnaire.
@@ -313,13 +314,20 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
           : Math.max(1, history.filter((item) => item?.role === 'user').length),
         maximumVisitorAnswers: safeJourney === 'fit' || safeJourney === 'plan' ? 3 : 4,
       };
-      if (safeJourney === 'fit') {
-        const fitQuery = [
+      const journeyStageDirective = safeJourney === 'plan' && journeyProgress.visitorAnswersReceived === 1
+        ? 'Ask only for the school-day/weekend rhythm now. Do not write the plan yet, unless the current user message itself explicitly supplies the age band, rhythm and family priority.'
+        : safeJourney === 'plan' && journeyProgress.visitorAnswersReceived === 2
+          ? 'Ask only for the single family priority now. Do not write the plan yet, unless the current user message itself explicitly supplies that missing priority.'
+          : safeJourney === 'plan' && journeyProgress.visitorAnswersReceived >= 3
+            ? 'Write the completed tailored plan now and leave followUp empty. Do not ask another question.'
+            : 'Follow the active journey rules and the reported progress.';
+      if (safeJourney === 'fit' || safeJourney === 'plan') {
+        const journeyQuery = [
           ...history.filter((item) => item?.role === 'user').map((item) => item.text),
           message,
-          'aile uygunluk değerlendirmesi',
+          safeJourney === 'fit' ? 'aile uygunluk değerlendirmesi' : 'aile dijital denge başlangıç planı',
         ].join(' ');
-        for (const article of retrieveKnowledge(fitQuery, 6)) {
+        for (const article of retrieveKnowledge(journeyQuery, 6)) {
           if (!articles.some((item) => item.id === article.id)) articles.push(article);
           if (articles.length >= 6) break;
         }
@@ -346,7 +354,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
         ...compactHistory,
         {
           role: 'user',
-          parts: [{ text: `CURRENT PAGE: ${pagePath}\nACTIVE GUIDED JOURNEY: ${safeJourney}\nJOURNEY PROGRESS: ${JSON.stringify(journeyProgress)}\nUSER QUESTION: ${message}\n\nVERIFIED ALIKA KNOWLEDGE:\n${JSON.stringify(context)}\n\nRECOMMENDED VERIFIED VIDEO GUIDE:\n${JSON.stringify(videoGuide)}\n\nALLOWED LINKS:\n${JSON.stringify(allowed)}` }],
+          parts: [{ text: `CURRENT PAGE: ${pagePath}\nACTIVE GUIDED JOURNEY: ${safeJourney}\nJOURNEY PROGRESS: ${JSON.stringify(journeyProgress)}\nMANDATORY JOURNEY STAGE: ${journeyStageDirective}\nUSER QUESTION: ${message}\n\nVERIFIED ALIKA KNOWLEDGE:\n${JSON.stringify(context)}\n\nRECOMMENDED VERIFIED VIDEO GUIDE:\n${JSON.stringify(videoGuide)}\n\nALLOWED LINKS:\n${JSON.stringify(allowed)}` }],
         },
       ];
       const response = await client.models.generateContent({

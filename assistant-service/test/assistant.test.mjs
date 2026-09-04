@@ -58,6 +58,11 @@ test('family fit questions retrieve the verified assessment framework', () => {
   assert.equal(results[0].id, 'manual-family-fit-assessment');
 });
 
+test('family balance requests retrieve the verified planning framework', () => {
+  const results = retrieveKnowledge('Okul günü ve hafta sonu için dijital denge planı hazırla', 5);
+  assert.equal(results[0].id, 'manual-family-balance-plan');
+});
+
 test('video retrieval opens the exact Turkish guide for the requested task', () => {
   const installationArticles = retrieveKnowledge('Windows kurulumu ve ilk ayarlar', 4);
   const installation = retrieveVideoGuide('Windows uygulamasını nasıl kurarım?', [], 'tr', installationArticles);
@@ -239,9 +244,72 @@ test('assistant uses the reasoning model and anti-template conversation rules', 
   assert.match(request.config.systemInstruction, /Strong fit/);
   assert.match(request.config.systemInstruction, /two-step low-friction start/);
   assert.match(request.config.systemInstruction, /do not sell around the mismatch/);
+  assert.match(request.config.systemInstruction, /separately labelled learning, free-screen-time, screen-free-break and wind-down blocks/);
+  assert.match(request.config.systemInstruction, /one simple review point after the first week/);
   assert.match(request.config.systemInstruction, /help the visitor prepare either an issue report or an improvement idea/);
   assert.match(request.config.systemInstruction, /do not tell the visitor to copy it manually/);
   assert.match(request.contents.at(-1).parts[0].text, /ACTIVE GUIDED JOURNEY: plan/);
+});
+
+test('plan journey carries all answers into a bounded final-plan prompt', async () => {
+  const requests = [];
+  const fakeClient = {
+    models: {
+      async generateContent(value) {
+        requests.push(value);
+        return { text: JSON.stringify({ answer: 'Başlangıç planı.', actions: [], followUp: '', emailSubject: '', emailBody: '' }) };
+      },
+    },
+  };
+  const assistant = createAssistantClient({}, { client: fakeClient });
+
+  await assistant.answer({
+    message: 'İlkokul, 8-11 yaş',
+    language: 'tr',
+    journey: 'plan',
+    history: [
+      { role: 'user', text: 'Ailemiz için dijital denge başlangıç planı hazırlayalım.' },
+      { role: 'assistant', text: 'Plan hangi yaş grubu için?' },
+    ],
+  });
+  await assistant.answer({
+    message: 'Hafta içi 16:00 evde, 17:00 ödev; hafta sonu sabah serbest.',
+    language: 'tr',
+    journey: 'plan',
+    history: [
+      { role: 'user', text: 'Ailemiz için dijital denge başlangıç planı hazırlayalım.' },
+      { role: 'assistant', text: 'Plan hangi yaş grubu için?' },
+      { role: 'user', text: 'İlkokul, 8-11 yaş' },
+      { role: 'assistant', text: 'Okul günü ve hafta sonu ritminiz nasıl?' },
+    ],
+  });
+  await assistant.answer({
+    message: 'Ödevin önce gelmesi ve akşam tartışmasının azalması',
+    language: 'tr',
+    journey: 'plan',
+    history: [
+      { role: 'user', text: 'Ailemiz için dijital denge başlangıç planı hazırlayalım.' },
+      { role: 'assistant', text: 'Plan hangi yaş grubu için?' },
+      { role: 'user', text: 'İlkokul, 8-11 yaş' },
+      { role: 'assistant', text: 'Okul günü ve hafta sonu ritminiz nasıl?' },
+      { role: 'user', text: 'Hafta içi 16:00 evde, 17:00 ödev; hafta sonu sabah serbest.' },
+      { role: 'assistant', text: 'Ailenizin tek ana önceliği nedir?' },
+    ],
+  });
+
+  assert.match(requests[0].contents.at(-1).parts[0].text, /JOURNEY PROGRESS: \{"visitorAnswersReceived":1,"maximumVisitorAnswers":3\}/);
+  assert.match(requests[0].contents.at(-1).parts[0].text, /Ask only for the school-day\/weekend rhythm now/);
+  assert.match(requests[1].contents.at(-1).parts[0].text, /Ask only for the single family priority now/);
+  const finalPrompt = requests[2].contents.at(-1).parts[0].text;
+  assert.match(finalPrompt, /JOURNEY PROGRESS: \{"visitorAnswersReceived":3,"maximumVisitorAnswers":3\}/);
+  assert.match(finalPrompt, /Write the completed tailored plan now/);
+  assert.match(finalPrompt, /manual-family-balance-plan/);
+  assert.equal(
+    requests[2].contents.some((item) =>
+      item.parts?.some((part) => part.text.includes('Hafta içi 16:00 evde')),
+    ),
+    true,
+  );
 });
 
 test('fit journey tells the model when to ask and when to conclude', async () => {

@@ -27,6 +27,18 @@
       "links": [{"label": "İndirme ve deneme seçenekleri", "href": "/downloads/"}, {"label": "Yaş gruplarını karşılaştırın", "href": "/age-groups/"}, {"label": "Özellikleri inceleyin", "href": "/features/"}]
     },
     {
+      "id": "manual-family-balance-plan",
+      "title": "Aileye özel dijital denge başlangıç planı",
+      "platform": "all",
+      "availability": "available",
+      "menuPath": "Site asistanı → Dijital denge planı hazırla",
+      "content": "Dijital denge planı bir tıbbi öneri veya cihazda otomatik uygulanan ayar değildir; ailenin birlikte konuşup deneyebileceği esnek bir başlangıç taslağıdır. Plan, çocuğun geniş yaş bandını, okul günü ve hafta sonu ritmini ve ailenin tek ana önceliğini dikkate alır. Öğrenme zamanı, serbest ekran zamanı, ekransız mola ve akşam kapanışı ayrı görünmelidir. AliKa içinde planın yalnız doğrulanmış parçaları günlük/haftalık süre, uyku aralığı, uygulama/site kuralı, görev ve sınırlı soru ödülü olarak uygulanabilir.",
+      "steps": ["Geniş yaş bandını seçin.", "Tipik okul günü ve hafta sonu ritmini kısa biçimde tarif edin.", "Tek ana önceliği belirleyin: tartışmayı azaltmak, ödevi öncelemek, uyku düzeni, uygulama sınırı veya öğrenme dengesi.", "Öğrenme, serbest zaman, mola ve kapanış bloklarını ailece konuşun.", "İlk hafta küçük bir günlük sınır ve uyku aralığıyla deneyip birlikte gözden geçirin."],
+      "cautions": ["Planı uzman sağlık veya gelişim tavsiyesi gibi sunmayın.", "Yaşa göre tek doğru dakika değeri varmış gibi kesin hüküm vermeyin.", "Yanlış cevabı süre cezasına çevirmeyin; ödülleri günlük tavanla sınırlayın.", "Site asistanı cihazdaki ayarları değiştirmez."],
+      "keywords": ["dijital denge planı", "aile planı", "okul günü rutini", "hafta sonu rutini", "öğrenme zamanı", "serbest ekran", "ekransız mola", "akşam kapanışı", "başlangıç planı"],
+      "links": [{"label": "Yaş grubuna göre yaklaşım", "href": "/age-groups/"}, {"label": "AliKa nasıl çalışır?", "href": "/how-it-works/"}, {"label": "Plan ve kural özellikleri", "href": "/features/"}]
+    },
+    {
       "id": "manual-windows-navigation",
       "title": "Windows ana menü ve ekran haritası",
       "platform": "windows",
