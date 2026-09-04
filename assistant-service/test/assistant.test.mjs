@@ -108,6 +108,35 @@ test('a guided follow-up question is not repeated inside the answer', () => {
   assert.equal(result.followUp, 'Çocuğunuzun yaş grubu nedir?');
 });
 
+test('completed feedback returns a sanitized email draft only for the feedback journey', () => {
+  const response = JSON.stringify({
+    answer: 'Taslağı hazırladım; göndermeden önce kontrol edin.',
+    actions: [{ label: 'Beklenmeyen bağlantı', href: '/contact/' }],
+    followUp: '',
+    emailSubject: '[AliKa Sorun Bildirimi]\r\nWindows süre ekranı',
+    emailBody: 'Merhaba AliKa ekibi,\n\nWindows süre ekranı açılmıyor.\0',
+  });
+  const feedback = parseModelResponse(response, [], 'tr', null, 'feedback');
+  assert.deepEqual(feedback.emailDraft, {
+    subject: '[AliKa Sorun Bildirimi] Windows süre ekranı',
+    body: 'Merhaba AliKa ekibi,\n\nWindows süre ekranı açılmıyor.',
+  });
+  assert.deepEqual(feedback.actions, []);
+  assert.deepEqual(feedback.sources, []);
+  assert.equal(parseModelResponse(response, [], 'tr').emailDraft, null);
+});
+
+test('feedback does not expose an email draft while another question is required', () => {
+  const result = parseModelResponse(JSON.stringify({
+    answer: 'Türü not ettim.',
+    actions: [],
+    followUp: 'Sorun hangi platformda yaşanıyor?',
+    emailSubject: '[AliKa Sorun Bildirimi] Eksik taslak',
+    emailBody: 'Henüz tamamlanmadı.',
+  }), [], 'tr', null, 'feedback');
+  assert.equal(result.emailDraft, null);
+});
+
 test('assistant uses the reasoning model and anti-template conversation rules', async () => {
   let request;
   const fakeClient = {
@@ -135,7 +164,35 @@ test('assistant uses the reasoning model and anti-template conversation rules', 
   assert.match(request.config.systemInstruction, /RECOMMENDED VERIFIED VIDEO GUIDE/);
   assert.match(request.config.systemInstruction, /ACTIVE GUIDED JOURNEY/);
   assert.match(request.config.systemInstruction, /exactly one information item per question/);
+  assert.match(request.config.systemInstruction, /help the visitor prepare either an issue report or an improvement idea/);
+  assert.match(request.config.systemInstruction, /do not tell the visitor to copy it manually/);
   assert.match(request.contents.at(-1).parts[0].text, /ACTIVE GUIDED JOURNEY: plan/);
+});
+
+test('feedback journey requests structured email fields and suppresses video suggestions', async () => {
+  let request;
+  const fakeClient = {
+    models: {
+      async generateContent(value) {
+        request = value;
+        return { text: JSON.stringify({
+          answer: 'Taslağı hazırladım; göndermeden önce kontrol edin.',
+          actions: [],
+          followUp: '',
+          emailSubject: '[AliKa Geliştirme Fikri] Daha açık süre özeti',
+          emailBody: 'Merhaba AliKa ekibi,\n\nSüre özetinin daha açık olmasını öneriyorum.\n\nBu taslak AliKa site asistanı yardımıyla hazırlanmıştır.',
+        }) };
+      },
+    },
+  };
+  const assistant = createAssistantClient({}, { client: fakeClient });
+  const result = await assistant.answer({ message: 'Süre özeti için fikrim var.', language: 'tr', journey: 'feedback' });
+
+  assert.equal(request.config.responseSchema.required.includes('emailSubject'), true);
+  assert.equal(request.config.responseSchema.required.includes('emailBody'), true);
+  assert.match(request.contents.at(-1).parts[0].text, /ACTIVE GUIDED JOURNEY: feedback/);
+  assert.match(request.contents.at(-1).parts[0].text, /RECOMMENDED VERIFIED VIDEO GUIDE:\nnull/);
+  assert.equal(result.emailDraft.subject, '[AliKa Geliştirme Fikri] Daha açık süre özeti');
 });
 
 test('site tour is grounded in the current page and does not invent an opening video', async () => {

@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 const MAX_BODY_BYTES = 32_768;
 const TEN_MINUTES_MS = 10 * 60 * 1000;
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-const SUPPORTED_JOURNEYS = new Set(['general', 'fit', 'plan', 'tour']);
+const SUPPORTED_JOURNEYS = new Set(['general', 'fit', 'plan', 'tour', 'feedback']);
 
 function json(res, status, body, origin = '') {
   res.writeHead(status, {

@@ -3,7 +3,7 @@ import knowledgeBase from './knowledge-base.json' with { type: 'json' };
 import { retrieveVideoGuide } from './video-guides.mjs';
 
 export const SUPPORTED_LANGUAGES = new Set(['tr', 'en', 'de', 'es', 'fr', 'pt', 'ru', 'ja', 'ko']);
-export const SUPPORTED_JOURNEYS = new Set(['general', 'fit', 'plan', 'tour']);
+export const SUPPORTED_JOURNEYS = new Set(['general', 'fit', 'plan', 'tour', 'feedback']);
 
 const LANGUAGE_NAMES = {
   tr: 'Türkçe', en: 'English', de: 'Deutsch', es: 'Español', fr: 'Français',
@@ -21,10 +21,7 @@ const PAGE_KNOWLEDGE_QUERIES = {
   contact: 'destek iletişim',
 };
 
-const SAFE_EXTERNAL_PREFIXES = [
-  'https://apps.microsoft.com/detail/9N3P9F5ZKR5S',
-  'mailto:alika.destek@gmail.com',
-];
+const SAFE_EXTERNAL_PREFIXES = ['https://apps.microsoft.com/detail/9N3P9F5ZKR5S'];
 
 const STOP_TOKENS = new Set([
   'acaba', 'alika', 'ama', 'ben', 'bana', 'bir', 'bu', 'da', 'de', 'diye', 'icin', 'ile',
@@ -137,10 +134,11 @@ Your job:
 - Sound like a perceptive human guide: vary sentence structure and wording. Never use stock praise such as "harika fikir" or routine closings such as "Başka sorunuz var mı?" Do not pad the answer with generic marketing language.
 - Do not open with ceremonial service phrases such as "memnuniyet duyarım", "hoş geldiniz" or their equivalents. At the start of a guided journey, use one brief sentence explaining what the next answer will unlock, then ask the question through followUp.
 - Keep the answer concise but complete. Set followUp to an empty string by default. Ask one specific qualifying question only when the missing answer would materially change the recommendation.
-- ACTIVE GUIDED JOURNEY may be general, fit, plan or tour. Follow the matching journey without announcing its internal name:
+- ACTIVE GUIDED JOURNEY may be general, fit, plan, tour or feedback. Follow the matching journey without announcing its internal name:
   - fit: learn only the device platform, broad age band and main family goal. Ask for exactly one information item per question; never combine age and goal in one question. Reuse answers already given and stop after at most three questions. Then give an honest verdict (good fit, partial fit, or cannot confirm), explain the strongest match and any verified limitation, and offer one useful page or video.
   - plan: learn the broad age band, school-day/weekend rhythm and the family's priority. Ask for exactly one information item per question and stop after at most three questions. Then create a flexible, concise starter routine with separate learning, free-time, break and wind-down ideas. Label it as a starting point for family agreement, not medical or developmental advice, and never imply that the website changed a device setting.
   - tour: ask only what topic, feature or task the visitor wants to find; never ask their age or device merely to navigate the site. If that goal is missing, ask one topic question and return no actions. Otherwise orient them to the current page in one sentence and offer the most relevant verified page or video. Do not force a tour step the visitor does not need.
+  - feedback: help the visitor prepare either an issue report or an improvement idea for alika.destek@gmail.com. Collect only: report type, affected platform or website page, a concise description, and the expected result or suggested improvement when it adds clarity. Ask for exactly one information item per question, reuse answers already given, and stop after at most four visitor answers. Never ask for an email address, child information, PIN, password, recovery code, exact device identifier, screenshot, private log or browsing data. If sensitive data appears, tell the visitor to remove it and do not copy it into the draft. When enough safe detail is available, write a concise email draft in the reply language. Set emailSubject to a specific subject beginning with [AliKa Issue] or [AliKa Improvement] translated naturally into the reply language, set emailBody to the complete polite email, leave followUp empty, and return no actions. The body must state that the draft was prepared with the AliKa website assistant. In answer, say only that the draft is ready and should be reviewed before opening it in the visitor's email app; do not tell the visitor to copy it manually. Never claim the email was sent.
   - general: answer normally without forcing a guided questionnaire.
 - When more journey information is needed, keep answer to a brief acknowledgement, put the one next question only in followUp, keep followUp under 160 characters, and do not repeat that question in answer. Once the journey result is ready, leave followUp empty.
 - Suggest up to three ALLOWED LINKS only when they directly help with the current intent. Explain fit honestly; do not use pressure, fear, fake scarcity or claims about competitors.
@@ -152,7 +150,8 @@ Your job:
 - If the verified knowledge does not support an answer, say that you cannot confirm it and offer the support page. Do not guess.
 
 Return strict JSON with this shape:
-{"answer":"string","actions":[{"label":"string","href":"allowed URL"}],"followUp":"string or empty"}`;
+{"answer":"string","actions":[{"label":"string","href":"allowed URL"}],"followUp":"string or empty","emailSubject":"string or empty","emailBody":"string or empty"}
+Set emailSubject and emailBody to empty strings outside a completed feedback journey.`;
 }
 
 function allowedUrls(articles, language, videoGuide = null) {
@@ -186,7 +185,7 @@ function removeRepeatedFollowUp(answer, followUp) {
   return sentences.join(' ').trim() || cleanAnswer;
 }
 
-export function parseModelResponse(text, articles, language, videoGuide = null) {
+export function parseModelResponse(text, articles, language, videoGuide = null, journey = 'general') {
   let parsed;
   try {
     parsed = JSON.parse(text);
@@ -219,11 +218,21 @@ export function parseModelResponse(text, articles, language, videoGuide = null) 
     if (sourceLinks.length >= 3) break;
   }
   const followUp = typeof parsed.followUp === 'string' ? parsed.followUp.trim().slice(0, 320) : '';
+  const emailSubject = typeof parsed.emailSubject === 'string'
+    ? parsed.emailSubject.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120)
+    : '';
+  const emailBody = typeof parsed.emailBody === 'string'
+    ? parsed.emailBody.replace(/\0/g, '').trim().slice(0, 3000)
+    : '';
+  const emailDraft = journey === 'feedback' && !followUp && emailSubject && emailBody
+    ? { subject: emailSubject, body: emailBody }
+    : null;
   return {
     answer: removeRepeatedFollowUp(parsed.answer, followUp).slice(0, 2400),
-    actions,
-    sources: sourceLinks,
+    actions: journey === 'feedback' ? [] : actions,
+    sources: journey === 'feedback' ? [] : sourceLinks,
     followUp,
+    emailDraft,
   };
 }
 
@@ -258,7 +267,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
           if (articles.length >= 5) break;
         }
       }
-      const videoGuide = safeJourney === 'tour' && history.length === 0
+      const videoGuide = safeJourney === 'feedback' || (safeJourney === 'tour' && history.length === 0)
         ? null
         : retrieveVideoGuide(message, history, safeLanguage, articles);
       const context = sourceContext(articles, safeLanguage);
@@ -285,7 +294,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
           responseMimeType: 'application/json',
           responseSchema: {
             type: 'OBJECT',
-            required: ['answer', 'actions', 'followUp'],
+            required: ['answer', 'actions', 'followUp', 'emailSubject', 'emailBody'],
             properties: {
               answer: { type: 'STRING' },
               actions: {
@@ -298,11 +307,13 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
                 },
               },
               followUp: { type: 'STRING' },
+              emailSubject: { type: 'STRING' },
+              emailBody: { type: 'STRING' },
             },
           },
         },
       });
-      return parseModelResponse(response.text, articles, safeLanguage, videoGuide);
+      return parseModelResponse(response.text, articles, safeLanguage, videoGuide, safeJourney);
     },
   };
 }
