@@ -80,3 +80,11 @@ test('assistant video URLs stay synchronized with the public nine-language guide
     assert.equal(new Set(sourceIds).size, 13, `${language}: duplicate YouTube video ID`);
   }
 });
+
+test('site assistant visibly separates actions from verified dated evidence', () => {
+  const widget = fs.readFileSync(path.join(siteRoot, 'public', 'site-assistant.js'), 'utf8');
+  assert.match(widget, /Doğrulanmış kaynaklar/);
+  assert.match(widget, /Son doğrulama/);
+  assert.match(widget, /className = 'evidence'/);
+  assert.match(widget, /renderSourceEvidence\(sourceLinks\)/);
+});

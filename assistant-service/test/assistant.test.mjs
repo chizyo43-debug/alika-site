@@ -158,6 +158,45 @@ test('model actions are restricted to retrieved AliKa links', () => {
   }), articles, 'tr');
   assert.deepEqual(result.actions, [{ label: 'İndir', href: '/downloads/' }]);
   assert.ok(result.sources.length > 0);
+  assert.deepEqual(Object.keys(result.sources[0]).sort(), ['href', 'id', 'kind', 'label', 'platform', 'verifiedAt']);
+  assert.equal(result.sources[0].verifiedAt, '2026-09-04');
+});
+
+test('verified evidence names the exact guide, platform and localized source page', () => {
+  const articles = retrieveKnowledge('Android telefonda YouTube için süre sınırı nasıl koyarım?', 5);
+  const result = parseModelResponse(JSON.stringify({
+    answer: 'Kurallar ekranından uygulama limiti ekleyebilirsiniz.',
+    actions: [],
+    followUp: '',
+  }), articles, 'en');
+
+  assert.deepEqual(result.sources[0], {
+    id: 'manual-android-rules',
+    label: 'Android süre, uygulama ve uyku kuralları',
+    href: '/en/features/',
+    kind: 'guide',
+    platform: 'android',
+    verifiedAt: '2026-09-04',
+  });
+});
+
+test('recommended video is exposed as first verified evidence', () => {
+  const articles = retrieveKnowledge('Windows kurulumu nasıl yapılır?', 5);
+  const video = retrieveVideoGuide('Windows kurulum videosunu aç', [], 'tr', articles);
+  const result = parseModelResponse(JSON.stringify({
+    answer: 'Kurulum adımlarını bu videoda görebilirsiniz.',
+    actions: [],
+    followUp: '',
+  }), articles, 'tr', video);
+
+  assert.deepEqual(result.sources[0], {
+    id: 'video:windows-installation',
+    label: 'AliKa Windows nasıl kurulur?',
+    href: 'https://www.youtube.com/watch?v=RZDOb072nyk',
+    kind: 'video',
+    platform: 'windows',
+    verifiedAt: '2026-09-04',
+  });
 });
 
 test('the primary verified page is added even when the model chooses a secondary page', () => {

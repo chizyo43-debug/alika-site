@@ -12,6 +12,8 @@ const LANGUAGE_NAMES = {
   pt: 'Português', ru: 'Русский', ja: '日本語', ko: '한국어',
 };
 
+const KNOWLEDGE_VERIFIED_AT = productKnowledge.version || productKnowledgeIndex.sourceVersion;
+
 const SUPPORT_LINK_LABELS = {
   tr: 'Destek sayfasını aç', en: 'Open support', de: 'Support öffnen', es: 'Abrir soporte',
   fr: 'Ouvrir l’assistance', pt: 'Abrir suporte', ru: 'Открыть поддержку',
@@ -244,6 +246,36 @@ function sourceContext(articles, language) {
   }));
 }
 
+function verifiedSources(articles, language, videoGuide = null) {
+  const sources = [];
+  if (videoGuide?.href) {
+    sources.push({
+      id: `video:${videoGuide.key}`,
+      label: videoGuide.title,
+      href: videoGuide.href,
+      kind: 'video',
+      platform: 'windows',
+      verifiedAt: KNOWLEDGE_VERIFIED_AT,
+    });
+  }
+  for (const article of articles.slice(0, 3)) {
+    const primaryLink = article.links?.[0];
+    if (!primaryLink) continue;
+    const href = localizedHref(primaryLink.href, language);
+    if (sources.some((item) => item.href === href)) continue;
+    sources.push({
+      id: article.id,
+      label: article.title,
+      href,
+      kind: article.menuPath ? 'guide' : 'page',
+      platform: article.platform || 'all',
+      verifiedAt: KNOWLEDGE_VERIFIED_AT,
+    });
+    if (sources.length >= 4) break;
+  }
+  return sources;
+}
+
 function prioritizeTourArticle(message, articles) {
   const query = fold(message).replace(/\s+/g, ' ').trim();
   const preferredId = TOUR_INTENT_ARTICLES.find((item) => item.pattern.test(query))?.id;
@@ -365,15 +397,7 @@ export function parseModelResponse(text, articles, language, videoGuide = null, 
     actions.unshift({ label: videoGuide.label, href: videoGuide.href });
     actions.splice(3);
   }
-  const sourceLinks = [];
-  for (const article of articles.slice(0, 3)) {
-    for (const link of article.links) {
-      const href = localizedHref(link.href, language);
-      if (!sourceLinks.some((item) => item.href === href)) sourceLinks.push({ label: link.label, href });
-      if (sourceLinks.length >= 3) break;
-    }
-    if (sourceLinks.length >= 3) break;
-  }
+  const sourceLinks = verifiedSources(articles, language, videoGuide);
   const followUp = typeof parsed.followUp === 'string' ? parsed.followUp.trim().slice(0, 320) : '';
   const emailSubject = typeof parsed.emailSubject === 'string'
     ? parsed.emailSubject.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120)
