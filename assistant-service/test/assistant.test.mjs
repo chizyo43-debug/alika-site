@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   createAssistantClient,
+  hasVerifiedKnowledge,
   parseModelResponse,
   retrieveConversationKnowledge,
   retrieveKnowledge,
@@ -16,6 +17,31 @@ test('retrieval prioritizes pricing facts', () => {
 test('retrieval prioritizes privacy facts', () => {
   const results = retrieveKnowledge('Çocuğumun verileri buluta gidiyor mu?', 4);
   assert.equal(results[0].id, 'privacy');
+});
+
+test('grounding confidence rejects unsupported questions without weakening verified safety answers', () => {
+  assert.equal(hasVerifiedKnowledge("AliKa iPhone'da çalışır mı?"), false);
+  assert.equal(hasVerifiedKnowledge('PlayStation sürümü var mı?'), false);
+  assert.equal(hasVerifiedKnowledge('Yarın hava nasıl?'), false);
+  assert.equal(hasVerifiedKnowledge('Çocuğun mesajlarını gizlice okuyabilir miyim?'), true);
+  assert.equal(hasVerifiedKnowledge('Android uygulama süre limiti nasıl ayarlanır?'), true);
+});
+
+test('unsupported general questions use an honest support handoff without calling the model', async () => {
+  const assistant = createAssistantClient({}, {
+    client: { models: { async generateContent() { throw new Error('model should not be called'); } } },
+  });
+  const result = await assistant.answer({
+    message: "AliKa iPhone'da çalışır mı?",
+    language: 'tr',
+    journey: 'general',
+    history: [],
+  });
+  assert.match(result.answer, /iPhone\/iPad \(iOS\) desteğini doğrulayan/);
+  assert.match(result.answer, /“çalışır” veya “çalışmaz” diye tahmin yürütmeyeceğim/);
+  assert.match(result.answer, /Windows, Android telefon\/tablet ve Android TV/);
+  assert.deepEqual(result.actions, [{ label: 'Destek sayfasını aç', href: '/contact/' }]);
+  assert.deepEqual(result.sources, []);
 });
 
 test('retrieval does not pad a specific answer with generic marketing facts', () => {

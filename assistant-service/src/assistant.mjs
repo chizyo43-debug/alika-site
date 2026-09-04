@@ -12,6 +12,36 @@ const LANGUAGE_NAMES = {
   pt: 'Português', ru: 'Русский', ja: '日本語', ko: '한국어',
 };
 
+const SUPPORT_LINK_LABELS = {
+  tr: 'Destek sayfasını aç', en: 'Open support', de: 'Support öffnen', es: 'Abrir soporte',
+  fr: 'Ouvrir l’assistance', pt: 'Abrir suporte', ru: 'Открыть поддержку',
+  ja: 'サポートを開く', ko: '지원 페이지 열기',
+};
+
+const UNVERIFIED_COPY = {
+  tr: 'Bu soruya yanıt verecek doğrulanmış bir AliKa bilgisi bulamadım. Tahmin yürütmeyeceğim; güncel kapsamı destek sayfasından doğrudan ekibe sorabilirsiniz.',
+  en: 'I could not find verified AliKa information that answers this question. I will not guess; you can ask the team directly through the support page.',
+  de: 'Ich habe keine verifizierte AliKa-Information gefunden, die diese Frage beantwortet. Ich rate nicht; über die Support-Seite können Sie das Team direkt fragen.',
+  es: 'No encontré información verificada de AliKa que responda a esta pregunta. No voy a adivinar; puede consultar directamente al equipo desde la página de soporte.',
+  fr: 'Je n’ai trouvé aucune information AliKa vérifiée répondant à cette question. Je ne vais pas deviner ; vous pouvez interroger directement l’équipe via la page d’assistance.',
+  pt: 'Não encontrei informação verificada da AliKa que responda a esta pergunta. Não vou adivinhar; pode perguntar diretamente à equipa pela página de suporte.',
+  ru: 'Я не нашёл подтверждённых сведений AliKa, которые отвечают на этот вопрос. Я не буду гадать; уточните актуальную информацию у команды через страницу поддержки.',
+  ja: 'この質問に答えられる検証済みのAliKa情報が見つかりませんでした。推測せず、サポートページからチームへ直接確認できます。',
+  ko: '이 질문에 답할 수 있는 검증된 AliKa 정보를 찾지 못했습니다. 추측하지 않고, 지원 페이지에서 팀에 직접 확인할 수 있도록 안내합니다.',
+};
+
+const UNVERIFIED_PLATFORM_COPY = {
+  tr: (platform) => `${platform} desteğini doğrulayan yayımlanmış bir AliKa bilgisi yok. Bu nedenle “çalışır” veya “çalışmaz” diye tahmin yürütmeyeceğim. Doğrulanmış platformlar Windows, Android telefon/tablet ve Android TV’dir; güncel kapsamı destek ekibine sorabilirsiniz.`,
+  en: (platform) => `There is no published AliKa information confirming ${platform} support, so I will not guess that it works or does not work. The verified platforms are Windows, Android phones/tablets and Android TV; you can ask support for the latest scope.`,
+  de: (platform) => `Es gibt keine veröffentlichte AliKa-Information, die ${platform}-Unterstützung bestätigt. Deshalb rate ich nicht, ob es funktioniert. Verifiziert sind Windows, Android-Handys/Tablets und Android TV; den aktuellen Stand erfahren Sie beim Support.`,
+  es: (platform) => `No hay información publicada de AliKa que confirme la compatibilidad con ${platform}; por eso no afirmaré si funciona o no. Las plataformas verificadas son Windows, teléfonos/tabletas Android y Android TV; consulte al soporte para conocer el alcance actual.`,
+  fr: (platform) => `Aucune information AliKa publiée ne confirme la prise en charge de ${platform} ; je ne vais donc pas affirmer si cela fonctionne ou non. Les plateformes vérifiées sont Windows, les téléphones/tablettes Android et Android TV ; l’assistance peut confirmer l’état actuel.`,
+  pt: (platform) => `Não existe informação publicada da AliKa que confirme suporte para ${platform}; por isso não vou afirmar se funciona ou não. As plataformas verificadas são Windows, telemóveis/tablets Android e Android TV; confirme o âmbito atual com o suporte.`,
+  ru: (platform) => `Опубликованные сведения AliKa не подтверждают поддержку ${platform}, поэтому я не буду утверждать, работает она или нет. Подтверждены Windows, телефоны/планшеты Android и Android TV; актуальный статус можно уточнить у поддержки.`,
+  ja: (platform) => `${platform}対応を確認できる公開済みAliKa情報はないため、動作する・しないを推測しません。確認済みの対象はWindows、Androidスマートフォン／タブレット、Android TVです。最新状況はサポートへ確認できます。`,
+  ko: (platform) => `${platform} 지원을 확인하는 공개된 AliKa 정보가 없어 작동 여부를 추측하지 않겠습니다. 검증된 플랫폼은 Windows, Android 휴대폰/태블릿, Android TV이며 최신 범위는 지원팀에 확인할 수 있습니다.`,
+};
+
 const PAGE_KNOWLEDGE_QUERIES = {
   '': 'AliKa nedir özellikler',
   features: 'özellikler Windows Android öğrenme',
@@ -53,6 +83,19 @@ const TOUR_VIDEO_CLARIFICATION = {
 };
 
 const SAFE_EXTERNAL_PREFIXES = ['https://apps.microsoft.com/detail/9N3P9F5ZKR5S'];
+const UNVERIFIED_PLATFORMS = [
+  { pattern: /\bios\b|iphone|ipad/u, label: 'iPhone/iPad (iOS)' },
+  { pattern: /macos|\bmac\b/u, label: 'Mac (macOS)' },
+  { pattern: /linux/u, label: 'Linux' },
+  { pattern: /chromebook/u, label: 'Chromebook' },
+  { pattern: /playstation|\bps[345]\b/u, label: 'PlayStation' },
+  { pattern: /xbox/u, label: 'Xbox' },
+  { pattern: /nintendo|switch/u, label: 'Nintendo Switch' },
+  { pattern: /fire tv/u, label: 'Fire TV' },
+  { pattern: /apple tv/u, label: 'Apple TV' },
+  { pattern: /tizen/u, label: 'Samsung Tizen' },
+  { pattern: /webos/u, label: 'LG webOS' },
+];
 
 const STOP_TOKENS = new Set([
   'acaba', 'alika', 'ama', 'ben', 'bana', 'bir', 'bu', 'da', 'de', 'diye', 'icin', 'ile',
@@ -88,12 +131,12 @@ function tokens(value) {
   return new Set(fold(value).split(/\s+/).filter((token) => token.length > 1 && !STOP_TOKENS.has(token)));
 }
 
-export function retrieveKnowledge(query, limit = 5) {
+function rankKnowledge(query) {
   const queryTokens = tokens(query);
   const foldedQuery = fold(query).replace(/\s+/g, ' ').trim();
   const platform = requestedPlatform(query);
   const wantsProcedure = /\bnasil\b|\bnasıl\b|nerede|nereden|adim|adım|ayarla|ekle|olustur|oluştur|acilir|açılır|yapilir|yapılır/u.test(foldedQuery);
-  const ranked = KNOWLEDGE_CATALOG.map((article) => {
+  return KNOWLEDGE_CATALOG.map((article) => {
     const indexEntry = PRODUCT_INDEX_BY_ID.get(article.id);
     const titleTokens = tokens(article.title);
     const keywordTokens = tokens(article.keywords.join(' '));
@@ -117,16 +160,30 @@ export function retrieveKnowledge(query, limit = 5) {
     }
     for (const keyword of [...article.keywords, ...(indexEntry?.terms || [])]) {
       const foldedKeyword = fold(keyword).replace(/\s+/g, ' ').trim();
-      if (foldedKeyword.length > 2 && foldedQuery.includes(foldedKeyword)) score += 9;
+      if (tokens(keyword).size > 0 && foldedKeyword.length > 2 && foldedQuery.includes(foldedKeyword)) score += 9;
     }
     if (platform && article.platform) {
       if (article.platform === platform || article.platform === 'all') score += 8;
       else if (article.platform !== 'cross-platform') score -= 12;
     }
-    if (wantsProcedure && article.menuPath && article.steps?.length) score += 12;
+    if (wantsProcedure && matchedTokens > 0 && article.menuPath && article.steps?.length) score += 12;
     if (matchedTokens > 1) score += matchedTokens * 2;
     return { article, score };
   }).sort((left, right) => right.score - left.score || left.article.id.localeCompare(right.article.id));
+}
+
+export function hasVerifiedKnowledge(query) {
+  if (unverifiedPlatformLabel(query)) return false;
+  return (rankKnowledge(query)[0]?.score || 0) >= 5;
+}
+
+function unverifiedPlatformLabel(query) {
+  const foldedQuery = fold(query).replace(/\s+/g, ' ').trim();
+  return UNVERIFIED_PLATFORMS.find((item) => item.pattern.test(foldedQuery))?.label || '';
+}
+
+export function retrieveKnowledge(query, limit = 5) {
+  const ranked = rankKnowledge(query);
 
   const topScore = ranked[0]?.score || 0;
   const minimumScore = Math.max(5, Math.floor(topScore * 0.4));
@@ -360,6 +417,26 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
       if (safeJourney === 'tour' && isVagueTourVideoRequest(message)) {
         const [answer, followUp] = TOUR_VIDEO_CLARIFICATION[safeLanguage];
         return { answer, actions: [], sources: [], followUp, emailDraft: null };
+      }
+      const recentUserContext = history
+        .filter((item) => item?.role === 'user' && typeof item?.text === 'string')
+        .slice(-2)
+        .map((item) => item.text)
+        .join(' ');
+      const groundingQuery = recentUserContext && tokens(message).size <= 3
+        ? `${recentUserContext} ${message}`
+        : message;
+      if (safeJourney === 'general' && !hasVerifiedKnowledge(groundingQuery)) {
+        const unverifiedPlatform = unverifiedPlatformLabel(groundingQuery);
+        return {
+          answer: unverifiedPlatform
+            ? UNVERIFIED_PLATFORM_COPY[safeLanguage](unverifiedPlatform)
+            : UNVERIFIED_COPY[safeLanguage],
+          actions: [{ label: SUPPORT_LINK_LABELS[safeLanguage], href: localizedHref('/contact/', safeLanguage) }],
+          sources: [],
+          followUp: '',
+          emailDraft: null,
+        };
       }
       const articles = retrieveConversationKnowledge(message, history, 6);
       const journeyProgress = {
