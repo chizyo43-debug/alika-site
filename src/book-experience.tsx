@@ -1500,6 +1500,9 @@ export default function BookExperience() {
           <span className="coverTitle">AliKa</span>
           <span className="coverStatement">{copy.approach_kicker}</span>
           <span className="coverSubtitle">{copy.meta}</span>
+          <span className="coverChildPortrait" aria-hidden="true">
+            <img src="/brand/alika-child-ambassador.webp" alt="" width="320" height="554" />
+          </span>
           <span className="openPrompt"><i aria-hidden="true">↗</i><b>{ui.openBook}</b><small>{ui.touchLogo}</small></span>
           <span className="coverRule coverRuleBottom" />
         </button>
