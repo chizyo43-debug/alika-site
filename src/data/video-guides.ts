@@ -1,6 +1,7 @@
 export type GuideLanguageCode = 'tr' | 'en' | 'de' | 'es' | 'fr' | 'pt' | 'ru' | 'ja' | 'ko';
 export type GuideReleaseStatus = 'preparing' | 'review' | 'public';
-export type GuideVideoGroup = 'start' | 'panel' | 'rules' | 'learning' | 'devices' | 'reports' | 'system';
+export type GuidePlatform = 'windows' | 'android';
+export type GuideVideoGroup = 'start' | 'child' | 'panel' | 'rules' | 'learning' | 'devices' | 'reports' | 'profile' | 'settings' | 'system';
 
 export interface GuideVideo {
   key: string;
@@ -15,7 +16,7 @@ export interface GuideVideo {
   captions?: string;
 }
 
-interface GuideLanguageCopy {
+export interface GuideLanguageCopy {
   sectionEyebrow: string;
   sectionTitle: string;
   sectionLead: string;
@@ -34,6 +35,8 @@ interface GuideLanguageCopy {
 }
 
 export interface GuideLanguage {
+  platform: GuidePlatform;
+  expectedVideoCount: number;
   code: GuideLanguageCode;
   youtubeLocale: string;
   nativeName: string;
@@ -41,6 +44,13 @@ export interface GuideLanguage {
   status: GuideReleaseStatus;
   copy: GuideLanguageCopy;
   videos: readonly GuideVideo[];
+}
+
+export interface GuideSeries {
+  platform: GuidePlatform;
+  expectedVideoCount: number;
+  groupOrder: readonly GuideVideoGroup[];
+  languages: readonly GuideLanguage[];
 }
 
 const trVideos = [
@@ -652,11 +662,13 @@ const koVideos = createLocalizedGuideVideos('ko', [
 
 const groupLabels = (
   start: string, panel: string, rules: string, learning: string, devices: string, reports: string, system: string,
-): Record<GuideVideoGroup, string> => ({ start, panel, rules, learning, devices, reports, system });
+): Record<GuideVideoGroup, string> => ({
+  start, child: rules, panel, rules, learning, devices, reports, profile: system, settings: system, system,
+});
 
 export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
   {
-    code: 'tr', youtubeLocale: 'tr', nativeName: 'Türkçe', playlistId: 'PLb83uFzWZ16Q', status: 'public', videos: trVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'tr', youtubeLocale: 'tr', nativeName: 'Türkçe', playlistId: 'PLb83uFzWZ16Q', status: 'public', videos: trVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube rehberleri · 9 uygulama dili', sectionTitle: 'AliKa Windows video rehberleri',
       sectionLead: 'Dilinizi seçin; 01–13 sırasındaki rehberleri konu başlıklarına göre adım adım izleyin.', channelLabel: 'AliKa kanalını aç', playlistLabel: '13 videoluk seriyi aç',
@@ -667,7 +679,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'en', youtubeLocale: 'en', nativeName: 'English', playlistId: 'PLcfP4qWx0x4k', status: 'public', videos: enVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'en', youtubeLocale: 'en', nativeName: 'English', playlistId: 'PLcfP4qWx0x4k', status: 'public', videos: enVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube guides · 9 app languages', sectionTitle: 'AliKa for Windows video guides',
       sectionLead: 'Choose your language and follow guides 01–13 step by step, organized by topic.', channelLabel: 'Open the AliKa channel', playlistLabel: 'Open the 13-video series',
@@ -678,7 +690,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'de', youtubeLocale: 'de', nativeName: 'Deutsch', playlistId: 'PLeJpTO5eMvbM', status: 'public', videos: deVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'de', youtubeLocale: 'de', nativeName: 'Deutsch', playlistId: 'PLeJpTO5eMvbM', status: 'public', videos: deVideos,
     copy: {
       sectionEyebrow: 'AliKa-YouTube-Anleitungen · 9 App-Sprachen', sectionTitle: 'AliKa Windows-Videoanleitungen',
       sectionLead: 'Wählen Sie Ihre Sprache und folgen Sie den Anleitungen 01–13 Schritt für Schritt, nach Themen geordnet.', channelLabel: 'AliKa-Kanal öffnen', playlistLabel: 'Alle 13 Videos öffnen',
@@ -689,7 +701,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'es', youtubeLocale: 'es', nativeName: 'Español', playlistId: 'PLGs9cZUQyNJg', status: 'public', videos: esVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'es', youtubeLocale: 'es', nativeName: 'Español', playlistId: 'PLGs9cZUQyNJg', status: 'public', videos: esVideos,
     copy: {
       sectionEyebrow: 'Guías de AliKa en YouTube · 9 idiomas', sectionTitle: 'Guías en vídeo de AliKa para Windows',
       sectionLead: 'Elija su idioma y siga las guías 01–13 paso a paso, organizadas por tema.', channelLabel: 'Abrir el canal de AliKa', playlistLabel: 'Abrir la serie de 13 vídeos',
@@ -700,7 +712,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'fr', youtubeLocale: 'fr', nativeName: 'Français', playlistId: 'PLJfxtPILegJ8', status: 'public', videos: frVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'fr', youtubeLocale: 'fr', nativeName: 'Français', playlistId: 'PLJfxtPILegJ8', status: 'public', videos: frVideos,
     copy: {
       sectionEyebrow: 'Guides AliKa sur YouTube · 9 langues', sectionTitle: 'Guides vidéo AliKa pour Windows',
       sectionLead: 'Choisissez votre langue et suivez les guides 01–13 étape par étape, classés par thème.', channelLabel: 'Ouvrir la chaîne AliKa', playlistLabel: 'Ouvrir la série de 13 vidéos',
@@ -711,7 +723,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'pt', youtubeLocale: 'pt-BR', nativeName: 'Português (Brasil)', playlistId: 'PLYDOAXkT60aU', status: 'public', videos: ptVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'pt', youtubeLocale: 'pt-BR', nativeName: 'Português (Brasil)', playlistId: 'PLYDOAXkT60aU', status: 'public', videos: ptVideos,
     copy: {
       sectionEyebrow: 'Guias do AliKa no YouTube · 9 idiomas', sectionTitle: 'Guias em vídeo do AliKa para Windows',
       sectionLead: 'Escolha seu idioma e acompanhe os guias 01–13 passo a passo, organizados por assunto.', channelLabel: 'Abrir o canal do AliKa', playlistLabel: 'Abrir a série de 13 vídeos',
@@ -722,7 +734,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'ru', youtubeLocale: 'ru', nativeName: 'Русский', playlistId: 'PLNmRBY5CU7Q8', status: 'public', videos: ruVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'ru', youtubeLocale: 'ru', nativeName: 'Русский', playlistId: 'PLNmRBY5CU7Q8', status: 'public', videos: ruVideos,
     copy: {
       sectionEyebrow: 'Видеоинструкции AliKa · 9 языков приложения', sectionTitle: 'Смотрите инструкции на своём языке.',
       sectionLead: 'Выберите язык, чтобы увидеть только опубликованные инструкции Windows на этом языке.', channelLabel: 'Открыть канал AliKa', playlistLabel: 'Открыть серию из 13 видео',
@@ -733,7 +745,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'ja', youtubeLocale: 'ja', nativeName: '日本語', playlistId: 'PLOPeP3QrjNDg', status: 'public', videos: jaVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'ja', youtubeLocale: 'ja', nativeName: '日本語', playlistId: 'PLOPeP3QrjNDg', status: 'public', videos: jaVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube ガイド · アプリ対応9言語', sectionTitle: 'お使いの言語でガイドをご覧ください。',
       sectionLead: '言語を選ぶと、その言語で公開済みのWindowsガイドだけが表示されます。', channelLabel: 'AliKaチャンネルを開く', playlistLabel: '全13本のシリーズを開く',
@@ -744,7 +756,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    code: 'ko', youtubeLocale: 'ko', nativeName: '한국어', playlistId: 'PLMC3Z8z69Ujk', status: 'public', videos: koVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'ko', youtubeLocale: 'ko', nativeName: '한국어', playlistId: 'PLMC3Z8z69Ujk', status: 'public', videos: koVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube 가이드 · 앱 지원 9개 언어', sectionTitle: '내 언어로 가이드를 시청하세요.',
       sectionLead: '언어를 선택하면 해당 언어로 공개된 Windows 가이드만 표시됩니다.', channelLabel: 'AliKa 채널 열기', playlistLabel: '13개 동영상 시리즈 열기',
@@ -756,22 +768,140 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
   },
 ] as const;
 
-export const GUIDE_VIDEO_GROUP_ORDER: readonly GuideVideoGroup[] = ['start', 'panel', 'rules', 'learning', 'devices', 'reports', 'system'];
+const androidGroupLabels = (
+  start: string,
+  child: string,
+  panel: string,
+  rules: string,
+  learning: string,
+  devices: string,
+  reports: string,
+  profile: string,
+  settings: string,
+): Record<GuideVideoGroup, string> => ({
+  start, child, panel, rules, learning, devices, reports, profile, settings, system: settings,
+});
 
-for (const language of GUIDE_LANGUAGES) {
-  if (language.status === 'public' && language.videos.length !== 13) {
-    throw new Error(`${language.code}: a public guide release must contain exactly 13 videos`);
-  }
-  const orders = language.videos.map((video) => video.order);
-  const ids = language.videos.map((video) => video.id);
-  if (new Set(orders).size !== orders.length || new Set(ids).size !== ids.length) {
-    throw new Error(`${language.code}: duplicate guide order or YouTube id`);
-  }
-  if (language.videos.length > 0 && orders.some((order, index) => order !== index + 1)) {
-    throw new Error(`${language.code}: guide videos must be ordered from 1 to 13`);
+const androidCopyOverrides: Record<GuideLanguageCode, Pick<GuideLanguageCopy,
+  'sectionTitle' | 'sectionLead' | 'playlistLabel' | 'emptyTitle' | 'emptyDescription' | 'groupLabels'
+>> = {
+  tr: {
+    sectionTitle: 'AliKa Android telefon ve tablet rehberleri',
+    sectionLead: 'Android rehberleri 01–21 sırasında; çocuk, ebeveyn ve ortak telefon ekranları ayrı başlıklarda gösterilecek.',
+    playlistLabel: '21 videoluk Android serisini aç',
+    emptyTitle: 'Türkçe Android rehberleri hazırlanıyor.',
+    emptyDescription: 'Gerçek telefon çekimleri onaylanıp Android dağıtımı açıldığında 21 videonun tamamı burada birlikte yayımlanacak.',
+    groupLabels: androidGroupLabels('Kurulum', 'Çocuk Ekranı', 'Panel', 'Kurallar', 'Öğrenme', 'Cihazlar ve Aile Ağı', 'Raporlar', 'Profil', 'Ayarlar'),
+  },
+  en: {
+    sectionTitle: 'AliKa Android phone and tablet guides',
+    sectionLead: 'The 01–21 Android series will keep child, parent and shared-phone screens in clearly separated topics.',
+    playlistLabel: 'Open the 21-video Android series',
+    emptyTitle: 'English Android guides are in preparation.',
+    emptyDescription: 'All 21 videos will appear together after real-device review and Android distribution are ready.',
+    groupLabels: androidGroupLabels('Setup', 'Child Screen', 'Dashboard', 'Rules', 'Learning', 'Devices and Family Network', 'Reports', 'Profile', 'Settings'),
+  },
+  de: {
+    sectionTitle: 'AliKa-Android-Anleitungen für Smartphone und Tablet',
+    sectionLead: 'Die Android-Reihe 01–21 trennt Kinder-, Eltern- und gemeinsam genutzte Geräte klar nach Themen.',
+    playlistLabel: 'Android-Serie mit 21 Videos öffnen',
+    emptyTitle: 'Deutsche Android-Anleitungen werden vorbereitet.',
+    emptyDescription: 'Alle 21 Videos erscheinen gemeinsam nach der Prüfung am echten Gerät und dem Start der Android-Verteilung.',
+    groupLabels: androidGroupLabels('Einrichtung', 'Kinderansicht', 'Übersicht', 'Regeln', 'Lernen', 'Geräte und Familiennetzwerk', 'Berichte', 'Profil', 'Einstellungen'),
+  },
+  es: {
+    sectionTitle: 'Guías de AliKa para teléfonos y tabletas Android',
+    sectionLead: 'La serie Android 01–21 separa claramente las pantallas del niño, de los padres y del teléfono compartido.',
+    playlistLabel: 'Abrir la serie Android de 21 vídeos',
+    emptyTitle: 'Las guías de Android en español están en preparación.',
+    emptyDescription: 'Los 21 vídeos aparecerán juntos tras la revisión en un dispositivo real y el inicio de la distribución Android.',
+    groupLabels: androidGroupLabels('Instalación', 'Pantalla infantil', 'Panel', 'Reglas', 'Aprendizaje', 'Dispositivos y red familiar', 'Informes', 'Perfil', 'Ajustes'),
+  },
+  fr: {
+    sectionTitle: 'Guides AliKa pour téléphones et tablettes Android',
+    sectionLead: 'La série Android 01–21 sépare clairement les écrans enfant, parent et téléphone partagé.',
+    playlistLabel: 'Ouvrir la série Android de 21 vidéos',
+    emptyTitle: 'Les guides Android en français sont en préparation.',
+    emptyDescription: 'Les 21 vidéos paraîtront ensemble après la validation sur appareil réel et l’ouverture de la distribution Android.',
+    groupLabels: androidGroupLabels('Installation', 'Écran enfant', 'Tableau de bord', 'Règles', 'Apprentissage', 'Appareils et réseau familial', 'Rapports', 'Profil', 'Paramètres'),
+  },
+  pt: {
+    sectionTitle: 'Guias do AliKa para celulares e tablets Android',
+    sectionLead: 'A série Android 01–21 separa claramente as telas da criança, dos responsáveis e do celular compartilhado.',
+    playlistLabel: 'Abrir a série Android de 21 vídeos',
+    emptyTitle: 'Os guias Android em português estão sendo preparados.',
+    emptyDescription: 'Os 21 vídeos aparecerão juntos após a revisão em aparelho real e a abertura da distribuição Android.',
+    groupLabels: androidGroupLabels('Configuração', 'Tela da criança', 'Painel', 'Regras', 'Aprendizagem', 'Dispositivos e rede familiar', 'Relatórios', 'Perfil', 'Configurações'),
+  },
+  ru: {
+    sectionTitle: 'Руководства AliKa для телефонов и планшетов Android',
+    sectionLead: 'В серии Android 01–21 экраны ребёнка, родителя и общего телефона разделены по понятным темам.',
+    playlistLabel: 'Открыть серию Android из 21 видео',
+    emptyTitle: 'Руководства Android на русском языке готовятся.',
+    emptyDescription: 'Все 21 видео появятся вместе после проверки на реальном устройстве и запуска распространения Android.',
+    groupLabels: androidGroupLabels('Установка', 'Экран ребёнка', 'Панель', 'Правила', 'Обучение', 'Устройства и семейная сеть', 'Отчёты', 'Профиль', 'Настройки'),
+  },
+  ja: {
+    sectionTitle: 'AliKa Androidスマートフォン・タブレットガイド',
+    sectionLead: 'Android 01–21シリーズでは、子ども・保護者・共有端末の画面を分かりやすい項目に分けて紹介します。',
+    playlistLabel: 'Android全21本のシリーズを開く',
+    emptyTitle: '日本語のAndroidガイドを準備しています。',
+    emptyDescription: '実機確認とAndroid配布の開始後、全21本をまとめて公開します。',
+    groupLabels: androidGroupLabels('セットアップ', '子ども画面', 'パネル', 'ルール', '学習', 'デバイスとファミリーネットワーク', 'レポート', 'プロフィール', '設定'),
+  },
+  ko: {
+    sectionTitle: 'AliKa Android 휴대폰·태블릿 가이드',
+    sectionLead: 'Android 01–21 시리즈는 자녀, 보호자, 공용 휴대폰 화면을 이해하기 쉬운 주제로 나누어 보여 줍니다.',
+    playlistLabel: 'Android 21개 동영상 시리즈 열기',
+    emptyTitle: '한국어 Android 가이드를 준비하고 있습니다.',
+    emptyDescription: '실제 기기 검토와 Android 배포가 시작되면 21개 동영상을 한 번에 공개합니다.',
+    groupLabels: androidGroupLabels('설정', '자녀 화면', '패널', '규칙', '학습', '기기 및 가족 네트워크', '보고서', '프로필', '설정'),
+  },
+};
+
+export const ANDROID_GUIDE_LANGUAGES: readonly GuideLanguage[] = GUIDE_LANGUAGES.map((windowsLanguage) => ({
+  ...windowsLanguage,
+  platform: 'android',
+  expectedVideoCount: 21,
+  playlistId: '',
+  status: 'preparing',
+  videos: [],
+  copy: { ...windowsLanguage.copy, ...androidCopyOverrides[windowsLanguage.code] },
+}));
+
+export const GUIDE_VIDEO_GROUP_ORDER: readonly GuideVideoGroup[] = ['start', 'panel', 'rules', 'learning', 'devices', 'reports', 'system'];
+export const ANDROID_GUIDE_VIDEO_GROUP_ORDER: readonly GuideVideoGroup[] = ['start', 'child', 'panel', 'rules', 'learning', 'devices', 'reports', 'profile', 'settings'];
+
+export const WINDOWS_GUIDE_SERIES: GuideSeries = {
+  platform: 'windows', expectedVideoCount: 13, groupOrder: GUIDE_VIDEO_GROUP_ORDER, languages: GUIDE_LANGUAGES,
+};
+export const ANDROID_GUIDE_SERIES: GuideSeries = {
+  platform: 'android', expectedVideoCount: 21, groupOrder: ANDROID_GUIDE_VIDEO_GROUP_ORDER, languages: ANDROID_GUIDE_LANGUAGES,
+};
+export const GUIDE_SERIES_BY_PLATFORM: Record<GuidePlatform, GuideSeries> = {
+  windows: WINDOWS_GUIDE_SERIES,
+  android: ANDROID_GUIDE_SERIES,
+};
+
+for (const series of Object.values(GUIDE_SERIES_BY_PLATFORM)) {
+  for (const language of series.languages) {
+    if (language.platform !== series.platform || language.expectedVideoCount !== series.expectedVideoCount) {
+      throw new Error(`${series.platform}/${language.code}: guide series metadata differs`);
+    }
+    if (language.status === 'public' && language.videos.length !== series.expectedVideoCount) {
+      throw new Error(`${series.platform}/${language.code}: a public guide release must contain exactly ${series.expectedVideoCount} videos`);
+    }
+    const orders = language.videos.map((video) => video.order);
+    const ids = language.videos.map((video) => video.id);
+    if (new Set(orders).size !== orders.length || new Set(ids).size !== ids.length) {
+      throw new Error(`${series.platform}/${language.code}: duplicate guide order or YouTube id`);
+    }
+    if (language.videos.length > 0 && orders.some((order, index) => order !== index + 1)) {
+      throw new Error(`${series.platform}/${language.code}: guide videos must be ordered from 1 to ${series.expectedVideoCount}`);
+    }
   }
 }
 
 export function getPublishedGuideVideos(language: GuideLanguage): readonly GuideVideo[] {
-  return language.status === 'public' && language.videos.length === 13 ? language.videos : [];
+  return language.status === 'public' && language.videos.length === language.expectedVideoCount ? language.videos : [];
 }

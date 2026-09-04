@@ -4,11 +4,11 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type TouchEvent } from 'react';
 import {
-  GUIDE_LANGUAGES,
-  GUIDE_VIDEO_GROUP_ORDER,
+  GUIDE_SERIES_BY_PLATFORM,
   getPublishedGuideVideos,
   type GuideLanguage,
   type GuideLanguageCode,
+  type GuidePlatform,
   type GuideVideo,
 } from './data/video-guides';
 import localeData from './data/locales.json';
@@ -78,6 +78,7 @@ interface PublishedContentCatalog {
 
 interface GameInfo {
   id: string;
+  coverId?: string;
   title: string;
   category: string;
   players: string;
@@ -127,16 +128,17 @@ const BOOK_UI_COPY: Record<SiteLanguage, {
   nextSection: string;
   scrollDown: string;
   coverEyebrow: string;
+  trialLabel: string;
 }> = {
-  tr: { bookLabel: 'AliKa etkileşimli ürün kitabı', openBook: 'Kitabı aç', touchLogo: 'Logo üzerine dokunun', previous: 'Önceki', next: 'Sonraki', previousSection: 'Önceki bölüm', nextSection: 'Sonraki bölüm', scrollDown: 'Aşağı kaydır', coverEyebrow: 'Aile için dijital denge' },
-  en: { bookLabel: 'AliKa interactive product book', openBook: 'Open the book', touchLogo: 'Tap the logo', previous: 'Previous', next: 'Next', previousSection: 'Previous section', nextSection: 'Next section', scrollDown: 'Scroll down', coverEyebrow: 'Digital balance for families' },
-  de: { bookLabel: 'Interaktives AliKa-Produktbuch', openBook: 'Buch öffnen', touchLogo: 'Logo antippen', previous: 'Zurück', next: 'Weiter', previousSection: 'Vorheriger Abschnitt', nextSection: 'Nächster Abschnitt', scrollDown: 'Nach unten', coverEyebrow: 'Digitale Balance für Familien' },
-  es: { bookLabel: 'Libro interactivo de AliKa', openBook: 'Abrir el libro', touchLogo: 'Toque el logotipo', previous: 'Anterior', next: 'Siguiente', previousSection: 'Sección anterior', nextSection: 'Sección siguiente', scrollDown: 'Desplazar', coverEyebrow: 'Equilibrio digital familiar' },
-  fr: { bookLabel: 'Livre produit interactif AliKa', openBook: 'Ouvrir le livre', touchLogo: 'Touchez le logo', previous: 'Précédent', next: 'Suivant', previousSection: 'Section précédente', nextSection: 'Section suivante', scrollDown: 'Faire défiler', coverEyebrow: 'Équilibre numérique familial' },
-  pt: { bookLabel: 'Livro interativo AliKa', openBook: 'Abrir o livro', touchLogo: 'Toque no logótipo', previous: 'Anterior', next: 'Seguinte', previousSection: 'Secção anterior', nextSection: 'Secção seguinte', scrollDown: 'Descer', coverEyebrow: 'Equilíbrio digital familiar' },
-  ru: { bookLabel: 'Интерактивная книга AliKa', openBook: 'Открыть книгу', touchLogo: 'Нажмите на логотип', previous: 'Назад', next: 'Далее', previousSection: 'Предыдущий раздел', nextSection: 'Следующий раздел', scrollDown: 'Прокрутить', coverEyebrow: 'Цифровой баланс семьи' },
-  ja: { bookLabel: 'AliKaインタラクティブ製品ブック', openBook: '本を開く', touchLogo: 'ロゴをタップ', previous: '前へ', next: '次へ', previousSection: '前のセクション', nextSection: '次のセクション', scrollDown: '下へスクロール', coverEyebrow: '家族のデジタルバランス' },
-  ko: { bookLabel: 'AliKa 인터랙티브 제품 책', openBook: '책 열기', touchLogo: '로고를 누르세요', previous: '이전', next: '다음', previousSection: '이전 섹션', nextSection: '다음 섹션', scrollDown: '아래로 스크롤', coverEyebrow: '가족을 위한 디지털 균형' },
+  tr: { bookLabel: 'AliKa etkileşimli ürün kitabı', openBook: 'Kitabı aç', touchLogo: 'Logo üzerine dokunun', previous: 'Önceki', next: 'Sonraki', previousSection: 'Önceki bölüm', nextSection: 'Sonraki bölüm', scrollDown: 'Aşağı kaydır', coverEyebrow: 'Aile için dijital denge', trialLabel: '7 gün ücretsiz deneyin' },
+  en: { bookLabel: 'AliKa interactive product book', openBook: 'Open the book', touchLogo: 'Tap the logo', previous: 'Previous', next: 'Next', previousSection: 'Previous section', nextSection: 'Next section', scrollDown: 'Scroll down', coverEyebrow: 'Digital balance for families', trialLabel: 'Try free for 7 days' },
+  de: { bookLabel: 'Interaktives AliKa-Produktbuch', openBook: 'Buch öffnen', touchLogo: 'Logo antippen', previous: 'Zurück', next: 'Weiter', previousSection: 'Vorheriger Abschnitt', nextSection: 'Nächster Abschnitt', scrollDown: 'Nach unten', coverEyebrow: 'Digitale Balance für Familien', trialLabel: '7 Tage kostenlos testen' },
+  es: { bookLabel: 'Libro interactivo de AliKa', openBook: 'Abrir el libro', touchLogo: 'Toque el logotipo', previous: 'Anterior', next: 'Siguiente', previousSection: 'Sección anterior', nextSection: 'Sección siguiente', scrollDown: 'Desplazar', coverEyebrow: 'Equilibrio digital familiar', trialLabel: 'Pruébalo gratis durante 7 días' },
+  fr: { bookLabel: 'Livre produit interactif AliKa', openBook: 'Ouvrir le livre', touchLogo: 'Touchez le logo', previous: 'Précédent', next: 'Suivant', previousSection: 'Section précédente', nextSection: 'Section suivante', scrollDown: 'Faire défiler', coverEyebrow: 'Équilibre numérique familial', trialLabel: 'Essayez gratuitement pendant 7 jours' },
+  pt: { bookLabel: 'Livro interativo AliKa', openBook: 'Abrir o livro', touchLogo: 'Toque no logótipo', previous: 'Anterior', next: 'Seguinte', previousSection: 'Secção anterior', nextSection: 'Secção seguinte', scrollDown: 'Descer', coverEyebrow: 'Equilíbrio digital familiar', trialLabel: 'Experimente grátis durante 7 dias' },
+  ru: { bookLabel: 'Интерактивная книга AliKa', openBook: 'Открыть книгу', touchLogo: 'Нажмите на логотип', previous: 'Назад', next: 'Далее', previousSection: 'Предыдущий раздел', nextSection: 'Следующий раздел', scrollDown: 'Прокрутить', coverEyebrow: 'Цифровой баланс семьи', trialLabel: 'Попробуйте бесплатно 7 дней' },
+  ja: { bookLabel: 'AliKaインタラクティブ製品ブック', openBook: '本を開く', touchLogo: 'ロゴをタップ', previous: '前へ', next: '次へ', previousSection: '前のセクション', nextSection: '次のセクション', scrollDown: '下へスクロール', coverEyebrow: '家族のデジタルバランス', trialLabel: '7日間無料でお試し' },
+  ko: { bookLabel: 'AliKa 인터랙티브 제품 책', openBook: '책 열기', touchLogo: '로고를 누르세요', previous: '이전', next: '다음', previousSection: '이전 섹션', nextSection: '다음 섹션', scrollDown: '아래로 스크롤', coverEyebrow: '가족을 위한 디지털 균형', trialLabel: '7일 무료 체험' },
 };
 
 function resolveSiteLanguage(): SiteLanguage {
@@ -168,11 +170,11 @@ const BOOK_PAGES: BookPage[] = [
   { id: 'gunluk-duzen', chapter: 'Planlama', kind: 'routine', navLabel: 'Ebeveyn görünümü', title: 'Bugün ne olduğunu tek ekrandan görün.', summary: 'Kalan süre, görev onayı ve süre hediyesinin ebeveyn görünümü.', status: 'Bugün kullanılabilir' },
   { id: 'aile', chapter: 'AliKa Ekosistemi', kind: 'family', navLabel: 'Cihazlar', title: 'Her cihazın görevi bellidir.', summary: 'Ebeveyn telefonu, çocuk cihazı ve ortak ekranın birlikte çalışması.', status: 'Bugün kullanılabilir' },
   { id: 'ekosistem-olanaklari', chapter: 'AliKa Ekosistemi', kind: 'ecosystem-actions', navLabel: 'Neler yapılabilir?', title: 'Bir cihazdan fazlası: ailece yapılabilenler.', summary: 'Bugün çalışan cihaz yönetimi, görev, öğrenme ve ortak oyun özellikleri; geliştirilen Android TV deneyimi.' },
-  { id: 'oyunlar', chapter: 'Oyunlar', kind: 'games-intro', navLabel: 'Oyun kitaplığı', title: '20 oyun, tek ortak ekran.', summary: 'AliKa içerik deposundaki 20 aile oyununun yaşa uyarlanan kitaplığı.', status: 'Geliştiriliyor' },
-  { id: 'oyunlar-bilgi', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Bilgi & kelime', title: 'Bilgi ve kelime oyunları.', summary: 'Bilgi Yarışması, Ülke–Başkent Hafızası, Çarkıfelek, Tabu ve Kelime Avı.' },
-  { id: 'oyunlar-yaraticilik', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Sahne & hikâye', title: 'Sahne, çizim ve hikâye oyunları.', summary: 'Bu Kim, Sessiz Sinema, Çiz ve Bil, Hikâye Macerası ve Ritim Sahnesi.' },
-  { id: 'oyunlar-aile', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Aile gecesi', title: 'Ailece oynanan oyunlar.', summary: 'Yalancı, Aile Kaçış Gecesi, İsim Şehir, Kelime Bahçesi ve Renkli Pazar.' },
-  { id: 'oyunlar-stem', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'STEM & strateji', title: 'STEM ve strateji oyunları.', summary: 'Rota Ustaları, Denge Atölyesi, Bahçe Ustaları, Işık Laboratuvarı ve Robot Kodlama Arenası.' },
+  { id: 'oyunlar', chapter: 'Oyunlar', kind: 'games-intro', navLabel: 'Oyun kitaplığı', title: 'Altı premium aile oyunu geliştiriliyor.', summary: '10–16 yaşındaki gençlerle yetişkinlerin aynı ekranda tekrar oynamak isteyeceği altı özgün Türkçe deneyim.', status: 'Geliştiriliyor' },
+  { id: 'oyunlar-bilgi', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Bilgi & kelime', title: 'Kelime ve bilgi arenası.', summary: 'Kelime Çarkı ve Bilgi Arenası: kısa turlar, gizli seçimler ve ailece konuşma.' },
+  { id: 'oyunlar-yaraticilik', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Aile Sahnesi', title: 'Anlat, çiz, canlandır.', summary: 'Aile Sahnesi; Sessiz Sinema, Çiz ve Bil ve Yasak Kelimeler modlarını tek başlıkta toplar.' },
+  { id: 'oyunlar-aile', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Kaçış gecesi', title: 'Her rol çözümün bir parçası.', summary: 'Aile Kaçış Gecesi; özel telefon rolleri, ortak envanter ve birlikte çözülen bulmacalar sunar.' },
+  { id: 'oyunlar-stem', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Işık & kodlama', title: 'Deneyerek çöz, birlikte çalıştır.', summary: 'Işık Laboratuvarı ve Robot Kodlama Arenası, ortak ekranda görsel problem çözmeyi öne çıkarır.' },
   { id: 'guven', chapter: 'Güven', kind: 'trust', navLabel: 'Yerel çalışma', title: 'Temel veriler cihazda kalır.', summary: 'Bulut hesabı, reklam ve ürün telemetrisi gerektirmeyen yerel çalışma; aile cihazları arasında isteğe bağlı şifreli ev ağı.' },
   { id: 'durum', chapter: 'Güven', kind: 'status', navLabel: 'Ürün durumu', title: 'Ne hazırsa onu söylüyoruz.', summary: 'Bugün çalışan, geliştirilen ve planlanan özelliklerin dürüst ayrımı.' },
   { id: 'hazir-icerik', chapter: 'Hazır içerik', kind: 'content', navLabel: 'Kütüphane', title: 'Ders, konu ve soru içerikleri tek kütüphanede.', summary: 'Hazırlanan eğitim içeriklerinin güncel görünümü.' },
@@ -336,49 +338,26 @@ const FIELD_ROWS: Array<{ state: PageStatus; title: string; detail: string }> = 
 ];
 
 const GAMES: GameInfo[] = [
-  { id: 'bilgi-yarismasi', title: 'Bilgi Yarışması', category: 'Bilgi', players: '2–8 oyuncu', duration: '10–20 dk', mark: '?', tone: 'cyan', summary: 'Yaşa göre uyarlanan, dokuz dilde hazırlanmış hızlı soru turu.', steps: ['Yaş grubunu, dili ve tur uzunluğunu seçin.', 'Soruyu ortak ekranda okuyup cevabınızı cihazınızdan verin.', 'Doğru cevapları ve kısa açıklamayı birlikte değerlendirin.'] },
-  { id: 'ulke-baskent', title: 'Ülke–Başkent Hafızası', category: 'Hafıza', players: '1–6 oyuncu', duration: '8–15 dk', mark: '⌁', tone: 'green', summary: '100 ülke–başkent çiftiyle görsel eşleştirme oyunu.', steps: ['Tur için 2–12 ülke–başkent çifti belirleyin.', 'Sıranızda iki kart açın ve doğru çifti bulmaya çalışın.', 'Eşleşen kartları alın; en çok çifti bulan kazanır.'] },
-  { id: 'carkifelek', title: 'Çarkıfelek', category: 'Kelime', players: '2–8 oyuncu', duration: '10–20 dk', mark: '◒', tone: 'amber', summary: 'Kategori ve ipucundan gizli kelimeyi bulan aile bulmacası.', steps: ['Kategori ile ipucunu okuyun; gizli harflere bakın.', 'Çarkı çevirip harf söyleyin veya kelimeyi tahmin edin.', 'Cevap cihazda gizli kalır; doğru bilen puanı alır.'] },
-  { id: 'tabu', title: 'Tabu', category: 'Anlatım', players: '4–10 oyuncu', duration: '15–25 dk', mark: '!', tone: 'coral', summary: 'Hedef kelimeyi dört yasak sözcüğü kullanmadan anlatın.', steps: ['Takımlara ayrılın ve anlatıcı ilk kartı açsın.', 'Hedefi, karttaki dört yasak kelimeyi söylemeden anlatın.', 'Süre bitmeden bilinen her kart için bir puan kazanın.'] },
-  { id: 'kelime-avi', title: 'Kelime Avı', category: 'Kelime', players: '1–6 oyuncu', duration: '8–15 dk', mark: 'Aa', tone: 'violet', summary: 'Karışık harfleri düzenleyip doğru kelimeye ulaşın.', steps: ['Karışık harfleri ve varsa kategori ipucunu inceleyin.', 'Harfleri doğru sıraya taşıyarak kelimeyi oluşturun.', 'Takılırsanız yaşa göre ilk harf ipucunu kullanın.'] },
-
-  { id: 'bu-kim', title: 'Bu Kim?', category: 'Tahmin', players: '2–8 oyuncu', duration: '10–20 dk', mark: '◉', tone: 'cyan', summary: 'İpuçları açıldıkça kişiyi en erken tahmin etmeye çalışın.', steps: ['Kaynaklı kişi kartını açın; ilk ipucunu dinleyin.', 'Her ipucundan sonra tahmininizi cihazınızdan verin.', 'Daha az ipucuyla doğru bilen daha yüksek puan alır.'] },
-  { id: 'sessiz-sinema', title: 'Sessiz Sinema', category: 'Hareket', players: '4–12 oyuncu', duration: '15–30 dk', mark: '☆', tone: 'coral', summary: 'Güvenli hareket kartlarını konuşmadan canlandırın.', steps: ['Takım, hızlı tur, aile veya oyuncu zinciri modunu seçin.', 'Karttaki eylemi konuşmadan ve güvenli biçimde canlandırın.', 'Süre içinde doğru tahmin edilen her kartı puanlayın.'] },
-  { id: 'ciz-ve-bil', title: 'Çiz ve Bil', category: 'Çizim', players: '3–10 oyuncu', duration: '15–25 dk', mark: '✎', tone: 'amber', summary: '200 sahneyi çizerek anlatan yaratıcı tahmin oyunu.', steps: ['Çizer gizli sahne kartını yalnız kendi cihazında görür.', 'Yazı ve konuşma olmadan verilen sahneyi çizer.', 'Takım süre dolmadan tahmin eder; küçük yaşta şekil ipucu açılır.'] },
-  { id: 'hikaye-macerasi', title: 'Hikâye Macerası', category: 'Hikâye', players: '1–8 oyuncu', duration: '15–30 dk', mark: '✦', tone: 'violet', summary: 'Karakter, yer, nesne ve sürprizlerle ortak hikâye kurun.', steps: ['Anlatıcı, aile zinciri veya 60 saniye modunu seçin.', 'Karakter, yer, nesne ve görev kartlarını açın.', 'Sırayla anlatın; sürpriz kartını hikâyenin ortasında ekleyin.'] },
-  { id: 'ritim-sahnesi', title: 'Ritim Sahnesi', category: 'Ritim', players: '1–8 oyuncu', duration: '8–20 dk', mark: '♪', tone: 'green', summary: 'Telifli müzik kullanmadan özgün ritimleri birlikte tekrar edin.', steps: ['Yaşa uygun 8–24 adımlı ritim dizisini açın.', 'Ekrandaki vuruşları el, masa veya seçilen sesle tekrar edin.', 'Doğru tempo ve vurguyla tamamlanan turu ilerletin.'] },
-
-  { id: 'yalanci', title: 'Yalancı', category: 'Akıl yürütme', players: '3–10 oyuncu', duration: '12–20 dk', mark: '≠', tone: 'coral', summary: 'Üç ifadeden yanlış olanı seçip nedenini açıklayın.', steps: ['İki doğru ve bir yanlış ifadeyi ortak ekranda okuyun.', 'Herkes yanlış olduğunu düşündüğü ifadeyi gizlice seçsin.', 'Seçimleri açın; doğru açıklamayla puanı paylaşın.'] },
-  { id: 'aile-kacis', title: 'Aile Kaçış Gecesi', category: 'İş birliği', players: '2–8 oyuncu', duration: '20–40 dk', mark: '⌂', tone: 'violet', summary: 'Tek çözümlü ipuçlarını farklı aile rolleriyle birlikte çözün.', steps: ['İpucu kâşifi, desen çözücü, anahtar koruyucu gibi rolleri bölüşün.', 'Her oyuncunun gördüğü parçaları konuşarak birleştirin.', 'Sembol kodunu bulup kasayı açın; isterseniz zamanlayıcı kullanın.'] },
-  { id: 'isim-sehir', title: 'İsim Şehir', category: 'Kelime', players: '2–10 oyuncu', duration: '10–25 dk', mark: 'ABC', tone: 'cyan', summary: 'Harf ve kategori turuyla klasik aile oyununu ortak ekrana taşır.', steps: ['Harf seçin; isim ve şehirle başlayan kategori listesini açın.', 'Süre içinde cevapları kendi cihazınıza yazın.', 'Ortak cevapları çıkarın; tartışmalı cevapları aile oylasın.'] },
-  { id: 'kelime-bahcesi', title: 'Kelime Bahçesi', category: 'Kelime', players: '1–6 oyuncu', duration: '8–15 dk', mark: '❀', tone: 'green', summary: 'Korkutucu kayıp görseli olmadan kelimeyi buldukça bahçeyi büyütün.', steps: ['Gizli kelimenin harf sayısını ve kategori ipucunu görün.', 'Sırayla harf seçin; doğru harflerde bahçe çiçek açsın.', 'Haklar bitmeden kelimeyi tamamlayın; küçük yaşta ek ipucu alın.'] },
-  { id: 'renkli-pazar', title: 'Renkli Pazar', category: 'Bütçe', players: '1–6 oyuncu', duration: '10–20 dk', mark: '★', tone: 'amber', summary: 'Yıldız paralarla tam bütçeyi kuran eğlenceli alışveriş bulmacası.', steps: ['Bütçeyi, ürünleri ve varsa kategori koşulunu inceleyin.', 'Ürünleri sepete taşıyıp toplamı yıldız paraya eşitleyin.', 'İleri yaşta kupon ve koşulları doğru sırada kullanın.'] },
-
-  { id: 'rota-ustalari', title: 'Rota Ustaları', category: 'Labirent', players: '1–6 oyuncu', duration: '10–20 dk', mark: '↝', tone: 'cyan', summary: 'Dönen taşlarla anahtar, kapı ve enerji dolu çözülebilir rotalar kurun.', steps: ['Başlangıç ile hedefi, engelleri ve özel taşları inceleyin.', 'İzin verilen yol taşlarını çevirerek kesintisiz rota oluşturun.', 'Anahtarı toplayıp tuzaklardan kaçınarak hedefe ulaşın.'] },
-  { id: 'denge-atolyesi', title: 'Denge Atölyesi', category: 'Fizik', players: '1–6 oyuncu', duration: '10–20 dk', mark: '△', tone: 'coral', summary: 'Parçaları fizik kurallarına göre yerleştirip dengede tutun.', steps: ['Tabanı ve kullanmanız gereken parçaları inceleyin.', 'Parçaları ağırlık merkezini koruyacak sırayla yerleştirin.', 'Yapıyı rüzgâr veya hareketli platform sınavında ayakta tutun.'] },
-  { id: 'bahce-ustalari', title: 'Bahçe Ustaları', category: 'Planlama', players: '1–6 oyuncu', duration: '12–25 dk', mark: '♧', tone: 'green', summary: 'Güneş, nem ve su kaynağına göre verimli bahçe planlayın.', steps: ['Izgarayı, bitkilerin güneş ve nem ihtiyaçlarını okuyun.', 'Bitkileri yerleştirip sınırlı suyu doğru hücrelere yönlendirin.', 'Tozlaştırıcı komşuluklarından bonus alarak planı tamamlayın.'] },
-  { id: 'isik-laboratuvari', title: 'Işık Laboratuvarı', category: 'Optik', players: '1–6 oyuncu', duration: '10–20 dk', mark: '◇', tone: 'violet', summary: 'Aynaları ve renk filtrelerini çevirerek ışığı kristale ulaştırın.', steps: ['Işık kaynağını, hedef kristali ve engelleri bulun.', 'Aynaları çevirip gerekiyorsa renk filtrelerini yerleştirin.', 'Kesintisiz doğru renkli ışığı hedef kristale ulaştırın.'] },
-  { id: 'robot-kodlama', title: 'Robot Kodlama Arenası', category: 'Kodlama', players: '1–6 oyuncu', duration: '10–25 dk', mark: '</>', tone: 'amber', summary: 'İleri, sağ ve sol komutlarıyla robotu enerji çekirdeğine götürün.', steps: ['Robot, hedef ve engelleri okuyup komut dizisini planlayın.', 'İleri, sağ ve sol bloklarını doğru sıraya yerleştirin.', 'Programı çalıştırın; ileri yaşta tekrar ve renk koşullarını ekleyin.'] },
+  { id: 'carkifelek', title: 'Kelime Çarkı', category: 'Kelime', players: '2–6 oyuncu', duration: '5 / 10 dk', mark: '◒', tone: 'amber', summary: 'Çark, harf seçimi, takım ipucu ve çözüm hamlesini kısa bir aile maçında birleştirir.', steps: ['Oyuncu sayısını, maç süresini ve iş birliği ya da rekabet tercihini seçin.', 'Çarkı çevirin; harf, takım ipucu veya çözüm hamlesi yapın.', 'Canlı harf tahtasını tamamlayın, skoru görün ve rövanşa geçin.'] },
+  { id: 'bilgi-yarismasi', title: 'Bilgi Arenası', category: 'Bilgi & blöf', players: '2–8 oyuncu', duration: '5 / 10 / 20 dk', mark: '?', tone: 'cyan', summary: 'Eşzamanlı cevap, güven puanı ve Yalanı Bul modu aile sohbetini oyuna taşır.', steps: ['Süreyi ve klasik soru ya da Yalanı Bul modunu seçin.', 'Herkes cevabını ve ne kadar emin olduğunu telefonundan gizlice işaretlesin.', 'Cevapları aynı anda açın; kısa takım konuşmasıyla turun sonucunu değerlendirin.'] },
+  { id: 'aile-sahnesi', coverId: 'ciz-ve-bil', title: 'Aile Sahnesi', category: 'Sahne & çizim', players: '3–8 oyuncu', duration: '5 / 10 / 20 dk', mark: '✎', tone: 'coral', summary: 'Sessiz Sinema, Çiz ve Bil ve Yasak Kelimeler birbirinden belirgin üç modda buluşur.', steps: ['Modu seçin; gizli kart yalnız o turun oyuncusunun telefonunda açılsın.', 'Kartı canlandırın, çizin veya yasak kelimeleri kullanmadan anlatın.', 'Takım tahminini ortak ekranda görsün; sırayı değiştirip yeni tura geçin.'] },
+  { id: 'aile-kacis', title: 'Aile Kaçış Gecesi', category: 'İş birliği', players: '2–6 oyuncu', duration: '10 / 20 dk', mark: '⌂', tone: 'violet', summary: 'Özel telefon rolleri ve ortak envanter, çözümü en az iki oyuncunun katkısına bağlar.', steps: ['Rolünüzü ve yalnız sizin göreceğiniz ipucunu telefonunuzda alın.', 'Oda haritasını ve ortak envanteri birlikte inceleyip bulguları paylaşın.', 'En az iki rolün bilgisini birleştirerek kilidi açın ve odayı tamamlayın.'] },
+  { id: 'robot-kodlama', title: 'Robot Kodlama Arenası', category: 'Kodlama', players: '2–6 oyuncu', duration: '5 / 10 / 20 dk', mark: '</>', tone: 'amber', summary: 'Oyuncular komut dizilerini telefonlarında kurar, robotlar ortak ekranda eşzamanlı çalışır.', steps: ['İş birliği ya da takım yarışı modunu ve görev haritasını seçin.', 'İleri, dönüş, tekrar ve koşul komutlarını telefonunuzda sıralayın.', 'Dizileri aynı anda çalıştırın; sonucu izleyip programı birlikte iyileştirin.'] },
+  { id: 'isik-laboratuvari', title: 'Işık Laboratuvarı', category: 'Optik & fizik', players: '2–6 oyuncu', duration: '5 / 10 / 20 dk', mark: '◇', tone: 'green', summary: 'Her oyuncu farklı ayna, prizma veya filtreyi kontrol ederek ortak ışık hedefini çözer.', steps: ['Işık kaynağını, hedefi ve oyunculara dağıtılan optik araçları inceleyin.', 'Ayna, prizma ve filtreleri sırayla ya da eşzamanlı ayarlayın.', 'Doğru renk ve açıdaki ışığı hedefe ulaştırıp yeni düzene geçin.'] },
 ];
 
 const GAME_GROUPS: Record<string, { kicker: string; title: string; description: string; ids: string[] }> = {
-  'oyunlar-bilgi': { kicker: 'Bilgi & kelime', title: 'Düşün, hatırla, doğru kelimeyi bul.', description: 'Hızlı turlar; yaşa göre ipucu, süre ve zorlukla birlikte büyür.', ids: ['bilgi-yarismasi', 'ulke-baskent', 'carkifelek', 'tabu', 'kelime-avi'] },
-  'oyunlar-yaraticilik': { kicker: 'Sahne & hikâye', title: 'Anlat, çiz, canlandır.', description: 'Tek bir doğru performans yok; aile aynı fikri farklı yollarla ifade eder.', ids: ['bu-kim', 'sessiz-sinema', 'ciz-ve-bil', 'hikaye-macerasi', 'ritim-sahnesi'] },
-  'oyunlar-aile': { kicker: 'Aile gecesi', title: 'Aynı masada, aynı takımda.', description: 'Rekabet kadar konuşmayı ve birlikte karar vermeyi de ödüllendirir.', ids: ['yalanci', 'aile-kacis', 'isim-sehir', 'kelime-bahcesi', 'renkli-pazar'] },
-  'oyunlar-stem': { kicker: 'STEM & strateji', title: 'Deneyerek çöz, yeniden kur.', description: 'Labirentten optiğe, bütçeden kodlamaya uzanan çözülebilir görevler.', ids: ['rota-ustalari', 'denge-atolyesi', 'bahce-ustalari', 'isik-laboratuvari', 'robot-kodlama'] },
-};
-
-const GAME_REPO_SLUGS: Record<string, string> = {
-  'bilgi-yarismasi': 'trivia', 'ulke-baskent': 'memory', carkifelek: 'word-wheel', tabu: 'taboo', 'kelime-avi': 'word-hunt',
-  'bu-kim': 'who-is-it', 'sessiz-sinema': 'charades', 'ciz-ve-bil': 'draw-guess', 'hikaye-macerasi': 'story-adventure', 'ritim-sahnesi': 'rhythm-stage',
-  yalanci: 'liar', 'aile-kacis': 'family-escape-night', 'isim-sehir': 'name-city', 'kelime-bahcesi': 'word-garden', 'renkli-pazar': 'colorful-market',
-  'rota-ustalari': 'route-masters', 'denge-atolyesi': 'balance-workshop', 'bahce-ustalari': 'garden-masters', 'isik-laboratuvari': 'light-laboratory', 'robot-kodlama': 'robot-coding-arena',
+  'oyunlar-bilgi': { kicker: 'Bilgi & kelime', title: 'Düşün, tartış, çöz.', description: 'Kelime ve bilgi turları kısa maçlar, eşzamanlı seçimler ve aile konuşması etrafında kurulur.', ids: ['carkifelek', 'bilgi-yarismasi'] },
+  'oyunlar-yaraticilik': { kicker: 'Aile Sahnesi', title: 'Anlat, çiz, canlandır.', description: 'Üç ayrı mod aynı başlık altında; gizli kart yalnız sıradaki oyuncunun telefonunda kalır.', ids: ['aile-sahnesi'] },
+  'oyunlar-aile': { kicker: 'Kaçış gecesi', title: 'Her rol sonucu değiştirir.', description: 'Ortak envanter ve birbirini tamamlayan özel ipuçları, aileyi aynı çözümde buluşturur.', ids: ['aile-kacis'] },
+  'oyunlar-stem': { kicker: 'Işık & kodlama', title: 'Deneyerek çöz, birlikte çalıştır.', description: 'Optik araçlar ve komut dizileri ortak ekranda görünür, kararlar oyuncu telefonlarında alınır.', ids: ['robot-kodlama', 'isik-laboratuvari'] },
 };
 
 const GAME_DETAILS: Record<string, { setup: string; finish: string; age: string }> = {
-  'bilgi-yarismasi': { setup: 'Dil, yaş bandı, oyuncular ve turdaki soru sayısı seçilir. Sistem 200 soruluk uygun havuzdan turu hazırlar.', finish: 'Herkes kendi cihazından cevap verir. Doğru cevap bir puandır; eşitlikte en hızlı doğru cevap öne geçer.', age: '5–7 yaşta kısa soru ve geniş cevap alanı; 15–18 yaşta daha ayrıntılı bilgi ve daha kısa cevap süresi kullanılır.' },
+  'bilgi-yarismasi': { setup: 'Oyuncu sayısı, 5/10/20 dakika ve klasik soru ya da Yalanı Bul modu seçilir. İlk sürüm yalnız insan onaylı Türkçe içerik kullanır.', finish: 'Cevap ve güven puanları aynı anda açılır. Klasik modda bilgi, Yalanı Bul modunda yanıltıcı seçeneği fark etme ödüllendirilir.', age: '10–12 için daha somut seçenekler ve uzun süre; 13–16 için yakın çeldiriciler, gerekçe konuşması ve daha hızlı tempo kullanılır.' },
   'ulke-baskent': { setup: '100 ülke–başkent çiftinden tur için 2–12 çift seçilir, kartlar kapanıp karıştırılır.', finish: 'Oyuncu iki kart açar. Eşleşirse çifti alıp yeniden oynar; kartlar bitince en çok çifti toplayan kazanır.', age: 'Küçük yaşta az kart ve daha uzun inceleme; büyük yaşta daha fazla çift ve kısa hatırlama süresi kullanılır.' },
-  carkifelek: { setup: 'Kategori ve ipucu ortak ekranda görünür; 200 kelimelik havuzdan seçilen yanıt yalnız oyuncu cihazında gizli kalır.', finish: 'Sıradaki oyuncu çarkı çevirir, harf söyler veya kelimeyi çözer. Doğru harfler açılır; kelimeyi bulan tur puanını alır.', age: 'Yaş büyüdükçe kelime uzar, ipucu azalır ve kapalı harf sayısı artar.' },
+  carkifelek: { setup: 'Oyuncu sayısı, 5/10 dakika, enerji düzeyi ve iş birliği ya da rekabet seçilir; puansız eğitim turu gerçek kumandayla oynanır.', finish: 'Çark, harf, takım ipucu ve çözüm hamleleri canlı harf tahtasını açar. Maç süresi dolduğunda skor gösterilir ve rövanş önerilir.', age: '10–12 profilinde daha kısa sözcükler ve görünür ipucu; 13–16 profilinde daha uzun yanıt, sınırlı ipucu ve riskli çark sektörleri kullanılır.' },
+  'aile-sahnesi': { setup: 'Sessiz Sinema, Çiz ve Bil ya da Yasak Kelimeler seçilir; gizli kart yalnız sıradaki oyuncunun telefonunda gösterilir.', finish: 'Takım süre içinde tahmin ederse puan alır. Tur sonunda oyuncu değişir; aynı maç içinde mod değiştirilebilir.', age: '10–12 profilinde somut eylem ve nesneler; 13–16 profilinde daha soyut kavramlar, çizim kısıtları ve yakın yasak kelimeler kullanılır.' },
   tabu: { setup: 'İki takım kurulur; anlatıcı hedef kelimeyi ve dört yasak sözcüğü yalnız kendi cihazında görür.', finish: 'Yasak sözcük kullanmadan anlatılan her doğru kart puandır. Yasak sözcük, pas veya süre sonu kartı geçersiz kılar.', age: 'Küçük yaşta gündelik sözcükler ve uzun süre; büyük yaşta soyut kavramlar ve daha sıkı süre kullanılır.' },
   'kelime-avi': { setup: 'Sistem 200 bulmacalık yaş ve dil havuzundan karışık harfleri, kategoriyi ve varsa yanıltıcı harfleri seçer.', finish: 'Harfler doğru sıraya taşınır. Kelime tamamlanınca yeni bulmaca açılır; süre içinde en çok kelimeyi çözen kazanır.', age: '5–7 yaşta ilk harf ipucu ve uzun süre; ileri yaşlarda daha uzun kelime ve yanıltıcı harfler bulunur.' },
   'bu-kim': { setup: '200 kaynaklı kişi arasından bir kart seçilir; kişinin adı cevap açılana kadar ortak ekranda gösterilmez.', finish: 'İpuçları sırayla açılır ve her ipucundan sonra tahmin alınır. Daha erken doğru tahmin daha yüksek puan getirir.', age: 'Küçük yaşta tanınabilir roller ve açık ipuçları; büyük yaşta tarih, bilim ve kültürden daha dolaylı ipuçları kullanılır.' },
@@ -387,20 +366,16 @@ const GAME_DETAILS: Record<string, { setup: string; finish: string; age: string 
   'hikaye-macerasi': { setup: 'Tek anlatıcı, aile zinciri, 60 saniyelik hızlı tur veya geç sürpriz modu seçilir; beş hikâye kartı açılır.', finish: 'Karakter, mekân, eşya, görev ve sürpriz hikâyede anlamlı biçimde kullanılır. Aile tamamlanan hikâyeyi birlikte değerlendirir.', age: 'Küçük yaşta tek cümlelik yönlendirme; büyük yaşta tutarlılık, süre ve beklenmedik sürpriz koşulları artar.' },
   'ritim-sahnesi': { setup: 'Özgün ritim dizisi, tempo ve kullanılacak el/masa sesi seçilir; telifli şarkı veya ses kaydı kullanılmaz.', finish: 'Ekrandaki vuruş dizisi dinlenip aynı sırada tekrar edilir. Doğru zamanlama seriyi uzatır; hata aynı bölümü yeniden açar.', age: '5–7 yaşta yavaş sekiz adım ve tek ses; ileri yaşlarda 24 adım, iki ses, aksan ve salınım bulunur.' },
   yalanci: { setup: 'Karttaki üç ifade ortak ekranda okunur: ikisi doğru, biri yanlıştır. Her oyuncu seçimini gizlice yapar.', finish: 'Seçimler aynı anda açılır. Yanlış ifadeyi bulan puan alır; açıklama ekranı doğru bilgiyi ailece konuşmaya açar.', age: 'Küçük yaşta somut ve kısa ifadeler; büyük yaşta neden–sonuç kurmayı gerektiren daha yakın seçenekler kullanılır.' },
-  'aile-kacis': { setup: 'İpucu kâşifi, desen çözücü, anahtar koruyucu ve kasa uzmanı rolleri paylaşılır; zamanlayıcı isteğe bağlıdır.', finish: 'Herkes yalnız kendisindeki ipucunu anlatarak ortak sembol kodunu oluşturur. Doğru kod kasayı açar ve macerayı bitirir.', age: 'Küçük yaşta daha açık desen ve ipucu paylaşımı; büyük yaşta çok aşamalı bağlantılar ve daha az yönlendirme vardır.' },
+  'aile-kacis': { setup: 'İpucu kâşifi, desen çözücü, anahtar koruyucu ve kasa uzmanı rolleri oyunculara özel dağıtılır; ortak envanter ekranda kalır.', finish: 'En az iki rolün bilgisi birleştirilmeden açılamayan son kilit çözülür. Oda tamamlanınca bekleme payı ve rol katkıları görünür.', age: '10–12 profilinde açık desen ve isteğe bağlı sınırsız süre; 13–16 profilinde çok aşamalı bağlantılar ve daha az yönlendirme vardır.' },
   'isim-sehir': { setup: 'Tur harfi seçilir. İsim ve şehir her zaman bulunur; yaşa göre hayvan, bitki, eşya gibi kategoriler eklenir.', finish: 'Süre sonunda cevaplar açılır. Ortak cevaplar elenir, benzersiz geçerli cevaplar puan alır; itirazları aile oylar.', age: 'Yaş büyüdükçe kategori sayısı artar ve yazma süresi kısalır; dilin özgün harf sistemi korunur.' },
   'kelime-bahcesi': { setup: '200 kelimelik havuzdan kategoriye uygun gizli kelime seçilir; harf yerleri ve deneme hakkı gösterilir.', finish: 'Doğru harfler kelimeyi açarken bahçe çiçeklenir. Haklar bitmeden kelime tamamlanırsa bahçe turu kazanılır.', age: 'Küçük yaşta daha fazla deneme ve ipucu vardır; darağacı, ip veya korkutucu kayıp görseli hiçbir yaşta kullanılmaz.' },
   'renkli-pazar': { setup: 'Yıldız para bütçesi, ürün rafı ve tamamlanması gereken kategori koşulları ekrana gelir.', finish: 'Ürünler sepete alınır; hem kategori koşulları sağlanır hem bütçe tam tutturulur. Tek doğru sepet turu tamamlar.', age: 'Küçük yaşta az ürün ve düz fiyat; büyük yaşta daha geniş sepet, kategori sınırı ve kupon indirimi eklenir.' },
   'rota-ustalari': { setup: 'Başlangıç, hedef, dönebilen yol taşları, anahtar, kapı, enerji ve tuzaklar incelenir.', finish: 'İzin verilen taşlar döndürülüp kesintisiz rota kurulur. Hamle sınırı içinde hedefe varmak bölümü tamamlar.', age: 'Küçük yaşta 5×5 tahta ve tek dönen taş; büyük yaşta 8×8 tahta ve dört dönen taş bulunur.' },
   'denge-atolyesi': { setup: 'Taban, kullanılacak parçalar ve varsa rüzgâr ya da hareketli platform koşulu gösterilir.', finish: 'Parçalar ağırlık merkezini koruyacak sırayla yerleştirilir. Yapı sınama boyunca yıkılmazsa görev geçilir.', age: 'Küçük yaşta beş büyük parça ve geniş taban; büyük yaşta on bir parça, dar taban ve kırılgan parçalar vardır.' },
   'bahce-ustalari': { setup: 'Izgaradaki güneş, nem ve su kaynaklarıyla bitkilerin ihtiyaç kartları birlikte incelenir.', finish: 'Bitkiler doğru hücrelere yerleştirilip su planlanır. Tüm ihtiyaçlar karşılanırsa görev geçilir; tozlaştırıcı komşuluğu bonus verir.', age: 'Küçük yaşta 3×3 bahçe ve dört bitki; büyük yaşta 6×6 bahçe, on bitki ve sıkı kaynak sınırı kullanılır.' },
-  'isik-laboratuvari': { setup: 'Işık kaynağı, hedef kristal, engeller, dönebilen aynalar ve renk filtreleri tahtada gösterilir.', finish: 'Aynalar ve filtreler çevrilerek doğru renkli, kesintisiz ışık yolu kristale ulaştırılır. Doğru yol görevi tamamlar.', age: 'Küçük yaşta 5×5 tabla ve tek ayna; büyük yaşta 8×8 tabla, dört ayna ve üç renk filtresi bulunur.' },
-  'robot-kodlama': { setup: 'Robotun başlangıcı, enerji çekirdeği ve engeller incelenir; komut blokları program alanına hazırlanır.', finish: 'İleri, sağ ve sol blokları sıralanıp program çalıştırılır. Robot hedefe çarpmadan ulaşırsa görev tamamlanır.', age: 'Küçük yaşta kısa düz komut dizileri; büyük yaşta tekrar blokları, renk koşulları, büyük tahta ve daha çok engel vardır.' },
+  'isik-laboratuvari': { setup: 'Işık kaynağı, hedef, engeller ve oyunculara dağıtılan ayna, prizma ya da filtre kontrolleri ortak ekranda gösterilir.', finish: 'Oyuncular araçlarını birlikte ayarlayıp doğru renk ve açıdaki ışığı hedefe ulaştırır. Çözüm, görsel tekrar oynatmayla açıklanır.', age: '10–12 profilinde az araç ve görünür ışın izi; 13–16 profilinde renk karışımı, daha çok yansıma ve sınırlı hamle bulunur.' },
+  'robot-kodlama': { setup: 'İş birliği ya da takım yarışı seçilir; her oyuncu komut dizisini kendi telefonunda hazırlar, harita ortak ekranda kalır.', finish: 'Diziler eşzamanlı çalıştırılır. Robotlar hedefe ulaştığında görev biter; hatalı programlar ceza vermeden düzenlenip yeniden denenir.', age: '10–12 profilinde ileri ve dönüş blokları; 13–16 profilinde tekrar, renk koşulu ve eşzamanlı robot etkileşimi kullanılır.' },
 };
-
-const GAME_AGE_PACKS = [
-  { id: 'young', label: '5–7' }, { id: 'mid', label: '8–11' }, { id: 'teen', label: '12–14' }, { id: 'senior', label: '15–18' },
-] as const;
 
 const CONTENT_GRADES: ContentGrade[] = [
   { id: '5', label: '5. sınıf', topics: 116, questions: 2500, subjects: [
@@ -575,31 +550,40 @@ function VideoGuideCard({ video, language }: { video: GuideVideo; language: Guid
   );
 }
 
-function LocalizedVideoLibrary({ initialLanguageCode = 'tr' }: { initialLanguageCode?: GuideLanguageCode }) {
+function LocalizedVideoLibrary({
+  initialLanguageCode = 'tr',
+  platform = 'windows',
+}: {
+  initialLanguageCode?: GuideLanguageCode;
+  platform?: GuidePlatform;
+}) {
   const [languageCode, setLanguageCode] = useState<GuideLanguageCode>(initialLanguageCode);
-  const language = GUIDE_LANGUAGES.find((item) => item.code === languageCode) ?? GUIDE_LANGUAGES[0];
+  const series = GUIDE_SERIES_BY_PLATFORM[platform];
+  const language = series.languages.find((item) => item.code === languageCode) ?? series.languages[0];
   const videos = getPublishedGuideVideos(language);
   const copy = language.copy;
+  const sectionTitleId = `${platform}-video-title`;
+  const tabPanelId = `${platform}-video-language-panel`;
 
   return (
-    <section className="platformVideoSection" aria-labelledby="windows-video-title">
+    <section className="platformVideoSection" aria-labelledby={sectionTitleId} data-guide-platform={platform}>
       <div className="platformVideoHeading">
-        <div lang={language.youtubeLocale}><small>{copy.sectionEyebrow}</small><h3 id="windows-video-title">{copy.sectionTitle}</h3></div>
+        <div lang={language.youtubeLocale}><small>{copy.sectionEyebrow}</small><h3 id={sectionTitleId}>{copy.sectionTitle}</h3></div>
         <a href="https://www.youtube.com/@AliKaApp" target="_blank" rel="noreferrer" lang={language.youtubeLocale}>{copy.channelLabel} ↗</a>
       </div>
       <p className="platformVideoLead" lang={language.youtubeLocale}>{copy.sectionLead}</p>
       <div className="videoLanguageTabs" role="tablist" aria-label="Rehber video dili">
-        {GUIDE_LANGUAGES.map((item) => {
+        {series.languages.map((item) => {
           const count = getPublishedGuideVideos(item).length;
           const selected = item.code === language.code;
           return (
             <button
-              id={`video-language-${item.code}`}
+              id={`${platform}-video-language-${item.code}`}
               key={item.code}
               type="button"
               role="tab"
               aria-selected={selected}
-              aria-controls="video-language-panel"
+              aria-controls={tabPanelId}
               className={selected ? 'active' : ''}
               onClick={() => setLanguageCode(item.code)}
             >
@@ -610,9 +594,9 @@ function LocalizedVideoLibrary({ initialLanguageCode = 'tr' }: { initialLanguage
         })}
       </div>
       <div
-        id="video-language-panel"
+        id={tabPanelId}
         role="tabpanel"
-        aria-labelledby={`video-language-${language.code}`}
+        aria-labelledby={`${platform}-video-language-${language.code}`}
         className="videoLanguagePanel"
       >
         <div className="videoLanguageStatus">
@@ -625,12 +609,12 @@ function LocalizedVideoLibrary({ initialLanguageCode = 'tr' }: { initialLanguage
         {videos.length > 0 ? (
           <>
             <div className="videoGuideGroups" lang={language.youtubeLocale}>
-              {GUIDE_VIDEO_GROUP_ORDER.map((group) => {
+              {series.groupOrder.map((group) => {
                 const groupVideos = videos.filter((video) => video.group === group);
                 if (groupVideos.length === 0) return null;
                 return (
-                  <section className="videoGuideGroup" key={group} aria-labelledby={`video-group-${language.code}-${group}`}>
-                    <h4 id={`video-group-${language.code}-${group}`}>{copy.groupLabels[group]}</h4>
+                  <section className="videoGuideGroup" key={group} aria-labelledby={`${platform}-video-group-${language.code}-${group}`}>
+                    <h4 id={`${platform}-video-group-${language.code}-${group}`}>{copy.groupLabels[group]}</h4>
                     <div className="videoLibrary platformVideoLibrary">{groupVideos.map((video) => <VideoGuideCard key={`${language.code}-${video.id}`} video={video} language={language} />)}</div>
                   </section>
                 );
@@ -652,12 +636,11 @@ function LocalizedVideoLibrary({ initialLanguageCode = 'tr' }: { initialLanguage
 
 function GameCard({ game, index }: { game: GameInfo; index: number }) {
   const details = GAME_DETAILS[game.id];
-  const repoSlug = GAME_REPO_SLUGS[game.id];
 
   return (
     <article className={`gameCard tone-${game.tone}`}>
       <div className="gameCover">
-        <img src={`/games/cards/${game.id}.webp`} alt={`${game.title} oyununun oynanışını gösteren görsel`} loading="lazy" decoding="async" />
+        <img src={`/games/cards/${game.coverId ?? game.id}.webp`} alt={`${game.title} geliştirme önizleme görseli`} loading="lazy" decoding="async" />
         <span aria-hidden="true">{game.mark}</span><i /><i />
         <small>{String(index + 1).padStart(2, '0')}</small>
       </div>
@@ -666,17 +649,17 @@ function GameCard({ game, index }: { game: GameInfo; index: number }) {
         <h3>{game.title}</h3>
         <p>{game.summary}</p>
         <section className="gameHow" aria-label={`${game.title} nasıl oynanır?`}>
-          <h4>Nasıl oynanır?</h4>
+          <h4>Hedef oyun akışı</h4>
           <ol>{game.steps.map((step, stepIndex) => <li key={step}><b>{stepIndex + 1}</b><span>{step}</span></li>)}</ol>
           <div className="gameRuleGrid">
             <p><b>Kurulum</b><span>{details.setup}</span></p>
             <p><b>Tur nasıl biter?</b><span>{details.finish}</span></p>
-            <p><b>Yaşa göre değişir</b><span>{details.age}</span></p>
+            <p><b>Zorluk profili</b><span>{details.age}</span></p>
           </div>
         </section>
-        <section className="gameDownloads" aria-label={`${game.title} Türkçe paketleri`}>
-          <div><strong>Türkçe oyun paketini indir</strong><small>.alika-game · yalnız veri</small></div>
-          <div>{GAME_AGE_PACKS.map((pack) => <a key={pack.id} href={`https://raw.githubusercontent.com/chizyo43-debug/alika-icerik/main/games/${repoSlug}/dist/tr/${pack.id}.alika-game`} target="_blank" rel="noreferrer" download={`${repoSlug}-tr-${pack.id}.alika-game`} aria-label={`${game.title}, ${pack.label} yaş Türkçe paketini indir`}><span>{pack.label}</span><small>yaş</small><b aria-hidden="true">↓</b></a>)}</div>
+        <section className="gameDownloads preview" aria-label={`${game.title} yayın durumu`}>
+          <div><strong>İndirme kapalı</strong><small>Türkçe ilk sürüm · 10–16 yaş</small></div>
+          <span className="gameDownloadGate">İnsan onayı ve premium motor kabulü bekleniyor</span>
         </section>
       </div>
     </article>
@@ -864,7 +847,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
             <a className="realScreen" href="/screens/platform/windows-rules.png" target="_blank" rel="noreferrer"><img src="/screens/platform/windows-rules.png" alt="AliKa Windows zamanlama ve uygulama kuralları ekranı" loading="lazy" decoding="async" /><span><b>Kurallar</b><small>Süre, uyku, uygulama ve web</small></span></a>
             <a className="realScreen" href="/screens/platform/windows-reports.png" target="_blank" rel="noreferrer"><img src="/screens/platform/windows-reports.png" alt="AliKa Windows haftalık rapor ekranı" loading="lazy" decoding="async" /><span><b>Raporlar</b><small>Haftalık, saatlik ve soru sonuçları</small></span></a>
           </div>
-          <LocalizedVideoLibrary />
+          <LocalizedVideoLibrary initialLanguageCode={language} platform="windows" />
           <p className="realEvidenceReceipt"><b>Gerçek ürün ekranları</b><span>Görseller çalışan Windows uygulamasından alınmıştır; tasarım maketi değildir.</span></p>
         </div>
       );
@@ -885,6 +868,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
             <a className="realScreen" href="/screens/platform/android-quiz.webp" target="_blank" rel="noreferrer"><img src="/screens/platform/android-quiz.webp" alt="AliKa Android soru çözme ekranı" loading="lazy" decoding="async" /><span><b>Soru çöz</b><small>İlerleme, seri ve kontrollü süre</small></span></a>
           </div>
           <div className="platformFeatureBand"><p><b>Planla</b><span>Süre ve uyku</span></p><i>→</i><p><b>Öğren</b><span>Konu ve soru</span></p><i>→</i><p><b>Takip et</b><span>İlerleme ve görev</span></p></div>
+          <LocalizedVideoLibrary initialLanguageCode={language} platform="android" />
           <p className="realEvidenceReceipt"><b>Gerçek cihaz kanıtı</b><span>Görseller fiziksel Android telefondaki çalışan AliKa uygulamasından alınmıştır.</span></p>
         </div>
       );
@@ -1079,16 +1063,16 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           <div className="pageTopline"><p className="folio">Oyunlar / AliKa oyun kitaplığı</p><StatusStamp status={page.status} /></div>
           <div className="gamesHero">
             <img src="/games/alika-game-night.webp" alt="Aynı masa etrafında telefon ve tabletlerle eğitim oyunları oynayan aile" loading="lazy" decoding="async" />
-            <div><small>Aynı masa · farklı yetenekler</small><h2 tabIndex={-1}>20 oyun, tek ortak ekran.</h2><p>Telefonlar oyuncuların kumandası, Windows veya TV ise ailenin ortak oyun alanı olur.</p></div>
+            <div><small>Aynı masa · farklı yetenekler</small><h2 tabIndex={-1}>Altı premium aile oyunu geliştiriliyor.</h2><p>Telefonlar oyuncuların kumandası, Windows ise ilk ortak oyun alanı olacak; Android TV fiziksel kabul kapısından sonra açılacak.</p></div>
           </div>
-          <div className="gameStats" aria-label="Oyun kataloğu özeti"><p><strong>20</strong><span>oyun ailesi</span></p><p><strong>9</strong><span>dil paketi</span></p><p><strong>4</strong><span>yaş grubu</span></p></div>
+          <div className="gameStats" aria-label="Hedef oyun kataloğu özeti"><p><strong>6</strong><span>premium oyun</span></p><p><strong>TR</strong><span>ilk sürüm</span></p><p><strong>10–16</strong><span>hedef yaş</span></p></div>
           <div className="gameShelf" aria-label="Oyun kategorileri">
-            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-bilgi'))}><b>?</b><span><strong>Bilgi & kelime</strong><small>5 oyun · Hafıza ve anlatım</small></span></button>
-            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-yaraticilik'))}><b>✎</b><span><strong>Sahne & hikâye</strong><small>5 oyun · Yaratıcılık ve ritim</small></span></button>
-            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-aile'))}><b>⌂</b><span><strong>Aile gecesi</strong><small>5 oyun · Birlikte karar</small></span></button>
-            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-stem'))}><b>&lt;/&gt;</b><span><strong>STEM & strateji</strong><small>5 oyun · Tasarım ve kodlama</small></span></button>
+            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-bilgi'))}><b>?</b><span><strong>Bilgi & kelime</strong><small>2 oyun · Kısa ve sosyal turlar</small></span></button>
+            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-yaraticilik'))}><b>✎</b><span><strong>Aile Sahnesi</strong><small>1 oyun · 3 belirgin mod</small></span></button>
+            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-aile'))}><b>⌂</b><span><strong>Kaçış gecesi</strong><small>1 oyun · Ortak çözüm</small></span></button>
+            <button type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'oyunlar-stem'))}><b>&lt;/&gt;</b><span><strong>Işık & kodlama</strong><small>2 oyun · Görsel problem çözme</small></span></button>
           </div>
-          <p className="gameSourceNote"><strong>Oyun dosyaları hazır.</strong> Uygulamada kullanılabilirlik oyuna göre değişebilir. Son insan incelemesini bekleyen içerikler depoda açıkça belirtilir. <a href="https://github.com/chizyo43-debug/alika-icerik/tree/main/games" target="_blank" rel="noreferrer">Oyun dosyalarını görün ↗</a></p>
+          <p className="gameSourceNote"><strong>Bugün çalışan Windows ortak ekran soru oyunu ayrıdır.</strong> Bu altı premium deneyim geliştirme hedefidir; insan içerik onayı, oyun motoru kabulü ve gerçek cihaz testleri tamamlanmadan indirilemez.</p>
         </div>
       );
     case 'games-group': {
@@ -1100,7 +1084,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           <div className="gameCatalog">
             {games.map((game, index) => <GameCard key={game.id} game={game} index={index} />)}
           </div>
-          <p className="gameCatalogFoot">Her oyun, ortak ekrandaki yönlendirme ve oyuncu cihazındaki gizli cevaplarla ailece oynanacak biçimde tasarlanmıştır.</p>
+          <p className="gameCatalogFoot">Bu sayfadaki akışlar tasarım hedefidir; bitmiş oynanış veya indirilebilir ürün değildir. Yayına yalnız insan onaylı içerik ve gerçek cihaz kabulünden sonra açılır.</p>
         </div>
       );
     }
@@ -1432,6 +1416,15 @@ export default function BookExperience() {
         <span className="deskPencil"><i /></span>
         <span className="ribbonTrail" />
       </div>
+      <aside className="coverNotes" aria-label={copy.hero_alt} aria-hidden={phase !== 'closed'}>
+        <article className="coverNote notePlan"><small>01</small><strong>{copy.pill[1]}</strong><span>{copy.approach_title}</span></article>
+        <article className="coverNote noteLearn"><small>02</small><strong>{copy.pill[0]}</strong><span>{copy.hero_body}</span></article>
+        <article className="coverNote noteBalance"><small>03</small><strong>{copy.pill[2]}</strong><span>{copy.final_body}</span></article>
+        <article className="coverNote noteTrust"><small>✓</small><strong>{copy.trust_title}</strong><span>{copy.trust_items.slice(0, 3).join(' · ')}</span></article>
+        <a className="coverNote noteStore" href={microsoftStoreUrl(language)} target="_blank" rel="noreferrer" tabIndex={phase === 'closed' ? 0 : -1}>
+          <small>{copy.status_today}</small><strong>Windows 10/11</strong><span>{ui.trialLabel}</span><b>{copy.get} <i aria-hidden="true">↗</i></b>
+        </a>
+      </aside>
       <header className="readingHeader" aria-hidden={!['reading', 'flipping'].includes(phase)}>
         <a className="miniBrand" href="#baslangic" onClick={(event) => { event.preventDefault(); turnTo(0); }}><img src="/brand/alika-logo.png" alt="" />AliKa</a>
         <p>{activeChapter.label}</p>
@@ -1505,6 +1498,7 @@ export default function BookExperience() {
             <AMascot />
           </span>
           <span className="coverTitle">AliKa</span>
+          <span className="coverStatement">{copy.approach_kicker}</span>
           <span className="coverSubtitle">{copy.meta}</span>
           <span className="openPrompt"><i aria-hidden="true">↗</i><b>{ui.openBook}</b><small>{ui.touchLogo}</small></span>
           <span className="coverRule coverRuleBottom" />

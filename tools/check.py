@@ -39,6 +39,14 @@ GUIDE_SLUGS = (
     "soru-cozerek-ekran-suresi-kazanma",
     "bulutsuz-ebeveyn-kontrolu",
 )
+PREMIUM_GAME_IDS = (
+    "carkifelek",
+    "bilgi-yarismasi",
+    "aile-sahnesi",
+    "aile-kacis",
+    "robot-kodlama",
+    "isik-laboratuvari",
+)
 
 
 class LinkParser(HTMLParser):
@@ -79,6 +87,31 @@ def main() -> None:
     locales = json.loads((ROOT / "src" / "data" / "locales.json").read_text(encoding="utf-8"))
     if tuple(locales) != LANGS:
         errors.append(f"Locale order/membership differs: {tuple(locales)}")
+
+    book_source = (ROOT / "src" / "book-experience.tsx").read_text(encoding="utf-8")
+    try:
+        game_block = book_source.split("const GAMES: GameInfo[] = [", 1)[1].split(
+            "const GAME_GROUPS:", 1
+        )[0]
+    except IndexError:
+        errors.append("Premium game catalogue source markers are missing")
+    else:
+        game_ids = tuple(re.findall(r"\{ id: '([^']+)'", game_block))
+        if game_ids != PREMIUM_GAME_IDS:
+            errors.append(f"Premium game catalogue differs: {game_ids}")
+    if any(
+        marker in book_source
+        for marker in ("GAME_REPO_SLUGS", "GAME_AGE_PACKS", "raw.githubusercontent.com/chizyo43-debug/alika-icerik/main/games")
+    ):
+        errors.append("Unapproved game package downloads are exposed")
+    for marker in (
+        "Altı premium aile oyunu geliştiriliyor.",
+        "Bugün çalışan Windows ortak ekran soru oyunu ayrıdır.",
+        "İndirme kapalı",
+        "İnsan onayı ve premium motor kabulü bekleniyor",
+    ):
+        if marker not in book_source:
+            errors.append(f"Premium game truth marker is missing: {marker}")
 
     expected_pages = 0
     for lang in LANGS:
@@ -297,6 +330,8 @@ def main() -> None:
         path in book_bundle_text for path in BOOK_LANGUAGE_PATHS
     ):
         errors.append("Language picker is missing or incomplete in the book experience")
+    if "Altı premium aile oyunu geliştiriliyor." not in book_bundle_text or "İndirme kapalı" not in book_bundle_text:
+        errors.append("Premium game truth copy is missing from the built book experience")
     for lang in LANGS:
         flag = DIST / "flags" / f"{lang}.svg"
         if not flag.exists():
