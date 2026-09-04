@@ -637,8 +637,6 @@ button:disabled { cursor: default; }
 .coverTitle { margin-top: 4px; font-size: clamp(46px,5vw,68px); font-weight: 900; letter-spacing: -.055em; line-height: 1; }
 .coverStatement { margin-top: 11px; color: #247a97; font-size: clamp(14px,1.3vw,18px); font-weight: 950; letter-spacing: .01em; text-align: center; }
 .coverSubtitle { max-width: 480px; margin-top: 8px; color: #5a7083; font-size: clamp(12px,1.1vw,15px); line-height: 1.45; text-align: center; }
-.coverChildPortrait { position: absolute; top: clamp(67px,8vh,82px); right: clamp(46px,5vw,68px); z-index: 2; width: clamp(70px,6.8vw,94px); aspect-ratio: 320 / 554; overflow: hidden; padding: 4px; border: 1px solid rgba(36,122,151,.3); border-radius: 15px; background: rgba(255,255,255,.95); box-shadow: 0 13px 28px rgba(16,35,62,.18); pointer-events: none; transform: rotate(2.5deg); transition: opacity .25s ease, transform .45s ease; }
-.coverChildPortrait img { display: block; width: 100%; height: 100%; border-radius: 11px; object-fit: cover; }
 .openPrompt { position: absolute; bottom: 36px; display: grid; grid-template-columns: 34px auto; grid-template-rows: auto auto; column-gap: 10px; align-items: center; text-align: left; }
 .openPrompt i { grid-row: 1 / 3; display: grid; width: 34px; aspect-ratio: 1; place-items: center; border: 1px solid rgba(16,35,62,.28); border-radius: 50%; color: var(--navy); background: var(--cyan); font-style: normal; transition: transform .2s ease, background .2s ease; }
 .openPrompt b { font-size: 13px; letter-spacing: .06em; }.openPrompt small { color: #6d8394; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
@@ -670,7 +668,6 @@ button:disabled { cursor: default; }
 .phase-morphing .aMascot, .phase-opening .morphMark .aMascot { opacity: 1; transform: translateY(2px) scale(1) rotate(0); }
 .phase-morphing .aArmRight { animation: mascotWave .6s ease-in-out .15s 2 alternate; }
 .phase-morphing .coverTitle, .phase-morphing .coverSubtitle, .phase-morphing .openPrompt { opacity: .16; transition: opacity .3s ease; }
-.phase-morphing .coverChildPortrait { opacity: 0; transform: rotate(0) scale(.88); }
 .phase-opening .bookCover, .phase-reading .bookCover, .phase-flipping .bookCover { width: 100%; }
 .phase-opening .bookCover { transform: rotateY(-165deg); }
 .phase-reading .bookCover, .phase-flipping .bookCover { opacity: 0; pointer-events: none; transform: rotateY(-178deg); }
@@ -754,8 +751,6 @@ button:disabled { cursor: default; }
   .coverTitle { font-size: 53px; }
   .coverStatement { font-size: 14px; }
   .coverSubtitle { max-width: 310px; font-size: 13px; }
-  .coverChildPortrait { top: 60px; right: 32px; width: 62px; padding: 3px; border-radius: 12px; }
-  .coverChildPortrait img { border-radius: 9px; }
   .openPrompt { bottom: 32px; }
   .coverRuleTop { top: 42px; }.coverRuleBottom { bottom: 18px; }
   .chapterTabs { top: calc(100% + 8px); left: 0; width: 100%; display: flex; gap: 5px; overflow-x: auto; padding: 0 2px 5px; scrollbar-width: none; }
@@ -811,8 +806,6 @@ button:disabled { cursor: default; }
   .coverTitle { margin-top: 0; font-size: 42px; }
   .coverStatement { margin-top: 5px; font-size: 11px; }
   .coverSubtitle { max-width: 330px; margin-top: 5px; font-size: 10px; line-height: 1.3; }
-  .coverChildPortrait { top: 34px; right: 22px; width: 46px; padding: 2px; border-radius: 9px; }
-  .coverChildPortrait img { border-radius: 7px; }
   .openPrompt { bottom: 18px; transform: scale(.78); }
   .coverRuleTop { top: 26px; }.coverRuleBottom { bottom: 12px; }
   .phase-closed .bookScene { height: min(60svh,370px); transform: translateY(-38px) rotateX(1deg); }
@@ -901,7 +894,6 @@ button:disabled { cursor: default; }
   .folio, .questionKicker { margin-bottom: 17px; }
   .morphMark { height: 126px; margin-top: 18px; transform: scale(.82); }
   .coverTitle { font-size: 48px; }
-  .coverChildPortrait { top: 50px; right: 38px; width: 58px; }
   .openPrompt { bottom: 24px; }.coverRuleTop { top: 34px; }.coverRuleBottom { bottom: 14px; }
   .phoneEvidence, .singlePhone { height: 315px; }
   .teacherNote { margin-top: 10px; }
