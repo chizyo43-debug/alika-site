@@ -1,5 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import knowledgeBase from './knowledge-base.json' with { type: 'json' };
+import productKnowledge from './product-knowledge.json' with { type: 'json' };
+import productKnowledgeIndex from './product-knowledge-index.json' with { type: 'json' };
 import { retrieveVideoGuide } from './video-guides.mjs';
 
 export const SUPPORTED_LANGUAGES = new Set(['tr', 'en', 'de', 'es', 'fr', 'pt', 'ru', 'ja', 'ko']);
@@ -34,6 +36,17 @@ const STOP_TOKENS = new Set([
   'как', 'и', 'или', 'мой', 'что', 'это', 'для',
 ]);
 
+const PRODUCT_INDEX_BY_ID = new Map(productKnowledgeIndex.entries.map((entry) => [entry.id, entry]));
+const KNOWLEDGE_CATALOG = [...knowledgeBase, ...productKnowledge.articles];
+
+function requestedPlatform(value) {
+  const foldedValue = fold(value);
+  if (/\bandroid\s+tv\b|\btv\b/u.test(foldedValue)) return 'android-tv';
+  if (/\bandroid\b|telefon|tablet/u.test(foldedValue)) return 'android';
+  if (/\bwindows\b|bilgisayar|\bpc\b/u.test(foldedValue)) return 'windows';
+  return null;
+}
+
 function fold(value) {
   return String(value)
     .toLocaleLowerCase('tr-TR')
@@ -49,22 +62,36 @@ function tokens(value) {
 export function retrieveKnowledge(query, limit = 5) {
   const queryTokens = tokens(query);
   const foldedQuery = fold(query).replace(/\s+/g, ' ').trim();
-  const ranked = knowledgeBase.map((article) => {
+  const platform = requestedPlatform(query);
+  const ranked = KNOWLEDGE_CATALOG.map((article) => {
+    const indexEntry = PRODUCT_INDEX_BY_ID.get(article.id);
     const titleTokens = tokens(article.title);
     const keywordTokens = tokens(article.keywords.join(' '));
-    const contentTokens = tokens(article.content);
+    const indexTokens = tokens(indexEntry?.terms?.join(' ') || '');
+    const detailText = [
+      article.content,
+      article.menuPath,
+      ...(article.steps || []),
+      ...(article.cautions || []),
+    ].filter(Boolean).join(' ');
+    const contentTokens = tokens(detailText);
     let score = 0;
     let matchedTokens = 0;
     for (const token of queryTokens) {
       let matched = false;
       if (titleTokens.has(token)) { score += 6; matched = true; }
       if (keywordTokens.has(token)) { score += 5; matched = true; }
+      if (indexTokens.has(token)) { score += 4; matched = true; }
       if (contentTokens.has(token)) { score += 1; matched = true; }
       if (matched) matchedTokens += 1;
     }
-    for (const keyword of article.keywords) {
+    for (const keyword of [...article.keywords, ...(indexEntry?.terms || [])]) {
       const foldedKeyword = fold(keyword).replace(/\s+/g, ' ').trim();
       if (foldedKeyword.length > 2 && foldedQuery.includes(foldedKeyword)) score += 9;
+    }
+    if (platform && article.platform) {
+      if (article.platform === platform || article.platform === 'all') score += 8;
+      else if (article.platform !== 'cross-platform') score -= 12;
     }
     if (matchedTokens > 1) score += matchedTokens * 2;
     return { article, score };
@@ -78,16 +105,20 @@ export function retrieveKnowledge(query, limit = 5) {
     .map((item) => item.article);
 
   if (selected.length > 0) return selected;
-  return knowledgeBase.filter((article) => article.id === 'overview').slice(0, limit);
+  return KNOWLEDGE_CATALOG.filter((article) => article.id === 'overview').slice(0, limit);
 }
 
 export function retrieveConversationKnowledge(message, history = [], limit = 5) {
-  let selected = retrieveKnowledge(message, Math.min(limit, 4));
   const recentUserContext = history
     .filter((item) => item?.role !== 'assistant' && typeof item?.text === 'string')
     .slice(-2)
     .map((item) => item.text)
     .join(' ');
+  const shortFollowUp = tokens(message).size <= 3;
+  let selected = retrieveKnowledge(
+    recentUserContext && shortFollowUp ? `${recentUserContext} ${message}` : message,
+    Math.min(limit, 4),
+  );
 
   if (recentUserContext) {
     const historyArticles = retrieveKnowledge(recentUserContext, 3);
@@ -115,7 +146,12 @@ function sourceContext(articles, language) {
   return articles.map((article) => ({
     id: article.id,
     title: article.title,
+    platform: article.platform || 'all',
+    availability: article.availability || 'available',
+    menuPath: article.menuPath || '',
     facts: article.content,
+    steps: article.steps || [],
+    cautions: article.cautions || [],
     links: article.links.map((link) => ({ ...link, href: localizedHref(link.href, language) })),
   }));
 }
@@ -128,6 +164,8 @@ Your job:
 - Clearly distinguish "available today", "in development", and "planned". Never turn a roadmap item into a current promise.
 - Treat the verified facts as evidence, not as a script. Reason, compare, synthesize and make a tailored recommendation from them. You may explain a practical implication of a fact, but must not present an unsupported inference as a product capability.
 - Answer the user's exact intent first. For yes/no questions, lead with yes/no and the important condition. For setup or family scenarios, give 2–4 concrete, ordered steps. For comparisons, explain who each option fits and why.
+- For a menu or how-to question, use the verified platform, menuPath and steps. Give the exact verified path first, then 2–6 ordered actions. Never mix Windows, Android and Android TV menus. If the platform is missing and the paths differ materially, ask one short platform question instead of guessing.
+- Treat each article's availability field as authoritative for that article: available means usable now, testing means technically tested but distribution can still be limited, mixed means the answer depends on platform. State a relevant limitation plainly.
 - Do not invent screen names, menu paths, browser dashboards or setup steps. If VERIFIED ALIKA KNOWLEDGE confirms a capability but does not give its exact interface path, explain what can be done and link to the relevant guide without fabricating clicks.
 - Do not mention an account login, cloud synchronization, browser control panel or data syncing unless those exact mechanisms are present in VERIFIED ALIKA KNOWLEDGE. AliKa's local-first architecture must not be rewritten as a cloud product.
 - Use the conversation history naturally. Do not repeat facts already given unless the new question depends on them, and do not restart the conversation on every turn.
@@ -257,14 +295,14 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
     async answer({ message, history = [], language = 'tr', pagePath = '/', journey = 'general' }) {
       const safeLanguage = SUPPORTED_LANGUAGES.has(language) ? language : 'tr';
       const safeJourney = SUPPORTED_JOURNEYS.has(journey) ? journey : 'general';
-      const articles = retrieveConversationKnowledge(message, history, 5);
+      const articles = retrieveConversationKnowledge(message, history, 6);
       if (safeJourney === 'tour') {
         const routeParts = pagePath.split(/[?#]/, 1)[0].split('/').filter((part) => part && !SUPPORTED_LANGUAGES.has(part));
         const route = routeParts.at(-1) || '';
         const pageQuery = PAGE_KNOWLEDGE_QUERIES[route] || route.replace(/[-_]+/g, ' ');
         for (const article of retrieveKnowledge(pageQuery || 'AliKa overview', 3)) {
           if (!articles.some((item) => item.id === article.id)) articles.push(article);
-          if (articles.length >= 5) break;
+          if (articles.length >= 6) break;
         }
       }
       const videoGuide = safeJourney === 'feedback' || (safeJourney === 'tour' && history.length === 0)
@@ -289,7 +327,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
         config: {
           systemInstruction: systemInstruction(safeLanguage),
           temperature: 1,
-          maxOutputTokens: 1800,
+          maxOutputTokens: 2200,
           thinkingConfig: { thinkingLevel: 'LOW' },
           responseMimeType: 'application/json',
           responseSchema: {

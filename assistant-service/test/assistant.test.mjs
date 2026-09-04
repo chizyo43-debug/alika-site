@@ -30,9 +30,22 @@ test('retrieval uses recent user context for a short follow-up', () => {
     { role: 'user', text: 'Android telefonda uygulama süre sınırı koyabilir miyim?' },
     { role: 'assistant', text: 'Evet, ebeveyn rolünden yönetebilirsiniz.' },
   ], 5);
-  assert.equal(results[0].id, 'android');
+  assert.equal(results[0].id, 'manual-android-rules');
   assert.equal(results.some((item) => item.id === 'android'), true);
   assert.equal(results.some((item) => item.id === 'overview'), false);
+});
+
+test('retrieval finds detailed Windows menu instructions', () => {
+  const results = retrieveKnowledge('Windows uygulamasına süre limiti nereden eklenir?', 5);
+  assert.equal(results[0].platform, 'windows');
+  assert.equal(results.some((item) => item.id === 'manual-windows-app-site-rules'), true);
+});
+
+test('retrieval finds Android shared-device instructions without mixing Windows menus', () => {
+  const results = retrieveKnowledge('Android telefonumu çocuk modunda nasıl paylaşırım?', 6);
+  assert.equal(results[0].id, 'manual-android-sharing');
+  assert.equal(results[0].platform, 'android');
+  assert.equal(results.slice(0, 3).some((item) => item.platform === 'windows'), false);
 });
 
 test('family resistance questions use the specific coaching facts', () => {
@@ -153,12 +166,13 @@ test('assistant uses the reasoning model and anti-template conversation rules', 
 
   assert.equal(request.model, 'gemini-3.5-flash');
   assert.equal(request.config.temperature, 1);
-  assert.equal(request.config.maxOutputTokens, 1800);
+  assert.equal(request.config.maxOutputTokens, 2200);
   assert.equal(request.config.thinkingConfig.thinkingLevel, 'LOW');
   assert.match(request.config.systemInstruction, /evidence, not as a script/);
   assert.match(request.config.systemInstruction, /followUp to an empty string by default/);
   assert.match(request.config.systemInstruction, /Never use stock praise/);
   assert.match(request.config.systemInstruction, /Do not invent screen names/);
+  assert.match(request.config.systemInstruction, /Never mix Windows, Android and Android TV menus/);
   assert.match(request.config.systemInstruction, /Do not mention an account login/);
   assert.match(request.config.systemInstruction, /Never imply that AliKa replaces parental communication/);
   assert.match(request.config.systemInstruction, /RECOMMENDED VERIFIED VIDEO GUIDE/);
@@ -167,6 +181,24 @@ test('assistant uses the reasoning model and anti-template conversation rules', 
   assert.match(request.config.systemInstruction, /help the visitor prepare either an issue report or an improvement idea/);
   assert.match(request.config.systemInstruction, /do not tell the visitor to copy it manually/);
   assert.match(request.contents.at(-1).parts[0].text, /ACTIVE GUIDED JOURNEY: plan/);
+});
+
+test('assistant supplies verified menu paths and ordered steps to the model', async () => {
+  let request;
+  const fakeClient = {
+    models: {
+      async generateContent(value) {
+        request = value;
+        return { text: JSON.stringify({ answer: 'Kurallar ekranını açın.', actions: [], followUp: '', emailSubject: '', emailBody: '' }) };
+      },
+    },
+  };
+  const assistant = createAssistantClient({}, { client: fakeClient });
+  await assistant.answer({ message: 'Android telefonda YouTube için süre sınırı nasıl koyarım?', language: 'tr' });
+  const prompt = request.contents.at(-1).parts[0].text;
+  assert.match(prompt, /manual-android-rules/);
+  assert.match(prompt, /Kurallar → Ayrıntılı kurallar/);
+  assert.match(prompt, /Uygulama süre limitleri → Uygulama limiti ekle/);
 });
 
 test('feedback journey requests structured email fields and suppresses video suggestions', async () => {

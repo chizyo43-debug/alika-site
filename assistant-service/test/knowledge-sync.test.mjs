@@ -4,6 +4,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import knowledgeBase from '../src/knowledge-base.json' with { type: 'json' };
+import productKnowledge from '../src/product-knowledge.json' with { type: 'json' };
+import productKnowledgeIndex from '../src/product-knowledge-index.json' with { type: 'json' };
 import videoCatalog from '../src/video-guide-catalog.json' with { type: 'json' };
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -18,6 +20,29 @@ test('knowledge base is broad, uniquely keyed, and link constrained', () => {
     for (const link of article.links) {
       assert.match(link.href, /^(\/|https:\/\/apps\.microsoft\.com\/detail\/9N3P9F5ZKR5S|mailto:alika\.destek@gmail\.com)/);
     }
+  }
+});
+
+test('product manual is indexed, detailed, and public-safe', () => {
+  assert.equal(productKnowledge.version, productKnowledgeIndex.sourceVersion);
+  assert.ok(productKnowledge.articles.length >= 25, 'detailed manual coverage unexpectedly shrank');
+  assert.equal(productKnowledgeIndex.entries.length, productKnowledge.articles.length);
+
+  const articleIds = productKnowledge.articles.map((article) => article.id);
+  const indexIds = productKnowledgeIndex.entries.map((entry) => entry.id);
+  assert.deepEqual(new Set(indexIds), new Set(articleIds));
+  assert.equal(new Set(articleIds).size, articleIds.length);
+
+  const serialized = JSON.stringify(productKnowledge);
+  assert.doesNotMatch(serialized, /C:\\\\Users|api[_ -]?key|recovery code value|private key/i);
+  for (const article of productKnowledge.articles) {
+    assert.ok(['all', 'windows', 'android', 'android-tv', 'cross-platform'].includes(article.platform), `${article.id}: invalid platform`);
+    assert.ok(['available', 'testing', 'mixed'].includes(article.availability), `${article.id}: invalid availability`);
+    assert.ok(article.menuPath.length >= 3, `${article.id}: menu path is missing`);
+    assert.ok(article.content.length >= 120, `${article.id}: facts are too short`);
+    assert.ok(article.steps.length >= 2, `${article.id}: steps are incomplete`);
+    assert.ok(article.keywords.length >= 5, `${article.id}: retrieval keywords are incomplete`);
+    for (const link of article.links) assert.match(link.href, /^\//);
   }
 });
 
