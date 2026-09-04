@@ -63,6 +63,7 @@ export function retrieveKnowledge(query, limit = 5) {
   const queryTokens = tokens(query);
   const foldedQuery = fold(query).replace(/\s+/g, ' ').trim();
   const platform = requestedPlatform(query);
+  const wantsProcedure = /\bnasil\b|\bnasıl\b|nerede|nereden|adim|adım|ayarla|ekle|olustur|oluştur|acilir|açılır|yapilir|yapılır/u.test(foldedQuery);
   const ranked = KNOWLEDGE_CATALOG.map((article) => {
     const indexEntry = PRODUCT_INDEX_BY_ID.get(article.id);
     const titleTokens = tokens(article.title);
@@ -93,6 +94,7 @@ export function retrieveKnowledge(query, limit = 5) {
       if (article.platform === platform || article.platform === 'all') score += 8;
       else if (article.platform !== 'cross-platform') score -= 12;
     }
+    if (wantsProcedure && article.menuPath && article.steps?.length) score += 12;
     if (matchedTokens > 1) score += matchedTokens * 2;
     return { article, score };
   }).sort((left, right) => right.score - left.score || left.article.id.localeCompare(right.article.id));
@@ -240,6 +242,14 @@ export function parseModelResponse(text, articles, language, videoGuide = null, 
       const action = safeAction(candidate, allowed);
       if (action && !actions.some((item) => item.href === action.href)) actions.push(action);
       if (actions.length >= 3) break;
+    }
+  }
+  const primaryLink = articles[0]?.links?.[0];
+  if (journey !== 'feedback' && primaryLink) {
+    const href = localizedHref(primaryLink.href, language);
+    if (allowed.has(href) && !actions.some((item) => item.href === href)) {
+      actions.unshift({ label: primaryLink.label.trim().slice(0, 80), href });
+      actions.splice(3);
     }
   }
   if (videoGuide && !actions.some((item) => item.href === videoGuide.href)) {

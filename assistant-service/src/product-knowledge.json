@@ -251,7 +251,7 @@
       "content": "Android rapor alanında Bugün, Raporlar, Olaylar, Haftalık Rapor ve Web/Video Geçmişi gibi görünümler bulunabilir. Ayarlar; dil, çocuk profili ve yaş stili, PIN, korumayı başlat/durdur, yüzen süre balonu, iyi oluş, izinler ve sağlık, kaldırma koruması, isteğe bağlı erişilebilirlik koruması, paylaşımlı cihaz, eğitim modu ve görev kapısını yönetir.",
       "steps": ["Kullanım sonucu için Panel → Raporlar'ı açın.", "Koruma veya görünüm ayarı için Profil → Ayarlar'a gidin.", "İzinler ve sağlık bölümünde eksik izin ya da durmuş koruma uyarısını inceleyin.", "Yalnız ilgili düzeltmeyi yapıp durumu yeniden kontrol edin."],
       "cautions": ["Koruma uyarısını gizlemeyin veya çalışıyor varsaymayın.", "Özel günlükleri ya da cihaz kimliklerini site asistanına göndermeyin."],
-      "keywords": ["android rapor", "android olaylar", "haftalık rapor", "web video geçmişi", "android ayarlar", "izinler ve sağlık", "yüzen balon", "kaldırma koruması"],
+      "keywords": ["android rapor", "android olaylar", "haftalık rapor", "web video geçmişi", "android ayarlar", "izinler ve sağlık", "koruma sağlığı", "yüzen balon", "kaldırma koruması"],
       "links": [{"label": "Destek", "href": "/contact/"}, {"label": "Gizlilik", "href": "/privacy/"}]
     },
     {

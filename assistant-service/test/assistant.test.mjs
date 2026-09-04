@@ -83,7 +83,10 @@ test('verified video action is added and unlisted YouTube URLs are rejected', ()
     actions: [{ label: 'Yanlış video', href: 'https://www.youtube.com/watch?v=AAAAAAAAAAA' }],
     followUp: '',
   }), articles, 'tr', video);
-  assert.deepEqual(result.actions, [{ label: video.label, href: 'https://www.youtube.com/watch?v=cMxuoJaG77E' }]);
+  assert.deepEqual(result.actions, [
+    { label: video.label, href: 'https://www.youtube.com/watch?v=cMxuoJaG77E' },
+    { label: 'Soru sistemi rehberi', href: '/rehber/soru-cozerek-ekran-suresi-kazanma/' },
+  ]);
 });
 
 test('model actions are restricted to retrieved AliKa links', () => {
@@ -99,6 +102,56 @@ test('model actions are restricted to retrieved AliKa links', () => {
   }), articles, 'tr');
   assert.deepEqual(result.actions, [{ label: 'İndir', href: '/downloads/' }]);
   assert.ok(result.sources.length > 0);
+});
+
+test('the primary verified page is added even when the model chooses a secondary page', () => {
+  const articles = retrieveKnowledge('Android telefonda YouTube için süre sınırı nereden eklenir?', 5);
+  assert.equal(articles[0].id, 'manual-android-rules');
+  const result = parseModelResponse(JSON.stringify({
+    answer: 'Kurallar ekranından uygulama limiti ekleyebilirsiniz.',
+    actions: [{ label: 'Genel ekosistem', href: '/ecosystem/' }],
+    followUp: '',
+    emailSubject: '',
+    emailBody: '',
+  }), articles, 'tr');
+  assert.deepEqual(result.actions[0], { label: 'Android kuralları', href: '/features/' });
+  assert.equal(result.actions.some((item) => item.href === '/ecosystem/'), true);
+});
+
+test('the exact verified video stays ahead of the primary page', () => {
+  const articles = retrieveKnowledge('Windows kurulumu nasıl yapılır?', 5);
+  const video = retrieveVideoGuide('Windows kurulum videosunu aç', [], 'tr', articles);
+  const result = parseModelResponse(JSON.stringify({
+    answer: 'Kurulum rehberini izleyebilirsiniz.',
+    actions: [],
+    followUp: '',
+    emailSubject: '',
+    emailBody: '',
+  }), articles, 'tr', video);
+  assert.equal(result.actions[0].href, video.href);
+  assert.equal(result.actions[1].href, articles[0].links[0].href);
+});
+
+test('critical help questions resolve to the expected product section', () => {
+  const cases = [
+    ['Windows haftalık süre planını nasıl ayarlarım?', 'manual-windows-rules-time', 'windows'],
+    ['Windows çocuğa hızlı 15 dakika nasıl verilir?', 'manual-windows-panel', 'windows'],
+    ['Windows çocuk profili nereden eklenir?', 'manual-windows-profiles', 'windows'],
+    ['Windows web ve video geçmişi ne kaydediyor?', 'manual-windows-reports', 'windows'],
+    ['Android telefonda YouTube limiti nasıl eklenir?', 'manual-android-rules', 'android'],
+    ['Android yerel VPN web filtresi nasıl açılır?', 'manual-android-web-filter', 'android'],
+    ['Android telefonu çocuğa paylaşımlı modda nasıl veririm?', 'manual-android-sharing', 'android'],
+    ['Android izinler ve koruma sağlığını nerede görürüm?', 'manual-android-reports-settings', 'android'],
+    ['Windows ve Android cihazı QR ile nasıl eşleştiririm?', 'manual-cross-platform-pairing', 'cross-platform'],
+    ['Kazanılan süreyi başka cihaza nasıl aktarırım?', 'manual-duration-economy', 'cross-platform'],
+    ['Android TV aile panosu nerede?', 'manual-android-tv', 'android-tv'],
+    ['Kural çalışmıyorsa hangi kontrolleri yapmalıyım?', 'manual-troubleshooting', 'all'],
+  ];
+  for (const [query, expectedId, expectedPlatform] of cases) {
+    const result = retrieveKnowledge(query, 5)[0];
+    assert.equal(result.id, expectedId, query);
+    assert.equal(result.platform, expectedPlatform, query);
+  }
 });
 
 test('localized internal links retain the selected language', () => {

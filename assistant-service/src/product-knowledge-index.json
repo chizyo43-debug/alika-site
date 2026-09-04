@@ -22,7 +22,7 @@
     {"id":"manual-android-web-filter","title":"Android web filtresi ve Güvenli Arama","platform":"android","terms":["site engelle","yerel vpn","dns filtresi","safe search","güvenli arama aç"]},
     {"id":"manual-android-quiz-content","title":"Android sorular, ödüller ve içerik","platform":"android","terms":["telefona soru yükle","csv soru","excel soru","matematik sorusu","süre kazan"]},
     {"id":"manual-android-sharing","title":"Android paylaşımlı telefon modu","platform":"android","terms":["telefonumu çocuğa ver","çocuk oturumu","paylaşımlı mod","izin verilen uygulama","ebeveyn moduna dön"]},
-    {"id":"manual-android-reports-settings","title":"Android raporlar, olaylar, ayarlar ve koruma sağlığı","platform":"android","terms":["android raporları","izin eksik","koruma durmuş","kaldırma koruması","yüzen süre balonu"]},
+    {"id":"manual-android-reports-settings","title":"Android raporlar, olaylar, ayarlar ve koruma sağlığı","platform":"android","terms":["android raporları","izinler ve koruma sağlığı","izin eksik","koruma durmuş","kaldırma koruması","yüzen süre balonu"]},
     {"id":"manual-cross-platform-pairing","title":"Windows ve Android cihaz eşleştirme","platform":"cross-platform","terms":["pc telefon bağla","windows android eşleştir","aynı wifi","qr kod","hesapsız eşleştirme"]},
     {"id":"manual-device-actions-chat","title":"Aile Ağı cihaz işlemleri ve aile mesajları","platform":"cross-platform","terms":["aile mesajı gönder","cihaza görev gönder","süre gönder","cihazı kilitle","teslim edildi"]},
     {"id":"manual-duration-economy","title":"Kazanılan süre ve cihazlar arası süre aktarımı","platform":"cross-platform","terms":["süreyi telefona aktar","kazanılan dakika","ortak bakiye","cihazlar arası ödül"]},
