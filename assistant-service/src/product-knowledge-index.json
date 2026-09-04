@@ -3,6 +3,7 @@
   "sourceVersion": "2026-09-04",
   "entries": [
     {"id":"manual-product-boundaries","title":"AliKa ürün sınırları ve çalışma ilkesi","platform":"all","terms":["program nasıl çalışır","ürün hakkında","görünür kontrol","rıza","yerel öncelikli","gizli takip yok"]},
+    {"id":"manual-family-fit-assessment","title":"Aile için dürüst AliKa uygunluk değerlendirmesi","platform":"all","terms":["aileme uygun mu","bize uygun mu","satın almalı mıyım","hangi sürüm uygun","dürüst tavsiye","ekran süresi çözümü"]},
     {"id":"manual-windows-navigation","title":"Windows ana menü ve ekran haritası","platform":"windows","terms":["windows menüler","ekranlar nerede","panel","çocuk ve kurallar","öğrenme","raporlar ve bildirimler"]},
     {"id":"manual-windows-panel","title":"Windows Panel günlük özet ve hızlı süre verme","platform":"windows","terms":["windows ana ekran","günlük özet","kalan süre","süre hediye","artı dakika"]},
     {"id":"manual-windows-rules-time","title":"Windows günlük ve haftalık zaman kuralları","platform":"windows","terms":["günlük limit ayarla","haftalık plan yap","uyku saati ayarla","zaman yönetimi","süre bitti"]},

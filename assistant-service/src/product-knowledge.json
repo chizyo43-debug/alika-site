@@ -15,6 +15,18 @@
       "links": [{"label": "AliKa nasıl çalışır?", "href": "/how-it-works/"}, {"label": "Gizlilik yaklaşımı", "href": "/privacy/"}]
     },
     {
+      "id": "manual-family-fit-assessment",
+      "title": "Aile için dürüst AliKa uygunluk değerlendirmesi",
+      "platform": "all",
+      "availability": "mixed",
+      "menuPath": "Site asistanı → AliKa aileme uygun mu?",
+      "content": "AliKa; desteklenen bir cihazda görünür süre kuralları, uygulama veya uyku sınırları, soru ve görevlerle kontrollü ödül ve aile içinde konuşulabilir bir dijital denge isteyen ailelerle güçlü biçimde eşleşir. İnternet üzerinden ev dışı gizli takip, iOS/macOS desteği, kusursuz içerik engelleme, tıbbi sonuç veya yazılımın aile iletişiminin yerini alması bekleniyorsa uygunluk doğrulanamaz. Windows mağaza dağıtımı ve 7 günlük deneme nettir; Android ve Android TV erişimi ayrı dağıtım durumuna göre kontrol edilmelidir.",
+      "steps": ["Kullanılacak platformu belirleyin.", "Çocuğun geniş yaş bandını seçin.", "Ailenin tek ana hedefini söyleyin: süre dengesi, uygulama sınırı, uyku düzeni, öğrenme/görev veya aile içi görünürlük.", "Sonuçtaki en güçlü eşleşme ve sınırlamayı birlikte değerlendirin.", "Uygunsa en küçük başlangıç kuralıyla deneyin."],
+      "cautions": ["Korku, baskı, rakipleri kötüleme veya sahte indirimle satış yapılmaz.", "Desteklenmeyen platform veya özellik için satın alma önerilmez.", "Android/TV dağıtımı doğrulanmadan bugün indirilebilir sözü verilmez."],
+      "keywords": ["aileme uygun mu", "uygunluk testi", "satın almalı mıyım", "pazarlama koçu", "hangi cihaz", "hangi yaş", "ana hedef", "dürüst öneri"],
+      "links": [{"label": "İndirme ve deneme seçenekleri", "href": "/downloads/"}, {"label": "Yaş gruplarını karşılaştırın", "href": "/age-groups/"}, {"label": "Özellikleri inceleyin", "href": "/features/"}]
+    },
+    {
       "id": "manual-windows-navigation",
       "title": "Windows ana menü ve ekran haritası",
       "platform": "windows",
