@@ -630,6 +630,10 @@ button:disabled { cursor: default; }
 .coverRule { position: absolute; left: 50%; width: 84px; height: 1px; transform: translateX(-50%); background: var(--amber); }
 .coverRuleTop { top: 54px; }.coverRuleBottom { bottom: 20px; }
 .coverEyebrow { margin-top: 4px; color: #47768b; font-size: 10px; font-weight: 850; letter-spacing: .22em; text-transform: uppercase; }
+.coverHook { position: absolute; top: 174px; left: calc(25% - 42px); z-index: 3; display: grid; width: 118px; min-height: 62px; padding: 10px 12px; place-content: center; border: 1px solid rgba(36,122,151,.34); border-radius: 15px 5px 15px 5px; color: var(--navy); background: linear-gradient(145deg,rgba(174,235,249,.9),rgba(255,255,255,.94)); box-shadow: 0 12px 24px rgba(16,35,62,.13), inset 0 1px rgba(255,255,255,.9); text-align: center; text-transform: uppercase; transform: translateX(-50%) rotate(-2deg); pointer-events: none; }
+.coverHook::before { content: '✦'; position: absolute; top: -10px; right: 11px; display: grid; width: 22px; height: 22px; place-items: center; border-radius: 50%; color: var(--navy); background: var(--amber); box-shadow: 0 4px 9px rgba(16,35,62,.16); font-size: 11px; }
+.coverHook small { color: #39758c; font-size: 9px; font-weight: 900; letter-spacing: .1em; line-height: 1.2; }
+.coverHook strong { margin-top: 3px; font-size: 12px; font-weight: 950; letter-spacing: .035em; line-height: 1.15; }
 .coverChildCharacter { position: absolute; top: 88px; left: calc(75% + 42px); z-index: 3; width: clamp(88px,10vw,122px); height: auto; pointer-events: none; filter: drop-shadow(0 14px 12px rgba(16,35,62,.18)); transform: translateX(-50%) translateZ(1px); }
 .morphMark { position: relative; display: grid; width: 212px; height: 178px; margin-top: clamp(32px,4.5vh,56px); place-items: center; }
 .officialLogo { position: relative; z-index: 2; width: 208px; height: auto; object-fit: contain; transition: opacity .3s ease, transform .6s cubic-bezier(.3,.7,.2,1); }
@@ -749,6 +753,10 @@ button:disabled { cursor: default; }
   .bookCover::after { left: 21px; }
   .morphMark { width: 170px; height: 145px; margin-top: 38px; }
   .officialLogo { width: 166px; }
+  .coverHook { top: 150px; left: calc(25% - 32px); width: 72px; min-height: 42px; padding: 7px 4px; border-radius: 11px 4px 11px 4px; }
+  .coverHook::before { top: -7px; right: 5px; width: 16px; height: 16px; font-size: 8px; }
+  .coverHook small { font-size: 7px; letter-spacing: .05em; }
+  .coverHook strong { margin-top: 2px; font-size: 9px; letter-spacing: 0; }
   .coverChildCharacter { top: 76px; left: calc(75% + 32px); width: 76px; }
   .coverTitle { font-size: 53px; }
   .coverStatement { font-size: 14px; }
@@ -803,6 +811,10 @@ button:disabled { cursor: default; }
   .coverEyebrow { margin-top: 0; font-size: 8px; }
   .morphMark { width: 126px; height: 94px; margin-top: 12px; }
   .officialLogo { width: 122px; }
+  .coverHook { top: 78px; left: calc(25% - 23px); width: 60px; min-height: 36px; padding: 5px 3px; }
+  .coverHook::before { display: none; }
+  .coverHook small { font-size: 6px; }
+  .coverHook strong { font-size: 7px; }
   .coverChildCharacter { top: 42px; left: calc(75% + 23px); width: 58px; }
   .aMascot { transform: translateY(5px) scale(.5); }
   .phase-morphing .aMascot, .phase-opening .morphMark .aMascot { transform: translateY(-8px) scale(.68); }

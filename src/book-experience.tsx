@@ -128,17 +128,19 @@ const BOOK_UI_COPY: Record<SiteLanguage, {
   nextSection: string;
   scrollDown: string;
   coverEyebrow: string;
+  coverHookLead: string;
+  coverHookReward: string;
   trialLabel: string;
 }> = {
-  tr: { bookLabel: 'AliKa etkileşimli ürün kitabı', openBook: 'Kitabı aç', touchLogo: 'Logo üzerine dokunun', previous: 'Önceki', next: 'Sonraki', previousSection: 'Önceki bölüm', nextSection: 'Sonraki bölüm', scrollDown: 'Aşağı kaydır', coverEyebrow: 'Aile için dijital denge', trialLabel: '7 gün ücretsiz deneyin' },
-  en: { bookLabel: 'AliKa interactive product book', openBook: 'Open the book', touchLogo: 'Tap the logo', previous: 'Previous', next: 'Next', previousSection: 'Previous section', nextSection: 'Next section', scrollDown: 'Scroll down', coverEyebrow: 'Digital balance for families', trialLabel: 'Try free for 7 days' },
-  de: { bookLabel: 'Interaktives AliKa-Produktbuch', openBook: 'Buch öffnen', touchLogo: 'Logo antippen', previous: 'Zurück', next: 'Weiter', previousSection: 'Vorheriger Abschnitt', nextSection: 'Nächster Abschnitt', scrollDown: 'Nach unten', coverEyebrow: 'Digitale Balance für Familien', trialLabel: '7 Tage kostenlos testen' },
-  es: { bookLabel: 'Libro interactivo de AliKa', openBook: 'Abrir el libro', touchLogo: 'Toque el logotipo', previous: 'Anterior', next: 'Siguiente', previousSection: 'Sección anterior', nextSection: 'Sección siguiente', scrollDown: 'Desplazar', coverEyebrow: 'Equilibrio digital familiar', trialLabel: 'Pruébalo gratis durante 7 días' },
-  fr: { bookLabel: 'Livre produit interactif AliKa', openBook: 'Ouvrir le livre', touchLogo: 'Touchez le logo', previous: 'Précédent', next: 'Suivant', previousSection: 'Section précédente', nextSection: 'Section suivante', scrollDown: 'Faire défiler', coverEyebrow: 'Équilibre numérique familial', trialLabel: 'Essayez gratuitement pendant 7 jours' },
-  pt: { bookLabel: 'Livro interativo AliKa', openBook: 'Abrir o livro', touchLogo: 'Toque no logótipo', previous: 'Anterior', next: 'Seguinte', previousSection: 'Secção anterior', nextSection: 'Secção seguinte', scrollDown: 'Descer', coverEyebrow: 'Equilíbrio digital familiar', trialLabel: 'Experimente grátis durante 7 dias' },
-  ru: { bookLabel: 'Интерактивная книга AliKa', openBook: 'Открыть книгу', touchLogo: 'Нажмите на логотип', previous: 'Назад', next: 'Далее', previousSection: 'Предыдущий раздел', nextSection: 'Следующий раздел', scrollDown: 'Прокрутить', coverEyebrow: 'Цифровой баланс семьи', trialLabel: 'Попробуйте бесплатно 7 дней' },
-  ja: { bookLabel: 'AliKaインタラクティブ製品ブック', openBook: '本を開く', touchLogo: 'ロゴをタップ', previous: '前へ', next: '次へ', previousSection: '前のセクション', nextSection: '次のセクション', scrollDown: '下へスクロール', coverEyebrow: '家族のデジタルバランス', trialLabel: '7日間無料でお試し' },
-  ko: { bookLabel: 'AliKa 인터랙티브 제품 책', openBook: '책 열기', touchLogo: '로고를 누르세요', previous: '이전', next: '다음', previousSection: '이전 섹션', nextSection: '다음 섹션', scrollDown: '아래로 스크롤', coverEyebrow: '가족을 위한 디지털 균형', trialLabel: '7일 무료 체험' },
+  tr: { bookLabel: 'AliKa etkileşimli ürün kitabı', openBook: 'Kitabı aç', touchLogo: 'Logo üzerine dokunun', previous: 'Önceki', next: 'Sonraki', previousSection: 'Önceki bölüm', nextSection: 'Sonraki bölüm', scrollDown: 'Aşağı kaydır', coverEyebrow: 'Aile için dijital denge', coverHookLead: 'Soru çöz', coverHookReward: 'Süre kazan', trialLabel: '7 gün ücretsiz deneyin' },
+  en: { bookLabel: 'AliKa interactive product book', openBook: 'Open the book', touchLogo: 'Tap the logo', previous: 'Previous', next: 'Next', previousSection: 'Previous section', nextSection: 'Next section', scrollDown: 'Scroll down', coverEyebrow: 'Digital balance for families', coverHookLead: 'Solve questions', coverHookReward: 'Earn time', trialLabel: 'Try free for 7 days' },
+  de: { bookLabel: 'Interaktives AliKa-Produktbuch', openBook: 'Buch öffnen', touchLogo: 'Logo antippen', previous: 'Zurück', next: 'Weiter', previousSection: 'Vorheriger Abschnitt', nextSection: 'Nächster Abschnitt', scrollDown: 'Nach unten', coverEyebrow: 'Digitale Balance für Familien', coverHookLead: 'Aufgaben lösen', coverHookReward: 'Zeit gewinnen', trialLabel: '7 Tage kostenlos testen' },
+  es: { bookLabel: 'Libro interactivo de AliKa', openBook: 'Abrir el libro', touchLogo: 'Toque el logotipo', previous: 'Anterior', next: 'Siguiente', previousSection: 'Sección anterior', nextSection: 'Sección siguiente', scrollDown: 'Desplazar', coverEyebrow: 'Equilibrio digital familiar', coverHookLead: 'Resuelve', coverHookReward: 'Gana tiempo', trialLabel: 'Pruébalo gratis durante 7 días' },
+  fr: { bookLabel: 'Livre produit interactif AliKa', openBook: 'Ouvrir le livre', touchLogo: 'Touchez le logo', previous: 'Précédent', next: 'Suivant', previousSection: 'Section précédente', nextSection: 'Section suivante', scrollDown: 'Faire défiler', coverEyebrow: 'Équilibre numérique familial', coverHookLead: 'Résous', coverHookReward: 'Gagne du temps', trialLabel: 'Essayez gratuitement pendant 7 jours' },
+  pt: { bookLabel: 'Livro interativo AliKa', openBook: 'Abrir o livro', touchLogo: 'Toque no logótipo', previous: 'Anterior', next: 'Seguinte', previousSection: 'Secção anterior', nextSection: 'Secção seguinte', scrollDown: 'Descer', coverEyebrow: 'Equilíbrio digital familiar', coverHookLead: 'Resolva', coverHookReward: 'Ganhe tempo', trialLabel: 'Experimente grátis durante 7 dias' },
+  ru: { bookLabel: 'Интерактивная книга AliKa', openBook: 'Открыть книгу', touchLogo: 'Нажмите на логотип', previous: 'Назад', next: 'Далее', previousSection: 'Предыдущий раздел', nextSection: 'Следующий раздел', scrollDown: 'Прокрутить', coverEyebrow: 'Цифровой баланс семьи', coverHookLead: 'Решай задачи', coverHookReward: 'Получай время', trialLabel: 'Попробуйте бесплатно 7 дней' },
+  ja: { bookLabel: 'AliKaインタラクティブ製品ブック', openBook: '本を開く', touchLogo: 'ロゴをタップ', previous: '前へ', next: '次へ', previousSection: '前のセクション', nextSection: '次のセクション', scrollDown: '下へスクロール', coverEyebrow: '家族のデジタルバランス', coverHookLead: '問題を解く', coverHookReward: '時間を獲得', trialLabel: '7日間無料でお試し' },
+  ko: { bookLabel: 'AliKa 인터랙티브 제품 책', openBook: '책 열기', touchLogo: '로고를 누르세요', previous: '이전', next: '다음', previousSection: '이전 섹션', nextSection: '다음 섹션', scrollDown: '아래로 스크롤', coverEyebrow: '가족을 위한 디지털 균형', coverHookLead: '문제를 풀고', coverHookReward: '시간을 얻어요', trialLabel: '7일 무료 체험' },
 };
 
 function resolveSiteLanguage(): SiteLanguage {
@@ -1492,6 +1494,7 @@ export default function BookExperience() {
         <button className="bookCover" type="button" onClick={openBook} aria-label={ui.openBook} aria-hidden={['reading', 'flipping'].includes(phase)} tabIndex={phase === 'closed' ? 0 : -1} disabled={phase !== 'closed'}>
           <span className="coverRule coverRuleTop" />
           <span className="coverEyebrow">{ui.coverEyebrow}</span>
+          <span className="coverHook" aria-hidden="true"><small>{ui.coverHookLead}</small><strong>{ui.coverHookReward}</strong></span>
           <img className="coverChildCharacter" src="/brand/alika-child-character-v2.png" alt="" aria-hidden="true" width="530" height="1239" />
           <span className="morphMark">
             <span className="logoHalo" aria-hidden="true" />
