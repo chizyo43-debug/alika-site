@@ -23,6 +23,35 @@ const PAGE_KNOWLEDGE_QUERIES = {
   contact: 'destek iletişim',
 };
 
+const TOUR_INTENT_ARTICLES = [
+  { pattern: /\bfiyat\b|\bucret\b|deneme|satin al|store|indir|download|price|preis|precio|prix|preco|цена|価格|가격/u, id: 'pricing' },
+  { pattern: /gizlilik|mahremiyet|veri.*(sakla|tut|sil)|privacy|datenschutz|privacidad|confidentialite|privacidade|конфиденциальность|プライバシー|개인정보|bulut/u, id: 'privacy' },
+  { pattern: /yas gr|kac yas|age|alter|edad|idade|возраст|年齢|나이|5.?7|8.?11|12.?14|15.?18/u, id: 'ages' },
+  { pattern: /yol harita|urun durum|hazir mi|gelistir|planlanan|guncelleme|roadmap|fahrplan|hoja de ruta|feuille de route|roteiro|дорожная карта|ロードマップ|로드맵/u, id: 'status-roadmap' },
+  { pattern: /ozellik|neler yap|islev|feature|funktion|funcion|fonction|funcionalidade|функци|機能|기능/u, id: 'platforms' },
+  { pattern: /kurulum|ilk ayar|pin|kurtarma kod|guvenli mod|setup|install/u, id: 'manual-windows-install-protection' },
+  { pattern: /icerik|ders|soru bankasi|content|inhalt|contenido|contenu|conteudo|контент|コンテンツ|콘텐츠|xlsx|csv|zip/u, id: 'content' },
+  { pattern: /aile agi|ekosistem|cihaz eslestir|ecosystem|okosystem|ecosistema|ecosysteme|экосистема|エコシステム|생태계|android tv/u, id: 'family-network' },
+  { pattern: /destek|iletisim|sorun|hata|calismiyor|support|hilfe|ayuda|aide|ajuda|поддержка|サポート|지원/u, id: 'manual-troubleshooting' },
+  { pattern: /nasil calis|gunluk akis|how it works|wie funktion|como funciona|comment fonctionne|как работает|仕組み|작동/u, id: 'overview' },
+];
+
+const TOUR_VIDEO_INTENT = /video|izle|oynat|watch|play|vídeo|vidéo|видео|動画|동영상|kurulum|setup|install|установ|インストール|설치|\blimit\b|sinir|kural|ayarla|ekle|olustur/u;
+const TOUR_VIDEO_REQUEST = /video|izle|oynat|watch|play|vídeo|vidéo|видео|動画|동영상/u;
+const TOUR_TASK_HINT = /kurulum|setup|install|установ|インストール|설치|panel|kural|rule|limit|sinir|uyku|bedtime|plan|web|icerik|content|soru|question|gorev|task|odev|homework|sinav|exam|cihaz|device|eslestir|pair|rapor|report|gizlilik|privacy|ayar|setting|tepsi|tray|kilit|lock|pin|yedek|backup/u;
+
+const TOUR_VIDEO_CLARIFICATION = {
+  tr: ['Doğru videoyu seçebilmem için yapılacak işlemi netleştirelim.', 'Hangi işlemi yapmak istiyorsunuz? Örneğin kurulum, uygulama sınırı, görev veya raporlar.'],
+  en: ['Let’s identify the task so I can choose the right video.', 'What do you want to do—for example installation, an app limit, a task, or reports?'],
+  de: ['Nennen Sie bitte die Aufgabe, damit ich das richtige Video auswählen kann.', 'Was möchten Sie tun, zum Beispiel installieren, ein App-Limit setzen, eine Aufgabe oder Berichte öffnen?'],
+  es: ['Indique la tarea para que pueda elegir el vídeo correcto.', '¿Qué desea hacer, por ejemplo instalar, limitar una aplicación, crear una tarea o ver informes?'],
+  fr: ['Précisons l’action afin de choisir la bonne vidéo.', 'Que voulez-vous faire, par exemple installer, limiter une application, créer une tâche ou voir les rapports ?'],
+  pt: ['Indique a tarefa para eu escolher o vídeo certo.', 'O que pretende fazer, por exemplo instalar, limitar uma aplicação, criar uma tarefa ou ver relatórios?'],
+  ru: ['Уточним действие, чтобы выбрать подходящее видео.', 'Что вы хотите сделать: установить AliKa, задать лимит приложения, создать задачу или открыть отчёты?'],
+  ja: ['適切な動画を選ぶため、操作内容を確認します。', '何をしたいですか？例：インストール、アプリ制限、タスク作成、レポート確認。'],
+  ko: ['알맞은 영상을 고를 수 있도록 작업을 확인할게요.', '어떤 작업을 하려나요? 예: 설치, 앱 시간 제한, 과제 만들기, 보고서 보기.'],
+};
+
 const SAFE_EXTERNAL_PREFIXES = ['https://apps.microsoft.com/detail/9N3P9F5ZKR5S'];
 
 const STOP_TOKENS = new Set([
@@ -158,6 +187,25 @@ function sourceContext(articles, language) {
   }));
 }
 
+function prioritizeTourArticle(message, articles) {
+  const query = fold(message).replace(/\s+/g, ' ').trim();
+  const preferredId = TOUR_INTENT_ARTICLES.find((item) => item.pattern.test(query))?.id;
+  if (!preferredId) return;
+  const existingIndex = articles.findIndex((article) => article.id === preferredId);
+  if (existingIndex === 0) return;
+  const preferred = existingIndex > 0
+    ? articles.splice(existingIndex, 1)[0]
+    : KNOWLEDGE_CATALOG.find((article) => article.id === preferredId);
+  if (!preferred) return;
+  articles.unshift(preferred);
+  articles.splice(6);
+}
+
+function isVagueTourVideoRequest(message) {
+  const query = fold(message).replace(/\s+/g, ' ').trim();
+  return TOUR_VIDEO_REQUEST.test(query) && !TOUR_TASK_HINT.test(query);
+}
+
 export function systemInstruction(language) {
   return `You are AliKa's official website guide and ethical product coach. Reply in ${LANGUAGE_NAMES[language]}.
 
@@ -179,7 +227,7 @@ Your job:
     When enough information is available, leave followUp empty and give a tailored result with four compact parts in the reply language: (1) a clear verdict equivalent to "Strong fit", "Partial fit", or "Cannot confirm"; (2) the strongest verified match between the family's goal and AliKa; (3) one relevant verified limitation or condition; and (4) a two-step low-friction start. Recommend a trial or download only when the verified platform and availability support it. For Android or Android TV, state any verified distribution limitation instead of implying that the Windows Store purchase covers it. For iOS, macOS, covert monitoring, internet-wide remote control, perfect filtering or medical/developmental guarantees, do not sell around the mismatch: use partial fit or cannot confirm. Be persuasive through specificity and relevance, never pressure, fear, fake urgency or competitor attacks.
   - plan: act as a practical family routine coach. Learn the broad age band, the school-day/weekend rhythm, and one family priority, in that order. Ask for exactly one missing information item per question and reuse facts already in history. JOURNEY PROGRESS reports how many visitor answers, including the current one, have been received. Never continue questioning after three visitor answers; if one message already supplies all three facts, conclude immediately.
     When enough information is available, leave followUp empty and write a concise, tailored starter plan in the reply language. It must include: (1) a clear label that this is a flexible starting point for family agreement, not medical or developmental advice; (2) a school-day routine and, when the visitor described it, a distinct weekend adjustment; (3) separately labelled learning, free-screen-time, screen-free-break and wind-down blocks; (4) one bounded reward rule where a verified learning/task reward fits, with a daily cap and no penalty for wrong answers; and (5) two small AliKa setup actions using only verified capabilities. Use concrete times or durations only as adjustable suggestions, explain what family input they respond to, and never present them as official age-based health guidance. Do not claim the website applied settings. Keep the plan realistic rather than filling every hour, and end with one simple review point after the first week.
-  - tour: ask only what topic, feature or task the visitor wants to find; never ask their age or device merely to navigate the site. If that goal is missing, ask one topic question and return no actions. Otherwise orient them to the current page in one sentence and offer the most relevant verified page or video. Do not force a tour step the visitor does not need.
+  - tour: act as a direct site navigator, not a questionnaire. Learn only the topic, feature or concrete task the visitor wants to find. Never ask age. Ask platform only when it materially changes the available instructions or video. If the goal is missing or is only "a video", ask one short question for the concrete task and return no actions. Once the goal is clear, do not keep questioning: say what the visitor will find in one or two concise sentences and route them to the single best verified site page. For a concrete Windows task with an exact verified guide, put that video first and the supporting page second. For broad browsing such as features, pricing, age groups, product status or downloads, prefer the relevant page and do not attach an unrelated video. Never describe a Windows video as Android or Android TV guidance, and do not invent a tour sequence the visitor does not need.
   - feedback: help the visitor prepare either an issue report or an improvement idea for alika.destek@gmail.com. Collect only: report type, affected platform or website page, a concise description, and the expected result or suggested improvement when it adds clarity. Ask for exactly one information item per question, reuse answers already given, and stop after at most four visitor answers. Never ask for an email address, child information, PIN, password, recovery code, exact device identifier, screenshot, private log or browsing data. If sensitive data appears, tell the visitor to remove it and do not copy it into the draft. When enough safe detail is available, write a concise email draft in the reply language. Set emailSubject to a specific subject beginning with [AliKa Issue] or [AliKa Improvement] translated naturally into the reply language, set emailBody to the complete polite email, leave followUp empty, and return no actions. The body must state that the draft was prepared with the AliKa website assistant. In answer, say only that the draft is ready and should be reviewed before opening it in the visitor's email app; do not tell the visitor to copy it manually. Never claim the email was sent.
   - general: answer normally without forcing a guided questionnaire.
 - When more journey information is needed, keep answer to a brief acknowledgement, put the one next question only in followUp, keep followUp under 160 characters, and do not repeat that question in answer. Once the journey result is ready, leave followUp empty.
@@ -254,7 +302,9 @@ export function parseModelResponse(text, articles, language, videoGuide = null, 
       actions.splice(3);
     }
   }
-  if (videoGuide && !actions.some((item) => item.href === videoGuide.href)) {
+  if (videoGuide) {
+    const existingVideoIndex = actions.findIndex((item) => item.href === videoGuide.href);
+    if (existingVideoIndex >= 0) actions.splice(existingVideoIndex, 1);
     actions.unshift({ label: videoGuide.label, href: videoGuide.href });
     actions.splice(3);
   }
@@ -279,8 +329,8 @@ export function parseModelResponse(text, articles, language, videoGuide = null, 
     : null;
   return {
     answer: removeRepeatedFollowUp(parsed.answer, followUp).slice(0, 2400),
-    actions: journey === 'feedback' ? [] : actions,
-    sources: journey === 'feedback' ? [] : sourceLinks,
+    actions: journey === 'feedback' || (journey === 'tour' && followUp) ? [] : actions,
+    sources: journey === 'feedback' || (journey === 'tour' && followUp) ? [] : sourceLinks,
     followUp,
     emailDraft,
   };
@@ -307,6 +357,10 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
     async answer({ message, history = [], language = 'tr', pagePath = '/', journey = 'general' }) {
       const safeLanguage = SUPPORTED_LANGUAGES.has(language) ? language : 'tr';
       const safeJourney = SUPPORTED_JOURNEYS.has(journey) ? journey : 'general';
+      if (safeJourney === 'tour' && isVagueTourVideoRequest(message)) {
+        const [answer, followUp] = TOUR_VIDEO_CLARIFICATION[safeLanguage];
+        return { answer, actions: [], sources: [], followUp, emailDraft: null };
+      }
       const articles = retrieveConversationKnowledge(message, history, 6);
       const journeyProgress = {
         visitorAnswersReceived: safeJourney === 'general'
@@ -333,6 +387,7 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
         }
       }
       if (safeJourney === 'tour') {
+        prioritizeTourArticle(message, articles);
         const routeParts = pagePath.split(/[?#]/, 1)[0].split('/').filter((part) => part && !SUPPORTED_LANGUAGES.has(part));
         const route = routeParts.at(-1) || '';
         const pageQuery = PAGE_KNOWLEDGE_QUERIES[route] || route.replace(/[-_]+/g, ' ');
@@ -341,7 +396,8 @@ export function createAssistantClient(env = process.env, dependencies = {}) {
           if (articles.length >= 6) break;
         }
       }
-      const videoGuide = safeJourney === 'feedback' || (safeJourney === 'tour' && history.length === 0)
+      const videoGuide = safeJourney === 'feedback'
+        || (safeJourney === 'tour' && (history.length === 0 || !TOUR_VIDEO_INTENT.test(fold(message))))
         ? null
         : retrieveVideoGuide(message, history, safeLanguage, articles);
       const context = sourceContext(articles, safeLanguage);

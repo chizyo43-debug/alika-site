@@ -75,6 +75,26 @@ test('video retrieval opens the exact Turkish guide for the requested task', () 
   assert.equal(task?.href, 'https://www.youtube.com/watch?v=XjlLQnRvyjY');
 });
 
+test('video retrieval ignores generic site browsing and finds the exact app-limit guide', () => {
+  const genericArticles = retrieveKnowledge('Özellikleri görmek istiyorum', 4);
+  const generic = retrieveVideoGuide(
+    'Özellikleri görmek istiyorum',
+    [{ role: 'user', text: 'İhtiyacıma göre AliKa sitesini birlikte gezmek istiyorum.' }],
+    'tr',
+    genericArticles,
+  );
+  assert.equal(generic, null);
+
+  const ruleArticles = retrieveKnowledge('Windows bilgisayarda YouTube uygulamasına süre sınırı koyma', 4);
+  const exact = retrieveVideoGuide(
+    'Windows bilgisayarda YouTube uygulamasına süre sınırı koyma videosu',
+    [],
+    'tr',
+    ruleArticles,
+  );
+  assert.equal(exact?.key, 'windows-child-rules');
+});
+
 test('video retrieval uses the selected language and suppresses Windows guides for Android', () => {
   const japanese = retrieveVideoGuide('Windowsへのインストール方法を動画で見たい', [], 'ja', []);
   assert.equal(japanese?.key, 'windows-installation');
@@ -133,7 +153,10 @@ test('the exact verified video stays ahead of the primary page', () => {
   const video = retrieveVideoGuide('Windows kurulum videosunu aç', [], 'tr', articles);
   const result = parseModelResponse(JSON.stringify({
     answer: 'Kurulum rehberini izleyebilirsiniz.',
-    actions: [],
+    actions: [
+      { label: 'Kurulum sayfası', href: articles[0].links[0].href },
+      { label: 'Kurulum videosu', href: video.href },
+    ],
     followUp: '',
     emailSubject: '',
     emailBody: '',
@@ -407,8 +430,75 @@ test('site tour is grounded in the current page and does not invent an opening v
     },
   };
   const assistant = createAssistantClient({}, { client: fakeClient });
-  await assistant.answer({ message: 'Siteyi birlikte gezelim.', language: 'tr', pagePath: '/privacy/', journey: 'tour' });
+  const result = await assistant.answer({ message: 'Siteyi birlikte gezelim.', language: 'tr', pagePath: '/privacy/', journey: 'tour' });
   const prompt = request.contents.at(-1).parts[0].text;
   assert.match(prompt, /"id":"privacy"/);
   assert.match(prompt, /RECOMMENDED VERIFIED VIDEO GUIDE:\nnull/);
+  assert.deepEqual(result.actions, []);
+  assert.deepEqual(result.sources, []);
+});
+
+test('site tour routes common goals to one correct primary destination', async () => {
+  const fakeClient = {
+    models: {
+      async generateContent() {
+        return { text: JSON.stringify({ answer: 'Doğru bölümü buldum.', actions: [], followUp: '', emailSubject: '', emailBody: '' }) };
+      },
+    },
+  };
+  const assistant = createAssistantClient({}, { client: fakeClient });
+  const history = [
+    { role: 'user', text: 'İhtiyacıma göre AliKa sitesini birlikte gezmek istiyorum.' },
+    { role: 'assistant', text: 'Sitede en çok neyi bulmak istiyorsunuz?' },
+  ];
+  const cases = [
+    ['Özellikleri görmek istiyorum', '/features/'],
+    ['Fiyat ve deneme bilgisi', '/downloads/'],
+    ['Gizlilik ve verilerin nerede tutulduğu', '/privacy/'],
+    ['Yaş gruplarını karşılaştırmak istiyorum', '/age-groups/'],
+    ['Güncel ürün durumu ve yol haritası', '/roadmap/'],
+  ];
+
+  for (const [message, expectedHref] of cases) {
+    const result = await assistant.answer({ message, history, language: 'tr', pagePath: '/', journey: 'tour' });
+    assert.equal(result.actions[0]?.href, expectedHref, message);
+  }
+});
+
+test('site tour puts the exact verified Windows task video first', async () => {
+  const fakeClient = {
+    models: {
+      async generateContent() {
+        return { text: JSON.stringify({ answer: 'Bu video doğrudan uygulama sınırı ekranını gösterir.', actions: [], followUp: '', emailSubject: '', emailBody: '' }) };
+      },
+    },
+  };
+  const assistant = createAssistantClient({}, { client: fakeClient });
+  const result = await assistant.answer({
+    message: 'Windows bilgisayarda YouTube uygulamasına süre sınırı koyma videosu',
+    language: 'tr',
+    pagePath: '/',
+    journey: 'tour',
+    history: [
+      { role: 'user', text: 'İhtiyacıma göre AliKa sitesini birlikte gezmek istiyorum.' },
+      { role: 'assistant', text: 'Hangi işlemi yapmak istiyorsunuz?' },
+    ],
+  });
+  assert.equal(result.actions[0]?.href, 'https://www.youtube.com/watch?v=sXvHkeOegIo');
+});
+
+test('site tour asks for a concrete task instead of guessing a vague video', async () => {
+  const assistant = createAssistantClient({}, {
+    client: { models: { async generateContent() { throw new Error('model should not be called'); } } },
+  });
+  const result = await assistant.answer({
+    message: 'Sadece bir kullanım videosu arıyorum',
+    language: 'tr',
+    pagePath: '/',
+    journey: 'tour',
+    history: [],
+  });
+  assert.match(result.followUp, /Hangi işlemi/);
+  assert.deepEqual(result.actions, []);
+  assert.deepEqual(result.sources, []);
 });

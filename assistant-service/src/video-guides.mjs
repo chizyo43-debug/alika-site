@@ -25,7 +25,7 @@ const VIDEO_KEYWORDS = {
   'windows-overview': ['genel bakis', 'nedir', 'ne ise yarar', 'overview', 'introduction'],
   'windows-installation': ['kur', 'kurulum', 'yukle', 'ilk ayar', 'pin', 'riza', 'kurtarma kodu', 'guvenli mod', 'install', 'setup', 'consent', 'recovery'],
   'windows-panel': ['panel', 'ana ekran', 'gunluk ozet', 'kalan sure', 'cihaz sagligi', 'dashboard', 'daily summary', 'remaining time'],
-  'windows-child-rules': ['cocuk profili', 'kural', 'uygulama limiti', 'site limiti', 'uyku', 'haftalik plan', 'web koruma', 'sinav ayari', 'child rules', 'app limit', 'bedtime', 'weekly plan'],
+  'windows-child-rules': ['cocuk profili', 'kural', 'uygulama limiti', 'uygulama sure limiti', 'sure siniri', 'youtube', 'site limiti', 'uyku', 'haftalik plan', 'web koruma', 'sinav ayari', 'child rules', 'app limit', 'time limit', 'bedtime', 'weekly plan'],
   'windows-learning-content': ['icerik ekle', 'soru bankasi ekle', 'xlsx', 'csv', 'zip', 'alika paketi', 'chatgpt', 'add lessons', 'question bank', 'import'],
   'windows-child-learning': ['cocuk ogrenme', 'calisma ekrani', 'konu anlatimi', 'ilerleme', 'child learning', 'study', 'lesson', 'progress'],
   'windows-child-question': ['soru coz', 'dogru cevap', 'yanlis cevap', 'sure kazan', 'cozum kagidi', 'question', 'answer', 'earned time', 'explanation'],
@@ -49,6 +49,10 @@ const VIDEO_CTA = {
   ko: '▶ 관련 Windows 동영상 열기',
 };
 
+const VIDEO_STOP_TOKENS = new Set([
+  'alika', 'site', 'sitesini', 'website', 'sayfa', 'page', 'guide', 'rehber',
+]);
+
 function fold(value) {
   return String(value)
     .toLowerCase()
@@ -61,7 +65,7 @@ function fold(value) {
 }
 
 function tokenSet(value) {
-  return new Set(fold(value).split(/\s+/).filter((token) => token.length > 1));
+  return new Set(fold(value).split(/\s+/).filter((token) => token.length > 1 && !VIDEO_STOP_TOKENS.has(token)));
 }
 
 function cjkBigrams(value) {
