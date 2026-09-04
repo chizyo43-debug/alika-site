@@ -246,7 +246,7 @@ HOW_TEXT = {
         "Ebeveyn PIN’iyle açın. Bugün özetinden kurallara, raporlara ve ayarlara ilerleyin.",
         "Günlük toplamı, uygulama limitini, gece saatini veya engeli seçip Kaydet’e basın.",
         "Haftalık, Sorular, Geçmiş ve Olaylar alt menülerinden yalnız ihtiyaç duyduğunuz ayrıntıyı açın.",
-        "Bir cevap seçin. Doğru cevap ödül ilerlemesine eklenir; tanımlı eşik dolunca süre kazanılır.",
+        "Bir cevap seçin. Üç doğru cevap ödül ilerlemesini tamamlar ve en fazla 3 dakika ek süre kazandırır.",
         "Kazanılan altınla kozmetik seçin; rozetleri ve seri ilerlemesini aynı alanda izleyin.",
     ),
     "en": (
@@ -254,7 +254,7 @@ HOW_TEXT = {
         "Unlock with the parent PIN, then move from Today to Rules, Reports or Settings.",
         "Choose a daily total, app limit, night schedule or block, then press Save.",
         "Open only the detail you need under Weekly, Questions, History or Events.",
-        "Choose an answer. Correct answers fill reward progress; the configured threshold grants time.",
+        "Choose an answer. Three correct answers complete reward progress and grant up to 3 extra minutes.",
         "Use earned gold for cosmetics and follow badges and streak progress in one place.",
     ),
     "de": (
@@ -262,7 +262,7 @@ HOW_TEXT = {
         "Mit der Eltern-PIN öffnen und von Heute zu Regeln, Berichten oder Einstellungen wechseln.",
         "Tageslimit, App-Limit, Nachtzeit oder Sperre wählen und Speichern drücken.",
         "Unter Woche, Aufgaben, Verlauf oder Ereignisse nur das benötigte Detail öffnen.",
-        "Antwort wählen. Richtige Antworten füllen den Fortschritt; am festgelegten Ziel gibt es Zeit.",
+        "Antwort wählen. Drei richtige Antworten schließen den Belohnungsfortschritt ab und bringen bis zu 3 zusätzliche Minuten.",
         "Verdientes Gold für Kosmetik nutzen und Abzeichen sowie Serien gemeinsam verfolgen.",
     ),
     "es": (
@@ -270,7 +270,7 @@ HOW_TEXT = {
         "Abra con el PIN parental y pase de Hoy a Reglas, Informes o Ajustes.",
         "Elija total diario, límite de app, horario nocturno o bloqueo y pulse Guardar.",
         "Abra solo el detalle necesario en Semana, Preguntas, Historial o Eventos.",
-        "Elija una respuesta. Los aciertos llenan el progreso y el umbral configurado concede tiempo.",
+        "Elija una respuesta. Tres aciertos completan el progreso y conceden hasta 3 minutos extra.",
         "Use el oro ganado en cosméticos y siga insignias y rachas en un solo lugar.",
     ),
     "fr": (
@@ -278,7 +278,7 @@ HOW_TEXT = {
         "Ouvrez avec le PIN parent puis accédez à Aujourd’hui, Règles, Rapports ou Réglages.",
         "Choisissez total quotidien, limite d’app, horaire de nuit ou blocage puis enregistrez.",
         "Ouvrez seulement le détail utile dans Semaine, Questions, Historique ou Événements.",
-        "Choisissez une réponse. Les bonnes réponses remplissent la progression puis accordent du temps.",
+        "Choisissez une réponse. Trois bonnes réponses complètent la progression et accordent jusqu’à 3 minutes supplémentaires.",
         "Utilisez l’or gagné pour les objets cosmétiques et suivez badges et séries.",
     ),
     "pt": (
@@ -286,7 +286,7 @@ HOW_TEXT = {
         "Abra com o PIN dos pais e avance de Hoje para Regras, Relatórios ou Definições.",
         "Escolha total diário, limite de app, horário noturno ou bloqueio e guarde.",
         "Abra só o detalhe necessário em Semana, Questões, Histórico ou Eventos.",
-        "Escolha uma resposta. As respostas certas enchem o progresso e concedem tempo no limite definido.",
+        "Escolha uma resposta. Três respostas certas completam o progresso e concedem até 3 minutos extra.",
         "Use o ouro ganho em cosméticos e acompanhe emblemas e séries no mesmo local.",
     ),
     "ru": (
@@ -294,7 +294,7 @@ HOW_TEXT = {
         "Откройте родительским PIN-кодом и перейдите из «Сегодня» в Правила, Отчёты или Настройки.",
         "Выберите общий лимит, лимит приложения, ночное время или блокировку и нажмите Сохранить.",
         "Открывайте нужное в разделах Неделя, Задания, История или События.",
-        "Выберите ответ. Верные ответы заполняют прогресс, а заданный порог даёт время.",
+        "Выберите ответ. Три верных ответа завершают прогресс и дают не более 3 дополнительных минут.",
         "Тратьте заработанное золото на оформление и следите за значками и сериями.",
     ),
     "ja": (
@@ -302,7 +302,7 @@ HOW_TEXT = {
         "保護者PINで開き、今日からルール、レポート、設定へ進みます。",
         "1日の合計、アプリ制限、夜間時間、ブロックを選んで保存します。",
         "週間、問題、履歴、イベントから必要な詳細だけを開きます。",
-        "答えを選びます。正解で進捗がたまり、設定した基準で時間を獲得します。",
+        "答えを選びます。3問正解すると進捗が完了し、追加時間は最大3分です。",
         "獲得したゴールドでアイテムを選び、バッジと連続記録を確認します。",
     ),
     "ko": (
@@ -310,7 +310,7 @@ HOW_TEXT = {
         "보호자 PIN으로 열고 오늘에서 규칙, 리포트, 설정으로 이동합니다.",
         "일일 총량, 앱 제한, 야간 시간 또는 차단을 선택하고 저장합니다.",
         "주간, 문제, 기록, 이벤트에서 필요한 세부 정보만 엽니다.",
-        "답을 고릅니다. 정답이 보상 진행도를 채우고 설정된 기준에서 시간을 얻습니다.",
+        "답을 고릅니다. 세 문제를 맞히면 보상 진행이 완료되고 추가 시간은 최대 3분입니다.",
         "획득한 골드로 꾸미기 아이템을 고르고 배지와 연속 기록을 확인합니다.",
     ),
 }
@@ -775,7 +775,7 @@ def demo_markup(kind: str, c: dict, lang: str) -> str:
     elif kind == "reports":
         body = '<div class="demo-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="demo-tabs"><i></i><i></i><i></i></div>'
     elif kind == "quiz":
-        body = '<div class="demo-question"><b>8 × 4</b><span><i>24</i><i>32</i><i>36</i></span></div><div class="demo-reward">+5</div>'
+        body = '<div class="demo-question"><b>8 × 4</b><span><i>24</i><i>32</i><i>36</i></span></div><div class="demo-reward">+3</div>'
     else:
         body = '<div class="demo-coins"><i></i><i></i><i></i></div><div class="demo-items"><i></i><i></i><i></i></div>'
     return f'<div class="mini-demo demo-{kind}" role="img" aria-label="{esc(labels[7])}">{body}</div>'

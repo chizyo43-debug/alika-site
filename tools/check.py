@@ -33,6 +33,17 @@ STORE_OFFER_MARKERS = {
     "ja": ('"price":"230"', '"priceCurrency":"JPY"'),
     "ko": ('"price":"2500"', '"priceCurrency":"KRW"'),
 }
+QUIZ_REWARD_MARKERS = {
+    "tr": "Üç doğru cevap ödül ilerlemesini tamamlar ve en fazla 3 dakika ek süre kazandırır.",
+    "en": "Three correct answers complete reward progress and grant up to 3 extra minutes.",
+    "de": "Drei richtige Antworten schließen den Belohnungsfortschritt ab und bringen bis zu 3 zusätzliche Minuten.",
+    "es": "Tres aciertos completan el progreso y conceden hasta 3 minutos extra.",
+    "fr": "Trois bonnes réponses complètent la progression et accordent jusqu’à 3 minutes supplémentaires.",
+    "pt": "Três respostas certas completam o progresso e concedem até 3 minutos extra.",
+    "ru": "Три верных ответа завершают прогресс и дают не более 3 дополнительных минут.",
+    "ja": "3問正解すると進捗が完了し、追加時間は最大3分です。",
+    "ko": "세 문제를 맞히면 보상 진행이 완료되고 추가 시간은 최대 3분입니다.",
+}
 BOOK_LANGUAGE_PATHS = ("/en/", "/de/", "/es/", "/fr/", "/pt/", "/ru/", "/ja/", "/ko/")
 GUIDE_SLUGS = (
     "windows-11-cocuk-ekran-suresi",
@@ -143,6 +154,12 @@ def main() -> None:
                     errors.append(f"Guide card coverage is incomplete: {guide_page}")
                 if guide_text.count('class="mini-demo ') != 6:
                     errors.append(f"Guide animation coverage is incomplete: {guide_page}")
+                if QUIZ_REWARD_MARKERS[lang] not in guide_text:
+                    errors.append(f"Exact 3-question reward copy is missing: {guide_page}")
+                if 'class="demo-reward">+3</div>' not in guide_text:
+                    errors.append(f"Exact +3 reward visual is missing: {guide_page}")
+                if 'class="demo-reward">+5</div>' in guide_text:
+                    errors.append(f"Stale +5 reward visual remains: {guide_page}")
 
         content_page = base / "content" / "index.html"
         if content_page.exists():
