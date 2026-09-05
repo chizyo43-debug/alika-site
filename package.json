@@ -8,8 +8,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build:book": "npm run claims:verify && npm run seo:verify && vite build && python tools/install_book_routes.py && npm run seo:dist",
+    "build:book": "npm run claims:verify && npm run cid:verify && npm run seo:verify && vite build && python tools/install_book_routes.py && npm run seo:dist",
     "claims:verify": "node tools/verify-public-claims.mjs",
+    "cid:verify": "node tools/verify-store-cid.mjs",
     "seo:verify": "node tools/verify-book-seo.mjs --source",
     "seo:dist": "node tools/verify-book-seo.mjs --dist",
     "knowledge:verify": "node assistant-service/tools/knowledge-verification.mjs --check",

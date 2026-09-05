@@ -12,6 +12,7 @@ import {
   type GuideVideo,
 } from './data/video-guides';
 import localeData from './data/locales.json';
+import { microsoftStoreUrl } from './store-campaign';
 
 type BookPhase = 'closed' | 'morphing' | 'opening' | 'reading' | 'flipping';
 type PageKind = 'contents' | 'method' | 'difference' | 'day-story' | 'platforms' | 'android-mobile' | 'android-tv' | 'learning' | 'evidence' | 'age-intro' | 'age-band' | 'planning' | 'routine' | 'family' | 'ecosystem-actions' | 'games-intro' | 'games-group' | 'trust' | 'status' | 'content' | 'content-catalog' | 'feedback' | 'closing';
@@ -152,10 +153,6 @@ function resolveSiteLanguage(): SiteLanguage {
   if (typeof window === 'undefined') return 'tr';
   const segment = window.location.pathname.split('/').filter(Boolean)[0];
   return segment && segment in localeData ? segment as SiteLanguage : 'tr';
-}
-
-function microsoftStoreUrl(language: SiteLanguage) {
-  return `https://apps.microsoft.com/detail/9N3P9F5ZKR5S?cid=site_home_${language}`;
 }
 
 const BOOK_PAGES: BookPage[] = [
