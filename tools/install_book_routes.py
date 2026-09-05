@@ -19,8 +19,8 @@ def escaped(value: object) -> str:
 
 
 def replace_meta(document: str, lang: str, copy: dict[str, object]) -> str:
-    title = f"{copy['name']} | AliKa"
-    description = str(copy["meta"])
+    title = str(copy["seo_title"])
+    description = str(copy["seo_description"])
     canonical = f"{BASE_URL}/{lang}/"
     replacements = (
         (r'<html lang="[^"]+">', f'<html lang="{lang}">'),
@@ -43,7 +43,7 @@ def fallback_markup(lang: str, copy: dict[str, object]) -> str:
     return (
         '<div id="root">'
         '<main class="bookBootStage" aria-label="AliKa product book">'
-        f'<span class="bookBootLang"><img src="/flags/{lang}.svg" alt="" width="28" height="19"><span>{escaped(copy["name"])}</span><i>⌄</i></span>'
+        f'<span class="bookBootLang"><img src="/flags/{lang}.svg" alt="{escaped(copy["name"])} dil seçeneği" width="28" height="19"><span>{escaped(copy["name"])}</span><i>⌄</i></span>'
         '<div class="bookBootBook"><div class="bookBootCover">'
         f'<small>{escaped(copy["hero_kicker"])}</small>'
         '<img src="/brand/alika-logo.png" alt="AliKa" width="208" height="144">'

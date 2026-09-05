@@ -1212,8 +1212,9 @@ export default function BookExperience() {
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.title = `${copy.name} | AliKa`;
-  }, [copy.name, language]);
+    document.title = copy.seo_title;
+    document.querySelector<HTMLMetaElement>('meta[name="description"]')?.setAttribute('content', copy.seo_description);
+  }, [copy.seo_description, copy.seo_title, language]);
 
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1428,20 +1429,20 @@ export default function BookExperience() {
         </a>
       </aside>
       <header className="readingHeader" aria-hidden={!['reading', 'flipping'].includes(phase)}>
-        <a className="miniBrand" href="#baslangic" onClick={(event) => { event.preventDefault(); turnTo(0); }}><img src="/brand/alika-logo.png" alt="" />AliKa</a>
+        <a className="miniBrand" href="#baslangic" onClick={(event) => { event.preventDefault(); turnTo(0); }}><img src="/brand/alika-logo.png" alt="AliKa logosu" />AliKa</a>
         <p>{activeChapter.label}</p>
         <span>{String(pageIndex + 1).padStart(2, '0')} / {pages.length}</span>
       </header>
       <details className="bookLanguagePicker">
         <summary aria-label={`${activeLanguage.label} · Site language`}>
-          <img src={activeLanguage.flag} alt="" width="28" height="19" />
+          <img src={activeLanguage.flag} alt={`${activeLanguage.label} dil seçeneği`} width="28" height="19" />
           <span>{activeLanguage.label}</span>
           <i aria-hidden="true">⌄</i>
         </summary>
         <nav className="bookLanguageMenu" aria-label="Language options">
           {SITE_LANGUAGES.map((option) => (
             <a key={option.code} href={`${option.href}#${currentPage.id}`} lang={option.code} aria-current={option.code === language ? 'page' : undefined}>
-              <img src={option.flag} alt="" width="28" height="19" />
+              <img src={option.flag} alt={`${option.label} dil seçeneği`} width="28" height="19" />
               <span>{option.label}</span>
               <b>{option.code.toUpperCase()}</b>
             </a>
@@ -1495,7 +1496,7 @@ export default function BookExperience() {
           <span className="coverRule coverRuleTop" />
           <span className="coverEyebrow">{ui.coverEyebrow}</span>
           <span className="coverHook" aria-hidden="true"><small>{ui.coverHookLead}</small><strong>{ui.coverHookReward}</strong></span>
-          <img className="coverChildCharacter" src="/brand/alika-child-character-v2.png" alt="" aria-hidden="true" width="530" height="1239" />
+          <img className="coverChildCharacter" src="/brand/alika-child-character-v2.png" alt="AliKa çocuk karakteri" width="530" height="1239" />
           <span className="morphMark">
             <span className="logoHalo" aria-hidden="true" />
             <img className="officialLogo" src="/brand/alika-logo.png" alt="AliKa" width="208" height="144" />

@@ -2,6 +2,8 @@
   "tr": {
     "name": "Türkçe",
     "locale": "tr_TR",
+    "seo_title": "AliKa Ebeveyn Kontrolü: Ekran Süresi ve Öğrenme Planı",
+    "seo_description": "Windows 10/11'de ekran süresini planlayın; çocuğunuz, sizin belirlediğiniz doğru cevap kuralıyla ek süre kazansın. Reklamsız ve bulut hesapsız.",
     "meta": "AliKa ekran süresini öğrenme, planlama ve ailece belirlenen hedeflerle daha dengeli hâle getirir.",
     "nav": ["Nasıl çalışır?", "Ekosistem", "Özellikler", "Yaş grupları", "İçerik", "Güncellemeler"],
     "get": "AliKa’yı edin",
@@ -56,6 +58,8 @@
   "en": {
     "name": "English",
     "locale": "en_US",
+    "seo_title": "AliKa Parental Control: Plan Screen Time and Learning",
+    "seo_description": "Plan screen time on Windows 10/11 and let children earn extra time through the correct-answer rule you set. No ads or cloud account required.",
     "meta": "AliKa turns screen time into a healthier balance of learning, planning and family goals.",
     "nav": ["How it works", "Ecosystem", "Features", "Age groups", "Content", "Updates"],
     "get": "Get AliKa",
@@ -110,6 +114,8 @@
   "de": {
     "name": "Deutsch",
     "locale": "de_DE",
+    "seo_title": "AliKa Elternkontrolle: Bildschirmzeit und Lernen planen",
+    "seo_description": "Planen Sie Bildschirmzeit unter Windows 10/11. Kinder verdienen Zusatzzeit nach Ihrer Regel für richtige Antworten – ohne Werbung oder Cloudkonto.",
     "meta": "AliKa verbindet Bildschirmzeit mit Lernen, Planung und gemeinsamen Familienzielen.",
     "nav": ["So funktioniert’s", "Ökosystem", "Funktionen", "Altersgruppen", "Inhalte", "Updates"],
     "get": "AliKa erhalten",
@@ -132,7 +138,7 @@
     "pages": {"how-it-works":["So funktioniert’s","Menüs und Alltagsschritte einfach erklärt."],"ecosystem":["Familienökosystem","Telefon, PC und geplantes TV-Erlebnis im selben Zuhause."],"features":["Funktionen","Kinder-, Eltern- und Familienfunktionen mit Status."],"age-groups":["Altersgruppen","AliKa für 5–7, 8–11, 12–14 und 15–18."],"content":["Inhaltsbibliothek","Lernpakete, direkte Downloads und Qualitätsstatus."],"updates":["Updates","Neue, verbesserte und korrigierte Punkte."],"roadmap":["Roadmap","Verfügbar, in Entwicklung und geplant klar getrennt."],"downloads":["Downloads","Geprüfte Bezugsquellen für AliKa."],"contact":["Kontakt","Support und häufige Fragen."]}
   },
   "es": {
-    "name": "Español", "locale": "es_ES", "meta": "AliKa equilibra el tiempo de pantalla con aprendizaje, planificación y objetivos familiares.",
+    "name": "Español", "locale": "es_ES", "seo_title": "AliKa Control Parental: Planifica pantalla y aprendizaje", "seo_description": "Planifica el tiempo de pantalla en Windows 10/11. Tus hijos ganan tiempo extra con la regla de respuestas correctas que tú defines, sin anuncios ni nube.", "meta": "AliKa equilibra el tiempo de pantalla con aprendizaje, planificación y objetivos familiares.",
     "nav": ["Cómo funciona", "Ecosistema", "Funciones", "Edades", "Contenido", "Novedades"], "get": "Obtener AliKa",
     "hero_kicker": "Más que tiempo de pantalla", "hero_title": "¿Su hijo no se aleja de la pantalla? Deje que la pantalla lo acerque al aprendizaje.", "hero_body": "Con preguntas, planificación semanal y reglas visibles, la pantalla pasa del conflicto al desarrollo.", "hero_alt": "Cómo funciona en su familia",
     "pill": ["Avanzar con preguntas", "Planificar la semana", "Equilibrar el tiempo"],
@@ -148,7 +154,7 @@
     "pages": {"how-it-works":["Cómo funciona","Menús y uso diario paso a paso."],"ecosystem":["Ecosistema familiar","Teléfono, PC y la experiencia TV planificada en el hogar."],"features":["Funciones","Experiencias de niño, padres y familia con su estado."],"age-groups":["Grupos de edad","AliKa para 5–7, 8–11, 12–14 y 15–18."],"content":["Biblioteca de contenido","Paquetes, descarga directa y estado de calidad."],"updates":["Novedades","Añadido, mejorado y corregido."],"roadmap":["Hoja de ruta","Disponible, en desarrollo y planificado por separado."],"downloads":["Descargas","Canales de distribución verificados."],"contact":["Contacto","Soporte y preguntas frecuentes."]}
   },
   "fr": {
-    "name": "Français", "locale": "fr_FR", "meta": "AliKa équilibre l’écran avec l’apprentissage, la planification et les objectifs familiaux.",
+    "name": "Français", "locale": "fr_FR", "seo_title": "AliKa Contrôle parental : planifier écran et apprentissage", "seo_description": "Planifiez le temps d’écran sous Windows 10/11. L’enfant gagne du temps selon votre règle de bonnes réponses, sans publicité ni compte cloud.", "meta": "AliKa équilibre l’écran avec l’apprentissage, la planification et les objectifs familiaux.",
     "nav": ["Comment ça marche", "Écosystème", "Fonctions", "Âges", "Contenu", "Actualités"], "get": "Obtenir AliKa",
     "hero_kicker": "Plus que du temps d’écran", "hero_title": "Votre enfant ne quitte pas l’écran ? Laissez l’écran le rapprocher de l’apprentissage.", "hero_body": "Questions, semaine planifiée et règles visibles transforment le conflit en outil de progression.", "hero_alt": "Voir AliKa dans votre famille",
     "pill": ["Progresser par les questions", "Planifier la semaine", "Équilibrer le temps"],
@@ -164,7 +170,7 @@
     "pages": {"how-it-works":["Comment ça marche","Menus et usage quotidien, étape par étape."],"ecosystem":["Écosystème familial","Téléphone, PC et expérience TV planifiée à la maison."],"features":["Fonctions","Expériences enfant, parent et famille avec leur statut."],"age-groups":["Groupes d’âge","AliKa pour 5–7, 8–11, 12–14 et 15–18 ans."],"content":["Bibliothèque de contenu","Packs, téléchargement direct et état qualité."],"updates":["Actualités","Ajouts, améliorations et corrections."],"roadmap":["Feuille de route","Disponible, en développement et planifié séparément."],"downloads":["Téléchargements","Canaux vérifiés pour AliKa."],"contact":["Contact","Assistance et questions fréquentes."]}
   },
   "pt": {
-    "name": "Português", "locale": "pt_PT", "meta": "A AliKa equilibra o ecrã com aprendizagem, planeamento e objetivos familiares.",
+    "name": "Português", "locale": "pt_PT", "seo_title": "AliKa Controlo Parental: planear ecrã e aprendizagem", "seo_description": "Planeie o tempo de ecrã no Windows 10/11. A criança ganha tempo extra pela regra de respostas certas definida por si, sem anúncios nem conta cloud.", "meta": "A AliKa equilibra o ecrã com aprendizagem, planeamento e objetivos familiares.",
     "nav": ["Como funciona", "Ecossistema", "Funcionalidades", "Idades", "Conteúdo", "Atualizações"], "get": "Obter AliKa",
     "hero_kicker": "Mais do que tempo de ecrã", "hero_title": "O seu filho não larga o ecrã? Deixe o ecrã aproximá-lo da aprendizagem.", "hero_body": "Perguntas, plano semanal e regras visíveis transformam conflito em desenvolvimento.", "hero_alt": "Como funciona na sua família",
     "pill": ["Avançar com perguntas", "Planear a semana", "Equilibrar o tempo"],
@@ -180,7 +186,7 @@
     "pages": {"how-it-works":["Como funciona","Menus e uso diário passo a passo."],"ecosystem":["Ecossistema familiar","Telemóvel, PC e experiência TV planeada em casa."],"features":["Funcionalidades","Experiências da criança, pais e família com estado."],"age-groups":["Grupos etários","AliKa para 5–7, 8–11, 12–14 e 15–18."],"content":["Biblioteca de conteúdo","Pacotes, transferência direta e estado de qualidade."],"updates":["Atualizações","Adicionado, melhorado e corrigido."],"roadmap":["Roteiro","Disponível, em desenvolvimento e planeado separados."],"downloads":["Transferências","Canais verificados da AliKa."],"contact":["Contacto","Apoio e perguntas frequentes."]}
   },
   "ru": {
-    "name": "Русский", "locale": "ru_RU", "meta": "AliKa сочетает экранное время с обучением, планированием и семейными целями.",
+    "name": "Русский", "locale": "ru_RU", "seo_title": "AliKa: родительский контроль экранного времени и учёбы", "seo_description": "Планируйте экранное время в Windows 10/11. Ребёнок получает дополнительное время по заданному вами числу правильных ответов — без рекламы и облака.", "meta": "AliKa сочетает экранное время с обучением, планированием и семейными целями.",
     "nav": ["Как это работает", "Экосистема", "Функции", "Возраст", "Материалы", "Обновления"], "get": "Получить AliKa",
     "hero_kicker": "Больше, чем экранное время", "hero_title": "Ребёнок не отрывается от экрана? Пусть экран приблизит его к учёбе.", "hero_body": "Вопросы, недельный план и понятные правила превращают конфликт в развитие.", "hero_alt": "Как AliKa работает в семье",
     "pill": ["Учиться через вопросы", "Планировать неделю", "Соблюдать баланс"],
@@ -196,7 +202,7 @@
     "pages": {"how-it-works":["Как это работает","Меню и ежедневный сценарий по шагам."],"ecosystem":["Семейная экосистема","Телефон, ПК и планируемый ТВ-сценарий дома."],"features":["Функции","Детские, родительские и семейные функции со статусом."],"age-groups":["Возрастные группы","AliKa для 5–7, 8–11, 12–14 и 15–18 лет."],"content":["Библиотека материалов","Пакеты, прямая загрузка и статус качества."],"updates":["Обновления","Добавлено, улучшено и исправлено."],"roadmap":["План развития","Доступно, в разработке и запланировано отдельно."],"downloads":["Загрузки","Проверенные каналы распространения."],"contact":["Контакты","Поддержка и частые вопросы."]}
   },
   "ja": {
-    "name": "日本語", "locale": "ja_JP", "meta": "AliKaは、スクリーン時間を学習・計画・家族の目標と結びつけます。",
+    "name": "日本語", "locale": "ja_JP", "seo_title": "AliKa ペアレンタルコントロール：画面時間と学習を計画", "seo_description": "Windows 10/11の画面時間を計画。保護者が設定した正解数のルールで子どもが追加時間を獲得できます。広告やクラウドアカウントは不要です。", "meta": "AliKaは、スクリーン時間を学習・計画・家族の目標と結びつけます。",
     "nav": ["使い方", "エコシステム", "機能", "年齢グループ", "教材", "更新情報"], "get": "AliKaを入手",
     "hero_kicker": "スクリーン時間の、その先へ", "hero_title": "画面から離れられないなら、画面を学びに近づくきっかけに。", "hero_body": "問題、週間計画、見えるルールで、画面を対立の原因から成長の道具へ変えます。", "hero_alt": "家族での使い方を見る",
     "pill": ["問題で前進", "一週間を計画", "時間のバランス"],
@@ -212,7 +218,7 @@
     "pages": {"how-it-works":["使い方","メニューと日々の流れを順番に説明します。"],"ecosystem":["家族で学ぶスクリーン時間と学習ゲーム","スマートフォンとWindows PCで計画と学習をつなぐAliKa。家族で取り組む問題、クイズ、対戦、協力、ゲームナイトは今後の提供予定です。"],"features":["機能","子ども・保護者・家族の機能と現在の状態。"],"age-groups":["年齢グループ","5–7、8–11、12–14、15–18歳に合わせた体験。"],"content":["教材ライブラリ","教材、直接ダウンロード、品質状態。"],"updates":["更新情報","追加・改善・修正内容。"],"roadmap":["ロードマップ","利用可能・開発中・計画中を明確に分けます。"],"downloads":["ダウンロード","確認済みの配布先。"],"contact":["お問い合わせ","サポートとよくある質問。"]}
   },
   "ko": {
-    "name": "한국어", "locale": "ko_KR", "meta": "AliKa는 화면 시간을 학습, 계획, 가족 목표와 연결합니다.",
+    "name": "한국어", "locale": "ko_KR", "seo_title": "AliKa 자녀 보호: 화면 시간과 학습을 함께 계획하세요", "seo_description": "Windows 10/11 화면 시간을 계획하고, 부모가 정한 정답 수 규칙에 따라 아이가 추가 시간을 얻도록 하세요. 광고와 클라우드 계정이 없습니다.", "meta": "AliKa는 화면 시간을 학습, 계획, 가족 목표와 연결합니다.",
     "nav": ["사용 방법", "에코시스템", "기능", "연령대", "콘텐츠", "업데이트"], "get": "AliKa 받기",
     "hero_kicker": "화면 시간 그 이상", "hero_title": "아이를 화면에서 떼기 어렵다면, 화면이 배움에 가까워지게 해보세요.", "hero_body": "문제 풀이, 주간 계획, 보이는 규칙으로 화면을 갈등이 아닌 성장 도구로 바꿉니다.", "hero_alt": "우리 가족 사용 방식 보기",
     "pill": ["문제로 성장", "한 주 계획", "시간 균형"],
