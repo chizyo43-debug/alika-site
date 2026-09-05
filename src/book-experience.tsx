@@ -74,6 +74,11 @@ interface PublishedContentSubject {
 interface PublishedContentCatalog {
   grades: PublishedContentGrade[];
   subjects: PublishedContentSubject[];
+  totals?: {
+    countries: number;
+    subjects: number;
+    questions: number;
+  };
 }
 
 interface GameInfo {
@@ -434,6 +439,38 @@ const CONTENT_GRADES: ContentGrade[] = [
     { id: 'edebiyat', label: 'Türk Dili ve Edebiyatı', topics: 20, questions: 500 },
   ] },
 ];
+
+function ContentSummaryNumbers() {
+  const [totals, setTotals] = useState({ countries: 5, subjects: 300, questions: 150732 });
+
+  useEffect(() => {
+    let active = true;
+    fetch('/icerik/catalog-v1.json')
+      .then((response) => {
+        if (!response.ok) throw new Error(`İçerik kataloğu: ${response.status}`);
+        return response.json() as Promise<PublishedContentCatalog>;
+      })
+      .then((catalog) => {
+        if (active && catalog.totals) {
+          setTotals({
+            countries: catalog.totals.countries,
+            subjects: catalog.totals.subjects,
+            questions: catalog.totals.questions,
+          });
+        }
+      })
+      .catch(() => undefined);
+    return () => { active = false; };
+  }, []);
+
+  return (
+    <div className="contentNumbers">
+      <p><strong>{totals.countries.toLocaleString('tr-TR')}</strong><span>ülke</span></p>
+      <p><strong>{totals.subjects.toLocaleString('tr-TR')}</strong><span>hazır ders paketi</span></p>
+      <p><strong>{totals.questions.toLocaleString('tr-TR')}</strong><span>soru</span></p>
+    </div>
+  );
+}
 
 function ContentLibraryPreview() {
   const [catalog, setCatalog] = useState<PublishedContentCatalog | null>(null);
@@ -1123,11 +1160,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           <p className="folio">Hazır içerik / Ders kütüphanesi</p>
           <h2 tabIndex={-1}>Çocuğun çalışacağı içerik hazır.</h2>
           <p className="pageLead">Ülkeyi, sınıfı ve dersi seçin. Hazırlanan konu anlatımlarını ve soru paketlerini tek yerde görün.</p>
-          <div className="contentNumbers">
-            <p><strong>3</strong><span>ülke</span></p>
-            <p><strong>200</strong><span>hazır ders paketi</span></p>
-            <p><strong>101.032</strong><span>soru</span></p>
-          </div>
+          <ContentSummaryNumbers />
           <button className="contentExploreButton" type="button" onClick={() => onNavigate(BOOK_PAGES.findIndex((item) => item.id === 'icerik-katalogu'))}>
             <span><small>Örnek veri ekranı</small><strong>Ülke, sınıf ve ders seçin</strong></span>
             <b aria-hidden="true">→</b>
