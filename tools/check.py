@@ -351,6 +351,11 @@ def main() -> None:
         errors.append("Language picker is missing or incomplete in the book experience")
     if "Altı premium aile oyunu geliştiriliyor." not in book_bundle_text or "İndirme kapalı" not in book_bundle_text:
         errors.append("Premium game truth copy is missing from the built book experience")
+    if not all(
+        marker in book_bundle_text
+        for marker in ("/icerik/catalog-v1.json", "hazır ders paketi", "150732")
+    ):
+        errors.append("Ready-content summary is not bound to the current catalog totals")
     for lang in LANGS:
         flag = DIST / "flags" / f"{lang}.svg"
         if not flag.exists():
