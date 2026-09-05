@@ -228,15 +228,17 @@ def main() -> None:
         content_release_tags = set((catalog.get("content_releases") or {}).values())
         if catalog.get("content_release"):
             content_release_tags.add(catalog["content_release"])
+        if catalog.get("question_bank_release"):
+            content_release_tags.add(catalog["question_bank_release"])
         totals = catalog.get("totals") or {}
         if totals != {
-            "countries": 4,
-            "gradeGroups": 31,
-            "subjects": 242,
-            "notes": 6572,
-            "questions": 121732,
-            "questionBanks": 187,
-            "questionBankQuestions": 374000,
+            "countries": 5,
+            "gradeGroups": 38,
+            "subjects": 300,
+            "notes": 7906,
+            "questions": 150732,
+            "questionBanks": 39,
+            "questionBankQuestions": 78000,
         }:
             errors.append(f"Content catalog totals are unexpected: {totals}")
         excluded = catalog.get("excluded") or []
@@ -261,27 +263,27 @@ def main() -> None:
                 if not target.exists() or digest(target) != subject["sha256"]:
                     errors.append(f"Subject artifact missing or hash mismatch: {target}")
         question_banks = catalog.get("question_banks") or []
-        if len(question_banks) != 187:
-            errors.append(f"Expected 187 independent question banks, got {len(question_banks)}")
+        if len(question_banks) != 39:
+            errors.append(f"Expected 39 independent class question banks, got {len(question_banks)}")
         bank_country_counts = {
             country: sum(bank.get("country_code") == country for bank in question_banks)
-            for country in ("TR", "JP", "KR", "GB")
+            for country in ("TR", "JP", "KR", "GB", "RU")
         }
-        if bank_country_counts != {"TR": 8, "JP": 43, "KR": 94, "GB": 42}:
-            errors.append(f"Independent question bank country coverage is incomplete: {bank_country_counts}")
-        subject_bank_keys = [
-            (bank.get("country_code"), bank.get("grade"), bank.get("subject_code"))
+        if bank_country_counts != {"TR": 8, "JP": 8, "KR": 8, "GB": 8, "RU": 7}:
+            errors.append(f"Independent class question bank coverage is incomplete: {bank_country_counts}")
+        class_bank_keys = [
+            (bank.get("country_code"), bank.get("grade"))
             for bank in question_banks
-            if bank.get("scope") == "country-grade-subject"
+            if bank.get("scope") == "country-grade"
         ]
-        if len(subject_bank_keys) != 179 or len(set(subject_bank_keys)) != 179:
-            errors.append("JP/KR/GB independent subject question bank keys are incomplete or duplicated")
+        if len(class_bank_keys) != 31 or len(set(class_bank_keys)) != 31:
+            errors.append("JP/KR/GB/RU mixed class question bank keys are incomplete or duplicated")
         for bank in question_banks:
-            expected_families = 2000 if bank.get("country_code") == "TR" else 400
+            minimum_families = 2000 if bank.get("country_code") == "TR" else 400
             if (
-                bank.get("country_code") not in {"TR", "JP", "KR", "GB"}
+                bank.get("country_code") not in {"TR", "JP", "KR", "GB", "RU"}
                 or bank.get("questions") != 2000
-                or bank.get("families") != expected_families
+                or bank.get("families", 0) < minimum_families
                 or bank.get("independent_from_subject_packages") is not True
                 or bank.get("source_question_reuse") != "forbidden"
             ):

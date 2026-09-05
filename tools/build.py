@@ -32,15 +32,15 @@ CONTENT_LIBRARY_LABELS = {
     "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "Codex 자체 감사 · 자동 검증", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년 ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
 }
 QUESTION_BANK_LABELS = {
-    "tr": ("Bağımsız soru bankaları", "Ders paketlerindeki sorular kopyalanmadan ayrıca üretilmiş ve doğrulanmış bankalar.", "Soru bankasını indir", "benzersiz soru"),
-    "en": ("Independent question banks", "Separately authored and validated banks that do not copy questions from subject packages.", "Download question bank", "unique questions"),
-    "de": ("Unabhängige Fragenbanken", "Separat erstellte und validierte Sammlungen ohne kopierte Fragen aus den Fachpaketen.", "Fragenbank herunterladen", "einzigartige Fragen"),
-    "es": ("Bancos de preguntas independientes", "Bancos creados y validados por separado, sin copiar preguntas de los paquetes de asignaturas.", "Descargar banco de preguntas", "preguntas únicas"),
-    "fr": ("Banques de questions indépendantes", "Banques créées et validées séparément, sans copier les questions des packs de matière.", "Télécharger la banque", "questions uniques"),
-    "pt": ("Bancos de perguntas independentes", "Bancos criados e validados separadamente, sem copiar perguntas dos pacotes de disciplinas.", "Transferir banco de perguntas", "perguntas únicas"),
-    "ru": ("Независимые банки вопросов", "Отдельно созданные и проверенные банки без копирования вопросов из предметных пакетов.", "Скачать банк вопросов", "уникальных вопросов"),
-    "ja": ("独立問題バンク", "教科パッケージの問題を複製せず、別途作成・検証した問題バンクです。", "問題バンクをダウンロード", "独自問題"),
-    "ko": ("독립 문제은행", "교과 패키지의 문항을 복사하지 않고 별도로 제작·검증한 문제은행입니다.", "문제은행 다운로드", "고유 문항"),
+    "tr": ("Sınıf başına karma soru bankaları", "Her sınıfın yayımlanabilir bütün derslerini kapsayan, ders paketlerinden soru kopyalamadan ayrıca üretilmiş tam 2.000 soruluk bankalar.", "Soru bankasını indir", "benzersiz soru"),
+    "en": ("Mixed question banks by grade", "Exactly 2,000 separately authored questions covering every publishable subject in each grade, without copying subject-package questions.", "Download question bank", "unique questions"),
+    "de": ("Gemischte Fragenbanken je Klasse", "Genau 2.000 separat erstellte Fragen zu allen veröffentlichten Fächern jeder Klasse, ohne Fragen aus Fachpaketen zu kopieren.", "Fragenbank herunterladen", "einzigartige Fragen"),
+    "es": ("Bancos mixtos por curso", "Exactamente 2.000 preguntas creadas por separado para todas las asignaturas publicadas de cada curso, sin copiar los paquetes de asignaturas.", "Descargar banco de preguntas", "preguntas únicas"),
+    "fr": ("Banques mixtes par classe", "Exactement 2 000 questions créées séparément pour toutes les matières publiées de chaque classe, sans copier les packs de matière.", "Télécharger la banque", "questions uniques"),
+    "pt": ("Bancos mistos por ano", "Exatamente 2.000 perguntas criadas separadamente para todas as disciplinas publicadas de cada ano, sem copiar os pacotes de disciplinas.", "Transferir banco de perguntas", "perguntas únicas"),
+    "ru": ("Смешанные банки по классам", "Ровно 2 000 отдельно созданных вопросов по всем опубликованным предметам каждого класса, без копирования заданий из предметных пакетов.", "Скачать банк вопросов", "уникальных вопросов"),
+    "ja": ("学年別・教科横断問題バンク", "各学年の公開対象全教科を網羅する独自作成の2,000問です。教科パッケージの問題は複製していません。", "問題バンクをダウンロード", "独自問題"),
+    "ko": ("학년별 혼합 문제은행", "각 학년의 공개 가능한 모든 과목을 다루는 별도 제작 2,000문항이며, 과목 패키지의 문항을 복사하지 않습니다.", "문제은행 다운로드", "고유 문항"),
 }
 CONTENT_BOOK_LABELS = {
     "tr": ("AliKa kitabına dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
@@ -830,7 +830,13 @@ def guide_atlas(lang: str, c: dict) -> str:
 def content_library(catalog: dict, lang: str) -> str:
     labels = CONTENT_LIBRARY_LABELS[lang]
     bank_labels = QUESTION_BANK_LABELS[lang]
-    country_order = {"turkiye": 0, "japonya": 1, "kore": 2}
+    country_order = {
+        "turkiye": 0,
+        "japonya": 1,
+        "kore": 2,
+        "ingiltere": 3,
+        "rusya": 4,
+    }
     countries = sorted(
         {row["country_slug"]: row["country"] for row in catalog["grades"]}.items(),
         key=lambda item: (country_order.get(item[0], 99), item[1]),
