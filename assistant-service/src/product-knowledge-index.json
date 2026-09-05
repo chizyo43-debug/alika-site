@@ -1,6 +1,6 @@
 {
   "version": "2026-09-04",
-  "sourceVersion": "2026-09-04",
+  "sourceVersion": "2026-09-05",
   "entries": [
     {"id":"manual-product-boundaries","title":"AliKa ürün sınırları ve çalışma ilkesi","platform":"all","terms":["program nasıl çalışır","ürün hakkında","görünür kontrol","rıza","yerel öncelikli","gizli takip yok"]},
     {"id":"manual-family-fit-assessment","title":"Aile için dürüst AliKa uygunluk değerlendirmesi","platform":"all","terms":["aileme uygun mu","bize uygun mu","satın almalı mıyım","hangi sürüm uygun","dürüst tavsiye","ekran süresi çözümü"]},

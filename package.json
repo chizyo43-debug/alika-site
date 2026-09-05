@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build:book": "vite build && python tools/install_book_routes.py",
+    "build:book": "npm run claims:verify && vite build && python tools/install_book_routes.py",
+    "claims:verify": "node tools/verify-public-claims.mjs",
     "knowledge:verify": "node assistant-service/tools/knowledge-verification.mjs --check",
     "knowledge:refresh": "node assistant-service/tools/knowledge-verification.mjs --refresh",
     "typecheck": "tsc --noEmit"

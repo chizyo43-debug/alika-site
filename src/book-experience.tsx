@@ -159,8 +159,8 @@ const BOOK_PAGES: BookPage[] = [
   { id: 'alika-farki', chapter: 'AliKa nedir?', kind: 'difference', navLabel: 'Farkımız', title: 'Yalnızca engellemez; çocuğa bir sonraki adımı gösterir.', summary: 'Klasik ekran sınırlama yaklaşımı ile AliKa’nın plan, öğrenme ve katılım yaklaşımının farkı.' },
   { id: 'bir-gun-alika', chapter: 'AliKa nedir?', kind: 'day-story', navLabel: 'Bir gün nasıl işler?', title: 'AliKa ile sıradan bir gün nasıl ilerler?', summary: 'Ebeveynin kuralı belirlemesinden çocuğun soru çözerek süre kazanmasına uzanan örnek günlük akış.' },
   { id: 'windows', chapter: 'Nasıl çalışır?', kind: 'platforms', navLabel: 'Windows', title: 'Windows’ta bütün aile düzeni tek panelde.', summary: 'Gerçek Windows ekranlarıyla süre, kural, rapor ve öğrenme araçları.', status: 'Bugün kullanılabilir' },
-  { id: 'android-mobil', chapter: 'Nasıl çalışır?', kind: 'android-mobile', navLabel: 'Telefon / tablet', title: 'Ebeveyn yönetir, çocuk ne yapacağını görür.', summary: 'Gerçek Android ekranlarıyla ebeveyn paneli, çocuk görünümü ve soru çözme.', status: 'Bugün kullanılabilir' },
-  { id: 'android-tv', chapter: 'Nasıl çalışır?', kind: 'android-tv', navLabel: 'Android TV', title: 'TV, ailenin ortak ekranına dönüşür.', summary: 'Ortak ekran kurulumu, aile cihazları ve telefonla katılımın gerçek ürün kanıtları.', status: 'Bugün kullanılabilir' },
+  { id: 'android-mobil', chapter: 'Nasıl çalışır?', kind: 'android-mobile', navLabel: 'Telefon / tablet', title: 'Ebeveyn yönetir, çocuk ne yapacağını görür.', summary: 'Kapalı alfa Android ekranlarıyla ebeveyn paneli, çocuk görünümü ve soru çözme önizlemesi.', status: 'Geliştiriliyor' },
+  { id: 'android-tv', chapter: 'Nasıl çalışır?', kind: 'android-tv', navLabel: 'Android TV', title: 'TV, ailenin ortak ekranına dönüşür.', summary: 'Geliştirme aşamasındaki ortak ekran, aile cihazları ve telefonla katılım önizlemesi.', status: 'Geliştiriliyor' },
   { id: 'ogrenme', chapter: 'Öğrenme', kind: 'learning', navLabel: 'Nasıl işler?', title: 'Öğrenme ekran süresinin içine girer.', summary: 'Konu anlatımı, soru çözme, ilerleme ve kontrollü süre kazanma akışı.', status: 'Bugün kullanılabilir' },
   { id: 'urun-kaniti', chapter: 'Öğrenme', kind: 'evidence', navLabel: 'Ürün ekranları', title: 'Çocuğun gördüğü gerçek ekranlar.', summary: 'Soru çözme ve ilerleme görünümünün gerçek ürün ekranları.', status: 'Bugün kullanılabilir' },
   { id: 'yas-gruplari', chapter: 'Yaş grupları', kind: 'age-intro', navLabel: 'Genel bakış', title: 'Aynı AliKa, yaşa göre farklı anlatım.', summary: 'Dört yaş grubunda dil, görünüm, motivasyon ve ebeveyn rolünün nasıl değiştiği.', status: 'Bugün kullanılabilir' },
@@ -170,8 +170,8 @@ const BOOK_PAGES: BookPage[] = [
   { id: 'yas-15-18', chapter: 'Yaş grupları', kind: 'age-band', navLabel: '15–18 yaş', title: 'Sade, ciddi ve veri odaklı.', summary: 'Maskotsuz, sonuç odaklı ve gencin alanına saygılı deneyim.', status: 'Bugün kullanılabilir' },
   { id: 'planlama', chapter: 'Planlama', kind: 'planning', navLabel: 'Kurallar', title: 'Çocuk ne zaman duracağını önceden bilir.', summary: 'Süre, uygulama, uyku ve görev kurallarının anlaşılır günlük planı.', status: 'Bugün kullanılabilir' },
   { id: 'gunluk-duzen', chapter: 'Planlama', kind: 'routine', navLabel: 'Ebeveyn görünümü', title: 'Bugün ne olduğunu tek ekrandan görün.', summary: 'Kalan süre, görev onayı ve süre hediyesinin ebeveyn görünümü.', status: 'Bugün kullanılabilir' },
-  { id: 'aile', chapter: 'AliKa Ekosistemi', kind: 'family', navLabel: 'Cihazlar', title: 'Her cihazın görevi bellidir.', summary: 'Ebeveyn telefonu, çocuk cihazı ve ortak ekranın birlikte çalışması.', status: 'Bugün kullanılabilir' },
-  { id: 'ekosistem-olanaklari', chapter: 'AliKa Ekosistemi', kind: 'ecosystem-actions', navLabel: 'Neler yapılabilir?', title: 'Bir cihazdan fazlası: ailece yapılabilenler.', summary: 'Bugün çalışan cihaz yönetimi, görev, öğrenme ve ortak oyun özellikleri; geliştirilen Android TV deneyimi.' },
+  { id: 'aile', chapter: 'AliKa Ekosistemi', kind: 'family', navLabel: 'Cihazlar', title: 'Her cihazın görevi bellidir.', summary: 'Windows temeli ve geliştirme aşamasındaki telefon/ortak ekran ekosistemi.', status: 'Geliştiriliyor' },
+  { id: 'ekosistem-olanaklari', chapter: 'AliKa Ekosistemi', kind: 'ecosystem-actions', navLabel: 'Neler yapılabilir?', title: 'Bir cihazdan fazlası: ailece yapılabilenler.', summary: 'Windows’ta hazır planlama ve aile ağı temeli; geliştirilmekte olan telefon, ortak ekran ve aile oyunu deneyimleri.' },
   { id: 'oyunlar', chapter: 'Oyunlar', kind: 'games-intro', navLabel: 'Oyun kitaplığı', title: 'Altı premium aile oyunu geliştiriliyor.', summary: '10–16 yaşındaki gençlerle yetişkinlerin aynı ekranda tekrar oynamak isteyeceği altı özgün Türkçe deneyim.', status: 'Geliştiriliyor' },
   { id: 'oyunlar-bilgi', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Bilgi & kelime', title: 'Kelime ve bilgi arenası.', summary: 'Kelime Çarkı ve Bilgi Arenası: kısa turlar, gizli seçimler ve ailece konuşma.' },
   { id: 'oyunlar-yaraticilik', chapter: 'Oyunlar', kind: 'games-group', navLabel: 'Aile Sahnesi', title: 'Anlat, çiz, canlandır.', summary: 'Aile Sahnesi; Sessiz Sinema, Çiz ve Bil ve Yasak Kelimeler modlarını tek başlıkta toplar.' },
@@ -334,9 +334,9 @@ function getVideoLibraryDuration(videos: readonly GuideVideo[]) {
 }
 
 const FIELD_ROWS: Array<{ state: PageStatus; title: string; detail: string }> = [
-  { state: 'Bugün kullanılabilir', title: 'Windows, Android ve Android TV temeli', detail: 'Ekran kuralları, soru çözerek süre kazanma, görevler, raporlar ve TV’de ortak ekran çalışıyor.' },
-  { state: 'Bugün kullanılabilir', title: 'Telefonlarla ortak soru oyunu', detail: 'Aile üyeleri Windows ortak ekranındaki soruya telefonlarından katılabiliyor; cevap, açıklama ve skor birlikte görünüyor.' },
-  { state: 'Geliştiriliyor', title: 'TV oyun kitaplığı ve çoklu telefon deneyimi', detail: 'Android TV’de çalışan oyun, aile panosu ve ayarların kapsamı genişletiliyor; kumanda ve çoklu oyuncu akışı iyileştiriliyor.' },
+  { state: 'Bugün kullanılabilir', title: 'Windows 10/11 sürümü', detail: 'Ekran kuralları, soru çözerek süre kazanma, görevler ve raporlar Microsoft Store sürümünde kullanılabilir.' },
+  { state: 'Geliştiriliyor', title: 'Android telefon, tablet ve Android TV', detail: 'Gerçek ürün ekranları geliştirme ve kapalı alfa durumunu gösterir; henüz genel mağaza indirmesi değildir.' },
+  { state: 'Geliştiriliyor', title: 'TV oyun kitaplığı ve çoklu telefon deneyimi', detail: 'Oyun, aile panosu, ayarlar, kumanda ve çoklu oyuncu akışı genel dağıtıma hazırlanıyor.' },
 ];
 
 const GAMES: GameInfo[] = [
@@ -859,7 +859,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           <div className="pageTopline"><p className="folio">Nasıl çalışır? / Telefon + tablet</p><StatusStamp status={page.status} /></div>
           <p className="questionKicker">İki rol, birbirini tamamlayan iki görünüm</p>
           <h2 className="compactTitle" tabIndex={-1}>Ebeveyn yönetir,<br />çocuk yolunu görür.</h2>
-          <p className="pageLead">Aynı Android uygulaması ebeveyn ve çocuk rolüne göre farklılaşır. Ebeveyn süre, uygulama, uyku ve görevleri yönetir; çocuk kalan süresini, çalışmalarını ve kazanabileceği adımı açıkça görür.</p>
+          <p className="pageLead">Kapalı alfa Android uygulaması ebeveyn ve çocuk rolüne göre farklılaşır. Ebeveyn süre, uygulama, uyku ve görevleri yönetir; çocuk kalan süresini, çalışmalarını ve kazanabileceği adımı açıkça görür.</p>
           <div className="roleLedger" aria-label="Android uygulamasındaki roller">
             <article><b>Ebeveyn ekranı</b><span>Günlük durumu görür, kuralları düzenler, görevleri onaylar ve aile cihazlarını yönetir.</span></article>
             <article><b>Çocuk ekranı</b><span>Kalan süreyi izler, kütüphaneyi açar, soru çözer ve tamamladığı görevi bildirir.</span></article>
@@ -871,7 +871,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           </div>
           <div className="platformFeatureBand"><p><b>Planla</b><span>Süre ve uyku</span></p><i>→</i><p><b>Öğren</b><span>Konu ve soru</span></p><i>→</i><p><b>Takip et</b><span>İlerleme ve görev</span></p></div>
           <LocalizedVideoLibrary initialLanguageCode={language} platform="android" />
-          <p className="realEvidenceReceipt"><b>Gerçek cihaz kanıtı</b><span>Görseller fiziksel Android telefondaki çalışan AliKa uygulamasından alınmıştır.</span></p>
+          <p className="realEvidenceReceipt"><b>Kapalı alfa cihaz kanıtı</b><span>Görseller fiziksel Android telefondaki geliştirme sürümünden alınmıştır; henüz genel mağaza indirmesi değildir.</span></p>
         </div>
       );
     case 'android-tv':
@@ -880,7 +880,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
           <div className="pageTopline"><p className="folio">Nasıl çalışır? / Android TV</p><StatusStamp status={page.status} /></div>
           <p className="questionKicker">Ortak bilgi TV’de, kişisel cevap telefonda</p>
           <h2 className="compactTitle" tabIndex={-1}>TV, ailenin ortak<br />oyun ekranı olur.</h2>
-          <p className="pageLead">AliKa TV; oyunları, ortak soruları ve aile panosunu uzaktan okunabilen büyük bir arayüzde gösterir. Telefonlar oyuncu kumandası olur; gizli cevap ve seçimler kişisel ekranda kalır.</p>
+          <p className="pageLead">Geliştirme sürümündeki AliKa TV; oyunları, ortak soruları ve aile panosunu uzaktan okunabilen büyük bir arayüzde gösterir. Telefon kumandası ve kişisel cevap akışları kapalı alfa kapsamında sınanır.</p>
           <ol className="platformSteps tvSteps" aria-label="Android TV kullanım akışı">
             <li><b>1</b><span><strong>TV’yi eşleştir</strong>TV’nin gösterdiği kod aile telefonundan onaylanır.</span></li>
             <li><b>2</b><span><strong>Oyunu seç</strong>TV’de ortak bilgi, telefonda kişisel seçim açılır.</span></li>
@@ -891,8 +891,8 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
             <a className="realScreen" href="/screens/platform/tv-live-family.webp" target="_blank" rel="noreferrer"><img src="/screens/platform/tv-live-family.webp" alt="Grundig Android TV üzerinde çalışan AliKa aile panosu" loading="lazy" decoding="async" /><span><b>Aile panosu</b><small>Kullanım, doğru cevap, seri ve rozetler</small></span></a>
             <a className="realScreen" href="/screens/platform/tv-live-settings.webp" target="_blank" rel="noreferrer"><img src="/screens/platform/tv-live-settings.webp" alt="Grundig Android TV üzerinde çalışan AliKa TV ayarları" loading="lazy" decoding="async" /><span><b>TV ayarları</b><small>Ebeveyn telefonu, dil, yaş ve yerel çalışma</small></span></a>
           </div>
-          <section className="tvTruth"><b>Bugünkü durum</b><span>AliKa TV; D-pad ile kullanılan oyunlar, Aile Panosu ve Ayarlar bölümleriyle gerçek Grundig Android TV’de çalışıyor. Oyun kütüphanesi ve çoklu telefon kumandası deneyimi geliştirilmeye devam ediyor.</span></section>
-          <p className="realEvidenceReceipt"><b>Canlı Grundig TV kanıtı</b><span>Bu üç görüntü Tailscale üzerinden bağlanılan fiziksel Grundig Android UHD TV’den doğrudan alınmıştır; tasarım maketi değildir.</span></p>
+          <section className="tvTruth"><b>Kapalı alfa durumu</b><span>AliKa TV fiziksel Android TV’de sınanıyor; oyun kütüphanesi ve çoklu telefon deneyimi geliştirilmeye devam ediyor. Henüz genel mağaza indirmesi değildir.</span></section>
+          <p className="realEvidenceReceipt"><b>Fiziksel TV test kanıtı</b><span>Bu üç görüntü fiziksel Grundig Android UHD TV’deki geliştirme sürümünden alınmıştır; tasarım maketi değildir.</span></p>
         </div>
       );
     case 'learning':
@@ -1045,18 +1045,18 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
     case 'ecosystem-actions':
       return (
         <div className="ecosystemActionsStory">
-          <div className="pageTopline"><p className="folio">AliKa Ekosistemi / Neler yapılabilir?</p><span className="mixedStatus">Hazır + geliştiriliyor</span></div>
+          <div className="pageTopline"><p className="folio">AliKa Ekosistemi / Neler yapılabilir?</p><span className="mixedStatus">Windows hazır · ekosistem geliştiriliyor</span></div>
           <h2 className="compactTitle" tabIndex={-1}>AliKa Ekosistemi ile neler yapabilirsiniz?</h2>
-          <p className="pageLead">Bir cihazdan verdiğiniz aile kararını diğer cihazda görünür hâle getirebilirsiniz. Aşağıda bugün çalışanlarla hazırlanmakta olanlar ayrı gösterilir.</p>
+          <p className="pageLead">Windows sürümü bugün Microsoft Store’da kullanılabilir. Telefon, Android TV, ortak ekran ve aile oyunu deneyimleri ise aşağıda açıkça geliştirme aşamasında gösterilir.</p>
 
           <div className="ecosystemLedger" aria-label="AliKa ekosistemi özellik durumu">
-            <article><StatusStamp status="Bugün kullanılabilir" /><div><strong>Cihazları görün ve yönetin</strong><span>Telefon ve Windows bilgisayarın çevrim içi durumunu görün; kuralları gönderin, gerektiğinde kilitleyin veya açın.</span></div></article>
-            <article><StatusStamp status="Bugün kullanılabilir" /><div><strong>Görev, mesaj ve süre paylaşın</strong><span>Gerçek yaşam görevi atayın, aile mesajı gönderin; ebeveyn onayından sonra süre veya ALTIN ödülü verin.</span></div></article>
-            <article><StatusStamp status="Bugün kullanılabilir" /><div><strong>Birlikte öğrenin ve oynayın</strong><span>Telefonlar Windows ortak ekranındaki soru oyununa katılır; cevap, açıklama ve skor ailece görünür.</span></div></article>
-            <article><StatusStamp status="Bugün kullanılabilir" /><div><strong>Android TV’yi ortak ekran olarak kullanın</strong><span>TV’de oyun kütüphanesini, Aile Panosu’nu ve Ayarlar’ı kumandayla açın; geliştirilmekte olan çoklu telefon deneyimini mevcut özelliklerden ayrı görün.</span></div></article>
+            <article><StatusStamp status="Geliştiriliyor" /><div><strong>Cihazları görün ve yönetin</strong><span>Telefon ve Windows bilgisayarın çevrim içi durumunu görme ve kuralları gönderme akışı kapalı alfa kapsamında geliştiriliyor.</span></div></article>
+            <article><StatusStamp status="Geliştiriliyor" /><div><strong>Görev, mesaj ve süre paylaşın</strong><span>Gerçek yaşam görevi, aile mesajı ve ebeveyn onaylı ödül akışları ekosistem dağıtımına hazırlanıyor.</span></div></article>
+            <article><StatusStamp status="Geliştiriliyor" /><div><strong>Birlikte öğrenin ve oynayın</strong><span>Telefonların ortak ekrandaki soru oyununa katıldığı aile deneyimi kapalı alfa kapsamında geliştiriliyor.</span></div></article>
+            <article><StatusStamp status="Geliştiriliyor" /><div><strong>Android TV’yi ortak ekran olarak kullanın</strong><span>TV oyun kitaplığı, Aile Panosu, Ayarlar ve çoklu telefon deneyimi genel dağıtımdan önce geliştiriliyor.</span></div></article>
           </div>
 
-          <section className="ecosystemVision"><AMascot className="aOnPage" /><div><small>Tek ürün değil, büyüyen aile sistemi</small><strong>Telefon planlar · PC uygular · ortak ekran aileyi buluşturur.</strong><span>Yaşa göre dil ve yönlendirme sadeleşir; çocuk büyüdükçe maskot geri çekilir, sorumluluk görünür kalır.</span></div></section>
+          <section className="ecosystemVision"><AMascot className="aOnPage" /><div><small>Tek ürün değil, büyüyen aile sistemi</small><strong>Windows bugün hazır · telefon ve ortak ekran ekosistemi hazırlanıyor.</strong><span>Yaşa göre dil ve yönlendirme sadeleşir; çocuk büyüdükçe maskot geri çekilir, sorumluluk görünür kalır.</span></div></section>
         </div>
       );
     case 'games-intro':

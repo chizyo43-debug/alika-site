@@ -9,7 +9,7 @@
   {
     "id": "platforms",
     "title": "Desteklenen platformlar ve satın alma kapsamı",
-    "content": "AliKa'nın Windows, Android telefon/tablet ve Android TV deneyimleri ürün sitesinde gerçek ekranlarla gösterilir. Windows, Android ve Android TV temeli bugün kullanılabilir olarak tanımlanır. Microsoft Store'daki satın alma yalnız Windows sürümünü kapsar; Android ve Android TV bu satın almaya dahil değildir. Platformların dağıtım kanalları ve kapsamı birbirinden ayrı değerlendirilmelidir.",
+    "content": "AliKa'nın Windows sürümü Microsoft Store'da genel kullanıma açıktır. Android telefon/tablet ve Android TV ekranları geliştirme ve kapalı alfa önizlemeleridir; henüz genel mağaza indirmesi değildir. Microsoft Store'daki satın alma yalnız Windows sürümünü kapsar; Android ve Android TV bu satın almaya dahil değildir.",
     "keywords": ["windows", "android", "telefon", "tablet", "android tv", "platform", "hangi cihaz", "satın alma kapsamı"],
     "links": [{"label": "Platformları görün", "href": "/features/"}, {"label": "İndirme seçenekleri", "href": "/downloads/"}]
   },
@@ -23,21 +23,21 @@
   {
     "id": "android",
     "title": "Android telefon ve tablet deneyimi",
-    "content": "Aynı Android uygulaması ebeveyn ve çocuk rolüne göre farklılaşır. Ebeveyn süre, uygulama, uyku ve görevleri yönetir. Android'de belirli bir uygulamaya günlük limit vermenin doğrulanmış yolu, korunan ebeveyn panelinde Kurallar → Uygulama süre limitleri → Uygulama limiti ekle adımlarını açmak, kurulu uygulamayı seçmek ve dakika değerini onaylamaktır. Örneğin YouTube kuruluysa bu listeden ayrıca seçilebilir. Kural cihazda yerel olarak saklanır; web hesabına veya tarayıcı paneline giriş yapılmaz. Çocuk kalan süresini, çalışmalarını ve soru çözerek kazanabileceği kontrollü ek süreyi açıkça görür. Android dağıtımı, Windows Microsoft Store satın alımından ayrı kapsamdadır.",
+    "content": "Kapalı alfa Android uygulaması ebeveyn ve çocuk rolüne göre farklılaşır. Ebeveyn süre, uygulama, uyku ve görevleri yönetir. Android'de belirli bir uygulamaya günlük limit vermenin doğrulanmış yolu, korunan ebeveyn panelinde Kurallar → Uygulama süre limitleri → Uygulama limiti ekle adımlarını açmak, kurulu uygulamayı seçmek ve dakika değerini onaylamaktır. Örneğin YouTube kuruluysa bu listeden ayrıca seçilebilir. Kural cihazda yerel olarak saklanır; web hesabına veya tarayıcı paneline giriş yapılmaz. Çocuk kalan süresini, çalışmalarını ve soru çözerek kazanabileceği kontrollü ek süreyi açıkça görür. Android henüz genel mağaza indirmesi değildir ve Windows Microsoft Store satın alımına dahil değildir.",
     "keywords": ["android", "telefon", "tablet", "ebeveyn telefonu", "çocuk telefonu", "mobil", "youtube", "uygulama süre limitleri", "uygulama limiti ekle"],
     "links": [{"label": "Android deneyimini görün", "href": "/features/"}, {"label": "Ekosistemi keşfedin", "href": "/ecosystem/"}]
   },
   {
     "id": "android-tv",
     "title": "Android TV ve ortak ekran",
-    "content": "AliKa TV oyunları, ortak soruları ve aile panosunu uzaktan okunabilen büyük bir arayüzde gösterir. Telefonlar oyuncu kumandası olabilir; gizli cevap ve seçimler kişisel ekranda kalır. D-pad ile kullanılan oyunlar, Aile Panosu ve Ayarlar gerçek Android TV'de çalışır. Oyun kütüphanesi ve çoklu telefon deneyimi geliştirilmeye devam eder; geliştirme durumu hazır özelliklerle karıştırılmamalıdır.",
+    "content": "Kapalı alfa AliKa TV geliştirme sürümü oyunları, ortak soruları ve aile panosunu uzaktan okunabilen büyük bir arayüzde gösterir. Telefon kumandası, gizli cevap ve kişisel seçim akışları fiziksel Android TV'de sınanmaktadır. Oyun kütüphanesi ve çoklu telefon deneyimi geliştirilmeye devam eder; Android TV henüz genel mağaza indirmesi değildir ve Windows satın alımına dahil değildir.",
     "keywords": ["tv", "android tv", "ortak ekran", "kumanda", "oyun", "aile panosu", "çoklu telefon"],
     "links": [{"label": "Android TV deneyimi", "href": "/ecosystem/"}, {"label": "Güncel yol haritası", "href": "/roadmap/"}]
   },
   {
     "id": "learning",
     "title": "Soru çözerek kontrollü süre kazanma",
-    "content": "Çocuk, ebeveynin eklediği ve kullanıma açtığı soru bankasından sorular çözer. Doğru cevapların kaç dakika kazandıracağını ve günlük kazanım tavanını ebeveyn belirler; süre sınırsız değildir. Yanlış cevap süre kazandırmaz, doğru seçenek ve varsa açıklama gösterilir. Ebeveyn sonuçları ve kazanılan süreyi raporlarda izleyebilir.",
+    "content": "Çocuk, ebeveynin eklediği ve kullanıma açtığı soru bankasından sorular çözer. Bir dakika kazanmak için gereken doğru cevap sayısını ve günlük kazanım tavanını ebeveyn belirler; süre sınırsız değildir. Yanlış cevap süre kazandırmaz, doğru seçenek ve varsa açıklama gösterilir. Ebeveyn sonuçları ve kazanılan süreyi raporlarda izleyebilir.",
     "keywords": ["soru", "quiz", "doğru cevap", "süre kazan", "ek süre", "ödül", "soru bankası", "günlük tavan"],
     "links": [{"label": "Soru sistemi rehberi", "href": "/rehber/soru-cozerek-ekran-suresi-kazanma/"}, {"label": "Hazır içerik kütüphanesi", "href": "/content/"}]
   },
@@ -121,14 +121,14 @@
   {
     "id": "reward-safety",
     "title": "Süre kazanmanın değişmeyen güvenlik sınırları",
-    "content": "Yanlış cevap ceza değildir ve mevcut süreyi azaltmaz. Kaç dakikanın, kaç soruyla ve günde en fazla ne kadar kazanılabileceğini ebeveyn belirler. Kazanılan dakika uyku saatini, uygulama engelini veya ebeveyn kilidini aşmaz. Ödül sistemi kapalıysa doğru cevap ilerlemeye yazılır fakat süre üretmez.",
+    "content": "Yanlış cevap ceza değildir ve mevcut süreyi azaltmaz. Bir dakika için gereken doğru cevap sayısını ve günde en fazla kaç dakika kazanılabileceğini ebeveyn belirler. Kazanılan dakika uyku saatini, uygulama engelini veya ebeveyn kilidini aşmaz. Ödül sistemi kapalıysa doğru cevap ilerlemeye yazılır fakat süre üretmez.",
     "keywords": ["yanlış cevap", "ceza", "süre azalır", "uyku", "engel aşar", "ebeveyn kilidi", "ödül kapalı"],
     "links": [{"label": "Süre kazanma rehberi", "href": "/rehber/soru-cozerek-ekran-suresi-kazanma/"}]
   },
   {
     "id": "daily-flow",
     "title": "Örnek bir AliKa günü",
-    "content": "Ebeveyn sabah günlük toplam süreyi, uygulama kurallarını, uyku saatini ve soru ödülünü seçer. Çocuk gün içinde köşe sayacından veya çocuk ekranından kalan süreyi görür. Süre bitince ebeveyn izin verdiyse dört seçenekli soru akışı açılır; doğru cevap belirlenen dakikayı ekler. Akşam uyku saati yine önceliklidir. Kullanım, sorular, görevler ve ek süre ebeveynin günlük görünümünde birlikte gösterilir.",
+    "content": "Ebeveyn sabah günlük toplam süreyi, uygulama kurallarını, uyku saatini ve soru ödülü oranını seçer. Çocuk gün içinde köşe sayacından veya çocuk ekranından kalan süreyi görür. Süre bitince ebeveyn izin verdiyse dört seçenekli soru akışı açılır; belirlenen doğru cevap sayısına ulaşıldığında bir dakika eklenir. Akşam uyku saati yine önceliklidir. Kullanım, sorular, görevler ve ek süre ebeveynin günlük görünümünde birlikte gösterilir.",
     "keywords": ["bir gün", "günlük akış", "sabah", "akşam", "köşe sayacı", "süre bitince", "nasıl işler"],
     "links": [{"label": "AliKa nasıl çalışır?", "href": "/how-it-works/"}]
   },

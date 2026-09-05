@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-04",
+  "version": "2026-09-05",
   "purpose": "AliKa site asistanı için doğrulanmış kullanıcı ve menü rehberi",
   "articles": [
     {
@@ -116,8 +116,8 @@
       "platform": "windows",
       "availability": "available",
       "menuPath": "Öğrenme → Sorular / Ödüller",
-      "content": "Ebeveyn kendi soru bankasını tek tek, toplu yapıştırma, CSV veya Excel ile ekleyebilir; otomatik matematik sorularını açabilir. Doğru cevap başına kazanılacak dakika ve günlük kazanım tavanı ebeveyn tarafından belirlenir. Yanlış cevap süre azaltmaz; doğru yanıt ve varsa açıklama gösterilir. Konu istatistikleri yeterli örnek olduğunda anlamlıdır.",
-      "steps": ["Öğrenme bölümünde soru bankasını açın.", "Tek soru ekleyin veya toplu içe aktarma yöntemini seçin.", "Doğru cevap, açıklama ve konu bilgisini kontrol edin.", "Ödüller bölümünde dakika değerini ve günlük tavanı belirleyin.", "Kaydedip çocuk görünümünde soru akışını doğrulayın."],
+      "content": "Ebeveyn kendi soru bankasını tek tek, toplu yapıştırma, CSV veya Excel ile ekleyebilir; otomatik matematik sorularını açabilir. Bir dakika kazanmak için gereken doğru cevap sayısı ve günlük kazanım tavanı ebeveyn tarafından belirlenir. Yanlış cevap süre azaltmaz; doğru yanıt ve varsa açıklama gösterilir. Konu istatistikleri yeterli örnek olduğunda anlamlıdır.",
+      "steps": ["Öğrenme bölümünde soru bankasını açın.", "Tek soru ekleyin veya toplu içe aktarma yöntemini seçin.", "Doğru cevap, açıklama ve konu bilgisini kontrol edin.", "Ödüller bölümünde bir dakika için gereken doğru cevap sayısını ve günlük tavanı belirleyin.", "Kaydedip çocuk görünümünde soru akışını doğrulayın."],
       "cautions": ["Yanlış cevap ceza değildir.", "Az sayıda sorudan güçlü veya zayıf konu sonucu çıkarmayın."],
       "keywords": ["windows soru bankası", "quiz", "csv", "excel", "toplu soru", "otomatik matematik", "doğru cevap dakika", "günlük tavan"],
       "links": [{"label": "Soru çözerek süre kazanma", "href": "/rehber/soru-cozerek-ekran-suresi-kazanma/"}, {"label": "İçerik kütüphanesi", "href": "/content/"}]
@@ -188,7 +188,7 @@
       "platform": "android",
       "availability": "testing",
       "menuPath": "Android alt menü",
-      "content": "Android ana hedefleri Panel, Cihazlar, Kurallar ve Profil'dir. Panel içinden Bugün, Zaman, Uygulamalar, Sınav, Raporlar, Paylaşım ve Sorular; Kurallar içinden ayrıntılı kural ekranı; Profil içinden Ayarlar ve Yardım açılır. Görünen hedefler cihazın ebeveyn/çocuk/paylaşımlı rolüne ve desteklediği yeteneklere göre değişebilir. Android sürümü saha testlerinden geçmiş olsa da dağıtım kapsamı Windows mağaza satın alımından ayrıdır ve genel mağaza kullanılabilirliği ayrıca doğrulanmalıdır.",
+      "content": "Android ana hedefleri Panel, Cihazlar, Kurallar ve Profil'dir. Panel içinden Bugün, Zaman, Uygulamalar, Sınav, Raporlar, Paylaşım ve Sorular; Kurallar içinden ayrıntılı kural ekranı; Profil içinden Ayarlar ve Yardım açılır. Görünen hedefler cihazın ebeveyn/çocuk/paylaşımlı rolüne ve desteklediği yeteneklere göre değişebilir. Android sürümü geliştirme ve kapalı alfa aşamasındadır; Windows mağaza satın alımına dahil değildir ve henüz genel mağaza indirmesi değildir.",
       "steps": ["Ebeveyn işlemi için PIN ile korunan ebeveyn görünümünü açın.", "Özet için Panel'i, cihaz bağlantıları için Cihazlar'ı seçin.", "Sınırlar için Kurallar'a, koruma ve yardım için Profil'e gidin."],
       "cautions": ["Windows menü adımlarını Android'de uygulamayın.", "Mağaza yayımlanma durumunu doğrulamadan indirme sözü vermeyin."],
       "keywords": ["android menü", "android panel", "cihazlar", "kurallar", "profil", "bugün", "android nerede", "alt menü"],
@@ -248,8 +248,8 @@
       "platform": "android",
       "availability": "testing",
       "menuPath": "Panel → Sorular; Öğrenme araçları",
-      "content": "Android soru sistemi doğru cevap başına dakika, günlük dakika ve soru tavanı, otomatik matematik, soru bankası, açıklama, süre sayacı ve konu istatistikleri sunar. Sorular tek tek veya CSV, TXT ve Excel üzerinden toplu eklenebilir. Yanlış cevap süre kazandırmaz; yapılandırılmışsa açıklama gösterilir. Hazır içerik ve ebeveynin kendi soru bankası ayrı kaynaklardır.",
-      "steps": ["Panel içinden Sorular'ı açın.", "Soru bankasını etkinleştirip tekli veya toplu ekleme yöntemini seçin.", "Doğru cevap ve açıklamaları kontrol edin.", "Doğru cevap dakikasını ve günlük tavanı belirleyin.", "Çocuk tarafında birkaç örnek soruyla akışı sınayın."],
+      "content": "Kapalı alfa Android soru sistemi bir dakika için gereken doğru cevap sayısı, günlük dakika ve soru tavanı, otomatik matematik, soru bankası, açıklama, süre sayacı ve konu istatistikleri sunar. Sorular tek tek veya CSV, TXT ve Excel üzerinden toplu eklenebilir. Yanlış cevap süre kazandırmaz; yapılandırılmışsa açıklama gösterilir. Hazır içerik ve ebeveynin kendi soru bankası ayrı kaynaklardır.",
+      "steps": ["Panel içinden Sorular'ı açın.", "Soru bankasını etkinleştirip tekli veya toplu ekleme yöntemini seçin.", "Doğru cevap ve açıklamaları kontrol edin.", "Bir dakika için gereken doğru cevap sayısını ve günlük tavanı belirleyin.", "Çocuk tarafında birkaç örnek soruyla akışı sınayın."],
       "cautions": ["Yanlış cevap için cezalandırıcı süre azaltımı kullanmayın.", "İçe aktarılan dosyalara kişisel veri koymayın."],
       "keywords": ["android soru bankası", "android quiz", "csv soru", "txt", "excel", "otomatik matematik", "doğru cevap dakika", "günlük soru tavanı"],
       "links": [{"label": "Soru sistemi", "href": "/rehber/soru-cozerek-ekran-suresi-kazanma/"}, {"label": "Hazır içerik", "href": "/content/"}]
@@ -332,7 +332,7 @@
       "platform": "all",
       "availability": "mixed",
       "menuPath": "Site → İndir",
-      "content": "Windows sürümü Microsoft Store dağıtımıyla sunulur ve mağaza satın alımı yalnız Windows sürümünü kapsar. Android telefon/tablet ve Android TV teknik olarak geliştirilmiş ve saha testlerinden geçmiş ayrı ürün yollarıdır; mağaza incelemesi ve dağıtım durumu ayrıca doğrulanmalıdır. Bir Windows satın alımı Android veya TV lisansı vaadi değildir.",
+      "content": "Windows sürümü Microsoft Store'da genel kullanıma açıktır ve mağaza satın alımı yalnız Windows sürümünü kapsar. Android telefon/tablet ve Android TV geliştirme ve kapalı alfa aşamasındaki ayrı ürün yollarıdır; henüz genel mağaza indirmesi değildir. Bir Windows satın alımı Android veya TV lisansı vaadi değildir.",
       "steps": ["İndir sayfasında kullanacağınız platformu seçin.", "Mağaza bağlantısının platformunu kontrol edin.", "Android veya TV için sayfada belirtilen güncel dağıtım durumunu esas alın."],
       "cautions": ["Planlanan veya incelemedeki dağıtımı hazır indirme olarak sunmayın.", "Platformlar arası satın alma kapsamı varsaymayın."],
       "keywords": ["hangi platform hazır", "windows satın alma", "android indir", "android tv indir", "microsoft store", "lisans kapsamı", "mağaza incelemesi"],
