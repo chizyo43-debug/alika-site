@@ -534,7 +534,7 @@ function VideoGuideCard({ video, language }: { video: GuideVideo; language: Guid
           />
         ) : (
           <>
-            <img className="videoPoster" src={video.poster} alt="" loading="lazy" decoding="async" />
+            <img className="videoPoster" src={video.poster} alt={`${video.title} video kapağı`} loading="lazy" decoding="async" />
             <button className="videoGate" type="button" onClick={() => setPlaying(true)} aria-label={`${video.title} — ${language.copy.playLabel}`}>
               <span lang={language.youtubeLocale}><b aria-hidden="true">▶</b> {language.copy.playLabel}</span>
             </button>
@@ -1171,7 +1171,7 @@ function PageContent({ page, onNavigate, language, copy }: { page: BookPage; onN
             <a className="supportLink" href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
           </div>
           <p className="storeScopeNote">Bu Microsoft Store satın alımı yalnız Windows sürümünü kapsar; Android ve Android TV bu satın alıma dahil değildir.</p>
-          <div className="closingMark"><img src="/brand/alika-logo.png" alt="" width="74" height="52" /><p>Ekranı kapatmak için değil,<br /><strong>zamanı daha iyi kullanmak için.</strong></p></div>
+          <div className="closingMark"><img src="/brand/alika-logo.png" alt="AliKa logosu" width="74" height="52" /><p>Ekranı kapatmak için değil,<br /><strong>zamanı daha iyi kullanmak için.</strong></p></div>
         </>
       );
   }
