@@ -19,10 +19,12 @@ const mode = process.argv[2];
 if (mode === '--source') {
   const source = fs.readFileSync(path.join(root, 'src', 'book-experience.tsx'), 'utf8');
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const assistant = fs.readFileSync(path.join(root, 'public', 'site-assistant.js'), 'utf8');
   if (!source.includes('document.title = copy.seo_title')) errors.push('interactive book must preserve the localized SEO title');
   if (!source.includes("meta[name=\"description\"]") || !source.includes("setAttribute('content', copy.seo_description)")) errors.push('interactive book must preserve the localized SEO description');
   if (/alt=""/.test(source)) errors.push('interactive book images must have descriptive alt text');
   if (/alt=""/.test(html)) errors.push('boot homepage images must have descriptive alt text');
+  if (/alt=""/.test(assistant)) errors.push('site assistant images must have descriptive alt text');
 } else if (mode === '--dist') {
   for (const [language, copy] of Object.entries(locales)) {
     const file = language === 'tr' ? path.join(root, 'dist', 'index.html') : path.join(root, 'dist', language, 'index.html');
