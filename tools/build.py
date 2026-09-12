@@ -74,6 +74,40 @@ SLUGS = (
 
 GUIDES = (
     {
+        "slug": "windows-cocuk-ekran-suresi-nasil-yonetilir",
+        "title": "Windows'ta Çocuk Ekran Süresi Nasıl Yönetilir?",
+        "description": "Windows 10 ve 11'de çocuk ekran süresi için aile kuralı oluşturun; Microsoft Family Safety seçeneklerini ve AliKa'nın görünür, yerel-öncelikli akışını karşılaştırın.",
+        "video": "https://youtube.com/shorts/9OEnsVkKep8",
+        "video_label": "Soru çöz, süre kazan akışını YouTube Short'ta izleyin",
+        "campaign_id": "organic_guide_windows_tr",
+        "lede": (
+            "Windows'ta ekran süresi yönetimi yalnız bir süre sayısı girmek değildir. "
+            "Aile kuralının önceden konuşulması, çocuğun kuralı görebilmesi ve istisnaların açıkça açıklanmasıyla daha anlaşılır bir düzen kurulabilir."
+        ),
+        "sections": (
+            ("Önce aile kuralını yazın", (
+                "Başlangıç için günlük toplam süreyi, uyku saatini ve okul günü ile hafta sonu arasındaki farkı birlikte belirleyin. Kuralın amacı ceza vermek değil, bilgisayar kullanımına herkesin anlayacağı bir çerçeve koymaktır.",
+                "İlk hafta tek bir toplam süre ve tek bir uyku aralığıyla başlayın. Kuralı değiştireceğiniz zamanı da baştan söyleyin; böylece çocuk, değişikliğin gizlice yapıldığını düşünmez.",
+            )),
+            ("Microsoft Family Safety ile neler yapılabilir?", (
+                "Microsoft Family Safety, Microsoft aile grubunda ekran süresi, uygulama ve oyun sınırları ile web ve arama filtreleri gibi yerleşik seçenekler sunar. Microsoft hesabı, aile grubu ve seçtiğiniz özelliğe göre desteklenen cihaz veya tarayıcı gerekebilir.",
+                "Yerleşik araç sizin aile düzeninize uygunsa onu kullanmak makul bir başlangıçtır. Ayarları çocukla gözden geçirin; özellikle web filtresi ve uygulama sınırlarının hangi cihazlarda geçerli olduğunu Microsoft'un güncel yardım sayfalarından doğrulayın.",
+            )),
+            ("AliKa hangi ihtiyaca odaklanır?", (
+                "AliKa, Microsoft'un yerleşik çözümünün yerine geçme iddiasında değildir. Windows 10/11'de ebeveynin belirlediği kuralları çocuk ekranında görünür kılmaya, kontrolü rızaya dayalı ve açık tutmaya odaklanır.",
+                "Temel kullanım kayıtları cihazda işlenir; yaklaşım yerel-önceliklidir. Aile kuralını kurmadan önce çocuğa hangi bilginin görüleceğini, neyin görülmeyeceğini ve itirazını nasıl dile getirebileceğini anlatın.",
+            )),
+            ("Süre sınırı ile öğrenme akışını ayırın", (
+                "AliKa'da ebeveyn günlük süreyi, uygulama veya web kurallarını kendi aile düzenine göre belirler. Süre bittiğinde çocuk, uygulanmış kuralı ve sonraki adımı görünür biçimde görür; gizli izleme yaklaşımı kullanılmaz.",
+                "İsterseniz ebeveynin onayladığı soru bankasında bir akış tanımlanabilir: çocuk soruyu yanıtlar; yanlış yanıtta konu anlatımı veya açıklama gösterilir, soru daha sonra tekrar gelir ve doğru yanıtlar ebeveynin belirlediği kurala göre kontrollü ek süreye dönüşür. Günlük kazanım sınırını da ebeveyn belirler.",
+            )),
+            ("İlk hafta için kısa kontrol listesi", (
+                "İlk kuralın doğru saatte çalıştığını, çocuk ekranındaki kalan sürenin anlaşılır olduğunu ve uyku aralığının aile düzenine uyduğunu kontrol edin. Beklenmeyen bir engel görürseniz önce kuralı birlikte inceleyin.",
+                "Bir haftanın sonunda yalnız süre toplamına bakmak yerine, kuralın anlaşılır olup olmadığını yetişkin ve çocuk açısından konuşun. Gerekirse tek bir ayarı değiştirip yeniden deneyin.",
+            )),
+        ),
+    },
+    {
         "slug": "windows-11-cocuk-ekran-suresi",
         "title": "Windows 11’de Çocuk Ekran Süresi Nasıl Sınırlandırılır?",
         "description": "Windows 11’de günlük süre, uygulama ve web sitesi limitlerini görünür kurallarla ayarlayın. AliKa ebeveyn panelini adım adım inceleyin.",
@@ -421,8 +455,8 @@ def store_market(lang: str) -> dict[str, str]:
     return STORE_MARKETS.get(lang, STORE_MARKETS["tr"])
 
 
-def microsoft_store_url(lang: str) -> str:
-    return f'{MICROSOFT_STORE_BASE_URL}?cid={store_market(lang)["cid"]}'
+def microsoft_store_url(lang: str, campaign_id: str | None = None) -> str:
+    return f'{MICROSOFT_STORE_BASE_URL}?cid={campaign_id or store_market(lang)["cid"]}'
 
 
 def document(locales: dict[str, dict], lang: str, title: str, description: str, body: str, slug: str = "") -> str:
@@ -568,7 +602,7 @@ def guide_article_body(guide: dict) -> str:
         </header>
         {sections}
         <aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>Video yalnız bağlantıya tıkladığınızda YouTube’da açılır.</span></div><a href="{esc(guide["video"])}" target="_blank" rel="noopener noreferrer">{esc(guide["video_label"])} ↗</a></aside>
-        <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{microsoft_store_url('tr')}" target="_blank" rel="noopener noreferrer">Microsoft Store’da açın</a></section>
+        <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı Windows 10/11 için 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{microsoft_store_url('tr', guide.get('campaign_id'))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a></section>
       </article>
     </main>
     """

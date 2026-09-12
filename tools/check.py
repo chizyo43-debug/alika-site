@@ -46,6 +46,7 @@ QUIZ_REWARD_MARKERS = {
 }
 BOOK_LANGUAGE_PATHS = ("/en/", "/de/", "/es/", "/fr/", "/pt/", "/ru/", "/ja/", "/ko/")
 GUIDE_SLUGS = (
+    "windows-cocuk-ekran-suresi-nasil-yonetilir",
     "windows-11-cocuk-ekran-suresi",
     "soru-cozerek-ekran-suresi-kazanma",
     "bulutsuz-ebeveyn-kontrolu",
@@ -210,7 +211,8 @@ def main() -> None:
 
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
-        if page.exists() and MICROSOFT_STORE_CIDS["tr"] not in page.read_text(encoding="utf-8"):
+        expected_cid = "cid=organic_guide_windows_tr" if slug == "windows-cocuk-ekran-suresi-nasil-yonetilir" else MICROSOFT_STORE_CIDS["tr"]
+        if page.exists() and expected_cid not in page.read_text(encoding="utf-8"):
             errors.append(f"Campaign CID is missing from guide CTA: {page}")
 
     catalog_path = DIST / "icerik" / "catalog-v1.json"
