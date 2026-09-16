@@ -215,6 +215,27 @@ def main() -> None:
         if page.exists() and expected_cid not in page.read_text(encoding="utf-8"):
             errors.append(f"Campaign CID is missing from guide CTA: {page}")
 
+    uk_pages = (
+        DIST / "en" / "guides" / "windows-child-screen-time" / "index.html",
+        DIST / "en" / "uk-windows-screen-time" / "index.html",
+    )
+    for page in uk_pages:
+        if not page.exists():
+            errors.append(f"Missing UK preparation page: {page}")
+            continue
+        uk_text = page.read_text(encoding="utf-8")
+        if '<html lang="en">' not in uk_text or '<link rel="canonical"' not in uk_text:
+            errors.append(f"UK language or canonical is missing: {page}")
+        if 'type="application/ld+json"' not in uk_text:
+            errors.append(f"UK structured data is missing: {page}")
+        if "cid=community_guide_windows_uk_v1" not in uk_text:
+            errors.append(f"UK campaign CID is missing: {page}")
+        parser = LinkParser()
+        parser.feed(uk_text)
+        for attr, value in parser.links:
+            if not route_exists(value):
+                errors.append(f"Broken {attr} in {page}: {value}")
+
     catalog_path = DIST / "icerik" / "catalog-v1.json"
     alias_path = DIST / "icerik" / "index.html"
     if not alias_path.exists():

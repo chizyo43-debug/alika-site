@@ -60,6 +60,9 @@ STORE_MARKETS = {
     "ko": {"cid": "site_home_ko", "price": "2500", "currency": "KRW"},
 }
 GUIDE_BASE = "rehber"
+UK_GUIDE_PATH = "en/guides/windows-child-screen-time"
+UK_LANDING_PATH = "en/uk-windows-screen-time"
+UK_CAMPAIGN_ID = "community_guide_windows_uk_v1"
 SLUGS = (
     "how-it-works",
     "ecosystem",
@@ -522,20 +525,20 @@ def software_application_schema(description: str, lang: str) -> str:
     return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False, separators=(",", ":"))}</script>'
 
 
-def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str) -> str:
+def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr") -> str:
     article_schema = {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": title,
         "description": description,
         "mainEntityOfPage": canonical,
-        "inLanguage": "tr-TR",
+        "inLanguage": "en-GB" if lang == "en" else "tr-TR",
         "author": {"@type": "Organization", "name": "ErenKa Software"},
         "publisher": {"@type": "Organization", "name": "ErenKa Software"},
         "dateModified": "2026-08-28",
     }
     return f"""<!doctype html>
-<html lang="tr">
+<html lang="{lang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -546,7 +549,7 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="icon" href="/assets/brand/alika-logo.png">
   <meta property="og:type" content="article">
-  <meta property="og:locale" content="tr_TR">
+  <meta property="og:locale" content="{'en_GB' if lang == 'en' else 'tr_TR'}">
   <meta property="og:site_name" content="AliKa">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
@@ -555,9 +558,9 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <script type="application/ld+json">{json.dumps(article_schema, ensure_ascii=False, separators=(",", ":"))}</script>
 </head>
 <body>
-  {header(locales, "tr")}
+  {header(locales, lang)}
   {body}
-  {footer(locales, "tr")}
+  {footer(locales, lang)}
   <script src="/assets/site.js" defer></script>
   <script src="/assets/site-assistant-config.js" defer></script>
   <script src="/assets/site-assistant.js" defer></script>
@@ -603,6 +606,47 @@ def guide_article_body(guide: dict) -> str:
         {sections}
         <aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>Video yalnız bağlantıya tıkladığınızda YouTube’da açılır.</span></div><a href="{esc(guide["video"])}" target="_blank" rel="noopener noreferrer">{esc(guide["video_label"])} ↗</a></aside>
         <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı Windows 10/11 için 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{microsoft_store_url('tr', guide.get('campaign_id'))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a></section>
+      </article>
+    </main>
+    """
+
+
+def uk_guide_body() -> str:
+    return f"""
+    <main id="main" class="guide-main">
+      <article class="guide-article">
+        <nav class="guide-breadcrumb" aria-label="Breadcrumb"><a href="/en/">AliKa</a><span>›</span><a href="/en/uk-windows-screen-time/">UK Windows guide</a></nav>
+        <header>
+          <p class="eyebrow">Windows 10/11 · Family screen-time guide</p>
+          <h1>Setting a clear screen-time routine on a Windows family PC</h1>
+          <p class="guide-lede">A useful screen-time routine starts with an agreed plan: what the limit is, when it applies, and what a child will see when it is reached.</p>
+          <p class="guide-disclosure"><strong>Disclosure:</strong> This guide is published by ErenKa Software, the developer of AliKa. AliKa is a Windows application; this is not a substitute for a family conversation or for Microsoft&apos;s own product guidance.</p>
+        </header>
+        <section><h2>Start with the family rule</h2><p>Agree the daily allowance, bedtime period and any difference between school days and weekends before turning on a limit. Keep the first week simple, then review whether everyone understood the rule.</p><p>Explain what will happen at the limit and how an exception can be discussed. A rule that is visible and predictable is easier to use than one that appears without warning.</p></section>
+        <section><h2>Where Microsoft Family Safety fits</h2><p>Microsoft Family Safety can be a sensible starting point for families who use a Microsoft family group. Its available options can include screen-time scheduling, app and game limits, and web or search filtering; availability depends on the account, device and browser you use.</p><p>Check Microsoft&apos;s current help before relying on a setting, particularly for web filtering and cross-device behaviour. AliKa does not claim to replace Microsoft Family Safety; families can choose the built-in tools that suit them.</p></section>
+        <section><h2>What AliKa is designed to do</h2><p>AliKa is for Windows 10 and Windows 11 family PCs. It helps a parent make an agreed rule visible on the child&apos;s screen, including the remaining time and the next step when a limit applies.</p><p>Its approach is consent-based and local-first: it is not designed for secret monitoring. Talk through what information is shown, what is not collected for this guide, and how a child can raise a concern about a rule.</p></section>
+        <section><h2>Keep learning rewards bounded</h2><p>If your family chooses to use AliKa&apos;s question flow, a parent sets the question bank, the reward rule and the daily cap. A correct answer can earn a limited amount of extra time only within that family rule.</p><p>Use a small cap at first. The aim is not to promise better learning outcomes or unlimited access, but to make the next step understandable within the routine you have agreed.</p></section>
+        <section><h2>A short first-week check</h2><p>Confirm that the schedule works at the intended time, the child can understand the remaining-time display, and the bedtime period fits your household. Change one setting at a time after discussing it together.</p></section>
+        <section class="guide-cta"><h2>Review the Windows setup together.</h2><p>AliKa is for Windows 10 and Windows 11. The Microsoft Store page is a product page; it does not ask for a child&apos;s data to read this guide.</p><a class="button" href="{microsoft_store_url('en', UK_CAMPAIGN_ID)}" target="_blank" rel="noopener noreferrer">View AliKa for Windows in Microsoft Store</a></section>
+      </article>
+    </main>
+    """
+
+
+def uk_landing_body() -> str:
+    return f"""
+    <main id="main" class="guide-main">
+      <article class="guide-article">
+        <header>
+          <p class="eyebrow">UK preparation page · Windows 10/11</p>
+          <h1>Make the screen-time plan clear before the screen turns off.</h1>
+          <p class="guide-lede">AliKa is a Windows family tool for making parent-agreed limits and next steps visible. This UK page is a preparation draft, not a request for child information.</p>
+        </header>
+        <section><h2>For a Windows family PC</h2><p>AliKa is designed for Windows 10 and Windows 11. Set up the routine with the parent and child present, so the limit, bedtime rule and any exception process can be understood together.</p></section>
+        <section><h2>Use the tools that fit your household</h2><p>Microsoft Family Safety offers built-in family options that may suit your needs. AliKa is not presented as a replacement for it; the guide explains how a visible, consent-based and local-first AliKa routine can sit alongside the tools your family chooses.</p></section>
+        <section><h2>Campaign measurement, without child data</h2><p>If this page is approved for community sharing, the campaign records only aggregated page visits and Store-click counts for its campaign link. It does not ask for child profiles, browsing histories, installation logs or personal contact details.</p></section>
+        <section class="guide-cta"><h2>Read the practical guide first.</h2><p>Review the steps and Windows requirements before deciding whether AliKa is right for your household.</p><a class="button" href="/en/guides/windows-child-screen-time/">Read the UK Windows screen-time guide</a><p><a class="text-link" href="{microsoft_store_url('en', UK_CAMPAIGN_ID)}" target="_blank" rel="noopener noreferrer">Open AliKa in Microsoft Store ↗</a></p></section>
+        <aside class="guide-disclosure"><strong>Publication status:</strong> Prepared for review. Community moderation, local-language and product/legal claim review remain required before any external sharing.</aside>
       </article>
     </main>
     """
@@ -1096,6 +1140,11 @@ def build() -> None:
             guide_document(locales, guide["title"], guide["description"], canonical, guide_article_body(guide)),
         )
 
+    uk_guide_url = f"{BASE_URL}/{UK_GUIDE_PATH}/"
+    write_page(DIST / UK_GUIDE_PATH / "index.html", guide_document(locales, "Windows child screen time: a clear family routine", "A practical UK guide to agreeing screen-time rules on a Windows 10 or Windows 11 family PC, with Microsoft Family Safety context and AliKa's visible, local-first approach.", uk_guide_url, uk_guide_body(), "en"))
+    uk_landing_url = f"{BASE_URL}/{UK_LANDING_PATH}/"
+    write_page(DIST / UK_LANDING_PATH / "index.html", guide_document(locales, "AliKa for UK Windows family screen time", "A preparation page for a clear, consent-based screen-time routine on Windows 10 and Windows 11 family PCs.", uk_landing_url, uk_landing_body(), "en"))
+
     # Uygulamadaki sabit, Türkçe ve anlaşılır içerik adresi.
     (DIST / "icerik").mkdir(exist_ok=True)
     shutil.copy2(DIST / "content" / "index.html", DIST / "icerik" / "index.html")
@@ -1114,6 +1163,7 @@ def build() -> None:
         urls.extend(f"{BASE_URL}{href(lang, slug)}" for slug in SLUGS)
     urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in GUIDES)
+    urls.extend((uk_guide_url, uk_landing_url))
     unique_urls = list(dict.fromkeys(urls))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join(f"  <url><loc>{esc(url)}</loc></url>\n" for url in unique_urls)
