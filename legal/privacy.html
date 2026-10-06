@@ -16,7 +16,7 @@ footer{margin-top:48px;color:#777;font-size:.9em;border-top:1px solid #ddd;paddi
 <body>
 <p><a href="index.html">← AliKa Legal</a></p>
 <h1>Privacy Policy — AliKa</h1>
-<p class="meta"><strong>Last updated:</strong> 04.09.2026<br>
+<p class="meta"><strong>Last updated:</strong> 06.10.2026<br>
 <strong>Publisher:</strong> ErenKa Software<br>
 <strong>Contact:</strong> alika.destek@gmail.com</p>
 
@@ -28,6 +28,11 @@ device, and lock screens and notifications are shown openly.</p>
 <p>The app may <strong>only be installed by the device owner/guardian, with the child's
 knowledge</strong>. It may not be used secretly on another person's device without their
 consent, and such use is expressly prohibited.</p>
+<p>Because it lets a parent see and limit how a child's device is used, the Android app is
+declared to Google Play as a parental-control monitoring tool
+(<code>isMonitoringTool = child_monitoring</code>). Its icon is never hidden, a persistent
+notification is shown while protection is running, and Google Play Protect may tell the
+device user that a monitoring app is installed.</p>
 
 <h2>2. Data collected</h2>
 <p>For its parental control functions, the app collects the following data <strong>only on
@@ -38,7 +43,57 @@ the device (locally)</strong>:</p>
 <tr><td>Titles and addresses of visited websites / videos</td><td>Parental visibility, content filtering</td></tr>
 <tr><td>Lock / limit / block events</td><td>Event log</td></tr>
 <tr><td>Parent PIN (stored only as a cryptographic hash)</td><td>Protecting settings</td></tr>
+<tr><td>Family chat messages between paired family devices</td><td>Family communication</td></tr>
+<tr><td>Short voice recordings made by the child in speaking questions (temporary)</td><td>Letting the child replay and compare their own pronunciation</td></tr>
 </table>
+
+<h3>Android permissions and how they are used</h3>
+<p>Each permission below is requested only for the feature named, is granted by the
+user in Android, and can be revoked at any time in the system settings.</p>
+<table>
+<tr><th>Permission</th><th>What it accesses and why</th></tr>
+<tr><td>Usage access</td><td>Which app is in the foreground and for how long, to count
+screen time and enforce limits. Stays on the device.</td></tr>
+<tr><td>Display over other apps</td><td>Shows the visible lock screen when a limit is reached.
+Reads no data.</td></tr>
+<tr><td>Notifications and foreground service</td><td>Shows the persistent notification while
+protection runs, plus limit and reminder notices.</td></tr>
+<tr><td>Accessibility service (optional “Settings Guard”)</td><td>See the dedicated section
+below.</td></tr>
+<tr><td>Device administrator (optional)</td><td>Activation alone provides uninstall protection.
+AliKa requests no device-admin policies, so it cannot wipe, lock or change passwords.</td></tr>
+<tr><td>VPN (optional web filter)</td><td>See “Android web filter (local VPN)” below.</td></tr>
+<tr><td>Microphone</td><td>Only when the child taps record in a speaking question. The clip is
+kept in the app's temporary cache on the device so the child can replay it; recording the
+same question again overwrites it, Android may clear the cache at any time, and it is never
+uploaded or shared.</td></tr>
+<tr><td>Camera</td><td>Only on the family pairing screen, to scan a QR code. Frames are decoded
+in memory and are not saved or sent.</td></tr>
+<tr><td>Local network and Wi-Fi state</td><td>Finds and talks to paired family devices on the
+home network. Wi-Fi network names, BSSID and MAC addresses are not collected.</td></tr>
+<tr><td>Close background apps</td><td>Closes the picture-in-picture window of an app that is
+currently blocked so it cannot float above the lock screen.</td></tr>
+<tr><td>Biometrics</td><td>Optional unlocking of the parent panel through Android's own
+biometric prompt. AliKa receives only success or failure, never biometric data.</td></tr>
+</table>
+
+<h3>Android accessibility service (Settings Guard)</h3>
+<p>Settings Guard is optional and off by default. Before Android's accessibility settings
+are opened, AliKa shows a separate in-app disclosure with <strong>Accept</strong> and
+<strong>Decline</strong> buttons; declining does not limit any other feature.</p>
+<ul>
+<li><strong>What it reads:</strong> only events from Android's Settings and app-manager /
+package-installer screens. On those screens it reads the app/package name, visible text
+and content descriptions. It receives nothing from messaging apps, browsers or any other
+app.</li>
+<li><strong>Why:</strong> to ask for the parent PIN when someone tries to uninstall or
+force-stop AliKa or turn off its device-administrator protection.</li>
+<li><strong>What is kept:</strong> screen text is not stored or shared. When a screen is
+blocked, only the system package name of that event is written to the local event log on
+the device. Nothing from this service is sent to ErenKa Software or any third party.</li>
+<li><strong>How to stop it:</strong> turn AliKa off in Android's accessibility settings at
+any time.</li>
+</ul>
 
 <h2>3. Storage and sharing of data</h2>
 <ul>
