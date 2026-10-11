@@ -16,7 +16,7 @@ footer{margin-top:48px;color:#777;font-size:.9em;border-top:1px solid #ddd;paddi
 <body>
 <p><a href="index.html">← AliKa Legal</a></p>
 <h1>Privacy Policy — AliKa</h1>
-<p class="meta"><strong>Last updated:</strong> 06.10.2026<br>
+<p class="meta"><strong>Last updated:</strong> 11.10.2026<br>
 <strong>Publisher:</strong> ErenKa Software<br>
 <strong>Contact:</strong> alika.destek@gmail.com</p>
 
@@ -45,6 +45,7 @@ the device (locally)</strong>:</p>
 <tr><td>Parent PIN (stored only as a cryptographic hash)</td><td>Protecting settings</td></tr>
 <tr><td>Family chat messages between paired family devices</td><td>Family communication</td></tr>
 <tr><td>Short voice recordings made by the child in speaking questions (temporary)</td><td>Letting the child replay and compare their own pronunciation</td></tr>
+<tr><td>Technical diagnostics: crashes and their cause, app restarts, permission and protection changes, failed network or feature operations, the app's own warning lines</td><td>Kept locally for 8 days so a problem report can be prepared; leaves the device only if the parent sends a problem report (see below)</td></tr>
 </table>
 
 <h3>Android permissions and how they are used</h3>
@@ -103,8 +104,9 @@ current Windows user's learning library and local state are stored under
 <code>%LocalAppData%\AliKa\</code>. Android usage history, child profiles, messages,
 learning content, rules and visited-domain history remain on the device or move directly
 between paired family devices on the approved local network.</li>
-<li>AliKa sends only the limited Android family-subscription metadata described below to
-an AliKa-operated licensing service. It does <strong>not</strong> send child content,
+<li>Apart from a problem report that the parent chooses to email (see “Problem reports
+sent by the parent” below), AliKa sends only the limited Android family-subscription
+metadata described below to an AliKa-operated licensing service. It does <strong>not</strong> send child content,
 usage history, messages, visited domains, location, Google account name or email, IMEI or
 Android ID to that service.</li>
 <li>AliKa does not sell user data or share it with advertising or analytics providers.</li>
@@ -131,6 +133,43 @@ fraud prevention and enforcement of the 10-device limit. Transfers use HTTPS/TLS
 Inactive or expired family-license records and their device records are permanently
 deleted within 90 days. Google Play separately processes purchases under Google's own
 privacy terms.</p>
+
+<h3>Problem reports sent by the parent</h3>
+<p>The parent panel has a <strong>Send a problem report</strong> button (Android: Help;
+Windows: Device Health). Nothing is sent automatically or in the background. When the
+parent taps the button, AliKa prepares one ZIP file on the device and opens the parent's
+own email app (Android share menu, or a Windows email draft with the file shown in
+Explorer) addressed to <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>.
+The report reaches ErenKa Software only if the parent sends that email; the parent can
+look at, keep or delete the file instead.</p>
+<p>The file covers the last 7 days and contains:</p>
+<ul>
+<li>device and system details: manufacturer, model, operating-system and build version,
+phone skin version, language, time zone, battery, memory, free storage and screen size;</li>
+<li>app details: AliKa version, install source, device role (child, parent or shared) and
+which permissions and protections are on or off;</li>
+<li>crash and “app not responding” traces, app exit reasons, AliKa's own system log lines
+and the technical diagnostics described in section 2;</li>
+<li>the local event log (for example limits reached, apps blocked, parent PIN entries and
+parent-session start/end times) and per-app usage durations by app package or program
+name, with hourly totals;</li>
+<li>AliKa settings with PIN hashes, recovery codes, tokens, keys and the child's name and
+birth month removed;</li>
+<li>on Windows, the service crash trace and Windows Event Viewer error entries that
+mention AliKa;</li>
+<li>the optional note the parent types.</li>
+</ul>
+<p>The report never contains the PIN or its hash, passwords, tokens or keys, the child's
+name, web history or visited domains, window titles, family messages, voice recordings,
+photos, location, contacts, Android ID or IMEI. ErenKa Software also receives the
+sender's email address and anything the parent writes in the email.</p>
+<p>Reports are used only to find and fix problems in AliKa and to reply to the parent.
+They are not used for advertising or profiling, not sold and not shared with third
+parties. Email delivery is handled by the parent's and ErenKa Software's email providers
+(alika.destek@gmail.com is a Google Gmail account) under their own terms. A report is
+kept only as long as needed to resolve the reported problem and is deleted no later than
+12 months after it is received. The parent can ask for earlier deletion by writing to the
+same address.</p>
 
 <h3>Android web filter (local VPN)</h3>
 <p>On Android the web filter uses a <strong>local</strong> VPN (VpnService) on the
@@ -196,6 +235,10 @@ digest, device role, revocation state, token digests and retained subscription-s
 metadata are permanently deleted. Records for an inactive or expired family are also
 deleted automatically within 90 days. Data that Google retains for Play purchases is
 controlled by Google and is not deleted by AliKa.</li>
+<li><strong>Problem-report deletion:</strong> Email alika.destek@gmail.com from the address
+that sent the report and ask for it to be deleted; the report and the related email are
+deleted. The local diagnostics on the device are removed automatically after 8 days or
+when AliKa is uninstalled.</li>
 <li><strong>Consent:</strong> An explicit consent screen is shown at first setup; functions do not
 start until it is accepted.</li>
 </ul>
