@@ -63,17 +63,18 @@ function HalftoneHalo() {
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
     };
 
-    const colors = () => {
-      const styles = getComputedStyle(document.documentElement);
-      return {
-        blue: styles.getPropertyValue('--halo-a').trim() || '#1e7bf0',
-        glow: styles.getPropertyValue('--halo-b').trim() || '#4cc3ff',
-        sun: styles.getPropertyValue('--sun').trim() || '#ffc22e',
-      };
+    /* Renk döngüsü: beyaza yakın açık mavi → koyu AliKa mavisi → tekrar açık mavi (bir tur ~7 sn). */
+    const LIGHT = [222, 238, 255];
+    const DARK = [10, 62, 168];
+    const CYCLE_MS = 7000;
+    const dotColor = (time: number, distance: number) => {
+      const phase = reduced ? Math.PI / 2 : (time / CYCLE_MS) * Math.PI * 2 - distance * 0.9;
+      const mix = (1 - Math.cos(phase)) / 2;
+      const channel = (i: number) => Math.round(LIGHT[i] + (DARK[i] - LIGHT[i]) * mix);
+      return `rgb(${channel(0)},${channel(1)},${channel(2)})`;
     };
 
     const draw = (time: number) => {
-      const palette = colors();
       context.clearRect(0, 0, size, size);
       const center = size / 2;
       const radius = size / 2;
@@ -89,9 +90,8 @@ function HalftoneHalo() {
           const base = Math.pow(1 - distance, 0.85);
           const dotRadius = Math.max(0, (base + wave * base + near * 0.7) * gap * 0.5);
           if (dotRadius < 0.35) continue;
-          const angle = Math.atan2(dy, dx);
-          context.fillStyle = angle > -2.4 && angle < -1.6 && distance > 0.55 ? palette.sun : distance < 0.5 ? palette.blue : palette.glow;
-          context.globalAlpha = 0.42 + base * 0.58;
+          context.fillStyle = dotColor(time, distance);
+          context.globalAlpha = 0.55 + base * 0.45;
           context.beginPath();
           context.arc(x, y, dotRadius, 0, Math.PI * 2);
           context.fill();
