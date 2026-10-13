@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { GUIDE_LANGUAGES, getPublishedGuideVideos } from '../data/video-guides';
 import { microsoftStoreUrl } from '../store-campaign';
 
@@ -84,14 +84,14 @@ function HalftoneHalo() {
           const dy = y - center;
           const distance = Math.sqrt(dx * dx + dy * dy) / radius;
           if (distance > 1) continue;
-          const wave = reduced ? 0 : Math.sin(time / 900 - distance * 9) * 0.18;
+          const wave = reduced ? 0 : Math.sin(time / 700 - distance * 10) * 0.26;
           const near = Math.max(0, 1 - Math.hypot(x - pointer.x, y - pointer.y) / (size * 0.16));
           const base = Math.pow(1 - distance, 0.85);
-          const dotRadius = Math.max(0, (base + wave * base + near * 0.6) * gap * 0.46);
+          const dotRadius = Math.max(0, (base + wave * base + near * 0.7) * gap * 0.5);
           if (dotRadius < 0.35) continue;
           const angle = Math.atan2(dy, dx);
           context.fillStyle = angle > -2.4 && angle < -1.6 && distance > 0.55 ? palette.sun : distance < 0.5 ? palette.blue : palette.glow;
-          context.globalAlpha = 0.3 + base * 0.7;
+          context.globalAlpha = 0.42 + base * 0.58;
           context.beginPath();
           context.arc(x, y, dotRadius, 0, Math.PI * 2);
           context.fill();
@@ -138,44 +138,98 @@ function HalftoneHalo() {
 
 type OrbitStatus = 'ready' | 'dev';
 
-interface OrbitItem {
+interface ScreenItem {
+  id: string;
   label: string;
-  href: string;
+  platform: string;
   status: OrbitStatus;
-  note?: string;
   tone: string;
+  side: 'left' | 'right';
+  angle: number;
   icon: ReactNode;
-  className: string;
+  image: string;
+  shape: 'wide' | 'phone';
+  body: string;
+  videoKey?: string;
 }
 
-const iconProps = { width: 30, height: 30, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+const iconProps = { width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
-const ORBIT: OrbitItem[] = [
-  {
-    label: 'Soru çöz, süre kazan', href: '#nasil', status: 'ready', tone: 'sun', className: 'o1',
-    icon: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.4" /><circle cx="12" cy="16.9" r=".6" fill="currentColor" /></svg>,
-  },
-  {
-    label: 'Haftalık plan', href: '#nasil', status: 'ready', tone: 'blue', className: 'o2',
-    icon: <svg {...iconProps}><rect x="3.5" y="5" width="17" height="15" rx="3" /><path d="M8 3v4M16 3v4M3.5 10h17M8 14h3M8 17h6" /></svg>,
-  },
-  {
-    label: 'Raporlar', href: '#nasil', status: 'ready', tone: 'ink', className: 'o3',
-    icon: <svg {...iconProps}><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>,
-  },
-  {
-    label: 'Telefon / tablet', href: '#platformlar', status: 'dev', note: 'Kapalı alfa', tone: 'sky', className: 'o4',
-    icon: <svg {...iconProps}><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><path d="M11 18.5h2" /></svg>,
-  },
-  {
-    label: 'Android TV', href: '#platformlar', status: 'dev', tone: 'night', className: 'o5',
-    icon: <svg {...iconProps}><rect x="2.5" y="4.5" width="19" height="13" rx="2.5" /><path d="M8 21h8M12 17.5V21" /></svg>,
-  },
-  {
-    label: 'Aile oyunları', href: '#platformlar', status: 'dev', tone: 'coral', className: 'o6',
-    icon: <svg {...iconProps}><path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.4a2.4 2.4 0 0 1-4 1L14.5 16h-5l-2.3 1.8a2.4 2.4 0 0 1-4-1l-1-3.4A5 5 0 0 1 7 7Z" /><path d="M8 10.5v3M6.5 12h3" /><circle cx="16" cy="11" r=".8" fill="currentColor" /><circle cx="17.5" cy="13.2" r=".8" fill="currentColor" /></svg>,
-  },
+const ICONS = {
+  panel: <svg {...iconProps}><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M9 4v16M13 9h4M13 13h4" /></svg>,
+  rules: <svg {...iconProps}><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2.5 2M9.5 2.5h5" /></svg>,
+  quiz: <svg {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.4" /><circle cx="12" cy="16.9" r=".6" fill="currentColor" /></svg>,
+  homework: <svg {...iconProps}><rect x="4.5" y="3" width="15" height="18" rx="2.5" /><path d="M8.5 8h7M8.5 12h7M8.5 16h4" /><path d="m14.5 16 1.3 1.3 2.4-2.6" /></svg>,
+  reports: <svg {...iconProps}><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>,
+  child: <svg {...iconProps}><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><circle cx="12" cy="10" r="2.4" /><path d="M9 15.5c.8-1.3 1.8-2 3-2s2.2.7 3 2" /></svg>,
+  parent: <svg {...iconProps}><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><path d="M12 7.5 9.5 8.6v2.2c0 1.8 1 3.3 2.5 3.9 1.5-.6 2.5-2.1 2.5-3.9V8.6Z" /></svg>,
+  phoneQuiz: <svg {...iconProps}><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><path d="M10.4 8.8a1.7 1.7 0 1 1 2.3 1.6c-.5.2-.7.6-.7 1v.3" /><circle cx="12" cy="14.6" r=".5" fill="currentColor" /></svg>,
+  tv: <svg {...iconProps}><rect x="2.5" y="4.5" width="19" height="13" rx="2.5" /><path d="M8 21h8M12 17.5V21" /></svg>,
+  games: <svg {...iconProps}><path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.4a2.4 2.4 0 0 1-4 1L14.5 16h-5l-2.3 1.8a2.4 2.4 0 0 1-4-1l-1-3.4A5 5 0 0 1 7 7Z" /><path d="M8 10.5v3M6.5 12h3" /><circle cx="16" cy="11" r=".8" fill="currentColor" /><circle cx="17.5" cy="13.2" r=".8" fill="currentColor" /></svg>,
+};
+
+/* Sol kavis: bugün kullanılabilen Windows ekranları. Sağ kavis: geliştirilen ekranlar. Açılar yüzü ve gövdeyi boş bırakır. */
+const SCREENS: ScreenItem[] = [
+  { id: 'panel', label: 'Ebeveyn paneli', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel.png', shape: 'wide', videoKey: 'windows-panel', body: 'Günün özeti tek ekranda: kalan süre, bekleyen görevler ve aile durumu.' },
+  { id: 'rules', label: 'Kurallar', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-rules.png', shape: 'wide', videoKey: 'windows-child-rules', body: 'Günlük süre, uygulama sınırları, uyku saati ve görevler. Çocuk ne zaman duracağını önceden bilir.' },
+  { id: 'quiz', label: 'Soru çöz, süre kazan', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/videos/tr/07-windows-child-question.jpg', shape: 'wide', videoKey: 'windows-child-question', body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
+  { id: 'homework', label: 'Görev, ödev, sınav', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.homework, image: '/videos/tr/08-windows-task-homework-exam.jpg', shape: 'wide', videoKey: 'windows-task-homework-exam', body: 'Görev, ödev ve sınavları oluşturun; tamamlananları panelden onaylayın.' },
+  { id: 'reports', label: 'Raporlar', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.reports, image: '/screens/platform/windows-reports.png', shape: 'wide', videoKey: 'windows-reports', body: 'Kullanım ve öğrenme sonuçları haftalık olarak bir arada. Pazarlık yerine konuşma.' },
+  { id: 'child', label: 'Çocuk ekranı', platform: 'Android · kapalı alfa', status: 'dev', tone: 'sky', side: 'right', angle: -35, icon: ICONS.child, image: '/screens/platform/android-child.webp', shape: 'phone', body: 'Çocuk kalan süresini ve sıradaki adımı telefonunda görür. Kapalı alfa ekranıdır.' },
+  { id: 'parent', label: 'Ebeveyn telefonu', platform: 'Android · kapalı alfa', status: 'dev', tone: 'blue', side: 'right', angle: -17, icon: ICONS.parent, image: '/screens/platform/android-parent.webp', shape: 'phone', body: 'Ebeveyn kuralları ve süre hediyesini telefondan yönetir. Kapalı alfa ekranıdır.' },
+  { id: 'phone-quiz', label: 'Telefonda soru', platform: 'Android · kapalı alfa', status: 'dev', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-quiz.webp', shape: 'phone', body: 'Soru çözerek süre kazanma akışının telefon sürümü. Kapalı alfa ekranıdır.' },
+  { id: 'tv', label: 'Android TV', platform: 'Android TV · geliştiriliyor', status: 'dev', tone: 'night', side: 'right', angle: 17, icon: ICONS.tv, image: '/screens/platform/tv-live-home.webp', shape: 'wide', body: 'TV ailenin ortak ekranı olur; telefonlar oyunlara katılımcı olarak bağlanır. Geliştirme önizlemesidir.' },
+  { id: 'games', label: 'Aile oyunları', platform: 'Ortak ekran · geliştiriliyor', status: 'dev', tone: 'coral', side: 'right', angle: 35, icon: ICONS.games, image: '/games/alika-game-night.webp', shape: 'wide', body: 'Altı özgün Türkçe aile oyunu: gençler ve yetişkinler aynı ekranda oynar.' },
 ];
+
+function findGuideVideo(key: string) {
+  const turkish = GUIDE_LANGUAGES.find((language) => language.code === 'tr' && language.platform === 'windows');
+  return turkish ? getPublishedGuideVideos(turkish).find((video) => video.key === key) : undefined;
+}
+
+function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (screen && !dialog.open) dialog.showModal();
+    if (!screen && dialog.open) dialog.close();
+  }, [screen]);
+
+  const video = screen?.videoKey ? findGuideVideo(screen.videoKey) : undefined;
+
+  return (
+    <dialog
+      ref={dialogRef}
+      className="screenDialog"
+      aria-labelledby="screenDialogTitle"
+      onClose={onClose}
+      onClick={(event) => event.target === event.currentTarget && onClose()}
+    >
+      {screen && (
+        <div className={`screenBody ${screen.shape}`}>
+          <figure className="screenShot">
+            <img src={screen.image} alt={`${screen.label} ekranı`} />
+          </figure>
+          <div className="screenText">
+            <span className="tag plain"><StatusDot status={screen.status} />{screen.platform}</span>
+            <h2 id="screenDialogTitle">{screen.label}</h2>
+            <p>{screen.body}</p>
+            <div className="screenActions">
+              {video && (
+                <a className="pill solid" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener">
+                  Videoyu izle <span className="mono">{video.duration}</span>
+                </a>
+              )}
+              <button type="button" className="pill ghost" onClick={onClose}>Kapat</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </dialog>
+  );
+}
 
 interface Platform {
   id: string;
@@ -397,6 +451,7 @@ function CopyEmail() {
 
 export default function Home() {
   const [theme, toggleTheme] = useTheme();
+  const [openScreen, setOpenScreen] = useState<ScreenItem | null>(null);
   const storeUrl = microsoftStoreUrl('tr');
   const videoCount = (() => {
     const turkish = GUIDE_LANGUAGES.find((language) => language.code === 'tr' && language.platform === 'windows');
@@ -431,18 +486,30 @@ export default function Home() {
           <a className="corner c-br" href="#iletisim">İletişim</a>
 
           <div className="stage">
+            <div className="glow" aria-hidden="true" />
+            <div className="ring" aria-hidden="true" />
             <HalftoneHalo />
+            <div className="orbitPath" aria-hidden="true" />
             <img className="mascot" src="/brand/alika-maskot.webp" alt="AliKa maskotu: siyah-beyaz ceketli, sarı tişörtlü gülümseyen çocuk" width="470" height="1100" />
-            {ORBIT.map((item) => (
-              <a key={item.label} className={`orbit ${item.className}`} href={item.href}>
-                <span className={`tile t-${item.tone}`}>{item.icon}</span>
-                <span className="orbitLabel"><StatusDot status={item.status} />{item.label}</span>
-                {item.note && <span className="orbitNote">{item.note}</span>}
-              </a>
+            {SCREENS.map((screen, i) => (
+              <button
+                key={screen.id}
+                type="button"
+                className={`orbit ${screen.side}`}
+                style={{ '--a': `${screen.angle}deg`, '--i': i } as CSSProperties}
+                onClick={() => setOpenScreen(screen)}
+                aria-label={`${screen.label}: ekran görüntüsünü aç (${screen.platform})`}
+              >
+                <span className={`tile t-${screen.tone}`}>{screen.icon}<StatusDot status={screen.status} /></span>
+                <span className="orbitLabel" aria-hidden="true">{screen.label}</span>
+              </button>
             ))}
           </div>
 
-          <h1 className="wordmark">AliKa</h1>
+          <h1 className="wordmark" aria-label="AliKa">
+            <span aria-hidden="true">Ali</span>
+            <span className="ka" aria-hidden="true"><span>K</span><span>a</span></span>
+          </h1>
           <p className="tagline">Kısıtlamıyoruz. <em>Planlıyoruz.</em></p>
           <a className="eventPill" href={storeUrl} target="_blank" rel="noopener">
             <StatusDot status="ready" />
@@ -539,6 +606,8 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      <ScreenDialog screen={openScreen} onClose={() => setOpenScreen(null)} />
 
       <footer className="foot wrap">
         <span>© 2026 ErenKa Software</span>

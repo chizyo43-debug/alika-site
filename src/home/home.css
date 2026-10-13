@@ -295,67 +295,127 @@ a {
 .c-bl { bottom: 28px; left: max(16px, (100% - 1200px) / 2); }
 .c-br { bottom: 28px; right: max(16px, (100% - 1200px) / 2); background-position: right bottom; }
 
+/* Sahne: maskot ortada, ekran düğmeleri iki yanda yüzü ve gövdeyi boş bırakan kavislerde. */
 .stage {
+  --h: clamp(430px, calc(100svh - 340px), 600px);
+  --cy: calc(var(--h) * 0.46);
+  --rx: min(calc(50% - 40px), calc(var(--h) * 0.36 + 96px));
+  --ry: calc(var(--h) * 0.62);
   position: relative;
-  width: min(820px, 100%, max(460px, calc((100svh - 400px) * 1.46)));
-  aspect-ratio: 820 / 560;
-  overflow: hidden;
+  width: min(1200px, 100%);
+  height: var(--h);
+}
+
+.glow,
+.ring,
+.halo {
+  position: absolute;
+  top: calc(var(--h) * 0.42);
+  left: 50%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+.glow {
+  width: calc(var(--h) * 1.05);
+  background: radial-gradient(circle, color-mix(in srgb, var(--glow) 70%, transparent) 0%, color-mix(in srgb, var(--blue) 32%, transparent) 42%, transparent 70%);
+  filter: blur(12px);
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.ring {
+  width: calc(var(--h) * 0.94);
+  background: conic-gradient(from 0deg, transparent 0 6%, var(--blue) 18%, var(--glow) 30%, transparent 42%, transparent 54%, var(--sun) 64%, transparent 76%, transparent);
+  -webkit-mask-image: radial-gradient(circle, transparent 64%, #000 65%, #000 68.5%, transparent 69.5%);
+  mask-image: radial-gradient(circle, transparent 64%, #000 65%, #000 68.5%, transparent 69.5%);
+  animation: spin 16s linear infinite;
 }
 
 .halo {
+  width: calc(var(--h) * 0.98);
+}
+
+.orbitPath {
   position: absolute;
-  top: 1%;
-  left: 50%;
-  width: 72%;
-  aspect-ratio: 1;
-  transform: translateX(-50%);
+  top: calc(var(--cy) - var(--ry));
+  left: calc(50% - var(--rx));
+  width: calc(var(--rx) * 2);
+  height: calc(var(--ry) * 2);
+  border: 2px dashed color-mix(in srgb, var(--blue) 30%, transparent);
+  border-radius: 50%;
+  -webkit-mask-image: linear-gradient(90deg, #000 18%, transparent 30%, transparent 70%, #000 82%);
+  mask-image: linear-gradient(90deg, #000 18%, transparent 30%, transparent 70%, #000 82%);
+  pointer-events: none;
 }
 
 .mascot {
   position: absolute;
   z-index: 1;
-  top: 3%;
+  top: calc(var(--h) * 0.03);
   left: 50%;
   width: auto;
-  height: 158%;
+  height: calc(var(--h) * 1.5);
+  max-width: none;
   transform: translateX(-50%);
   -webkit-mask-image: linear-gradient(180deg, #000 48%, transparent 61%);
   mask-image: linear-gradient(180deg, #000 48%, transparent 61%);
+  pointer-events: none;
   animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .orbit {
   position: absolute;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  animation: float 6s ease-in-out infinite, pop 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+  z-index: 3;
+  top: calc(var(--cy) + sin(var(--a)) * var(--ry));
+  left: calc(50% + cos(var(--a)) * var(--rx));
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  animation: float 6s ease-in-out infinite, pop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+  animation-delay: calc(var(--i) * -0.7s), calc(0.2s + var(--i) * 0.06s);
 }
 
-.o1 { left: 20%; top: 6%; animation-delay: 0s, 0.25s; }
-.o2 { left: 1%; top: 36%; animation-delay: -1.5s, 0.35s; }
-.o3 { left: 16%; top: 68%; animation-delay: -3s, 0.45s; }
-.o4 { right: 19%; top: 10%; animation-delay: -0.8s, 0.3s; }
-.o5 { right: 0%; top: 42%; animation-delay: -2.2s, 0.4s; }
-.o6 { right: 15%; top: 72%; animation-delay: -4s, 0.5s; }
+.orbit:focus-visible {
+  outline: none;
+}
+
+.orbit:focus-visible .tile {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
 
 .tile {
+  position: relative;
   display: grid;
-  width: 66px;
-  height: 66px;
+  width: 62px;
+  height: 62px;
   place-items: center;
   border: 3px solid #ffffff;
-  border-radius: 20px;
+  border-radius: 19px;
   box-shadow: var(--shadow);
   color: #ffffff;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tile .dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #ffffff;
+  box-shadow: none;
 }
 
 .orbit:hover .tile {
-  transform: scale(1.08) rotate(-4deg);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--glow) 35%, transparent), var(--shadow);
+  transform: scale(1.1) rotate(-4deg);
 }
 
 .t-sun { background: linear-gradient(140deg, #ffd65c, #ffad0f); color: #0f1a2b; }
@@ -364,36 +424,63 @@ a {
 .t-sky { background: linear-gradient(140deg, #ffffff, #dcecff); color: #1e6fe0; }
 .t-night { background: linear-gradient(140deg, #173a5e, #0a1220); color: #ffc22e; }
 .t-coral { background: linear-gradient(140deg, #ff8a5c, #e2365b); }
+.t-mint { background: linear-gradient(140deg, #4fe0bd, #109b7d); }
+.t-violet { background: linear-gradient(140deg, #9d8cff, #5b46e0); }
 
 .orbitLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 4px 11px;
+  position: absolute;
+  top: 50%;
+  padding: 5px 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--surface);
-  font-size: 13px;
-  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(15, 26, 43, 0.08);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
   white-space: nowrap;
+  translate: 0 -50%;
+  transition: opacity 0.2s ease;
 }
 
-.orbitNote {
-  margin-top: -4px;
-  color: var(--ink-3);
-  font-size: 12px;
-  font-weight: 700;
+.orbit.left .orbitLabel {
+  right: calc(100% + 12px);
+}
+
+.orbit.right .orbitLabel {
+  left: calc(100% + 12px);
 }
 
 .wordmark {
   position: relative;
   z-index: 2;
-  margin: -1.2% 0 0;
+  display: flex;
+  margin: -8px 0 0;
   font-size: clamp(76px, 12vw, 164px);
   font-weight: 950;
-  line-height: 0.9;
+  line-height: 0.95;
   letter-spacing: -0.055em;
-  animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: riseText 0.8s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* "Ka": AliKa mavisi, akan parıltı ve sırayla zıplayan harfler. */
+.ka {
+  display: inline-flex;
+}
+
+.ka > span {
+  display: inline-block;
+  padding-right: 0.04em;
+  background: linear-gradient(100deg, var(--blue) 0%, var(--glow) 22%, var(--blue) 44%, var(--blue) 56%, var(--glow) 78%, var(--blue) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3.6s linear infinite, bob 3.2s ease-in-out infinite;
+}
+
+.ka > span:nth-child(2) {
+  animation-delay: -0.5s, 0.18s;
 }
 
 .tagline {
@@ -468,13 +555,28 @@ a {
   to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-.wordmark {
-  animation-name: riseText;
-}
-
 @keyframes riseText {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.75; scale: 0.96; }
+  50% { opacity: 1; scale: 1.04; }
+}
+
+@keyframes spin {
+  to { rotate: 360deg; }
+}
+
+@keyframes shimmer {
+  to { background-position: -220% 0; }
+}
+
+@keyframes bob {
+  0%, 60%, 100% { transform: translateY(0) rotate(0); }
+  70% { transform: translateY(-9%) rotate(-3deg); }
+  82% { transform: translateY(1%) rotate(1deg); }
 }
 
 @keyframes nudge {
@@ -1077,6 +1179,28 @@ h2 {
 }
 
 /* Tablet ve telefon */
+@media (max-width: 1060px) {
+  .orbitLabel {
+    top: auto;
+    bottom: calc(100% + 10px);
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    translate: -50% 0;
+  }
+
+  .orbit.left .orbitLabel,
+  .orbit.right .orbitLabel {
+    right: auto;
+    left: 50%;
+  }
+
+  .orbit:hover .orbitLabel,
+  .orbit:focus-visible .orbitLabel {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 1020px) {
   .steps,
   .ages {
@@ -1180,40 +1304,34 @@ h2 {
   }
 
   .stage {
-    aspect-ratio: 1 / 1.05;
-  }
-
-  .halo {
-    width: 96%;
+    --h: 400px;
+    --rx: calc(50% - 28px);
   }
 
   .mascot {
-    height: 140%;
+    height: calc(var(--h) * 1.25);
   }
 
-  .tile {
-    width: 50px;
-    height: 50px;
-    border-width: 2px;
-    border-radius: 15px;
-  }
-
-  .tile svg {
-    width: 23px;
-    height: 23px;
-  }
-
-  .orbitLabel,
-  .orbitNote {
+  .orbitPath {
     display: none;
   }
 
-  .o1 { left: 6%; top: 4%; }
-  .o2 { left: 0; top: 38%; }
-  .o3 { left: 6%; top: 72%; }
-  .o4 { right: 6%; top: 6%; }
-  .o5 { right: 0; top: 40%; }
-  .o6 { right: 6%; top: 74%; }
+  .tile {
+    width: 46px;
+    height: 46px;
+    border-width: 2px;
+    border-radius: 14px;
+  }
+
+  .tile svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tile .dot {
+    width: 10px;
+    height: 10px;
+  }
 
   .eventPill {
     flex-wrap: wrap;
@@ -1268,6 +1386,129 @@ h2 {
   .foot {
     flex-direction: column;
     gap: 6px;
+  }
+}
+
+/* Ekran penceresi */
+.screenDialog {
+  width: min(1040px, 100% - 32px);
+  max-width: none;
+  max-height: calc(100svh - 48px);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+}
+
+.screenDialog[open] {
+  animation: dialogIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+.screenDialog::backdrop {
+  background: rgba(10, 17, 29, 0.62);
+  backdrop-filter: blur(6px);
+}
+
+.screenBody {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+}
+
+.screenBody.phone {
+  grid-template-columns: auto 1fr;
+}
+
+.screenShot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 28px;
+  background: radial-gradient(circle at 80% 15%, rgba(76, 195, 255, 0.45), transparent 50%), linear-gradient(135deg, #0b2a66, #1e6fe0);
+}
+
+.screenBody.wide .screenShot img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.screenBody.phone .screenShot {
+  padding: 28px 44px;
+}
+
+.screenBody.phone .screenShot img {
+  width: auto;
+  max-height: min(68svh, 620px);
+  border: 6px solid #0f1a2b;
+  border-radius: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.screenText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  padding: 36px 32px;
+}
+
+.screenText h2 {
+  font-size: clamp(28px, 3vw, 40px);
+}
+
+.screenText p {
+  margin: 0 0 8px;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.tag.plain {
+  background: color-mix(in srgb, var(--blue) 12%, transparent);
+  color: var(--ink);
+}
+
+.tag.plain .dot {
+  box-shadow: none;
+}
+
+.screenActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.screenActions .mono {
+  opacity: 0.7;
+  font-size: 13px;
+}
+
+@keyframes dialogIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 760px) {
+  .screenBody,
+  .screenBody.phone {
+    grid-template-columns: 1fr;
+  }
+
+  .screenShot,
+  .screenBody.phone .screenShot {
+    padding: 18px;
+  }
+
+  .screenBody.phone .screenShot img {
+    max-height: 46svh;
+  }
+
+  .screenText {
+    padding: 24px 20px;
   }
 }
 
