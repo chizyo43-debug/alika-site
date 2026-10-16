@@ -169,16 +169,16 @@ const ICONS = {
   games: <svg {...iconProps}><path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.4a2.4 2.4 0 0 1-4 1L14.5 16h-5l-2.3 1.8a2.4 2.4 0 0 1-4-1l-1-3.4A5 5 0 0 1 7 7Z" /><path d="M8 10.5v3M6.5 12h3" /><circle cx="16" cy="11" r=".8" fill="currentColor" /><circle cx="17.5" cy="13.2" r=".8" fill="currentColor" /></svg>,
 };
 
-/* Sol kavis: bugün kullanılabilen Windows ekranları. Sağ kavis: geliştirilen ekranlar. Açılar yüzü ve gövdeyi boş bırakır. */
+/* Sol kavis: Windows ekranları. Sağ kavis: Android telefon ekranları ve geliştirilen TV/oyun ekranları. Açılar yüzü ve gövdeyi boş bırakır. */
 const SCREENS: ScreenItem[] = [
   { id: 'panel', label: 'Ebeveyn paneli', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel.png', shape: 'wide', videoKey: 'windows-panel', body: 'Günün özeti tek ekranda: kalan süre, bekleyen görevler ve aile durumu.' },
   { id: 'rules', label: 'Kurallar', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-rules.png', shape: 'wide', videoKey: 'windows-child-rules', body: 'Günlük süre, uygulama sınırları, uyku saati ve görevler. Çocuk ne zaman duracağını önceden bilir.' },
   { id: 'quiz', label: 'Soru çöz, süre kazan', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/videos/tr/07-windows-child-question.jpg', shape: 'wide', videoKey: 'windows-child-question', body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
   { id: 'homework', label: 'Görev, ödev, sınav', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.homework, image: '/videos/tr/08-windows-task-homework-exam.jpg', shape: 'wide', videoKey: 'windows-task-homework-exam', body: 'Görev, ödev ve sınavları oluşturun; tamamlananları panelden onaylayın.' },
   { id: 'reports', label: 'Raporlar', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.reports, image: '/screens/platform/windows-reports.png', shape: 'wide', videoKey: 'windows-reports', body: 'Kullanım ve öğrenme sonuçları haftalık olarak bir arada. Pazarlık yerine konuşma.' },
-  { id: 'child', label: 'Çocuk ekranı', platform: 'Android · kapalı alfa', status: 'dev', tone: 'sky', side: 'right', angle: -35, icon: ICONS.child, image: '/screens/platform/android-child.webp', shape: 'phone', body: 'Çocuk kalan süresini ve sıradaki adımı telefonunda görür. Kapalı alfa ekranıdır.' },
-  { id: 'parent', label: 'Ebeveyn telefonu', platform: 'Android · kapalı alfa', status: 'dev', tone: 'blue', side: 'right', angle: -17, icon: ICONS.parent, image: '/screens/platform/android-parent.webp', shape: 'phone', body: 'Ebeveyn kuralları ve süre hediyesini telefondan yönetir. Kapalı alfa ekranıdır.' },
-  { id: 'phone-quiz', label: 'Telefonda soru', platform: 'Android · kapalı alfa', status: 'dev', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-quiz.webp', shape: 'phone', body: 'Soru çözerek süre kazanma akışının telefon sürümü. Kapalı alfa ekranıdır.' },
+  { id: 'child', label: 'Çocuk ekranı', platform: 'Android · Google Play', status: 'ready', tone: 'sky', side: 'right', angle: -35, icon: ICONS.child, image: '/screens/platform/android-child.webp', shape: 'phone', body: 'Çocuk kalan süresini ve sıradaki adımı telefonunda görür.' },
+  { id: 'parent', label: 'Ebeveyn telefonu', platform: 'Android · Google Play', status: 'ready', tone: 'blue', side: 'right', angle: -17, icon: ICONS.parent, image: '/screens/platform/android-parent.webp', shape: 'phone', body: 'Ebeveyn kuralları ve süre hediyesini telefondan yönetir.' },
+  { id: 'phone-quiz', label: 'Telefonda soru', platform: 'Android · Google Play', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-quiz.webp', shape: 'phone', body: 'Soru çözerek süre kazanma akışının telefon sürümü.' },
   { id: 'tv', label: 'Android TV', platform: 'Android TV · geliştiriliyor', status: 'dev', tone: 'night', side: 'right', angle: 17, icon: ICONS.tv, image: '/screens/platform/tv-live-home.webp', shape: 'wide', body: 'TV ailenin ortak ekranı olur; telefonlar oyunlara katılımcı olarak bağlanır. Geliştirme önizlemesidir.' },
   { id: 'games', label: 'Aile oyunları', platform: 'Ortak ekran · geliştiriliyor', status: 'dev', tone: 'coral', side: 'right', angle: 35, icon: ICONS.games, image: '/games/alika-game-night.webp', shape: 'wide', body: 'Altı özgün Türkçe aile oyunu: gençler ve yetişkinler aynı ekranda oynar.' },
 ];
@@ -255,11 +255,11 @@ function platforms(storeUrl: string): Platform[] {
       action: { label: 'Microsoft Store’da edin', href: storeUrl, external: true },
     },
     {
-      id: 'android', tone: 'p-android', status: 'dev', tags: ['Geliştiriliyor', 'Kapalı alfa', 'Telefon / tablet'],
+      id: 'android', tone: 'p-android', status: 'ready', tags: ['Bugün kullanılabilir', 'Telefon / tablet', 'Google Play'],
       title: 'AliKa Android',
-      body: 'Ebeveyn yönetir, çocuk ne yapacağını görür. Kapalı alfadaki ekranlar: ebeveyn paneli, çocuk görünümü ve soru çözme. Hazır olduğunda burada duyuracağız.',
-      image: '/screens/platform/android-child.webp', imageAlt: 'AliKa Android çocuk ekranı, kapalı alfa', shape: 'phone',
-      action: { label: 'Haber almak için yazın', href: `mailto:${SUPPORT_EMAIL}?subject=AliKa%20Android` },
+      body: 'Ebeveyn yönetir, çocuk ne yapacağını görür. Ebeveyn paneli, çocuk görünümü ve soru çözerek süre kazanma artık telefonda ve tablette.',
+      image: '/screens/platform/android-child.webp', imageAlt: 'AliKa Android çocuk ekranı', shape: 'phone',
+      action: { label: 'Google Play’den edin', href: PLAY_STORE_URL, external: true },
     },
     {
       id: 'tv', tone: 'p-tv', status: 'dev', tags: ['Geliştiriliyor', 'Android TV'],
@@ -356,7 +356,7 @@ function PlatformRail({ items }: { items: Platform[] }) {
         <div className="wrap railHead">
           <div>
             <h2>Platformlar</h2>
-            <p>Windows bugün hazır. Telefon, TV ve aile oyunları geliştiriliyor.</p>
+            <p>Windows ve Android bugün hazır. TV ve aile oyunları geliştiriliyor.</p>
           </div>
           <div className="railMeta" aria-hidden="true">
             <span className="mono">{String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
@@ -521,10 +521,10 @@ export default function Home() {
             <span className="ka" aria-hidden="true"><span>K</span><span>a</span></span>
           </h1>
           <p className="tagline">Kısıtlamıyoruz. <em>Planlıyoruz.</em></p>
-          <a className="eventPill" href={storeUrl} target="_blank" rel="noopener">
+          <a className="eventPill" href="#platformlar">
             <StatusDot status="ready" />
-            <span>Windows 10/11 · Microsoft Store’da</span>
-            <span className="mono">7 gün ücretsiz</span>
+            <span>Windows ve Android’de yayında</span>
+            <span className="mono">Microsoft Store · Google Play</span>
           </a>
           <a className="scrollCue" href="#tanitim" aria-label="Aşağı kaydır">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m5 9 7 7 7-7" /></svg>
@@ -539,13 +539,14 @@ export default function Home() {
           </p>
           <div className="actions">
             <a className="pill solid" href={storeUrl} target="_blank" rel="noopener">Microsoft Store’da edin <span aria-hidden="true">↗</span></a>
+            <a className="pill solid" href={PLAY_STORE_URL} target="_blank" rel="noopener">Google Play’den edin <span aria-hidden="true">↗</span></a>
             <a className="pill ghost" href="#rehberler">Rehberleri izle</a>
           </div>
           <dl className="stats">
             <div><dt>5–18</dt><dd>yaş için dört ayrı anlatım</dd></div>
             {videoCount > 0 && <div><dt>{videoCount}</dt><dd>Türkçe video rehber</dd></div>}
             <div><dt>0</dt><dd>reklam ve izleyici</dd></div>
-            <div><dt>7 gün</dt><dd>ücretsiz deneme</dd></div>
+            <div><dt>7 gün</dt><dd>Windows’ta ücretsiz deneme</dd></div>
           </dl>
         </section>
 
@@ -610,6 +611,7 @@ export default function Home() {
           <CopyEmail />
           <div className="links">
             <a href={storeUrl} target="_blank" rel="noopener"><span>Microsoft Store</span><small>AliKa Windows</small></a>
+            <a href={PLAY_STORE_URL} target="_blank" rel="noopener"><span>Google Play</span><small>AliKa Android</small></a>
             <a href="#rehberler"><span>Video rehberler</span><small>Türkçe</small></a>
             <a href="/privacy/"><span>Gizlilik</span><small>/privacy</small></a>
             <a href="/eula/"><span>Kullanım koşulları</span><small>/eula</small></a>
