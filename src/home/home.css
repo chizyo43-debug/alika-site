@@ -214,13 +214,6 @@ a {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--glow) 45%, transparent);
 }
 
-.pill.small {
-  min-height: 38px;
-  margin-left: 6px;
-  padding: 0 16px;
-  font-size: 14px;
-}
-
 /* Üst çubuktaki mağaza düğmeleri */
 .storeBtns {
   display: flex;
@@ -476,8 +469,6 @@ a {
 .t-blue { background: linear-gradient(140deg, #4cc3ff, #1e6fe0); }
 .t-ink { background: linear-gradient(140deg, #233552, #0f1a2b); color: #4cc3ff; }
 .t-sky { background: linear-gradient(140deg, #ffffff, #dcecff); color: #1e6fe0; }
-.t-night { background: linear-gradient(140deg, #173a5e, #0a1220); color: #ffc22e; }
-.t-coral { background: linear-gradient(140deg, #ff8a5c, #e2365b); }
 .t-mint { background: linear-gradient(140deg, #4fe0bd, #109b7d); }
 .t-violet { background: linear-gradient(140deg, #9d8cff, #5b46e0); }
 
@@ -817,7 +808,6 @@ h2 {
 .p-windows { background: radial-gradient(circle at 85% 15%, rgba(76, 195, 255, 0.45), transparent 45%), linear-gradient(135deg, #0b2a66, #1e6fe0); }
 .p-android { background: radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.55), transparent 45%), linear-gradient(135deg, #ffad0f, #ffd65c); color: #0f1a2b; }
 .p-tv { background: radial-gradient(circle at 80% 85%, rgba(76, 195, 255, 0.28), transparent 50%), linear-gradient(135deg, #0a1220, #173a5e); }
-.p-games { background: radial-gradient(circle at 85% 15%, rgba(255, 194, 46, 0.4), transparent 45%), linear-gradient(135deg, #b0204a, #ff7a59); }
 
 .pcardText {
   display: flex;
@@ -909,6 +899,51 @@ h2 {
   border: 7px solid #0f1a2b;
   border-radius: 30px;
   box-shadow: 0 24px 50px rgba(15, 26, 43, 0.3);
+}
+
+/* Geliştirilen TV kartı: ekran görüntüsü yerine güncel oyun listesi */
+.pcardGames {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pcardGames li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.pcardGames strong {
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.pcardGames span {
+  color: #b6caea;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.pcardGames small {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(76, 195, 255, 0.16);
+  color: #8fd8ff;
+  font-size: 11px;
+  font-weight: 800;
 }
 
 /* Bölümler */
@@ -1121,6 +1156,81 @@ h2 {
   :root:not([data-theme='light']) .chip.and { background: rgba(255, 194, 46, 0.16); color: #ffd36b; }
 }
 
+/* Kimler için: dört aile durumu */
+.audiences {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.audience {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.audience h3 {
+  margin: 6px 0 0;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.audience p {
+  margin: 0;
+  color: var(--ink-2);
+  font-weight: 700;
+}
+
+.audience ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.audience li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.audience li::before {
+  position: absolute;
+  top: 0.45em;
+  left: 2px;
+  width: 9px;
+  height: 5px;
+  border-bottom: 2px solid var(--ok);
+  border-left: 2px solid var(--ok);
+  transform: rotate(-45deg);
+  content: '';
+}
+
+@media (max-width: 1020px) {
+  .audiences {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .audiences {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Sık sorulanlar: açılır satırlar */
 .faq {
   max-width: 920px;
@@ -1217,13 +1327,6 @@ h2 {
 }
 
 /* Video rehberler */
-.videoGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px 22px;
-  margin-top: 40px;
-}
-
 .video {
   display: flex;
   flex-direction: column;
@@ -1459,48 +1562,86 @@ h2 {
   text-underline-offset: 8px;
 }
 
-.links {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-  margin-top: 56px;
+/* Altbilgi: marka, site haritası, yasal */
+.foot {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
 }
 
-.links a {
+.footGrid {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.1fr) 2fr;
+  gap: 48px;
+  padding: 56px 0 40px;
+}
+
+.footBrand p {
+  max-width: 34ch;
+  margin: 14px 0 0;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.footCols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.footCols div {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 18px 20px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--surface);
-  text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-.links a:hover {
-  border-color: var(--blue);
-  transform: translateY(-2px);
-}
-
-.links span {
-  font-weight: 800;
-}
-
-.links small {
+.footCols h3 {
+  margin: 0 0 4px;
   color: var(--ink-3);
   font-family: var(--mono);
   font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.foot {
+.footCols a {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footCols a:hover {
+  color: var(--blue);
+}
+
+.footBottom {
   display: flex;
   justify-content: space-between;
-  padding: 26px 0 40px;
+  gap: 12px;
+  padding: 20px 0 36px;
   border-top: 1px solid var(--line);
   color: var(--ink-3);
   font-size: 14px;
   font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .footGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footCols {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 28px;
+  }
+
+  .footBottom {
+    flex-direction: column;
+    gap: 6px;
+  }
 }
 
 /* Tablet ve telefon */
@@ -1606,13 +1747,12 @@ h2 {
     font-size: 16px;
   }
 
-  .videoGrid {
+  .trustList {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .trustList,
-  .links {
-    grid-template-columns: repeat(2, 1fr);
+  .pcard.p-tv {
+    grid-template-rows: auto auto;
   }
 
   .peek {
@@ -1710,9 +1850,7 @@ h2 {
 
   .steps,
   .ages,
-  .videoGrid,
-  .trustList,
-  .links {
+  .trustList {
     grid-template-columns: 1fr;
   }
 
@@ -1738,9 +1876,12 @@ h2 {
     grid-template-rows: auto 200px;
   }
 
-  .foot {
-    flex-direction: column;
-    gap: 6px;
+  .pcard.p-tv {
+    grid-template-rows: auto auto;
+  }
+
+  .pcardGames {
+    grid-template-columns: 1fr;
   }
 }
 
