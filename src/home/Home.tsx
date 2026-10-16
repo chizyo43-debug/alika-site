@@ -283,6 +283,20 @@ const STEPS = [
   { title: 'Haftayı konuşun', body: 'Raporlar kullanımı ve öğrenmeyi birlikte gösterir. Pazarlık yerine konuşma.' },
 ];
 
+/* YouTube kanalındaki ilk kurulum videoları (15.10.2026). Kapak görselleri yerelde tutulur. */
+const INSTALL_VIDEOS = [
+  {
+    id: 'e3vwoACP44I', platform: 'Windows', duration: '1:35', poster: '/videos/kurulum/windows-ilk-kurulum.webp',
+    title: 'AliKa Windows ilk kurulum', body: 'Microsoft Store’dan yüklemeden ilk kurulumun son adımına kadar.',
+    store: 'microsoft' as const,
+  },
+  {
+    id: '4RmEnThuR3c', platform: 'Android', duration: '1:40', poster: '/videos/kurulum/android-ilk-kurulum.webp',
+    title: 'AliKa Android ilk kurulum', body: 'Google Play’den yüklemeden telefon izinlerine ve ilk kurulumun son adımına kadar.',
+    store: 'play' as const,
+  },
+];
+
 const AGES = [
   { range: '5–7', title: 'Önce güven, sonra merak.', body: 'Büyük görseller, tek adımlı yönlendirme ve şefkatli geri bildirim.' },
   { range: '8–11', title: 'Merakı alışkanlığa dönüştür.', body: 'Kısa açıklamalar, görünür ilerleme ve dengeli maskot desteği.' },
@@ -490,7 +504,7 @@ export default function Home() {
 
       <main id="icerik">
         <section className="hero">
-          <a className="corner c-tl" href="#nasil">Nasıl çalışır</a>
+          <a className="corner c-tl" href="#nasil">Nasıl çalışır ve kurulum</a>
           <a className="corner c-tr" href="#platformlar">Platformlar</a>
           <a className="corner c-bl" href="#guven">Güven</a>
           <a className="corner c-br" href="#iletisim">İletişim</a>
@@ -555,8 +569,8 @@ export default function Home() {
         <section id="nasil" className="section wrap">
           <div className="sectionHead">
             <div>
-              <h2>Nasıl çalışır?</h2>
-              <p>Ebeveynin kuralından çocuğun kazandığı süreye, sıradan bir gün dört adımda.</p>
+              <h2>Nasıl çalışır ve kurulum</h2>
+              <p>Ebeveynin kuralından çocuğun kazandığı süreye, sıradan bir gün dört adımda. Kurulumu da iki kısa videoda izleyin.</p>
             </div>
           </div>
           <ol className="steps">
@@ -568,6 +582,27 @@ export default function Home() {
               </li>
             ))}
           </ol>
+
+          <h3 className="subHead" id="kurulum">Kurulum videoları</h3>
+          <div className="installGrid">
+            {INSTALL_VIDEOS.map((video) => (
+              <article key={video.id} className="install">
+                <a className="video" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener">
+                  <span className="videoThumb">
+                    <img src={video.poster} alt="" loading="lazy" decoding="async" />
+                    <span className="mono videoTime">{video.duration}</span>
+                    <span className="play" aria-hidden="true">▶</span>
+                  </span>
+                  <span className="mono videoEyebrow">{video.platform} · İlk kurulum · YouTube</span>
+                  <span className="videoTitle">{video.title}</span>
+                </a>
+                <p>{video.body}</p>
+                <a className="pill ghost" href={video.store === 'microsoft' ? storeUrl : PLAY_STORE_URL} target="_blank" rel="noopener">
+                  {video.store === 'microsoft' ? 'Microsoft Store’da edin' : 'Google Play’den edin'} <span aria-hidden="true">↗</span>
+                </a>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="yas" className="section wrap">
