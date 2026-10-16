@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { microsoftStoreUrl } from '../store-campaign';
+import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, playStoreUrl, type Lang } from './i18n/langs';
+import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, ScreenId, TvGame, VideoKey } from './i18n/types';
 
 const SUPPORT_EMAIL = 'alika.destek@gmail.com';
-const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.alika.parental&hl=tr';
 
 type Theme = 'light' | 'dark';
 
@@ -139,9 +140,8 @@ function HalftoneHalo() {
 type OrbitStatus = 'ready' | 'dev';
 
 interface ScreenItem {
-  id: string;
-  label: string;
-  platform: string;
+  id: ScreenId;
+  platform: 'Windows' | 'Android';
   status: OrbitStatus;
   tone: string;
   side: 'left' | 'right';
@@ -149,7 +149,6 @@ interface ScreenItem {
   icon: ReactNode;
   image: string;
   shape: 'wide' | 'phone';
-  body: string;
   video?: { id: string; duration: string };
 }
 
@@ -168,21 +167,22 @@ const ICONS = {
 };
 
 /* Sol kavis Windows, sağ kavis Android. İki taraf aynı sırayla aynayı izler:
-   ebeveyn paneli, kural, ortada soru çöz, koruma, çocuğun günü. Açılar yüzü ve gövdeyi boş bırakır. */
+   ebeveyn paneli, kural, ortada soru çöz, koruma, çocuğun günü. Açılar yüzü ve gövdeyi boş bırakır.
+   Ekran görüntüleri Türkçe arayüzdendir; yazılar dil dosyasından gelir. */
 const SCREENS: ScreenItem[] = [
-  { id: 'win-panel', label: 'Ebeveyn paneli', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel-bugun.webp', shape: 'wide', body: 'Günün özeti tek ekranda: kullanılan ve kalan süre, tek tıkla ek süre, soru çözerek kazanılan dakikalar ve onayınızı bekleyen görevler.' },
-  { id: 'win-rules', label: 'Süre ve kurallar', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-kurallar.webp', shape: 'wide', body: 'Günlük ekran süresi, günlük üst sınır ve uyku saati. Kullanılmayan süre havuza birikir; çocuk ne zaman duracağını önceden bilir.' },
-  { id: 'win-quiz', label: 'Soru çöz, süre kazan', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/screens/platform/windows-soru-coz.webp', shape: 'wide', video: { id: 'EtLaLyNdXk0', duration: '0:33' }, body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
-  { id: 'win-protect', label: 'Kapatılamaz koruma', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.shield, image: '/screens/platform/windows-guvenli-mod.webp', shape: 'wide', video: { id: 'e3vwoACP44I', duration: '1:35' }, body: 'Güvenli Mod açıkken çocuk hesabı standart hesaba geçer; AliKa açılışta kendiliğinden başlar, çocuk onu durduramaz ya da kaldıramaz. Kaldırmak için yönetici onayı gerekir. Web koruması ve güvenli arama ilk kurulumda önerilen ayar olarak açık gelir.' },
-  { id: 'win-homework', label: 'Görevler ve onay', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.homework, image: '/screens/platform/windows-gorevler.webp', shape: 'wide', body: 'Çocuğa gerçek dünya görevleri verin: kitap bitirme, oda toplama, ekran dışı etkinlik. Çocuk tamamladığını bildirir; siz onaylayınca ödül süresi eklenir.' },
-  { id: 'and-panel', label: 'Ebeveyn paneli', platform: 'Android', status: 'ready', tone: 'blue', side: 'right', angle: -35, icon: ICONS.parent, image: '/screens/platform/android-panel.webp', shape: 'phone', body: 'Bugünün özeti telefonda: günlük kullanım ve hedef, soru çözerek kazanılan bonus süre ve hızlı işlemler.' },
-  { id: 'and-reward', label: 'Ödül kuralı', platform: 'Android', status: 'ready', tone: 'ink', side: 'right', angle: -17, icon: ICONS.reward, image: '/screens/platform/android-odul-kurali.webp', shape: 'phone', body: 'Bir dakika için kaç doğru gerektiğini, günlük kazanılabilir üst sınırı ve günlük soru sınırını siz seçersiniz. Üst üste yanlışlarda küçük bir süre cezası da açılabilir.' },
-  { id: 'and-quiz', label: 'Soru çöz, süre kazan', platform: 'Android', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-soru-coz.webp', shape: 'phone', body: 'Çocuk telefonda soru çözer; bir doğru cevabın kaç dakika ettiğini, bugün ne kadar kazandığını ve günlük üst sınırı aynı ekranda görür.' },
-  { id: 'and-protect', label: 'Web ve uygulama koruması', platform: 'Android', status: 'ready', tone: 'mint', side: 'right', angle: 17, icon: ICONS.shield, image: '/screens/platform/android-kurallar.webp', shape: 'phone', video: { id: '4RmEnThuR3c', duration: '1:40' }, body: 'İnternet filtresi engellediğiniz siteleri kapatır, Google, YouTube ve Bing’de güvenli aramayı zorlar. İsterseniz yeni uygulamalar da siz onaylayana kadar kapalı kalır. Filtre için Android bir kez VPN izni ister; filtreleme cihazda yapılır, veri dışarı gönderilmez.' },
-  { id: 'and-child', label: 'Çocuk ekranı', platform: 'Android', status: 'ready', tone: 'sky', side: 'right', angle: 35, icon: ICONS.child, image: '/screens/platform/android-cocuk-ana.webp', shape: 'phone', body: 'Çocuk kalan süresini, bugün soru çözerek kazandığı ve ailesine gönderebileceği dakikaları ve bugünkü çalışmalarını telefonunda görür.' },
+  { id: 'win-panel', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel-bugun.webp', shape: 'wide' },
+  { id: 'win-rules', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-kurallar.webp', shape: 'wide' },
+  { id: 'win-quiz', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/screens/platform/windows-soru-coz.webp', shape: 'wide', video: { id: 'EtLaLyNdXk0', duration: '0:33' } },
+  { id: 'win-protect', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.shield, image: '/screens/platform/windows-guvenli-mod.webp', shape: 'wide', video: { id: 'e3vwoACP44I', duration: '1:35' } },
+  { id: 'win-homework', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.homework, image: '/screens/platform/windows-gorevler.webp', shape: 'wide' },
+  { id: 'and-panel', platform: 'Android', status: 'ready', tone: 'blue', side: 'right', angle: -35, icon: ICONS.parent, image: '/screens/platform/android-panel.webp', shape: 'phone' },
+  { id: 'and-reward', platform: 'Android', status: 'ready', tone: 'ink', side: 'right', angle: -17, icon: ICONS.reward, image: '/screens/platform/android-odul-kurali.webp', shape: 'phone' },
+  { id: 'and-quiz', platform: 'Android', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-soru-coz.webp', shape: 'phone' },
+  { id: 'and-protect', platform: 'Android', status: 'ready', tone: 'mint', side: 'right', angle: 17, icon: ICONS.shield, image: '/screens/platform/android-kurallar.webp', shape: 'phone', video: { id: '4RmEnThuR3c', duration: '1:40' } },
+  { id: 'and-child', platform: 'Android', status: 'ready', tone: 'sky', side: 'right', angle: 35, icon: ICONS.child, image: '/screens/platform/android-cocuk-ana.webp', shape: 'phone' },
 ];
 
-function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose: () => void }) {
+function ScreenDialog({ screen, onClose, t }: { screen: ScreenItem | null; onClose: () => void; t: HomeCopy }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -193,6 +193,7 @@ function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose:
   }, [screen]);
 
   const video = screen?.video;
+  const text = screen ? t.screens[screen.id] : null;
 
   return (
     <dialog
@@ -202,22 +203,23 @@ function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose:
       onClose={onClose}
       onClick={(event) => event.target === event.currentTarget && onClose()}
     >
-      {screen && (
+      {screen && text && (
         <div className={`screenBody ${screen.shape}`}>
           <figure className="screenShot">
-            <img src={screen.image} alt={`${screen.label} ekranı`} />
+            <img src={screen.image} alt={t.a11y.screenAlt(text.label)} />
           </figure>
           <div className="screenText">
             <span className="tag plain"><StatusDot status={screen.status} />{screen.platform}</span>
-            <h2 id="screenDialogTitle">{screen.label}</h2>
-            <p>{screen.body}</p>
+            <h2 id="screenDialogTitle">{text.label}</h2>
+            <p>{text.body}</p>
+            {t.dialog.note && <p className="screenNote">{t.dialog.note}</p>}
             <div className="screenActions">
               {video && (
                 <a className="pill solid" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener">
-                  Videoyu izle <span className="mono">{video.duration}</span>
+                  {t.dialog.watch} <span className="mono">{video.duration}</span>
                 </a>
               )}
-              <button type="button" className="pill ghost" onClick={onClose}>Kapat</button>
+              <button type="button" className="pill ghost" onClick={onClose}>{t.dialog.close}</button>
             </div>
           </div>
         </div>
@@ -235,177 +237,111 @@ interface Platform {
   body: string;
   image?: { src: string; alt: string; shape: 'wide' | 'phone' };
   /* Görseli olmayan kartta (geliştirilen TV) güncel oyun listesi gösterilir. */
-  games?: { name: string; body: string; kind: 'Hazır' | 'İndirilir' }[];
+  games?: { id: TvGame; name: string; body: string; kind: string }[];
   action?: { label: string; href: string; external?: boolean };
 }
 
-function platforms(storeUrl: string): Platform[] {
+/* Oyun listesi Android TV kodundan (TvHomeScreen yerleşik oyunlar + TvGameCatalogClient katalog oyunları). */
+const TV_GAMES: { id: TvGame; ready: boolean }[] = [
+  { id: 'rally', ready: true },
+  { id: 'station', ready: true },
+  { id: 'wheel', ready: false },
+  { id: 'nameCity', ready: false },
+];
+
+function platforms(t: HomeCopy, storeUrl: string, playUrl: string): Platform[] {
+  const { windows, android, tv } = t.platforms;
   return [
     {
-      id: 'windows', tone: 'p-windows', status: 'ready', tags: ['Bugün kullanılabilir', 'Windows 10/11', 'Microsoft Store'],
-      title: 'AliKa Windows',
-      body: 'Süre, uygulama, uyku ve görev kuralları tek panelde. Çocuk ne zaman duracağını önceden görür; soru çözerek kazandığı ek süre sizin koyduğunuz kurala bağlıdır. Raporlar ve isteğe bağlı şifreli aile ağı dahil.',
-      image: { src: '/screens/platform/windows-panel-bugun.webp', alt: 'AliKa Windows ebeveyn paneli, Bugün sayfası', shape: 'wide' },
-      action: { label: 'Microsoft Store’da edin', href: storeUrl, external: true },
+      id: 'windows', tone: 'p-windows', status: 'ready', tags: windows.tags,
+      title: windows.title,
+      body: windows.body,
+      image: { src: '/screens/platform/windows-panel-bugun.webp', alt: windows.imageAlt, shape: 'wide' },
+      action: { label: t.store.getStore, href: storeUrl, external: true },
     },
     {
-      id: 'android', tone: 'p-android', status: 'ready', tags: ['Bugün kullanılabilir', 'Telefon / tablet', 'Google Play'],
-      title: 'AliKa Android',
-      body: 'Ebeveyn yönetir, çocuk ne yapacağını görür. Ebeveyn paneli, çocuk görünümü ve soru çözerek süre kazanma artık telefonda ve tablette.',
-      image: { src: '/screens/platform/android-cocuk-ana.webp', alt: 'AliKa Android çocuk ana ekranı', shape: 'phone' },
-      action: { label: 'Google Play’den edin', href: PLAY_STORE_URL, external: true },
+      id: 'android', tone: 'p-android', status: 'ready', tags: android.tags,
+      title: android.title,
+      body: android.body,
+      image: { src: '/screens/platform/android-cocuk-ana.webp', alt: android.imageAlt, shape: 'phone' },
+      action: { label: t.store.getPlay, href: playUrl, external: true },
     },
     {
-      /* Oyun listesi Android TV kodundan (TvHomeScreen yerleşik oyunlar + TvGameCatalogClient katalog oyunları). */
-      id: 'tv', tone: 'p-tv', status: 'dev', tags: ['Geliştiriliyor', 'Android TV'],
-      title: 'AliKa TV ve aile oyunları',
-      body: 'TV ailenin ortak ekranı olur: Aile Panosu’nda aile profili ve son aile mesajı görünür. Oyunlara herkes kendi telefonundan katılır; telefon kumanda olur.',
-      games: [
-        { name: 'Işık Hızı Rallisi', body: 'Ders sorularını doğru ve hızlı cevapla, yörüngede öne geç.', kind: 'Hazır' },
-        { name: 'Uzay İstasyonu', body: 'Komutları sesli söyle, istasyonu ekipçe eve getir.', kind: 'Hazır' },
-        { name: 'Çarkıfelek', body: 'İpucundan gizli kelimeyi bul; her yaş grubuna ayrı sürüm.', kind: 'İndirilir' },
-        { name: 'İsim Şehir', body: 'Klasik oyun ortak ekranda; her yaş grubuna ayrı sürüm.', kind: 'İndirilir' },
-      ],
+      id: 'tv', tone: 'p-tv', status: 'dev', tags: tv.tags,
+      title: tv.title,
+      body: tv.body,
+      games: TV_GAMES.map((game) => ({ id: game.id, ...tv.games[game.id], kind: game.ready ? tv.ready : tv.download })),
     },
   ];
 }
 
-const STEPS = [
-  { title: 'Kuralı birlikte koyun', body: 'Günlük süreyi, uygulamaları, uyku saatini ve görevleri siz belirlersiniz.' },
-  { title: 'Plan görünür olur', body: 'Çocuk kalan süresini ve ne zaman duracağını önceden görür. Sürpriz kesinti olmaz.' },
-  { title: 'Soru çöz, süre kazan', body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz seçersiniz. Ek süre bu sınırı aşmaz.' },
-  { title: 'Haftayı konuşun', body: 'Raporlar kullanımı ve öğrenmeyi birlikte gösterir. Pazarlık yerine konuşma.' },
-];
-
-/* YouTube kanalındaki güncel videolar (15.10.2026). Kapak görselleri yerelde tutulur. */
+/* YouTube kanalındaki güncel videolar (15.10.2026, Türkçe). Kapak görselleri yerelde tutulur. */
 const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@AliKaApp';
-const VIDEOS = [
-  {
-    id: 'e3vwoACP44I', platform: 'Windows', duration: '1:35', poster: '/videos/kurulum/windows-ilk-kurulum.webp',
-    title: 'AliKa Windows ilk kurulum', body: 'Microsoft Store’dan yüklemeden ilk kurulumun son adımına kadar.',
-    store: 'microsoft' as const,
-  },
-  {
-    id: '4RmEnThuR3c', platform: 'Android', duration: '1:40', poster: '/videos/kurulum/android-ilk-kurulum.webp',
-    title: 'AliKa Android ilk kurulum', body: 'Google Play’den yüklemeden telefon izinlerine ve ilk kurulumun son adımına kadar.',
-    store: 'play' as const,
-  },
-  {
-    id: 'EtLaLyNdXk0', platform: 'Windows', duration: '0:33', poster: '/videos/kurulum/windows-soru-coz.webp',
-    title: 'Soru çöz, ek süre kazan', body: 'Çocuk doğru cevapla ek süre kazanır, kilit kalkar.',
-    store: null,
-  },
+const VIDEOS: { id: string; key: VideoKey; platform: string; duration: string; poster: string; store: 'microsoft' | 'play' | null }[] = [
+  { id: 'e3vwoACP44I', key: 'winSetup', platform: 'Windows', duration: '1:35', poster: '/videos/kurulum/windows-ilk-kurulum.webp', store: 'microsoft' },
+  { id: '4RmEnThuR3c', key: 'androidSetup', platform: 'Android', duration: '1:40', poster: '/videos/kurulum/android-ilk-kurulum.webp', store: 'play' },
+  { id: 'EtLaLyNdXk0', key: 'winQuiz', platform: 'Windows', duration: '0:33', poster: '/videos/kurulum/windows-soru-coz.webp', store: null },
 ];
 
-const AGES = [
-  { range: '5–7', title: 'Önce güven, sonra merak.', body: 'Kısa metin, eğlenceli ton, bol ipucu, az soru ve yanında AliKa.' },
-  { range: '8–11', title: 'Merakı alışkanlığa dönüştür.', body: 'Orta uzunlukta metin, arkadaşça ton, iki ipucu ve daha sakin bir maskot.' },
-  { range: '12–14', title: 'Hedefini gör, ilerlemeni yönet.', body: 'Daha uzun açıklamalar, nötr ton, tek ipucu ve görünür istatistikler.' },
-  { range: '15–18', title: 'Sade, ciddi ve veri odaklı.', body: 'Tam metin, resmi ton, ipucusuz sorular, tam istatistik ve maskotsuz ekran.' },
-];
+const AGE_RANGES = ['5–7', '8–11', '12–14', '15–18'];
 
 type FeaturePlatform = 'Windows' | 'Android';
 const BOTH: FeaturePlatform[] = ['Windows', 'Android'];
 
 /* Kimler için: kodda doğrulanan özelliklerle dört aile durumu. */
-const AUDIENCES: { id: string; title: string; body: string; points: string[]; on: FeaturePlatform[] }[] = [
-  {
-    id: 'kardes', title: 'Bilgisayarı paylaşan kardeşler',
-    body: 'Aynı Windows bilgisayarda her çocuğun kendi profili, kuralı ve raporu olur.',
-    points: ['Çocuk başına ayrı süre, kural ve yaş ayarı', 'Anne ve baba için ayrı ebeveyn PIN’i', 'Takvim profilleri ve misafir oturumu'],
-    on: ['Windows'],
-  },
-  {
-    id: 'ilk-telefon', title: 'İlk telefonunu alan çocuk',
-    body: 'Telefon elinde, kurallar herkesin bildiği gibi.',
-    points: ['Günlük süre ve gece modu', 'Yeni uygulamalar için onay', 'Seçtiğiniz mesajlaşma uygulamaları süre bitince de açık; arama ve SMS hep açık'],
-    on: ['Android'],
-  },
-  {
-    id: 'sinav', title: 'Sınava hazırlanan öğrenci',
-    body: 'Ekran zamanı düzenli çalışmaya dönüşür.',
-    points: ['Planlı deneme sınavı ve sonuç karnesi', 'Kendi soru bankanız ya da hazır içerik', 'Odak modu; LGS denemeleri içe aktardığınız paketle'],
-    on: BOTH,
-  },
-  {
-    id: 'paylasimli', title: 'Telefonunu çocuğuyla paylaşan ebeveyn',
-    body: 'Telefon sizin; çocuk ara sıra kullanıyor.',
-    points: ['“Çocuğa ver” ile kısıtlı oturum', 'Yalnız izin verdiğiniz uygulamalar açılır', 'PIN ile ebeveyn moduna dönüş'],
-    on: ['Android'],
-  },
+const AUDIENCES: { id: AudienceId; on: FeaturePlatform[] }[] = [
+  { id: 'kardes', on: ['Windows'] },
+  { id: 'ilk-telefon', on: ['Android'] },
+  { id: 'sinav', on: BOTH },
+  { id: 'paylasimli', on: ['Android'] },
 ];
 
 /* Neler var: her madde yalnız gerçekten bulunduğu platformla etiketlenir. Kaynak: Store 1.2.11
    listelemesi (dürüstlük çiti), Android 0.3.10 arayüz metinleri ve site asistanının ürün bilgisi. */
-const FEATURE_GROUPS: { id: string; title: string; lead: string; items: { name: string; body: string; on: FeaturePlatform[] }[] }[] = [
-  {
-    id: 'kontrol', title: 'Kontrol', lead: 'Kuralı siz koyarsınız; süreyi cihaz hatırlatır.',
-    items: [
-      { name: 'Günlük süre ve uyku saati', body: 'Günlük limit, haftalık tablo ve gece kilidi. Kullanılmayan süre havuza birikebilir.', on: BOTH },
-      { name: 'Uygulama kuralları', body: 'Uygulama başına süre, engelleme ve yeni uygulamalar için ebeveyn onayı.', on: BOTH },
-      { name: 'Web filtresi ve güvenli arama', body: 'Engellediğiniz siteler kapanır, arama sonuçlarında uygunsuz içerik gizlenir.', on: BOTH },
-      { name: 'Raporlar', body: 'Günlük ve haftalık kullanım, saatlik dağılım ve olay geçmişi.', on: BOTH },
-      { name: 'Kapatılamaz koruma', body: 'Çocuk standart Windows hesabından AliKa’yı durduramaz ya da kaldıramaz.', on: ['Windows'] },
-    ],
-  },
-  {
-    id: 'ogrenme', title: 'Öğrenme', lead: 'Ekran başındaki zaman öğrenmeye döner.',
-    items: [
-      { name: 'Soru çöz, süre kazan', body: 'Bir dakika için kaç doğru gerektiğini ve günlük üst sınırı siz seçersiniz.', on: BOTH },
-      { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik sınıf, ders ve konuya göre seçilir; kendi sorularınızı Excel ya da CSV ile eklersiniz.', on: BOTH },
-      { name: 'Şekilli sorular', body: 'Geometri, koordinat düzlemi, grafik, tablo ve devre şemaları net çizilir.', on: BOTH },
-      { name: 'Deneme sınavı ve sonuç karnesi', body: 'Planladığınız saatte deneme sınavı. Sonuç karnesi ölçüm içindir, süre ödülü vermez.', on: BOTH },
-      { name: 'Ders notları ve Öğrenme Stüdyosu', body: 'Eklediğiniz ders notları bölüm bölüm açılır; çözümlü örnekler ve cevap açıklamalarıyla.', on: ['Windows'] },
-    ],
-  },
-  {
-    id: 'aile', title: 'Aile', lead: 'Pazarlık yerine herkesin bildiği bir plan.',
-    items: [
-      { name: 'Görevler ve ödüller', body: 'Ekran dışı görevler ebeveyn onayıyla ek süreye dönüşür.', on: BOTH },
-      { name: 'Aile ağı', body: 'Bilgisayar ve telefonlar aynı Wi‑Fi’da QR ya da kodla eşleşir; hesap ve bulut gerekmez.', on: BOTH },
-      { name: 'Aile mesajları ve süre gönderme', body: 'Çocuk ailesine yazar; kazanılan süre aile cihazları arasında gönderilebilir.', on: BOTH },
-      { name: 'Paylaşımlı telefon', body: 'Telefon sizin, çocuk ara sıra kullanıyor: “Çocuğa ver” deyince yalnız izin verdiğiniz uygulamalar açılır; PIN ile geri dönersiniz.', on: ['Android'] },
-    ],
-  },
+const CONTROL: { key: ControlFeature; on: FeaturePlatform[] }[] = [
+  { key: 'dailyTime', on: BOTH },
+  { key: 'appRules', on: BOTH },
+  { key: 'webFilter', on: BOTH },
+  { key: 'reports', on: BOTH },
+  { key: 'tamperProof', on: ['Windows'] },
+];
+const LEARNING: { key: LearningFeature; on: FeaturePlatform[] }[] = [
+  { key: 'quiz', on: BOTH },
+  { key: 'content', on: BOTH },
+  { key: 'figures', on: BOTH },
+  { key: 'exam', on: BOTH },
+  { key: 'notes', on: ['Windows'] },
+];
+const FAMILY: { key: FamilyFeature; on: FeaturePlatform[] }[] = [
+  { key: 'tasks', on: BOTH },
+  { key: 'network', on: BOTH },
+  { key: 'messages', on: BOTH },
+  { key: 'sharedPhone', on: ['Android'] },
 ];
 
-const FAQ = [
-  {
-    q: 'Çocuğum AliKa’yı kapatabilir ya da kaldırabilir mi?',
-    a: 'Windows’ta çocuk standart hesaptaysa AliKa’yı durduramaz ya da kaldıramaz; kaldırmak için Windows yönetici onayı gerekir. Android’de panel ve ayarlar ebeveyn PIN’iyle korunur; eksik bir izin olursa uygulama bunu açıkça gösterir.',
-  },
-  {
-    q: 'Hesap açmam ya da verileri buluta göndermem gerekiyor mu?',
-    a: 'Hayır. AliKa hesabı, e-posta kaydı ya da bulut yoktur. Kullanım, profil ve öğrenme verileri cihazda kalır. Tek istisna, sizin kendi e-postanızla gönderdiğiniz hata raporudur.',
-  },
-  {
-    q: 'Ücretli mi, deneme süresi var mı?',
-    a: 'Windows sürümü Microsoft Store’dan alınır ve 7 gün ücretsiz denenebilir. Android’de aile aboneliği 14 gün ücretsiz denemeyle başlar ve 10 eşleşmiş aile cihazını kapsar; deneme sonunda iptal edilmezse Google Play seçtiğiniz planı yeniler. Windows satın alımı Android’i kapsamaz. Güncel fiyatlar mağaza sayfalarındadır.',
-  },
-  {
-    q: 'Bilgisayar ve telefon birlikte çalışır mı?',
-    a: 'Evet. Windows ve Android cihazlar aynı Wi‑Fi’da QR ya da kodla eşleşir; görevler, mesajlar ve süre aile cihazları arasında gider. Ev dışından internet üzerinden uzaktan yönetim yoktur; aile ağı evinizin ağında şifreli çalışır.',
-  },
-  {
-    q: 'Hangi dersler ve sınıflar var?',
-    a: 'Hazır içerik ülke, sınıf, ders ve konuya göre seçilir; matematik soruları uygulamanın içinde üretilir. Kendi sorularınızı ve soru bankalarınızı Excel şablonuyla ya da içerik paketleriyle eklersiniz.',
-  },
-  {
-    q: 'AliKa çocuğumu gizlice izler mi?',
-    a: 'Hayır. AliKa saklanmaz: kurulumda açık rıza istenir, çalışırken görünür bir gösterge vardır. Amaç gizli gözetim değil, ailede herkesin bildiği şeffaf kurallardır.',
-  },
-  {
-    q: 'Hangi yaşlar için uygun?',
-    a: '5–18 yaş. Dil, görünüm, maskot ve kutlama dozu yaşa göre değişir; 15–18 yaşta maskotsuz, sade bir görünüm kullanılır.',
-  },
-];
+function featureGroups(t: HomeCopy) {
+  const { control, learning, family } = t.features;
+  return [
+    { id: 'kontrol', title: control.title, lead: control.lead, items: CONTROL.map((item) => ({ ...control.items[item.key], on: item.on })) },
+    { id: 'ogrenme', title: learning.title, lead: learning.lead, items: LEARNING.map((item) => ({ ...learning.items[item.key], on: item.on })) },
+    { id: 'aile', title: family.title, lead: family.lead, items: FAMILY.map((item) => ({ ...family.items[item.key], on: item.on })) },
+  ];
+}
+
+function PlatformChips({ on }: { on: FeaturePlatform[] }) {
+  return (
+    <span className="featOn">
+      {on.map((platform) => <span key={platform} className={`chip ${platform === 'Windows' ? 'win' : 'and'}`}>{platform}</span>)}
+    </span>
+  );
+}
 
 function StatusDot({ status }: { status: OrbitStatus }) {
   return <i className={`dot ${status}`} aria-hidden="true" />;
 }
 
 /* Platform kartları: geniş ekranda dikey kaydırma yatay kaydırmaya dönüşür, dar ekranda kaydırmalı şerit olur. */
-function PlatformRail({ items }: { items: Platform[] }) {
+function PlatformRail({ items, t }: { items: Platform[]; t: HomeCopy }) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -465,8 +401,8 @@ function PlatformRail({ items }: { items: Platform[] }) {
       <div className="railSticky">
         <div className="wrap railHead">
           <div>
-            <h2>Platformlar</h2>
-            <p>Windows ve Android bugün hazır. TV ve aile oyunları geliştiriliyor.</p>
+            <h2>{t.rail.title}</h2>
+            <p>{t.rail.lead}</p>
           </div>
           <div className="railMeta" aria-hidden="true">
             <span className="mono">{String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
@@ -479,8 +415,8 @@ function PlatformRail({ items }: { items: Platform[] }) {
               <article key={item.id} className={`pcard ${item.tone}`}>
                 <div className="pcardText">
                   <div className="tags">
-                    {item.tags.map((tag, t) => (
-                      <span key={tag} className="tag">{t === 0 && <StatusDot status={item.status} />}{tag}</span>
+                    {item.tags.map((tag, n) => (
+                      <span key={tag} className="tag">{n === 0 && <StatusDot status={item.status} />}{tag}</span>
                     ))}
                     <span className="mono pnum">{String(i + 1).padStart(2, '0')}</span>
                   </div>
@@ -498,9 +434,9 @@ function PlatformRail({ items }: { items: Platform[] }) {
                   </figure>
                 )}
                 {item.games && (
-                  <ul className="pcardGames" aria-label="TV oyunları">
+                  <ul className="pcardGames" aria-label={t.a11y.tvGames}>
                     {item.games.map((game) => (
-                      <li key={game.name}>
+                      <li key={game.id}>
                         <strong>{game.name}</strong>
                         <span>{game.body}</span>
                         <small className="mono">{game.kind}</small>
@@ -517,7 +453,7 @@ function PlatformRail({ items }: { items: Platform[] }) {
   );
 }
 
-function CopyEmail() {
+function CopyEmail({ t }: { t: HomeCopy }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -531,42 +467,85 @@ function CopyEmail() {
   return (
     <div className="mailRow">
       <a className="mail" href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
-      <button type="button" className="pill ghost" onClick={copy} aria-live="polite">{copied ? 'Kopyalandı' : 'Kopyala'}</button>
+      <button type="button" className="pill ghost" onClick={copy} aria-live="polite">{copied ? t.contact.copied : t.contact.copy}</button>
     </div>
   );
 }
 
-export default function Home() {
+/* Dil seçici: her dil kendi ana sayfasına gider. Dışarı tıklayınca ya da Esc ile kapanır. */
+function LanguagePicker({ lang, t }: { lang: Lang; t: HomeCopy }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    const close = (event: Event) => {
+      const details = ref.current;
+      if (!details?.open) return;
+      if (event instanceof KeyboardEvent ? event.key === 'Escape' : !details.contains(event.target as Node)) {
+        details.open = false;
+      }
+    };
+    document.addEventListener('pointerdown', close);
+    document.addEventListener('keydown', close);
+    return () => {
+      document.removeEventListener('pointerdown', close);
+      document.removeEventListener('keydown', close);
+    };
+  }, []);
+
+  return (
+    <details className="langPick" ref={ref}>
+      <summary className="iconBtn langBtn" aria-label={`${t.a11y.language}: ${LANG_NAMES[lang]}`}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" /></svg>
+        <span className="mono" aria-hidden="true">{lang.toUpperCase()}</span>
+      </summary>
+      <ul className="langList">
+        {LANGS.map((code) => (
+          <li key={code}>
+            <a href={homePath(code)} hrefLang={code} lang={code} aria-current={code === lang ? 'page' : undefined}>
+              <span className="mono">{code.toUpperCase()}</span>{LANG_NAMES[code]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
+export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
   const [theme, toggleTheme] = useTheme();
   const [openScreen, setOpenScreen] = useState<ScreenItem | null>(null);
-  const storeUrl = microsoftStoreUrl('tr');
+  const storeUrl = microsoftStoreUrl(lang);
+  const playUrl = playStoreUrl(lang);
+  const home = homePath(lang);
+  const guides = GUIDE_PATHS[lang];
 
   return (
     <>
-      <a className="skip" href="#icerik">İçeriğe geç</a>
+      <a className="skip" href="#icerik">{t.a11y.skip}</a>
       <header className="top">
-        <a className="brand" href="/" aria-label="AliKa ana sayfa">
+        <a className="brand" href={home} aria-label={t.a11y.home}>
           <img src="/brand/alika-logo.png" alt="" width="34" height="34" />
           <span>AliKa</span>
         </a>
-        <nav className="topNav" aria-label="Ana menü">
-          <a href="#ozellikler">Özellikler</a>
-          <a href="#videolar">Videolar</a>
-          <a href="#sss">SSS</a>
-          <a href="/privacy/">Gizlilik</a>
-          <button type="button" className="iconBtn" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Açık temaya geç' : 'Koyu temaya geç'}>
+        <nav className="topNav" aria-label={t.a11y.mainMenu}>
+          <a href="#ozellikler">{t.nav.features}</a>
+          <a href="#videolar">{t.nav.videos}</a>
+          <a href="#sss">{t.nav.faq}</a>
+          <a href="/privacy/">{t.nav.privacy}</a>
+          <LanguagePicker lang={lang} t={t} />
+          <button type="button" className="iconBtn" onClick={toggleTheme} aria-label={theme === 'dark' ? t.a11y.toLight : t.a11y.toDark}>
             {theme === 'dark'
               ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
               : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" /></svg>}
           </button>
           <div className="storeBtns">
-            <a className="storeBtn" href={storeUrl} target="_blank" rel="noopener" aria-label="Microsoft Store’dan indir (Windows)">
+            <a className="storeBtn" href={storeUrl} target="_blank" rel="noopener" aria-label={t.a11y.storeAria}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h8.5v8.5H3zM12.5 3H21v8.5h-8.5zM3 12.5h8.5V21H3zM12.5 12.5H21V21h-8.5z" /></svg>
-              <span className="storeText"><small>Windows için</small>Microsoft Store</span>
+              <span className="storeText"><small>{t.store.forWindows}</small>Microsoft Store</span>
             </a>
-            <a className="storeBtn" href={PLAY_STORE_URL} target="_blank" rel="noopener" aria-label="Google Play’den indir (Android)">
+            <a className="storeBtn" href={playUrl} target="_blank" rel="noopener" aria-label={t.a11y.playAria}>
               <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2.8v18.4c0 .5.5.8.9.6l15.4-8.7c.5-.3.5-1 0-1.3L5.4 2.2c-.4-.2-.9.1-.9.6Z" fill="currentColor" /><path d="m4.8 2.4 10.4 10.4M4.8 21.6l10.4-10.4" stroke="var(--store-bg)" strokeWidth="1.4" /></svg>
-              <span className="storeText"><small>Android için</small>Google Play</span>
+              <span className="storeText"><small>{t.store.forAndroid}</small>Google Play</span>
             </a>
           </div>
         </nav>
@@ -574,17 +553,17 @@ export default function Home() {
 
       <main id="icerik">
         <section className="hero">
-          <a className="corner c-tl" href="#nasil">Nasıl çalışır ve kurulum</a>
-          <a className="corner c-tr" href="#platformlar">Platformlar</a>
-          <a className="corner c-bl" href="#guven">Güven</a>
-          <a className="corner c-br" href="#iletisim">İletişim</a>
+          <a className="corner c-tl" href="#nasil">{t.hero.how}</a>
+          <a className="corner c-tr" href="#platformlar">{t.hero.platforms}</a>
+          <a className="corner c-bl" href="#guven">{t.hero.trust}</a>
+          <a className="corner c-br" href="#iletisim">{t.hero.contact}</a>
 
           <div className="stage">
             <div className="glow" aria-hidden="true" />
             <div className="ring" aria-hidden="true" />
             <HalftoneHalo />
             <div className="orbitPath" aria-hidden="true" />
-            <img className="mascot" src="/brand/alika-maskot.webp" alt="AliKa maskotu: siyah-beyaz ceketli, sarı tişörtlü gülümseyen çocuk" width="470" height="1100" />
+            <img className="mascot" src="/brand/alika-maskot.webp" alt={t.hero.mascotAlt} width="470" height="1100" />
             <span className="sideTag left" aria-hidden="true">Windows</span>
             <span className="sideTag right" aria-hidden="true">Android</span>
             {SCREENS.map((screen, i) => (
@@ -594,10 +573,10 @@ export default function Home() {
                 className={`orbit ${screen.side}`}
                 style={{ '--a': `${screen.angle}deg`, '--i': i } as CSSProperties}
                 onClick={() => setOpenScreen(screen)}
-                aria-label={`${screen.label}: ekran görüntüsünü aç (${screen.platform})`}
+                aria-label={t.a11y.openScreen(t.screens[screen.id].label, screen.platform)}
               >
                 <span className={`tile t-${screen.tone}`}>{screen.icon}<StatusDot status={screen.status} /></span>
-                <span className="orbitLabel" aria-hidden="true">{screen.label}</span>
+                <span className="orbitLabel" aria-hidden="true">{t.screens[screen.id].label}</span>
               </button>
             ))}
           </div>
@@ -606,68 +585,69 @@ export default function Home() {
             <span aria-hidden="true">Ali</span>
             <span className="ka" aria-hidden="true"><span>K</span><span>a</span></span>
           </h1>
-          <p className="tagline">Kısıtlamıyoruz. <em>Planlıyoruz.</em></p>
+          <p className="tagline">{t.hero.tagline[0]} <em>{t.hero.tagline[1]}</em></p>
           <a className="eventPill" href="#platformlar">
             <StatusDot status="ready" />
-            <span>Windows ve Android’de yayında</span>
+            <span>{t.hero.live}</span>
             <span className="mono">Microsoft Store · Google Play</span>
           </a>
-          <a className="scrollCue" href="#tanitim" aria-label="Aşağı kaydır">
+          <a className="scrollCue" href="#tanitim" aria-label={t.a11y.scrollDown}>
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m5 9 7 7 7-7" /></svg>
           </a>
         </section>
 
         <section id="tanitim" className="intro wrap">
-          <p className="eyebrow mono">Ebeveyn kontrolü · Öğrenme · Aile zamanı</p>
+          <p className="eyebrow mono">{t.intro.eyebrow}</p>
           <p className="introLead">
-            Çocuğunuz ekrandan uzaklaşmıyorsa, bırakın ekran onu öğrenmeye yaklaştırsın. AliKa ekran süresini
-            sizin koyduğunuz kurallarla planlar; çocuk <mark>soru çözerek</mark>, sizin belirlediğiniz sınır içinde ek süre kazanır.
+            {t.intro.lead[0]}<mark>{t.intro.lead[1]}</mark>{t.intro.lead[2]}
           </p>
           <div className="actions">
-            <a className="pill solid" href={storeUrl} target="_blank" rel="noopener">Microsoft Store’da edin <span aria-hidden="true">↗</span></a>
-            <a className="pill solid" href={PLAY_STORE_URL} target="_blank" rel="noopener">Google Play’den edin <span aria-hidden="true">↗</span></a>
-            <a className="pill ghost" href="#videolar">Videoları izle</a>
+            <a className="pill solid" href={storeUrl} target="_blank" rel="noopener">{t.store.getStore} <span aria-hidden="true">↗</span></a>
+            <a className="pill solid" href={playUrl} target="_blank" rel="noopener">{t.store.getPlay} <span aria-hidden="true">↗</span></a>
+            <a className="pill ghost" href="#videolar">{t.intro.watchVideos}</a>
           </div>
           <dl className="stats">
-            <div><dt>5–18</dt><dd>yaş için dört ayrı anlatım</dd></div>
-            <div><dt>2</dt><dd>platform: Windows ve Android</dd></div>
-            <div><dt>0</dt><dd>reklam ve izleyici</dd></div>
-            <div><dt>7–14 gün</dt><dd>ücretsiz deneme: Windows’ta 7, Android’de 14</dd></div>
+            {t.intro.stats.map((stat) => (
+              <div key={stat.value}><dt>{stat.value}</dt><dd>{stat.label}</dd></div>
+            ))}
           </dl>
         </section>
 
-        <PlatformRail items={platforms(storeUrl)} />
+        <PlatformRail items={platforms(t, storeUrl, playUrl)} t={t} />
 
         <section id="kimler" className="section wrap">
           <div className="sectionHead">
             <div>
-              <h2>Kimler için?</h2>
-              <p>Her ailenin ekranla derdi farklı. AliKa en çok bu durumlarda işe yarar.</p>
+              <h2>{t.audiences.title}</h2>
+              <p>{t.audiences.lead}</p>
             </div>
           </div>
           <div className="audiences">
-            {AUDIENCES.map((item) => (
-              <article key={item.id} className={`audience u-${item.id}`}>
-                <span className="featOn">{item.on.map((platform) => <span key={platform} className={`chip ${platform === 'Windows' ? 'win' : 'and'}`}>{platform}</span>)}</span>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-                <ul>
-                  {item.points.map((point) => <li key={point}>{point}</li>)}
-                </ul>
-              </article>
-            ))}
+            {AUDIENCES.map((item) => {
+              const text = t.audiences.items[item.id];
+              return (
+                <article key={item.id} className={`audience u-${item.id}`}>
+                  <PlatformChips on={item.on} />
+                  <h3>{text.title}</h3>
+                  <p>{text.body}</p>
+                  <ul>
+                    {text.points.map((point) => <li key={point}>{point}</li>)}
+                  </ul>
+                </article>
+              );
+            })}
           </div>
         </section>
 
         <section id="ozellikler" className="section wrap">
           <div className="sectionHead">
             <div>
-              <h2>Neler var?</h2>
-              <p>Kontrol, öğrenme ve aile aynı uygulamada. Her maddede hangi platformda olduğu yazar.</p>
+              <h2>{t.features.title}</h2>
+              <p>{t.features.lead}</p>
             </div>
           </div>
           <div className="features">
-            {FEATURE_GROUPS.map((group) => (
+            {featureGroups(t).map((group) => (
               <article key={group.id} className={`featGroup f-${group.id}`}>
                 <h3>{group.title}</h3>
                 <p className="featLead">{group.lead}</p>
@@ -676,9 +656,7 @@ export default function Home() {
                     <li key={item.name}>
                       <div className="featName">
                         <strong>{item.name}</strong>
-                        <span className="featOn">
-                          {item.on.map((platform) => <span key={platform} className={`chip ${platform === 'Windows' ? 'win' : 'and'}`}>{platform}</span>)}
-                        </span>
+                        <PlatformChips on={item.on} />
                       </div>
                       <span>{item.body}</span>
                     </li>
@@ -692,12 +670,12 @@ export default function Home() {
         <section id="nasil" className="section wrap">
           <div className="sectionHead">
             <div>
-              <h2>Nasıl çalışır ve kurulum</h2>
-              <p>Ebeveynin kuralından çocuğun kazandığı süreye, sıradan bir gün dört adımda. Kurulumu ve kullanımı kısa videolarda izleyin.</p>
+              <h2>{t.how.title}</h2>
+              <p>{t.how.lead}</p>
             </div>
           </div>
           <ol className="steps">
-            {STEPS.map((step, i) => (
+            {t.how.steps.map((step, i) => (
               <li key={step.title}>
                 <span className="stepNum" aria-hidden="true">{i + 1}</span>
                 <h3>{step.title}</h3>
@@ -707,9 +685,10 @@ export default function Home() {
           </ol>
 
           <div className="subHeadRow" id="videolar">
-            <h3 className="subHead">Videolar</h3>
-            <a className="textLink" href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">YouTube kanalı ↗</a>
+            <h3 className="subHead">{t.how.videos}</h3>
+            <a className="textLink" href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">{t.how.channel}</a>
           </div>
+          {t.how.videoNote && <p className="videoNote">{t.how.videoNote}</p>}
           <div className="installGrid">
             {VIDEOS.map((video) => (
               <article key={video.id} className="install">
@@ -719,13 +698,13 @@ export default function Home() {
                     <span className="mono videoTime">{video.duration}</span>
                     <span className="play" aria-hidden="true">▶</span>
                   </span>
-                  <span className="mono videoEyebrow">{video.platform} · {video.store ? 'İlk kurulum' : 'Kullanım'} · YouTube</span>
-                  <span className="videoTitle">{video.title}</span>
+                  <span className="mono videoEyebrow">{video.platform} · {video.store ? t.how.firstSetup : t.how.usage} · YouTube</span>
+                  <span className="videoTitle">{t.videos[video.key].title}</span>
                 </a>
-                <p>{video.body}</p>
+                <p>{t.videos[video.key].body}</p>
                 {video.store && (
-                  <a className="pill ghost" href={video.store === 'microsoft' ? storeUrl : PLAY_STORE_URL} target="_blank" rel="noopener">
-                    {video.store === 'microsoft' ? 'Microsoft Store’da edin' : 'Google Play’den edin'} <span aria-hidden="true">↗</span>
+                  <a className="pill ghost" href={video.store === 'microsoft' ? storeUrl : playUrl} target="_blank" rel="noopener">
+                    {video.store === 'microsoft' ? t.store.getStore : t.store.getPlay} <span aria-hidden="true">↗</span>
                   </a>
                 )}
               </article>
@@ -736,14 +715,14 @@ export default function Home() {
         <section id="yas" className="section wrap">
           <div className="sectionHead">
             <div>
-              <h2>Aynı AliKa, yaşa göre farklı anlatım</h2>
-              <p>Dil, görünüm, maskot ve kutlama dozu çocuğun yaşına göre değişir.</p>
+              <h2>{t.ages.title}</h2>
+              <p>{t.ages.lead}</p>
             </div>
           </div>
           <div className="ages">
-            {AGES.map((age, i) => (
-              <article key={age.range} className={`age a${i + 1}`}>
-                <span className="ageRange">{age.range}<small>yaş</small></span>
+            {t.ages.items.map((age, i) => (
+              <article key={AGE_RANGES[i]} className={`age a${i + 1}`}>
+                <span className="ageRange">{AGE_RANGES[i]}<small>{t.ages.unit}</small></span>
                 <h3>{age.title}</h3>
                 <p>{age.body}</p>
               </article>
@@ -754,26 +733,26 @@ export default function Home() {
 
         <section id="guven" className="trust">
           <div className="wrap trustInner">
-            <p className="eyebrow mono">Güven</p>
-            <h2>Ailenizin verisi, ailenizde kalır.</h2>
+            <p className="eyebrow mono">{t.trust.eyebrow}</p>
+            <h2>{t.trust.title}</h2>
             <ul className="trustList">
-              <li><strong>Reklam yok</strong><span>Çocuğunuzun ekranında satış yapılmaz.</span></li>
-              <li><strong>İzleyici yok</strong><span>Ürün telemetrisi ve üçüncü taraf takip yok.</span></li>
-              <li><strong>Bulut hesabı yok</strong><span>Temel veriler cihazda kalır. Aile cihazları arasında isteğe bağlı, şifreli ev ağı.</span></li>
+              {t.trust.items.map((item) => (
+                <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>
+              ))}
             </ul>
-            <a className="textLink onDark" href="/privacy/">Gizlilik politikasını okuyun →</a>
+            <a className="textLink onDark" href="/privacy/">{t.trust.privacyLink}</a>
           </div>
         </section>
 
         <section id="sss" className="section wrap">
           <div className="sectionHead">
             <div>
-              <h2>Sık sorulanlar</h2>
-              <p>Kurmadan önce en çok merak edilenler.</p>
+              <h2>{t.faq.title}</h2>
+              <p>{t.faq.lead}</p>
             </div>
           </div>
           <div className="faq">
-            {FAQ.map((item) => (
+            {t.faq.items.map((item) => (
               <details key={item.q}>
                 <summary>{item.q}</summary>
                 <p>{item.a}</p>
@@ -784,48 +763,49 @@ export default function Home() {
 
         <section id="iletisim" className="contact wrap">
           <img className="peek" src="/brand/alika-maskot.webp" alt="" aria-hidden="true" loading="lazy" />
-          <p className="eyebrow mono">İletişim</p>
-          <h2>Birlikte geliştirelim.</h2>
-          <p className="contactLead">Hata bildirimi, geliştirme fikri ya da eleştiri için en hızlı yol e-posta.</p>
-          <CopyEmail />
+          <p className="eyebrow mono">{t.contact.eyebrow}</p>
+          <h2>{t.contact.title}</h2>
+          <p className="contactLead">{t.contact.lead}</p>
+          <CopyEmail t={t} />
         </section>
       </main>
 
-      <ScreenDialog screen={openScreen} onClose={() => setOpenScreen(null)} />
+      <ScreenDialog screen={openScreen} onClose={() => setOpenScreen(null)} t={t} />
 
       <footer className="foot">
         <div className="wrap footGrid">
           <div className="footBrand">
-            <a className="brand" href="/" aria-label="AliKa ana sayfa">
+            <a className="brand" href={home} aria-label={t.a11y.home}>
               <img src="/brand/alika-logo.png" alt="" width="34" height="34" />
               <span>AliKa</span>
             </a>
-            <p>Kısıtlamıyoruz, planlıyoruz. Windows ve Android için ebeveyn kontrolü ve öğrenme; reklamsız, hesapsız.</p>
+            <p>{t.footer.tagline}</p>
           </div>
-          <nav className="footCols" aria-label="Alt menü">
+          <nav className="footCols" aria-label={t.a11y.footerMenu}>
             <div>
-              <h3>Ürün</h3>
-              <a href="#platformlar">Platformlar</a>
-              <a href="#kimler">Kimler için</a>
-              <a href="#ozellikler">Özellikler</a>
-              <a href="#nasil">Nasıl çalışır</a>
+              <h3>{t.footer.product}</h3>
+              <a href="#platformlar">{t.footer.platforms}</a>
+              <a href="#kimler">{t.footer.audiences}</a>
+              <a href="#ozellikler">{t.footer.features}</a>
+              <a href="#nasil">{t.footer.how}</a>
             </div>
             <div>
-              <h3>İndir</h3>
+              <h3>{t.footer.download}</h3>
               <a href={storeUrl} target="_blank" rel="noopener">Microsoft Store</a>
-              <a href={PLAY_STORE_URL} target="_blank" rel="noopener">Google Play</a>
+              <a href={playUrl} target="_blank" rel="noopener">Google Play</a>
             </div>
             <div>
-              <h3>Destek</h3>
-              <a href="#sss">Sık sorulanlar</a>
-              <a href="/rehber/">Rehberler</a>
-              <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">YouTube kanalı</a>
-              <a href={`mailto:${SUPPORT_EMAIL}`}>E-posta</a>
+              <h3>{t.footer.support}</h3>
+              <a href="#sss">{t.footer.faq}</a>
+              {guides && <a href={guides}>{t.footer.guides}</a>}
+              <a href={contentPath(lang)}>{t.footer.content}</a>
+              <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">{t.footer.channel}</a>
+              <a href={`mailto:${SUPPORT_EMAIL}`}>{t.footer.email}</a>
             </div>
             <div>
-              <h3>Yasal</h3>
-              <a href="/privacy/">Gizlilik</a>
-              <a href="/eula/">Kullanım koşulları</a>
+              <h3>{t.footer.legal}</h3>
+              <a href="/privacy/">{t.footer.privacy}</a>
+              <a href="/eula/">{t.footer.terms}</a>
             </div>
           </nav>
         </div>

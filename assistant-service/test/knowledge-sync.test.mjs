@@ -70,7 +70,7 @@ test('both site and assistant deployments enforce knowledge freshness', () => {
 });
 
 test('high-risk product claims remain synchronized with public source copy', () => {
-  const home = fs.readFileSync(path.join(siteRoot, 'src', 'home', 'Home.tsx'), 'utf8');
+  const home = fs.readFileSync(path.join(siteRoot, 'src', 'home', 'i18n', 'tr.ts'), 'utf8');
   const index = fs.readFileSync(path.join(siteRoot, 'index.html'), 'utf8');
   const privacy = fs.readFileSync(path.join(siteRoot, 'legal', 'privacy.html'), 'utf8');
   const facts = knowledgeBase.map((article) => article.content).join('\n');

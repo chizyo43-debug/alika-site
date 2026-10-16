@@ -12,37 +12,22 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
 LANGS = ("tr", "en", "de", "es", "fr", "pt", "ru", "ja", "ko")
-SLUGS = (
-    "how-it-works",
-    "ecosystem",
-    "features",
-    "age-groups",
-    "content",
-    "updates",
-    "roadmap",
-    "downloads",
-    "contact",
-)
-MICROSOFT_STORE_ID = "9N3P9F5ZKR5S"
-MICROSOFT_STORE_CIDS = {
-    "tr": "cid=site_home_tr",
-    "ja": "cid=site_home_ja",
-    "ko": "cid=site_home_ko",
+# Eski alt sayfalar yeni ana sayfanın bölümlerine yönlenir (tools/build.py ile aynı tablo).
+REDIRECT_ANCHORS = {
+    "how-it-works": "nasil",
+    "ecosystem": "platformlar",
+    "features": "ozellikler",
+    "age-groups": "yas",
+    "updates": "platformlar",
+    "roadmap": "platformlar",
+    "downloads": "platformlar",
+    "contact": "iletisim",
 }
+MICROSOFT_STORE_ID = "9N3P9F5ZKR5S"
 STORE_OFFER_MARKERS = {
+    "tr": ('"price":"80.00"', '"priceCurrency":"TRY"'),
     "ja": ('"price":"230"', '"priceCurrency":"JPY"'),
     "ko": ('"price":"2500"', '"priceCurrency":"KRW"'),
-}
-QUIZ_REWARD_MARKERS = {
-    "tr": "Ebeveyn, 1 dakika için gereken doğru soru sayısını belirler; çocuk bu kurala göre ek süre kazanır.",
-    "en": "The parent sets how many correct answers earn 1 minute; the child gains time only by that rule.",
-    "de": "Eltern legen fest, wie viele richtige Antworten 1 Minute bringen; nur nach dieser Regel wird Zeit verdient.",
-    "es": "La familia define cuántos aciertos dan 1 minuto; el menor gana tiempo solo con esa regla.",
-    "fr": "Le parent fixe le nombre de bonnes réponses pour gagner 1 minute ; le temps suit cette règle.",
-    "pt": "Os pais definem quantas respostas certas valem 1 minuto; o tempo segue essa regra.",
-    "ru": "Родитель задаёт, сколько верных ответов дают 1 минуту; время начисляется только по этому правилу.",
-    "ja": "保護者が1分を得るために必要な正解数を設定し、そのルールに沿って追加時間を獲得します。",
-    "ko": "보호자가 1분을 얻는 데 필요한 정답 수를 정하고, 아이는 그 규칙에 따라 추가 시간을 얻습니다.",
 }
 PLAY_STORE_PACKAGE = "com.alika.parental"
 GUIDE_SLUGS = (
@@ -95,9 +80,11 @@ def main() -> None:
     expected_pages = 0
     for lang in LANGS:
         base = DIST if lang == "tr" else DIST / lang
-        expected = [base / "index.html", *(base / slug / "index.html" for slug in SLUGS)]
-        expected_pages += len(expected)
-        for page in expected:
+        home_href = "/" if lang == "tr" else f"/{lang}/"
+        home_page = base / "index.html"
+        content_page = base / "content" / "index.html"
+        for page in (home_page, content_page):
+            expected_pages += 1
             if not page.exists():
                 errors.append(f"Missing page: {page}")
                 continue
@@ -110,26 +97,39 @@ def main() -> None:
                 errors.append(f"No canonical: {page}")
             if text.count('rel="alternate" hreflang=') != len(LANGS):
                 errors.append(f"Bad hreflang count: {page}")
+            if re.search(r'name="robots" content="[^"]*noindex', text, re.I):
+                errors.append(f"Indexable page is noindex: {page}")
             for attr, value in parser.links:
                 if not route_exists(value):
                     errors.append(f"Broken {attr} in {page}: {value}")
 
-        for slug in ("how-it-works", "features"):
-            guide_page = base / slug / "index.html"
-            if guide_page.exists():
-                guide_text = guide_page.read_text(encoding="utf-8")
-                if guide_text.count('class="guide-card reveal"') != 6:
-                    errors.append(f"Guide card coverage is incomplete: {guide_page}")
-                if guide_text.count('class="mini-demo ') != 6:
-                    errors.append(f"Guide animation coverage is incomplete: {guide_page}")
-                if QUIZ_REWARD_MARKERS[lang] not in guide_text:
-                    errors.append(f"Exact 3-question reward copy is missing: {guide_page}")
-                if 'class="demo-reward">1/3</div>' not in guide_text:
-                    errors.append(f"Configurable reward progress visual is missing: {guide_page}")
-                if any(stale in guide_text for stale in ('class="demo-reward">+3</div>', 'class="demo-reward">+5</div>')):
-                    errors.append(f"Stale fixed reward visual remains: {guide_page}")
+        # Dil ana sayfası: Vite ile derlenen yeni ana sayfa ve o dilin kabuğu.
+        if home_page.exists():
+            home_text = home_page.read_text(encoding="utf-8")
+            parser = LinkParser()
+            parser.feed(home_text)
+            if not any(attr == "src" and re.search(r"/assets/index-[^/]+\.js$", value) for attr, value in parser.links):
+                errors.append(f"New home page bundle is missing: {home_page}")
+            if f'<link rel="canonical" href="https://www.alika.tr{home_href}"' not in home_text:
+                errors.append(f"Home canonical is wrong: {home_page}")
+            if '<script type="application/ld+json">' not in home_text or '"@type":"SoftwareApplication"' not in home_text:
+                errors.append(f"SoftwareApplication schema is missing: {home_page}")
+            if f'"inLanguage":"{lang}"' not in home_text:
+                errors.append(f"Schema language is wrong: {home_page}")
+            for marker in STORE_OFFER_MARKERS.get(lang, ()):
+                if marker not in home_text:
+                    errors.append(f"Localized Store offer is missing ({marker}): {home_page}")
+            if lang not in STORE_OFFER_MARKERS and '"offers"' in home_text:
+                errors.append(f"Unverified Store price is published: {home_page}")
+            if f"apps.microsoft.com/detail/{MICROSOFT_STORE_ID}?cid=site_home_{lang}" not in home_text:
+                errors.append(f"Microsoft Store link is missing: {home_page}")
+            if f"details?id={PLAY_STORE_PACKAGE}&amp;hl={lang}" not in home_text:
+                errors.append(f"Google Play link is missing: {home_page}")
+            if '<section class="seoFallback">' not in home_text or "<h1>" not in home_text:
+                errors.append(f"Pre-rendered home summary is missing: {home_page}")
+            if "/assets/screenshots/" in home_text or "ALTIN" in home_text:
+                errors.append(f"Obsolete mascot screenshot remains: {home_page}")
 
-        content_page = base / "content" / "index.html"
         if content_page.exists():
             content_text = content_page.read_text(encoding="utf-8")
             if 'class="content-route"' not in content_text or "content-book-shell" not in content_text:
@@ -141,21 +141,21 @@ def main() -> None:
             if 'aria-label="Language"' not in content_text or "aria-hidden=\"true\">" not in content_text:
                 errors.append(f"Flagged language selector is missing: {content_page}")
 
-        downloads_page = base / "downloads" / "index.html"
-        if downloads_page.exists():
-            downloads_text = downloads_page.read_text(encoding="utf-8")
-            if (
-                "apps.microsoft.com" not in downloads_text
-                or MICROSOFT_STORE_ID not in downloads_text
-                or MICROSOFT_STORE_CIDS.get(lang, MICROSOFT_STORE_CIDS["tr"])
-                not in downloads_text
-            ):
-                errors.append(f"Microsoft Store link is missing: {downloads_page}")
-            if '"@type":"SoftwareApplication"' not in downloads_text:
-                errors.append(f"SoftwareApplication schema is missing: {downloads_page}")
-            for marker in STORE_OFFER_MARKERS.get(lang, ()):
-                if marker not in downloads_text:
-                    errors.append(f"Localized Store offer is missing ({marker}): {downloads_page}")
+        # Eski alt sayfalar: dizine girmeyen, yeni ana sayfanın bölümüne yönlenen kısa sayfa.
+        for slug, anchor in REDIRECT_ANCHORS.items():
+            expected_pages += 1
+            page = base / slug / "index.html"
+            if not page.exists():
+                errors.append(f"Missing redirect: {page}")
+                continue
+            text = page.read_text(encoding="utf-8")
+            target = f"{home_href}#{anchor}"
+            if f'<meta http-equiv="refresh" content="0; url={target}">' not in text:
+                errors.append(f"Redirect target is wrong: {page}")
+            if '<meta name="robots" content="noindex">' not in text:
+                errors.append(f"Redirect must be noindex: {page}")
+            if f'<html lang="{lang}">' not in text:
+                errors.append(f"Wrong lang in redirect: {page}")
 
     if expected_pages != 90:
         errors.append(f"Internal checker error, expected page count is {expected_pages}")
@@ -178,7 +178,7 @@ def main() -> None:
 
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
-        expected_cid = "cid=organic_guide_windows_tr" if slug == "windows-cocuk-ekran-suresi-nasil-yonetilir" else MICROSOFT_STORE_CIDS["tr"]
+        expected_cid = "cid=organic_guide_windows_tr" if slug == "windows-cocuk-ekran-suresi-nasil-yonetilir" else "cid=site_home_tr"
         if page.exists() and expected_cid not in page.read_text(encoding="utf-8"):
             errors.append(f"Campaign CID is missing from guide CTA: {page}")
 
@@ -331,31 +331,25 @@ def main() -> None:
     if (DIST / "CNAME").read_text(encoding="utf-8").strip() != "www.alika.tr":
         errors.append("CNAME is not www.alika.tr")
 
-    # Türkçe kök: Vite ile derlenen yeni ana sayfa. Diğer dillerin ana sayfası statik kalır.
+    # Tüm dillerin ana sayfası Vite ile derlenen yeni ana sayfadır.
     home_bundles = tuple((DIST / "assets").glob("index-*.js"))
     home_bundle_text = "\n".join(bundle.read_text(encoding="utf-8") for bundle in home_bundles)
     if not home_bundles or MICROSOFT_STORE_ID not in home_bundle_text or "site_home_" not in home_bundle_text:
         errors.append("Microsoft Store link is missing from the home page bundle")
     if PLAY_STORE_PACKAGE not in home_bundle_text:
         errors.append("Google Play link is missing from the home page bundle")
+    if (DIST / "assets" / "screenshots").exists():
+        errors.append("Obsolete mascot screenshots are still published")
+    if (DIST / ".vite").exists():
+        errors.append("Build manifest must not be published")
 
     root_page = (DIST / "index.html").read_text(encoding="utf-8")
-    parser = LinkParser()
-    parser.feed(root_page)
-    if not any(attr == "src" and re.search(r"/assets/index-[^/]+\.js$", value) for attr, value in parser.links):
-        errors.append("Home page bundle is missing from the Turkish root")
-    for lang in LANGS[1:]:
-        page = DIST / lang / "index.html"
-        if page.exists() and "/assets/index-" in page.read_text(encoding="utf-8"):
-            errors.append(f"Language root unexpectedly loads the Turkish home bundle: {page}")
     if '<script type="application/ld+json">' not in root_page or '"SoftwareApplication"' not in root_page:
         errors.append("SoftwareApplication schema is missing from the Turkish home page")
     if "AliKa: Kısıtlamıyoruz, planlıyoruz" not in root_page:
         errors.append("Turkish home page is not pre-rendered with the campaign message")
     if "Windows satın alımı Android’i kapsamaz" not in root_page:
         errors.append("Windows-only Store purchase scope is missing from the Turkish home page")
-    if MICROSOFT_STORE_CIDS["tr"] not in root_page or PLAY_STORE_PACKAGE not in root_page:
-        errors.append("Store links are missing from the Turkish home page")
     if re.search(r'name="robots" content="[^"]*noindex', root_page, re.I):
         errors.append("Turkish home page must not be noindex")
 
@@ -368,8 +362,8 @@ def main() -> None:
         print("\n".join(f"ERROR: {error}" for error in errors))
         raise SystemExit(1)
     print(
-        f"OK: {expected_pages} localized pages, {len(guide_pages)} Turkish guide pages, "
-        "108 guide animations, verified catalog downloads, fixed legal routes, local links and tracker fence"
+        f"OK: {expected_pages} localized pages (9 new homes, 9 catalogues, 72 redirects), "
+        f"{len(guide_pages)} Turkish guide pages, verified catalog downloads, fixed legal routes, local links and tracker fence"
     )
 
 

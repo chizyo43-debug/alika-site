@@ -9,5 +9,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: false,
+    // Dil kabukları kendi çeviri parçasını önceden yükler (tools/build-language-homes.mjs).
+    manifest: true,
   },
 });

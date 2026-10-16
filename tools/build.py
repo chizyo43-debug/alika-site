@@ -63,17 +63,17 @@ GUIDE_BASE = "rehber"
 UK_GUIDE_PATH = "en/guides/windows-child-screen-time"
 UK_LANDING_PATH = "en/uk-windows-screen-time"
 UK_CAMPAIGN_ID = "community_guide_windows_uk_v1"
-SLUGS = (
-    "how-it-works",
-    "ecosystem",
-    "features",
-    "age-groups",
-    "content",
-    "updates",
-    "roadmap",
-    "downloads",
-    "contact",
-)
+# Eski alt sayfalar yeni ana sayfanın bölümlerine yönlenir; yalnız içerik kataloğu ayrı sayfa kalır.
+REDIRECT_ANCHORS = {
+    "how-it-works": "nasil",
+    "ecosystem": "platformlar",
+    "features": "ozellikler",
+    "age-groups": "yas",
+    "updates": "platformlar",
+    "roadmap": "platformlar",
+    "downloads": "platformlar",
+    "contact": "iletisim",
+}
 
 GUIDES = (
     {
@@ -239,18 +239,6 @@ GUIDES = (
     },
 )
 
-SCREEN_LABELS = {
-    "tr": ("Çocuk", "Ebeveyn", "Sorular", "Raporlar"),
-    "en": ("Child", "Parent", "Questions", "Reports"),
-    "de": ("Kind", "Eltern", "Aufgaben", "Berichte"),
-    "es": ("Niño", "Familia", "Preguntas", "Informes"),
-    "fr": ("Enfant", "Parent", "Questions", "Rapports"),
-    "pt": ("Criança", "Família", "Questões", "Relatórios"),
-    "ru": ("Ребёнок", "Родитель", "Задания", "Отчёты"),
-    "ja": ("子ども", "保護者", "問題", "レポート"),
-    "ko": ("자녀", "보호자", "문제", "리포트"),
-}
-
 ACCESS_LABELS = {
     "tr": ("İçeriğe geç", "Menü", "Geç", "Ortak ekran", "Hazır", "Yanıt gizli"),
     "en": ("Skip to content", "Menu", "Skip", "Shared screen", "Ready", "Answer hidden"),
@@ -263,105 +251,6 @@ ACCESS_LABELS = {
     "ko": ("본문으로", "메뉴", "건너뛰기", "공유 화면", "준비됨", "답변 숨김"),
 }
 
-GUIDE_LABELS = {
-    "tr": ("Ekran ekran AliKa", "Her menünün nerede olduğunu, ne işe yaradığını ve nasıl kullanıldığını kısa örneklerle görün.", "Nerede?", "Ne işe yarar?", "Nasıl kullanılır?", "Kurallar", "Odam ve Vitrin", "Çalışan özelliği izle"),
-    "en": ("AliKa, screen by screen", "See where every menu is, what it does and how to use it through short examples.", "Where?", "What does it do?", "How to use it?", "Rules", "Room & Showcase", "Watch the feature"),
-    "de": ("AliKa, Bildschirm für Bildschirm", "Sehen Sie mit kurzen Beispielen, wo jedes Menü liegt, was es tut und wie es benutzt wird.", "Wo?", "Wozu dient es?", "Wie wird es benutzt?", "Regeln", "Zimmer & Schaufenster", "Funktion ansehen"),
-    "es": ("AliKa, pantalla por pantalla", "Vea dónde está cada menú, para qué sirve y cómo se usa con ejemplos breves.", "¿Dónde?", "¿Para qué sirve?", "¿Cómo se usa?", "Reglas", "Habitación y escaparate", "Ver la función"),
-    "fr": ("AliKa, écran par écran", "Découvrez où se trouve chaque menu, son rôle et son utilisation avec de courts exemples.", "Où ?", "À quoi sert-il ?", "Comment l’utiliser ?", "Règles", "Chambre et vitrine", "Voir la fonction"),
-    "pt": ("AliKa, ecrã a ecrã", "Veja onde fica cada menu, para que serve e como usar através de exemplos curtos.", "Onde?", "Para que serve?", "Como usar?", "Regras", "Quarto e vitrine", "Ver a função"),
-    "ru": ("AliKa, экран за экраном", "Узнайте, где находится каждое меню, зачем оно нужно и как им пользоваться.", "Где?", "Для чего?", "Как пользоваться?", "Правила", "Комната и витрина", "Посмотреть функцию"),
-    "ja": ("画面ごとにわかるAliKa", "各メニューの場所、役割、使い方を短い例で確認できます。", "場所", "できること", "使い方", "ルール", "マイルームとショーケース", "機能を見る"),
-    "ko": ("화면별로 보는 AliKa", "각 메뉴의 위치, 역할, 사용 방법을 짧은 예시로 확인하세요.", "위치", "기능", "사용 방법", "기능 규칙", "내 방과 쇼케이스", "기능 보기"),
-}
-
-HOW_TEXT = {
-    "tr": (
-        "Ana ekranda kalan süreyi görün; tek dokunuşla soru çözmeye veya Odam’a geçin.",
-        "Ebeveyn PIN’iyle açın. Bugün özetinden kurallara, raporlara ve ayarlara ilerleyin.",
-        "Günlük toplamı, uygulama limitini, gece saatini veya engeli seçip Kaydet’e basın.",
-        "Haftalık, Sorular, Geçmiş ve Olaylar alt menülerinden yalnız ihtiyaç duyduğunuz ayrıntıyı açın.",
-        "Bir cevap seçin. Ebeveyn, 1 dakika için gereken doğru soru sayısını belirler; çocuk bu kurala göre ek süre kazanır.",
-        "Kazanılan altınla kozmetik seçin; rozetleri ve seri ilerlemesini aynı alanda izleyin.",
-    ),
-    "en": (
-        "See remaining time on Home; open Questions or My Room with one tap.",
-        "Unlock with the parent PIN, then move from Today to Rules, Reports or Settings.",
-        "Choose a daily total, app limit, night schedule or block, then press Save.",
-        "Open only the detail you need under Weekly, Questions, History or Events.",
-        "Choose an answer. The parent sets how many correct answers earn 1 minute; the child gains time only by that rule.",
-        "Use earned gold for cosmetics and follow badges and streak progress in one place.",
-    ),
-    "de": (
-        "Restzeit auf Start sehen; mit einem Tipp Aufgaben oder Zimmer öffnen.",
-        "Mit der Eltern-PIN öffnen und von Heute zu Regeln, Berichten oder Einstellungen wechseln.",
-        "Tageslimit, App-Limit, Nachtzeit oder Sperre wählen und Speichern drücken.",
-        "Unter Woche, Aufgaben, Verlauf oder Ereignisse nur das benötigte Detail öffnen.",
-        "Antwort wählen. Eltern legen fest, wie viele richtige Antworten 1 Minute bringen; nur nach dieser Regel wird Zeit verdient.",
-        "Verdientes Gold für Kosmetik nutzen und Abzeichen sowie Serien gemeinsam verfolgen.",
-    ),
-    "es": (
-        "Vea el tiempo restante en Inicio y abra Preguntas o Mi habitación con un toque.",
-        "Abra con el PIN parental y pase de Hoy a Reglas, Informes o Ajustes.",
-        "Elija total diario, límite de app, horario nocturno o bloqueo y pulse Guardar.",
-        "Abra solo el detalle necesario en Semana, Preguntas, Historial o Eventos.",
-        "Elija una respuesta. La familia define cuántos aciertos dan 1 minuto; el menor gana tiempo solo con esa regla.",
-        "Use el oro ganado en cosméticos y siga insignias y rachas en un solo lugar.",
-    ),
-    "fr": (
-        "Consultez le temps restant sur l’accueil puis ouvrez Questions ou Ma chambre.",
-        "Ouvrez avec le PIN parent puis accédez à Aujourd’hui, Règles, Rapports ou Réglages.",
-        "Choisissez total quotidien, limite d’app, horaire de nuit ou blocage puis enregistrez.",
-        "Ouvrez seulement le détail utile dans Semaine, Questions, Historique ou Événements.",
-        "Choisissez une réponse. Le parent fixe le nombre de bonnes réponses pour gagner 1 minute ; le temps suit cette règle.",
-        "Utilisez l’or gagné pour les objets cosmétiques et suivez badges et séries.",
-    ),
-    "pt": (
-        "Veja o tempo restante no início e abra Questões ou Meu quarto com um toque.",
-        "Abra com o PIN dos pais e avance de Hoje para Regras, Relatórios ou Definições.",
-        "Escolha total diário, limite de app, horário noturno ou bloqueio e guarde.",
-        "Abra só o detalhe necessário em Semana, Questões, Histórico ou Eventos.",
-        "Escolha uma resposta. Os pais definem quantas respostas certas valem 1 minuto; o tempo segue essa regra.",
-        "Use o ouro ganho em cosméticos e acompanhe emblemas e séries no mesmo local.",
-    ),
-    "ru": (
-        "На главном экране смотрите остаток времени и одним касанием открывайте задания или комнату.",
-        "Откройте родительским PIN-кодом и перейдите из «Сегодня» в Правила, Отчёты или Настройки.",
-        "Выберите общий лимит, лимит приложения, ночное время или блокировку и нажмите Сохранить.",
-        "Открывайте нужное в разделах Неделя, Задания, История или События.",
-        "Выберите ответ. Родитель задаёт, сколько верных ответов дают 1 минуту; время начисляется только по этому правилу.",
-        "Тратьте заработанное золото на оформление и следите за значками и сериями.",
-    ),
-    "ja": (
-        "ホームで残り時間を確認し、ワンタップで問題またはマイルームを開きます。",
-        "保護者PINで開き、今日からルール、レポート、設定へ進みます。",
-        "1日の合計、アプリ制限、夜間時間、ブロックを選んで保存します。",
-        "週間、問題、履歴、イベントから必要な詳細だけを開きます。",
-        "答えを選びます。保護者が1分を得るために必要な正解数を設定し、そのルールに沿って追加時間を獲得します。",
-        "獲得したゴールドでアイテムを選び、バッジと連続記録を確認します。",
-    ),
-    "ko": (
-        "홈에서 남은 시간을 보고 한 번 눌러 문제 또는 내 방을 엽니다.",
-        "보호자 PIN으로 열고 오늘에서 규칙, 리포트, 설정으로 이동합니다.",
-        "일일 총량, 앱 제한, 야간 시간 또는 차단을 선택하고 저장합니다.",
-        "주간, 문제, 기록, 이벤트에서 필요한 세부 정보만 엽니다.",
-        "답을 고릅니다. 보호자가 1분을 얻는 데 필요한 정답 수를 정하고, 아이는 그 규칙에 따라 추가 시간을 얻습니다.",
-        "획득한 골드로 꾸미기 아이템을 고르고 배지와 연속 기록을 확인합니다.",
-    ),
-}
-
-DOWNLOAD_LABELS = {
-    "tr": ("Pilot içerik paketini indir", "Türkiye 5. sınıf için üretim aşamasındaki içerik havuzu. Kalite incelemesi sürüyor; ZIP GitHub sayfası açılmadan doğrudan indirilir.", "Pilot paketi indir", "İndiriliyor…", "İndirme hazır", "Doğrudan indirme açılamadı; tekrar deneyin."),
-    "en": ("Download the pilot content pack", "A work-in-progress Grade 5 content pool for Türkiye. Quality review continues; the ZIP downloads without opening GitHub.", "Download pilot pack", "Downloading…", "Download ready", "Direct download could not start. Please try again."),
-    "de": ("Pilot-Inhaltspaket laden", "Inhalte für die 5. Klasse in der Türkei in laufender Qualitätsprüfung. Die ZIP-Datei wird direkt geladen.", "Pilotpaket laden", "Wird geladen…", "Download bereit", "Direkter Download konnte nicht starten."),
-    "es": ("Descargar el paquete piloto", "Contenido de 5.º de Türkiye aún en revisión de calidad. El ZIP se descarga sin abrir GitHub.", "Descargar piloto", "Descargando…", "Descarga lista", "No se pudo iniciar la descarga directa."),
-    "fr": ("Télécharger le pack pilote", "Contenus niveau 5 en Türkiye encore en contrôle qualité. Le ZIP se télécharge sans ouvrir GitHub.", "Télécharger le pilote", "Téléchargement…", "Téléchargement prêt", "Le téléchargement direct n’a pas démarré."),
-    "pt": ("Transferir o pacote piloto", "Conteúdo do 5.º ano na Türkiye ainda em revisão de qualidade. O ZIP é transferido sem abrir o GitHub.", "Transferir piloto", "A transferir…", "Transferência pronta", "Não foi possível iniciar a transferência."),
-    "ru": ("Скачать пилотный пакет", "Материалы для 5 класса Турции ещё проходят проверку качества. ZIP скачивается без открытия GitHub.", "Скачать пилот", "Загрузка…", "Файл готов", "Не удалось начать прямую загрузку."),
-    "ja": ("パイロット教材をダウンロード", "トルコの小学5年生向け教材は品質確認中です。GitHubを開かずZIPを直接ダウンロードします。", "パイロット版をダウンロード", "ダウンロード中…", "準備完了", "直接ダウンロードを開始できませんでした。"),
-    "ko": ("파일럿 콘텐츠 팩 다운로드", "튀르키예 5학년 콘텐츠는 아직 품질 검토 중입니다. GitHub을 열지 않고 ZIP을 바로 받습니다.", "파일럿 팩 다운로드", "다운로드 중…", "다운로드 준비됨", "직접 다운로드를 시작하지 못했습니다."),
-}
-
 
 def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
@@ -370,6 +259,11 @@ def esc(value: object) -> str:
 def href(lang: str, slug: str = "") -> str:
     prefix = "" if lang == "tr" else f"/{lang}"
     return f"{prefix}/{slug + '/' if slug else ''}"
+
+
+def page_href(lang: str, slug: str) -> str:
+    anchor = REDIRECT_ANCHORS.get(slug)
+    return f"{href(lang)}#{anchor}" if anchor else href(lang, slug)
 
 
 def locale_switch_path(target_lang: str, slug: str = "") -> str:
@@ -404,9 +298,9 @@ def language_menu(locales: dict[str, dict], lang: str, slug: str = "") -> str:
 def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
     c = locales[lang]
     access = ACCESS_LABELS[lang]
-    nav_slugs = ("how-it-works", "ecosystem", "features", "age-groups", "content", "updates")
+    nav_slugs = ("how-it-works", "ecosystem", "features", "age-groups", "content")
     nav = "".join(
-        f'<a href="{href(lang, item)}">{esc(label)}</a>'
+        f'<a href="{page_href(lang, item)}">{esc(label)}</a>'
         for item, label in zip(nav_slugs, c["nav"])
     )
     return f"""
@@ -427,7 +321,7 @@ def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
           <summary aria-label="Language"><span aria-hidden="true">{LANGUAGE_FLAGS[lang]}</span><span>{esc(c["name"])}</span></summary>
           <div class="language-list">{language_menu(locales, lang, slug)}</div>
         </details>
-        <a class="button button-small" href="{href(lang, 'downloads')}">{esc(c["get"])}</a>
+        <a class="button button-small" href="{page_href(lang, 'downloads')}">{esc(c["get"])}</a>
       </div>
     </header>
     """
@@ -442,8 +336,8 @@ def footer(locales: dict[str, dict], lang: str) -> str:
         <div><strong>AliKa</strong><span>{esc(c["final_body"])}</span></div>
       </div>
       <div class="footer-links">
-        <a href="{href(lang, 'roadmap')}">{esc(c["pages"]["roadmap"][0])}</a>
-        <a href="{href(lang, 'contact')}">{esc(c["support"])}</a>
+        <a href="{page_href(lang, 'roadmap')}">{esc(c["pages"]["roadmap"][0])}</a>
+        <a href="{page_href(lang, 'contact')}">{esc(c["support"])}</a>
         <a href="/privacy/">{esc(c["privacy"])}</a>
         <a href="/eula/">{esc(c["eula"])}</a>
       </div>
@@ -483,7 +377,6 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
-  {software_application_schema(description, lang) if slug in ("", "downloads") else ""}
 </head>
 <body{' class="content-route"' if slug == "content" else ''}>
   {header(locales, lang, slug)}
@@ -497,30 +390,6 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
 """
 
 
-def software_application_schema(description: str, lang: str) -> str:
-    market = store_market(lang)
-    store_url = microsoft_store_url(lang)
-    data = {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "AliKa Parental Control",
-        "description": description,
-        "applicationCategory": "UtilitiesApplication",
-        "applicationSubCategory": "Parental control",
-        "operatingSystem": "Windows 10, Windows 11",
-        "softwareVersion": "1.1.68",
-        "url": BASE_URL,
-        "downloadUrl": store_url,
-        "publisher": {"@type": "Organization", "name": "ErenKa Software"},
-        "offers": {
-            "@type": "Offer",
-            "price": market["price"],
-            "priceCurrency": market["currency"],
-            "availability": "https://schema.org/InStock",
-            "url": store_url,
-        },
-    }
-    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False, separators=(",", ":"))}</script>'
 
 
 def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr") -> str:
@@ -655,257 +524,14 @@ def uk_landing_body() -> str:
     """
 
 
-def screenshot_card(src: str, title: str, tab: str, active: bool = False) -> str:
-    active_class = " is-active" if active else ""
-    return (
-        f'<figure class="screen-card{active_class}" data-screen-panel="{tab}">'
-        f'<div class="phone-frame"><img src="/assets/screenshots/{src}" alt="{esc(title)}" loading="lazy"></div>'
-        f'<figcaption>{esc(title)}</figcaption></figure>'
-    )
 
 
-def home(locales: dict[str, dict], lang: str) -> str:
-    c = locales[lang]
-    screen_labels = SCREEN_LABELS[lang]
-    access = ACCESS_LABELS[lang]
-    eco_cards = "".join(
-        f'<button type="button" class="eco-choice{" is-active" if i == 0 else ""}" '
-        f'data-eco-choice="{i}"><span>0{i + 1}</span>{esc(label)}</button>'
-        for i, label in enumerate(c["eco_items"])
-    )
-    age_buttons = "".join(
-        f'<button type="button" class="age-button{" is-active" if i == 0 else ""}" '
-        f'data-age="{i}"><strong>{age}</strong><span>{esc(c["age_labels"][i])}</span></button>'
-        for i, age in enumerate(("5–7", "8–11", "12–14", "15–18"))
-    )
-    trust = "".join(f"<li><span></span>{esc(item)}</li>" for item in c["trust_items"])
-    pills = "".join(f"<li><span>0{i + 1}</span>{esc(item)}</li>" for i, item in enumerate(c["pill"]))
-    return f"""
-    <div class="intro" data-intro aria-hidden="true">
-      <button type="button" data-intro-skip aria-label="{esc(access[2])}">{esc(access[2])}</button>
-      <img src="/assets/brand/alika-logo.png" alt="" width="150" height="150">
-      <span>AliKa</span>
-    </div>
-    <main id="main">
-      <section class="hero section-dark">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="hero-copy reveal">
-          <p class="eyebrow">{esc(c["hero_kicker"])}</p>
-          <h1>{esc(c["hero_title"])}</h1>
-          <p class="lede">{esc(c["hero_body"])}</p>
-          <div class="button-row">
-            <a class="button" href="{href(lang, 'downloads')}">{esc(c["get"])}</a>
-            <a class="button button-ghost" href="#ecosystem">{esc(c["hero_alt"])}</a>
-          </div>
-          <ul class="hero-pills">{pills}</ul>
-        </div>
-        <div class="hero-stage reveal" aria-label="AliKa product preview">
-          <div class="stage-glow"></div>
-          <div class="desktop-shell">
-            <div class="desktop-top"><i></i><i></i><i></i><span>AliKa · {esc(screen_labels[1])}</span></div>
-            <div class="desktop-body">
-              <div class="mini-sidebar"><b>A</b><i></i><i></i><i></i><i></i></div>
-              <div class="desktop-content">
-                <p>{esc(c["status_today"])}</p><strong>42 min</strong>
-                <div class="progress"><span></span></div>
-                <div class="mini-grid"><i></i><i></i><i></i></div>
-              </div>
-            </div>
-          </div>
-          <div class="hero-phone">
-            <img src="/assets/screenshots/android-home.png" alt="AliKa Android child home screen">
-          </div>
-          <div class="float-card float-question"><small>{esc(screen_labels[2])}</small><strong>8 / 10</strong><span>{esc(c["pill"][0])}</span></div>
-          <div class="float-card float-plan"><small>{esc(c["pill"][1])}</small><strong>4</strong><span>{esc(c["status_plan"])}</span></div>
-        </div>
-      </section>
-
-      <section class="method section-light">
-        <div class="section-heading reveal">
-          <p class="eyebrow">{esc(c["approach_kicker"])}</p>
-          <h2>{esc(c["approach_title"])}</h2>
-          <p>{esc(c["approach_body"])}</p>
-        </div>
-        <div class="method-grid reveal">
-          <article><span>01</span><h3>{esc(c["pill"][2])}</h3><p>{esc(c["approach_body"])}</p></article>
-          <article><span>02</span><h3>{esc(c["pill"][0])}</h3><p>{esc(c["proof_body"])}</p></article>
-          <article><span>03</span><h3>{esc(c["pill"][1])}</h3><p>{esc(c["final_body"])}</p></article>
-        </div>
-      </section>
-
-      <section class="proof section-snow">
-        <div class="section-heading center reveal">
-          <p class="eyebrow">{esc(c["proof_kicker"])}</p>
-          <h2>{esc(c["proof_title"])}</h2>
-          <p>{esc(c["proof_body"])}</p>
-        </div>
-        <div class="screen-tabs reveal" role="tablist" aria-label="Product screens">
-          <button class="is-active" data-screen-tab="child">{esc(screen_labels[0])}</button>
-          <button data-screen-tab="parent">{esc(screen_labels[1])}</button>
-          <button data-screen-tab="quiz">{esc(screen_labels[2])}</button>
-          <button data-screen-tab="reports">{esc(screen_labels[3])}</button>
-        </div>
-        <div class="screen-showcase reveal">
-          {screenshot_card("android-home.png", "AliKa child experience", "child", True)}
-          {screenshot_card("android-parent.png", "PIN-protected parent panel", "parent")}
-          {screenshot_card("android-quiz.png", "Question experience", "quiz")}
-          {screenshot_card("android-reports.png", "Progress and reports", "reports")}
-          <div class="screen-copy">
-            <span class="status status-today">{esc(c["status_today"])}</span>
-            <h3>{esc(c["proof_title"])}</h3>
-            <p>{esc(c["proof_body"])}</p>
-            <a href="{href(lang, 'how-it-works')}">{esc(c["learn_more"])} <span>→</span></a>
-          </div>
-        </div>
-      </section>
-
-      <section class="ecosystem section-dark" id="ecosystem">
-        <div class="section-heading reveal">
-          <p class="eyebrow">{esc(c["ecosystem_kicker"])}</p>
-          <h2>{esc(c["ecosystem_title"])}</h2>
-          <p>{esc(c["ecosystem_body"])}</p>
-        </div>
-        <div class="eco-layout reveal">
-          <div class="eco-choices">{eco_cards}</div>
-          <div class="family-orbit" data-eco-stage>
-            <div class="home-boundary"></div>
-            <div class="eco-node node-tv"><small>{esc(access[3])}</small><strong>TV</strong><span>{esc(screen_labels[2])} 04</span></div>
-            <div class="eco-node node-parent"><small>{esc(screen_labels[1])}</small><strong>A</strong><span>{esc(access[4])}</span></div>
-            <div class="eco-node node-child"><small>{esc(screen_labels[0])}</small><strong>B</strong><span>{esc(access[5])}</span></div>
-            <div class="eco-center"><img src="/assets/brand/alika-logo.png" alt="" width="72" height="72"><b data-eco-title>{esc(c["eco_items"][0])}</b></div>
-          </div>
-          <aside class="eco-note">
-            <span class="status status-dev">{esc(c["status_dev"])}</span>
-            <p>{esc(c["planned_note"])}</p>
-            <a href="{href(lang, 'ecosystem')}">{esc(c["learn_more"])} <span>→</span></a>
-          </aside>
-        </div>
-      </section>
-
-      <section class="ages section-light">
-        <div class="section-heading reveal">
-          <p class="eyebrow">{esc(c["age_kicker"])}</p>
-          <h2>{esc(c["age_title"])}</h2>
-          <p>{esc(c["age_body"])}</p>
-        </div>
-        <div class="age-layout reveal">
-          <div class="age-buttons">{age_buttons}</div>
-          <div class="age-preview age-0" data-age-preview>
-            <div class="age-mascot"><img src="/assets/brand/alika-logo.png" alt=""></div>
-            <div class="age-copy"><small>5–7</small><strong data-age-label>{esc(c["age_labels"][0])}</strong><i></i><i></i><i></i></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="trust section-snow">
-        <div class="trust-card reveal">
-          <div>
-            <p class="eyebrow">{esc(c["trust_kicker"])}</p>
-            <h2>{esc(c["trust_title"])}</h2>
-            <p>{esc(c["trust_body"])}</p>
-            <a href="/privacy/">{esc(c["privacy"])} <span>→</span></a>
-          </div>
-          <ul>{trust}</ul>
-        </div>
-      </section>
-
-      <section class="content-hub section-light">
-        <div class="section-heading reveal">
-          <p class="eyebrow">{esc(c["content_kicker"])}</p>
-          <h2>{esc(c["content_title"])}</h2>
-          <p>{esc(c["content_body"])}</p>
-        </div>
-        <div class="package-grid reveal">
-          <article><small>JP · 5</small><h3>算数</h3><p>23 anlatım · 500 soru</p><span>{esc(c["status_today"])}</span></article>
-          <article><small>KR · 5</small><h3>수학</h3><p>23 anlatım · 500 soru</p><span>{esc(c["status_today"])}</span></article>
-          <article class="package-cta"><h3>{esc(c["content_title"])}</h3><a href="{href(lang, 'content')}">{esc(c["learn_more"])} →</a></article>
-        </div>
-      </section>
-
-      <section class="final-cta section-dark reveal">
-        <img src="/assets/brand/alika-logo.png" width="86" height="86" alt="">
-        <h2>{esc(c["final_title"])}</h2>
-        <p>{esc(c["final_body"])}</p>
-        <div class="button-row">
-          <a class="button" href="{href(lang, 'downloads')}">{esc(c["get"])}</a>
-          <a class="button button-ghost" href="{href(lang, 'features')}">{esc(c["learn_more"])}</a>
-        </div>
-      </section>
-    </main>
-    """
 
 
-def status_cards(c: dict) -> str:
-    return f"""
-    <div class="status-grid">
-      <article><span class="status status-today">{esc(c["status_today"])}</span><h3>{esc(c["pill"][0])} · {esc(c["pill"][1])}</h3><p>{esc(c["proof_body"])}</p></article>
-      <article><span class="status status-dev">{esc(c["status_dev"])}</span><h3>{esc(c["ecosystem_title"])}</h3><p>{esc(c["ecosystem_body"])}</p></article>
-      <article><span class="status status-plan">{esc(c["status_plan"])}</span><h3>{esc(c["eco_items"][0])}</h3><p>{esc(c["planned_note"])}</p></article>
-    </div>
-    """
 
 
-def demo_markup(kind: str, c: dict, lang: str) -> str:
-    labels = GUIDE_LABELS[lang]
-    if kind == "home":
-        body = f'<div class="demo-ring"><b>42</b><small>min</small></div><div class="demo-actions"><i></i><i></i></div>'
-    elif kind == "parent":
-        body = '<div class="demo-pin"><i></i><i></i><i></i><i></i></div><div class="demo-panels"><i></i><i></i><i></i></div>'
-    elif kind == "rules":
-        body = '<div class="demo-rule"><span><i></i></span><span><i></i></span><span><i></i></span></div><b class="demo-save">✓</b>'
-    elif kind == "reports":
-        body = '<div class="demo-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="demo-tabs"><i></i><i></i><i></i></div>'
-    elif kind == "quiz":
-        body = '<div class="demo-question"><b>8 × 4</b><span><i>24</i><i>32</i><i>36</i></span></div><div class="demo-reward">1/3</div>'
-    else:
-        body = '<div class="demo-coins"><i></i><i></i><i></i></div><div class="demo-items"><i></i><i></i><i></i></div>'
-    return f'<div class="mini-demo demo-{kind}" role="img" aria-label="{esc(labels[7])}">{body}</div>'
 
 
-def guide_atlas(lang: str, c: dict) -> str:
-    screen = SCREEN_LABELS[lang]
-    labels = GUIDE_LABELS[lang]
-    names = (screen[0], screen[1], labels[5], screen[3], screen[2], labels[6])
-    paths = (
-        f"AliKa › {screen[0]}",
-        f"AliKa › {screen[1]}",
-        f"{screen[1]} › {labels[5]}",
-        f"{screen[1]} › {screen[3]}",
-        f"{screen[0]} › {screen[2]}",
-        f"{screen[0]} › {labels[6]}",
-    )
-    purposes = (
-        c["hero_body"],
-        c["trust_body"],
-        c["approach_body"],
-        c["proof_body"],
-        c["final_body"],
-        c["content_body"],
-    )
-    kinds = ("home", "parent", "rules", "reports", "quiz", "room")
-    cards = []
-    for i, (name, path, purpose, how, kind) in enumerate(zip(names, paths, purposes, HOW_TEXT[lang], kinds)):
-        cards.append(f"""
-        <article class="guide-card reveal">
-          <div class="guide-copy">
-            <span class="guide-number">0{i + 1}</span>
-            <h3>{esc(name)}</h3>
-            <dl>
-              <div><dt>{esc(labels[2])}</dt><dd>{esc(path)}</dd></div>
-              <div><dt>{esc(labels[3])}</dt><dd>{esc(purpose)}</dd></div>
-              <div><dt>{esc(labels[4])}</dt><dd>{esc(how)}</dd></div>
-            </dl>
-          </div>
-          {demo_markup(kind, c, lang)}
-        </article>""")
-    return f"""
-    <div class="guide-heading">
-      <p class="eyebrow">{esc(c["approach_kicker"])}</p>
-      <h2>{esc(labels[0])}</h2>
-      <p>{esc(labels[1])}</p>
-    </div>
-    <div class="guide-grid">{"".join(cards)}</div>
-    """
 
 
 def content_library(catalog: dict, lang: str) -> str:
@@ -979,121 +605,64 @@ def content_library(catalog: dict, lang: str) -> str:
     """
 
 
-def inner_content(lang: str, slug: str, c: dict, catalog: dict) -> str:
-    title, desc = c["pages"][slug]
-    if slug == "how-it-works":
-        flow = "".join(
-            f'<article><span>0{i + 1}</span><h3>{esc(label)}</h3><p>{esc(HOW_TEXT[lang][index])}</p></article>'
-            for i, (label, index) in enumerate(zip((c["pill"][1], c["pill"][2], c["pill"][0], c["pages"]["updates"][0]), (1, 2, 4, 3)))
-        )
-        detail = f'{guide_atlas(lang, c)}<div class="section-divider"></div><div class="steps-grid">{flow}</div>'
-    elif slug == "ecosystem":
-        items = "".join(
-            f'<article><span>0{i + 1}</span><h3>{esc(item)}</h3><p>{esc(c["ecosystem_body"])}</p><small>{esc(c["status_plan"])}</small></article>'
-            for i, item in enumerate(c["eco_items"])
-        )
-        detail = f'<div class="experience-grid">{items}</div>{status_cards(c)}'
-    elif slug == "age-groups":
-        cards = "".join(
-            f'<article><strong>{age}</strong><h3>{esc(label)}</h3><p>{esc(c["age_body"])}</p>'
-            f'<ul><li>{esc(HOW_TEXT[lang][0])}</li><li>{esc(HOW_TEXT[lang][4 if i < 3 else 3])}</li></ul></article>'
-            for i, (age, label) in enumerate(zip(("5–7", "8–11", "12–14", "15–18"), c["age_labels"]))
-        )
-        detail = f'<div class="age-detail-grid">{cards}</div>'
-    elif slug == "content":
-        detail = content_library(catalog, lang)
-    elif slug == "features":
-        detail = f'{guide_atlas(lang, c)}<div class="section-divider"></div>{status_cards(c)}'
-    elif slug == "roadmap":
-        detail = f'{status_cards(c)}<div class="roadmap-note"><h2>{esc(c["ecosystem_title"])}</h2><p>{esc(c["planned_note"])}</p></div>'
-    elif slug == "updates":
-        detail = f"""
-        <div class="update-list">
-          <article><time>2026-07</time><span class="status status-today">{esc(c["status_today"])}</span><h2>{esc(c["proof_title"])}</h2><p>{esc(c["proof_body"])}</p></article>
-          <article><time>2026-07</time><span class="status status-today">{esc(c["status_today"])}</span><h2>{esc(GUIDE_LABELS[lang][6])}</h2><p>{esc(HOW_TEXT[lang][5])}</p></article>
-          <article><time>2026-07</time><span class="status status-dev">{esc(c["status_dev"])}</span><h2>{esc(c["ecosystem_title"])}</h2><p>{esc(c["planned_note"])}</p></article>
-        </div>"""
-    elif slug == "downloads":
-        store_scope = (
-            "Bu Microsoft Store satın alımı yalnız Windows sürümünü kapsar; Android ve Android TV "
-            "bu satın alıma dahil değildir."
-            if lang == "tr"
-            else c["planned_note"]
-        )
-        detail = f"""
-        <div class="download-card">
-          <div><span class="status status-today">Microsoft Store</span><h3>AliKa · Windows</h3><p>{esc(c["proof_body"])}</p></div>
-          <a class="button" href="{microsoft_store_url(lang)}" target="_blank" rel="noopener noreferrer">{esc(c["get"])}</a>
-        </div>
-        <p class="honesty-note">{esc(store_scope)}</p>"""
-    elif slug == "contact":
-        detail = f"""
-        <div class="contact-card"><span>{esc(c["support"])}</span><a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a></div>
-        <div class="faq-grid">
-          <details><summary>{esc(c["trust_items"][3])}</summary><p>{esc(c["trust_body"])}</p></details>
-          <details><summary>{esc(c["ecosystem_title"])}</summary><p>{esc(c["planned_note"])}</p></details>
-          <details><summary>{esc(c["trust_title"])}</summary><p>{esc(c["trust_body"])}</p></details>
-        </div>"""
-    else:
-        detail = f"""
-        <div class="steps-grid">
-          <article><span>01</span><h3>{esc(c["pill"][1])}</h3><p>{esc(c["approach_body"])}</p></article>
-          <article><span>02</span><h3>{esc(c["pill"][0])}</h3><p>{esc(c["proof_body"])}</p></article>
-          <article><span>03</span><h3>{esc(c["pill"][2])}</h3><p>{esc(c["final_body"])}</p></article>
-        </div>"""
-    if slug == "content":
-        book_labels = CONTENT_BOOK_LABELS[lang]
-        country_count = len({row["country_slug"] for row in catalog["grades"]})
-        grade_count = len(catalog["grades"])
-        subject_count = len(catalog["subjects"])
-        return f"""
-        <main id="main" class="content-library-main">
-          <section class="content-library-stage">
-            <div class="content-book-shell">
-              <div class="content-book-paper">
-                <a class="content-book-back" href="{href(lang)}"><span aria-hidden="true">←</span> {esc(book_labels[0])}</a>
-                <header class="content-book-heading">
-                  <div>
-                    <p class="eyebrow">{esc(c["content_kicker"])}</p>
-                    <p class="content-book-overline">{esc(book_labels[1])}</p>
-                    <h1>{esc(title)}</h1>
-                    <p>{esc(desc)}</p>
-                  </div>
-                  <img src="/assets/brand/alika-logo.png" width="104" height="104" alt="AliKa">
-                </header>
-                <div class="content-book-stats" aria-label="{esc(c['content_body'])}">
-                  <span><strong>{country_count}</strong>{esc(book_labels[2])}</span>
-                  <span><strong>{grade_count}</strong>{esc(book_labels[3])}</span>
-                  <span><strong>{subject_count}</strong>{esc(book_labels[4])}</span>
-                </div>
-                <section class="content-book-catalog" aria-label="{esc(title)}">
-                  {detail}
-                </section>
-                <footer class="content-book-contact">
-                  <p>{esc(book_labels[5])}</p>
-                  <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
-                </footer>
-              </div>
-            </div>
-          </section>
-        </main>
-        """
+def content_page(lang: str, c: dict, catalog: dict) -> str:
+    title, desc = c["pages"]["content"]
+    detail = content_library(catalog, lang)
+    book_labels = CONTENT_BOOK_LABELS[lang]
+    country_count = len({row["country_slug"] for row in catalog["grades"]})
+    grade_count = len(catalog["grades"])
+    subject_count = len(catalog["subjects"])
     return f"""
-    <main id="main" class="inner-main">
-      <section class="inner-hero section-dark">
-        <p class="eyebrow">AliKa · {esc(title)}</p>
-        <h1>{esc(title)}</h1>
-        <p>{esc(desc)}</p>
-      </section>
-      <section class="inner-content section-light">
-        {detail}
-      </section>
-      <section class="inner-cta section-snow">
-        <h2>{esc(c["final_title"])}</h2>
-        <a class="button" href="{href(lang, 'downloads')}">{esc(c["get"])}</a>
+    <main id="main" class="content-library-main">
+      <section class="content-library-stage">
+        <div class="content-book-shell">
+          <div class="content-book-paper">
+            <a class="content-book-back" href="{href(lang)}"><span aria-hidden="true">←</span> {esc(book_labels[0])}</a>
+            <header class="content-book-heading">
+              <div>
+                <p class="eyebrow">{esc(c["content_kicker"])}</p>
+                <p class="content-book-overline">{esc(book_labels[1])}</p>
+                <h1>{esc(title)}</h1>
+                <p>{esc(desc)}</p>
+              </div>
+              <img src="/assets/brand/alika-logo.png" width="104" height="104" alt="AliKa">
+            </header>
+            <div class="content-book-stats" aria-label="{esc(c['content_body'])}">
+              <span><strong>{country_count}</strong>{esc(book_labels[2])}</span>
+              <span><strong>{grade_count}</strong>{esc(book_labels[3])}</span>
+              <span><strong>{subject_count}</strong>{esc(book_labels[4])}</span>
+            </div>
+            <section class="content-book-catalog" aria-label="{esc(title)}">
+              {detail}
+            </section>
+            <footer class="content-book-contact">
+              <p>{esc(book_labels[5])}</p>
+              <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
+            </footer>
+          </div>
+        </div>
       </section>
     </main>
     """
+
+
+def redirect_document(lang: str, slug: str) -> str:
+    target = page_href(lang, slug)
+    return f"""<!doctype html>
+<html lang="{lang}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>AliKa</title>
+  <meta http-equiv="refresh" content="0; url={target}">
+  <script>location.replace({json.dumps(target)});</script>
+</head>
+<body>
+  <p><a href="{target}">AliKa</a></p>
+</body>
+</html>
+"""
 
 
 def write_page(path: Path, content: str) -> None:
@@ -1116,15 +685,14 @@ def build() -> None:
     content_root = Path(os.environ.get("ALIKA_CONTENT_ROOT", ROOT / "_content"))
     catalog = build_content_catalog(content_root, DIST)
 
+    # Dil ana sayfaları Vite ile derlenen yeni ana sayfadır (npm run build:home).
     for lang in LANGS:
         c = locales[lang]
-        home_path = DIST / "index.html" if lang == "tr" else DIST / lang / "index.html"
-        # Türkçe kök sonra Vite ana sayfasıyla değişir; diğer diller bu statik ana sayfayı kullanır.
-        write_page(home_path, document(locales, lang, c["seo_title"], c["seo_description"], home(locales, lang)))
-        for slug in SLUGS:
-            title, desc = c["pages"][slug]
-            path = DIST / slug / "index.html" if lang == "tr" else DIST / lang / slug / "index.html"
-            write_page(path, document(locales, lang, f"{title} — AliKa", desc, inner_content(lang, slug, c, catalog), slug))
+        base = DIST if lang == "tr" else DIST / lang
+        title, desc = c["pages"]["content"]
+        write_page(base / "content" / "index.html", document(locales, lang, f"{title} — AliKa", desc, content_page(lang, c, catalog), "content"))
+        for slug in REDIRECT_ANCHORS:
+            write_page(base / slug / "index.html", redirect_document(lang, slug))
 
     guide_index_url = f"{BASE_URL}/{GUIDE_BASE}/"
     write_page(
@@ -1164,7 +732,7 @@ def build() -> None:
     urls = [f"{BASE_URL}/"]
     for lang in LANGS:
         urls.append(f"{BASE_URL}{href(lang)}")
-        urls.extend(f"{BASE_URL}{href(lang, slug)}" for slug in SLUGS)
+        urls.append(f"{BASE_URL}{href(lang, 'content')}")
     urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in GUIDES)
     urls.extend((uk_guide_url, uk_landing_url))
