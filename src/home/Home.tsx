@@ -164,22 +164,23 @@ const ICONS = {
   child: <svg {...iconProps}><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><circle cx="12" cy="10" r="2.4" /><path d="M9 15.5c.8-1.3 1.8-2 3-2s2.2.7 3 2" /></svg>,
   parent: <svg {...iconProps}><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><path d="M12 7.5 9.5 8.6v2.2c0 1.8 1 3.3 2.5 3.9 1.5-.6 2.5-2.1 2.5-3.9V8.6Z" /></svg>,
   phoneQuiz: <svg {...iconProps}><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><path d="M10.4 8.8a1.7 1.7 0 1 1 2.3 1.6c-.5.2-.7.6-.7 1v.3" /><circle cx="12" cy="14.6" r=".5" fill="currentColor" /></svg>,
-  tv: <svg {...iconProps}><rect x="2.5" y="4.5" width="19" height="13" rx="2.5" /><path d="M8 21h8M12 17.5V21" /></svg>,
-  games: <svg {...iconProps}><path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1 3.4a2.4 2.4 0 0 1-4 1L14.5 16h-5l-2.3 1.8a2.4 2.4 0 0 1-4-1l-1-3.4A5 5 0 0 1 7 7Z" /><path d="M8 10.5v3M6.5 12h3" /><circle cx="16" cy="11" r=".8" fill="currentColor" /><circle cx="17.5" cy="13.2" r=".8" fill="currentColor" /></svg>,
+  shield: <svg {...iconProps}><path d="M12 2.8 4.5 5.6v5.6c0 4.6 3.1 8.5 7.5 9.9 4.4-1.4 7.5-5.3 7.5-9.9V5.6Z" /><path d="m8.8 12 2.2 2.2 4.3-4.4" /></svg>,
+  reward: <svg {...iconProps}><circle cx="12" cy="9" r="6" /><path d="m9 14.2-1.6 7 4.6-2.4 4.6 2.4-1.6-7" /><path d="M12 6.5v5M9.8 9h4.4" /></svg>,
 };
 
-/* Sol kavis: Windows ekranları. Sağ kavis: Android telefon ekranları ve geliştirilen TV/oyun ekranları. Açılar yüzü ve gövdeyi boş bırakır. */
+/* Sol kavis Windows, sağ kavis Android. İki taraf aynı sırayla aynayı izler:
+   ebeveyn paneli, kural, ortada soru çöz, koruma, çocuğun günü. Açılar yüzü ve gövdeyi boş bırakır. */
 const SCREENS: ScreenItem[] = [
-  { id: 'panel', label: 'Ebeveyn paneli', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel.png', shape: 'wide', body: 'Günün özeti tek ekranda: kalan süre, bekleyen görevler ve aile durumu.' },
-  { id: 'rules', label: 'Kurallar', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-rules.png', shape: 'wide', body: 'Günlük süre, uygulama sınırları, uyku saati ve görevler. Çocuk ne zaman duracağını önceden bilir.' },
-  { id: 'quiz', label: 'Soru çöz, süre kazan', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/videos/tr/07-windows-child-question.jpg', shape: 'wide', video: { id: 'EtLaLyNdXk0', duration: '0:33' }, body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
-  { id: 'homework', label: 'Görev, ödev, sınav', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.homework, image: '/videos/tr/08-windows-task-homework-exam.jpg', shape: 'wide', body: 'Görev, ödev ve sınavları oluşturun; tamamlananları panelden onaylayın.' },
-  { id: 'reports', label: 'Raporlar', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.reports, image: '/screens/platform/windows-reports.png', shape: 'wide', body: 'Kullanım ve öğrenme sonuçları haftalık olarak bir arada. Pazarlık yerine konuşma.' },
-  { id: 'child', label: 'Çocuk ekranı', platform: 'Android · Google Play', status: 'ready', tone: 'sky', side: 'right', angle: -35, icon: ICONS.child, image: '/screens/platform/android-child.webp', shape: 'phone', body: 'Çocuk kalan süresini ve sıradaki adımı telefonunda görür.' },
-  { id: 'parent', label: 'Ebeveyn telefonu', platform: 'Android · Google Play', status: 'ready', tone: 'blue', side: 'right', angle: -17, icon: ICONS.parent, image: '/screens/platform/android-parent.webp', shape: 'phone', body: 'Ebeveyn kuralları ve süre hediyesini telefondan yönetir.' },
-  { id: 'phone-quiz', label: 'Telefonda soru', platform: 'Android · Google Play', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-quiz.webp', shape: 'phone', body: 'Soru çözerek süre kazanma akışının telefon sürümü.' },
-  { id: 'tv', label: 'Android TV', platform: 'Android TV · geliştiriliyor', status: 'dev', tone: 'night', side: 'right', angle: 17, icon: ICONS.tv, image: '/screens/platform/tv-live-home.webp', shape: 'wide', body: 'TV ailenin ortak ekranı olur; telefonlar oyunlara katılımcı olarak bağlanır. Geliştirme önizlemesidir.' },
-  { id: 'games', label: 'Aile oyunları', platform: 'Ortak ekran · geliştiriliyor', status: 'dev', tone: 'coral', side: 'right', angle: 35, icon: ICONS.games, image: '/games/alika-game-night.webp', shape: 'wide', body: 'Altı özgün Türkçe aile oyunu: gençler ve yetişkinler aynı ekranda oynar.' },
+  { id: 'win-panel', label: 'Ebeveyn paneli', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel.png', shape: 'wide', body: 'Günün özeti tek ekranda: kalan süre, puanlar, cihazlar ve yaklaşan program.' },
+  { id: 'win-rules', label: 'Süre ve kurallar', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-rules.png', shape: 'wide', body: 'Günlük süre, gece kilidi, uygulama ve site sınırları. Çocuk ne zaman duracağını önceden bilir.' },
+  { id: 'win-quiz', label: 'Soru çöz, süre kazan', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/videos/tr/07-windows-child-question.jpg', shape: 'wide', video: { id: 'EtLaLyNdXk0', duration: '0:33' }, body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
+  { id: 'win-protect', label: 'Web ve uygulama koruması', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.shield, image: '/screens/platform/windows-protection.webp', shape: 'wide', video: { id: 'e3vwoACP44I', duration: '1:35' }, body: 'İlk kurulumda önerilen korumalar açık gelir: web koruması engellediğiniz siteleri kapatır, güvenli arama uygunsuz sonuçları gizler.' },
+  { id: 'win-homework', label: 'Görev, ödev, sınav', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.homework, image: '/videos/tr/08-windows-task-homework-exam.jpg', shape: 'wide', body: 'Görev, ödev ve sınavları oluşturun; tamamlananları panelden onaylayın.' },
+  { id: 'and-panel', label: 'Ebeveyn paneli', platform: 'Android', status: 'ready', tone: 'blue', side: 'right', angle: -35, icon: ICONS.parent, image: '/screens/android-parent.webp', shape: 'phone', body: 'Bugünün özeti telefonda: kalan süre, bütçeye sayılan süre ve saatlik kullanım.' },
+  { id: 'and-reward', label: 'Ödül kuralı', platform: 'Android', status: 'ready', tone: 'ink', side: 'right', angle: -17, icon: ICONS.reward, image: '/screens/android-reports.webp', shape: 'phone', body: 'Bir dakika için kaç doğru gerektiğini, günlük kazanılabilir üst sınırı ve günlük soru sınırını siz seçersiniz.' },
+  { id: 'and-quiz', label: 'Soru çöz, süre kazan', platform: 'Android', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-quiz.webp', shape: 'phone', body: 'Çocuk telefonda soru çözer; bugün ne kadar kazandığını ve günlük üst sınırı aynı ekranda görür.' },
+  { id: 'and-protect', label: 'Web ve uygulama koruması', platform: 'Android', status: 'ready', tone: 'mint', side: 'right', angle: 17, icon: ICONS.shield, image: '/screens/platform/android-protection.webp', shape: 'phone', video: { id: '4RmEnThuR3c', duration: '1:40' }, body: 'Web koruması, güvenli arama ve onaya kadar kapalı kalan yeni uygulamalar. Web koruması Android VPN izni ister; onayı ebeveyn verir.' },
+  { id: 'and-child', label: 'Çocuk ekranı', platform: 'Android', status: 'ready', tone: 'sky', side: 'right', angle: 35, icon: ICONS.child, image: '/screens/platform/android-child-home.webp', shape: 'phone', body: 'Çocuk kalan süresini, bugünkü çalışmalarını ve sıradaki adımı telefonunda görür.' },
 ];
 
 function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose: () => void }) {
@@ -474,6 +475,8 @@ export default function Home() {
             <HalftoneHalo />
             <div className="orbitPath" aria-hidden="true" />
             <img className="mascot" src="/brand/alika-maskot.webp" alt="AliKa maskotu: siyah-beyaz ceketli, sarı tişörtlü gülümseyen çocuk" width="470" height="1100" />
+            <span className="sideTag left" aria-hidden="true">Windows</span>
+            <span className="sideTag right" aria-hidden="true">Android</span>
             {SCREENS.map((screen, i) => (
               <button
                 key={screen.id}

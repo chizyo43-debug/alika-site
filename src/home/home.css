@@ -505,6 +505,30 @@ a {
   left: calc(100% + 12px);
 }
 
+/* Kavis başlıkları: sol Windows, sağ Android */
+.sideTag {
+  position: absolute;
+  z-index: 3;
+  top: calc(var(--cy) - var(--ry) * 0.82);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+.sideTag.left {
+  left: calc(50% - var(--rx) * 0.98);
+}
+
+.sideTag.right {
+  left: calc(50% + var(--rx) * 0.98);
+}
+
 .wordmark {
   position: relative;
   z-index: 2;
@@ -1292,6 +1316,26 @@ h2 {
 
 /* Tablet ve telefon */
 @media (max-width: 1060px) {
+  .stage {
+    margin-top: 34px;
+  }
+
+  /* Dar ekranda etiketler kavislerin üstüne, sahnenin dışına çıkar; ikonlarla çakışmaz. */
+  .sideTag {
+    top: -30px;
+    font-size: 12px;
+    translate: none;
+  }
+
+  .sideTag.left {
+    left: 0;
+  }
+
+  .sideTag.right {
+    right: 0;
+    left: auto;
+  }
+
   .orbitLabel {
     top: auto;
     bottom: calc(100% + 10px);
