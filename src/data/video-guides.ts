@@ -668,7 +668,7 @@ const groupLabels = (
 
 export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'tr', youtubeLocale: 'tr', nativeName: 'Türkçe', playlistId: 'PLb83uFzWZ16Q', status: 'public', videos: trVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'tr', youtubeLocale: 'tr', nativeName: 'Türkçe', playlistId: 'PLb83uFzWZ16Q', status: 'preparing', videos: trVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube rehberleri · 9 uygulama dili', sectionTitle: 'AliKa Windows video rehberleri',
       sectionLead: 'Dilinizi seçin; 01–13 sırasındaki rehberleri konu başlıklarına göre adım adım izleyin.', channelLabel: 'AliKa kanalını aç', playlistLabel: '13 videoluk seriyi aç',
@@ -679,7 +679,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'en', youtubeLocale: 'en', nativeName: 'English', playlistId: 'PLcfP4qWx0x4k', status: 'public', videos: enVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'en', youtubeLocale: 'en', nativeName: 'English', playlistId: 'PLcfP4qWx0x4k', status: 'preparing', videos: enVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube guides · 9 app languages', sectionTitle: 'AliKa for Windows video guides',
       sectionLead: 'Choose your language and follow guides 01–13 step by step, organized by topic.', channelLabel: 'Open the AliKa channel', playlistLabel: 'Open the 13-video series',
@@ -690,7 +690,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'de', youtubeLocale: 'de', nativeName: 'Deutsch', playlistId: 'PLeJpTO5eMvbM', status: 'public', videos: deVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'de', youtubeLocale: 'de', nativeName: 'Deutsch', playlistId: 'PLeJpTO5eMvbM', status: 'preparing', videos: deVideos,
     copy: {
       sectionEyebrow: 'AliKa-YouTube-Anleitungen · 9 App-Sprachen', sectionTitle: 'AliKa Windows-Videoanleitungen',
       sectionLead: 'Wählen Sie Ihre Sprache und folgen Sie den Anleitungen 01–13 Schritt für Schritt, nach Themen geordnet.', channelLabel: 'AliKa-Kanal öffnen', playlistLabel: 'Alle 13 Videos öffnen',
@@ -701,7 +701,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'es', youtubeLocale: 'es', nativeName: 'Español', playlistId: 'PLGs9cZUQyNJg', status: 'public', videos: esVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'es', youtubeLocale: 'es', nativeName: 'Español', playlistId: 'PLGs9cZUQyNJg', status: 'preparing', videos: esVideos,
     copy: {
       sectionEyebrow: 'Guías de AliKa en YouTube · 9 idiomas', sectionTitle: 'Guías en vídeo de AliKa para Windows',
       sectionLead: 'Elija su idioma y siga las guías 01–13 paso a paso, organizadas por tema.', channelLabel: 'Abrir el canal de AliKa', playlistLabel: 'Abrir la serie de 13 vídeos',
@@ -712,7 +712,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'fr', youtubeLocale: 'fr', nativeName: 'Français', playlistId: 'PLJfxtPILegJ8', status: 'public', videos: frVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'fr', youtubeLocale: 'fr', nativeName: 'Français', playlistId: 'PLJfxtPILegJ8', status: 'preparing', videos: frVideos,
     copy: {
       sectionEyebrow: 'Guides AliKa sur YouTube · 9 langues', sectionTitle: 'Guides vidéo AliKa pour Windows',
       sectionLead: 'Choisissez votre langue et suivez les guides 01–13 étape par étape, classés par thème.', channelLabel: 'Ouvrir la chaîne AliKa', playlistLabel: 'Ouvrir la série de 13 vidéos',
@@ -723,7 +723,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'pt', youtubeLocale: 'pt-BR', nativeName: 'Português (Brasil)', playlistId: 'PLYDOAXkT60aU', status: 'public', videos: ptVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'pt', youtubeLocale: 'pt-BR', nativeName: 'Português (Brasil)', playlistId: 'PLYDOAXkT60aU', status: 'preparing', videos: ptVideos,
     copy: {
       sectionEyebrow: 'Guias do AliKa no YouTube · 9 idiomas', sectionTitle: 'Guias em vídeo do AliKa para Windows',
       sectionLead: 'Escolha seu idioma e acompanhe os guias 01–13 passo a passo, organizados por assunto.', channelLabel: 'Abrir o canal do AliKa', playlistLabel: 'Abrir a série de 13 vídeos',
@@ -734,7 +734,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'ru', youtubeLocale: 'ru', nativeName: 'Русский', playlistId: 'PLNmRBY5CU7Q8', status: 'public', videos: ruVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'ru', youtubeLocale: 'ru', nativeName: 'Русский', playlistId: 'PLNmRBY5CU7Q8', status: 'preparing', videos: ruVideos,
     copy: {
       sectionEyebrow: 'Видеоинструкции AliKa · 9 языков приложения', sectionTitle: 'Смотрите инструкции на своём языке.',
       sectionLead: 'Выберите язык, чтобы увидеть только опубликованные инструкции Windows на этом языке.', channelLabel: 'Открыть канал AliKa', playlistLabel: 'Открыть серию из 13 видео',
@@ -745,7 +745,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'ja', youtubeLocale: 'ja', nativeName: '日本語', playlistId: 'PLOPeP3QrjNDg', status: 'public', videos: jaVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'ja', youtubeLocale: 'ja', nativeName: '日本語', playlistId: 'PLOPeP3QrjNDg', status: 'preparing', videos: jaVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube ガイド · アプリ対応9言語', sectionTitle: 'お使いの言語でガイドをご覧ください。',
       sectionLead: '言語を選ぶと、その言語で公開済みのWindowsガイドだけが表示されます。', channelLabel: 'AliKaチャンネルを開く', playlistLabel: '全13本のシリーズを開く',
@@ -756,7 +756,7 @@ export const GUIDE_LANGUAGES: readonly GuideLanguage[] = [
     },
   },
   {
-    platform: 'windows', expectedVideoCount: 13, code: 'ko', youtubeLocale: 'ko', nativeName: '한국어', playlistId: 'PLMC3Z8z69Ujk', status: 'public', videos: koVideos,
+    platform: 'windows', expectedVideoCount: 13, code: 'ko', youtubeLocale: 'ko', nativeName: '한국어', playlistId: 'PLMC3Z8z69Ujk', status: 'preparing', videos: koVideos,
     copy: {
       sectionEyebrow: 'AliKa YouTube 가이드 · 앱 지원 9개 언어', sectionTitle: '내 언어로 가이드를 시청하세요.',
       sectionLead: '언어를 선택하면 해당 언어로 공개된 Windows 가이드만 표시됩니다.', channelLabel: 'AliKa 채널 열기', playlistLabel: '13개 동영상 시리즈 열기',

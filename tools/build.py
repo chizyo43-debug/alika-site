@@ -80,8 +80,8 @@ GUIDES = (
         "slug": "windows-cocuk-ekran-suresi-nasil-yonetilir",
         "title": "Windows'ta Çocuk Ekran Süresi Nasıl Yönetilir?",
         "description": "Windows 10 ve 11'de çocuk ekran süresi için aile kuralı oluşturun; Microsoft Family Safety seçeneklerini ve AliKa'nın görünür, yerel-öncelikli akışını karşılaştırın.",
-        "video": "https://youtube.com/shorts/9OEnsVkKep8",
-        "video_label": "Soru çöz, süre kazan akışını YouTube Short'ta izleyin",
+        "video": "https://youtu.be/EtLaLyNdXk0",
+        "video_label": "Soru çöz, ek süre kazan videosunu YouTube’da izleyin",
         "campaign_id": "organic_guide_windows_tr",
         "lede": (
             "Windows'ta ekran süresi yönetimi yalnız bir süre sayısı girmek değildir. "
@@ -114,8 +114,8 @@ GUIDES = (
         "slug": "windows-11-cocuk-ekran-suresi",
         "title": "Windows 11’de Çocuk Ekran Süresi Nasıl Sınırlandırılır?",
         "description": "Windows 11’de günlük süre, uygulama ve web sitesi limitlerini görünür kurallarla ayarlayın. AliKa ebeveyn panelini adım adım inceleyin.",
-        "video": "https://youtu.be/sXvHkeOegIo",
-        "video_label": "Çocuk ve kurallar video rehberini izleyin",
+        "video": "https://youtu.be/e3vwoACP44I",
+        "video_label": "AliKa Windows ilk kurulum videosunu izleyin",
         "lede": (
             "Ekran süresi tartışması çoğu zaman “şimdi kapat” cümlesi söylendiğinde başlar. "
             "Daha sakin bir düzen için sınırın önceden belirlenmesi, çocuğun kalan süreyi görebilmesi "
@@ -156,8 +156,8 @@ GUIDES = (
         "slug": "soru-cozerek-ekran-suresi-kazanma",
         "title": "Soru Çözerek Ekran Süresi Kazanma: AliKa Nasıl Çalışır?",
         "description": "Çocuğun soru çözerek kontrollü ek süre kazanmasını; soru bankası, ödül oranı ve günlük tavan ayarlarıyla adım adım öğrenin.",
-        "video": "https://youtu.be/cMxuoJaG77E",
-        "video_label": "Soru çözerek süre kazanma video rehberini izleyin",
+        "video": "https://youtu.be/EtLaLyNdXk0",
+        "video_label": "Soru çöz, ek süre kazan videosunu YouTube’da izleyin",
         "lede": (
             "Ekran süresini yalnızca kesmek yerine bir kısmını öğrenmeyle ilişkilendirmek mümkün. "
             "AliKa’da çocuk, ebeveynin eklediği soru bankasından sorular çözer; doğru cevaplar "
@@ -198,8 +198,6 @@ GUIDES = (
         "slug": "bulutsuz-ebeveyn-kontrolu",
         "title": "Bulut Hesabı Olmadan Ebeveyn Kontrolü Nasıl Çalışır?",
         "description": "AliKa’nın cihazda kalan verilerle, reklamsız ve zorunlu bulut hesabı olmadan nasıl çalıştığını; yerel aile ağının sınırlarını öğrenin.",
-        "video": "https://youtu.be/cxzZrfLhJjE",
-        "video_label": "Gizlilik ve yerel veri video rehberini izleyin",
         "lede": (
             "Bir ebeveyn kontrolü uygulamasında yalnız “ne yapıyor?” değil, “veri nereye gidiyor?” sorusu da önemlidir. "
             "AliKa’nın temel kullanım kayıtları cihazda tutulur; reklam, üçüncü taraf analitik ve zorunlu AliKa bulut hesabı bulunmaz."
@@ -593,6 +591,11 @@ def guide_article_body(guide: dict) -> str:
         f'<section><h2>{esc(heading)}</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in paragraphs)}</section>'
         for heading, paragraphs in guide["sections"]
     )
+    # Videosu olmayan rehberde video kutusu gösterilmez (eski videolar YouTube'dan kaldırıldı).
+    video_aside = (
+        f'<aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>Video yalnız bağlantıya tıkladığınızda YouTube’da açılır.</span></div><a href="{esc(guide["video"])}" target="_blank" rel="noopener noreferrer">{esc(guide["video_label"])} ↗</a></aside>'
+        if guide.get("video") else ""
+    )
     return f"""
     <main id="main" class="guide-main">
       <article class="guide-article">
@@ -604,7 +607,7 @@ def guide_article_body(guide: dict) -> str:
           <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa ücretli bir Windows uygulamasıdır.</p>
         </header>
         {sections}
-        <aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>Video yalnız bağlantıya tıkladığınızda YouTube’da açılır.</span></div><a href="{esc(guide["video"])}" target="_blank" rel="noopener noreferrer">{esc(guide["video_label"])} ↗</a></aside>
+        {video_aside}
         <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı Windows 10/11 için 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{microsoft_store_url('tr', guide.get('campaign_id'))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a></section>
       </article>
     </main>
