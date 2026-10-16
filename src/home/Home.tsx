@@ -3,6 +3,7 @@ import { GUIDE_LANGUAGES, getPublishedGuideVideos } from '../data/video-guides';
 import { microsoftStoreUrl } from '../store-campaign';
 
 const SUPPORT_EMAIL = 'alika.destek@gmail.com';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.alika.parental&hl=tr';
 
 type Theme = 'light' | 'dark';
 
@@ -474,7 +475,16 @@ export default function Home() {
               ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
               : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" /></svg>}
           </button>
-          <a className="pill solid small" href={storeUrl} target="_blank" rel="noopener">AliKa’yı edin</a>
+          <div className="storeBtns">
+            <a className="storeBtn" href={storeUrl} target="_blank" rel="noopener" aria-label="Microsoft Store’dan indir (Windows)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h8.5v8.5H3zM12.5 3H21v8.5h-8.5zM3 12.5h8.5V21H3zM12.5 12.5H21V21h-8.5z" /></svg>
+              <span className="storeText"><small>Windows için</small>Microsoft Store</span>
+            </a>
+            <a className="storeBtn" href={PLAY_STORE_URL} target="_blank" rel="noopener" aria-label="Google Play’den indir (Android)">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2.8v18.4c0 .5.5.8.9.6l15.4-8.7c.5-.3.5-1 0-1.3L5.4 2.2c-.4-.2-.9.1-.9.6Z" fill="currentColor" /><path d="m4.8 2.4 10.4 10.4M4.8 21.6l10.4-10.4" stroke="var(--store-bg)" strokeWidth="1.4" /></svg>
+              <span className="storeText"><small>Android için</small>Google Play</span>
+            </a>
+          </div>
         </nav>
       </header>
 
