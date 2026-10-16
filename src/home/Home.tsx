@@ -307,6 +307,20 @@ const VIDEO_BY_KEY = Object.fromEntries(VIDEOS.map((video) => [video.key, video]
 
 const AGE_RANGES = ['5–7', '8–11', '12–14', '15–18'];
 
+/* Kimler için kartlarından ilgili rehbere: yalnız yayımlanmış rehberler. */
+const AUDIENCE_GUIDES: Partial<Record<Lang, Partial<Record<AudienceId, string>>>> = {
+  tr: {
+    kardes: '/rehber/windows-cocuk-ekran-suresi-nasil-yonetilir/',
+    sinav: '/rehber/soru-cozerek-ekran-suresi-kazanma/',
+  },
+};
+
+/* Deneme ve satın alma kartları; Windows'tan gelen ziyaretçide Windows önce gelir. */
+const OFFERS: { id: 'windows' | 'android'; platform: FeaturePlatform; store: StoreId }[] = [
+  { id: 'android', platform: 'Android', store: 'play' },
+  { id: 'windows', platform: 'Windows', store: 'microsoft' },
+];
+
 type FeaturePlatform = 'Windows' | 'Android';
 const BOTH: FeaturePlatform[] = ['Windows', 'Android'];
 
@@ -360,6 +374,99 @@ function PlatformChips({ on }: { on: FeaturePlatform[] }) {
 
 function StatusDot({ status }: { status: OrbitStatus }) {
   return <i className={`dot ${status}`} aria-hidden="true" />;
+}
+
+const STORE_NAMES = { microsoft: 'Microsoft Store', play: 'Google Play' } as const;
+type StoreId = keyof typeof STORE_NAMES;
+
+const STORE_ICONS: Record<StoreId, ReactNode> = {
+  microsoft: <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h8.5v8.5H3zM12.5 3H21v8.5h-8.5zM3 12.5h8.5V21H3zM12.5 12.5H21V21h-8.5z" /></svg>,
+  play: <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2.8v18.4c0 .5.5.8.9.6l15.4-8.7c.5-.3.5-1 0-1.3L5.4 2.2c-.4-.2-.9.1-.9.6Z" fill="currentColor" /><path d="m4.8 2.4 10.4 10.4M4.8 21.6l10.4-10.4" stroke="var(--store-bg)" strokeWidth="1.4" /></svg>,
+};
+
+/* Ziyaretçinin cihazı yalnız hangi mağaza düğmesinin öne çıkacağını seçer; hiçbir yere gönderilmez. */
+type Device = 'android' | 'windows' | 'apple' | 'other';
+
+function detectDevice(): Device {
+  const agent = navigator.userAgent;
+  if (/Android/i.test(agent)) return 'android';
+  if (/iPhone|iPad|iPod|Macintosh/i.test(agent)) return 'apple';
+  if (/Windows/i.test(agent)) return 'windows';
+  return 'other';
+}
+
+function StoreBadge({ store, href, note, big = false }: { store: StoreId; href: string; note: string; big?: boolean }) {
+  return (
+    <a className={`storeBtn${big ? ' big' : ''}`} href={href} target="_blank" rel="noopener">
+      {STORE_ICONS[store]}
+      <span className="storeText"><small>{note}</small>{STORE_NAMES[store]}</span>
+    </a>
+  );
+}
+
+interface CtaProps { device: Device; t: HomeCopy; storeUrl: string; playUrl: string }
+
+/* Android'den gelen Google Play'i, Windows'tan gelen Microsoft Store'u önde görür; diğerleri ikisini birden.
+   Gelir Android aile aboneliğinde olduğu için ikili gösterimde Google Play önce gelir. */
+function HeroCta({ device, t, storeUrl, playUrl }: CtaProps) {
+  const play = <StoreBadge store="play" href={playUrl} note={t.cta.trialPlay} big />;
+  const store = <StoreBadge store="microsoft" href={storeUrl} note={t.cta.trialStore} big />;
+  if (device === 'android' || device === 'windows') {
+    const android = device === 'android';
+    return (
+      <div className="heroCta" id="hemen">
+        {android ? play : store}
+        <a className="textLink" href={android ? storeUrl : playUrl} target="_blank" rel="noopener">
+          {android ? t.cta.alsoStore : t.cta.alsoPlay} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    );
+  }
+  return (
+    <div className="heroCta" id="hemen">
+      <div className="heroBadges">{play}{store}</div>
+      {device === 'apple' && <p className="heroApple">{t.cta.appleNote}</p>}
+    </div>
+  );
+}
+
+/* Telefonda açılıştaki düğme geçilince altta ince bir deneme çubuğu kalır; açılıştaki cümleyi
+   örtmesin diye ondan önce çıkmaz. Deneme bölümü ya da altbilgi görününce çekilir. Geniş ekranda CSS ile gizlidir. */
+function StickyCta({ device, t, storeUrl, playUrl }: CtaProps) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById('hemen');
+    const watched = [hero, document.getElementById('deneme'), document.querySelector('.foot')]
+      .filter((element): element is HTMLElement => element instanceof HTMLElement);
+    const visible = new Set<Element>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      }
+      const passed = !hero || hero.getBoundingClientRect().bottom < 0;
+      setShow(passed && visible.size === 0);
+    });
+    watched.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
+  const primary = device === 'android'
+    ? { href: playUrl, label: STORE_NAMES.play, note: t.cta.trialPlay, external: true }
+    : device === 'windows'
+      ? { href: storeUrl, label: STORE_NAMES.microsoft, note: t.cta.trialStore, external: true }
+      : { href: '#deneme', label: t.cta.stickyChoose, note: t.cta.stickyBoth, external: false };
+
+  return (
+    <div className={`stickyCta${show ? ' show' : ''}`} inert={!show}>
+      <img src="/brand/alika-logo.png" alt="" width="30" height="30" />
+      <span className="stickyText"><strong>AliKa</strong><small>{primary.note}</small></span>
+      <a className="pill solid" href={primary.href} {...(primary.external ? { target: '_blank', rel: 'noopener' } : {})}>
+        {primary.label}{primary.external && <span aria-hidden="true"> ↗</span>}
+      </a>
+    </div>
+  );
 }
 
 /* Platform kartları: geniş ekranda dikey kaydırma yatay kaydırmaya dönüşür, dar ekranda kaydırmalı şerit olur. */
@@ -536,8 +643,11 @@ function LanguagePicker({ lang, t }: { lang: Lang; t: HomeCopy }) {
 export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
   const [theme, toggleTheme] = useTheme();
   const [openScreen, setOpenScreen] = useState<ScreenItem | null>(null);
-  /* Aynı anda tek video oynar; başka karta tıklanınca önceki kapanır. */
-  const [playingVideo, setPlayingVideo] = useState<VideoKey | null>(null);
+  /* Aynı anda tek video oynar; başka karta tıklanınca önceki kapanır. Tanıtımdaki demo 'demo' adıyla ayrıdır. */
+  const [playingVideo, setPlayingVideo] = useState<VideoKey | 'demo' | null>(null);
+  const [device] = useState(detectDevice);
+  const demoVideo = VIDEO_BY_KEY.winQuiz;
+  const offers = device === 'windows' ? [...OFFERS].reverse() : OFFERS;
   const storeUrl = microsoftStoreUrl(lang);
   const playUrl = playStoreUrl(lang);
   const home = homePath(lang);
@@ -554,6 +664,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
         <nav className="topNav" aria-label={t.a11y.mainMenu}>
           <a href="#ozellikler">{t.nav.features}</a>
           <a href="#videolar">{t.nav.videos}</a>
+          <a href="#deneme">{t.nav.offer}</a>
           <a href="#sss">{t.nav.faq}</a>
           <a href="/privacy/">{t.nav.privacy}</a>
           <LanguagePicker lang={lang} t={t} />
@@ -564,12 +675,12 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           </button>
           <div className="storeBtns">
             <a className="storeBtn" href={storeUrl} target="_blank" rel="noopener" aria-label={t.a11y.storeAria}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h8.5v8.5H3zM12.5 3H21v8.5h-8.5zM3 12.5h8.5V21H3zM12.5 12.5H21V21h-8.5z" /></svg>
-              <span className="storeText"><small>{t.store.forWindows}</small>Microsoft Store</span>
+              {STORE_ICONS.microsoft}
+              <span className="storeText"><small>{t.store.forWindows}</small>{STORE_NAMES.microsoft}</span>
             </a>
             <a className="storeBtn" href={playUrl} target="_blank" rel="noopener" aria-label={t.a11y.playAria}>
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 2.8v18.4c0 .5.5.8.9.6l15.4-8.7c.5-.3.5-1 0-1.3L5.4 2.2c-.4-.2-.9.1-.9.6Z" fill="currentColor" /><path d="m4.8 2.4 10.4 10.4M4.8 21.6l10.4-10.4" stroke="var(--store-bg)" strokeWidth="1.4" /></svg>
-              <span className="storeText"><small>{t.store.forAndroid}</small>Google Play</span>
+              {STORE_ICONS.play}
+              <span className="storeText"><small>{t.store.forAndroid}</small>{STORE_NAMES.play}</span>
             </a>
           </div>
         </nav>
@@ -610,25 +721,51 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
             <span className="ka" aria-hidden="true"><span>K</span><span>a</span></span>
           </h1>
           <p className="tagline">{t.hero.tagline[0]} <em>{t.hero.tagline[1]}</em></p>
-          <a className="eventPill" href="#platformlar">
+          <p className="pitch">{t.cta.pitch}</p>
+          <HeroCta device={device} t={t} storeUrl={storeUrl} playUrl={playUrl} />
+          <p className="heroNote">
             <StatusDot status="ready" />
             <span>{t.hero.live}</span>
-            <span className="mono">Microsoft Store · Google Play</span>
-          </a>
+            <span className="mono">{t.cta.trustLine}</span>
+          </p>
           <a className="scrollCue" href="#tanitim" aria-label={t.a11y.scrollDown}>
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m5 9 7 7 7-7" /></svg>
           </a>
         </section>
 
         <section id="tanitim" className="intro wrap">
-          <p className="eyebrow mono">{t.intro.eyebrow}</p>
-          <p className="introLead">
-            {t.intro.lead[0]}<mark>{t.intro.lead[1]}</mark>{t.intro.lead[2]}
-          </p>
-          <div className="actions">
-            <a className="pill solid" href={storeUrl} target="_blank" rel="noopener">{t.store.getStore} <span aria-hidden="true">↗</span></a>
-            <a className="pill solid" href={playUrl} target="_blank" rel="noopener">{t.store.getPlay} <span aria-hidden="true">↗</span></a>
-            <a className="pill ghost" href="#videolar">{t.intro.watchVideos}</a>
+          <div className="introGrid">
+            <div className="introText">
+              <p className="eyebrow mono">{t.intro.eyebrow}</p>
+              <p className="introLead">
+                {t.intro.lead[0]}<mark>{t.intro.lead[1]}</mark>{t.intro.lead[2]}
+              </p>
+              <a className="textLink" href="#videolar">{t.intro.watchVideos} <span aria-hidden="true">→</span></a>
+            </div>
+            {/* En kısa ve en ikna edici video açılışın hemen altında: soru çöz, süre kazan. */}
+            <figure className="demo video">
+              {playingVideo === 'demo' ? (
+                <span className="videoThumb">
+                  <VideoPlayer video={demoVideo} lang={lang} label={t.demo.title} />
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  className="videoThumb"
+                  onClick={() => setPlayingVideo('demo')}
+                  aria-label={`${t.dialog.watch}: ${t.demo.title} (${demoVideo.duration})`}
+                >
+                  <img src={`${demoVideo.file}.webp`} alt="" loading="lazy" decoding="async" />
+                  <span className="mono videoTime">{demoVideo.duration}</span>
+                  <span className="play" aria-hidden="true">▶</span>
+                </button>
+              )}
+              <figcaption>
+                <strong>{t.demo.title}</strong>
+                <span>{t.demo.body}</span>
+                {t.how.videoNote && <small>{t.how.videoNote}</small>}
+              </figcaption>
+            </figure>
           </div>
           <dl className="stats">
             {t.intro.stats.map((stat) => (
@@ -649,6 +786,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           <div className="audiences">
             {AUDIENCES.map((item) => {
               const text = t.audiences.items[item.id];
+              const guide = AUDIENCE_GUIDES[lang]?.[item.id];
               return (
                 <article key={item.id} className={`audience u-${item.id}`}>
                   <PlatformChips on={item.on} />
@@ -657,6 +795,25 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
                   <ul>
                     {text.points.map((point) => <li key={point}>{point}</li>)}
                   </ul>
+                  {/* Her durumun bir sonraki adımı: o platformun mağazası, varsa ilgili rehber. */}
+                  <div className="audienceCta">
+                    {item.on.map((platform) => {
+                      const store: StoreId = platform === 'Windows' ? 'microsoft' : 'play';
+                      return (
+                        <a
+                          key={platform}
+                          className="pill ghost small"
+                          href={store === 'microsoft' ? storeUrl : playUrl}
+                          target="_blank"
+                          rel="noopener"
+                          aria-label={`${text.title}: ${STORE_NAMES[store]}`}
+                        >
+                          {STORE_NAMES[store]} <span aria-hidden="true">↗</span>
+                        </a>
+                      );
+                    })}
+                    {guide && <a className="textLink" href={guide}>{t.audiences.guide} <span aria-hidden="true">→</span></a>}
+                  </div>
                 </article>
               );
             })}
@@ -779,6 +936,37 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           </div>
         </section>
 
+        <section id="deneme" className="section wrap">
+          <div className="sectionHead">
+            <div>
+              <h2>{t.offer.title}</h2>
+              <p>{t.offer.lead}</p>
+            </div>
+          </div>
+          <div className="offers">
+            {offers.map((offer) => {
+              const copy = t.offer[offer.id];
+              return (
+                <article key={offer.id} className={`offer o-${offer.id}`}>
+                  <PlatformChips on={[offer.platform]} />
+                  <h3>{copy.title}</h3>
+                  <p className="offerTrial">{copy.trial}</p>
+                  <ul>
+                    {copy.points.map((point) => <li key={point}>{point}</li>)}
+                  </ul>
+                  <StoreBadge
+                    store={offer.store}
+                    href={offer.store === 'microsoft' ? storeUrl : playUrl}
+                    note={offer.store === 'microsoft' ? t.cta.trialStore : t.cta.trialPlay}
+                    big
+                  />
+                </article>
+              );
+            })}
+          </div>
+          <p className="offerNote">{t.offer.note}</p>
+        </section>
+
         <section id="sss" className="section wrap">
           <div className="sectionHead">
             <div>
@@ -795,6 +983,27 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
             ))}
           </div>
         </section>
+
+        {t.guides && (
+          <section id="rehberler" className="section wrap">
+            <div className="sectionHead">
+              <div>
+                <h2>{t.guides.title}</h2>
+                <p>{t.guides.lead}</p>
+              </div>
+              {guides && <a className="textLink" href={guides}>{t.guides.all} <span aria-hidden="true">→</span></a>}
+            </div>
+            <div className="guideCards">
+              {t.guides.items.map((guide) => (
+                <a key={guide.href} className="guideCard" href={guide.href}>
+                  <strong>{guide.title}</strong>
+                  <span>{guide.body}</span>
+                  <span className="mono guideArrow" aria-hidden="true">→</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section id="iletisim" className="contact wrap">
           <img className="peek" src="/brand/alika-maskot.webp" alt="" aria-hidden="true" loading="lazy" />
@@ -823,6 +1032,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               <a href="#kimler">{t.footer.audiences}</a>
               <a href="#ozellikler">{t.footer.features}</a>
               <a href="#nasil">{t.footer.how}</a>
+              <a href="#deneme">{t.nav.offer}</a>
             </div>
             <div>
               <h3>{t.footer.download}</h3>
@@ -849,6 +1059,8 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           <span className="mono">alika.tr</span>
         </div>
       </footer>
+
+      <StickyCta device={device} t={t} storeUrl={storeUrl} playUrl={playUrl} />
     </>
   );
 }

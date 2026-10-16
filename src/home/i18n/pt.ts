@@ -27,7 +27,7 @@ const pt: HomeCopy = {
     openScreen: (label, platform) => `${label}: abrir captura de tela (${platform})`,
     screenAlt: (label) => `Tela ${label}`,
   },
-  nav: { features: 'Recursos', videos: 'Vídeos', faq: 'Perguntas', privacy: 'Privacidade' },
+  nav: { features: 'Recursos', videos: 'Vídeos', faq: 'Perguntas', privacy: 'Privacidade', offer: 'Teste grátis' },
   store: {
     forWindows: 'Para Windows',
     forAndroid: 'Para Android',
@@ -42,6 +42,21 @@ const pt: HomeCopy = {
     mascotAlt: 'Mascote do AliKa: uma criança sorridente de jaqueta preta e branca e camiseta amarela',
     tagline: ['Não restringimos.', 'Planejamos.'],
     live: 'Disponível no Windows e no Android',
+  },
+  cta: {
+    pitch: 'Controle parental para Windows e Android. Planeje o tempo de tela em família; a criança ganha tempo extra respondendo perguntas, dentro do limite que você define.',
+    trialPlay: 'Teste grátis por 14 dias',
+    trialStore: 'Teste grátis por 7 dias',
+    alsoStore: 'Microsoft Store para PCs com Windows',
+    alsoPlay: 'Google Play para celulares e tablets Android',
+    appleNote: 'Não há versão para iPhone, iPad ou Mac. O AliKa é instalado no PC com Windows ou no celular ou tablet Android da criança.',
+    trustLine: 'Sem anúncios · Sem conta AliKa · Os dados ficam no aparelho',
+    stickyBoth: 'Para Windows e Android',
+    stickyChoose: 'Teste grátis',
+  },
+  demo: {
+    title: 'AliKa em meio minuto',
+    body: 'Quando o tempo acaba, a tela é bloqueada. A criança responde perguntas, ganha tempo extra pela regra que você definiu e a tela é desbloqueada.',
   },
   screens: {
     'win-panel': { label: 'Painel do responsável', body: 'O resumo do dia em uma tela: tempo usado e restante, tempo extra com um clique, minutos ganhos respondendo perguntas e tarefas aguardando sua aprovação.' },
@@ -106,6 +121,7 @@ const pt: HomeCopy = {
   audiences: {
     title: 'Para quem é?',
     lead: 'Cada família tem seu próprio desafio com as telas. O AliKa ajuda mais nestas situações.',
+    guide: 'Ler o guia',
     items: {
       kardes: {
         title: 'Irmãos que dividem o computador',
@@ -205,6 +221,21 @@ const pt: HomeCopy = {
       { title: 'Sem conta na nuvem', body: 'Os dados principais ficam no aparelho. Rede doméstica criptografada e opcional entre os aparelhos da família.' },
     ],
     privacyLink: 'Leia a política de privacidade →',
+  },
+  offer: {
+    title: 'Teste primeiro, decida depois.',
+    lead: 'Cada plataforma é comprada na sua própria loja. O preço atual para o seu país está na página da loja.',
+    windows: {
+      title: 'PC com Windows',
+      trial: '7 dias grátis',
+      points: ['Compra única', 'Um perfil separado para cada criança no mesmo PC', 'Instalação e atualizações pela Microsoft Store'],
+    },
+    android: {
+      title: 'Celular e tablet Android',
+      trial: '14 dias grátis',
+      points: ['Assinatura familiar: 10 aparelhos da família pareados', 'Cancele antes do fim do teste e nada é cobrado', 'Cancelamento e renovação no Google Play'],
+    },
+    note: 'A compra para Windows não inclui o Android.',
   },
   faq: {
     title: 'Perguntas frequentes',

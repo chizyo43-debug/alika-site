@@ -81,6 +81,7 @@ function schema(lang, copy, canonical, storeUrl) {
 function fallback(copy, storeUrl, playUrl) {
   return `<section class="seoFallback">
         <h1>${esc(copy.seo.h1)}</h1>
+        <p>${esc(copy.cta.pitch)}</p>
         <p>${esc(copy.intro.lead.join(''))}</p>
         <p>${esc(copy.seo.pricing)}</p>
         <a href="${esc(storeUrl)}">Microsoft Store</a>

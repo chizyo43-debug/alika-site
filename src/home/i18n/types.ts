@@ -29,6 +29,12 @@ interface FeatureGroupCopy<K extends string> {
   items: Record<K, NameBody>;
 }
 
+interface OfferCopy {
+  title: string;
+  trial: string;
+  points: string[];
+}
+
 interface PlatformCopy {
   tags: string[];
   title: string;
@@ -58,7 +64,7 @@ export interface HomeCopy {
     openScreen: (label: string, platform: string) => string;
     screenAlt: (label: string) => string;
   };
-  nav: { features: string; videos: string; faq: string; privacy: string };
+  nav: { features: string; videos: string; faq: string; privacy: string; offer: string };
   store: { forWindows: string; forAndroid: string; getStore: string; getPlay: string };
   hero: {
     how: string;
@@ -69,6 +75,19 @@ export interface HomeCopy {
     tagline: [string, string];
     live: string;
   };
+  /* Açılıştaki ürün cümlesi ve cihaza göre öne çıkan deneme düğmeleri; alttaki yapışkan çubuk da bunları kullanır. */
+  cta: {
+    pitch: string;
+    trialPlay: string;
+    trialStore: string;
+    alsoStore: string;
+    alsoPlay: string;
+    appleNote: string;
+    trustLine: string;
+    stickyBoth: string;
+    stickyChoose: string;
+  };
+  demo: TitleBody;
   screens: Record<ScreenId, { label: string; body: string }>;
   dialog: { watch: string; close: string; note?: string };
   intro: {
@@ -87,6 +106,7 @@ export interface HomeCopy {
   audiences: {
     title: string;
     lead: string;
+    guide: string;
     items: Record<AudienceId, TitleBody & { points: string[] }>;
   };
   features: {
@@ -110,7 +130,11 @@ export interface HomeCopy {
   videos: Record<VideoKey, TitleBody>;
   ages: { title: string; lead: string; unit: string; items: TitleBody[] };
   trust: { eyebrow: string; title: string; items: TitleBody[]; privacyLink: string };
+  /* Deneme ve satın alma: fiyat yazılmaz, mağaza sayfası güncel fiyatı gösterir. */
+  offer: { title: string; lead: string; windows: OfferCopy; android: OfferCopy; note: string };
   faq: { title: string; lead: string; items: { q: string; a: string }[] };
+  /* Yalnız yayımlanmış rehberleri olan dillerde ana sayfada rehber bandı çıkar. */
+  guides?: { title: string; lead: string; all: string; items: { href: string; title: string; body: string }[] };
   contact: { eyebrow: string; title: string; lead: string; copy: string; copied: string };
   footer: {
     tagline: string;

@@ -27,7 +27,7 @@ const ja: HomeCopy = {
     openScreen: (label, platform) => `${label}：スクリーンショットを開く（${platform}）`,
     screenAlt: (label) => `${label}の画面`,
   },
-  nav: { features: '機能', videos: '動画', faq: 'よくある質問', privacy: 'プライバシー' },
+  nav: { features: '機能', videos: '動画', faq: 'よくある質問', privacy: 'プライバシー', offer: '無料体験' },
   store: {
     forWindows: 'Windows向け',
     forAndroid: 'Android向け',
@@ -42,6 +42,21 @@ const ja: HomeCopy = {
     mascotAlt: 'AliKaのマスコット：白黒のジャケットに黄色いTシャツを着た笑顔の子ども',
     tagline: ['制限しない。', '計画する。'],
     live: 'WindowsとAndroidで配信中',
+  },
+  cta: {
+    pitch: 'WindowsとAndroidのためのペアレンタルコントロール。画面時間を家族で計画し、お子さまは問題に答えて、保護者が決めた上限の範囲で追加時間を獲得します。',
+    trialPlay: '14日間無料で試す',
+    trialStore: '7日間無料で試す',
+    alsoStore: 'Windowsパソコン用：Microsoft Store',
+    alsoPlay: 'Androidスマホ・タブレット用：Google Play',
+    appleNote: 'iPhone、iPad、Mac版はありません。AliKaはお子さまのWindowsパソコン、またはAndroidスマホ・タブレットにインストールします。',
+    trustLine: '広告なし · AliKaアカウント不要 · データは端末に',
+    stickyBoth: 'WindowsとAndroidに対応',
+    stickyChoose: '無料で試す',
+  },
+  demo: {
+    title: '30秒でわかるAliKa',
+    body: '時間が終わると画面がロックされます。お子さまが問題に答えると、保護者が決めたルールに従って追加時間が加わり、ロックが解除されます。',
   },
   screens: {
     'win-panel': { label: '保護者パネル', body: '今日の概要をひと目で。使用時間と残り時間、ワンクリックの追加時間、問題に答えて獲得した分数、承認待ちのタスクが並びます。' },
@@ -106,6 +121,7 @@ const ja: HomeCopy = {
   audiences: {
     title: 'どんな家族に？',
     lead: '画面との付き合い方の悩みは家族ごとに違います。AliKaが特に役立つのはこんな場面です。',
+    guide: 'ガイドを読む',
     items: {
       kardes: {
         title: 'パソコンを共有するきょうだい',
@@ -205,6 +221,21 @@ const ja: HomeCopy = {
       { title: 'クラウドアカウントなし', body: '主要なデータは端末に残ります。家族の端末間は任意の暗号化ホームネットワークでつながります。' },
     ],
     privacyLink: 'プライバシーポリシーを読む →',
+  },
+  offer: {
+    title: 'まず試して、それから決める。',
+    lead: '各プラットフォームはそれぞれのストアで購入します。お住まいの国の最新価格はストアのページに表示されます。',
+    windows: {
+      title: 'Windowsパソコン',
+      trial: '7日間無料',
+      points: ['買い切り', '同じパソコンで子どもごとに別プロフィール', 'Microsoft Storeからインストール・更新'],
+    },
+    android: {
+      title: 'Androidスマホ・タブレット',
+      trial: '14日間無料',
+      points: ['ファミリー定期購入：ペアリングした家族の端末10台まで', '体験期間の終了前に解約すれば料金はかかりません', '解約と更新はGoogle Playで管理'],
+    },
+    note: 'Windows版の購入にAndroidは含まれません。',
   },
   faq: {
     title: 'よくある質問',

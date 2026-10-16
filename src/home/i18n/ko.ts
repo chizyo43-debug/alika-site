@@ -27,7 +27,7 @@ const ko: HomeCopy = {
     openScreen: (label, platform) => `${label}: 스크린샷 열기 (${platform})`,
     screenAlt: (label) => `${label} 화면`,
   },
-  nav: { features: '기능', videos: '동영상', faq: '자주 묻는 질문', privacy: '개인정보' },
+  nav: { features: '기능', videos: '동영상', faq: '자주 묻는 질문', privacy: '개인정보', offer: '무료 체험' },
   store: {
     forWindows: 'Windows용',
     forAndroid: 'Android용',
@@ -42,6 +42,21 @@ const ko: HomeCopy = {
     mascotAlt: 'AliKa 마스코트: 흑백 재킷과 노란 티셔츠를 입고 웃고 있는 아이',
     tagline: ['막지 않습니다.', '계획합니다.'],
     live: 'Windows와 Android에서 이용 가능',
+  },
+  cta: {
+    pitch: 'Windows와 Android를 위한 자녀 보호 앱. 화면 시간을 함께 계획하고, 아이는 문제를 풀어 보호자가 정한 한도 안에서 추가 시간을 얻습니다.',
+    trialPlay: '14일 무료 체험',
+    trialStore: '7일 무료 체험',
+    alsoStore: 'Windows PC용 Microsoft Store',
+    alsoPlay: 'Android 휴대폰·태블릿용 Google Play',
+    appleNote: 'iPhone, iPad, Mac 버전은 없습니다. AliKa는 아이의 Windows PC 또는 Android 휴대폰·태블릿에 설치합니다.',
+    trustLine: '광고 없음 · AliKa 계정 불필요 · 데이터는 기기에',
+    stickyBoth: 'Windows와 Android용',
+    stickyChoose: '무료로 체험하기',
+  },
+  demo: {
+    title: '30초 만에 보는 AliKa',
+    body: '시간이 끝나면 화면이 잠깁니다. 아이가 문제를 풀면 보호자가 정한 규칙에 따라 추가 시간을 얻고 잠금이 풀립니다.',
   },
   screens: {
     'win-panel': { label: '보호자 패널', body: '하루 요약을 한 화면에: 사용 시간과 남은 시간, 클릭 한 번으로 주는 추가 시간, 문제를 풀어 얻은 시간, 승인을 기다리는 과제.' },
@@ -106,6 +121,7 @@ const ko: HomeCopy = {
   audiences: {
     title: '누구를 위한 앱인가요?',
     lead: '화면 때문에 겪는 고민은 가족마다 다릅니다. AliKa는 특히 이런 상황에서 도움이 됩니다.',
+    guide: '가이드 읽기',
     items: {
       kardes: {
         title: '컴퓨터를 함께 쓰는 형제자매',
@@ -205,6 +221,21 @@ const ko: HomeCopy = {
       { title: '클라우드 계정 없음', body: '핵심 데이터는 기기에 남습니다. 가족 기기 사이에는 선택형 암호화 홈 네트워크.' },
     ],
     privacyLink: '개인정보 처리방침 읽기 →',
+  },
+  offer: {
+    title: '먼저 써 보고 결정하세요.',
+    lead: '각 플랫폼은 해당 스토어에서 구매합니다. 국가별 현재 가격은 스토어 페이지에 표시됩니다.',
+    windows: {
+      title: 'Windows PC',
+      trial: '7일 무료',
+      points: ['한 번 구매', '같은 PC에서 아이마다 별도 프로필', 'Microsoft Store에서 설치 및 업데이트'],
+    },
+    android: {
+      title: 'Android 휴대폰·태블릿',
+      trial: '14일 무료',
+      points: ['가족 구독: 연결된 가족 기기 10대', '체험 기간이 끝나기 전에 해지하면 요금이 청구되지 않습니다', '해지와 갱신은 Google Play에서'],
+    },
+    note: 'Windows 구매에는 Android가 포함되지 않습니다.',
   },
   faq: {
     title: '자주 묻는 질문',

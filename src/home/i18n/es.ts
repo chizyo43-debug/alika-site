@@ -27,7 +27,7 @@ const es: HomeCopy = {
     openScreen: (label, platform) => `${label}: abrir captura de pantalla (${platform})`,
     screenAlt: (label) => `Pantalla de ${label}`,
   },
-  nav: { features: 'Funciones', videos: 'Vídeos', faq: 'Preguntas', privacy: 'Privacidad' },
+  nav: { features: 'Funciones', videos: 'Vídeos', faq: 'Preguntas', privacy: 'Privacidad', offer: 'Prueba gratis' },
   store: {
     forWindows: 'Para Windows',
     forAndroid: 'Para Android',
@@ -42,6 +42,21 @@ const es: HomeCopy = {
     mascotAlt: 'Mascota de AliKa: un niño sonriente con chaqueta blanca y negra y camiseta amarilla',
     tagline: ['No restringimos.', 'Planificamos.'],
     live: 'Disponible en Windows y Android',
+  },
+  cta: {
+    pitch: 'Control parental para Windows y Android. Planifica el tiempo de pantalla en familia; tu hijo gana tiempo extra respondiendo preguntas, dentro del límite que tú fijas.',
+    trialPlay: 'Pruébalo gratis 14 días',
+    trialStore: 'Pruébalo gratis 7 días',
+    alsoStore: 'Microsoft Store para PC con Windows',
+    alsoPlay: 'Google Play para teléfonos y tabletas Android',
+    appleNote: 'No hay versión para iPhone, iPad ni Mac. AliKa se instala en el PC con Windows o en el teléfono o la tableta Android de tu hijo.',
+    trustLine: 'Sin anuncios · Sin cuenta de AliKa · Los datos se quedan en el dispositivo',
+    stickyBoth: 'Para Windows y Android',
+    stickyChoose: 'Pruébalo gratis',
+  },
+  demo: {
+    title: 'AliKa en medio minuto',
+    body: 'Cuando se acaba el tiempo, la pantalla se bloquea. Tu hijo responde preguntas, gana tiempo extra según la regla que fijaste y el bloqueo se levanta.',
   },
   screens: {
     'win-panel': { label: 'Panel de padres', body: 'El resumen del día en una pantalla: tiempo usado y restante, tiempo extra con un clic, minutos ganados respondiendo preguntas y tareas que esperan tu aprobación.' },
@@ -106,6 +121,7 @@ const es: HomeCopy = {
   audiences: {
     title: '¿Para quién es?',
     lead: 'Cada familia tiene su propio reto con las pantallas. AliKa ayuda sobre todo en estos casos.',
+    guide: 'Leer la guía',
     items: {
       kardes: {
         title: 'Hermanos que comparten ordenador',
@@ -205,6 +221,21 @@ const es: HomeCopy = {
       { title: 'Sin cuenta en la nube', body: 'Los datos principales se quedan en el dispositivo. Red doméstica cifrada y opcional entre los dispositivos de la familia.' },
     ],
     privacyLink: 'Lee la política de privacidad →',
+  },
+  offer: {
+    title: 'Pruébalo primero y luego decide.',
+    lead: 'Cada plataforma se compra en su propia tienda. El precio actual para tu país aparece en la página de la tienda.',
+    windows: {
+      title: 'PC con Windows',
+      trial: '7 días gratis',
+      points: ['Compra única', 'Un perfil distinto para cada hijo en el mismo PC', 'Se instala y actualiza desde Microsoft Store'],
+    },
+    android: {
+      title: 'Teléfono y tableta Android',
+      trial: '14 días gratis',
+      points: ['Suscripción familiar: 10 dispositivos familiares emparejados', 'Si cancelas antes de que acabe la prueba, no se te cobra', 'La cancelación y la renovación se gestionan en Google Play'],
+    },
+    note: 'La compra de Windows no incluye Android.',
   },
   faq: {
     title: 'Preguntas frecuentes',

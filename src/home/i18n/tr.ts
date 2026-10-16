@@ -27,7 +27,7 @@ const tr: HomeCopy = {
     openScreen: (label, platform) => `${label}: ekran görüntüsünü aç (${platform})`,
     screenAlt: (label) => `${label} ekranı`,
   },
-  nav: { features: 'Özellikler', videos: 'Videolar', faq: 'SSS', privacy: 'Gizlilik' },
+  nav: { features: 'Özellikler', videos: 'Videolar', faq: 'SSS', privacy: 'Gizlilik', offer: 'Ücretsiz deneme' },
   store: {
     forWindows: 'Windows için',
     forAndroid: 'Android için',
@@ -42,6 +42,21 @@ const tr: HomeCopy = {
     mascotAlt: 'AliKa maskotu: siyah-beyaz ceketli, sarı tişörtlü gülümseyen çocuk',
     tagline: ['Kısıtlamıyoruz.', 'Planlıyoruz.'],
     live: 'Windows ve Android’de yayında',
+  },
+  cta: {
+    pitch: 'Windows ve Android için ebeveyn kontrolü. Ekran süresini birlikte planlayın; çocuğunuz soru çözerek, sizin koyduğunuz sınır içinde ek süre kazansın.',
+    trialPlay: '14 gün ücretsiz deneyin',
+    trialStore: '7 gün ücretsiz deneyin',
+    alsoStore: 'Windows bilgisayar için Microsoft Store',
+    alsoPlay: 'Android telefon ve tablet için Google Play',
+    appleNote: 'iPhone, iPad ve Mac sürümü yok. AliKa çocuğunuzun Windows bilgisayarına ya da Android telefonuna veya tabletine kurulur.',
+    trustLine: 'Reklam yok · AliKa hesabı gerekmez · Veriler cihazda',
+    stickyBoth: 'Windows ve Android için',
+    stickyChoose: 'Ücretsiz deneyin',
+  },
+  demo: {
+    title: 'Yarım dakikada AliKa',
+    body: 'Süre bitince ekran kilitlenir. Çocuk soru çözer, sizin belirlediğiniz kurala göre ek süre kazanır ve kilit kalkar.',
   },
   screens: {
     'win-panel': { label: 'Ebeveyn paneli', body: 'Günün özeti tek ekranda: kullanılan ve kalan süre, tek tıkla ek süre, soru çözerek kazanılan dakikalar ve onayınızı bekleyen görevler.' },
@@ -102,6 +117,7 @@ const tr: HomeCopy = {
   audiences: {
     title: 'Kimler için?',
     lead: 'Her ailenin ekranla derdi farklı. AliKa en çok bu durumlarda işe yarar.',
+    guide: 'Rehberi okuyun',
     items: {
       kardes: {
         title: 'Bilgisayarı paylaşan kardeşler',
@@ -201,6 +217,21 @@ const tr: HomeCopy = {
     ],
     privacyLink: 'Gizlilik politikasını okuyun →',
   },
+  offer: {
+    title: 'Önce deneyin, sonra karar verin.',
+    lead: 'Her platform kendi mağazasından alınır. Ülkenizdeki güncel fiyat mağaza sayfasında yazar.',
+    windows: {
+      title: 'Windows bilgisayar',
+      trial: '7 gün ücretsiz',
+      points: ['Tek seferlik satın alma', 'Aynı bilgisayarda her çocuğa ayrı profil', 'Kurulum ve güncelleme Microsoft Store’dan'],
+    },
+    android: {
+      title: 'Android telefon ve tablet',
+      trial: '14 gün ücretsiz',
+      points: ['Aile aboneliği: 10 eşleşmiş aile cihazı', 'Deneme bitmeden iptal ederseniz ücret alınmaz', 'İptal ve yenileme Google Play’den yönetilir'],
+    },
+    note: 'Windows satın alımı Android’i kapsamaz.',
+  },
   faq: {
     title: 'Sık sorulanlar',
     lead: 'Kurmadan önce en çok merak edilenler.',
@@ -232,6 +263,33 @@ const tr: HomeCopy = {
       {
         q: 'Hangi yaşlar için uygun?',
         a: '5–18 yaş. Dil, görünüm, maskot ve kutlama dozu yaşa göre değişir; 15–18 yaşta maskotsuz, sade bir görünüm kullanılır.',
+      },
+    ],
+  },
+  guides: {
+    title: 'Ebeveyn rehberleri',
+    lead: 'AliKa’yı kurmadan önce de işe yarayan kısa, uygulamalı yazılar.',
+    all: 'Tüm rehberler',
+    items: [
+      {
+        href: '/rehber/windows-cocuk-ekran-suresi-nasil-yonetilir/',
+        title: 'Windows’ta çocuk ekran süresi nasıl yönetilir?',
+        body: 'Aile kuralı oluşturun; Windows’un kendi seçenekleriyle AliKa’nın görünür akışını karşılaştırın.',
+      },
+      {
+        href: '/rehber/windows-11-cocuk-ekran-suresi/',
+        title: 'Windows 11’de çocuk ekran süresi nasıl sınırlandırılır?',
+        body: 'Günlük süre, uygulama ve web sitesi limitlerini görünür kurallarla adım adım ayarlayın.',
+      },
+      {
+        href: '/rehber/soru-cozerek-ekran-suresi-kazanma/',
+        title: 'Soru çözerek ekran süresi kazanma',
+        body: 'Soru bankası, ödül oranı ve günlük tavanla kontrollü ek süre nasıl çalışır?',
+      },
+      {
+        href: '/rehber/bulutsuz-ebeveyn-kontrolu/',
+        title: 'Bulut hesabı olmadan ebeveyn kontrolü',
+        body: 'Veriler cihazda kalır: reklamsız, zorunlu hesap olmadan çalışan ebeveyn kontrolü ve sınırları.',
       },
     ],
   },

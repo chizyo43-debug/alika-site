@@ -27,7 +27,7 @@ const en: HomeCopy = {
     openScreen: (label, platform) => `${label}: open screenshot (${platform})`,
     screenAlt: (label) => `${label} screen`,
   },
-  nav: { features: 'Features', videos: 'Videos', faq: 'FAQ', privacy: 'Privacy' },
+  nav: { features: 'Features', videos: 'Videos', faq: 'FAQ', privacy: 'Privacy', offer: 'Free trial' },
   store: {
     forWindows: 'For Windows',
     forAndroid: 'For Android',
@@ -42,6 +42,21 @@ const en: HomeCopy = {
     mascotAlt: 'AliKa mascot: a smiling child in a black-and-white jacket and a yellow T-shirt',
     tagline: ['We don’t restrict.', 'We plan.'],
     live: 'Available on Windows and Android',
+  },
+  cta: {
+    pitch: 'Parental control for Windows and Android. Plan screen time together; your child earns extra time by answering questions, within the limit you set.',
+    trialPlay: 'Try free for 14 days',
+    trialStore: 'Try free for 7 days',
+    alsoStore: 'Microsoft Store for Windows PCs',
+    alsoPlay: 'Google Play for Android phones and tablets',
+    appleNote: 'There is no iPhone, iPad or Mac version. AliKa is installed on your child’s Windows PC or Android phone or tablet.',
+    trustLine: 'No ads · No AliKa account · Data stays on the device',
+    stickyBoth: 'For Windows and Android',
+    stickyChoose: 'Try it free',
+  },
+  demo: {
+    title: 'AliKa in half a minute',
+    body: 'When time is up, the screen locks. Your child answers questions, earns extra time under the rule you set, and the lock lifts.',
   },
   screens: {
     'win-panel': { label: 'Parent panel', body: 'The day at a glance: time used and left, extra time in one click, minutes earned by answering questions and tasks waiting for your approval.' },
@@ -106,6 +121,7 @@ const en: HomeCopy = {
   audiences: {
     title: 'Who is it for?',
     lead: 'Every family struggles with screens differently. AliKa helps most in these situations.',
+    guide: 'Read the guide',
     items: {
       kardes: {
         title: 'Siblings sharing a computer',
@@ -205,6 +221,21 @@ const en: HomeCopy = {
       { title: 'No cloud account', body: 'Core data stays on the device. An optional, encrypted home network between family devices.' },
     ],
     privacyLink: 'Read the privacy policy →',
+  },
+  offer: {
+    title: 'Try it first, then decide.',
+    lead: 'Each platform is bought from its own store. The current price for your country is on the store page.',
+    windows: {
+      title: 'Windows PC',
+      trial: '7 days free',
+      points: ['One-time purchase', 'A separate profile for each child on the same PC', 'Installed and updated through Microsoft Store'],
+    },
+    android: {
+      title: 'Android phone and tablet',
+      trial: '14 days free',
+      points: ['Family subscription: 10 paired family devices', 'Cancel before the trial ends and you are not charged', 'Cancel or renew in Google Play'],
+    },
+    note: 'The Windows purchase does not include Android.',
   },
   faq: {
     title: 'Frequently asked questions',

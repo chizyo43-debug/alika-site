@@ -34,6 +34,14 @@ for (const [pattern, message] of bannedClaims) {
   if (pattern.test(combinedSources)) errors.push(message);
 }
 
+// Fiyat mağazada gösterilir; sayfa metninde tutar yazılmaz (yalnız mağaza doğrulamalı ld+json).
+if (/₺\s*\d|\d\s*(?:TL|TRY)\b|[¥₩€$£]\s*\d/.test([home, ...i18nSources].join('\n'))) {
+  errors.push('visible home copy must not state a price; the stores show it');
+}
+// Deneme süreleri mağazalardakiyle aynı kalmalı: Play 14 gün, Microsoft Store 7 gün.
+requireMatch(trCopy, /trialPlay: '14 gün ücretsiz/, 'Android trial must stay 14 days as on Google Play');
+requireMatch(trCopy, /trialStore: '7 gün ücretsiz/, 'Windows trial must stay 7 days as on Microsoft Store');
+
 requireMatch(
   home,
   /id: 'windows', tone: 'p-windows', status: 'ready', tags: windows\.tags/,
