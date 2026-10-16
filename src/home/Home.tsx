@@ -178,9 +178,9 @@ const SCREENS: ScreenItem[] = [
   { id: 'win-homework', label: 'Görevler ve onay', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.homework, image: '/screens/platform/windows-gorevler.webp', shape: 'wide', body: 'Çocuğa gerçek dünya görevleri verin: kitap bitirme, oda toplama, ekran dışı etkinlik. Çocuk tamamladığını bildirir; siz onaylayınca ödül süresi eklenir.' },
   { id: 'and-panel', label: 'Ebeveyn paneli', platform: 'Android', status: 'ready', tone: 'blue', side: 'right', angle: -35, icon: ICONS.parent, image: '/screens/android-parent.webp', shape: 'phone', body: 'Bugünün özeti telefonda: kalan süre, bütçeye sayılan süre ve saatlik kullanım.' },
   { id: 'and-reward', label: 'Ödül kuralı', platform: 'Android', status: 'ready', tone: 'ink', side: 'right', angle: -17, icon: ICONS.reward, image: '/screens/android-reports.webp', shape: 'phone', body: 'Bir dakika için kaç doğru gerektiğini, günlük kazanılabilir üst sınırı ve günlük soru sınırını siz seçersiniz.' },
-  { id: 'and-quiz', label: 'Soru çöz, süre kazan', platform: 'Android', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-quiz.webp', shape: 'phone', body: 'Çocuk telefonda soru çözer; bugün ne kadar kazandığını ve günlük üst sınırı aynı ekranda görür.' },
+  { id: 'and-quiz', label: 'Soru çöz, süre kazan', platform: 'Android', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-soru-coz.webp', shape: 'phone', body: 'Çocuk telefonda soru çözer; bir doğru cevabın kaç dakika ettiğini, bugün ne kadar kazandığını ve günlük üst sınırı aynı ekranda görür.' },
   { id: 'and-protect', label: 'Web ve uygulama koruması', platform: 'Android', status: 'ready', tone: 'mint', side: 'right', angle: 17, icon: ICONS.shield, image: '/screens/platform/android-protection.webp', shape: 'phone', video: { id: '4RmEnThuR3c', duration: '1:40' }, body: 'Web koruması, güvenli arama ve onaya kadar kapalı kalan yeni uygulamalar. Web koruması Android VPN izni ister; onayı ebeveyn verir.' },
-  { id: 'and-child', label: 'Çocuk ekranı', platform: 'Android', status: 'ready', tone: 'sky', side: 'right', angle: 35, icon: ICONS.child, image: '/screens/platform/android-child-home.webp', shape: 'phone', body: 'Çocuk kalan süresini, bugünkü çalışmalarını ve sıradaki adımı telefonunda görür.' },
+  { id: 'and-child', label: 'Çocuk ekranı', platform: 'Android', status: 'ready', tone: 'sky', side: 'right', angle: 35, icon: ICONS.child, image: '/screens/platform/android-cocuk-ana.webp', shape: 'phone', body: 'Çocuk kalan süresini, bugün soru çözerek kazandığı dakikaları ve sıradaki çalışmasını telefonunda görür.' },
 ];
 
 function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose: () => void }) {
@@ -253,7 +253,7 @@ function platforms(storeUrl: string): Platform[] {
       id: 'android', tone: 'p-android', status: 'ready', tags: ['Bugün kullanılabilir', 'Telefon / tablet', 'Google Play'],
       title: 'AliKa Android',
       body: 'Ebeveyn yönetir, çocuk ne yapacağını görür. Ebeveyn paneli, çocuk görünümü ve soru çözerek süre kazanma artık telefonda ve tablette.',
-      image: '/screens/platform/android-child.webp', imageAlt: 'AliKa Android çocuk ekranı', shape: 'phone',
+      image: '/screens/platform/android-cocuk-ana.webp', imageAlt: 'AliKa Android çocuk ana ekranı', shape: 'phone',
       action: { label: 'Google Play’den edin', href: PLAY_STORE_URL, external: true },
     },
     {
