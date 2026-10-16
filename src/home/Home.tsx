@@ -319,7 +319,7 @@ const AUDIENCES: { id: AudienceId; on: FeaturePlatform[] }[] = [
 ];
 
 /* Neler var: her madde yalnız gerçekten bulunduğu platformla etiketlenir. Kaynak: Store 1.2.11
-   listelemesi (dürüstlük çiti), Android 0.3.10 arayüz metinleri ve site asistanının ürün bilgisi. */
+   listelemesi (dürüstlük çiti) ve Android 0.3.10 arayüz metinleri. */
 const CONTROL: { key: ControlFeature; on: FeaturePlatform[] }[] = [
   { key: 'dailyTime', on: BOTH },
   { key: 'appRules', on: BOTH },

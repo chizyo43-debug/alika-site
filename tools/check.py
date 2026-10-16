@@ -370,8 +370,14 @@ def main() -> None:
     if (DIST / "og.png").exists() or not (DIST / "og.jpg").exists():
         errors.append("Share image must be og.jpg; the old og.png must not be published")
     for page in DIST.rglob("*.html"):
-        if "/og.png" in page.read_text(encoding="utf-8"):
+        page_text = page.read_text(encoding="utf-8")
+        if "/og.png" in page_text:
             errors.append(f"Old share image is referenced: {page}")
+        # Site asistanı kaldırıldı; hiçbir sayfa onu yüklememeli.
+        if "site-assistant" in page_text:
+            errors.append(f"Removed site assistant is still loaded: {page}")
+    if any(DIST.rglob("site-assistant*")):
+        errors.append("Removed site assistant files are still published")
     if (DIST / ".vite").exists():
         errors.append("Build manifest must not be published")
 

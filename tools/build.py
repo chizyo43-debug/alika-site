@@ -407,8 +407,6 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   {body}
   {footer(locales, lang)}
   <script src="/assets/site.js" defer></script>
-  <script src="/assets/site-assistant-config.js" defer></script>
-  <script src="/assets/site-assistant.js" defer></script>
 </body>
 </html>
 """
@@ -456,8 +454,6 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   {body}
   {footer(locales, lang)}
   <script src="/assets/site.js" defer></script>
-  <script src="/assets/site-assistant-config.js" defer></script>
-  <script src="/assets/site-assistant.js" defer></script>
 </body>
 </html>
 """

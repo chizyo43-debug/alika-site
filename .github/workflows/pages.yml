@@ -34,8 +34,6 @@ jobs:
           cache: npm
       - name: Install site dependencies
         run: npm ci
-      - name: Verify assistant knowledge freshness
-        run: npm run knowledge:verify
       - name: Validate source content packages
         shell: bash
         run: |
@@ -46,8 +44,6 @@ jobs:
         run: python tools/build.py
       - name: Build home page
         run: npm run build:home
-        env:
-          ALIKA_ASSISTANT_ENDPOINT: ${{ vars.ALIKA_ASSISTANT_ENDPOINT }}
       - name: Type check home page
         run: npm run typecheck
       - name: Validate

@@ -32,12 +32,10 @@ const mode = process.argv[2];
 if (mode === '--source') {
   // Türkçe ana sayfa: yeni React ana sayfasının kabuğu (index.html).
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const assistant = fs.readFileSync(path.join(root, 'public', 'site-assistant.js'), 'utf8');
   checkHomeHead('tr', html, 'index.html');
   if (!html.includes('<link rel="canonical" href="https://www.alika.tr/" />')) errors.push('index.html: canonical is missing');
   if ((html.match(/rel="alternate" hreflang=/g) || []).length !== Object.keys(locales).length) errors.push('index.html: hreflang set is incomplete');
   if (/alt=""/.test(html)) errors.push('home shell images must have descriptive alt text');
-  if (/alt=""/.test(assistant)) errors.push('site assistant images must have descriptive alt text');
 } else if (mode === '--dist') {
   for (const language of Object.keys(locales)) {
     const file = language === 'tr' ? path.join(root, 'dist', 'index.html') : path.join(root, 'dist', language, 'index.html');
