@@ -14,7 +14,7 @@ const i18nSources = fs.readdirSync(i18nDir)
   .filter((name) => name.endsWith('.ts'))
   .map((name) => fs.readFileSync(path.join(i18nDir, name), 'utf8'));
 const trCopy = fs.readFileSync(path.join(i18nDir, 'tr.ts'), 'utf8');
-const langs = fs.readFileSync(path.join(i18nDir, 'langs.ts'), 'utf8');
+const storeCampaign = fs.readFileSync(path.join(root, 'src', 'store-campaign.ts'), 'utf8');
 const knowledgeBaseSource = fs.readFileSync(knowledgeBasePath, 'utf8');
 const productKnowledgeSource = fs.readFileSync(productKnowledgePath, 'utf8');
 const knowledgeBase = JSON.parse(knowledgeBaseSource);
@@ -65,7 +65,7 @@ requireMatch(
   'Android phone/tablet must be labelled as available on Google Play',
 );
 requireMatch(
-  langs,
+  storeCampaign,
   /play\.google\.com\/store\/apps\/details\?id=com\.alika\.parental/,
   'Android must link to its Google Play listing',
 );

@@ -21,10 +21,6 @@ export function langFromPath(pathname: string): Lang {
   return isLang(first) ? first : 'tr';
 }
 
-export function playStoreUrl(lang: Lang): string {
-  return `https://play.google.com/store/apps/details?id=com.alika.parental&hl=${lang}`;
-}
-
 /* Hazır içerik kataloğu: uygulama Türkçe için /icerik/ adresini açar. */
 export function contentPath(lang: Lang): string {
   return lang === 'tr' ? '/icerik/' : `/${lang}/content/`;

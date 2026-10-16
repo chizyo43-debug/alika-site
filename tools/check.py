@@ -123,10 +123,13 @@ def main() -> None:
                 errors.append(f"Unverified Store price is published: {home_page}")
             if f"apps.microsoft.com/detail/{MICROSOFT_STORE_ID}?cid=site_home_{lang}" not in home_text:
                 errors.append(f"Microsoft Store link is missing: {home_page}")
-            if f"details?id={PLAY_STORE_PACKAGE}&amp;hl={lang}" not in home_text:
+            play_campaign = f"utm_source%3Dalika.tr%26utm_medium%3Dsite%26utm_campaign%3Dsite_home_{lang}"
+            if f"details?id={PLAY_STORE_PACKAGE}&amp;hl={lang}&amp;referrer={play_campaign}" not in home_text:
                 errors.append(f"Google Play link is missing: {home_page}")
             if '<section class="seoFallback">' not in home_text or "<h1>" not in home_text:
                 errors.append(f"Pre-rendered home summary is missing: {home_page}")
+            if '<meta property="og:image" content="https://www.alika.tr/og.jpg"' not in home_text or 'property="og:image:alt"' not in home_text:
+                errors.append(f"Share image is missing: {home_page}")
             if "/assets/screenshots/" in home_text or "ALTIN" in home_text:
                 errors.append(f"Obsolete mascot screenshot remains: {home_page}")
 
@@ -340,6 +343,12 @@ def main() -> None:
         errors.append("Google Play link is missing from the home page bundle")
     if (DIST / "assets" / "screenshots").exists():
         errors.append("Obsolete mascot screenshots are still published")
+    # Eski kitap kapaklı paylaşım görseli yayından kalktı.
+    if (DIST / "og.png").exists() or not (DIST / "og.jpg").exists():
+        errors.append("Share image must be og.jpg; the old og.png must not be published")
+    for page in DIST.rglob("*.html"):
+        if "/og.png" in page.read_text(encoding="utf-8"):
+            errors.append(f"Old share image is referenced: {page}")
     if (DIST / ".vite").exists():
         errors.append("Build manifest must not be published")
 

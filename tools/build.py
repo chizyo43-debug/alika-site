@@ -14,6 +14,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
 DIST = ROOT / "dist"
 PUBLIC = ROOT / "public"
+# Paylaşım görseli: üzerindeki yazı Türkçe; alt metin sayfanın dilinde.
+OG_IMAGE_ALT = {
+    "tr": "AliKa logosu, “Kısıtlamıyoruz. Planlıyoruz.” sloganı ve gülümseyen AliKa maskotu. Windows ve Android; Microsoft Store ve Google Play.",
+    "en": "AliKa logo, the Turkish slogan “We don’t restrict. We plan.” and the smiling AliKa mascot. Windows and Android; Microsoft Store and Google Play.",
+}
 BASE_URL = "https://www.alika.tr"
 LANGS = ("tr", "en", "de", "es", "fr", "pt", "ru", "ja", "ko")
 LANGUAGE_FLAGS = {
@@ -421,7 +426,10 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{BASE_URL}/og.png">
+  <meta property="og:image" content="{BASE_URL}/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{esc(OG_IMAGE_ALT['en' if lang == 'en' else 'tr'])}">
   <script type="application/ld+json">{json.dumps(article_schema, ensure_ascii=False, separators=(",", ":"))}</script>
 </head>
 <body>

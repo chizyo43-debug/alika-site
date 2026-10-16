@@ -5,13 +5,25 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { homePath, LANGS, playStoreUrl } from '../src/home/i18n/langs.ts';
-import { microsoftStoreUrl } from '../src/store-campaign.ts';
+import { homePath, LANGS } from '../src/home/i18n/langs.ts';
+import { microsoftStoreUrl, playStoreUrl } from '../src/store-campaign.ts';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const BASE_URL = 'https://www.alika.tr';
 const locales = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'locales.json'), 'utf8'));
+// Paylaşım görselindeki yazı Türkçe; alt metin her dilde görseli anlatır.
+const OG_IMAGE_ALT = {
+  tr: 'AliKa logosu, “Kısıtlamıyoruz. Planlıyoruz.” sloganı ve gülümseyen AliKa maskotu. Windows ve Android; Microsoft Store ve Google Play.',
+  en: 'AliKa logo, the Turkish slogan “We don’t restrict. We plan.” and the smiling AliKa mascot. Windows and Android; Microsoft Store and Google Play.',
+  de: 'AliKa-Logo, der türkische Slogan „Wir verbieten nicht. Wir planen.“ und das lächelnde AliKa-Maskottchen. Windows und Android; Microsoft Store und Google Play.',
+  es: 'Logotipo de AliKa, el lema en turco «No restringimos. Planificamos.» y la mascota sonriente de AliKa. Windows y Android; Microsoft Store y Google Play.',
+  fr: 'Logo AliKa, le slogan en turc « Nous ne restreignons pas. Nous planifions. » et la mascotte AliKa souriante. Windows et Android ; Microsoft Store et Google Play.',
+  pt: 'Logotipo da AliKa, o slogan em turco “Não restringimos. Planejamos.” e o mascote sorridente da AliKa. Windows e Android; Microsoft Store e Google Play.',
+  ru: 'Логотип AliKa, слоган на турецком «Мы не запрещаем. Мы планируем.» и улыбающийся талисман AliKa. Windows и Android; Microsoft Store и Google Play.',
+  ja: 'AliKaのロゴ、トルコ語のスローガン「制限しない。計画する。」、笑顔のAliKaマスコット。WindowsとAndroid、Microsoft StoreとGoogle Play。',
+  ko: 'AliKa 로고, 튀르키예어 슬로건 “막지 않습니다. 계획합니다.”, 웃고 있는 AliKa 마스코트. Windows와 Android, Microsoft Store와 Google Play.',
+};
 const OG_LOCALES = {
   tr: 'tr_TR', en: 'en_US', de: 'de_DE', es: 'es_ES', fr: 'fr_FR', pt: 'pt_BR', ru: 'ru_RU', ja: 'ja_JP', ko: 'ko_KR',
 };
@@ -97,7 +109,7 @@ for (const lang of LANGS) {
   if (!seo) throw new Error(`${lang}: locales.json entry is missing`);
   const canonical = `${BASE_URL}${homePath(lang)}`;
   const storeUrl = microsoftStoreUrl(lang, '');
-  const playUrl = playStoreUrl(lang);
+  const playUrl = playStoreUrl(lang, '');
 
   let html = template;
   html = replaceOnce(html, /<html lang="[^"]*">/, `<html lang="${lang}">`, 'html lang');
@@ -110,6 +122,8 @@ for (const lang of LANGS) {
   html = setMeta(html, 'property', 'og:description', seo.seo_description);
   html = setMeta(html, 'name', 'twitter:title', seo.seo_title);
   html = setMeta(html, 'name', 'twitter:description', seo.seo_description);
+  html = setMeta(html, 'property', 'og:image:alt', OG_IMAGE_ALT[lang]);
+  html = setMeta(html, 'name', 'twitter:image:alt', OG_IMAGE_ALT[lang]);
   html = replaceOnce(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/, schema(lang, copy, canonical, storeUrl), 'ld+json');
   html = replaceOnce(html, /<section class="seoFallback">[\s\S]*?<\/section>/, fallback(copy, storeUrl, playUrl), 'seo fallback');
   if (chunks[lang]) {

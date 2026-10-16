@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { microsoftStoreUrl } from '../store-campaign';
-import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, playStoreUrl, type Lang } from './i18n/langs';
+import { microsoftStoreUrl, playStoreUrl } from '../store-campaign';
+import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, type Lang } from './i18n/langs';
 import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, ScreenId, TvGame, VideoKey } from './i18n/types';
 
 const SUPPORT_EMAIL = 'alika.destek@gmail.com';
