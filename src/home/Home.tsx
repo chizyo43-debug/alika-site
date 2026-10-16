@@ -149,7 +149,7 @@ interface ScreenItem {
   icon: ReactNode;
   image: string;
   shape: 'wide' | 'phone';
-  video?: { id: string; duration: string };
+  video?: VideoKey;
 }
 
 const iconProps = { width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
@@ -172,17 +172,28 @@ const ICONS = {
 const SCREENS: ScreenItem[] = [
   { id: 'win-panel', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel-bugun.webp', shape: 'wide' },
   { id: 'win-rules', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-kurallar.webp', shape: 'wide' },
-  { id: 'win-quiz', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/screens/platform/windows-soru-coz.webp', shape: 'wide', video: { id: 'EtLaLyNdXk0', duration: '0:33' } },
-  { id: 'win-protect', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.shield, image: '/screens/platform/windows-guvenli-mod.webp', shape: 'wide', video: { id: 'e3vwoACP44I', duration: '1:35' } },
+  { id: 'win-quiz', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/screens/platform/windows-soru-coz.webp', shape: 'wide', video: 'winQuiz' },
+  { id: 'win-protect', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.shield, image: '/screens/platform/windows-guvenli-mod.webp', shape: 'wide', video: 'winSetup' },
   { id: 'win-homework', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.homework, image: '/screens/platform/windows-gorevler.webp', shape: 'wide' },
   { id: 'and-panel', platform: 'Android', status: 'ready', tone: 'blue', side: 'right', angle: -35, icon: ICONS.parent, image: '/screens/platform/android-panel.webp', shape: 'phone' },
   { id: 'and-reward', platform: 'Android', status: 'ready', tone: 'ink', side: 'right', angle: -17, icon: ICONS.reward, image: '/screens/platform/android-odul-kurali.webp', shape: 'phone' },
   { id: 'and-quiz', platform: 'Android', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-soru-coz.webp', shape: 'phone' },
-  { id: 'and-protect', platform: 'Android', status: 'ready', tone: 'mint', side: 'right', angle: 17, icon: ICONS.shield, image: '/screens/platform/android-kurallar.webp', shape: 'phone', video: { id: '4RmEnThuR3c', duration: '1:40' } },
+  { id: 'and-protect', platform: 'Android', status: 'ready', tone: 'mint', side: 'right', angle: 17, icon: ICONS.shield, image: '/screens/platform/android-kurallar.webp', shape: 'phone', video: 'androidSetup' },
   { id: 'and-child', platform: 'Android', status: 'ready', tone: 'sky', side: 'right', angle: 35, icon: ICONS.child, image: '/screens/platform/android-cocuk-ana.webp', shape: 'phone' },
 ];
 
-function ScreenDialog({ screen, onClose, t }: { screen: ScreenItem | null; onClose: () => void; t: HomeCopy }) {
+/* Video dosyası sitede durur; tıklanana kadar yalnız kapak görseli yüklenir, YouTube'a bağlanılmaz. */
+function VideoPlayer({ video, lang, label }: { video: VideoItem; lang: Lang; label: string }) {
+  const captionLabel = new Intl.DisplayNames([lang], { type: 'language' }).of('tr') ?? 'Türkçe';
+  return (
+    <video className="videoPlayer" controls autoPlay playsInline preload="none" poster={`${video.file}.webp`} aria-label={label}>
+      <source src={`${video.file}.mp4`} type="video/mp4" />
+      <track kind="captions" src={`${video.file}.tr.vtt`} srcLang="tr" label={captionLabel} />
+    </video>
+  );
+}
+
+function ScreenDialog({ screen, onClose, lang, t }: { screen: ScreenItem | null; onClose: () => void; lang: Lang; t: HomeCopy }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -192,9 +203,6 @@ function ScreenDialog({ screen, onClose, t }: { screen: ScreenItem | null; onClo
     if (!screen && dialog.open) dialog.close();
   }, [screen]);
 
-  const video = screen?.video;
-  const text = screen ? t.screens[screen.id] : null;
-
   return (
     <dialog
       ref={dialogRef}
@@ -203,28 +211,39 @@ function ScreenDialog({ screen, onClose, t }: { screen: ScreenItem | null; onClo
       onClose={onClose}
       onClick={(event) => event.target === event.currentTarget && onClose()}
     >
-      {screen && text && (
-        <div className={`screenBody ${screen.shape}`}>
-          <figure className="screenShot">
-            <img src={screen.image} alt={t.a11y.screenAlt(text.label)} />
-          </figure>
-          <div className="screenText">
-            <span className="tag plain"><StatusDot status={screen.status} />{screen.platform}</span>
-            <h2 id="screenDialogTitle">{text.label}</h2>
-            <p>{text.body}</p>
-            {t.dialog.note && <p className="screenNote">{t.dialog.note}</p>}
-            <div className="screenActions">
-              {video && (
-                <a className="pill solid" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener">
-                  {t.dialog.watch} <span className="mono">{video.duration}</span>
-                </a>
-              )}
-              <button type="button" className="pill ghost" onClick={onClose}>{t.dialog.close}</button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Ekran değişince içerik yeniden kurulur; açık video kapanır. */}
+      {screen && <ScreenContent key={screen.id} screen={screen} onClose={onClose} lang={lang} t={t} />}
     </dialog>
+  );
+}
+
+function ScreenContent({ screen, onClose, lang, t }: { screen: ScreenItem; onClose: () => void; lang: Lang; t: HomeCopy }) {
+  const [playing, setPlaying] = useState(false);
+  const video = screen.video ? VIDEO_BY_KEY[screen.video] : null;
+  const text = t.screens[screen.id];
+
+  return (
+    <div className={`screenBody ${playing ? 'wide' : screen.shape}`}>
+      <figure className="screenShot">
+        {playing && video
+          ? <VideoPlayer video={video} lang={lang} label={t.videos[video.key].title} />
+          : <img src={screen.image} alt={t.a11y.screenAlt(text.label)} />}
+      </figure>
+      <div className="screenText">
+        <span className="tag plain"><StatusDot status={screen.status} />{screen.platform}</span>
+        <h2 id="screenDialogTitle">{text.label}</h2>
+        <p>{text.body}</p>
+        {t.dialog.note && <p className="screenNote">{t.dialog.note}</p>}
+        <div className="screenActions">
+          {video && !playing && (
+            <button type="button" className="pill solid" onClick={() => setPlaying(true)}>
+              {t.dialog.watch} <span className="mono">{video.duration}</span>
+            </button>
+          )}
+          <button type="button" className="pill ghost" onClick={onClose}>{t.dialog.close}</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -275,13 +294,16 @@ function platforms(t: HomeCopy, storeUrl: string, playUrl: string): Platform[] {
   ];
 }
 
-/* YouTube kanalındaki güncel videolar (15.10.2026, Türkçe). Kapak görselleri yerelde tutulur. */
+/* Kanaldaki üç güncel videonun (15.10.2026, Türkçe) aynı dosyaları sitede barındırılır ve sayfada oynar.
+   `file` uzantısız yoldur: .mp4 video, .webp kapak, .tr.vtt Türkçe altyazı. */
 const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@AliKaApp';
-const VIDEOS: { id: string; key: VideoKey; platform: string; duration: string; poster: string; store: 'microsoft' | 'play' | null }[] = [
-  { id: 'e3vwoACP44I', key: 'winSetup', platform: 'Windows', duration: '1:35', poster: '/videos/kurulum/windows-ilk-kurulum.webp', store: 'microsoft' },
-  { id: '4RmEnThuR3c', key: 'androidSetup', platform: 'Android', duration: '1:40', poster: '/videos/kurulum/android-ilk-kurulum.webp', store: 'play' },
-  { id: 'EtLaLyNdXk0', key: 'winQuiz', platform: 'Windows', duration: '0:33', poster: '/videos/kurulum/windows-soru-coz.webp', store: null },
+interface VideoItem { key: VideoKey; platform: string; duration: string; file: string; store: 'microsoft' | 'play' | null }
+const VIDEOS: VideoItem[] = [
+  { key: 'winSetup', platform: 'Windows', duration: '1:35', file: '/videos/kurulum/windows-ilk-kurulum', store: 'microsoft' },
+  { key: 'androidSetup', platform: 'Android', duration: '1:40', file: '/videos/kurulum/android-ilk-kurulum', store: 'play' },
+  { key: 'winQuiz', platform: 'Windows', duration: '0:33', file: '/videos/kurulum/windows-soru-coz', store: null },
 ];
+const VIDEO_BY_KEY = Object.fromEntries(VIDEOS.map((video) => [video.key, video])) as Record<VideoKey, VideoItem>;
 
 const AGE_RANGES = ['5–7', '8–11', '12–14', '15–18'];
 
@@ -514,6 +536,8 @@ function LanguagePicker({ lang, t }: { lang: Lang; t: HomeCopy }) {
 export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
   const [theme, toggleTheme] = useTheme();
   const [openScreen, setOpenScreen] = useState<ScreenItem | null>(null);
+  /* Aynı anda tek video oynar; başka karta tıklanınca önceki kapanır. */
+  const [playingVideo, setPlayingVideo] = useState<VideoKey | null>(null);
   const storeUrl = microsoftStoreUrl(lang);
   const playUrl = playStoreUrl(lang);
   const home = homePath(lang);
@@ -691,16 +715,27 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           {t.how.videoNote && <p className="videoNote">{t.how.videoNote}</p>}
           <div className="installGrid">
             {VIDEOS.map((video) => (
-              <article key={video.id} className="install">
-                <a className="video" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener">
-                  <span className="videoThumb">
-                    <img src={video.poster} alt="" loading="lazy" decoding="async" />
-                    <span className="mono videoTime">{video.duration}</span>
-                    <span className="play" aria-hidden="true">▶</span>
-                  </span>
-                  <span className="mono videoEyebrow">{video.platform} · {video.store ? t.how.firstSetup : t.how.usage} · YouTube</span>
+              <article key={video.key} className="install">
+                <div className="video">
+                  {playingVideo === video.key ? (
+                    <span className="videoThumb">
+                      <VideoPlayer video={video} lang={lang} label={t.videos[video.key].title} />
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      className="videoThumb"
+                      onClick={() => setPlayingVideo(video.key)}
+                      aria-label={`${t.dialog.watch}: ${t.videos[video.key].title} (${video.duration})`}
+                    >
+                      <img src={`${video.file}.webp`} alt="" loading="lazy" decoding="async" />
+                      <span className="mono videoTime">{video.duration}</span>
+                      <span className="play" aria-hidden="true">▶</span>
+                    </button>
+                  )}
+                  <span className="mono videoEyebrow">{video.platform} · {video.store ? t.how.firstSetup : t.how.usage}</span>
                   <span className="videoTitle">{t.videos[video.key].title}</span>
-                </a>
+                </div>
                 <p>{t.videos[video.key].body}</p>
                 {video.store && (
                   <a className="pill ghost" href={video.store === 'microsoft' ? storeUrl : playUrl} target="_blank" rel="noopener">
@@ -770,7 +805,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
         </section>
       </main>
 
-      <ScreenDialog screen={openScreen} onClose={() => setOpenScreen(null)} t={t} />
+      <ScreenDialog screen={openScreen} onClose={() => setOpenScreen(null)} lang={lang} t={t} />
 
       <footer className="foot">
         <div className="wrap footGrid">

@@ -89,8 +89,8 @@ const tr: HomeCopy = {
       tags: ['Geliştiriliyor', 'Android TV'],
       title: 'AliKa TV ve aile oyunları',
       body: 'TV ailenin ortak ekranı olur: Aile Panosu’nda aile profili ve son aile mesajı görünür. Oyunlara herkes kendi telefonundan katılır; telefon kumanda olur.',
-      ready: 'Hazır',
-      download: 'İndirilir',
+      ready: 'TV ile gelecek',
+      download: 'TV’de indirilecek',
       games: {
         rally: { name: 'Işık Hızı Rallisi', body: 'Ders sorularını doğru ve hızlı cevapla, yörüngede öne geç.' },
         station: { name: 'Uzay İstasyonu', body: 'Komutları sesli söyle, istasyonu ekipçe eve getir.' },

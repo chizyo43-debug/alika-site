@@ -6,6 +6,7 @@ import os
 import shutil
 import stat
 from pathlib import Path
+from urllib.parse import quote
 
 from content_catalog import build_content_catalog
 
@@ -59,6 +60,7 @@ CONTENT_BOOK_LABELS = {
     "ko": ("AliKa 책으로 돌아가기", "준비된 콘텐츠 노트", "국가", "학년 패키지", "과목 패키지", "오류나 개선 아이디어가 있나요? 알려주세요."),
 }
 MICROSOFT_STORE_BASE_URL = "https://apps.microsoft.com/detail/9N3P9F5ZKR5S"
+PLAY_STORE_BASE_URL = "https://play.google.com/store/apps/details?id=com.alika.parental"
 STORE_MARKETS = {
     "tr": {"cid": "site_home_tr", "price": "80.00", "currency": "TRY"},
     "ja": {"cid": "site_home_ja", "price": "230", "currency": "JPY"},
@@ -85,8 +87,8 @@ GUIDES = (
         "slug": "windows-cocuk-ekran-suresi-nasil-yonetilir",
         "title": "Windows'ta Çocuk Ekran Süresi Nasıl Yönetilir?",
         "description": "Windows 10 ve 11'de çocuk ekran süresi için aile kuralı oluşturun; Microsoft Family Safety seçeneklerini ve AliKa'nın görünür, yerel-öncelikli akışını karşılaştırın.",
-        "video": "https://youtu.be/EtLaLyNdXk0",
-        "video_label": "Soru çöz, ek süre kazan videosunu YouTube’da izleyin",
+        "video": "windows-soru-coz",
+        "video_label": "Soru çöz, ek süre kazan · 0:33",
         "campaign_id": "organic_guide_windows_tr",
         "lede": (
             "Windows'ta ekran süresi yönetimi yalnız bir süre sayısı girmek değildir. "
@@ -117,10 +119,11 @@ GUIDES = (
     },
     {
         "slug": "windows-11-cocuk-ekran-suresi",
+        "campaign_id": "site_rehber_windows11_tr",
         "title": "Windows 11’de Çocuk Ekran Süresi Nasıl Sınırlandırılır?",
         "description": "Windows 11’de günlük süre, uygulama ve web sitesi limitlerini görünür kurallarla ayarlayın. AliKa ebeveyn panelini adım adım inceleyin.",
-        "video": "https://youtu.be/e3vwoACP44I",
-        "video_label": "AliKa Windows ilk kurulum videosunu izleyin",
+        "video": "windows-ilk-kurulum",
+        "video_label": "AliKa Windows ilk kurulum · 1:35",
         "lede": (
             "Ekran süresi tartışması çoğu zaman “şimdi kapat” cümlesi söylendiğinde başlar. "
             "Daha sakin bir düzen için sınırın önceden belirlenmesi, çocuğun kalan süreyi görebilmesi "
@@ -159,10 +162,15 @@ GUIDES = (
     },
     {
         "slug": "soru-cozerek-ekran-suresi-kazanma",
+        "campaign_id": "site_rehber_soru_coz_tr",
+        "android_note": (
+            "Soru çözerek süre kazanma Android telefon ve tablette de aynı kuralla çalışır: ebeveyn bir dakika için gereken doğru cevap sayısını ve günlük kazanım tavanını belirler, yanlış cevap süre kazandırmaz. Sorular tek tek ya da CSV, TXT ve Excel dosyasıyla eklenebilir.",
+            "Bu rehberdeki ayrıntılar Windows sürümünden alınmıştır; Android’de ekranlar ve bazı ayrıntılar farklı olabilir. Android aile aboneliği Google Play’de 14 gün ücretsiz denemeyle başlar; Windows satın alımı Android’i kapsamaz.",
+        ),
         "title": "Soru Çözerek Ekran Süresi Kazanma: AliKa Nasıl Çalışır?",
         "description": "Çocuğun soru çözerek kontrollü ek süre kazanmasını; soru bankası, ödül oranı ve günlük tavan ayarlarıyla adım adım öğrenin.",
-        "video": "https://youtu.be/EtLaLyNdXk0",
-        "video_label": "Soru çöz, ek süre kazan videosunu YouTube’da izleyin",
+        "video": "windows-soru-coz",
+        "video_label": "Soru çöz, ek süre kazan · 0:33",
         "lede": (
             "Ekran süresini yalnızca kesmek yerine bir kısmını öğrenmeyle ilişkilendirmek mümkün. "
             "AliKa’da çocuk, ebeveynin eklediği soru bankasından sorular çözer; doğru cevaplar "
@@ -201,6 +209,11 @@ GUIDES = (
     },
     {
         "slug": "bulutsuz-ebeveyn-kontrolu",
+        "campaign_id": "site_rehber_bulutsuz_tr",
+        "android_note": (
+            "Android’de de kurallar cihazda saklanır; web hesabına veya tarayıcı paneline giriş yapılmaz. Android web filtresi cihazdaki yerel VPN ile alan adı düzeyinde çalışır; sayfa içeriğini buluta gönderen bir tünel değildir.",
+            "Android aile aboneliği Google Play üzerinden alınır; abonelik ve dağıtım Google Play’in kendi hizmetidir. Windows satın alımı Android’i kapsamaz.",
+        ),
         "title": "Bulut Hesabı Olmadan Ebeveyn Kontrolü Nasıl Çalışır?",
         "description": "AliKa’nın cihazda kalan verilerle, reklamsız ve zorunlu bulut hesabı olmadan nasıl çalıştığını; yerel aile ağının sınırlarını öğrenin.",
         "lede": (
@@ -359,6 +372,12 @@ def microsoft_store_url(lang: str, campaign_id: str | None = None) -> str:
     return f'{MICROSOFT_STORE_BASE_URL}?cid={campaign_id or store_market(lang)["cid"]}'
 
 
+def play_store_url(lang: str, campaign_id: str, medium: str) -> str:
+    """Play kampanyayı referrer içindeki utm_* değerlerinden okur (pazarlama planı Ek A)."""
+    referrer = quote(f"utm_source=site&utm_medium={medium}&utm_campaign={campaign_id}", safe="")
+    return f"{PLAY_STORE_BASE_URL}&hl={lang}&referrer={referrer}"
+
+
 def document(locales: dict[str, dict], lang: str, title: str, description: str, body: str, slug: str = "") -> str:
     alternates = "\n".join(
         f'<link rel="alternate" hreflang="{code}" href="{BASE_URL}{href(code, slug)}">'
@@ -458,7 +477,7 @@ def guide_index_body() -> str:
         <p>Kuralları önceden konuşmak, öğrenme akışını sınırlı tutmak ve verinin nereye gittiğini bilmek için hazırlanmış Türkçe kaynaklar.</p>
       </header>
       <section class="article-grid" aria-label="Türkçe ebeveyn rehberleri">{cards}</section>
-      <aside class="guide-disclosure"><strong>Açıklık notu:</strong> Bu rehberler AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa ücretli bir Windows uygulamasıdır; Microsoft Store’da 7 günlük deneme ve ₺80 fiyat gösterilir.</aside>
+      <aside class="guide-disclosure"><strong>Açıklık notu:</strong> Bu rehberler AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa Windows ve Android için ücretli bir uygulamadır. Windows sürümü Microsoft Store’da 7 günlük deneme ve ₺80 fiyatla, Android aile aboneliği Google Play’de 14 günlük denemeyle sunulur.</aside>
     </main>
     """
 
@@ -468,24 +487,53 @@ def guide_article_body(guide: dict) -> str:
         f'<section><h2>{esc(heading)}</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in paragraphs)}</section>'
         for heading, paragraphs in guide["sections"]
     )
-    # Videosu olmayan rehberde video kutusu gösterilmez (eski videolar YouTube'dan kaldırıldı).
+    # Video dosyası sitede durur ve sayfada oynar; tıklanana kadar yalnız kapak görseli yüklenir.
+    video = f'/videos/kurulum/{guide["video"]}' if guide.get("video") else ""
     video_aside = (
-        f'<aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>Video yalnız bağlantıya tıkladığınızda YouTube’da açılır.</span></div><a href="{esc(guide["video"])}" target="_blank" rel="noopener noreferrer">{esc(guide["video_label"])} ↗</a></aside>'
-        if guide.get("video") else ""
+        f'<aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>{esc(guide["video_label"])}</span></div>'
+        f'<video controls preload="none" playsinline poster="{video}.webp"><source src="{video}.mp4" type="video/mp4">'
+        f'<track kind="captions" src="{video}.tr.vtt" srclang="tr" label="Türkçe"></video></aside>'
+        if video else ""
     )
+    # İki platformda geçerli rehber: Android notu ve Play düğmesi.
+    android_note = guide.get("android_note")
+    android_section = (
+        f'<section><h2>Android telefon ve tablette</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in android_note)}</section>'
+        if android_note else ""
+    )
+    store_button = f'<a class="button" href="{microsoft_store_url("tr", guide.get("campaign_id"))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a>'
+    if android_note:
+        eyebrow = "Windows ve Android · AliKa ebeveyn rehberi"
+        disclosure = "AliKa Windows ve Android için ücretli bir uygulamadır."
+        play_href = esc(play_store_url("tr", guide["campaign_id"], "rehber"))
+        cta = (
+            '<section class="guide-cta"><h2>Windows’ta ya da Android’de deneyin.</h2>'
+            '<p>Windows sürümünü Microsoft Store’da 7 gün ücretsiz deneyebilirsiniz; deneme sonrası fiyat ₺80’dir. '
+            'Android aile aboneliği Google Play’de 14 gün ücretsiz denemeyle başlar.</p>'
+            f'<div class="button-row">{store_button}<a class="button" href="{play_href}" target="_blank" rel="noopener noreferrer">Google Play’de açın</a></div></section>'
+        )
+    else:
+        eyebrow = "Windows 10/11 · AliKa ebeveyn rehberi"
+        disclosure = "AliKa ücretli bir Windows uygulamasıdır."
+        cta = (
+            '<section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2>'
+            '<p>AliKa’yı Windows 10/11 için 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p>'
+            f'{store_button}</section>'
+        )
     return f"""
     <main id="main" class="guide-main">
       <article class="guide-article">
         <nav class="guide-breadcrumb" aria-label="Sayfa yolu"><a href="/">AliKa</a><span>›</span><a href="/{GUIDE_BASE}/">Rehberler</a></nav>
         <header>
-          <p class="eyebrow">Windows 10/11 · AliKa ebeveyn rehberi</p>
+          <p class="eyebrow">{eyebrow}</p>
           <h1>{esc(guide["title"])}</h1>
           <p class="guide-lede">{esc(guide["lede"])}</p>
-          <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa ücretli bir Windows uygulamasıdır.</p>
+          <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. {disclosure}</p>
         </header>
         {sections}
+        {android_section}
         {video_aside}
-        <section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2><p>AliKa’yı Windows 10/11 için 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p><a class="button" href="{microsoft_store_url('tr', guide.get('campaign_id'))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a></section>
+        {cta}
       </article>
     </main>
     """

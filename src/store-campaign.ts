@@ -20,7 +20,7 @@ export function microsoftStoreUrl(language: string, search?: string): string {
 export function playStoreUrl(language: string, search?: string): string {
   const activeSearch = search ?? (typeof window === 'undefined' ? '' : window.location.search);
   const campaignId = resolveStoreCampaignId(language, activeSearch);
-  const referrer = `utm_source=alika.tr&utm_medium=site&utm_campaign=${campaignId}`;
+  const referrer = `utm_source=site&utm_medium=web&utm_campaign=${campaignId}`;
   return `https://play.google.com/store/apps/details?id=com.alika.parental&hl=${language}&referrer=${encodeURIComponent(referrer)}`;
 }
 

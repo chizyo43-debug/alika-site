@@ -123,7 +123,7 @@ def main() -> None:
                 errors.append(f"Unverified Store price is published: {home_page}")
             if f"apps.microsoft.com/detail/{MICROSOFT_STORE_ID}?cid=site_home_{lang}" not in home_text:
                 errors.append(f"Microsoft Store link is missing: {home_page}")
-            play_campaign = f"utm_source%3Dalika.tr%26utm_medium%3Dsite%26utm_campaign%3Dsite_home_{lang}"
+            play_campaign = f"utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3Dsite_home_{lang}"
             if f"details?id={PLAY_STORE_PACKAGE}&amp;hl={lang}&amp;referrer={play_campaign}" not in home_text:
                 errors.append(f"Google Play link is missing: {home_page}")
             if '<section class="seoFallback">' not in home_text or "<h1>" not in home_text:
@@ -179,11 +179,26 @@ def main() -> None:
             if not route_exists(value):
                 errors.append(f"Broken {attr} in {page}: {value}")
 
+    # Her rehberin kendi kampanya adı; iki platformlu rehberlerde Play düğmesi aynı adı taşır.
+    guide_campaigns = {
+        "windows-cocuk-ekran-suresi-nasil-yonetilir": ("organic_guide_windows_tr", False),
+        "windows-11-cocuk-ekran-suresi": ("site_rehber_windows11_tr", False),
+        "soru-cozerek-ekran-suresi-kazanma": ("site_rehber_soru_coz_tr", True),
+        "bulutsuz-ebeveyn-kontrolu": ("site_rehber_bulutsuz_tr", True),
+    }
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
-        expected_cid = "cid=organic_guide_windows_tr" if slug == "windows-cocuk-ekran-suresi-nasil-yonetilir" else "cid=site_home_tr"
-        if page.exists() and expected_cid not in page.read_text(encoding="utf-8"):
+        if not page.exists():
+            continue
+        guide_text = page.read_text(encoding="utf-8")
+        campaign, has_play = guide_campaigns[slug]
+        if f"cid={campaign}" not in guide_text:
             errors.append(f"Campaign CID is missing from guide CTA: {page}")
+        play_link = f"details?id={PLAY_STORE_PACKAGE}&amp;hl=tr&amp;referrer=utm_source%3Dsite%26utm_medium%3Drehber%26utm_campaign%3D{campaign}"
+        if has_play != (play_link in guide_text):
+            errors.append(f"Guide Google Play button is wrong: {page}")
+        if "youtube.com" in guide_text or "youtu.be" in guide_text:
+            errors.append(f"Guide video must play on the site, not on YouTube: {page}")
 
     uk_pages = (
         DIST / "en" / "guides" / "windows-child-screen-time" / "index.html",
@@ -343,6 +358,14 @@ def main() -> None:
         errors.append("Google Play link is missing from the home page bundle")
     if (DIST / "assets" / "screenshots").exists():
         errors.append("Obsolete mascot screenshots are still published")
+    # Videolar sitede oynar: dosya, kapak ve Türkçe altyazı birlikte yayımlanır.
+    for name in ("windows-ilk-kurulum", "android-ilk-kurulum", "windows-soru-coz"):
+        for suffix in (".mp4", ".webp", ".tr.vtt"):
+            if not (DIST / "videos" / "kurulum" / f"{name}{suffix}").exists():
+                errors.append(f"Site video file is missing: {name}{suffix}")
+    if "youtube.com/watch" in home_bundle_text:
+        errors.append("Home page videos must play on the site, not link to YouTube")
+
     # Eski kitap kapaklı paylaşım görseli yayından kalktı.
     if (DIST / "og.png").exists() or not (DIST / "og.jpg").exists():
         errors.append("Share image must be og.jpg; the old og.png must not be published")

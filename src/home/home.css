@@ -1411,11 +1411,36 @@ h2 {
   aspect-ratio: 16 / 9;
 }
 
+button.videoThumb {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 .videoThumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
+}
+
+/* Sitede oynayan video: kapakla aynı 16:9 çerçeve. */
+.videoPlayer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #0f1a2b;
+  object-fit: contain;
+}
+
+.screenShot .videoPlayer {
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .video:hover .videoThumb img {
@@ -1452,9 +1477,17 @@ h2 {
 }
 
 .video:hover .play,
-.video:focus-visible .play {
+.videoThumb:focus-visible .play {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
+}
+
+/* Dokunmatik ekranda üzerine gelme yok: oynat düğmesi hep görünür. */
+@media (hover: none) {
+  .play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .videoTitle {

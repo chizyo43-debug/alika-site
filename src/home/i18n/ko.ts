@@ -93,8 +93,8 @@ const ko: HomeCopy = {
       tags: ['개발 중', 'Android TV'],
       title: 'AliKa TV와 가족 게임',
       body: 'TV가 가족의 공유 화면이 됩니다. 가족 보드에는 가족 프로필과 최근 가족 메시지가 보입니다. 모두 자기 휴대폰으로 게임에 참여하고, 휴대폰이 컨트롤러가 됩니다.',
-      ready: '기본 포함',
-      download: '다운로드',
+      ready: '기본 포함 예정',
+      download: '다운로드 예정',
       games: {
         rally: { name: '광속 랠리', body: '학교 문제를 정확하고 빠르게 맞혀 궤도 트랙에서 앞서 나가세요.' },
         station: { name: '우주 정거장', body: '명령을 소리 내어 외치고 팀이 함께 정거장을 귀환시키세요.' },

@@ -93,8 +93,8 @@ const en: HomeCopy = {
       tags: ['In development', 'Android TV'],
       title: 'AliKa TV and family games',
       body: 'The TV becomes the family’s shared screen: the Family Board shows the family profile and the latest family message. Everyone joins games from their own phone, which becomes the controller.',
-      ready: 'Built in',
-      download: 'Download',
+      ready: 'Will be built in',
+      download: 'Will be downloadable',
       games: {
         rally: { name: 'Light Speed Rally', body: 'Answer school questions correctly and fast to pull ahead on the orbit track.' },
         station: { name: 'Space Station', body: 'Call out commands and bring the station home as a crew.' },

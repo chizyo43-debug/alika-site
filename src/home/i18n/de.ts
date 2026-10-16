@@ -93,8 +93,8 @@ const de: HomeCopy = {
       tags: ['In Entwicklung', 'Android TV'],
       title: 'AliKa TV und Familienspiele',
       body: 'Der Fernseher wird zum gemeinsamen Bildschirm der Familie: Die Familientafel zeigt das Familienprofil und die neueste Familiennachricht. Alle spielen über ihr eigenes Handy mit, das zum Controller wird.',
-      ready: 'Integriert',
-      download: 'Zum Laden',
+      ready: 'Wird integriert',
+      download: 'Später ladbar',
       games: {
         rally: { name: 'Lichtgeschwindigkeits-Rallye', body: 'Schulfragen richtig und schnell beantworten und auf der Umlaufbahn vorne liegen.' },
         station: { name: 'Raumstation', body: 'Befehle laut ansagen und die Station als Team nach Hause bringen.' },

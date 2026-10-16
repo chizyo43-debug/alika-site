@@ -2834,9 +2834,8 @@ h3 {
 
 .guide-video {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  flex-direction: column;
+  gap: 16px;
   margin: 34px 0;
   padding: 22px 24px;
   color: #fff;
@@ -2854,10 +2853,12 @@ h3 {
   font-size: 0.9rem;
 }
 
-.guide-video a {
-  flex: 0 0 auto;
-  color: var(--cyan);
-  font-weight: 900;
+.guide-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius-md);
 }
 
 .guide-cta {
@@ -2968,10 +2969,6 @@ h3 {
     min-height: 0;
   }
 
-  .guide-video {
-    align-items: flex-start;
-    flex-direction: column;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

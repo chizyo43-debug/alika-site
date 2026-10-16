@@ -93,8 +93,8 @@ const es: HomeCopy = {
       tags: ['En desarrollo', 'Android TV'],
       title: 'AliKa TV y juegos en familia',
       body: 'La TV se convierte en la pantalla compartida de la familia: el Tablero familiar muestra el perfil familiar y el último mensaje de la familia. Todos se unen a los juegos desde su propio móvil, que hace de mando.',
-      ready: 'Incluido',
-      download: 'Descargable',
+      ready: 'Vendrá incluido',
+      download: 'Se podrá descargar',
       games: {
         rally: { name: 'Rally a la velocidad de la luz', body: 'Responde bien y rápido a preguntas escolares y adelántate en la órbita.' },
         station: { name: 'Estación espacial', body: 'Di las órdenes en voz alta y lleva la estación a casa en equipo.' },
