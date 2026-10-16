@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { GUIDE_LANGUAGES, getPublishedGuideVideos } from '../data/video-guides';
 import { microsoftStoreUrl } from '../store-campaign';
 
 const SUPPORT_EMAIL = 'alika.destek@gmail.com';
@@ -151,7 +150,7 @@ interface ScreenItem {
   image: string;
   shape: 'wide' | 'phone';
   body: string;
-  videoKey?: string;
+  video?: { id: string; duration: string };
 }
 
 const iconProps = { width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
@@ -171,22 +170,17 @@ const ICONS = {
 
 /* Sol kavis: Windows ekranları. Sağ kavis: Android telefon ekranları ve geliştirilen TV/oyun ekranları. Açılar yüzü ve gövdeyi boş bırakır. */
 const SCREENS: ScreenItem[] = [
-  { id: 'panel', label: 'Ebeveyn paneli', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel.png', shape: 'wide', videoKey: 'windows-panel', body: 'Günün özeti tek ekranda: kalan süre, bekleyen görevler ve aile durumu.' },
-  { id: 'rules', label: 'Kurallar', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-rules.png', shape: 'wide', videoKey: 'windows-child-rules', body: 'Günlük süre, uygulama sınırları, uyku saati ve görevler. Çocuk ne zaman duracağını önceden bilir.' },
-  { id: 'quiz', label: 'Soru çöz, süre kazan', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/videos/tr/07-windows-child-question.jpg', shape: 'wide', videoKey: 'windows-child-question', body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
-  { id: 'homework', label: 'Görev, ödev, sınav', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.homework, image: '/videos/tr/08-windows-task-homework-exam.jpg', shape: 'wide', videoKey: 'windows-task-homework-exam', body: 'Görev, ödev ve sınavları oluşturun; tamamlananları panelden onaylayın.' },
-  { id: 'reports', label: 'Raporlar', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.reports, image: '/screens/platform/windows-reports.png', shape: 'wide', videoKey: 'windows-reports', body: 'Kullanım ve öğrenme sonuçları haftalık olarak bir arada. Pazarlık yerine konuşma.' },
+  { id: 'panel', label: 'Ebeveyn paneli', platform: 'Windows', status: 'ready', tone: 'blue', side: 'left', angle: 215, icon: ICONS.panel, image: '/screens/platform/windows-panel.png', shape: 'wide', body: 'Günün özeti tek ekranda: kalan süre, bekleyen görevler ve aile durumu.' },
+  { id: 'rules', label: 'Kurallar', platform: 'Windows', status: 'ready', tone: 'ink', side: 'left', angle: 197, icon: ICONS.rules, image: '/screens/platform/windows-rules.png', shape: 'wide', body: 'Günlük süre, uygulama sınırları, uyku saati ve görevler. Çocuk ne zaman duracağını önceden bilir.' },
+  { id: 'quiz', label: 'Soru çöz, süre kazan', platform: 'Windows', status: 'ready', tone: 'sun', side: 'left', angle: 180, icon: ICONS.quiz, image: '/videos/tr/07-windows-child-question.jpg', shape: 'wide', video: { id: 'EtLaLyNdXk0', duration: '0:33' }, body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
+  { id: 'homework', label: 'Görev, ödev, sınav', platform: 'Windows', status: 'ready', tone: 'mint', side: 'left', angle: 163, icon: ICONS.homework, image: '/videos/tr/08-windows-task-homework-exam.jpg', shape: 'wide', body: 'Görev, ödev ve sınavları oluşturun; tamamlananları panelden onaylayın.' },
+  { id: 'reports', label: 'Raporlar', platform: 'Windows', status: 'ready', tone: 'violet', side: 'left', angle: 145, icon: ICONS.reports, image: '/screens/platform/windows-reports.png', shape: 'wide', body: 'Kullanım ve öğrenme sonuçları haftalık olarak bir arada. Pazarlık yerine konuşma.' },
   { id: 'child', label: 'Çocuk ekranı', platform: 'Android · Google Play', status: 'ready', tone: 'sky', side: 'right', angle: -35, icon: ICONS.child, image: '/screens/platform/android-child.webp', shape: 'phone', body: 'Çocuk kalan süresini ve sıradaki adımı telefonunda görür.' },
   { id: 'parent', label: 'Ebeveyn telefonu', platform: 'Android · Google Play', status: 'ready', tone: 'blue', side: 'right', angle: -17, icon: ICONS.parent, image: '/screens/platform/android-parent.webp', shape: 'phone', body: 'Ebeveyn kuralları ve süre hediyesini telefondan yönetir.' },
   { id: 'phone-quiz', label: 'Telefonda soru', platform: 'Android · Google Play', status: 'ready', tone: 'sun', side: 'right', angle: 0, icon: ICONS.phoneQuiz, image: '/screens/platform/android-quiz.webp', shape: 'phone', body: 'Soru çözerek süre kazanma akışının telefon sürümü.' },
   { id: 'tv', label: 'Android TV', platform: 'Android TV · geliştiriliyor', status: 'dev', tone: 'night', side: 'right', angle: 17, icon: ICONS.tv, image: '/screens/platform/tv-live-home.webp', shape: 'wide', body: 'TV ailenin ortak ekranı olur; telefonlar oyunlara katılımcı olarak bağlanır. Geliştirme önizlemesidir.' },
   { id: 'games', label: 'Aile oyunları', platform: 'Ortak ekran · geliştiriliyor', status: 'dev', tone: 'coral', side: 'right', angle: 35, icon: ICONS.games, image: '/games/alika-game-night.webp', shape: 'wide', body: 'Altı özgün Türkçe aile oyunu: gençler ve yetişkinler aynı ekranda oynar.' },
 ];
-
-function findGuideVideo(key: string) {
-  const turkish = GUIDE_LANGUAGES.find((language) => language.code === 'tr' && language.platform === 'windows');
-  return turkish ? getPublishedGuideVideos(turkish).find((video) => video.key === key) : undefined;
-}
 
 function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -198,7 +192,7 @@ function ScreenDialog({ screen, onClose }: { screen: ScreenItem | null; onClose:
     if (!screen && dialog.open) dialog.close();
   }, [screen]);
 
-  const video = screen?.videoKey ? findGuideVideo(screen.videoKey) : undefined;
+  const video = screen?.video;
 
   return (
     <dialog
@@ -283,8 +277,9 @@ const STEPS = [
   { title: 'Haftayı konuşun', body: 'Raporlar kullanımı ve öğrenmeyi birlikte gösterir. Pazarlık yerine konuşma.' },
 ];
 
-/* YouTube kanalındaki ilk kurulum videoları (15.10.2026). Kapak görselleri yerelde tutulur. */
-const INSTALL_VIDEOS = [
+/* YouTube kanalındaki güncel videolar (15.10.2026). Kapak görselleri yerelde tutulur. */
+const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@AliKaApp';
+const VIDEOS = [
   {
     id: 'e3vwoACP44I', platform: 'Windows', duration: '1:35', poster: '/videos/kurulum/windows-ilk-kurulum.webp',
     title: 'AliKa Windows ilk kurulum', body: 'Microsoft Store’dan yüklemeden ilk kurulumun son adımına kadar.',
@@ -294,6 +289,11 @@ const INSTALL_VIDEOS = [
     id: '4RmEnThuR3c', platform: 'Android', duration: '1:40', poster: '/videos/kurulum/android-ilk-kurulum.webp',
     title: 'AliKa Android ilk kurulum', body: 'Google Play’den yüklemeden telefon izinlerine ve ilk kurulumun son adımına kadar.',
     store: 'play' as const,
+  },
+  {
+    id: 'EtLaLyNdXk0', platform: 'Windows', duration: '0:33', poster: '/videos/kurulum/windows-soru-coz.webp',
+    title: 'Soru çöz, ek süre kazan', body: 'Çocuk doğru cevapla ek süre kazanır, kilit kalkar.',
+    store: null,
   },
 ];
 
@@ -408,43 +408,6 @@ function PlatformRail({ items }: { items: Platform[] }) {
   );
 }
 
-function Guides() {
-  const turkish = GUIDE_LANGUAGES.find((language) => language.code === 'tr' && language.platform === 'windows');
-  const videos = turkish ? getPublishedGuideVideos(turkish) : [];
-  const [showAll, setShowAll] = useState(false);
-  if (!videos.length) return null;
-  const visible = showAll ? videos : videos.slice(0, 6);
-
-  return (
-    <section id="rehberler" className="section wrap">
-      <div className="sectionHead">
-        <div>
-          <h2>Video rehberler</h2>
-          <p>Kurulumdan raporlara, AliKa Windows’u adım adım gösteren {videos.length} kısa video.</p>
-        </div>
-        {videos.length > 6 && (
-          <button type="button" className="textLink" onClick={() => setShowAll((value) => !value)} aria-expanded={showAll}>
-            {showAll ? 'Daha az göster' : `${videos.length} videonun hepsini göster`}
-          </button>
-        )}
-      </div>
-      <div className="videoGrid">
-        {visible.map((video) => (
-          <a key={video.key} className="video" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener">
-            <span className="videoThumb">
-              <img src={video.poster} alt="" loading="lazy" decoding="async" />
-              <span className="mono videoTime">{video.duration}</span>
-              <span className="play" aria-hidden="true">▶</span>
-            </span>
-            <span className="videoTitle">{video.title}</span>
-            <span className="mono videoEyebrow">{video.eyebrow}</span>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function CopyEmail() {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
@@ -468,10 +431,6 @@ export default function Home() {
   const [theme, toggleTheme] = useTheme();
   const [openScreen, setOpenScreen] = useState<ScreenItem | null>(null);
   const storeUrl = microsoftStoreUrl('tr');
-  const videoCount = (() => {
-    const turkish = GUIDE_LANGUAGES.find((language) => language.code === 'tr' && language.platform === 'windows');
-    return turkish ? getPublishedGuideVideos(turkish).length : 0;
-  })();
 
   return (
     <>
@@ -482,7 +441,7 @@ export default function Home() {
           <span>AliKa</span>
         </a>
         <nav className="topNav" aria-label="Ana menü">
-          <a href="#rehberler">Rehberler</a>
+          <a href="#videolar">Videolar</a>
           <a href="/privacy/">Gizlilik</a>
           <button type="button" className="iconBtn" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Açık temaya geç' : 'Koyu temaya geç'}>
             {theme === 'dark'
@@ -554,11 +513,11 @@ export default function Home() {
           <div className="actions">
             <a className="pill solid" href={storeUrl} target="_blank" rel="noopener">Microsoft Store’da edin <span aria-hidden="true">↗</span></a>
             <a className="pill solid" href={PLAY_STORE_URL} target="_blank" rel="noopener">Google Play’den edin <span aria-hidden="true">↗</span></a>
-            <a className="pill ghost" href="#rehberler">Rehberleri izle</a>
+            <a className="pill ghost" href="#videolar">Videoları izle</a>
           </div>
           <dl className="stats">
             <div><dt>5–18</dt><dd>yaş için dört ayrı anlatım</dd></div>
-            {videoCount > 0 && <div><dt>{videoCount}</dt><dd>Türkçe video rehber</dd></div>}
+            <div><dt>2</dt><dd>platform: Windows ve Android</dd></div>
             <div><dt>0</dt><dd>reklam ve izleyici</dd></div>
             <div><dt>7 gün</dt><dd>Windows’ta ücretsiz deneme</dd></div>
           </dl>
@@ -570,7 +529,7 @@ export default function Home() {
           <div className="sectionHead">
             <div>
               <h2>Nasıl çalışır ve kurulum</h2>
-              <p>Ebeveynin kuralından çocuğun kazandığı süreye, sıradan bir gün dört adımda. Kurulumu da iki kısa videoda izleyin.</p>
+              <p>Ebeveynin kuralından çocuğun kazandığı süreye, sıradan bir gün dört adımda. Kurulumu ve kullanımı kısa videolarda izleyin.</p>
             </div>
           </div>
           <ol className="steps">
@@ -583,9 +542,12 @@ export default function Home() {
             ))}
           </ol>
 
-          <h3 className="subHead" id="kurulum">Kurulum videoları</h3>
+          <div className="subHeadRow" id="videolar">
+            <h3 className="subHead">Videolar</h3>
+            <a className="textLink" href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">YouTube kanalı ↗</a>
+          </div>
           <div className="installGrid">
-            {INSTALL_VIDEOS.map((video) => (
+            {VIDEOS.map((video) => (
               <article key={video.id} className="install">
                 <a className="video" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener">
                   <span className="videoThumb">
@@ -593,13 +555,15 @@ export default function Home() {
                     <span className="mono videoTime">{video.duration}</span>
                     <span className="play" aria-hidden="true">▶</span>
                   </span>
-                  <span className="mono videoEyebrow">{video.platform} · İlk kurulum · YouTube</span>
+                  <span className="mono videoEyebrow">{video.platform} · {video.store ? 'İlk kurulum' : 'Kullanım'} · YouTube</span>
                   <span className="videoTitle">{video.title}</span>
                 </a>
                 <p>{video.body}</p>
-                <a className="pill ghost" href={video.store === 'microsoft' ? storeUrl : PLAY_STORE_URL} target="_blank" rel="noopener">
-                  {video.store === 'microsoft' ? 'Microsoft Store’da edin' : 'Google Play’den edin'} <span aria-hidden="true">↗</span>
-                </a>
+                {video.store && (
+                  <a className="pill ghost" href={video.store === 'microsoft' ? storeUrl : PLAY_STORE_URL} target="_blank" rel="noopener">
+                    {video.store === 'microsoft' ? 'Microsoft Store’da edin' : 'Google Play’den edin'} <span aria-hidden="true">↗</span>
+                  </a>
+                )}
               </article>
             ))}
           </div>
@@ -623,7 +587,6 @@ export default function Home() {
           </div>
         </section>
 
-        <Guides />
 
         <section id="guven" className="trust">
           <div className="wrap trustInner">
@@ -647,7 +610,7 @@ export default function Home() {
           <div className="links">
             <a href={storeUrl} target="_blank" rel="noopener"><span>Microsoft Store</span><small>AliKa Windows</small></a>
             <a href={PLAY_STORE_URL} target="_blank" rel="noopener"><span>Google Play</span><small>AliKa Android</small></a>
-            <a href="#rehberler"><span>Video rehberler</span><small>Türkçe</small></a>
+            <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener"><span>YouTube</span><small>@AliKaApp</small></a>
             <a href="/privacy/"><span>Gizlilik</span><small>/privacy</small></a>
             <a href="/eula/"><span>Kullanım koşulları</span><small>/eula</small></a>
           </div>

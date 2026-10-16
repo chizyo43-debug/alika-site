@@ -1086,17 +1086,26 @@ h2 {
 }
 
 /* Kurulum videoları: Nasıl çalışır bölümünün altında, platform başına bir kart. */
+.subHeadRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin-top: 64px;
+  scroll-margin-top: 90px;
+}
+
 .subHead {
-  margin: 64px 0 0;
+  margin: 0;
   font-size: clamp(24px, 2.4vw, 30px);
   font-weight: 900;
   letter-spacing: -0.01em;
-  scroll-margin-top: 90px;
 }
 
 .installGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
   margin-top: 24px;
 }
@@ -1122,7 +1131,13 @@ h2 {
   font-weight: 600;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1020px) {
+  .installGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
   .installGrid {
     grid-template-columns: 1fr;
   }
