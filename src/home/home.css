@@ -1027,6 +1027,195 @@ h2 {
   opacity: 0.85;
 }
 
+/* Neler var: üç grup, her maddede bulunduğu platformun çipi. */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.featGroup {
+  padding: 28px 24px 10px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.f-kontrol { --accent: var(--blue); }
+.f-ogrenme { --accent: var(--sun); }
+.f-aile { --accent: var(--ok); }
+
+.featGroup h3 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.featLead {
+  margin: 6px 0 0;
+  color: var(--ink-2);
+  font-weight: 700;
+}
+
+.featGroup ul {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featGroup li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.featName {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.featName strong {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+.featGroup li > span {
+  color: var(--ink-2);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.featOn {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.chip.win { background: rgba(30, 123, 240, 0.12); color: #145cc0; }
+.chip.and { background: rgba(255, 173, 15, 0.2); color: #8a5300; }
+
+:root[data-theme='dark'] .chip.win { background: rgba(77, 163, 255, 0.16); color: #8cc4ff; }
+:root[data-theme='dark'] .chip.and { background: rgba(255, 194, 46, 0.16); color: #ffd36b; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .chip.win { background: rgba(77, 163, 255, 0.16); color: #8cc4ff; }
+  :root:not([data-theme='light']) .chip.and { background: rgba(255, 194, 46, 0.16); color: #ffd36b; }
+}
+
+/* Sık sorulanlar: açılır satırlar */
+.faq {
+  max-width: 920px;
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq summary {
+  position: relative;
+  padding: 22px 48px 22px 0;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  color: var(--blue);
+  font-size: 20px;
+  line-height: 1;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease, background 0.2s ease;
+  content: '+';
+}
+
+.faq details[open] summary::after {
+  border-color: transparent;
+  background: var(--sun);
+  color: #0f1a2b;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faq summary:hover {
+  color: var(--blue);
+}
+
+.faq summary:focus-visible {
+  outline: 3px solid var(--glow);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.faq details p {
+  max-width: 72ch;
+  margin: -6px 0 24px;
+  color: var(--ink-2);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+@media (max-width: 1020px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .featGroup ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .featGroup {
+    padding: 22px 18px 6px;
+  }
+
+  .featGroup ul {
+    grid-template-columns: 1fr;
+  }
+
+  .faq summary {
+    font-size: 18px;
+  }
+}
+
 /* Video rehberler */
 .videoGrid {
   display: grid;

@@ -305,6 +305,73 @@ const AGES = [
   { range: '15–18', title: 'Sade, ciddi ve veri odaklı.', body: 'Maskotsuz, sonuç odaklı ve gencin alanına saygılı deneyim.' },
 ];
 
+/* Neler var: her madde yalnız gerçekten bulunduğu platformla etiketlenir. Kaynak: Store 1.2.11
+   listelemesi (dürüstlük çiti), Android 0.3.10 arayüz metinleri ve site asistanının ürün bilgisi. */
+type FeaturePlatform = 'Windows' | 'Android';
+const BOTH: FeaturePlatform[] = ['Windows', 'Android'];
+const FEATURE_GROUPS: { id: string; title: string; lead: string; items: { name: string; body: string; on: FeaturePlatform[] }[] }[] = [
+  {
+    id: 'kontrol', title: 'Kontrol', lead: 'Kuralı siz koyarsınız; süreyi cihaz hatırlatır.',
+    items: [
+      { name: 'Günlük süre ve uyku saati', body: 'Günlük limit, haftalık tablo ve gece kilidi. Kullanılmayan süre havuza birikebilir.', on: BOTH },
+      { name: 'Uygulama kuralları', body: 'Uygulama başına süre, engelleme ve yeni uygulamalar için ebeveyn onayı.', on: BOTH },
+      { name: 'Web filtresi ve güvenli arama', body: 'Engellediğiniz siteler kapanır, arama sonuçlarında uygunsuz içerik gizlenir.', on: BOTH },
+      { name: 'Raporlar', body: 'Günlük ve haftalık kullanım, saatlik dağılım ve olay geçmişi.', on: BOTH },
+      { name: 'Kapatılamaz koruma', body: 'Çocuk standart Windows hesabından AliKa’yı durduramaz ya da kaldıramaz.', on: ['Windows'] },
+    ],
+  },
+  {
+    id: 'ogrenme', title: 'Öğrenme', lead: 'Ekran başındaki zaman öğrenmeye döner.',
+    items: [
+      { name: 'Soru çöz, süre kazan', body: 'Bir dakika için kaç doğru gerektiğini ve günlük üst sınırı siz seçersiniz.', on: BOTH },
+      { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik sınıf, ders ve konuya göre seçilir; kendi sorularınızı Excel ya da CSV ile eklersiniz.', on: BOTH },
+      { name: 'Şekilli sorular', body: 'Geometri, koordinat düzlemi, grafik, tablo ve devre şemaları net çizilir.', on: BOTH },
+      { name: 'Deneme sınavı ve sonuç karnesi', body: 'Planladığınız saatte deneme sınavı. Sonuç karnesi ölçüm içindir, süre ödülü vermez.', on: BOTH },
+      { name: 'Ders notları ve Öğrenme Stüdyosu', body: 'Eklediğiniz ders notları bölüm bölüm açılır; çözümlü örnekler ve cevap açıklamalarıyla.', on: ['Windows'] },
+    ],
+  },
+  {
+    id: 'aile', title: 'Aile', lead: 'Pazarlık yerine herkesin bildiği bir plan.',
+    items: [
+      { name: 'Görevler ve ödüller', body: 'Ekran dışı görevler ebeveyn onayıyla ek süreye dönüşür.', on: BOTH },
+      { name: 'Aile ağı', body: 'Bilgisayar ve telefonlar aynı Wi‑Fi’da QR ya da kodla eşleşir; hesap ve bulut gerekmez.', on: BOTH },
+      { name: 'Aile mesajları ve süre gönderme', body: 'Çocuk ailesine yazar; kazanılan süre aile cihazları arasında gönderilebilir.', on: BOTH },
+      { name: 'Paylaşımlı telefon', body: 'Telefon sizin, çocuk ara sıra kullanıyor: “Çocuğa ver” deyince yalnız izin verdiğiniz uygulamalar açılır; PIN ile geri dönersiniz.', on: ['Android'] },
+    ],
+  },
+];
+
+const FAQ = [
+  {
+    q: 'Çocuğum AliKa’yı kapatabilir ya da kaldırabilir mi?',
+    a: 'Windows’ta çocuk standart hesaptaysa AliKa’yı durduramaz ya da kaldıramaz; kaldırmak için Windows yönetici onayı gerekir. Android’de panel ve ayarlar ebeveyn PIN’iyle korunur; eksik bir izin olursa uygulama bunu açıkça gösterir.',
+  },
+  {
+    q: 'Hesap açmam ya da verileri buluta göndermem gerekiyor mu?',
+    a: 'Hayır. AliKa hesabı, e-posta kaydı ya da bulut yoktur. Kullanım, profil ve öğrenme verileri cihazda kalır. Tek istisna, sizin kendi e-postanızla gönderdiğiniz hata raporudur.',
+  },
+  {
+    q: 'Ücretli mi, deneme süresi var mı?',
+    a: 'Windows sürümü Microsoft Store’dan alınır ve 7 gün ücretsiz denenebilir. Android’de aile aboneliği 14 gün ücretsiz denemeyle başlar ve 10 eşleşmiş aile cihazını kapsar; deneme sonunda iptal edilmezse Google Play seçtiğiniz planı yeniler. Windows satın alımı Android’i kapsamaz. Güncel fiyatlar mağaza sayfalarındadır.',
+  },
+  {
+    q: 'Bilgisayar ve telefon birlikte çalışır mı?',
+    a: 'Evet. Windows ve Android cihazlar aynı Wi‑Fi’da QR ya da kodla eşleşir; görevler, mesajlar ve süre aile cihazları arasında gider. Ev dışından internet üzerinden uzaktan yönetim yoktur; aile ağı evinizin ağında şifreli çalışır.',
+  },
+  {
+    q: 'Hangi dersler ve sınıflar var?',
+    a: 'Hazır içerik ülke, sınıf, ders ve konuya göre seçilir; matematik soruları uygulamanın içinde üretilir. Kendi sorularınızı ve soru bankalarınızı Excel şablonuyla ya da içerik paketleriyle eklersiniz.',
+  },
+  {
+    q: 'AliKa çocuğumu gizlice izler mi?',
+    a: 'Hayır. AliKa saklanmaz: kurulumda açık rıza istenir, çalışırken görünür bir gösterge vardır. Amaç gizli gözetim değil, ailede herkesin bildiği şeffaf kurallardır.',
+  },
+  {
+    q: 'Hangi yaşlar için uygun?',
+    a: '5–18 yaş. Dil, görünüm, maskot ve kutlama dozu yaşa göre değişir; 15–18 yaşta maskotsuz, sade bir görünüm kullanılır.',
+  },
+];
+
 function StatusDot({ status }: { status: OrbitStatus }) {
   return <i className={`dot ${status}`} aria-hidden="true" />;
 }
@@ -442,7 +509,9 @@ export default function Home() {
           <span>AliKa</span>
         </a>
         <nav className="topNav" aria-label="Ana menü">
+          <a href="#ozellikler">Özellikler</a>
           <a href="#videolar">Videolar</a>
+          <a href="#sss">SSS</a>
           <a href="/privacy/">Gizlilik</a>
           <button type="button" className="iconBtn" onClick={toggleTheme} aria-label={theme === 'dark' ? 'Açık temaya geç' : 'Koyu temaya geç'}>
             {theme === 'dark'
@@ -522,8 +591,38 @@ export default function Home() {
             <div><dt>5–18</dt><dd>yaş için dört ayrı anlatım</dd></div>
             <div><dt>2</dt><dd>platform: Windows ve Android</dd></div>
             <div><dt>0</dt><dd>reklam ve izleyici</dd></div>
-            <div><dt>7 gün</dt><dd>Windows’ta ücretsiz deneme</dd></div>
+            <div><dt>7–14 gün</dt><dd>ücretsiz deneme: Windows’ta 7, Android’de 14</dd></div>
           </dl>
+        </section>
+
+        <section id="ozellikler" className="section wrap">
+          <div className="sectionHead">
+            <div>
+              <h2>Neler var?</h2>
+              <p>Kontrol, öğrenme ve aile aynı uygulamada. Her maddede hangi platformda olduğu yazar.</p>
+            </div>
+          </div>
+          <div className="features">
+            {FEATURE_GROUPS.map((group) => (
+              <article key={group.id} className={`featGroup f-${group.id}`}>
+                <h3>{group.title}</h3>
+                <p className="featLead">{group.lead}</p>
+                <ul>
+                  {group.items.map((item) => (
+                    <li key={item.name}>
+                      <div className="featName">
+                        <strong>{item.name}</strong>
+                        <span className="featOn">
+                          {item.on.map((platform) => <span key={platform} className={`chip ${platform === 'Windows' ? 'win' : 'and'}`}>{platform}</span>)}
+                        </span>
+                      </div>
+                      <span>{item.body}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </section>
 
         <PlatformRail items={platforms(storeUrl)} />
@@ -601,6 +700,23 @@ export default function Home() {
               <li><strong>Bulut hesabı yok</strong><span>Temel veriler cihazda kalır. Aile cihazları arasında isteğe bağlı, şifreli ev ağı.</span></li>
             </ul>
             <a className="textLink onDark" href="/privacy/">Gizlilik politikasını okuyun →</a>
+          </div>
+        </section>
+
+        <section id="sss" className="section wrap">
+          <div className="sectionHead">
+            <div>
+              <h2>Sık sorulanlar</h2>
+              <p>Kurmadan önce en çok merak edilenler.</p>
+            </div>
+          </div>
+          <div className="faq">
+            {FAQ.map((item) => (
+              <details key={item.q}>
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
           </div>
         </section>
 
