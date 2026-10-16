@@ -3,11 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const bookPath = path.join(root, 'src', 'book-experience.tsx');
+const homePath = path.join(root, 'src', 'home', 'Home.tsx');
 const knowledgeBasePath = path.join(root, 'assistant-service', 'src', 'knowledge-base.json');
 const productKnowledgePath = path.join(root, 'assistant-service', 'src', 'product-knowledge.json');
 
-const book = fs.readFileSync(bookPath, 'utf8');
+const home = fs.readFileSync(homePath, 'utf8');
 const knowledgeBaseSource = fs.readFileSync(knowledgeBasePath, 'utf8');
 const productKnowledgeSource = fs.readFileSync(productKnowledgePath, 'utf8');
 const knowledgeBase = JSON.parse(knowledgeBaseSource);
@@ -24,7 +24,7 @@ function requireArticle(collection, id) {
   return article;
 }
 
-const combinedSources = [book, knowledgeBaseSource, productKnowledgeSource].join('\n');
+const combinedSources = [home, knowledgeBaseSource, productKnowledgeSource].join('\n');
 const bannedClaims = [
   [/3\s*soru\s*=\s*\+?\s*15\s*dakika/i, 'fixed 3-question/15-minute claim is forbidden'],
   [/3\s*soru\s*=\s*(?:en\s*fazla\s*)?3\s*dakika/i, 'fixed 3-question/3-minute claim cannot be a public site promise'],
@@ -38,18 +38,23 @@ for (const [pattern, message] of bannedClaims) {
 }
 
 requireMatch(
-  book,
-  /id: 'windows'.*status: 'Bugün kullanılabilir'/,
+  home,
+  /id: 'windows', tone: 'p-windows', status: 'ready', tags: \['Bugün kullanılabilir'/,
   'Windows must remain marked as generally available',
 );
 requireMatch(
-  book,
-  /id: 'android-mobil'.*status: 'Geliştiriliyor'/,
-  'Android mobile must remain marked as under development',
+  home,
+  /id: 'android', tone: 'p-android', status: 'ready', tags: \['Bugün kullanılabilir'.*'Google Play'\]/,
+  'Android phone/tablet must be marked as available on Google Play',
 );
 requireMatch(
-  book,
-  /id: 'android-tv'.*status: 'Geliştiriliyor'/,
+  home,
+  /play\.google\.com\/store\/apps\/details\?id=com\.alika\.parental/,
+  'Android must link to its Google Play listing',
+);
+requireMatch(
+  home,
+  /id: 'tv', tone: 'p-tv', status: 'dev', tags: \['Geliştiriliyor'/,
   'Android TV must remain marked as under development',
 );
 
@@ -60,9 +65,19 @@ const baseLearning = requireArticle(knowledgeBase, 'learning');
 const baseRewardSafety = requireArticle(knowledgeBase, 'reward-safety');
 const baseDailyFlow = requireArticle(knowledgeBase, 'daily-flow');
 
+for (const article of [basePlatforms, baseAndroid]) {
+  if (article && !/Android.*Google Play/i.test(article.content)) {
+    errors.push(`${article.id} must state that Android is available on Google Play`);
+  }
+}
+for (const article of [basePlatforms, baseAndroidTv]) {
+  if (article && !/Android TV.*henüz genel mağaza indirmesi değildir/i.test(article.content)) {
+    errors.push(`${article.id} must state that Android TV is not a general store download`);
+  }
+}
 for (const article of [basePlatforms, baseAndroid, baseAndroidTv]) {
-  if (article && !/henüz genel mağaza indirmesi değildir/i.test(article.content)) {
-    errors.push(`${article.id} must state that Android/TV is not a general store download`);
+  if (article && /kapalı alfa/i.test(article.content)) {
+    errors.push(`${article.id} must not describe the published Android app as closed alpha`);
   }
 }
 
@@ -90,8 +105,11 @@ for (const article of [windowsQuiz, androidQuiz]) {
 if (availability && !/Windows sürümü Microsoft Store'da genel kullanıma açıktır/i.test(availability.content)) {
   errors.push('availability article must identify Windows as the generally available Store product');
 }
-if (availability && !/Android.*kapalı alfa/i.test(availability.content)) {
-  errors.push('availability article must identify Android and TV as development/closed-alpha products');
+if (availability && !/Android telefon\/tablet sürümü Google Play'de/i.test(availability.content)) {
+  errors.push('availability article must identify Android phone/tablet as available on Google Play');
+}
+if (availability && !/Android TV.*henüz genel mağaza indirmesi değildir/i.test(availability.content)) {
+  errors.push('availability article must identify Android TV as not yet a general store download');
 }
 
 if (errors.length) {

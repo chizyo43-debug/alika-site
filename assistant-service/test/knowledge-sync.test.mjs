@@ -70,39 +70,23 @@ test('both site and assistant deployments enforce knowledge freshness', () => {
 });
 
 test('high-risk product claims remain synchronized with public source copy', () => {
-  const book = fs.readFileSync(path.join(siteRoot, 'src', 'book-experience.tsx'), 'utf8');
+  const home = fs.readFileSync(path.join(siteRoot, 'src', 'home', 'Home.tsx'), 'utf8');
   const index = fs.readFileSync(path.join(siteRoot, 'index.html'), 'utf8');
   const privacy = fs.readFileSync(path.join(siteRoot, 'legal', 'privacy.html'), 'utf8');
   const facts = knowledgeBase.map((article) => article.content).join('\n');
 
-  assert.match(book, /Windows, Android ve Android TV temeli/);
-  assert.match(book, /yalnız Windows sürümünü kapsar/);
-  assert.match(index, /7 günlük deneme/);
+  assert.match(home, /Windows ve Android’de yayında/);
+  assert.match(home, /Windows satın alımı Android’i kapsamaz/);
+  assert.match(index, /7 gün ücretsiz denenebilir/);
   assert.match(facts, /yalnız Windows sürümünü kapsar/);
   assert.match(facts, /Yanlış cevap ceza değildir/);
   assert.match(facts, /gizli izleme/i);
   assert.match(privacy, /Optional website AI assistant/);
 });
 
-test('assistant video URLs stay synchronized with the public nine-language guide catalog', () => {
-  const source = fs.readFileSync(path.join(siteRoot, 'src', 'data', 'video-guides.ts'), 'utf8');
-  const directArrays = new Set(['tr', 'en', 'es']);
-  for (const [language, entry] of Object.entries(videoCatalog.languages)) {
-    const marker = directArrays.has(language)
-      ? `const ${language}Videos = [`
-      : `const ${language}Videos = createLocalizedGuideVideos('${language}', [`;
-    const start = source.indexOf(marker);
-    assert.notEqual(start, -1, `${language}: source video block is missing`);
-    const endMarker = directArrays.has(language) ? '] as const satisfies readonly GuideVideo[];' : ']);';
-    const end = source.indexOf(endMarker, start);
-    assert.notEqual(end, -1, `${language}: source video block is incomplete`);
-    const sourceIds = [...source.slice(start, end).matchAll(/\bid:\s*'([A-Za-z0-9_-]{11})'/g)].map((match) => match[1]);
-    const catalogVideos = Object.values(entry.videos);
-    assert.equal(catalogVideos.length, 13, `${language}: assistant must expose 13 videos`);
-    assert.deepEqual(catalogVideos.map((video) => video.id), sourceIds, `${language}: assistant video IDs drifted from the site catalog`);
-    assert.equal(new Set(sourceIds).size, 13, `${language}: duplicate YouTube video ID`);
-  }
-});
+// Sitedeki dokuz dilli video kataloğu 16.10.2026'da kalktı; eski videolar kanaldan silindi.
+// Asistan kataloğu kanaldaki güncel videolarla yeniden kurulana kadar eşleme testi bekler.
+test.todo('assistant video catalog is rebuilt from the current YouTube channel videos');
 
 test('site assistant visibly separates actions from verified dated evidence', () => {
   const widget = fs.readFileSync(path.join(siteRoot, 'public', 'site-assistant.js'), 'utf8');

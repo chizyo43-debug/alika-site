@@ -44,20 +44,12 @@ QUIZ_REWARD_MARKERS = {
     "ja": "保護者が1分を得るために必要な正解数を設定し、そのルールに沿って追加時間を獲得します。",
     "ko": "보호자가 1분을 얻는 데 필요한 정답 수를 정하고, 아이는 그 규칙에 따라 추가 시간을 얻습니다.",
 }
-BOOK_LANGUAGE_PATHS = ("/en/", "/de/", "/es/", "/fr/", "/pt/", "/ru/", "/ja/", "/ko/")
+PLAY_STORE_PACKAGE = "com.alika.parental"
 GUIDE_SLUGS = (
     "windows-cocuk-ekran-suresi-nasil-yonetilir",
     "windows-11-cocuk-ekran-suresi",
     "soru-cozerek-ekran-suresi-kazanma",
     "bulutsuz-ebeveyn-kontrolu",
-)
-PREMIUM_GAME_IDS = (
-    "carkifelek",
-    "bilgi-yarismasi",
-    "aile-sahnesi",
-    "aile-kacis",
-    "robot-kodlama",
-    "isik-laboratuvari",
 )
 
 
@@ -99,31 +91,6 @@ def main() -> None:
     locales = json.loads((ROOT / "src" / "data" / "locales.json").read_text(encoding="utf-8"))
     if tuple(locales) != LANGS:
         errors.append(f"Locale order/membership differs: {tuple(locales)}")
-
-    book_source = (ROOT / "src" / "book-experience.tsx").read_text(encoding="utf-8")
-    try:
-        game_block = book_source.split("const GAMES: GameInfo[] = [", 1)[1].split(
-            "const GAME_GROUPS:", 1
-        )[0]
-    except IndexError:
-        errors.append("Premium game catalogue source markers are missing")
-    else:
-        game_ids = tuple(re.findall(r"\{ id: '([^']+)'", game_block))
-        if game_ids != PREMIUM_GAME_IDS:
-            errors.append(f"Premium game catalogue differs: {game_ids}")
-    if any(
-        marker in book_source
-        for marker in ("GAME_REPO_SLUGS", "GAME_AGE_PACKS", "raw.githubusercontent.com/chizyo43-debug/alika-icerik/main/games")
-    ):
-        errors.append("Unapproved game package downloads are exposed")
-    for marker in (
-        "Altı premium aile oyunu geliştiriliyor.",
-        "Bugün çalışan Windows ortak ekran soru oyunu ayrıdır.",
-        "İndirme kapalı",
-        "İnsan onayı ve premium motor kabulü bekleniyor",
-    ):
-        if marker not in book_source:
-            errors.append(f"Premium game truth marker is missing: {marker}")
 
     expected_pages = 0
     for lang in LANGS:
@@ -364,54 +331,33 @@ def main() -> None:
     if (DIST / "CNAME").read_text(encoding="utf-8").strip() != "www.alika.tr":
         errors.append("CNAME is not www.alika.tr")
 
-    book_bundles = tuple((DIST / "assets").glob("index-*.js"))
-    book_bundle_text = "\n".join(bundle.read_text(encoding="utf-8") for bundle in book_bundles)
-    if not book_bundles or MICROSOFT_STORE_ID not in book_bundle_text or "site_home_" not in book_bundle_text:
-        errors.append("Microsoft Store link is missing from the book experience")
-    if "bookLanguagePicker" not in book_bundle_text or not all(
-        path in book_bundle_text for path in BOOK_LANGUAGE_PATHS
-    ):
-        errors.append("Language picker is missing or incomplete in the book experience")
-    if "Altı premium aile oyunu geliştiriliyor." not in book_bundle_text or "İndirme kapalı" not in book_bundle_text:
-        errors.append("Premium game truth copy is missing from the built book experience")
-    if not all(
-        marker in book_bundle_text
-        for marker in ("/icerik/catalog-v1.json", "hazır ders paketi", "150732")
-    ):
-        errors.append("Ready-content summary is not bound to the current catalog totals")
-    for lang in LANGS:
-        flag = DIST / "flags" / f"{lang}.svg"
-        if not flag.exists():
-            errors.append(f"Language flag is missing: {flag}")
-
-    localized_book_pages = [DIST / "index.html", *(DIST / lang / "index.html" for lang in LANGS[1:])]
-    root_bundle_names: set[str] | None = None
-    for page in localized_book_pages:
-        if not page.exists():
-            continue
-        page_text = page.read_text(encoding="utf-8")
-        parser = LinkParser()
-        parser.feed(page_text)
-        bundle_names = {
-            value for attr, value in parser.links
-            if attr == "src" and re.search(r"/assets/index-[^/]+\.js$", value)
-        }
-        if not bundle_names:
-            errors.append(f"Interactive book bundle is missing from language root: {page}")
-        elif root_bundle_names is None:
-            root_bundle_names = bundle_names
-        elif bundle_names != root_bundle_names:
-            errors.append(f"Language root does not use the same book bundle: {page}")
+    # Türkçe kök: Vite ile derlenen yeni ana sayfa. Diğer dillerin ana sayfası statik kalır.
+    home_bundles = tuple((DIST / "assets").glob("index-*.js"))
+    home_bundle_text = "\n".join(bundle.read_text(encoding="utf-8") for bundle in home_bundles)
+    if not home_bundles or MICROSOFT_STORE_ID not in home_bundle_text or "site_home_" not in home_bundle_text:
+        errors.append("Microsoft Store link is missing from the home page bundle")
+    if PLAY_STORE_PACKAGE not in home_bundle_text:
+        errors.append("Google Play link is missing from the home page bundle")
 
     root_page = (DIST / "index.html").read_text(encoding="utf-8")
+    parser = LinkParser()
+    parser.feed(root_page)
+    if not any(attr == "src" and re.search(r"/assets/index-[^/]+\.js$", value) for attr, value in parser.links):
+        errors.append("Home page bundle is missing from the Turkish root")
+    for lang in LANGS[1:]:
+        page = DIST / lang / "index.html"
+        if page.exists() and "/assets/index-" in page.read_text(encoding="utf-8"):
+            errors.append(f"Language root unexpectedly loads the Turkish home bundle: {page}")
     if '<script type="application/ld+json">' not in root_page or '"SoftwareApplication"' not in root_page:
         errors.append("SoftwareApplication schema is missing from the Turkish home page")
-    if "Ekran süresini kavgaya değil öğrenmeye dönüştürün." not in root_page:
+    if "AliKa: Kısıtlamıyoruz, planlıyoruz" not in root_page:
         errors.append("Turkish home page is not pre-rendered with the campaign message")
-    if "yalnız Windows sürümünü kapsar" not in root_page:
+    if "Windows satın alımı Android’i kapsamaz" not in root_page:
         errors.append("Windows-only Store purchase scope is missing from the Turkish home page")
-    if MICROSOFT_STORE_CIDS["tr"] not in root_page:
-        errors.append("Campaign CID is missing from the Turkish home page")
+    if MICROSOFT_STORE_CIDS["tr"] not in root_page or PLAY_STORE_PACKAGE not in root_page:
+        errors.append("Store links are missing from the Turkish home page")
+    if re.search(r'name="robots" content="[^"]*noindex', root_page, re.I):
+        errors.append("Turkish home page must not be noindex")
 
     forbidden = re.compile(r"(google-analytics|googletagmanager|facebook\.net|hotjar|segment\.com)", re.I)
     for page in DIST.rglob("*.html"):

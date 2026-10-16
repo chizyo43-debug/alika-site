@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      - name: Install book experience dependencies
+      - name: Install site dependencies
         run: npm ci
       - name: Verify assistant knowledge freshness
         run: npm run knowledge:verify
@@ -44,11 +44,11 @@ jobs:
           done
       - name: Build
         run: python tools/build.py
-      - name: Build interactive book homepage
-        run: npm run build:book
+      - name: Build home page
+        run: npm run build:home
         env:
           ALIKA_ASSISTANT_ENDPOINT: ${{ vars.ALIKA_ASSISTANT_ENDPOINT }}
-      - name: Type check interactive book
+      - name: Type check home page
         run: npm run typecheck
       - name: Validate
         run: python tools/check.py

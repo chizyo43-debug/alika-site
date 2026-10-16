@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-09-05",
+  "verifiedAt": "2026-10-16",
   "sourceVersions": {
-    "productKnowledge": "2026-09-05",
-    "productKnowledgeIndex": "2026-09-05",
+    "productKnowledge": "2026-10-16",
+    "productKnowledgeIndex": "2026-10-16",
     "videoGuideCatalog": "1"
   },
   "sources": {
-    "knowledge-base.json": "558a0ba66d65a4f2a3d1d9254cb9369a2aa550b8d14c6871e31b3b1e5218e37e",
-    "product-knowledge.json": "091a285450e8a50919950d82fb402349d0cf8be10ad5122b47bfeb3ba403e32c",
-    "product-knowledge-index.json": "a6264b2482aea9a26f0ce1c08254f1173f005dece3ca6a0aec1ce3c412c1ebb0",
+    "knowledge-base.json": "6263412e38e4f693a5ea8cecbe1af073a66fa66356868fdd4d4b45096831166f",
+    "product-knowledge.json": "8b67d0d4e399ae3442a3485e15746576aaf46d92e15c4795c1bed0b095c5c5bb",
+    "product-knowledge-index.json": "2fb035b9faa655893a5f7567734f0c49ff454f1b48dc376a3b3e1371da105ec5",
     "video-guide-catalog.json": "c0f5130e9dd6eefb7c181f18fe24c69c67064d5c408cae1fbbfa55b1253f826d"
   }
 }

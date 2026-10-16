@@ -1119,7 +1119,8 @@ def build() -> None:
     for lang in LANGS:
         c = locales[lang]
         home_path = DIST / "index.html" if lang == "tr" else DIST / lang / "index.html"
-        write_page(home_path, document(locales, lang, f"AliKa — {c['hero_kicker']}", c["meta"], home(locales, lang)))
+        # Türkçe kök sonra Vite ana sayfasıyla değişir; diğer diller bu statik ana sayfayı kullanır.
+        write_page(home_path, document(locales, lang, c["seo_title"], c["seo_description"], home(locales, lang)))
         for slug in SLUGS:
             title, desc = c["pages"][slug]
             path = DIST / slug / "index.html" if lang == "tr" else DIST / lang / slug / "index.html"
