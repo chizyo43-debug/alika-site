@@ -96,6 +96,8 @@ STORE_MARKETS = {
 HOME_I18N = SRC / "home" / "i18n"
 # Ana sayfadaki GUIDE_PATHS ile aynı: yalnız gerçekten var olan rehberler.
 GUIDE_LINKS = {"tr": "/rehber/", "en": "/en/guides/windows-child-screen-time/"}
+# Yasal metinler: Türkçe sayfalar Türkçe sürüme, diğer diller İngilizceye bağlanır.
+LEGAL_TR = {"gizlilik": "gizlilik", "kullanim-kosullari": "kullanim-kosullari"}
 GUIDE_BASE = "rehber"
 UK_GUIDE_PATH = "en/guides/windows-child-screen-time"
 UK_LANDING_PATH = "en/uk-windows-screen-time"
@@ -322,6 +324,12 @@ def format_count(value: int, lang: str) -> str:
     return f"{value:,}".replace(",", THOUSANDS_SEPARATORS.get(lang, ","))
 
 
+def legal_href(lang: str, kind: str) -> str:
+    if lang == "tr":
+        return "/gizlilik/" if kind == "privacy" else "/kullanim-kosullari/"
+    return "/privacy/" if kind == "privacy" else "/eula/"
+
+
 def content_href(lang: str) -> str:
     # Ana sayfadaki contentPath ile aynı: Türkçe katalog uygulamanın da açtığı /icerik/ adresinde.
     return "/icerik/" if lang == "tr" else href(lang, "content")
@@ -429,8 +437,8 @@ def footer(locales: dict[str, dict], lang: str) -> str:
         {guide_link}
         <a href="{content_href(lang)}">{esc(words["content"])}</a>
         <a href="{home}#iletisim">{esc(words["support"])}</a>
-        <a href="/privacy/">{esc(words["privacy"])}</a>
-        <a href="/eula/">{esc(words["terms"])}</a>
+        <a href="{legal_href(lang, 'privacy')}">{esc(words["privacy"])}</a>
+        <a href="{legal_href(lang, 'terms')}">{esc(words["terms"])}</a>
       </div>
       <p>© 2026 ErenKa Software · <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a></p>
     </footer>
@@ -873,12 +881,17 @@ def build() -> None:
         target.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target / "index.html")
     shutil.copy2(ROOT / "legal" / "privacy.html", DIST / "privacy-policy.html")
+    for name in LEGAL_TR:
+        target = DIST / name
+        target.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / "legal" / "tr" / f"{name}.html", target / "index.html")
 
     urls = [f"{BASE_URL}/"]
     for lang in LANGS:
         urls.append(f"{BASE_URL}{href(lang)}")
         urls.append(f"{BASE_URL}{href(lang, 'content')}")
     urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
+    urls.extend(f"{BASE_URL}/{name}/" for name in LEGAL_TR)
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in GUIDES)
     urls.append(uk_guide_url)
     unique_urls = list(dict.fromkeys(urls))

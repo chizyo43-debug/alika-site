@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.alika.tr/gizlilik/">
+<link rel="alternate" hreflang="tr" href="https://www.alika.tr/gizlilik/">
+<link rel="alternate" hreflang="en" href="https://www.alika.tr/privacy/">
+<title>Gizlilik Politikası — AliKa</title>
+<style>
+body{font-family:'Segoe UI',system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#1a1a2e;line-height:1.6}
+h1,h2{color:#1e3a5f}a{color:#1e6fd9}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px;text-align:left}
+th{background:#f0f4f8}
+.meta{color:#555}
+footer{margin-top:48px;color:#777;font-size:.9em;border-top:1px solid #ddd;padding-top:12px}
+</style>
+</head>
+<body>
+<p><a href="/">← AliKa</a> · <a href="/privacy/" hreflang="en" lang="en">English</a></p>
+<h1>Gizlilik Politikası — AliKa</h1>
+<p class="meta"><strong>Son güncelleme:</strong> 17.10.2026<br>
+<strong>Yayıncı:</strong> ErenKa Software<br>
+<strong>İletişim:</strong> alika.destek@gmail.com</p>
+<p class="meta">Bu metin, İngilizce <a href="/privacy/" hreflang="en" lang="en">Privacy Policy</a> metninin Türkçe çevirisidir.</p>
+
+<h2>1. Uygulamanın amacı</h2>
+<p>AliKa, bir <strong>ebeveynin/vasinin bakımındaki çocuğun cihazında ekran süresini
+yönetmesi</strong> için tasarlanmış, <strong>şeffaf (gizli olmayan)</strong> bir ebeveyn
+kontrolü uygulamasıdır. Uygulama gizlice çalışmaz: cihazda görünür biçimde bulunur; kilit
+ekranları ve bildirimler açıkça gösterilir.</p>
+<p>Uygulama <strong>yalnızca cihaz sahibi/vasi tarafından, çocuğun bilgisi dahilinde</strong>
+kurulabilir. Başka bir kişinin cihazında, onun rızası olmadan gizlice kullanılamaz; bu tür
+kullanım açıkça yasaktır.</p>
+<p>Ebeveynin, çocuğun cihazının nasıl kullanıldığını görmesini ve sınırlamasını sağladığı için
+Android uygulaması Google Play’e ebeveyn denetimi amaçlı bir izleme aracı olarak bildirilmiştir
+(<code>isMonitoringTool = child_monitoring</code>). Simgesi hiçbir zaman gizlenmez, koruma
+çalışırken kalıcı bir bildirim gösterilir ve Google Play Protect cihaz kullanıcısına bir izleme
+uygulamasının yüklü olduğunu bildirebilir.</p>
+
+<h2>2. Toplanan veriler</h2>
+<p>Ebeveyn kontrolü işlevleri için uygulama aşağıdaki verileri <strong>yalnızca cihazda
+(yerel olarak)</strong> toplar:</p>
+<table>
+<tr><th>Veri</th><th>Amaç</th></tr>
+<tr><td>Kullanılan uygulamaların adları ve süreleri</td><td>Kullanım raporları, süre sınırları</td></tr>
+<tr><td>Ziyaret edilen web sitelerinin / videoların başlıkları ve adresleri</td><td>Ebeveyn görünürlüğü, içerik filtreleme</td></tr>
+<tr><td>Kilit / sınır / engel olayları</td><td>Olay günlüğü</td></tr>
+<tr><td>Ebeveyn PIN’i (yalnızca kriptografik özet olarak saklanır)</td><td>Ayarların korunması</td></tr>
+<tr><td>Eşleştirilmiş aile cihazları arasındaki aile sohbeti mesajları</td><td>Aile içi iletişim</td></tr>
+<tr><td>Çocuğun konuşma sorularında yaptığı kısa ses kayıtları (geçici)</td><td>Çocuğun kendi telaffuzunu yeniden dinleyip karşılaştırabilmesi</td></tr>
+<tr><td>Teknik tanılama: çökmeler ve nedenleri, uygulamanın yeniden başlamaları, izin ve koruma değişiklikleri, başarısız ağ veya özellik işlemleri, uygulamanın kendi uyarı satırları</td><td>Hata raporu hazırlanabilsin diye cihazda 8 gün tutulur; yalnızca ebeveyn bir hata raporu gönderirse cihazdan çıkar (aşağıya bakın)</td></tr>
+</table>
+
+<h3>Android izinleri ve nasıl kullanıldıkları</h3>
+<p>Aşağıdaki her izin yalnızca adı geçen özellik için istenir, kullanıcı tarafından Android’de
+verilir ve sistem ayarlarından istendiği zaman geri alınabilir.</p>
+<table>
+<tr><th>İzin</th><th>Neye erişir ve neden</th></tr>
+<tr><td>Kullanım erişimi</td><td>Ekran süresini saymak ve sınırları uygulamak için hangi uygulamanın
+önde olduğu ve ne kadar süre önde kaldığı. Cihazda kalır.</td></tr>
+<tr><td>Diğer uygulamaların üzerinde gösterme</td><td>Bir sınıra ulaşıldığında görünür kilit ekranını
+gösterir. Hiçbir veri okumaz.</td></tr>
+<tr><td>Bildirimler ve ön plan hizmeti</td><td>Koruma çalışırken kalıcı bildirimi, ayrıca sınır ve
+hatırlatma bildirimlerini gösterir.</td></tr>
+<tr><td>Erişilebilirlik hizmeti (isteğe bağlı “Ayar bekçisi”)</td><td>Aşağıdaki ayrı bölüme
+bakın.</td></tr>
+<tr><td>Cihaz yöneticisi (isteğe bağlı)</td><td>Etkinleştirilmesi tek başına kaldırma koruması sağlar.
+AliKa hiçbir cihaz yöneticisi politikası istemez; bu nedenle cihazı silemez, kilitleyemez veya
+parolaları değiştiremez.</td></tr>
+<tr><td>VPN (isteğe bağlı web filtresi)</td><td>Aşağıdaki “Android web filtresi (yerel VPN)” bölümüne bakın.</td></tr>
+<tr><td>Mikrofon</td><td>Yalnızca çocuk bir konuşma sorusunda kayıt düğmesine dokunduğunda. Kayıt,
+çocuğun yeniden dinleyebilmesi için uygulamanın cihazdaki geçici önbelleğinde tutulur; aynı soru
+yeniden kaydedildiğinde üzerine yazılır, Android önbelleği istediği zaman temizleyebilir ve kayıt
+hiçbir zaman yüklenmez veya paylaşılmaz.</td></tr>
+<tr><td>Kamera</td><td>Yalnızca aile eşleştirme ekranında, QR kod okutmak için. Görüntüler bellekte
+çözülür; kaydedilmez ve gönderilmez.</td></tr>
+<tr><td>Yerel ağ ve Wi-Fi durumu</td><td>Ev ağındaki eşleştirilmiş aile cihazlarını bulur ve onlarla
+iletişim kurar. Wi-Fi ağ adları, BSSID ve MAC adresleri toplanmaz.</td></tr>
+<tr><td>Arka plan uygulamalarını kapatma</td><td>O anda engellenmiş bir uygulamanın resim içinde resim
+penceresini kapatır; böylece pencere kilit ekranının üzerinde kalamaz.</td></tr>
+<tr><td>Biyometri</td><td>Ebeveyn panelinin isteğe bağlı olarak Android’in kendi biyometrik penceresiyle
+açılması. AliKa yalnızca başarılı ya da başarısız sonucunu alır; biyometrik veriyi hiçbir zaman almaz.</td></tr>
+</table>
+
+<h3>Android erişilebilirlik hizmeti (Ayar bekçisi)</h3>
+<p>Ayar bekçisi isteğe bağlıdır ve varsayılan olarak kapalıdır. Android’in erişilebilirlik ayarları
+açılmadan önce AliKa, <strong>Kabul et</strong> ve <strong>Reddet</strong> düğmeleri olan ayrı bir
+uygulama içi açıklama gösterir; reddetmek başka hiçbir özelliği kısıtlamaz.</p>
+<ul>
+<li><strong>Neyi okur:</strong> yalnızca Android’in Ayarlar ekranlarından ve uygulama yöneticisi /
+paket yükleyici ekranlarından gelen olayları. Bu ekranlarda uygulama/paket adını, görünen metni ve
+içerik açıklamalarını okur. Mesajlaşma uygulamalarından, tarayıcılardan veya başka herhangi bir
+uygulamadan hiçbir şey almaz.</li>
+<li><strong>Neden:</strong> biri AliKa’yı kaldırmaya, zorla durdurmaya veya cihaz yöneticisi
+korumasını kapatmaya çalıştığında ebeveyn PIN’ini sormak için.</li>
+<li><strong>Ne saklanır:</strong> ekran metni saklanmaz veya paylaşılmaz. Bir ekran engellendiğinde
+yalnızca o olayın sistem paket adı cihazdaki yerel olay günlüğüne yazılır. Bu hizmetten ErenKa
+Software’e veya herhangi bir üçüncü tarafa hiçbir şey gönderilmez.</li>
+<li><strong>Nasıl durdurulur:</strong> AliKa’yı Android’in erişilebilirlik ayarlarından istediğiniz
+zaman kapatın.</li>
+</ul>
+
+<h2>3. Verilerin saklanması ve paylaşılması</h2>
+<ul>
+<li><strong>Ebeveyn kontrolü içeriği ailenin cihazlarında kalır.</strong> Bilgisayar genelindeki
+Windows ayarları ve raporlar <code>%ProgramData%\AliKa\</code> altında; o anki Windows kullanıcısının
+öğrenme kütüphanesi ve yerel durumu <code>%LocalAppData%\AliKa\</code> altında saklanır. Android
+kullanım geçmişi, çocuk profilleri, mesajlar, öğrenme içeriği, kurallar ve ziyaret edilen alan adı
+geçmişi cihazda kalır ya da onaylanan yerel ağda eşleştirilmiş aile cihazları arasında doğrudan
+taşınır.</li>
+<li>Ebeveynin e-postayla göndermeyi seçtiği bir hata raporu dışında (aşağıdaki “Ebeveynin
+gönderdiği hata raporları” bölümüne bakın) AliKa, yalnızca aşağıda açıklanan sınırlı Android aile
+aboneliği üst verilerini AliKa’nın işlettiği bir lisans hizmetine gönderir. Bu hizmete çocuk içeriği,
+kullanım geçmişi, mesajlar, ziyaret edilen alan adları, konum, Google hesap adı veya e-posta adresi,
+IMEI ya da Android ID <strong>gönderilmez</strong>.</li>
+<li>AliKa kullanıcı verilerini satmaz; reklam veya analiz sağlayıcılarıyla paylaşmaz.</li>
+<li>Uygulamada reklam ağı veya üçüncü taraf analiz SDK’sı <strong>yoktur</strong>.</li>
+<li>PIN düz metin olarak saklanmaz; PBKDF2-HMAC-SHA256 ile özetlenir.</li>
+</ul>
+
+<h3>İsteğe bağlı yerel aile ağı</h3>
+<p>Ebeveyn Aile Ağı özelliklerini açıkça etkinleştirir ve aile cihazlarını eşleştirirse,
+desteklenen veriler onaylanan yerel ağda eşleştirilmiş cihazlar arasında şifreli iletişimle
+doğrudan aktarılır. Bu isteğe bağlı aktarım AliKa’nın işlettiği bir bulut hizmetinden geçmez.
+Özellik ebeveyn tarafından kapatılabilir.</p>
+
+<h3>Android aile aboneliğinin doğrulanması</h3>
+<p>Tek bir Google Play aile aboneliğinin en fazla 10 eşleştirilmiş Android telefon, tablet ve
+TV’de çalışabilmesi için AliKa sınırlı bir lisans hizmeti kullanır. Bu hizmet rastgele bir AliKa
+aile kimliğini, rastgele bir AliKa cihaz kimliğini, cihaz açık anahtarının SHA-256 özetini, cihaz
+rolünü, iptal durumunu ve Google Play ürününü, abonelik durumunu ve ödenmiş dönemin bitiş zamanını
+işler. Satın alma ve yenileme belirteçleri yalnızca SHA-256 özetleri olarak tutulur; düz değerleri
+saklanmaz. Google hesap adları ve e-posta adresleri lisans hizmeti tarafından toplanmaz.</p>
+<p>Bu üst veriler yalnızca uygulamanın çalışması, abonelik doğrulama, kötüye kullanımın önlenmesi ve
+10 cihaz sınırının uygulanması için kullanılır. Aktarımlar HTTPS/TLS kullanır. Etkin olmayan veya
+süresi dolmuş aile lisansı kayıtları ve bunlara bağlı cihaz kayıtları 90 gün içinde kalıcı olarak
+silinir. Google Play satın alımları Google’ın kendi gizlilik koşullarına göre ayrıca işler.</p>
+
+<h3>Ebeveynin gönderdiği hata raporları</h3>
+<p>Ebeveyn panelinde bir <strong>Hata raporu gönder</strong> düğmesi vardır (Android: Yardım;
+Windows: Cihaz Sağlığı). Hiçbir şey otomatik olarak veya arka planda gönderilmez. Ebeveyn düğmeye
+dokunduğunda AliKa cihazda tek bir ZIP dosyası hazırlar ve ebeveynin kendi e-posta uygulamasını
+<a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a> adresine yazılmış olarak açar
+(Android paylaşım menüsü ya da dosyanın Dosya Gezgini’nde gösterildiği bir Windows e-posta taslağı).
+Rapor ErenKa Software’e yalnızca ebeveyn bu e-postayı gönderirse ulaşır; ebeveyn dosyayı incelemeyi,
+saklamayı veya silmeyi de seçebilir.</p>
+<p>Dosya son 7 günü kapsar ve şunları içerir:</p>
+<ul>
+<li>cihaz ve sistem bilgileri: üretici, model, işletim sistemi ve derleme sürümü, telefon arayüzü
+sürümü, dil, saat dilimi, pil, bellek, boş depolama alanı ve ekran boyutu;</li>
+<li>uygulama bilgileri: AliKa sürümü, yükleme kaynağı, cihaz rolü (çocuk, ebeveyn veya ortak) ve
+hangi izinlerin ve korumaların açık ya da kapalı olduğu;</li>
+<li>çökme ve “uygulama yanıt vermiyor” izleri, uygulamadan çıkış nedenleri, AliKa’nın kendi sistem
+günlüğü satırları ve 2. bölümde açıklanan teknik tanılama;</li>
+<li>yerel olay günlüğü (örneğin ulaşılan sınırlar, engellenen uygulamalar, ebeveyn PIN girişleri ve
+ebeveyn oturumunun başlangıç/bitiş zamanları) ile uygulama paket veya program adına göre uygulama
+başına kullanım süreleri ve saatlik toplamlar;</li>
+<li>PIN özetleri, kurtarma kodları, belirteçler, anahtarlar ve çocuğun adı ile doğum ayı çıkarılmış
+AliKa ayarları;</li>
+<li>Windows’ta, hizmetin çökme izi ve AliKa’dan söz eden Windows Olay Görüntüleyicisi hata
+kayıtları;</li>
+<li>ebeveynin isteğe bağlı olarak yazdığı not.</li>
+</ul>
+<p>Rapor hiçbir zaman PIN’i veya özetini, parolaları, belirteçleri veya anahtarları, çocuğun adını,
+web geçmişini veya ziyaret edilen alan adlarını, pencere başlıklarını, aile mesajlarını, ses
+kayıtlarını, fotoğrafları, konumu, kişileri, Android ID’yi veya IMEI’yi içermez. ErenKa Software
+ayrıca gönderenin e-posta adresini ve ebeveynin e-postaya yazdığı her şeyi alır.</p>
+<p>Raporlar yalnızca AliKa’daki sorunları bulup düzeltmek ve ebeveyne yanıt vermek için kullanılır.
+Reklam veya profil çıkarma için kullanılmaz, satılmaz ve üçüncü taraflarla paylaşılmaz. E-posta
+iletimini ebeveynin ve ErenKa Software’in e-posta sağlayıcıları kendi koşullarına göre yapar
+(alika.destek@gmail.com bir Google Gmail hesabıdır). Bir rapor yalnızca bildirilen sorunu çözmek
+için gerektiği sürece tutulur ve alındıktan en geç 12 ay sonra silinir. Ebeveyn aynı adrese yazarak
+daha erken silinmesini isteyebilir.</p>
+
+<h3>Android web filtresi (yerel VPN)</h3>
+<p>Android’de web filtresi cihazda <strong>yerel</strong> bir VPN (VpnService) kullanır. Listedeki
+siteleri ve güvenli arama dışı içeriği engellemek için yalnızca DNS isteklerini (ziyaret edilen
+sitelerin alan adlarını) inceler. Şifreli bir tünel oluşturulmaz ve hiçbir trafik bir AliKa
+sunucusuna yönlendirilmez; yalnızca olağan DNS çözümlemesi herkese açık bir çözümleyiciye gider.
+Sayfa içeriği okunmaz. Ziyaret edilen alan adları cihazda kalır. Ebeveyn filtreyi ancak uygulama
+içindeki belirgin bir açıklamanın ve açık rızanın ardından etkinleştirebilir ve istediği zaman
+kapatabilir.</p>
+<p><em>(İleride bulut eşitleme eklenirse bu bölüm güncellenecek ve ayrıca açık rıza
+istenecektir.)</em></p>
+
+<h2>4. Çocukların gizliliği (COPPA / GDPR-K)</h2>
+<p>Bu uygulama verileri yasal vasi adına ve yalnızca vasinin kendi çocuğunun cihazını yönetmesi
+amacıyla işler. Veriler pazarlama, profil çıkarma veya üçüncü taraflarla paylaşım için kullanılmaz.
+Vasi, geçmişi ve kütüphane öğelerini ebeveyn panelinden silebilir; tüm yerel verileri silme adımları
+aşağıda yazılıdır.</p>
+
+<h2>5. Kullanıcı hakları</h2>
+<ul>
+<li><strong>Erişim:</strong> Ebeveyn paneli yerel olarak toplanan ebeveyn kontrolü verilerini
+gösterir. Android abonelik ekranı, lisans üst verilerini tanımlamak için gereken aile ve cihaz
+kimliklerini gösterir.</li>
+<li><strong>Silme:</strong> Ebeveyn paneli geçmiş kayıtlarını ve içe aktarılan kütüphane içeriğini
+silebilir. Microsoft Store/MSIX paketinin kaldırılması paketi, hizmeti ve çalışan işlemleri kaldırır;
+ancak yeniden kurulumda veri kaybı olmadan devam edilebilsin diye <code>%ProgramData%\AliKa\</code> ve
+<code>%LocalAppData%\AliKa\</code> klasörlerini bilerek korur. Her şeyi silmek için kaldırma işleminden
+sonra ilk klasörü yönetici olarak, ikincisini ilgili Windows kullanıcısı olarak silin. Klasik Kurulum
+kaldırıcısı ayrıca <code>%ProgramData%\AliKa\</code> klasörünü silmeyi önerir; sessiz
+güncelleme/kaldırma verileri korur.</li>
+<li><strong>Android’de yerel verilerin silinmesi:</strong> Ebeveyn geçmişi, aile sohbetini ve içe
+aktarılan öğrenme içeriğini ebeveyn panelinden temizleyebilir. AliKa bir Android cihazdan
+kaldırıldığında uygulamanın cihazdaki yerel verileri de silinir.</li>
+<li><strong>Android lisans üst verilerinin silinmesi talebi:</strong>
+<a href="mailto:alika.destek@gmail.com?subject=AliKa%20Android%20data%20deletion%20request">alika.destek@gmail.com</a>
+adresine “AliKa Android data deletion request” konu satırıyla e-posta gönderin ve uygulamanın abonelik
+ekranında görünen AliKa aile kimliği ile cihaz kimliğini ekleyin. Çocuğun adını, PIN’i, mesajları,
+tarama geçmişini veya satın alma belirtecini göndermeyin. Başka birinin bir ailenin kaydını
+silememesi için ErenKa Software silmeden önce cihaza bağlı bir doğrulama yanıtı isteyebilir.
+Doğrulamadan sonra rastgele aile/cihaz kimlikleri, açık anahtar özeti, cihaz rolü, iptal durumu,
+belirteç özetleri ve tutulan abonelik durumu üst verileri kalıcı olarak silinir. Etkin olmayan veya
+süresi dolmuş bir ailenin kayıtları da 90 gün içinde kendiliğinden silinir. Google’ın Play satın
+alımları için tuttuğu veriler Google’ın denetimindedir ve AliKa tarafından silinmez.</li>
+<li><strong>Hata raporunun silinmesi:</strong> Raporu gönderdiğiniz adresten
+alika.destek@gmail.com adresine yazıp silinmesini isteyin; rapor ve ilgili e-posta silinir. Cihazdaki
+yerel tanılama kayıtları 8 gün sonra ya da AliKa kaldırıldığında kendiliğinden silinir.</li>
+<li><strong>Rıza:</strong> İlk kurulumda açık bir rıza ekranı gösterilir; bu ekran kabul edilmeden
+işlevler başlamaz.</li>
+</ul>
+
+<h2>6. Güvenlik</h2>
+<p>Yerel ayarlar bir ebeveyn PIN’i ile korunur. Android lisans hizmeti aktarımları HTTPS/TLS, cihaz
+açık anahtarları ve özetlenmiş belirteçler kullanır; üretim kayıtlarına erişim, doğrulama ve saklama
+süresi temizliği için gereken hizmet kimlikleriyle sınırlıdır. Cihaz güvenliği (disk şifreleme ve
+işletim sistemi güncellemeleri) kullanıcının sorumluluğundadır.</p>
+
+<h2>7. Değişiklikler</h2>
+<p>Bu politika değişirse bu belge güncellenir ve değişiklik uygulamada veya mağaza sayfasında
+duyurulur.</p>
+
+<h2>8. İletişim</h2>
+<p>Sorular: alika.destek@gmail.com — ErenKa Software, Türkiye.</p>
+
+<footer>ErenKa Software · AliKa</footer>
+</body>
+</html>

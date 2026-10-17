@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import { microsoftStoreUrl, playStoreUrl } from '../store-campaign';
-import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, type Lang } from './i18n/langs';
+import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, legalPath, type Lang } from './i18n/langs';
 import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, PlanStatus, ScreenId, TvGame, VideoKey } from './i18n/types';
 
 const SUPPORT_EMAIL = 'alika.destek@gmail.com';
@@ -634,7 +634,7 @@ function MobileMenu({ lang, t }: { lang: Lang; t: HomeCopy }) {
     ['#plan', t.nav.plan],
     ['#deneme', t.nav.offer],
     ['#sss', t.nav.faq],
-    ['/privacy/', t.nav.privacy],
+    [legalPath(lang, 'privacy'), t.nav.privacy],
   ];
 
   return (
@@ -705,7 +705,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           <a href="#plan">{t.nav.plan}</a>
           <a href="#deneme">{t.nav.offer}</a>
           <a href="#sss">{t.nav.faq}</a>
-          <a className="navLow" href="/privacy/">{t.nav.privacy}</a>
+          <a className="navLow" href={legalPath(lang, 'privacy')}>{t.nav.privacy}</a>
           <LanguagePicker lang={lang} t={t} />
           <button type="button" className="iconBtn" onClick={toggleTheme} aria-label={theme === 'dark' ? t.a11y.toLight : t.a11y.toDark}>
             {theme === 'dark'
@@ -972,7 +972,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
                 <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>
               ))}
             </ul>
-            <a className="textLink onDark" href="/privacy/">{t.trust.privacyLink}</a>
+            <a className="textLink onDark" href={legalPath(lang, 'privacy')}>{t.trust.privacyLink}</a>
           </div>
         </section>
 
@@ -1113,8 +1113,8 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
             </div>
             <div>
               <h3>{t.footer.legal}</h3>
-              <a href="/privacy/">{t.footer.privacy}</a>
-              <a href="/eula/">{t.footer.terms}</a>
+              <a href={legalPath(lang, 'privacy')}>{t.footer.privacy}</a>
+              <a href={legalPath(lang, 'terms')}>{t.footer.terms}</a>
             </div>
           </nav>
         </div>

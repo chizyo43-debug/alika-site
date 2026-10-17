@@ -26,6 +26,12 @@ export function contentPath(lang: Lang): string {
   return lang === 'tr' ? '/icerik/' : `/${lang}/content/`;
 }
 
+/* Yasal metinler: Türkçe sayfa Türkçe sürümü, diğer diller İngilizce sürümü açar. */
+export function legalPath(lang: Lang, kind: 'privacy' | 'terms'): string {
+  if (lang === 'tr') return kind === 'privacy' ? '/gizlilik/' : '/kullanim-kosullari/';
+  return kind === 'privacy' ? '/privacy/' : '/eula/';
+}
+
 /* Yalnız gerçekten var olan rehberler. */
 export const GUIDE_PATHS: Partial<Record<Lang, string>> = {
   tr: '/rehber/',

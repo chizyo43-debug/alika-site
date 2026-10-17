@@ -348,6 +348,17 @@ def main() -> None:
             if not target.exists() or digest(source) != digest(target):
                 errors.append(f"Legal file changed or missing: {target}")
 
+    # Türkçe yasal metinler: kaynakla aynı, İngilizce sürüme bağlı.
+    for name, english in (("gizlilik", "privacy"), ("kullanim-kosullari", "eula")):
+        target = DIST / name / "index.html"
+        source = ROOT / "legal" / "tr" / f"{name}.html"
+        if not target.exists() or digest(source) != digest(target):
+            errors.append(f"Turkish legal page changed or missing: {target}")
+        elif f'href="/{english}/"' not in target.read_text(encoding="utf-8"):
+            errors.append(f"Turkish legal page must link its English version: {target}")
+    if 'href="/gizlilik/"' not in (DIST / "content" / "index.html").read_text(encoding="utf-8"):
+        errors.append("Turkish pages must link the Turkish privacy policy")
+
     if (DIST / "privacy-policy.html").read_bytes() != (ROOT / "legal" / "privacy.html").read_bytes():
         errors.append("privacy-policy.html differs from source")
 
