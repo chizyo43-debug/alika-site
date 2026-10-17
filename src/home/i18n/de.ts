@@ -27,7 +27,7 @@ const de: HomeCopy = {
     openScreen: (label, platform) => `${label}: Bildschirmfoto öffnen (${platform})`,
     screenAlt: (label) => `Bildschirm ${label}`,
   },
-  nav: { features: 'Funktionen', videos: 'Videos', faq: 'FAQ', privacy: 'Datenschutz', offer: 'Gratis testen' },
+  nav: { features: 'Funktionen', videos: 'Videos', faq: 'FAQ', privacy: 'Datenschutz', offer: 'Gratis testen', content: 'Inhalte', plan: 'Roadmap' },
   store: {
     forWindows: 'Für Windows',
     forAndroid: 'Für Android',

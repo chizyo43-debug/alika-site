@@ -65,7 +65,7 @@ export interface HomeCopy {
     openScreen: (label: string, platform: string) => string;
     screenAlt: (label: string) => string;
   };
-  nav: { features: string; videos: string; faq: string; privacy: string; offer: string };
+  nav: { features: string; videos: string; faq: string; privacy: string; offer: string; content: string; plan: string };
   store: { forWindows: string; forAndroid: string; getStore: string; getPlay: string };
   hero: {
     how: string;

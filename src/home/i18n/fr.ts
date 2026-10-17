@@ -27,7 +27,7 @@ const fr: HomeCopy = {
     openScreen: (label, platform) => `${label} : ouvrir la capture d’écran (${platform})`,
     screenAlt: (label) => `Écran ${label}`,
   },
-  nav: { features: 'Fonctions', videos: 'Vidéos', faq: 'FAQ', privacy: 'Confidentialité', offer: 'Essai gratuit' },
+  nav: { features: 'Fonctions', videos: 'Vidéos', faq: 'FAQ', privacy: 'Confidentialité', offer: 'Essai gratuit', content: 'Contenus', plan: 'Plan' },
   store: {
     forWindows: 'Pour Windows',
     forAndroid: 'Pour Android',

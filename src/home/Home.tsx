@@ -663,10 +663,12 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
         </a>
         <nav className="topNav" aria-label={t.a11y.mainMenu}>
           <a href="#ozellikler">{t.nav.features}</a>
-          <a href="#videolar">{t.nav.videos}</a>
+          <a className="navLow" href="#videolar">{t.nav.videos}</a>
+          <a href={contentPath(lang)}>{t.nav.content}</a>
+          <a href="#plan">{t.nav.plan}</a>
           <a href="#deneme">{t.nav.offer}</a>
           <a href="#sss">{t.nav.faq}</a>
-          <a href="/privacy/">{t.nav.privacy}</a>
+          <a className="navLow" href="/privacy/">{t.nav.privacy}</a>
           <LanguagePicker lang={lang} t={t} />
           <button type="button" className="iconBtn" onClick={toggleTheme} aria-label={theme === 'dark' ? t.a11y.toLight : t.a11y.toDark}>
             {theme === 'dark'

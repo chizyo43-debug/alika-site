@@ -27,7 +27,7 @@ const tr: HomeCopy = {
     openScreen: (label, platform) => `${label}: ekran görüntüsünü aç (${platform})`,
     screenAlt: (label) => `${label} ekranı`,
   },
-  nav: { features: 'Özellikler', videos: 'Videolar', faq: 'SSS', privacy: 'Gizlilik', offer: 'Ücretsiz deneme' },
+  nav: { features: 'Özellikler', videos: 'Videolar', faq: 'SSS', privacy: 'Gizlilik', offer: 'Ücretsiz deneme', content: 'İçerik', plan: 'Plan' },
   store: {
     forWindows: 'Windows için',
     forAndroid: 'Android için',

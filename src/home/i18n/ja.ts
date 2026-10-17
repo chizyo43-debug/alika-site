@@ -27,7 +27,7 @@ const ja: HomeCopy = {
     openScreen: (label, platform) => `${label}：スクリーンショットを開く（${platform}）`,
     screenAlt: (label) => `${label}の画面`,
   },
-  nav: { features: '機能', videos: '動画', faq: 'よくある質問', privacy: 'プライバシー', offer: '無料体験' },
+  nav: { features: '機能', videos: '動画', faq: 'よくある質問', privacy: 'プライバシー', offer: '無料体験', content: '教材', plan: '計画' },
   store: {
     forWindows: 'Windows向け',
     forAndroid: 'Android向け',

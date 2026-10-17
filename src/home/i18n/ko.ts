@@ -27,7 +27,7 @@ const ko: HomeCopy = {
     openScreen: (label, platform) => `${label}: 스크린샷 열기 (${platform})`,
     screenAlt: (label) => `${label} 화면`,
   },
-  nav: { features: '기능', videos: '동영상', faq: '자주 묻는 질문', privacy: '개인정보', offer: '무료 체험' },
+  nav: { features: '기능', videos: '동영상', faq: '자주 묻는 질문', privacy: '개인정보', offer: '무료 체험', content: '콘텐츠', plan: '로드맵' },
   store: {
     forWindows: 'Windows용',
     forAndroid: 'Android용',

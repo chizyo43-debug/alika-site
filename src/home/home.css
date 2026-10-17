@@ -2305,7 +2305,8 @@ button.videoThumb {
 
 /* Uzun dillerde üst menü sığsın: önce mağaza düğmeleri simgeye iner, sonra metin bağlantıları gizlenir.
    Eşikler en uzun dile (Rusça) göre ölçüldü: tam menü 1146 px, simgeli menü 933 px. */
-@media (max-width: 1180px) {
+/* Üst menü eşikleri 9 dilde ölçüldü (Rusça en geniş: tam 1301, simgeli 1088, Videolar/Gizlilik olmadan 888 px). */
+@media (max-width: 1250px) {
   .top .storeBtn {
     width: 42px;
     padding: 0;
@@ -2313,6 +2314,23 @@ button.videoThumb {
   }
 
   .top .storeText {
+    display: none;
+  }
+}
+
+/* Rusçada yazılı mağaza düğmeleri 1200 px içeriğe hiç sığmaz. */
+:root:lang(ru) .top .storeBtn {
+  width: 42px;
+  padding: 0;
+  justify-content: center;
+}
+
+:root:lang(ru) .top .storeText {
+  display: none;
+}
+
+@media (max-width: 1110px) {
+  .topNav > a.navLow {
     display: none;
   }
 }
