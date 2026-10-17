@@ -289,7 +289,181 @@ GUIDES = (
             )),
         ),
     },
+    {
+        "slug": "ailece-ekran-suresi-plani",
+        "campaign_id": "site_rehber_ekran_plani_tr",
+        "platform": "both",
+        "draft": True,
+        "title": "Ailece Ekran Süresi Planı Nasıl Yapılır? Haftalık Düzen",
+        "description": "Çocukla birlikte haftalık ekran planı kurun: okul günü ve hafta sonu süresi, ekranların kapanacağı saat, ekran dışı zaman ve haftalık gözden geçirme.",
+        "video": "windows-ilk-kurulum",
+        "video_label": "AliKa Windows ilk kurulum · 1:35",
+        "lede": (
+            "Ekran süresi planı, sürenin her akşam yeniden tartışılmaması için önceden ve birlikte yapılır. "
+            "Okul günü ile hafta sonunu ayırın, ekranların kapanacağı saati sabitleyin ve planı haftada bir kısa bir konuşmayla gözden geçirin. "
+            "Aşağıdaki tabloyu yazdırıp çocukla birlikte doldurabilirsiniz."
+        ),
+        "sections": (
+            ("Planı sakin bir anda, birlikte kurun", (
+                "Planı süre bittiği ya da tartışmanın başladığı anda değil, herkesin sakin olduğu bir zamanda konuşun. Çocuğa ekranı neler için kullandığını sorun: ödev, oyun, video, arkadaşlarla konuşma. Hangisinin onun için önemli olduğunu bilmek, kuralı daha anlaşılır kılar.",
+                "Ortaokul çağındaki bir çocuk kendi önerisini getirebilir. Son kararı ebeveyn verse de çocuğun önerisini dinlemek, planın uygulanmasını kolaylaştırır. Kararlaştırdığınız her kuralı tek cümleyle yazın.",
+            )),
+            ("Okul günü ile hafta sonunu ayırın", (
+                "Okul günlerinde ödev, uyku ve okul sonrası etkinlikler zamanı zaten daraltır; hafta sonu daha esnek olabilir. İki ayrı günlük toplam belirlemek, çoğu aile için tek bir sayıdan daha gerçekçidir.",
+                "İlk hafta, bugünkü kullanıma yakın ve uygulanabilir bir süreyle başlayın. Bir anda büyük bir düşüş yapmak yerine haftalık gözden geçirmede küçük adımlarla ilerleyin. Ödev için kullanılan bilgisayar süresinin günlük toplama dahil olup olmadığını da baştan kararlaştırın.",
+            )),
+            ("Ekranların kapanacağı saati sabitleyin", (
+                "Toplam süre kadar önemli olan, ekranların akşam hangi saatte kapanacağıdır. Okul günleri için sabit bir saat belirleyin; hafta sonu bu saat biraz daha geç olabilir.",
+                "Yemek masası veya yatak odası gibi ekransız alanlar da plana yazılabilir. Bu kuralların ailedeki herkes için geçerli olması, çocuğun planı benimsemesini kolaylaştırır.",
+            )),
+            ("Ekran dışı zamanı da plana ekleyin", (
+                "Plan yalnız sınırlardan oluşursa çocuk boşalan zamanı nasıl geçireceğini bilemeyebilir. Her güne kısa bir ekran dışı etkinlik yazın: spor, kitap, arkadaşlarla buluşma, evde küçük bir sorumluluk.",
+                "Ekran dışı etkinlik ceza olarak değil, günün doğal bir parçası olarak sunulduğunda daha kolay sürdürülür.",
+            )),
+            ("İstisnaları baştan konuşun", (
+                "Doğum günü, bayram, uzun bir okul projesi ya da hastalık günü gibi durumlar planı geçici olarak değiştirebilir. Bu durumlarda kimin karar vereceğini ve ek sürenin nasıl verileceğini önceden söyleyin.",
+                "Tek seferlik bir izin, günlük kuralı kalıcı olarak değiştirmez. Bunu açıkça söylemek, ertesi gün aynı izni isteme tartışmasını azaltır.",
+            )),
+            ("Haftada bir kısa gözden geçirme", (
+                "Haftada bir gün, örneğin pazar akşamı, on dakikalık bir konuşmayla planın nasıl gittiğini değerlendirin. Neyin işlediğini, neyin zorlandığını birlikte konuşun.",
+                "Her hafta yalnız bir şeyi değiştirin. Aynı anda birçok kuralı değiştirmek, hangisinin işe yaradığını görmeyi zorlaştırır.",
+            )),
+            ("Sık yapılan hatalar", (
+                "Kuralı tartışmanın ortasında koymak, aynı anda çok sayıda kural başlatmak, kuralı çocuğa söylemeden değiştirmek ve planı yazmadan yalnız sözlü bırakmak en sık karşılaşılan sorunlardır.",
+                "Ekran süresini sürekli ödül ya da ceza aracı olarak kullanmak da planın amacını belirsizleştirebilir. Planın amacı, günün düzenini önceden belli etmektir.",
+            )),
+        ),
+        "printable": {
+            "title": "Haftalık aile ekran planı",
+            "note": "Yazdırın, çocukla birlikte doldurun ve görünür bir yere asın.",
+            "columns": ("Gün", "Ekran süresi", "Ekranlar kapanır", "Ekran dışı plan"),
+            "rows": tuple((day, "", "", "") for day in ("Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar")),
+        },
+        "product": ("Bu planı otomatik uygulamak isterseniz", (
+            "AliKa ebeveyn kontrolü, kararlaştırdığınız planı Windows bilgisayarda ve Android telefonda uygular. Haftanın her günü için ayrı süre ve uyku saati girilebilir; çocuk kalan süresini ekranında görür, süre dolduğunda hangi kuralın uygulandığını bilir.",
+            "İsterseniz çocuk, sizin eklediğiniz sorulardan çözerek kontrollü ek süre kazanabilir; kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz. AliKa hesabı açmanız gerekmez.",
+        )),
+    },
+    {
+        "slug": "android-cocuk-ekran-suresi",
+        "campaign_id": "site_rehber_android_tr",
+        "platform": "android",
+        "draft": True,
+        "title": "Android Telefonda Çocuğun Ekran Süresi Nasıl Planlanır?",
+        "description": "Android telefon ve tablette çocuk ekran süresini planlayın: günlük süre, uygulama sınırı, uyku saati, web filtresi, izinler ve ilk hafta kontrolleri.",
+        "video": "android-ilk-kurulum",
+        "video_label": "AliKa Android ilk kurulum · 1:40",
+        "lede": (
+            "Android telefonda ekran süresi planı üç adımda kurulur: telefonun kimin olduğunu belirlemek, günlük süreyi ve uyku saatini ayarlamak, ardından kuralı çocukla birlikte denemek. "
+            "Ayarları çocuğun telefonunda, onun bilgisiyle yapın. "
+            "Bu rehber genel adımları ve AliKa’nın Android’deki akışını anlatır."
+        ),
+        "sections": (
+            ("Kurmadan önce: telefon kimin, kural ne?", (
+                "Önce telefonun kime ait olduğunu netleştirin: yalnız çocuğun kullandığı bir telefon mu, ebeveynle ortak kullanılan bir telefon mu? Ortak telefonda ebeveynin kendi kullanımının nasıl sayılacağını baştan düşünmek gerekir.",
+                "Sonra çocukla üç şeyi konuşun: günlük toplam süre, ekranların kapanacağı saat ve ayrıca sınırlanacak uygulamalar. Bu kararlar telefona girilmeden önce yazılı olursa kurulum çok daha hızlı biter.",
+            )),
+            ("Günlük süre, uygulama sınırı ve uyku saati", (
+                "Günlük toplam süre bütün uygulamaları kapsar. Uygulama sınırı ise belirli bir oyun ya da video uygulamasına ayrıca dakika verir. Uyku saati, belirlediğiniz aralıkta telefonu kilitler.",
+                "İlk hafta tek bir günlük toplam ve tek bir uyku aralığıyla başlayın. Okul günü ve hafta sonu için farklı süre gerekiyorsa haftalık planı sonra ekleyin.",
+            )),
+            ("Web filtresi ve güvenli arama", (
+                "Web filtresi, engellediğiniz siteleri kapatır ve Google, YouTube ve Bing’de güvenli aramayı zorlar. Android bu özellik için bir kez VPN izni ister; AliKa’da filtreleme telefonun içinde yapılır, gezinme verisi dışarı gönderilmez.",
+                "Filtreyi açtıktan sonra çocuğun ödev için kullandığı siteleri birlikte deneyin. Beklenmedik bir engel görürseniz filtre ayarını birlikte gözden geçirin.",
+            )),
+            ("Android izinleri neden istenir?", (
+                "Ekran süresini ölçmek için kullanım erişimi, korumanın çalıştığını göstermek için bildirim, web filtresi için VPN izni gerekir. İzinleri ebeveyn olarak siz verirsiniz; Android ayarlarından her zaman geri alınabilir.",
+                "AliKa’da Ayar bekçisi isteğe bağlıdır ve başlangıçta kapalıdır. Açarsanız AliKa kaldırılmak ya da durdurulmak istendiğinde ebeveyn PIN’i sorar. Bu izni vermemek diğer özellikleri kullanmanıza engel olmaz.",
+            )),
+            ("Soru çözerek ek süre (isteğe bağlı)", (
+                "Çocuk, sizin eklediğiniz sorulardan çözerek kontrollü ek süre kazanabilir. Kaç doğru cevabın bir dakika ettiğini, günlük kazanım tavanını ve günlük soru sınırını siz seçersiniz; yanlış cevap süre kazandırmaz.",
+                "Ayrıntılar “Soru çözerek ekran süresi kazanma” rehberindedir. Türkiye ortaokul (5–8. sınıf) için hazır konu anlatımı ve soru paketleri alika.tr’deki Hazır içerik sayfasındadır.",
+            )),
+            ("Birden fazla telefon ve tablet", (
+                "Bir AliKa aile aboneliği, ebeveyn telefonu dahil en fazla 10 eşleştirilmiş Android aile cihazında kullanılır. Cihazlar aynı Wi-Fi ağındayken eşleştirilir; eşleştirmeyi kurulumdan sonra da yapabilirsiniz.",
+                "Ebeveyn telefonu ebeveyn olarak kurulduğunda çocuk için süre ve soru kuralları o telefonda uygulanmaz. Windows satın alımı Android aboneliğini kapsamaz.",
+            )),
+            ("İlk hafta kontrol listesi", (
+                "Çocuğun ekranında kalan sürenin doğru göründüğünü, uyku saatinin beklenen saatte başladığını, koruma bildiriminin göründüğünü ve web filtresinin ödev sitelerini engellemediğini kontrol edin.",
+                "Ebeveyn PIN’ini çocuğun göremeyeceği bir anda girin; kurtarma kodunu telefondan ayrı, güvenli bir yerde saklayın.",
+            )),
+            ("Sık yapılan hatalar", (
+                "İzinleri yarım bırakmak, ilk gün çok sıkı sınırlarla başlamak, kuralı çocuğa söylemeden açmak ve kurtarma kodunu kaybetmek en sık karşılaşılan sorunlardır.",
+                "Ayarı çocuğun haberi olmadan değiştirmek de güveni zedeleyebilir. Değişikliği yapmadan önce kısaca söylemek yeterlidir.",
+            )),
+        ),
+    },
+    {
+        "slug": "ara-tatil-ekran-suresi-plani",
+        "campaign_id": "site_rehber_ara_tatil_tr",
+        "platform": "both",
+        "draft": True,
+        "title": "Ara Tatilde Ekran Süresi Nasıl Planlanır? 9 Günlük Plan",
+        "description": "16–20 Kasım ara tatili için hafta sonlarıyla 9 günlük ekran planı: günlük süre, uyku saati, ekran dışı etkinlik ve okula dönüş. Yazdırılabilir tablo.",
+        "video": "windows-soru-coz",
+        "video_label": "Soru çöz, ek süre kazan · 0:33",
+        "lede": (
+            "Ara tatil okul düzenini bozar ama ekran süresinin sınırsız olması gerekmez. "
+            "Tatil başlamadan günlük bir süre, sabit bir uyku saati ve her gün için bir ekran dışı plan belirleyin; son iki günü okul düzenine dönüşe ayırın. "
+            "Aşağıdaki 9 günlük tabloyu yazdırıp çocukla birlikte doldurabilirsiniz."
+        ),
+        "sections": (
+            ("Ara tatil ne zaman?", (
+                "MEB’in 2026–2027 çalışma takvimine göre birinci dönem ara tatili 16–20 Kasım 2026 tarihleri arasındadır. Hafta sonlarıyla birlikte tatil 14 Kasım Cumartesi’den 22 Kasım Pazar’a kadar dokuz gün sürer; dersler 23 Kasım Pazartesi yeniden başlar.",
+                "Okulunuzun duyurusu farklıysa tabloyu kendi takviminize göre düzenleyin.",
+            )),
+            ("Tatilden önce kısa bir aile konuşması", (
+                "Tatil başlamadan çocuğa tatilde neler yapmak istediğini sorun. Ödevleri, okunacak kitapları ve evden uzak geçecek günleri (ziyaret, yolculuk) birlikte takvime yazın.",
+                "Tatildeki ekran süresinin okul günlerinden farklı olup olmayacağını bu konuşmada kararlaştırın. Önceden konuşulan bir kural, tatilin ortasında yeni bir tartışma başlatmaz.",
+            )),
+            ("Tatil günü için gerçekçi bir süre", (
+                "Tatilde ekran süresi okul gününden biraz fazla olabilir; önemli olan bunun önceden belli olmasıdır. Günlük bir toplam ve sabit bir ekran kapanış saati, dokuz günün tamamı için yeterli bir çerçevedir.",
+                "Uyku saatini tatil boyunca çok kaydırmamak, okula dönüşü kolaylaştırır.",
+            )),
+            ("Her güne bir ekran dışı plan", (
+                "Tablodaki her güne bir ekran dışı etkinlik yazın: park, kütüphane, müze, akraba ziyareti, birlikte yemek yapmak, kutu oyunu, spor ya da kitap. Büyük planlar gerekmez; günde bir küçük etkinlik yeterlidir.",
+                "Etkinliği çocukla birlikte seçmek, onun plana sahip çıkmasını sağlar.",
+            )),
+            ("Kısa ve düzenli tekrar zamanı", (
+                "Tatil, okulda işlenen konuları kısa bloklarla tekrar etmek için de uygundur. Örneğin günde 20–30 dakikalık bir tekrar ya da okuma zamanı, günün geri kalanını rahat bırakır.",
+                "Türkiye ortaokul (5–8. sınıf) için konu anlatımı ve soru paketleri alika.tr’deki Hazır içerik sayfasındadır.",
+            )),
+            ("Son iki gün: okula dönüş", (
+                "21–22 Kasım hafta sonunu okul düzenine dönüşe ayırın. Uyku ve ekran kapanış saatini okul günlerindeki saate geri çekin; okul çantasını ve ödevleri pazar akşamından önce birlikte kontrol edin.",
+            )),
+            ("Sık yapılan hatalar", (
+                "Tatil boyunca hiç kural koymayıp son gün birden sıkı bir düzene dönmek, uyku saatini her gün biraz daha geciktirmek ve bütün günü ekranın etrafında planlamak en sık görülen sorunlardır.",
+            )),
+        ),
+        "printable": {
+            "title": "Ara tatil 9 günlük ekran planı",
+            "note": "14–22 Kasım 2026 · Yazdırın, çocukla birlikte doldurun.",
+            "columns": ("Gün", "Ekran süresi", "Ekranlar kapanır", "Ekran dışı plan", "Tekrar / okuma"),
+            "rows": (
+                ("Cumartesi 14 Kasım", "", "", "", ""),
+                ("Pazar 15 Kasım", "", "", "", ""),
+                ("Pazartesi 16 Kasım", "", "", "", ""),
+                ("Salı 17 Kasım", "", "", "", ""),
+                ("Çarşamba 18 Kasım", "", "", "", ""),
+                ("Perşembe 19 Kasım", "", "", "", ""),
+                ("Cuma 20 Kasım", "", "", "", ""),
+                ("Cumartesi 21 Kasım · dönüş hazırlığı", "", "", "", ""),
+                ("Pazar 22 Kasım · dönüş hazırlığı", "", "", "", ""),
+            ),
+        },
+        "product": ("Bu planı otomatik uygulamak isterseniz", (
+            "AliKa ebeveyn kontrolü bu planı Windows bilgisayarda ve Android telefonda uygulayabilir. Günlere göre ayrı süre ve uyku saati girilebilir; Windows’ta okul ve tatil günleri için ayrı takvim profili de tanımlanabilir.",
+            "Çocuk kalan süresini ekranında görür. İsterseniz sizin eklediğiniz sorulardan çözerek, sizin belirlediğiniz günlük üst sınır içinde ek süre kazanabilir.",
+        )),
+    },
 )
+
+# Taslak rehberler ve okullar sayfası yalnız ALIKA_DRAFTS=1 ile derlenir (yayın öncesi önizleme).
+SHOW_DRAFTS = os.environ.get("ALIKA_DRAFTS") == "1"
+PUBLISHED_GUIDES = tuple(guide for guide in GUIDES if SHOW_DRAFTS or not guide.get("draft"))
+# Rehberlerin görünen ve yapılandırılmış son güncelleme tarihi.
+GUIDE_UPDATED = ("2026-10-17", "17 Ekim 2026")
+SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
 
 ACCESS_LABELS = {
     "tr": ("İçeriğe geç", "Menü", "Geç", "Ortak ekran", "Hazır", "Yanıt gizli"),
@@ -497,17 +671,17 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
 
 
 
-def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr") -> str:
+def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr", schema_type: str = "Article") -> str:
     article_schema = {
         "@context": "https://schema.org",
-        "@type": "Article",
+        "@type": schema_type,
         "headline": title,
         "description": description,
         "mainEntityOfPage": canonical,
         "inLanguage": "en-GB" if lang == "en" else "tr-TR",
         "author": {"@type": "Organization", "name": "ErenKa Software"},
         "publisher": {"@type": "Organization", "name": "ErenKa Software"},
-        "dateModified": "2026-10-17",
+        "dateModified": GUIDE_UPDATED[0],
     }
     return f"""<!doctype html>
 <html lang="{lang}">
@@ -546,7 +720,7 @@ def guide_index_body() -> str:
     cards = "".join(
         f'<article class="article-card"><p class="eyebrow">AliKa rehberi</p><h2>{esc(guide["title"])}</h2>'
         f'<p>{esc(guide["description"])}</p><a class="text-link" href="/{GUIDE_BASE}/{guide["slug"]}/">Rehberi okuyun →</a></article>'
-        for guide in GUIDES
+        for guide in PUBLISHED_GUIDES
     )
     return f"""
     <main id="main" class="guide-main">
@@ -580,8 +754,39 @@ def guide_article_body(guide: dict) -> str:
         f'<section><h2>Android telefon ve tablette</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in android_note)}</section>'
         if android_note else ""
     )
+    printable = guide.get("printable")
+    printable_section = ""
+    if printable:
+        head = "".join(f'<th scope="col">{esc(column)}</th>' for column in printable["columns"])
+        rows = "".join(
+            f'<tr><th scope="row">{esc(row[0])}</th>{"".join(f"<td>{esc(cell)}</td>" for cell in row[1:])}</tr>'
+            for row in printable["rows"]
+        )
+        # Düğme yalnız tabloyu yazdırır (print-plan sınıfı); sayfanın geri kalanı baskıda gizlenir.
+        printable_section = (
+            f'<section class="guide-print" id="yazdir"><h2>{esc(printable["title"])}</h2><p>{esc(printable["note"])}</p>'
+            f'<div class="guide-table"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
+            '<button class="button guide-print-button" type="button" '
+            'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">Planı yazdırın</button></section>'
+        )
+    product = guide.get("product")
+    product_section = (
+        f'<section><h2>{esc(product[0])}</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in product[1])}</section>'
+        if product else ""
+    )
+    platform = guide.get("platform", "both" if android_note else "windows")
     store_button = f'<a class="button" href="{microsoft_store_url("tr", guide.get("campaign_id"))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a>'
-    if android_note:
+    if platform == "android":
+        eyebrow = "Android telefon ve tablet · AliKa ebeveyn rehberi"
+        disclosure = "AliKa Windows ve Android için ücretli bir uygulamadır; bu rehber Android sürümünü anlatır."
+        play_href = esc(play_store_url("tr", guide["campaign_id"], "rehber"))
+        cta = (
+            '<section class="guide-cta"><h2>Android telefonunuzda deneyin.</h2>'
+            '<p>AliKa’nın Android aile aboneliği Google Play’de 14 gün ücretsiz denemeyle başlar; deneme bitmeden iptal ederseniz ücret alınmaz. '
+            'Bir abonelik 10 eşleştirilmiş aile cihazında geçerlidir. Güncel fiyatı mağaza sayfası gösterir.</p>'
+            f'<div class="button-row"><a class="button" href="{play_href}" target="_blank" rel="noopener noreferrer">Google Play’de açın</a>{store_button}</div></section>'
+        )
+    elif platform == "both":
         eyebrow = "Windows ve Android · AliKa ebeveyn rehberi"
         disclosure = "AliKa Windows ve Android için ücretli bir uygulamadır."
         play_href = esc(play_store_url("tr", guide["campaign_id"], "rehber"))
@@ -607,15 +812,156 @@ def guide_article_body(guide: dict) -> str:
           <p class="eyebrow">{eyebrow}</p>
           <h1>{esc(guide["title"])}</h1>
           <p class="guide-lede">{esc(guide["lede"])}</p>
+          <p class="guide-updated">Son güncelleme: <time datetime="{GUIDE_UPDATED[0]}">{GUIDE_UPDATED[1]}</time></p>
           <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. {disclosure}</p>
         </header>
         {sections}
+        {printable_section}
+        {product_section}
         {android_section}
         {video_aside}
         {cta}
       </article>
     </main>
     """
+
+
+def school_body() -> str:
+    """Okullar ve rehber öğretmenler için kaynak sayfası (taslak)."""
+    sections = (
+        ("Okulda paylaşırken", (
+            "Kaynakları okul yönetiminin bilgisi ve onayıyla, genel bir veli bilgilendirmesi olarak paylaşın. Notta satış ya da indirim teklifi yoktur; AliKa yalnızca isteyen aileler için bir seçenek olarak anılır.",
+            "Bu kaynaklar için öğrencilerden veya velilerden hiçbir bilgi toplanmaz; form doldurmak ya da kayıt olmak gerekmez.",
+        )),
+        ("AliKa hakkında kısa bilgi", (
+            "AliKa ebeveyn kontrolü, ailelerin ekran süresini önceden planlamasına yardımcı olan bir Windows ve Android uygulamasıdır. Kurallar çocuğun ekranında görünür; ebeveyn isterse çocuk, belirlenen sınır içinde soru çözerek ek süre kazanabilir.",
+            "Türkiye ortaokul (5–8. sınıf) için konu anlatımı ve soru paketleri alika.tr’deki Hazır içerik sayfasındadır. Uygulama ücretlidir; deneme ve fiyat bilgisi mağaza sayfalarındadır.",
+        )),
+        ("İletişim", (
+            "Kaynaklarla ilgili soru ve önerileriniz için alika.destek@gmail.com adresine yazabilirsiniz.",
+        )),
+    )
+    rendered = "".join(
+        f'<section><h2>{esc(heading)}</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in paragraphs)}</section>'
+        for heading, paragraphs in sections
+    )
+    plans = "".join(
+        f'<li><a href="/{GUIDE_BASE}/{guide["slug"]}/#yazdir">{esc(guide["printable"]["title"])}</a></li>'
+        for guide in PUBLISHED_GUIDES if guide.get("printable")
+    )
+    return f"""
+    <main id="main" class="guide-main">
+      <article class="guide-article">
+        <nav class="guide-breadcrumb" aria-label="Sayfa yolu"><a href="/">AliKa</a><span>›</span><span aria-current="page">Okullar</span></nav>
+        <header>
+          <p class="eyebrow">Ortaokul · Rehber öğretmenler ve sınıf öğretmenleri</p>
+          <h1>Velilerle ekran planı konuşmak için yazdırılabilir kaynaklar.</h1>
+          <p class="guide-lede">Veli toplantısında dağıtabileceğiniz tek sayfalık bilgilendirme notu ve ailelerin evde birlikte doldurduğu planlar. Kaynaklar bir uygulama gerektirmez; indirip çoğaltabilirsiniz.</p>
+          <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu sayfa AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır.</p>
+        </header>
+        <section>
+          <h2>Tek sayfalık veli notu</h2>
+          <p>Not, ailece ekran planını beş adımda anlatır ve haftalık bir plan tablosu içerir. Okul ve sınıf adı için boş alan bırakılmıştır.</p>
+          <div class="button-row"><a class="button" href="/okullar/{SCHOOL_KIT_PDF}" download>Veli notunu indirin (PDF)</a><a class="button" href="/okullar/veli-notu/">Yazdırılabilir sayfayı açın</a></div>
+        </section>
+        <section>
+          <h2>Yazdırılabilir planlar</h2>
+          <p>Aileler bu planları evde çocukla birlikte doldurur. Her plan ilgili rehberin içinde yazdırılabilir tablo olarak yer alır.</p>
+          <ul class="guide-links">{plans}</ul>
+        </section>
+        {rendered}
+      </article>
+    </main>
+    """
+
+
+def school_kit_document() -> str:
+    """Tek sayfalık (A4) veli bilgilendirme notu; okulda çoğaltılmak üzere."""
+    steps = (
+        ("Sakin bir anda konuşun.", "Çocuğunuza ekranı neler için kullandığını sorun; kuralları birlikte, tek cümleyle yazın."),
+        ("Okul günü ile hafta sonunu ayırın.", "İki ayrı günlük süre, çoğu aile için tek bir sayıdan daha gerçekçidir."),
+        ("Ekranların kapanacağı saati sabitleyin.", "Yemek masası gibi ekransız alanlar ailedeki herkes için geçerli olabilir."),
+        ("Ekran dışı zamanı da yazın.", "Her güne küçük bir etkinlik: spor, kitap, arkadaşlar, evde bir sorumluluk."),
+        ("Haftada bir 10 dakika gözden geçirin.", "Neyin işlediğini konuşun; her hafta yalnız bir şeyi değiştirin."),
+    )
+    step_items = "".join(f"<li><strong>{esc(title)}</strong> {esc(body)}</li>" for title, body in steps)
+    days = ("Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar")
+    rows = "".join(f'<tr><th scope="row">{day}</th><td></td><td></td><td></td></tr>' for day in days)
+    checks = (
+        "Kurallar yazıldı ve görünür bir yere asıldı.",
+        "Çocuk kuralları kendi cümlesiyle anlatabiliyor.",
+        "İstisnalar (bayram, proje, hastalık) konuşuldu.",
+        "Haftalık gözden geçirme günü belirlendi.",
+    )
+    check_items = "".join(f"<li>{esc(item)}</li>" for item in checks)
+    return f"""<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Ailece Ekran Planı — Veli Bilgilendirme Notu</title>
+  <link rel="icon" href="/assets/brand/alika-logo.png">
+  <style>
+    @page {{ size: A4; margin: 14mm 15mm; }}
+    * {{ box-sizing: border-box; }}
+    body {{ margin: 0; background: #e9eef5; color: #15202b; font: 10.5pt/1.45 'Segoe UI', system-ui, sans-serif; }}
+    .sheet {{ width: 210mm; min-height: 297mm; margin: 16px auto; padding: 14mm 15mm; background: #fff; box-shadow: 0 8px 30px rgba(10, 22, 49, .15); }}
+    header {{ display: flex; align-items: center; gap: 12px; padding-bottom: 8px; border-bottom: 3px solid #35d0e0; }}
+    header img {{ width: 40px; height: 40px; }}
+    h1 {{ margin: 0; color: #0a1631; font-size: 19pt; line-height: 1.1; }}
+    header p {{ margin: 2px 0 0; color: #60708e; }}
+    .fields {{ display: flex; gap: 24px; margin: 10px 0 6px; color: #60708e; }}
+    .fields span {{ flex: 1; border-bottom: 1px solid #9aa7bd; padding-bottom: 2px; }}
+    h2 {{ margin: 12px 0 5px; color: #0a1631; font-size: 12.5pt; }}
+    p {{ margin: 4px 0; }}
+    ol {{ margin: 4px 0; padding-left: 20px; }}
+    ol li {{ margin: 3px 0; }}
+    table {{ width: 100%; border-collapse: collapse; margin-top: 4px; }}
+    th, td {{ border: 1px solid #9aa7bd; padding: 0 6px; height: 8.6mm; text-align: left; font-size: 10pt; }}
+    thead th {{ height: auto; padding: 4px 6px; background: #e9f7f9; color: #0a1631; }}
+    tbody th {{ width: 24%; font-weight: 600; }}
+    ol.lines {{ margin: 2px 0 0; padding-left: 20px; }}
+    ol.lines li {{ height: 8.5mm; border-bottom: 1px solid #9aa7bd; }}
+    ul.checks {{ list-style: none; margin: 4px 0; padding: 0; columns: 2; column-gap: 18px; }}
+    ul.checks li {{ margin: 3px 0; padding-left: 20px; position: relative; break-inside: avoid; }}
+    ul.checks li::before {{ content: ''; position: absolute; left: 0; top: 3px; width: 11px; height: 11px; border: 1.5px solid #0a1631; border-radius: 2px; }}
+    footer {{ margin-top: 12px; padding-top: 7px; border-top: 1px solid #c9d2e0; color: #4a5872; font-size: 8.8pt; }}
+    footer strong {{ color: #0a1631; }}
+    .print {{ display: block; width: 210mm; margin: 0 auto 24px; text-align: right; }}
+    .print button {{ padding: 10px 18px; border: 0; border-radius: 999px; background: #0a1631; color: #fff; font: 600 11pt 'Segoe UI', sans-serif; cursor: pointer; }}
+    @media screen and (max-width: 840px) {{ .sheet, .print {{ width: auto; margin: 8px; min-height: 0; padding: 18px 16px; }} }}
+    @media print {{ body {{ background: #fff; }} .sheet {{ width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }} .print {{ display: none; }} }}
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header>
+      <img src="/assets/brand/alika-logo.png" alt="">
+      <div><h1>Ailece Ekran Planı</h1><p>Veli bilgilendirme notu · Ortaokul (5–8. sınıf)</p></div>
+    </header>
+    <div class="fields"><span>Okul:</span><span>Sınıf:</span></div>
+    <p>Ekran süresi tartışmaları çoğu zaman süre bittiği anda başlar. Kural önceden, birlikte ve yazılı olarak belirlendiğinde her akşam yeniden pazarlık etmek gerekmez. Bu not evde uygulayabileceğiniz basit bir plan önerir; bunun için bir uygulama kullanmanız gerekmez.</p>
+    <h2>5 adımda aile planı</h2>
+    <ol>{step_items}</ol>
+    <h2>Haftalık planımız</h2>
+    <table>
+      <thead><tr><th scope="col">Gün</th><th scope="col">Ekran süresi</th><th scope="col">Ekranlar kapanır</th><th scope="col">Ekran dışı plan</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+    <h2>Ailemizin kuralları</h2>
+    <ol class="lines"><li></li><li></li><li></li></ol>
+    <h2>İlk hafta kontrolü</h2>
+    <ul class="checks">{check_items}</ul>
+    <footer>
+      <p><strong>Daha fazla rehber ve yazdırılabilir plan:</strong> alika.tr/rehber</p>
+      <p>Bu not, AliKa ebeveyn kontrolü uygulamasının geliştiricisi ErenKa Software tarafından hazırlanmıştır. Planı uygulamak için bir uygulama gerekmez; uygulama kullanmak tamamen isteğe bağlıdır. İletişim: alika.destek@gmail.com</p>
+    </footer>
+  </main>
+  <p class="print"><button type="button" onclick="window.print()">Yazdır / PDF olarak kaydet</button></p>
+</body>
+</html>
+"""
 
 
 def uk_guide_body() -> str:
@@ -858,7 +1204,7 @@ def build() -> None:
             guide_index_body(),
         ),
     )
-    for guide in GUIDES:
+    for guide in PUBLISHED_GUIDES:
         canonical = f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/"
         write_page(
             DIST / GUIDE_BASE / guide["slug"] / "index.html",
@@ -869,6 +1215,21 @@ def build() -> None:
     write_page(DIST / UK_GUIDE_PATH / "index.html", guide_document(locales, "Windows child screen time: a clear family routine", "A practical UK guide to agreeing screen-time rules on a Windows 10 or Windows 11 family PC, with Microsoft Family Safety context and AliKa's visible, local-first approach.", uk_guide_url, uk_guide_body(), "en"))
     # İngiltere hazırlık sayfası yayından kalktı (iç taslak notları vardı); eski adres rehbere yönlenir.
     write_page(DIST / UK_LANDING_PATH / "index.html", redirect_to("en", f"/{UK_GUIDE_PATH}/"))
+
+    if SHOW_DRAFTS:
+        school_url = f"{BASE_URL}/okullar/"
+        write_page(
+            DIST / "okullar" / "index.html",
+            guide_document(
+                locales,
+                "Okullar ve Rehber Öğretmenler İçin Veli Kaynakları",
+                "Ortaokul veli toplantıları için tek sayfalık ekran planı notu ve ailelerin evde birlikte doldurduğu yazdırılabilir planlar.",
+                school_url,
+                school_body(),
+                schema_type="WebPage",
+            ),
+        )
+        write_page(DIST / "okullar" / "veli-notu" / "index.html", school_kit_document())
 
     write_page(DIST / "404.html", not_found_document(locales))
 
@@ -894,7 +1255,7 @@ def build() -> None:
         urls.append(f"{BASE_URL}{href(lang, 'content')}")
     urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
     urls.extend(f"{BASE_URL}/{name}/" for name in LEGAL_TR)
-    urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in GUIDES)
+    urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
     urls.append(uk_guide_url)
     unique_urls = list(dict.fromkeys(urls))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
