@@ -2907,6 +2907,12 @@ h3 {
   margin-top: 18px;
 }
 
+.guide-links-note {
+  margin: 28px 0 0;
+  color: var(--muted, #475569);
+  line-height: 1.6;
+}
+
 .guide-updated {
   margin: 14px 0 0;
   color: var(--muted);

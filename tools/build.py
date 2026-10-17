@@ -293,7 +293,6 @@ GUIDES = (
         "slug": "ailece-ekran-suresi-plani",
         "campaign_id": "site_rehber_ekran_plani_tr",
         "platform": "both",
-        "draft": True,
         "title": "Ailece Ekran Süresi Planı Nasıl Yapılır? Haftalık Düzen",
         "description": "Çocukla birlikte haftalık ekran planı kurun: okul günü ve hafta sonu süresi, ekranların kapanacağı saat, ekran dışı zaman ve haftalık gözden geçirme.",
         "video": "windows-ilk-kurulum",
@@ -348,7 +347,6 @@ GUIDES = (
         "slug": "android-cocuk-ekran-suresi",
         "campaign_id": "site_rehber_android_tr",
         "platform": "android",
-        "draft": True,
         "title": "Android Telefonda Çocuğun Ekran Süresi Nasıl Planlanır?",
         "description": "Android telefon ve tablette çocuk ekran süresini planlayın: günlük süre, uygulama sınırı, uyku saati, web filtresi, izinler ve ilk hafta kontrolleri.",
         "video": "android-ilk-kurulum",
@@ -397,7 +395,6 @@ GUIDES = (
         "slug": "ara-tatil-ekran-suresi-plani",
         "campaign_id": "site_rehber_ara_tatil_tr",
         "platform": "both",
-        "draft": True,
         "title": "Ara Tatilde Ekran Süresi Nasıl Planlanır? 9 Günlük Plan",
         "description": "16–20 Kasım ara tatili için hafta sonlarıyla 9 günlük ekran planı: günlük süre, uyku saati, ekran dışı etkinlik ve okula dönüş. Yazdırılabilir tablo.",
         "video": "windows-soru-coz",
@@ -458,7 +455,7 @@ GUIDES = (
     },
 )
 
-# Taslak rehberler ve okullar sayfası yalnız ALIKA_DRAFTS=1 ile derlenir (yayın öncesi önizleme).
+# "draft": True işaretli rehberler yalnız ALIKA_DRAFTS=1 ile derlenir (yayın öncesi önizleme).
 SHOW_DRAFTS = os.environ.get("ALIKA_DRAFTS") == "1"
 PUBLISHED_GUIDES = tuple(guide for guide in GUIDES if SHOW_DRAFTS or not guide.get("draft"))
 # Rehberlerin görünen ve yapılandırılmış son güncelleme tarihi.
@@ -601,6 +598,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
     home = href(lang)
     guide = GUIDE_LINKS.get(lang)
     guide_link = f'<a href="{guide}">{esc(words["guides"])}</a>' if guide else ""
+    school_link = f'<a href="/okullar/">{esc(words["schools"])}</a>' if words.get("schools") else ""
     return f"""
     <footer class="site-footer">
       <div class="footer-brand">
@@ -611,6 +609,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
         <a href="{home}#hakkimizda">{esc(words["about"])}</a>
         <a href="{home}#sss">{esc(words["faq"])}</a>
         {guide_link}
+        {school_link}
         <a href="{content_href(lang)}">{esc(words["content"])}</a>
         <a href="{home}#iletisim">{esc(words["support"])}</a>
         <a href="{legal_href(lang, 'privacy')}">{esc(words["privacy"])}</a>
@@ -730,6 +729,7 @@ def guide_index_body() -> str:
         <p>Kuralları önceden konuşmak, öğrenme akışını sınırlı tutmak ve verinin nereye gittiğini bilmek için hazırlanmış Türkçe kaynaklar.</p>
       </header>
       <section class="article-grid" aria-label="Türkçe ebeveyn rehberleri">{cards}</section>
+      <p class="guide-links-note"><strong>Okullar ve rehber öğretmenler için:</strong> veli toplantısında dağıtılabilecek tek sayfalık not ve yazdırılabilir planlar <a href="/okullar/">Okullar sayfasında</a>.</p>
       <aside class="guide-disclosure"><strong>Açıklık notu:</strong> Bu rehberler AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa Windows ve Android için ücretli bir uygulamadır. Windows sürümü Microsoft Store’da 7 günlük denemeyle, Android aile aboneliği Google Play’de 14 günlük denemeyle sunulur; güncel fiyatı mağaza sayfası gösterir.</aside>
     </main>
     """
@@ -1199,7 +1199,7 @@ def build() -> None:
         guide_document(
             locales,
             "Türkçe Ebeveyn Rehberleri",
-            "Windows 10/11 ekran süresi, öğrenerek süre kazanma ve bulutsuz ebeveyn kontrolü için uygulanabilir Türkçe rehberler.",
+            "Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
             guide_index_url,
             guide_index_body(),
         ),
@@ -1216,20 +1216,20 @@ def build() -> None:
     # İngiltere hazırlık sayfası yayından kalktı (iç taslak notları vardı); eski adres rehbere yönlenir.
     write_page(DIST / UK_LANDING_PATH / "index.html", redirect_to("en", f"/{UK_GUIDE_PATH}/"))
 
-    if SHOW_DRAFTS:
-        school_url = f"{BASE_URL}/okullar/"
-        write_page(
-            DIST / "okullar" / "index.html",
-            guide_document(
-                locales,
-                "Okullar ve Rehber Öğretmenler İçin Veli Kaynakları",
-                "Ortaokul veli toplantıları için tek sayfalık ekran planı notu ve ailelerin evde birlikte doldurduğu yazdırılabilir planlar.",
-                school_url,
-                school_body(),
-                schema_type="WebPage",
-            ),
-        )
-        write_page(DIST / "okullar" / "veli-notu" / "index.html", school_kit_document())
+    school_url = f"{BASE_URL}/okullar/"
+    write_page(
+        DIST / "okullar" / "index.html",
+        guide_document(
+            locales,
+            "Okullar ve Rehber Öğretmenler İçin Veli Kaynakları",
+            "Ortaokul veli toplantıları için tek sayfalık ekran planı notu ve ailelerin evde birlikte doldurduğu yazdırılabilir planlar.",
+            school_url,
+            school_body(),
+            schema_type="WebPage",
+        ),
+    )
+    # Veli notu yazdırma sayfasıdır (noindex); PDF'i public/okullar/ altındadır.
+    write_page(DIST / "okullar" / "veli-notu" / "index.html", school_kit_document())
 
     write_page(DIST / "404.html", not_found_document(locales))
 
@@ -1256,6 +1256,7 @@ def build() -> None:
     urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
     urls.extend(f"{BASE_URL}/{name}/" for name in LEGAL_TR)
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
+    urls.append(school_url)
     urls.append(uk_guide_url)
     unique_urls = list(dict.fromkeys(urls))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

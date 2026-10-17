@@ -160,6 +160,8 @@ export interface HomeCopy {
     about: string;
     faq: string;
     guides: string;
+    /* Yalnız okullar sayfası olan dilde (tr). */
+    schools?: string;
     content: string;
     channel: string;
     email: string;

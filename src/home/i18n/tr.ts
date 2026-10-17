@@ -295,9 +295,9 @@ const tr: HomeCopy = {
         body: 'Aile kuralı oluşturun; Windows’un kendi seçenekleriyle AliKa’nın görünür akışını karşılaştırın.',
       },
       {
-        href: '/rehber/windows-11-cocuk-ekran-suresi/',
-        title: 'Windows 11’de çocuk ekran süresi nasıl sınırlandırılır?',
-        body: 'Günlük süre, uygulama ve web sitesi limitlerini görünür kurallarla adım adım ayarlayın.',
+        href: '/rehber/android-cocuk-ekran-suresi/',
+        title: 'Android telefonda çocuğun ekran süresi',
+        body: 'Günlük süre, uyku saati, web filtresi ve izinler: Android’de kuralı çocukla birlikte kurun.',
       },
       {
         href: '/rehber/soru-cozerek-ekran-suresi-kazanma/',
@@ -305,9 +305,9 @@ const tr: HomeCopy = {
         body: 'Soru bankası, ödül oranı ve günlük tavanla kontrollü ek süre nasıl çalışır?',
       },
       {
-        href: '/rehber/bulutsuz-ebeveyn-kontrolu/',
-        title: 'Bulut hesabı olmadan ebeveyn kontrolü',
-        body: 'Veriler cihazda kalır: reklamsız, zorunlu hesap olmadan çalışan ebeveyn kontrolü ve sınırları.',
+        href: '/rehber/ailece-ekran-suresi-plani/',
+        title: 'Ailece ekran süresi planı',
+        body: 'Okul günü, hafta sonu ve ekranların kapanacağı saat: yazdırılabilir haftalık planla birlikte.',
       },
     ],
   },
@@ -331,6 +331,7 @@ const tr: HomeCopy = {
     about: 'Hakkımızda',
     faq: 'Sık sorulanlar',
     guides: 'Rehberler',
+    schools: 'Okullar için',
     content: 'Hazır içerik',
     channel: 'YouTube kanalı',
     email: 'E-posta',

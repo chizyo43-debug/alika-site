@@ -35,7 +35,11 @@ GUIDE_SLUGS = (
     "windows-11-cocuk-ekran-suresi",
     "soru-cozerek-ekran-suresi-kazanma",
     "bulutsuz-ebeveyn-kontrolu",
+    "ailece-ekran-suresi-plani",
+    "android-cocuk-ekran-suresi",
+    "ara-tatil-ekran-suresi-plani",
 )
+SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
 
 
 class LinkParser(HTMLParser):
@@ -188,6 +192,9 @@ def main() -> None:
         "windows-11-cocuk-ekran-suresi": ("site_rehber_windows11_tr", False),
         "soru-cozerek-ekran-suresi-kazanma": ("site_rehber_soru_coz_tr", True),
         "bulutsuz-ebeveyn-kontrolu": ("site_rehber_bulutsuz_tr", True),
+        "ailece-ekran-suresi-plani": ("site_rehber_ekran_plani_tr", True),
+        "android-cocuk-ekran-suresi": ("site_rehber_android_tr", True),
+        "ara-tatil-ekran-suresi-plani": ("site_rehber_ara_tatil_tr", True),
     }
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
@@ -202,6 +209,20 @@ def main() -> None:
             errors.append(f"Guide Google Play button is wrong: {page}")
         if "youtube.com" in guide_text or "youtu.be" in guide_text:
             errors.append(f"Guide video must play on the site, not on YouTube: {page}")
+
+    # Okullar sayfası: dizinde ve site haritasında; veli notu PDF'i var, yazdırma sayfası noindex.
+    school_page = DIST / "okullar" / "index.html"
+    school_text = school_page.read_text(encoding="utf-8") if school_page.exists() else ""
+    sitemap_text = (DIST / "sitemap.xml").read_text(encoding="utf-8")
+    if f'href="/okullar/{SCHOOL_KIT_PDF}"' not in school_text or not (DIST / "okullar" / SCHOOL_KIT_PDF).exists():
+        errors.append("Schools page or its parent-note PDF is missing")
+    if "/okullar/</loc>" not in sitemap_text or "veli-notu" in sitemap_text:
+        errors.append("Sitemap must list /okullar/ and leave out the printable parent note")
+    kit_page = DIST / "okullar" / "veli-notu" / "index.html"
+    if not kit_page.exists() or '<meta name="robots" content="noindex">' not in kit_page.read_text(encoding="utf-8"):
+        errors.append("Printable parent note must exist and be noindex")
+    if 'href="/okullar/"' not in (DIST / "rehber" / "index.html").read_text(encoding="utf-8"):
+        errors.append("Guide hub must link the schools page")
 
     # İngiltere hazırlık sayfası gizli: rehbere yönlenir, dizine ve site haritasına girmez.
     uk_landing = DIST / "en" / "uk-windows-screen-time" / "index.html"

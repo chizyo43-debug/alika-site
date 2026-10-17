@@ -311,6 +311,7 @@ const AGE_RANGES = ['5–7', '8–11', '12–14', '15–18'];
 const AUDIENCE_GUIDES: Partial<Record<Lang, Partial<Record<AudienceId, string>>>> = {
   tr: {
     kardes: '/rehber/windows-cocuk-ekran-suresi-nasil-yonetilir/',
+    'ilk-telefon': '/rehber/android-cocuk-ekran-suresi/',
     sinav: '/rehber/soru-cozerek-ekran-suresi-kazanma/',
   },
 };
@@ -1107,6 +1108,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               <h3>{t.footer.support}</h3>
               <a href="#sss">{t.footer.faq}</a>
               {guides && <a href={guides}>{t.footer.guides}</a>}
+              {t.footer.schools && <a href="/okullar/">{t.footer.schools}</a>}
               <a href={contentPath(lang)}>{t.footer.content}</a>
               <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">{t.footer.channel}</a>
               <a href={`mailto:${SUPPORT_EMAIL}`}>{t.footer.email}</a>
