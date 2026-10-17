@@ -196,7 +196,7 @@ GUIDES = (
         "slug": "soru-cozerek-ekran-suresi-kazanma",
         "campaign_id": "site_rehber_soru_coz_tr",
         "android_note": (
-            "Soru çözerek süre kazanma Android telefon ve tablette de aynı kuralla çalışır: ebeveyn bir dakika için gereken doğru cevap sayısını ve günlük kazanım tavanını belirler, yanlış cevap süre kazandırmaz. Sorular tek tek ya da CSV, TXT ve Excel dosyasıyla eklenebilir.",
+            "Soru çözerek süre kazanma Android telefon ve tablette de aynı kuralla çalışır: ebeveyn bir dakika için gereken doğru cevap sayısını ve günlük kazanım tavanını belirler, yanlış cevap süre kazandırmaz; ebeveyn isterse belirli sayıda yanlışta süreden düşüm de uygulanır. Sorular tek tek ya da CSV, TXT ve Excel dosyasıyla eklenebilir.",
             "Bu rehberdeki ayrıntılar Windows sürümünden alınmıştır; Android’de ekranlar ve bazı ayrıntılar farklı olabilir. Android aile aboneliği Google Play’de 14 gün ücretsiz denemeyle başlar; Windows satın alımı Android’i kapsamaz.",
         ),
         "title": "Soru Çözerek Ekran Süresi Kazanma: AliKa Nasıl Çalışır?",
@@ -210,7 +210,7 @@ GUIDES = (
         ),
         "sections": (
             ("Sorular nereden gelir?", (
-                "Sorular yalnız ebeveynin ekleyip kullanıma açtığı bankadan gelir. Hazır ödev veya otomatik olarak çocuğa gönderilen sınırsız içerik iddiası yoktur.",
+                "Sorular ebeveynin ekleyip kullanıma açtığı bankadan gelir. Ebeveyn isterse ayrıca otomatik matematik sorularını açabilir; bu seçenek başlangıçta kapalıdır. Hazır ödev veya çocuğa kendiliğinden gönderilen sınırsız içerik iddiası yoktur.",
                 "Soruları tek tek ekleyebilir veya CSV/XLSX soru bankası içe aktarabilirsiniz. Türkiye ortaokul (5–8. sınıf) için hazır konu anlatımı ve soru paketleri alika.tr’deki Hazır içerik sayfasındadır; bunlar da ancak ebeveyn içe aktarınca kullanılır. PDF ve EPUB dosyaları ise Kütüphane belgesi olarak kullanılır; soru bankasıyla aynı şey değildir.",
             )),
             ("Kaç doğru cevap kaç dakika kazandırır?", (
@@ -218,7 +218,7 @@ GUIDES = (
                 "Başlangıçta küçük bir ödül oranı seçin ve çocuğun soruyu okuyarak mı, rastgele mi ilerlediğini gözleyin.",
             )),
             ("Günlük kazanım tavanı neden önemlidir?", (
-                "Doğru cevaplar sınırsız süre üretmez. Çocuğun bir günde kazanabileceği en yüksek ek süreyi ebeveyn belirler.",
+                "Doğru cevaplar sınırsız süre üretmez. Çocuğun bir günde kazanabileceği en yüksek ek süreyi ebeveyn belirler; isterse günlük soru sayısına da üst sınır koyar.",
                 "Bu tavan, öğrenme akışının ailece konuşulan toplam ekran düzenini bozmasını önler.",
             )),
             ("Çocuk soru ekranında ne görür?", (
@@ -227,6 +227,7 @@ GUIDES = (
             )),
             ("Yanlış cevap ve tekrar akışı nasıl çalışır?", (
                 "Yanlış cevap ek süre kazandırmaz. Doğru seçenek ve varsa açıklama gösterilir. Aynı soru hemen yeniden gelmez; araya en az iki farklı soru girer.",
+                "Ebeveyn, belirli sayıda yanlış cevapta süreden dakika düşülmesini de ayarlayabilir. Bu düşüm yeni kurulumda açık gelir; değerlerini değiştirebilir ya da 0 yazarak kapatabilirsiniz. Çocuğa bu kuralı ilk turdan önce söyleyin.",
                 "Üç yanlış üst üste olduğunda 30 saniyelik bekleme uygulanır. Amaç rastgele işaretleme yerine açıklamayı okuyarak ilerlemektir.",
             )),
             ("Kazanılan süre ve sonuçlar nereden izlenir?", (
@@ -244,7 +245,7 @@ GUIDES = (
         "campaign_id": "site_rehber_bulutsuz_tr",
         "android_note": (
             "Android’de de kurallar cihazda saklanır; web hesabına veya tarayıcı paneline giriş yapılmaz. Android web filtresi cihazdaki yerel VPN ile alan adı düzeyinde çalışır; sayfa içeriğini buluta gönderen bir tünel değildir.",
-            "Android aile aboneliği Google Play üzerinden alınır; abonelik ve dağıtım Google Play’in kendi hizmetidir. Windows satın alımı Android’i kapsamaz.",
+            "Android aile aboneliği Google Play üzerinden alınır; abonelik ve dağıtım Google Play’in kendi hizmetidir. Bir aboneliğin 10 cihazda geçerli olması için AliKa sınırlı bir lisans hizmeti kullanır: rastgele aile ve cihaz kimliği, cihaz rolü ve abonelik durumu doğrulanır. Çocuk içeriği, kullanım geçmişi, mesajlar ve ziyaret edilen alan adları bu hizmete gönderilmez. Windows satın alımı Android’i kapsamaz.",
         ),
         "title": "Bulut Hesabı Olmadan Ebeveyn Kontrolü Nasıl Çalışır?",
         "description": "AliKa’nın cihazda kalan verilerle, reklamsız ve zorunlu bulut hesabı olmadan nasıl çalıştığını; yerel aile ağının sınırlarını öğrenin.",
@@ -255,7 +256,7 @@ GUIDES = (
         "sections": (
             ("Hangi kayıtlar cihazda tutulur?", (
                 "Ekran süresi kuralları, uygulama kullanım süreleri, öğrenme sonuçları ve raporlar cihazda işlenir. Ebeveyn paneli toplanan kayıtları görünür kılar.",
-                "AliKa’nın kendi bulut eşitleme hizmeti veya ürün kullanım telemetrisi yoktur.",
+                "AliKa’nın kendi bulut eşitleme hizmeti veya ürün kullanım telemetrisi yoktur. Android’deki tek istisna, aile aboneliğini doğrulayan ve yalnız lisans bilgisi işleyen sınırlı hizmettir; ayrıntısı Gizlilik Politikası’ndadır.",
             )),
             ("AliKa neyi görür, neyi görmez?", (
                 "Ürün, ebeveynin belirlediği kuralları uygulamak ve raporlamak için gereken yerel bilgiyi işler. Gizli takip, reklam profili veya üçüncü taraf pazarlama amacıyla veri toplamaz.",
@@ -268,6 +269,7 @@ GUIDES = (
             ("Reklam, telemetri ve zorunlu hesap neden yok?", (
                 "Yerel öncelikli tasarım, aile kuralları ve kullanım kayıtları için AliKa hesabı açmayı zorunlu kılmaz. Uygulamada reklam ağı veya üçüncü taraf analitik SDK’sı bulunmaz.",
                 "Microsoft Store lisansı ve dağıtımı işletim sisteminin kendi hizmetleridir; “internete hiçbir zaman ihtiyaç duymaz” iddiası bu nedenle doğru değildir.",
+                "Ebeveyn panelindeki “Hata raporu gönder” düğmesi arka planda bir şey göndermez: cihazda bir dosya hazırlar ve ebeveynin kendi e-posta uygulamasını açar. Rapor, yalnız ebeveyn o e-postayı gönderirse ulaşır.",
             )),
             ("Yerel aile ağı nasıl açılır?", (
                 "Aile Ağı başlangıçta kapalıdır. Ebeveyn özelliği açıkça etkinleştirip cihazları geçici QR kodla eşleştirir.",
@@ -505,7 +507,7 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
         "inLanguage": "en-GB" if lang == "en" else "tr-TR",
         "author": {"@type": "Organization", "name": "ErenKa Software"},
         "publisher": {"@type": "Organization", "name": "ErenKa Software"},
-        "dateModified": "2026-08-28",
+        "dateModified": "2026-10-17",
     }
     return f"""<!doctype html>
 <html lang="{lang}">
