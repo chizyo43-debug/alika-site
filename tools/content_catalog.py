@@ -27,6 +27,15 @@ COUNTRY_RELEASE_TAGS = {
     "RU": RU_CONTENT_RELEASE_TAG,
 }
 COUNTRY_ORDER = {"turkiye": 0, "japonya": 1, "kore": 2, "ingiltere": 3, "rusya": 4}
+# Sitede yalnız çalışma verisi hazır olan kapsam yayımlanır: Türkiye ortaokul (5–8).
+# Diğer sınıflar ve ülkeler plan aşamasında; içerik deposunda kalır ama indirme olarak sunulmaz.
+PUBLISHED_GRADES = {"turkiye": frozenset({5, 6, 7, 8})}
+
+
+def _published(country_slug: str, grade: object) -> bool:
+    return grade in PUBLISHED_GRADES.get(country_slug, frozenset())
+
+
 
 
 def _grade_group_sort_key(item: tuple[tuple[str, str], list[dict]]) -> tuple[int, float, str]:
@@ -199,6 +208,8 @@ def _legacy_subjects(content_root: Path, data_output: Path) -> tuple[list[dict],
             continue
         pack = parsed["pack"]
         grade = int(pack.get("grade") or grade_slug.split("-")[0])
+        if not _published(country_slug, grade):
+            continue
         target = data_output / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
@@ -237,6 +248,8 @@ def _legacy_question_banks(content_root: Path, data_output: Path) -> list[dict]:
         rel = source.relative_to(content_root)
         _, grade_slug, bank_dir, filename = rel.parts
         if bank_dir != "soru-bankasi":
+            continue
+        if not _published(country_slug, int(grade_slug.split("-")[0])):
             continue
         parsed = _read_package(source)
         pack = parsed["pack"]
@@ -596,7 +609,11 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
         + _country_release_class_question_banks(content_root, "GB")
         + _country_release_class_question_banks(content_root, "RU")
     )
-    subjects = legacy_subjects + _release_subjects(content_root)
+    question_banks = [row for row in question_banks if _published(row["country_slug"], row["grade"])]
+    subjects = [
+        row for row in legacy_subjects + _release_subjects(content_root)
+        if _published(row["country_slug"], row["grade"])
+    ]
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for subject in subjects:
         grouped[(subject["country_slug"], subject["grade_slug"])].append(subject)
@@ -632,6 +649,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
         "content_releases": COUNTRY_RELEASE_TAGS,
         "question_bank_release": CLASS_QUESTION_BANK_RELEASE_TAG,
         "quality_disclosure": "Codex öz-denetimli ve makine doğrulamalı güvenli kapsam; insan incelemesi iddiası yoktur.",
+        "published_scope": {country: sorted(grades_set) for country, grades_set in PUBLISHED_GRADES.items()},
         "grades": grades,
         "subjects": public_subjects,
         "question_banks": question_banks,

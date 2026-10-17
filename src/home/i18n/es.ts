@@ -136,7 +136,7 @@ const es: HomeCopy = {
       sinav: {
         title: 'Un estudiante que prepara exámenes',
         body: 'El tiempo de pantalla se convierte en estudio constante.',
-        points: ['Examen de práctica programado y boletín de resultados', 'Tu propio banco de preguntas o contenido listo para usar', 'Modo enfoque; simulacros con los paquetes que importes'],
+        points: ['Examen de práctica programado y boletín de resultados', 'Contenido listo para 5.º a 8.º curso (plan turco) o tu propio banco de preguntas', 'Modo enfoque; simulacros con los paquetes que importes'],
       },
       paylasimli: {
         title: 'Padres que comparten su móvil con su hijo',
@@ -164,7 +164,7 @@ const es: HomeCopy = {
       lead: 'El tiempo frente a la pantalla se convierte en aprendizaje.',
       items: {
         quiz: { name: 'Responde y gana tiempo', body: 'Tú eliges cuántas respuestas correctas cuesta un minuto y el límite diario.' },
-        content: { name: 'Contenido listo y tus propias preguntas', body: 'El contenido listo se elige por curso, asignatura y tema; tus propias preguntas las añades con Excel o CSV.' },
+        content: { name: 'Contenido listo y tus propias preguntas', body: 'Por ahora el contenido listo es del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco) y se elige por asignatura y tema. Tus propias preguntas las añades con Excel o CSV.' },
         figures: { name: 'Preguntas con figuras', body: 'Geometría, plano cartesiano, gráficos, tablas y esquemas de circuitos se dibujan con claridad.' },
         exam: { name: 'Examen de práctica y boletín de resultados', body: 'Un examen de práctica a la hora que programes. El boletín sirve para medir y no da tiempo de recompensa.' },
         notes: { name: 'Apuntes y Studio de aprendizaje', body: 'Los apuntes que añadas se abren sección por sección, con ejemplos resueltos y explicaciones de las respuestas.' },
@@ -237,6 +237,24 @@ const es: HomeCopy = {
     },
     note: 'La compra de Windows no incluye Android.',
   },
+  about: {
+    eyebrow: 'Sobre nosotros',
+    title: 'Nació de la negociación de cada noche: «cinco minutos más».',
+    story: [
+      'Los deberes a medias, el juego todavía abierto. Quien apaga la pantalla cuando se acaba el tiempo queda como el malo, el niño se enfada y a la noche siguiente empieza la misma negociación. AliKa se diseñó pensando en estas escenas que viven las familias reales cada noche y en los problemas del tiempo de pantalla y del estudio.',
+      'Esto es lo que vimos: la prohibición apaga la pantalla, pero no termina la discusión. Cuando el niño no conoce la regla de antemano, cada corte se convierte en una sorpresa y cada sorpresa en una nueva negociación. Y estudiar acaba pareciendo el rival del tiempo de pantalla.',
+      'Así que planteamos la pregunta al revés: si la pantalla ya forma parte de la vida, ¿podemos ponerla al lado del estudio? En AliKa la familia fija la regla en conjunto y el niño ve de antemano el tiempo que le queda; si quiere, responde preguntas y gana tiempo extra dentro del límite que tú fijas. De ahí viene «No restringimos. Planificamos.»',
+      'AliKa no es un producto terminado. Seguimos desarrollándolo con la misma idea y con los comentarios de las familias. El contenido escolar listo empezó con el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco); otros cursos y países están en fase de planificación.',
+    ],
+    signature: 'El equipo de AliKa · ErenKa Software',
+    planTitle: '¿Dónde estamos?',
+    plan: [
+      { status: 'ready', label: 'Listo hoy', items: ['Apps para Windows y Android', 'Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco)', 'Añadir tus propias preguntas con Excel o CSV'] },
+      { status: 'dev', label: 'En desarrollo', items: ['Android TV y juegos en familia'] },
+      { status: 'plan', label: 'En fase de planificación', items: ['Cursos de primaria y bachillerato', 'Planes de estudios de otros países'] },
+    ],
+    contentLink: 'Abrir la biblioteca de contenido',
+  },
   faq: {
     title: 'Preguntas frecuentes',
     lead: 'Lo que más se pregunta antes de instalar.',
@@ -259,7 +277,7 @@ const es: HomeCopy = {
       },
       {
         q: '¿Qué asignaturas y cursos hay?',
-        a: 'El contenido listo se elige por país, curso, asignatura y tema; ahora hay paquetes para Turquía, Reino Unido, Japón, Corea del Sur y Rusia. Las preguntas de matemáticas se generan dentro de la app. Puedes añadir tus propias preguntas y bancos de preguntas con la plantilla de Excel o con paquetes de contenido.',
+        a: 'Ahora hay contenido listo para el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco): explicaciones de temas y preguntas por asignatura, y un banco de preguntas mixto por curso. Las preguntas de práctica de matemáticas se generan dentro de la app. Los cursos de primaria y bachillerato y los planes de otros países están en fase de planificación; mientras tanto puedes añadir tus propias preguntas con la plantilla de Excel o con paquetes de contenido.',
       },
       {
         q: '¿AliKa vigila a mi hijo en secreto?',
@@ -267,7 +285,7 @@ const es: HomeCopy = {
       },
       {
         q: '¿Para qué edades es?',
-        a: 'De 5 a 18 años. El lenguaje, el aspecto, la mascota y cuánto se celebra cambian con la edad; de 15 a 18 años se usa un aspecto sencillo y sin mascota.',
+        a: 'De 5 a 18 años. El lenguaje, el aspecto, la mascota y cuánto se celebra cambian con la edad; de 15 a 18 años se usa un aspecto sencillo y sin mascota. Por ahora el contenido escolar listo es de 5.º a 8.º curso del plan turco.',
       },
     ],
   },
@@ -288,6 +306,7 @@ const es: HomeCopy = {
     audiences: 'Para quién',
     features: 'Funciones',
     how: 'Cómo funciona',
+    about: 'Sobre nosotros',
     faq: 'Preguntas frecuentes',
     guides: 'Guías',
     content: 'Contenido listo',

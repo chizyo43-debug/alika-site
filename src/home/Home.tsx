@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { microsoftStoreUrl, playStoreUrl } from '../store-campaign';
 import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, type Lang } from './i18n/langs';
-import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, ScreenId, TvGame, VideoKey } from './i18n/types';
+import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, PlanStatus, ScreenId, TvGame, VideoKey } from './i18n/types';
 
 const SUPPORT_EMAIL = 'alika.destek@gmail.com';
 
@@ -372,7 +372,7 @@ function PlatformChips({ on }: { on: FeaturePlatform[] }) {
   );
 }
 
-function StatusDot({ status }: { status: OrbitStatus }) {
+function StatusDot({ status }: { status: PlanStatus }) {
   return <i className={`dot ${status}`} aria-hidden="true" />;
 }
 
@@ -936,6 +936,29 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           </div>
         </section>
 
+        <section id="hakkimizda" className="section wrap about">
+          <div className="aboutStory">
+            <p className="eyebrow mono">{t.about.eyebrow}</p>
+            <h2>{t.about.title}</h2>
+            <div className="aboutText">
+              {t.about.story.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+            <p className="aboutSign">{t.about.signature}</p>
+          </div>
+          <aside id="plan" className="aboutPlan" aria-labelledby="plan-title">
+            <h3 id="plan-title">{t.about.planTitle}</h3>
+            {t.about.plan.map((group) => (
+              <div key={group.status} className={`planGroup plan-${group.status}`}>
+                <p className="planLabel"><StatusDot status={group.status} />{group.label}</p>
+                <ul>
+                  {group.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </div>
+            ))}
+            <a className="textLink" href={contentPath(lang)}>{t.about.contentLink} <span aria-hidden="true">→</span></a>
+          </aside>
+        </section>
+
         <section id="deneme" className="section wrap">
           <div className="sectionHead">
             <div>
@@ -1033,6 +1056,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               <a href="#ozellikler">{t.footer.features}</a>
               <a href="#nasil">{t.footer.how}</a>
               <a href="#deneme">{t.nav.offer}</a>
+              <a href="#hakkimizda">{t.footer.about}</a>
             </div>
             <div>
               <h3>{t.footer.download}</h3>

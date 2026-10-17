@@ -41,6 +41,12 @@ if (/₺\s*\d|\d\s*(?:TL|TRY)\b|[¥₩€$£]\s*\d/.test([home, ...i18nSources].
 // Deneme süreleri mağazalardakiyle aynı kalmalı: Play 14 gün, Microsoft Store 7 gün.
 requireMatch(trCopy, /trialPlay: '14 gün ücretsiz/, 'Android trial must stay 14 days as on Google Play');
 requireMatch(trCopy, /trialStore: '7 gün ücretsiz/, 'Windows trial must stay 7 days as on Microsoft Store');
+// Hazır ders içeriği yalnız Türkiye ortaokul (5–8); diğer sınıflar ve ülkeler plan aşamasında.
+requireMatch(trCopy, /Türkiye ortaokul \(5–8\. sınıf\)/, 'ready content scope must say Türkiye ortaokul (5–8. sınıf)');
+requireMatch(trCopy, /status: 'plan', label: 'Plan aşamasında'/, 'other grades and countries must be shown as Plan aşamasında');
+if (/United Kingdom|Vereinigte Königreich|Reino Unido|Royaume-Uni|Великобритани|イギリス|영국/.test(i18nSources.join(' '))) {
+  errors.push('home copy must not claim content packs for other countries; only Türkiye 5–8 is published');
+}
 
 requireMatch(
   home,

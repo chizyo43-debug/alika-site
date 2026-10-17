@@ -48,6 +48,18 @@ QUESTION_BANK_LABELS = {
     "ja": ("学年別・教科横断問題バンク", "各学年の公開対象全教科を網羅する独自作成の2,000問です。教科パッケージの問題は複製していません。", "問題バンクをダウンロード", "独自問題"),
     "ko": ("학년별 혼합 문제은행", "각 학년의 공개 가능한 모든 과목을 다루는 별도 제작 2,000문항이며, 과목 패키지의 문항을 복사하지 않습니다.", "문제은행 다운로드", "고유 문항"),
 }
+# Sitede yayımlanan kapsam (tools/content_catalog.py PUBLISHED_GRADES ile aynı): hazır / plan aşamasında / ders sözcüğü.
+CONTENT_SCOPE_LABELS = {
+    "tr": ("Şu an hazır:", "Türkiye ortaokul müfredatı (5–8. sınıf) için konu anlatımları, sorular ve sınıf başına soru bankası.", "Plan aşamasında:", "İlkokul ve lise sınıfları ile diğer ülkelerin müfredatları.", "ders"),
+    "en": ("Available now:", "Topic explanations, questions and a question bank per grade for the Turkish middle-school curriculum (grades 5–8, in Turkish).", "In the planning stage:", "Primary and high-school grades and other countries’ curricula.", "subjects"),
+    "de": ("Jetzt verfügbar:", "Themenerklärungen, Fragen und eine Fragenbank pro Klasse für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch).", "In Planung:", "Grundschul- und Oberstufenklassen sowie Lehrpläne anderer Länder.", "Fächer"),
+    "es": ("Disponible ahora:", "Explicaciones de temas, preguntas y un banco de preguntas por curso del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco).", "En fase de planificación:", "Cursos de primaria y bachillerato y planes de estudios de otros países.", "asignaturas"),
+    "fr": ("Disponible maintenant :", "Explications de cours, questions et une banque de questions par classe pour le programme turc du collège (classes 5 à 8, en turc).", "En phase de planification :", "Le primaire, le lycée et les programmes d’autres pays.", "matières"),
+    "pt": ("Disponível agora:", "Explicações de temas, perguntas e um banco de perguntas por ano para o currículo turco do 5.º ao 8.º ano (em turco).", "Em fase de planeamento:", "O 1.º ciclo, o ensino secundário e os currículos de outros países.", "disciplinas"),
+    "ru": ("Сейчас доступно:", "Объяснения тем, вопросы и банк вопросов для каждого класса по турецкой программе средней школы (5–8 классы, на турецком языке).", "На этапе планирования:", "Начальная и старшая школа и программы других стран.", "предметов"),
+    "ja": ("現在提供中：", "トルコの中学校課程（5〜8年生、トルコ語）の単元解説、問題、学年別問題バンク。", "計画段階：", "小学校・高校の学年と、ほかの国のカリキュラム。", "教科"),
+    "ko": ("현재 제공:", "튀르키예 중학교 과정(5~8학년, 튀르키예어)의 단원 설명, 문제, 학년별 문제은행.", "계획 단계:", "초등학교·고등학교 학년과 다른 나라 교육과정.", "과목"),
+}
 CONTENT_BOOK_LABELS = {
     "tr": ("AliKa kitabına dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
     "en": ("Back to the AliKa book", "Ready content ledger", "Countries", "Grade packs", "Subject packs", "Found an issue or have an idea? Tell us."),
@@ -77,7 +89,7 @@ REDIRECT_ANCHORS = {
     "features": "ozellikler",
     "age-groups": "yas",
     "updates": "platformlar",
-    "roadmap": "platformlar",
+    "roadmap": "plan",
     "downloads": "platformlar",
     "contact": "iletisim",
 }
@@ -589,6 +601,7 @@ def uk_landing_body() -> str:
 def content_library(catalog: dict, lang: str) -> str:
     labels = CONTENT_LIBRARY_LABELS[lang]
     bank_labels = QUESTION_BANK_LABELS[lang]
+    scope = CONTENT_SCOPE_LABELS[lang]
     country_order = {
         "turkiye": 0,
         "japonya": 1,
@@ -616,14 +629,14 @@ def content_library(catalog: dict, lang: str) -> str:
     grade_cards = "".join(f"""
       <article class="grade-download-card" data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
         <div><small>{esc(row['country'])} · {esc(labels[7].format(row['grade']))}</small>
-          <h3>{row['subject_count']} ders · {row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}</h3>
+          <h3>{row['subject_count']} {esc(scope[4])} · {row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}</h3>
           <p>{esc(labels[6])}</p></div>
         <a class="button direct-download" href="{esc(row['download_url'])}" download
            data-direct-download>{esc(labels[2])}</a>
       </article>""" for row in catalog["grades"])
     subject_cards = "".join(f"""
       <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
-        <small>{esc(row['country_code'])} · {row['grade']}. sınıf</small>
+        <small>{esc(row['country_code'])} · {esc(labels[7].format(row['grade']))}</small>
         <h3>{esc(row['subject'])}</h3>
         <p>{row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}<br>{esc(labels[6])}</p>
         <a class="package-cta" href="{esc(row['download_url'])}" download>{esc(labels[3])}</a>
@@ -645,6 +658,10 @@ def content_library(catalog: dict, lang: str) -> str:
         <div class="package-grid question-bank-grid">{question_bank_cards}</div>
       </section>""" if question_bank_cards else ""
     return f"""
+      <div class="content-scope" data-content-scope>
+        <p><strong>{esc(scope[0])}</strong> {esc(scope[1])}</p>
+        <p class="content-scope-plan"><strong>{esc(scope[2])}</strong> {esc(scope[3])}</p>
+      </div>
       <div class="content-filters" data-content-filters>
         <label>{esc(labels[0])}<select data-content-country>{country_options}</select></label>
         <label>{esc(labels[1])}<select data-content-grade>{grade_options}</select></label>

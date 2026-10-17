@@ -12,6 +12,7 @@ export type LearningFeature = 'quiz' | 'content' | 'figures' | 'exam' | 'notes';
 export type FamilyFeature = 'tasks' | 'network' | 'messages' | 'sharedPhone';
 export type TvGame = 'rally' | 'station' | 'wheel' | 'nameCity';
 export type VideoKey = 'winSetup' | 'androidSetup' | 'winQuiz';
+export type PlanStatus = 'ready' | 'dev' | 'plan';
 
 export interface TitleBody {
   title: string;
@@ -132,6 +133,16 @@ export interface HomeCopy {
   trust: { eyebrow: string; title: string; items: TitleBody[]; privacyLink: string };
   /* Deneme ve satın alma: fiyat yazılmaz, mağaza sayfası güncel fiyatı gösterir. */
   offer: { title: string; lead: string; windows: OfferCopy; android: OfferCopy; note: string };
+  /* Hakkımızda hikâyesi ve durum kartı: hazır, geliştiriliyor, plan aşamasında. */
+  about: {
+    eyebrow: string;
+    title: string;
+    story: string[];
+    signature: string;
+    planTitle: string;
+    plan: { status: PlanStatus; label: string; items: string[] }[];
+    contentLink: string;
+  };
   faq: { title: string; lead: string; items: { q: string; a: string }[] };
   /* Yalnız yayımlanmış rehberleri olan dillerde ana sayfada rehber bandı çıkar. */
   guides?: { title: string; lead: string; all: string; items: { href: string; title: string; body: string }[] };
@@ -146,6 +157,7 @@ export interface HomeCopy {
     audiences: string;
     features: string;
     how: string;
+    about: string;
     faq: string;
     guides: string;
     content: string;

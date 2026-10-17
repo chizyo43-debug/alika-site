@@ -1567,6 +1567,29 @@ h3 {
   background-color: #fffdf7;
 }
 
+/* Yayımlanan kapsam: hazır olan ve plan aşamasındaki içerik */
+.content-scope {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 20px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--success);
+  border-radius: var(--radius-md);
+  background: #fffdf7;
+}
+
+.content-scope p {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.content-scope .content-scope-plan {
+  color: var(--muted);
+}
+
 .content-book-catalog .honesty-note {
   margin: 14px 0 24px;
   font-size: 0.9rem;

@@ -19,7 +19,7 @@ REDIRECT_ANCHORS = {
     "features": "ozellikler",
     "age-groups": "yas",
     "updates": "platformlar",
-    "roadmap": "platformlar",
+    "roadmap": "plan",
     "downloads": "platformlar",
     "contact": "iletisim",
 }
@@ -243,13 +243,13 @@ def main() -> None:
             content_release_tags.add(catalog["question_bank_release"])
         totals = catalog.get("totals") or {}
         if totals != {
-            "countries": 5,
-            "gradeGroups": 38,
-            "subjects": 300,
-            "notes": 7906,
-            "questions": 150732,
-            "questionBanks": 39,
-            "questionBankQuestions": 78000,
+            "countries": 1,
+            "gradeGroups": 4,
+            "subjects": 24,
+            "notes": 1029,
+            "questions": 13036,
+            "questionBanks": 4,
+            "questionBankQuestions": 8000,
         }:
             errors.append(f"Content catalog totals are unexpected: {totals}")
         excluded = catalog.get("excluded") or []
@@ -274,25 +274,20 @@ def main() -> None:
                 if not target.exists() or digest(target) != subject["sha256"]:
                     errors.append(f"Subject artifact missing or hash mismatch: {target}")
         question_banks = catalog.get("question_banks") or []
-        if len(question_banks) != 39:
-            errors.append(f"Expected 39 independent class question banks, got {len(question_banks)}")
-        bank_country_counts = {
-            country: sum(bank.get("country_code") == country for bank in question_banks)
-            for country in ("TR", "JP", "KR", "GB", "RU")
-        }
-        if bank_country_counts != {"TR": 8, "JP": 8, "KR": 8, "GB": 8, "RU": 7}:
-            errors.append(f"Independent class question bank coverage is incomplete: {bank_country_counts}")
-        class_bank_keys = [
-            (bank.get("country_code"), bank.get("grade"))
-            for bank in question_banks
-            if bank.get("scope") == "country-grade"
-        ]
-        if len(class_bank_keys) != 31 or len(set(class_bank_keys)) != 31:
-            errors.append("JP/KR/GB/RU mixed class question bank keys are incomplete or duplicated")
+        # Yalnız Türkiye ortaokul (5–8) yayımlanır; diğer sınıflar ve ülkeler plan aşamasında.
+        if catalog.get("published_scope") != {"turkiye": [5, 6, 7, 8]}:
+            errors.append(f"Published content scope must be Türkiye 5–8: {catalog.get('published_scope')}")
+        for kind in ("grades", "subjects", "question_banks"):
+            for row in catalog.get(kind, []):
+                if row.get("country_slug") != "turkiye" or row.get("grade") not in {5, 6, 7, 8}:
+                    errors.append(f"Unpublished scope leaked into {kind}: {row.get('country_slug')} {row.get('grade')}")
+        bank_grades = sorted(bank.get("grade") for bank in question_banks)
+        if bank_grades != [5, 6, 7, 8]:
+            errors.append(f"Expected one independent question bank per grade 5–8, got {bank_grades}")
         for bank in question_banks:
-            minimum_families = 2000 if bank.get("country_code") == "TR" else 400
+            minimum_families = 2000
             if (
-                bank.get("country_code") not in {"TR", "JP", "KR", "GB", "RU"}
+                bank.get("country_code") != "TR"
                 or bank.get("questions") != 2000
                 or bank.get("families", 0) < minimum_families
                 or bank.get("independent_from_subject_packages") is not True

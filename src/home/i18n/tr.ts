@@ -132,7 +132,7 @@ const tr: HomeCopy = {
       sinav: {
         title: 'Sınava hazırlanan öğrenci',
         body: 'Ekran zamanı düzenli çalışmaya dönüşür.',
-        points: ['Planlı deneme sınavı ve sonuç karnesi', 'Kendi soru bankanız ya da hazır içerik', 'Odak modu; LGS denemeleri içe aktardığınız paketle'],
+        points: ['Planlı deneme sınavı ve sonuç karnesi', 'Ortaokul (5–8. sınıf) için hazır içerik ya da kendi soru bankanız', 'Odak modu; LGS denemeleri içe aktardığınız paketle'],
       },
       paylasimli: {
         title: 'Telefonunu çocuğuyla paylaşan ebeveyn',
@@ -160,7 +160,7 @@ const tr: HomeCopy = {
       lead: 'Ekran başındaki zaman öğrenmeye döner.',
       items: {
         quiz: { name: 'Soru çöz, süre kazan', body: 'Bir dakika için kaç doğru gerektiğini ve günlük üst sınırı siz seçersiniz.' },
-        content: { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik sınıf, ders ve konuya göre seçilir; kendi sorularınızı Excel ya da CSV ile eklersiniz.' },
+        content: { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik şimdilik Türkiye ortaokul (5–8. sınıf) müfredatı için; ders ve konuya göre seçilir. Kendi sorularınızı Excel ya da CSV ile eklersiniz.' },
         figures: { name: 'Şekilli sorular', body: 'Geometri, koordinat düzlemi, grafik, tablo ve devre şemaları net çizilir.' },
         exam: { name: 'Deneme sınavı ve sonuç karnesi', body: 'Planladığınız saatte deneme sınavı. Sonuç karnesi ölçüm içindir, süre ödülü vermez.' },
         notes: { name: 'Ders notları ve Öğrenme Stüdyosu', body: 'Eklediğiniz ders notları bölüm bölüm açılır; çözümlü örnekler ve cevap açıklamalarıyla.' },
@@ -232,6 +232,24 @@ const tr: HomeCopy = {
     },
     note: 'Windows satın alımı Android’i kapsamaz.',
   },
+  about: {
+    eyebrow: 'Hakkımızda',
+    title: 'Her akşamki “beş dakika daha” pazarlığından doğdu.',
+    story: [
+      'Ödev yarım, oyun açık. Süre bitince ekranı kapatan anne baba kötü, kapatılan çocuk küskün; ertesi akşam aynı pazarlık yeniden başlar. AliKa, gerçek ailelerin her akşam yaşadığı bu sahneler, ekran süresi ve ders çalışma sorunları düşünülerek tasarlandı.',
+      'Gördüğümüz şuydu: Yasak ekranı kapatıyor ama tartışmayı bitirmiyor. Çocuk kuralı önceden bilmeyince her kesinti bir sürprize, her sürpriz yeni bir pazarlığa dönüşüyor. Ders çalışmak da ekran süresinin rakibi gibi görülüyor.',
+      'Biz soruyu tersinden sorduk: Ekran zaten hayatın içindeyse onu ders çalışmanın yanına koyabilir miyiz? AliKa’da kuralı aile birlikte koyar, çocuk kalan süresini önceden görür; isterse soru çözer ve sizin belirlediğiniz sınır içinde ek süre kazanır. “Kısıtlamıyoruz, planlıyoruz” sözü buradan geliyor.',
+      'AliKa bitmiş bir ürün değil. Aynı ana fikirle, ailelerden gelen geri bildirimlerle geliştirmeye devam ediyoruz. Hazır ders içeriğine Türkiye’deki ortaokul öğrencileriyle başladık; diğer sınıflar ve ülkeler plan aşamasında.',
+    ],
+    signature: 'AliKa ekibi · ErenKa Software',
+    planTitle: 'Nerede duruyoruz?',
+    plan: [
+      { status: 'ready', label: 'Bugün hazır', items: ['Windows ve Android uygulaması', 'Türkiye ortaokul (5–8. sınıf) konu anlatımları ve soruları', 'Kendi sorularınızı Excel ya da CSV ile ekleme'] },
+      { status: 'dev', label: 'Geliştiriliyor', items: ['Android TV ve aile oyunları'] },
+      { status: 'plan', label: 'Plan aşamasında', items: ['İlkokul ve lise sınıfları', 'Diğer ülkelerin müfredatları'] },
+    ],
+    contentLink: 'İçerik kütüphanesini aç',
+  },
   faq: {
     title: 'Sık sorulanlar',
     lead: 'Kurmadan önce en çok merak edilenler.',
@@ -254,7 +272,7 @@ const tr: HomeCopy = {
       },
       {
         q: 'Hangi dersler ve sınıflar var?',
-        a: 'Hazır içerik ülke, sınıf, ders ve konuya göre seçilir; matematik soruları uygulamanın içinde üretilir. Kendi sorularınızı ve soru bankalarınızı Excel şablonuyla ya da içerik paketleriyle eklersiniz.',
+        a: 'Şu an hazır içerik Türkiye ortaokul müfredatı (5–8. sınıf) için: derslere göre konu anlatımları ve sorular ile sınıf başına karma soru bankası. Matematik alıştırma soruları uygulamanın içinde üretilir. İlkokul ve lise sınıfları ile diğer ülkelerin müfredatları plan aşamasında; bu arada kendi sorularınızı Excel şablonuyla ya da içerik paketleriyle ekleyebilirsiniz.',
       },
       {
         q: 'AliKa çocuğumu gizlice izler mi?',
@@ -262,7 +280,7 @@ const tr: HomeCopy = {
       },
       {
         q: 'Hangi yaşlar için uygun?',
-        a: '5–18 yaş. Dil, görünüm, maskot ve kutlama dozu yaşa göre değişir; 15–18 yaşta maskotsuz, sade bir görünüm kullanılır.',
+        a: '5–18 yaş. Dil, görünüm, maskot ve kutlama dozu yaşa göre değişir; 15–18 yaşta maskotsuz, sade bir görünüm kullanılır. Hazır ders içeriği şimdilik ortaokul (5–8. sınıf) için.',
       },
     ],
   },
@@ -310,6 +328,7 @@ const tr: HomeCopy = {
     audiences: 'Kimler için',
     features: 'Özellikler',
     how: 'Nasıl çalışır',
+    about: 'Hakkımızda',
     faq: 'Sık sorulanlar',
     guides: 'Rehberler',
     content: 'Hazır içerik',

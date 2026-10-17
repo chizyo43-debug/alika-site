@@ -136,7 +136,7 @@ const de: HomeCopy = {
       sinav: {
         title: 'Schüler vor Prüfungen',
         body: 'Bildschirmzeit wird zu regelmäßigem Lernen.',
-        points: ['Geplante Übungsprüfung mit Ergebnisbericht', 'Eigene Fragenbank oder fertige Inhalte', 'Fokusmodus; Probeprüfungen aus importierten Paketen'],
+        points: ['Geplante Übungsprüfung mit Ergebnisbericht', 'Fertige Inhalte für die Klassen 5–8 (türkischer Lehrplan) oder eigene Fragenbank', 'Fokusmodus; Probeprüfungen aus importierten Paketen'],
       },
       paylasimli: {
         title: 'Eltern, die ihr Handy mit dem Kind teilen',
@@ -164,7 +164,7 @@ const de: HomeCopy = {
       lead: 'Zeit am Bildschirm wird zu Lernzeit.',
       items: {
         quiz: { name: 'Fragen lösen, Zeit verdienen', body: 'Sie wählen, wie viele richtige Antworten eine Minute kostet, und legen die Tagesgrenze fest.' },
-        content: { name: 'Fertige Inhalte und eigene Fragen', body: 'Fertige Inhalte werden nach Klasse, Fach und Thema gewählt; eigene Fragen fügen Sie per Excel oder CSV hinzu.' },
+        content: { name: 'Fertige Inhalte und eigene Fragen', body: 'Fertige Inhalte gibt es derzeit für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch), nach Fach und Thema wählbar. Eigene Fragen fügen Sie per Excel oder CSV hinzu.' },
         figures: { name: 'Fragen mit Abbildungen', body: 'Geometrie, Koordinatensysteme, Diagramme, Tabellen und Schaltpläne werden sauber gezeichnet.' },
         exam: { name: 'Übungsprüfung und Ergebnisbericht', body: 'Eine Übungsprüfung zur geplanten Zeit. Der Ergebnisbericht dient der Standortbestimmung und bringt keine Belohnungszeit.' },
         notes: { name: 'Lernnotizen und Lernstudio', body: 'Hinzugefügte Lernnotizen öffnen sich Abschnitt für Abschnitt, mit gelösten Beispielen und Erklärungen zu den Antworten.' },
@@ -237,6 +237,24 @@ const de: HomeCopy = {
     },
     note: 'Der Windows-Kauf umfasst Android nicht.',
   },
+  about: {
+    eyebrow: 'Über uns',
+    title: 'Entstanden aus der allabendlichen „Nur noch fünf Minuten“-Verhandlung.',
+    story: [
+      'Hausaufgaben halb fertig, das Spiel noch offen. Wer den Bildschirm ausschaltet, wenn die Zeit um ist, ist der Böse; das Kind ist beleidigt, und am nächsten Abend beginnt dieselbe Verhandlung von vorn. AliKa wurde mit Blick auf diese Szenen entwickelt, die echte Familien jeden Abend erleben – und auf die Probleme rund um Bildschirmzeit und Lernen.',
+      'Was wir gesehen haben: Ein Verbot schaltet den Bildschirm aus, beendet aber nicht den Streit. Wenn Kinder die Regel nicht vorher kennen, wird jede Unterbrechung zur Überraschung und jede Überraschung zu einer neuen Verhandlung. Lernen wirkt dann wie der Gegner der Bildschirmzeit.',
+      'Also haben wir die Frage umgedreht: Wenn Bildschirme ohnehin zum Leben gehören, können wir sie dann neben das Lernen stellen? In AliKa legt die Familie die Regel gemeinsam fest, und das Kind sieht seine verbleibende Zeit im Voraus; wenn es möchte, beantwortet es Fragen und verdient innerhalb der von Ihnen gesetzten Grenze zusätzliche Zeit. Daher kommt „Wir verbieten nicht. Wir planen.“',
+      'AliKa ist kein fertiges Produkt. Wir entwickeln es mit derselben Grundidee und mit dem Feedback von Familien weiter. Die fertigen Lerninhalte haben mit dem türkischen Lehrplan der Mittelstufe begonnen (Klassen 5–8, auf Türkisch); weitere Klassenstufen und Länder sind in Planung.',
+    ],
+    signature: 'Das AliKa-Team · ErenKa Software',
+    planTitle: 'Wo stehen wir?',
+    plan: [
+      { status: 'ready', label: 'Heute verfügbar', items: ['Apps für Windows und Android', 'Themenerklärungen und Fragen für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch)', 'Eigene Fragen per Excel oder CSV hinzufügen'] },
+      { status: 'dev', label: 'In Entwicklung', items: ['Android TV und Familienspiele'] },
+      { status: 'plan', label: 'In Planung', items: ['Grundschul- und Oberstufenklassen', 'Lehrpläne anderer Länder'] },
+    ],
+    contentLink: 'Zur Inhaltsbibliothek',
+  },
   faq: {
     title: 'Häufige Fragen',
     lead: 'Was Eltern vor der Installation am häufigsten wissen möchten.',
@@ -259,7 +277,7 @@ const de: HomeCopy = {
       },
       {
         q: 'Welche Fächer und Klassenstufen gibt es?',
-        a: 'Fertige Inhalte werden nach Land, Klasse, Fach und Thema gewählt; derzeit gibt es Pakete für die Türkei, das Vereinigte Königreich, Japan, Südkorea und Russland. Mathefragen erzeugt die App selbst. Eigene Fragen und Fragenbanken fügen Sie mit der Excel-Vorlage oder mit Inhaltspaketen hinzu.',
+        a: 'Fertige Inhalte gibt es derzeit für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch): Themenerklärungen und Fragen nach Fach sowie eine gemischte Fragenbank pro Klasse. Matheübungen erzeugt die App selbst. Grundschul- und Oberstufenklassen sowie Lehrpläne anderer Länder sind in Planung; bis dahin fügen Sie eigene Fragen mit der Excel-Vorlage oder mit Inhaltspaketen hinzu.',
       },
       {
         q: 'Überwacht AliKa mein Kind heimlich?',
@@ -267,7 +285,7 @@ const de: HomeCopy = {
       },
       {
         q: 'Für welches Alter ist AliKa geeignet?',
-        a: '5 bis 18 Jahre. Sprache, Aussehen, Maskottchen und wie viel gefeiert wird, ändern sich mit dem Alter; von 15 bis 18 gibt es eine schlichte Ansicht ohne Maskottchen.',
+        a: '5 bis 18 Jahre. Sprache, Aussehen, Maskottchen und wie viel gefeiert wird, ändern sich mit dem Alter; von 15 bis 18 gibt es eine schlichte Ansicht ohne Maskottchen. Fertige Lerninhalte gibt es derzeit für die Klassen 5–8 des türkischen Lehrplans.',
       },
     ],
   },
@@ -288,6 +306,7 @@ const de: HomeCopy = {
     audiences: 'Für wen',
     features: 'Funktionen',
     how: 'So funktioniert’s',
+    about: 'Über uns',
     faq: 'Häufige Fragen',
     guides: 'Ratgeber',
     content: 'Fertige Inhalte',

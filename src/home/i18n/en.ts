@@ -136,7 +136,7 @@ const en: HomeCopy = {
       sinav: {
         title: 'A student preparing for exams',
         body: 'Screen time turns into regular study.',
-        points: ['Scheduled practice exams and a result report', 'Your own question bank or ready-made content', 'Focus Mode; mock exams from packs you import'],
+        points: ['Scheduled practice exams and a result report', 'Ready-made content for grades 5–8 (Turkish curriculum) or your own question bank', 'Focus Mode; mock exams from packs you import'],
       },
       paylasimli: {
         title: 'A parent sharing their phone with a child',
@@ -164,7 +164,7 @@ const en: HomeCopy = {
       lead: 'Time in front of the screen turns into learning.',
       items: {
         quiz: { name: 'Answer questions, earn time', body: 'You choose how many correct answers one minute takes and set the daily cap.' },
-        content: { name: 'Ready-made content and your own questions', body: 'Ready-made content is chosen by grade, subject and topic; you add your own questions with Excel or CSV.' },
+        content: { name: 'Ready-made content and your own questions', body: 'Ready-made content currently covers the Turkish middle-school curriculum (grades 5–8, in Turkish), chosen by subject and topic. You add your own questions with Excel or CSV.' },
         figures: { name: 'Questions with figures', body: 'Geometry, coordinate planes, charts, tables and circuit diagrams are drawn clearly.' },
         exam: { name: 'Practice exam and result report', body: 'A practice exam at the time you schedule. The result report is for measuring progress and does not give reward time.' },
         notes: { name: 'Study Notes and Learning Studio', body: 'Study notes you add open section by section, with worked examples and answer explanations.' },
@@ -237,6 +237,24 @@ const en: HomeCopy = {
     },
     note: 'The Windows purchase does not include Android.',
   },
+  about: {
+    eyebrow: 'About us',
+    title: 'Born from the nightly “five more minutes” negotiation.',
+    story: [
+      'Homework half done, game still open. The parent who switches the screen off when time is up becomes the bad guy, the child sulks, and the next evening the same negotiation starts again. AliKa was designed around these scenes that real families live through every evening, and around the problems of screen time and studying.',
+      'This is what we saw: a ban switches the screen off, but it doesn’t end the argument. When children don’t know the rule in advance, every interruption becomes a surprise, and every surprise becomes a new negotiation. Studying ends up looking like screen time’s rival.',
+      'So we asked the question the other way round: if screens are already part of life, can we put them next to studying? In AliKa the family sets the rule together and the child sees the time left in advance; if they want, they answer questions and earn extra time within the limit you set. That is where “We don’t restrict. We plan.” comes from.',
+      'AliKa is not a finished product. We keep developing it around the same idea, guided by feedback from families. Ready-made lessons started with the Turkish middle-school curriculum (grades 5–8, in Turkish); other grades and countries are in the planning stage.',
+    ],
+    signature: 'The AliKa team · ErenKa Software',
+    planTitle: 'Where are we now?',
+    plan: [
+      { status: 'ready', label: 'Ready today', items: ['Windows and Android apps', 'Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish)', 'Adding your own questions with Excel or CSV'] },
+      { status: 'dev', label: 'In development', items: ['Android TV and family games'] },
+      { status: 'plan', label: 'In the planning stage', items: ['Primary and high-school grades', 'Curricula for other countries'] },
+    ],
+    contentLink: 'Open the content library',
+  },
   faq: {
     title: 'Frequently asked questions',
     lead: 'What parents ask most before installing.',
@@ -259,7 +277,7 @@ const en: HomeCopy = {
       },
       {
         q: 'Which subjects and grades are available?',
-        a: 'Ready-made content is chosen by country, grade, subject and topic; packs are currently available for Türkiye, the United Kingdom, Japan, South Korea and Russia. Math questions are generated inside the app. You can add your own questions and question banks with the Excel template or content packs.',
+        a: 'Ready-made content is currently available for the Turkish middle-school curriculum (grades 5–8, in Turkish): topic explanations and questions by subject, plus a mixed question bank for each grade. Math practice questions are generated inside the app. Primary and high-school grades and other countries’ curricula are in the planning stage; meanwhile you can add your own questions with the Excel template or content packs.',
       },
       {
         q: 'Does AliKa secretly monitor my child?',
@@ -267,7 +285,7 @@ const en: HomeCopy = {
       },
       {
         q: 'Which ages is it for?',
-        a: 'Ages 5–18. Language, look, mascot and how much celebration change with age; from 15 to 18, a simple look without the mascot is used.',
+        a: 'Ages 5–18. Language, look, mascot and how much celebration change with age; from 15 to 18, a simple look without the mascot is used. Ready-made lessons currently cover grades 5–8 of the Turkish curriculum.',
       },
     ],
   },
@@ -288,6 +306,7 @@ const en: HomeCopy = {
     audiences: 'Who it’s for',
     features: 'Features',
     how: 'How it works',
+    about: 'About us',
     faq: 'FAQ',
     guides: 'Guide',
     content: 'Ready-made content',

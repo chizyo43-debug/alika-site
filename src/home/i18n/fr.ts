@@ -136,7 +136,7 @@ const fr: HomeCopy = {
       sinav: {
         title: 'Un élève qui prépare un examen',
         body: 'Le temps d’écran devient un travail régulier.',
-        points: ['Examen d’entraînement planifié et bulletin de résultats', 'Votre propre banque de questions ou des contenus prêts', 'Mode concentration ; examens blancs avec les packs que vous importez'],
+        points: ['Examen d’entraînement planifié et bulletin de résultats', 'Contenus prêts pour les classes 5 à 8 (programme turc) ou votre propre banque de questions', 'Mode concentration ; examens blancs avec les packs que vous importez'],
       },
       paylasimli: {
         title: 'Un parent qui prête son téléphone à son enfant',
@@ -164,7 +164,7 @@ const fr: HomeCopy = {
       lead: 'Le temps devant l’écran devient du temps pour apprendre.',
       items: {
         quiz: { name: 'Répondre, gagner du temps', body: 'Vous choisissez combien de bonnes réponses coûte une minute et fixez le plafond du jour.' },
-        content: { name: 'Contenus prêts et vos propres questions', body: 'Les contenus prêts se choisissent par niveau, matière et thème ; vous ajoutez vos questions avec Excel ou CSV.' },
+        content: { name: 'Contenus prêts et vos propres questions', body: 'Les contenus prêts couvrent pour l’instant le programme turc du collège (classes 5 à 8, en turc) et se choisissent par matière et thème ; vous ajoutez vos questions avec Excel ou CSV.' },
         figures: { name: 'Questions avec figures', body: 'Géométrie, repère cartésien, graphiques, tableaux et schémas électriques sont tracés avec netteté.' },
         exam: { name: 'Examen d’entraînement et bulletin de résultats', body: 'Un examen d’entraînement à l’heure que vous planifiez. Le bulletin sert à mesurer et ne donne pas de temps de récompense.' },
         notes: { name: 'Fiches de cours et Studio d’apprentissage', body: 'Les fiches que vous ajoutez s’ouvrent partie par partie, avec des exemples corrigés et des explications des réponses.' },
@@ -237,6 +237,24 @@ const fr: HomeCopy = {
     },
     note: 'L’achat Windows n’inclut pas Android.',
   },
+  about: {
+    eyebrow: 'À propos',
+    title: 'Né de la négociation de chaque soir : « encore cinq minutes ».',
+    story: [
+      'Les devoirs à moitié faits, le jeu encore ouvert. Le parent qui éteint l’écran quand le temps est écoulé passe pour le méchant, l’enfant boude, et le lendemain soir la même négociation recommence. AliKa a été conçu en pensant à ces scènes que vivent de vraies familles chaque soir, et aux problèmes de temps d’écran et de travail scolaire.',
+      'Voici ce que nous avons constaté : l’interdiction éteint l’écran, mais elle ne met pas fin à la dispute. Quand l’enfant ne connaît pas la règle à l’avance, chaque coupure devient une surprise, et chaque surprise une nouvelle négociation. Les devoirs finissent par passer pour les rivaux du temps d’écran.',
+      'Nous avons donc posé la question à l’envers : si l’écran fait déjà partie de la vie, peut-on le placer à côté des révisions ? Dans AliKa, la famille fixe la règle ensemble et l’enfant voit à l’avance le temps qu’il lui reste ; s’il le souhaite, il répond à des questions et gagne du temps supplémentaire dans la limite que vous fixez. C’est de là que vient « Nous ne restreignons pas. Nous planifions. »',
+      'AliKa n’est pas un produit fini. Nous continuons à le développer avec la même idée et grâce aux retours des familles. Les contenus scolaires prêts ont commencé avec le programme turc du collège (classes 5 à 8, en turc) ; les autres classes et pays sont en phase de planification.',
+    ],
+    signature: 'L’équipe AliKa · ErenKa Software',
+    planTitle: 'Où en sommes-nous ?',
+    plan: [
+      { status: 'ready', label: 'Prêt aujourd’hui', items: ['Applications Windows et Android', 'Explications de cours et questions du programme turc du collège (classes 5 à 8, en turc)', 'Ajouter vos propres questions avec Excel ou CSV'] },
+      { status: 'dev', label: 'En développement', items: ['Android TV et jeux en famille'] },
+      { status: 'plan', label: 'En phase de planification', items: ['Classes du primaire et du lycée', 'Programmes d’autres pays'] },
+    ],
+    contentLink: 'Ouvrir la bibliothèque de contenus',
+  },
   faq: {
     title: 'Questions fréquentes',
     lead: 'Ce que les parents demandent le plus avant d’installer.',
@@ -259,7 +277,7 @@ const fr: HomeCopy = {
       },
       {
         q: 'Quelles matières et quels niveaux sont proposés ?',
-        a: 'Les contenus prêts se choisissent par pays, niveau, matière et thème ; des packs existent actuellement pour la Turquie, le Royaume-Uni, le Japon, la Corée du Sud et la Russie. Les questions de maths sont générées dans l’application. Vous ajoutez vos propres questions et banques de questions avec le modèle Excel ou des packs de contenu.',
+        a: 'Les contenus prêts existent pour l’instant pour le programme turc du collège (classes 5 à 8, en turc) : explications de cours et questions par matière, et une banque de questions mixte par classe. Les exercices de maths sont générés dans l’application. Le primaire, le lycée et les programmes d’autres pays sont en phase de planification ; en attendant, vous ajoutez vos propres questions avec le modèle Excel ou des packs de contenu.',
       },
       {
         q: 'AliKa surveille-t-il mon enfant en secret ?',
@@ -267,7 +285,7 @@ const fr: HomeCopy = {
       },
       {
         q: 'Pour quels âges ?',
-        a: 'De 5 à 18 ans. Le langage, l’apparence, la mascotte et l’intensité des félicitations changent avec l’âge ; de 15 à 18 ans, l’affichage est sobre et sans mascotte.',
+        a: 'De 5 à 18 ans. Le langage, l’apparence, la mascotte et l’intensité des félicitations changent avec l’âge ; de 15 à 18 ans, l’affichage est sobre et sans mascotte. Les contenus scolaires prêts couvrent pour l’instant les classes 5 à 8 du programme turc.',
       },
     ],
   },
@@ -288,6 +306,7 @@ const fr: HomeCopy = {
     audiences: 'Pour qui',
     features: 'Fonctions',
     how: 'Fonctionnement',
+    about: 'À propos',
     faq: 'Questions fréquentes',
     guides: 'Guides',
     content: 'Contenus prêts',

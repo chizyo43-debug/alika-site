@@ -136,7 +136,7 @@ const pt: HomeCopy = {
       sinav: {
         title: 'Um estudante se preparando para provas',
         body: 'O tempo de tela vira estudo regular.',
-        points: ['Simulado agendado e boletim de resultados', 'Seu próprio banco de perguntas ou conteúdo pronto', 'Modo foco; simulados com os pacotes que você importar'],
+        points: ['Simulado agendado e boletim de resultados', 'Conteúdo pronto do 5º ao 8º ano (currículo turco) ou seu próprio banco de perguntas', 'Modo foco; simulados com os pacotes que você importar'],
       },
       paylasimli: {
         title: 'Pais que dividem o celular com a criança',
@@ -164,7 +164,7 @@ const pt: HomeCopy = {
       lead: 'O tempo diante da tela vira aprendizado.',
       items: {
         quiz: { name: 'Responda e ganhe tempo', body: 'Você escolhe quantas respostas certas custa um minuto e o limite diário.' },
-        content: { name: 'Conteúdo pronto e suas próprias perguntas', body: 'O conteúdo pronto é escolhido por série, matéria e tema; suas perguntas você adiciona com Excel ou CSV.' },
+        content: { name: 'Conteúdo pronto e suas próprias perguntas', body: 'Por enquanto o conteúdo pronto é do currículo turco do ensino fundamental II (5º ao 8º ano, em turco), escolhido por matéria e tema. Suas perguntas você adiciona com Excel ou CSV.' },
         figures: { name: 'Perguntas com figuras', body: 'Geometria, plano cartesiano, gráficos, tabelas e diagramas de circuitos são desenhados com nitidez.' },
         exam: { name: 'Simulado e boletim de resultados', body: 'Um simulado no horário que você agendar. O boletim serve para medir e não dá tempo de recompensa.' },
         notes: { name: 'Resumos e Studio de aprendizagem', body: 'Os resumos que você adicionar abrem seção por seção, com exemplos resolvidos e explicações das respostas.' },
@@ -237,6 +237,24 @@ const pt: HomeCopy = {
     },
     note: 'A compra para Windows não inclui o Android.',
   },
+  about: {
+    eyebrow: 'Sobre nós',
+    title: 'Nasceu da negociação de toda noite: “só mais cinco minutos”.',
+    story: [
+      'Lição de casa pela metade, jogo ainda aberto. Quem desliga a tela quando o tempo acaba vira o vilão, a criança fica emburrada e, na noite seguinte, a mesma negociação recomeça. O AliKa foi pensado a partir dessas cenas que famílias reais vivem toda noite e dos problemas de tempo de tela e de estudo.',
+      'O que vimos foi isto: a proibição desliga a tela, mas não acaba com a discussão. Quando a criança não conhece a regra de antemão, cada interrupção vira uma surpresa, e cada surpresa vira uma nova negociação. Estudar acaba parecendo o rival do tempo de tela.',
+      'Então fizemos a pergunta ao contrário: se a tela já faz parte da vida, dá para colocá-la ao lado do estudo? No AliKa, a família define a regra junta e a criança vê antes quanto tempo ainda tem; se quiser, responde perguntas e ganha tempo extra dentro do limite que você define. É daí que vem “Não restringimos. Planejamos.”',
+      'O AliKa não é um produto acabado. Seguimos desenvolvendo com a mesma ideia e com o retorno das famílias. O conteúdo escolar pronto começou pelo currículo turco do ensino fundamental II (5º ao 8º ano, em turco); outras séries e países estão em fase de planejamento.',
+    ],
+    signature: 'Equipe AliKa · ErenKa Software',
+    planTitle: 'Onde estamos?',
+    plan: [
+      { status: 'ready', label: 'Pronto hoje', items: ['Apps para Windows e Android', 'Explicações de conteúdo e questões do currículo turco do ensino fundamental II (5º ao 8º ano, em turco)', 'Adicionar suas próprias perguntas com Excel ou CSV'] },
+      { status: 'dev', label: 'Em desenvolvimento', items: ['Android TV e jogos em família'] },
+      { status: 'plan', label: 'Em fase de planejamento', items: ['Anos iniciais e ensino médio', 'Currículos de outros países'] },
+    ],
+    contentLink: 'Abrir a biblioteca de conteúdo',
+  },
   faq: {
     title: 'Perguntas frequentes',
     lead: 'O que os pais mais perguntam antes de instalar.',
@@ -259,7 +277,7 @@ const pt: HomeCopy = {
       },
       {
         q: 'Quais matérias e séries existem?',
-        a: 'O conteúdo pronto é escolhido por país, série, matéria e tema; hoje há pacotes para Turquia, Reino Unido, Japão, Coreia do Sul e Rússia. As perguntas de matemática são geradas dentro do app. Você adiciona suas próprias perguntas e bancos de perguntas com o modelo do Excel ou com pacotes de conteúdo.',
+        a: 'Hoje há conteúdo pronto para o currículo turco do ensino fundamental II (5º ao 8º ano, em turco): explicações de conteúdo e questões por matéria, além de um banco de questões misto por ano. Os exercícios de matemática são gerados dentro do app. Anos iniciais, ensino médio e currículos de outros países estão em fase de planejamento; enquanto isso, você adiciona suas próprias perguntas com o modelo do Excel ou com pacotes de conteúdo.',
       },
       {
         q: 'O AliKa vigia meu filho em segredo?',
@@ -267,7 +285,7 @@ const pt: HomeCopy = {
       },
       {
         q: 'Para quais idades é indicado?',
-        a: 'De 5 a 18 anos. Linguagem, visual, mascote e o tanto de comemoração mudam com a idade; dos 15 aos 18 anos, o visual é simples e sem mascote.',
+        a: 'De 5 a 18 anos. Linguagem, visual, mascote e o tanto de comemoração mudam com a idade; dos 15 aos 18 anos, o visual é simples e sem mascote. Por enquanto o conteúdo escolar pronto cobre do 5º ao 8º ano do currículo turco.',
       },
     ],
   },
@@ -288,6 +306,7 @@ const pt: HomeCopy = {
     audiences: 'Para quem',
     features: 'Recursos',
     how: 'Como funciona',
+    about: 'Sobre nós',
     faq: 'Perguntas frequentes',
     guides: 'Guias',
     content: 'Conteúdo pronto',
