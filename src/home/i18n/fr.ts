@@ -297,7 +297,7 @@ const fr: HomeCopy = {
     copied: 'Copié',
   },
   footer: {
-    tagline: 'Nous ne restreignons pas, nous planifions. Contrôle parental et apprentissage pour Windows et Android ; sans publicité, sans compte.',
+    tagline: 'Nous ne restreignons pas, nous planifions. Contrôle parental et apprentissage pour Windows et Android ; sans publicité, sans compte AliKa.',
     product: 'Produit',
     download: 'Télécharger',
     support: 'Aide',

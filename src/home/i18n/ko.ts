@@ -297,7 +297,7 @@ const ko: HomeCopy = {
     copied: '복사됨',
   },
   footer: {
-    tagline: '막지 않고, 계획합니다. Windows와 Android를 위한 자녀 보호와 학습. 광고 없이, 계정 없이.',
+    tagline: '막지 않고, 계획합니다. Windows와 Android를 위한 자녀 보호와 학습. 광고 없이, AliKa 계정 없이.',
     product: '제품',
     download: '다운로드',
     support: '지원',

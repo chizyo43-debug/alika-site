@@ -297,7 +297,7 @@ const es: HomeCopy = {
     copied: 'Copiado',
   },
   footer: {
-    tagline: 'No restringimos, planificamos. Control parental y aprendizaje para Windows y Android; sin anuncios y sin cuenta.',
+    tagline: 'No restringimos, planificamos. Control parental y aprendizaje para Windows y Android; sin anuncios y sin cuenta de AliKa.',
     product: 'Producto',
     download: 'Descargar',
     support: 'Ayuda',

@@ -379,6 +379,24 @@ def main() -> None:
     if (DIST / ".vite").exists():
         errors.append("Build manifest must not be published")
 
+    # Bilinmeyen adreste sitenin kendi 404 sayfası; dizine girmez.
+    not_found = DIST / "404.html"
+    if not not_found.exists() or '<meta name="robots" content="noindex">' not in not_found.read_text(encoding="utf-8"):
+        errors.append("404.html is missing or indexable")
+    # Alt sayfaların menüsü yeni ana sayfayla aynı: deneme düğmesi #deneme, eski bölüm adları yok.
+    for page in (DIST / "content" / "index.html", DIST / "rehber" / "index.html", DIST / "en" / "content" / "index.html"):
+        static_text = page.read_text(encoding="utf-8")
+        if 'href="/#deneme"' not in static_text and 'href="/en/#deneme"' not in static_text:
+            errors.append(f"Static header trial button must go to #deneme: {page}")
+        if "/how-it-works/" in static_text or "/ecosystem/" in static_text or "/downloads/" in static_text:
+            errors.append(f"Static page still links to old subpages: {page}")
+    for page in DIST.rglob("*.html"):
+        visible = page.read_text(encoding="utf-8")
+        if "Codex" in visible:
+            errors.append(f"Internal tool name is shown: {page}")
+        if page.parts[len(DIST.parts)] == "rehber" and "₺" in visible:
+            errors.append(f"Guide states a price; the stores show it: {page}")
+
     root_page = (DIST / "index.html").read_text(encoding="utf-8")
     if '<script type="application/ld+json">' not in root_page or '"SoftwareApplication"' not in root_page:
         errors.append("SoftwareApplication schema is missing from the Turkish home page")

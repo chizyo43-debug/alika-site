@@ -3,6 +3,7 @@ from __future__ import annotations
 import html
 import json
 import os
+import re
 import shutil
 import stat
 from pathlib import Path
@@ -27,15 +28,15 @@ LANGUAGE_FLAGS = {
     "pt": "🇵🇹", "ru": "🇷🇺", "ja": "🇯🇵", "ko": "🇰🇷",
 }
 CONTENT_LIBRARY_LABELS = {
-    "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Codex öz-denetimli · Makine doğrulamalı", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
-    "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Codex self-audited · Machine validated", "Grade {}", "Do not extract the ZIP. Select the class ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
-    "de": ("Land", "Klasse", "Alle Fächer herunterladen", "Fach herunterladen", "Lektionen", "Fragen", "Codex-Selbstprüfung · Maschinell validiert", "Klasse {}", "ZIP nicht entpacken. Wählen Sie die Klassen-ZIP direkt über Inhalte hinzufügen in AliKa oder legen Sie sie im vorbereiteten Ordner ab und starten Sie den Scan."),
-    "es": ("País", "Curso", "Descargar todas las asignaturas", "Descargar asignatura", "lecciones", "preguntas", "Autoauditoría de Codex · Validación automática", "Curso {}", "No extraiga el ZIP. Seleccione directamente el ZIP del curso en Añadir contenido de AliKa o colóquelo en la carpeta preparada y analícela."),
-    "fr": ("Pays", "Niveau", "Télécharger toutes les matières", "Télécharger la matière", "leçons", "questions", "Auto-audit Codex · Validation automatique", "Niveau {}", "Ne décompressez pas le ZIP. Sélectionnez-le directement dans Ajouter du contenu d’AliKa ou placez-le dans le dossier préparé puis lancez l’analyse."),
-    "pt": ("País", "Ano", "Transferir todas as disciplinas", "Transferir disciplina", "lições", "perguntas", "Autoauditoria Codex · Validação automática", "Ano {}", "Não extraia o ZIP. Selecione o ZIP do ano diretamente em Adicionar conteúdo no AliKa ou coloque-o na pasta preparada e faça a leitura."),
-    "ru": ("Страна", "Класс", "Скачать все предметы", "Скачать предмет", "уроков", "вопросов", "Самопроверка Codex · Машинная валидация", "Класс {}", "Не распаковывайте ZIP. Выберите архив класса через Добавить материалы в AliKa или поместите его в подготовленную папку и запустите сканирование."),
-    "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "Codex自己監査済み・機械検証済み", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年ZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
-    "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "Codex 자체 감사 · 자동 검증", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년 ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
+    "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Yapay zekâ ile hazırlandı · Otomatik kontrol edildi", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
+    "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Prepared with AI · Automatically checked", "Grade {}", "Do not extract the ZIP. Select the class ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
+    "de": ("Land", "Klasse", "Alle Fächer herunterladen", "Fach herunterladen", "Lektionen", "Fragen", "Mit KI erstellt · Automatisch geprüft", "Klasse {}", "ZIP nicht entpacken. Wählen Sie die Klassen-ZIP direkt über Inhalte hinzufügen in AliKa oder legen Sie sie im vorbereiteten Ordner ab und starten Sie den Scan."),
+    "es": ("País", "Curso", "Descargar todas las asignaturas", "Descargar asignatura", "lecciones", "preguntas", "Preparado con IA · Revisado automáticamente", "Curso {}", "No extraiga el ZIP. Seleccione directamente el ZIP del curso en Añadir contenido de AliKa o colóquelo en la carpeta preparada y analícela."),
+    "fr": ("Pays", "Niveau", "Télécharger toutes les matières", "Télécharger la matière", "leçons", "questions", "Préparé avec l’IA · Vérifié automatiquement", "Niveau {}", "Ne décompressez pas le ZIP. Sélectionnez-le directement dans Ajouter du contenu d’AliKa ou placez-le dans le dossier préparé puis lancez l’analyse."),
+    "pt": ("País", "Ano", "Transferir todas as disciplinas", "Transferir disciplina", "lições", "perguntas", "Preparado com IA · Verificado automaticamente", "Ano {}", "Não extraia o ZIP. Selecione o ZIP do ano diretamente em Adicionar conteúdo no AliKa ou coloque-o na pasta preparada e faça a leitura."),
+    "ru": ("Страна", "Класс", "Скачать все предметы", "Скачать предмет", "уроков", "вопросов", "Подготовлено с помощью ИИ · Проверено автоматически", "Класс {}", "Не распаковывайте ZIP. Выберите архив класса через Добавить материалы в AliKa или поместите его в подготовленную папку и запустите сканирование."),
+    "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "AIで作成・自動チェック済み", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年ZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
+    "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "AI로 작성 · 자동 검사 완료", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년 ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
 }
 QUESTION_BANK_LABELS = {
     "tr": ("Sınıf başına karma soru bankaları", "Her sınıfın yayımlanabilir bütün derslerini kapsayan, ders paketlerinden soru kopyalamadan ayrıca üretilmiş tam 2.000 soruluk bankalar.", "Soru bankasını indir", "benzersiz soru"),
@@ -60,6 +61,19 @@ CONTENT_SCOPE_LABELS = {
     "ja": ("現在提供中：", "トルコの中学校課程（5〜8年生、トルコ語）の単元解説、問題、学年別問題バンク。", "計画段階：", "小学校・高校の学年と、ほかの国のカリキュラム。", "教科"),
     "ko": ("현재 제공:", "튀르키예 중학교 과정(5~8학년, 튀르키예어)의 단원 설명, 문제, 학년별 문제은행.", "계획 단계:", "초등학교·고등학교 학년과 다른 나라 교육과정.", "과목"),
 }
+# İçerik sayfasının altındaki kalite notu (her dilde; katalog JSON alanı makine içindir).
+CONTENT_QUALITY_NOTES = {
+    "tr": "İçerik yapay zekâ ile hazırlandı ve otomatik kontrollerden geçti; insan incelemesinden geçtiği iddia edilmez. Hata görürseniz bize yazın.",
+    "en": "Content was prepared with AI and passed automated checks; it is not claimed to be human-reviewed. If you spot a mistake, tell us.",
+    "de": "Die Inhalte wurden mit KI erstellt und automatisch geprüft; eine menschliche Prüfung wird nicht behauptet. Fehler gefunden? Schreiben Sie uns.",
+    "es": "El contenido se preparó con IA y pasó comprobaciones automáticas; no se afirma que lo haya revisado una persona. Si ve un error, escríbanos.",
+    "fr": "Les contenus ont été préparés avec l’IA et vérifiés automatiquement ; aucune relecture humaine n’est revendiquée. Une erreur ? Écrivez-nous.",
+    "pt": "O conteúdo foi preparado com IA e passou por verificações automáticas; não se afirma revisão humana. Encontrou um erro? Escreva-nos.",
+    "ru": "Материалы подготовлены с помощью ИИ и прошли автоматическую проверку; проверка человеком не заявляется. Нашли ошибку? Напишите нам.",
+    "ja": "教材はAIで作成し、自動チェックを通過しています。人による確認済みとはしていません。誤りを見つけたらお知らせください。",
+    "ko": "콘텐츠는 AI로 작성되었고 자동 검사를 통과했습니다. 사람이 검토했다고 주장하지 않습니다. 오류를 발견하면 알려주세요.",
+}
+THOUSANDS_SEPARATORS = {"tr": ".", "de": ".", "es": ".", "pt": ".", "fr": "\u202f", "ru": "\u00a0"}
 CONTENT_BOOK_LABELS = {
     "tr": ("AliKa kitabına dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
     "en": ("Back to the AliKa book", "Ready content ledger", "Countries", "Grade packs", "Subject packs", "Found an issue or have an idea? Tell us."),
@@ -78,6 +92,10 @@ STORE_MARKETS = {
     "ja": {"cid": "site_home_ja", "price": "230", "currency": "JPY"},
     "ko": {"cid": "site_home_ko", "price": "2500", "currency": "KRW"},
 }
+# Alt sayfaların menüsü ve altlığı yeni ana sayfanın dil dosyalarından okunur (src/home/i18n/{lang}.ts).
+HOME_I18N = SRC / "home" / "i18n"
+# Ana sayfadaki GUIDE_PATHS ile aynı: yalnız gerçekten var olan rehberler.
+GUIDE_LINKS = {"tr": "/rehber/", "en": "/en/guides/windows-child-screen-time/"}
 GUIDE_BASE = "rehber"
 UK_GUIDE_PATH = "en/guides/windows-child-screen-time"
 UK_LANDING_PATH = "en/uk-windows-screen-time"
@@ -191,7 +209,7 @@ GUIDES = (
         "sections": (
             ("Sorular nereden gelir?", (
                 "Sorular yalnız ebeveynin ekleyip kullanıma açtığı bankadan gelir. Hazır ödev veya otomatik olarak çocuğa gönderilen sınırsız içerik iddiası yoktur.",
-                "Soruları tek tek ekleyebilir veya CSV/XLSX soru bankası içe aktarabilirsiniz. PDF ve EPUB dosyaları ise Kütüphane belgesi olarak kullanılır; soru bankasıyla aynı şey değildir.",
+                "Soruları tek tek ekleyebilir veya CSV/XLSX soru bankası içe aktarabilirsiniz. Türkiye ortaokul (5–8. sınıf) için hazır konu anlatımı ve soru paketleri alika.tr’deki Hazır içerik sayfasındadır; bunlar da ancak ebeveyn içe aktarınca kullanılır. PDF ve EPUB dosyaları ise Kütüphane belgesi olarak kullanılır; soru bankasıyla aynı şey değildir.",
             )),
             ("Kaç doğru cevap kaç dakika kazandırır?", (
                 "Ödül oranını ebeveyn belirler. Bir videoda görülen “iki doğru, bir dakika” yalnız örnek ayardır; ürünün değişmez kuralı değildir.",
@@ -300,6 +318,34 @@ def locale_switch_path(target_lang: str, slug: str = "") -> str:
     return href(target_lang, slug)
 
 
+def format_count(value: int, lang: str) -> str:
+    return f"{value:,}".replace(",", THOUSANDS_SEPARATORS.get(lang, ","))
+
+
+def content_href(lang: str) -> str:
+    # Ana sayfadaki contentPath ile aynı: Türkçe katalog uygulamanın da açtığı /icerik/ adresinde.
+    return "/icerik/" if lang == "tr" else href(lang, "content")
+
+
+_HOME_COPY: dict[str, dict[str, dict[str, str]]] = {}
+
+
+def home_copy(lang: str) -> dict[str, dict[str, str]]:
+    """Ana sayfa dil dosyasından nav ve footer metinlerini okur."""
+    if lang not in _HOME_COPY:
+        source = (HOME_I18N / f"{lang}.ts").read_text(encoding="utf-8")
+        pair = re.compile(r"(\w+): '((?:[^'\\]|\\.)*)'")
+        nav_line = re.search(r"^  nav: \{(.*)\},$", source, re.M)
+        footer_block = re.search(r"^  footer: \{\n(.*?)^  \},$", source, re.M | re.S)
+        if not nav_line or not footer_block:
+            raise ValueError(f"Home copy for {lang} has no nav/footer block")
+        _HOME_COPY[lang] = {
+            "nav": {key: value.replace("\\'", "'") for key, value in pair.findall(nav_line.group(1))},
+            "footer": {key: value.replace("\\'", "'") for key, value in pair.findall(footer_block.group(1))},
+        }
+    return _HOME_COPY[lang]
+
+
 def load_locales() -> dict[str, dict]:
     data = json.loads((SRC / "data" / "locales.json").read_text(encoding="utf-8"))
     missing = [lang for lang in LANGS if lang not in data]
@@ -328,11 +374,20 @@ def language_menu(locales: dict[str, dict], lang: str, slug: str = "") -> str:
 def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
     c = locales[lang]
     access = ACCESS_LABELS[lang]
-    nav_slugs = ("how-it-works", "ecosystem", "features", "age-groups", "content")
-    nav = "".join(
-        f'<a href="{page_href(lang, item)}">{esc(label)}</a>'
-        for item, label in zip(nav_slugs, c["nav"])
+    words = home_copy(lang)["nav"]
+    home = href(lang)
+    # Ana sayfanın üst menüsüyle aynı sıra; deneme düğmesi sağda.
+    current = ' aria-current="page"'
+    nav_items = (
+        (f"{home}#ozellikler", words["features"], ""),
+        (f"{home}#videolar", words["videos"], ""),
+        (content_href(lang), words["content"], current if slug == "content" else ""),
+        (f"{home}#plan", words["plan"], ""),
+        (f"{home}#sss", words["faq"], ""),
     )
+    nav = "".join(f'<a href="{link}"{attr}>{esc(label)}</a>' for link, label, attr in nav_items)
+    # Telefonda sağdaki deneme düğmesi gizlenir; menüde görünür.
+    nav += f'<a class="nav-offer" href="{home}#deneme">{esc(words["offer"])}</a>'
     return f"""
     <a class="skip-link" href="#main">{esc(access[0])}</a>
     <header class="site-header" data-header>
@@ -351,25 +406,31 @@ def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
           <summary aria-label="Language"><span aria-hidden="true">{LANGUAGE_FLAGS[lang]}</span><span>{esc(c["name"])}</span></summary>
           <div class="language-list">{language_menu(locales, lang, slug)}</div>
         </details>
-        <a class="button button-small" href="{page_href(lang, 'downloads')}">{esc(c["get"])}</a>
+        <a class="button button-small" href="{href(lang)}#deneme">{esc(words["offer"])}</a>
       </div>
     </header>
     """
 
 
 def footer(locales: dict[str, dict], lang: str) -> str:
-    c = locales[lang]
+    words = home_copy(lang)["footer"]
+    home = href(lang)
+    guide = GUIDE_LINKS.get(lang)
+    guide_link = f'<a href="{guide}">{esc(words["guides"])}</a>' if guide else ""
     return f"""
     <footer class="site-footer">
       <div class="footer-brand">
         <img src="/assets/brand/alika-logo.png" width="52" height="52" alt="">
-        <div><strong>AliKa</strong><span>{esc(c["final_body"])}</span></div>
+        <div><strong>AliKa</strong><span>{esc(words["tagline"])}</span></div>
       </div>
       <div class="footer-links">
-        <a href="{page_href(lang, 'roadmap')}">{esc(c["pages"]["roadmap"][0])}</a>
-        <a href="{page_href(lang, 'contact')}">{esc(c["support"])}</a>
-        <a href="/privacy/">{esc(c["privacy"])}</a>
-        <a href="/eula/">{esc(c["eula"])}</a>
+        <a href="{home}#hakkimizda">{esc(words["about"])}</a>
+        <a href="{home}#sss">{esc(words["faq"])}</a>
+        {guide_link}
+        <a href="{content_href(lang)}">{esc(words["content"])}</a>
+        <a href="{home}#iletisim">{esc(words["support"])}</a>
+        <a href="/privacy/">{esc(words["privacy"])}</a>
+        <a href="/eula/">{esc(words["terms"])}</a>
       </div>
       <p>© 2026 ErenKa Software · <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a></p>
     </footer>
@@ -480,12 +541,12 @@ def guide_index_body() -> str:
     return f"""
     <main id="main" class="guide-main">
       <header class="guide-index-hero">
-        <p class="eyebrow">Windows 10/11 · Dijital ebeveynlik</p>
+        <p class="eyebrow">Windows ve Android · Dijital ebeveynlik</p>
         <h1>Ekran süresi için açık, uygulanabilir rehberler.</h1>
         <p>Kuralları önceden konuşmak, öğrenme akışını sınırlı tutmak ve verinin nereye gittiğini bilmek için hazırlanmış Türkçe kaynaklar.</p>
       </header>
       <section class="article-grid" aria-label="Türkçe ebeveyn rehberleri">{cards}</section>
-      <aside class="guide-disclosure"><strong>Açıklık notu:</strong> Bu rehberler AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa Windows ve Android için ücretli bir uygulamadır. Windows sürümü Microsoft Store’da 7 günlük deneme ve ₺80 fiyatla, Android aile aboneliği Google Play’de 14 günlük denemeyle sunulur.</aside>
+      <aside class="guide-disclosure"><strong>Açıklık notu:</strong> Bu rehberler AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa Windows ve Android için ücretli bir uygulamadır. Windows sürümü Microsoft Store’da 7 günlük denemeyle, Android aile aboneliği Google Play’de 14 günlük denemeyle sunulur; güncel fiyatı mağaza sayfası gösterir.</aside>
     </main>
     """
 
@@ -516,16 +577,16 @@ def guide_article_body(guide: dict) -> str:
         play_href = esc(play_store_url("tr", guide["campaign_id"], "rehber"))
         cta = (
             '<section class="guide-cta"><h2>Windows’ta ya da Android’de deneyin.</h2>'
-            '<p>Windows sürümünü Microsoft Store’da 7 gün ücretsiz deneyebilirsiniz; deneme sonrası fiyat ₺80’dir. '
+            '<p>Windows sürümünü Microsoft Store’da 7 gün ücretsiz deneyebilirsiniz. '
             'Android aile aboneliği Google Play’de 14 gün ücretsiz denemeyle başlar.</p>'
             f'<div class="button-row">{store_button}<a class="button" href="{play_href}" target="_blank" rel="noopener noreferrer">Google Play’de açın</a></div></section>'
         )
     else:
         eyebrow = "Windows 10/11 · AliKa ebeveyn rehberi"
-        disclosure = "AliKa ücretli bir Windows uygulamasıdır."
+        disclosure = "AliKa Windows ve Android için ücretli bir uygulamadır; bu rehber Windows sürümünü anlatır."
         cta = (
             '<section class="guide-cta"><h2>Windows bilgisayarınızda birlikte deneyin.</h2>'
-            '<p>AliKa’yı Windows 10/11 için 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Deneme sonrası fiyat ₺80’dir.</p>'
+            '<p>AliKa’yı Windows 10/11 için 7 gün ücretsiz deneyebilir, ilk kuralı ve çocuk ekranını kontrol edebilirsiniz. Güncel fiyatı mağaza sayfası gösterir.</p>'
             f'{store_button}</section>'
         )
     return f"""
@@ -629,7 +690,7 @@ def content_library(catalog: dict, lang: str) -> str:
     grade_cards = "".join(f"""
       <article class="grade-download-card" data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
         <div><small>{esc(row['country'])} · {esc(labels[7].format(row['grade']))}</small>
-          <h3>{row['subject_count']} {esc(scope[4])} · {row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}</h3>
+          <h3>{row['subject_count']} {esc(scope[4])} · {format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}</h3>
           <p>{esc(labels[6])}</p></div>
         <a class="button direct-download" href="{esc(row['download_url'])}" download
            data-direct-download>{esc(labels[2])}</a>
@@ -638,20 +699,20 @@ def content_library(catalog: dict, lang: str) -> str:
       <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
         <small>{esc(row['country_code'])} · {esc(labels[7].format(row['grade']))}</small>
         <h3>{esc(row['subject'])}</h3>
-        <p>{row['notes']} {esc(labels[4])} · {row['questions']} {esc(labels[5])}<br>{esc(labels[6])}</p>
+        <p>{format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}<br>{esc(labels[6])}</p>
         <a class="package-cta" href="{esc(row['download_url'])}" download>{esc(labels[3])}</a>
       </article>""" for row in catalog["subjects"])
     question_bank_cards = "".join(f"""
       <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
         <small>{esc(row['country'])} · {esc(labels[7].format(row['grade']))}</small>
         <h3>{esc(row['title'])}</h3>
-        <p><strong>{row['questions']:,}</strong> {esc(bank_labels[3])}<br>{esc(bank_labels[1])}</p>
+        <p><strong>{format_count(row['questions'], lang)}</strong> {esc(bank_labels[3])}</p>
         <a class="package-cta" href="{esc(row['download_url'])}" download>{esc(bank_labels[2])}</a>
       </article>""" for row in catalog.get("question_banks", []))
     question_bank_section = f"""
       <section class="question-bank-section" data-content-collection>
         <div class="question-bank-heading">
-          <p class="eyebrow">2.000</p>
+          <p class="eyebrow">{format_count(2000, lang)}</p>
           <h2>{esc(bank_labels[0])}</h2>
           <p>{esc(bank_labels[1])}</p>
         </div>
@@ -670,7 +731,7 @@ def content_library(catalog: dict, lang: str) -> str:
       <div class="grade-downloads">{grade_cards}</div>
       {question_bank_section}
       <div class="package-grid" data-content-grid>{subject_cards}</div>
-      <p class="honesty-note">{esc(catalog['quality_disclosure'])} · <a href="{esc(catalog['source_repository'])}">GitHub</a></p>
+      <p class="honesty-note">{esc(CONTENT_QUALITY_NOTES[lang])} · <a href="{esc(catalog['source_repository'])}">GitHub</a></p>
     """
 
 
@@ -734,6 +795,45 @@ def redirect_document(lang: str, slug: str) -> str:
 """
 
 
+def not_found_document(locales: dict[str, dict]) -> str:
+    """GitHub Pages bilinmeyen her adreste bunu gösterir; bağlantılar mutlak olmalı."""
+    body = """
+    <main id="main" class="guide-main">
+      <article class="guide-article">
+        <header>
+          <p class="eyebrow">404</p>
+          <h1>Bu sayfa bulunamadı.</h1>
+          <p class="guide-lede">Adres değişmiş ya da yanlış yazılmış olabilir. Aşağıdaki bağlantılardan devam edebilirsiniz.</p>
+          <p lang="en">Page not found. <a class="text-link" href="/en/">Go to the English home page →</a></p>
+        </header>
+        <section class="guide-cta">
+          <h2>Nereye gitmek istersiniz?</h2>
+          <div class="button-row"><a class="button" href="/">Ana sayfa</a><a class="button" href="/icerik/">Hazır içerik</a><a class="button" href="/rehber/">Rehberler</a></div>
+        </section>
+      </article>
+    </main>
+    """
+    return f"""<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0A1631">
+  <meta name="robots" content="noindex">
+  <title>Sayfa bulunamadı — AliKa</title>
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="icon" href="/assets/brand/alika-logo.png">
+</head>
+<body>
+  {header(locales, "tr")}
+  {body}
+  {footer(locales, "tr")}
+  <script src="/assets/site.js" defer></script>
+</body>
+</html>
+"""
+
+
 def write_page(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8", newline="\n")
@@ -785,6 +885,8 @@ def build() -> None:
     write_page(DIST / UK_GUIDE_PATH / "index.html", guide_document(locales, "Windows child screen time: a clear family routine", "A practical UK guide to agreeing screen-time rules on a Windows 10 or Windows 11 family PC, with Microsoft Family Safety context and AliKa's visible, local-first approach.", uk_guide_url, uk_guide_body(), "en"))
     uk_landing_url = f"{BASE_URL}/{UK_LANDING_PATH}/"
     write_page(DIST / UK_LANDING_PATH / "index.html", guide_document(locales, "AliKa for UK Windows family screen time", "A preparation page for a clear, consent-based screen-time routine on Windows 10 and Windows 11 family PCs.", uk_landing_url, uk_landing_body(), "en"))
+
+    write_page(DIST / "404.html", not_found_document(locales))
 
     # Uygulamadaki sabit, Türkçe ve anlaşılır içerik adresi.
     (DIST / "icerik").mkdir(exist_ok=True)

@@ -153,6 +153,11 @@ button {
   inset-inline: 0;
 }
 
+/* Deneme bağlantısı yalnız telefon menüsünde; geniş ekranda sağdaki düğme var. */
+.site-nav a.nav-offer {
+  display: none;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -2512,6 +2517,11 @@ h3 {
 
   .site-nav {
     inset-block-start: 70px;
+  }
+
+  .site-nav a.nav-offer {
+    display: flex;
+    color: var(--cyan);
   }
 
   .hero {

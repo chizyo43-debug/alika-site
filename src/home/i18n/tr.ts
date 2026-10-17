@@ -319,7 +319,7 @@ const tr: HomeCopy = {
     copied: 'Kopyalandı',
   },
   footer: {
-    tagline: 'Kısıtlamıyoruz, planlıyoruz. Windows ve Android için ebeveyn kontrolü ve öğrenme; reklamsız, hesapsız.',
+    tagline: 'Kısıtlamıyoruz, planlıyoruz. Windows ve Android için ebeveyn kontrolü ve öğrenme; reklamsız, AliKa hesabı gerekmez.',
     product: 'Ürün',
     download: 'İndir',
     support: 'Destek',

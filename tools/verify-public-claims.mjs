@@ -35,9 +35,11 @@ for (const [pattern, message] of bannedClaims) {
 }
 
 // Fiyat mağazada gösterilir; sayfa metninde tutar yazılmaz (yalnız mağaza doğrulamalı ld+json).
-if (/₺\s*\d|\d\s*(?:TL|TRY)\b|[¥₩€$£]\s*\d/.test([home, ...i18nSources].join('\n'))) {
+if (/₺\s*\d|\d\s*(?:TL|TRY)\b|[¥₩€$£]\s*\d/.test([home, ...i18nSources, guideSource].join('\n'))) {
   errors.push('visible home copy must not state a price; the stores show it');
 }
+// İç araç adları ziyaretçiye gösterilmez.
+if (/Codex/.test(guideSource)) errors.push('public pages must not name internal tools (Codex)');
 // Deneme süreleri mağazalardakiyle aynı kalmalı: Play 14 gün, Microsoft Store 7 gün.
 requireMatch(trCopy, /trialPlay: '14 gün ücretsiz/, 'Android trial must stay 14 days as on Google Play');
 requireMatch(trCopy, /trialStore: '7 gün ücretsiz/, 'Windows trial must stay 7 days as on Microsoft Store');

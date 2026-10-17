@@ -297,7 +297,7 @@ const ja: HomeCopy = {
     copied: 'コピーしました',
   },
   footer: {
-    tagline: '制限ではなく、計画を。WindowsとAndroid向けのペアレンタルコントロールと学習。広告なし、アカウント不要。',
+    tagline: '制限ではなく、計画を。WindowsとAndroid向けのペアレンタルコントロールと学習。広告なし、AliKaアカウント不要。',
     product: '製品',
     download: 'ダウンロード',
     support: 'サポート',

@@ -297,7 +297,7 @@ const en: HomeCopy = {
     copied: 'Copied',
   },
   footer: {
-    tagline: 'We don’t restrict, we plan. Parental control and learning for Windows and Android; no ads, no account.',
+    tagline: 'We don’t restrict, we plan. Parental control and learning for Windows and Android; no ads, no AliKa account needed.',
     product: 'Product',
     download: 'Download',
     support: 'Support',

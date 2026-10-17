@@ -297,7 +297,7 @@ const de: HomeCopy = {
     copied: 'Kopiert',
   },
   footer: {
-    tagline: 'Wir verbieten nicht, wir planen. Elternkontrolle und Lernen für Windows und Android; ohne Werbung, ohne Konto.',
+    tagline: 'Wir verbieten nicht, wir planen. Elternkontrolle und Lernen für Windows und Android; ohne Werbung, ohne AliKa-Konto.',
     product: 'Produkt',
     download: 'Herunterladen',
     support: 'Hilfe',
