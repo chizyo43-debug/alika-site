@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import { microsoftStoreUrl, playStoreUrl } from '../store-campaign';
 import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, type Lang } from './i18n/langs';
 import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, PlanStatus, ScreenId, TvGame, VideoKey } from './i18n/types';
@@ -601,10 +601,8 @@ function CopyEmail({ t }: { t: HomeCopy }) {
   );
 }
 
-/* Dil seçici: her dil kendi ana sayfasına gider. Dışarı tıklayınca ya da Esc ile kapanır. */
-function LanguagePicker({ lang, t }: { lang: Lang; t: HomeCopy }) {
-  const ref = useRef<HTMLDetailsElement>(null);
-
+/* Açılır liste dışarı tıklayınca ya da Esc ile kapanır. */
+function useDismiss(ref: RefObject<HTMLDetailsElement | null>) {
   useEffect(() => {
     const close = (event: Event) => {
       const details = ref.current;
@@ -619,7 +617,46 @@ function LanguagePicker({ lang, t }: { lang: Lang; t: HomeCopy }) {
       document.removeEventListener('pointerdown', close);
       document.removeEventListener('keydown', close);
     };
-  }, []);
+  }, [ref]);
+}
+
+/* Telefonda yazılı menü gizlenir; aynı bağlantılar bu açılır listede durur. */
+function MobileMenu({ lang, t }: { lang: Lang; t: HomeCopy }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+  useDismiss(ref);
+  const close = () => {
+    if (ref.current) ref.current.open = false;
+  };
+  const items: [string, string][] = [
+    ['#ozellikler', t.nav.features],
+    ['#videolar', t.nav.videos],
+    [contentPath(lang), t.nav.content],
+    ['#plan', t.nav.plan],
+    ['#deneme', t.nav.offer],
+    ['#sss', t.nav.faq],
+    ['/privacy/', t.nav.privacy],
+  ];
+
+  return (
+    <details className="mobMenu" ref={ref}>
+      <summary className="iconBtn" aria-label={t.a11y.mainMenu}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </summary>
+      <ul className="langList mobList">
+        {items.map(([href, label]) => (
+          <li key={href}>
+            <a href={href} onClick={close}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
+/* Dil seçici: her dil kendi ana sayfasına gider. */
+function LanguagePicker({ lang, t }: { lang: Lang; t: HomeCopy }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+  useDismiss(ref);
 
   return (
     <details className="langPick" ref={ref}>
@@ -685,6 +722,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               <span className="storeText"><small>{t.store.forAndroid}</small>{STORE_NAMES.play}</span>
             </a>
           </div>
+          <MobileMenu lang={lang} t={t} />
         </nav>
       </header>
 

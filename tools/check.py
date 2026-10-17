@@ -203,10 +203,17 @@ def main() -> None:
         if "youtube.com" in guide_text or "youtu.be" in guide_text:
             errors.append(f"Guide video must play on the site, not on YouTube: {page}")
 
-    uk_pages = (
-        DIST / "en" / "guides" / "windows-child-screen-time" / "index.html",
-        DIST / "en" / "uk-windows-screen-time" / "index.html",
-    )
+    # İngiltere hazırlık sayfası gizli: rehbere yönlenir, dizine ve site haritasına girmez.
+    uk_landing = DIST / "en" / "uk-windows-screen-time" / "index.html"
+    uk_landing_text = uk_landing.read_text(encoding="utf-8") if uk_landing.exists() else ""
+    if (
+        '<meta name="robots" content="noindex">' not in uk_landing_text
+        or 'url=/en/guides/windows-child-screen-time/"' not in uk_landing_text
+    ):
+        errors.append("UK preparation page must be a noindex redirect to the UK guide")
+    if "uk-windows-screen-time" in (DIST / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("Hidden UK preparation page is still in the sitemap")
+    uk_pages = (DIST / "en" / "guides" / "windows-child-screen-time" / "index.html",)
     for page in uk_pages:
         if not page.exists():
             errors.append(f"Missing UK preparation page: {page}")

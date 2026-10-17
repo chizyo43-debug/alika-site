@@ -191,6 +191,28 @@ a {
   position: relative;
 }
 
+/* Telefon menüsü: yazılı bağlantılar gizlenince (≤960 px) görünür. */
+.mobMenu {
+  position: relative;
+  display: none;
+}
+
+.mobMenu > summary {
+  list-style: none;
+}
+
+.mobMenu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobMenu[open] > summary {
+  background: var(--surface);
+}
+
+.mobList {
+  min-width: 220px;
+}
+
 .langBtn {
   display: flex;
   width: auto;
@@ -2337,6 +2359,17 @@ button.videoThumb {
 
 @media (max-width: 960px) {
   .topNav > a:not(.pill) {
+    display: none;
+  }
+
+  .mobMenu {
+    display: block;
+  }
+}
+
+/* Dar telefonda üst çubukta yalnız logo; ad hemen altta büyük başlıkta. */
+@media (max-width: 420px) {
+  .top .brand span {
     display: none;
   }
 }
