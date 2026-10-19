@@ -55,8 +55,8 @@ const ko: HomeCopy = {
     stickyChoose: '무료로 체험하기',
   },
   demo: {
-    title: '30초 만에 보는 AliKa',
-    body: '시간이 끝나면 화면이 잠깁니다. 아이가 문제를 풀면 보호자가 정한 규칙에 따라 추가 시간을 얻고 잠금이 풀립니다.',
+    title: '45초 만에 보는 AliKa',
+    body: '컴퓨터에서도 휴대폰에서도 규칙은 보호자가 정합니다. 시간이 끝나면 아이는 문제를 풀고, 보호자가 정한 한도 안에서 추가 시간을 얻습니다.',
   },
   screens: {
     'win-panel': { label: '보호자 패널', body: '하루 요약을 한 화면에: 사용 시간과 남은 시간, 클릭 한 번으로 주는 추가 시간, 문제를 풀어 얻은 시간, 승인을 기다리는 과제.' },
@@ -199,7 +199,12 @@ const ko: HomeCopy = {
   videos: {
     winSetup: { title: 'AliKa for Windows 첫 설정', body: 'Microsoft Store 설치부터 첫 설정의 마지막 단계까지.' },
     androidSetup: { title: 'AliKa for Android 첫 설정', body: 'Google Play 설치부터 휴대폰 권한, 첫 설정의 마지막 단계까지.' },
-    winQuiz: { title: '문제 풀고 추가 시간 얻기', body: '아이가 정답으로 추가 시간을 얻으면 잠금이 풀립니다.' },
+    ad: { title: '컴퓨터에서도, 휴대폰에서도', body: 'Windows 컴퓨터와 Android 휴대폰의 화면 시간을 보호자가 계획하고, 아이는 문제를 풀어 정한 한도 안에서 추가 시간을 얻습니다.' },
+    firstDay: { title: 'AliKa 첫날 설정', body: '하루 사용 시간, 주간 계획, 야간 모드, 문제 보상과 하루 상한, 과제, 주간 보고서.' },
+    winPanel: { title: 'AliKa Windows 보호자 패널', body: '각 탭의 역할: 규칙, 앱과 인터넷, 과제, 문제, 보고서, 보안, 설정.' },
+    andPanel: { title: 'AliKa Android 보호자 패널', body: '하단 메뉴와 각 메뉴의 역할: 패널, 시간·앱 관리, 규칙, 문제, 보고서, 기기, 프로필.' },
+    homeNetwork: { title: 'AliKa 가족 네트워크', body: '휴대폰과 Windows 컴퓨터를 가족 네트워크에 추가, 두 번째 보호자, 가족 구독, 보호자 휴대폰에서 기기 관리. 영상 속 TV 부분은 개발 중입니다.' },
+    quizShort: { title: '화면 시간 그 이상', body: '아이는 문제를 풀어 추가 시간을 얻고, 한도는 보호자가 정합니다.' },
   },
   ages: {
     title: '같은 AliKa, 나이에 따라 다른 이야기',

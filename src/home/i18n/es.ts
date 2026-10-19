@@ -55,8 +55,8 @@ const es: HomeCopy = {
     stickyChoose: 'Pruébalo gratis',
   },
   demo: {
-    title: 'AliKa en medio minuto',
-    body: 'Cuando se acaba el tiempo, la pantalla se bloquea. Tu hijo responde preguntas, gana tiempo extra según la regla que fijaste y el bloqueo se levanta.',
+    title: 'AliKa en 45 segundos',
+    body: 'En el ordenador y en el móvil, tú pones las reglas. Cuando se acaba el tiempo, tu hijo responde preguntas y gana tiempo extra dentro del límite que fijas.',
   },
   screens: {
     'win-panel': { label: 'Panel de padres', body: 'El resumen del día en una pantalla: tiempo usado y restante, tiempo extra con un clic, minutos ganados respondiendo preguntas y tareas que esperan tu aprobación.' },
@@ -199,7 +199,12 @@ const es: HomeCopy = {
   videos: {
     winSetup: { title: 'AliKa para Windows: primera configuración', body: 'Desde la instalación en Microsoft Store hasta el último paso de la primera configuración.' },
     androidSetup: { title: 'AliKa para Android: primera configuración', body: 'Desde la instalación en Google Play, pasando por los permisos del móvil, hasta el último paso de la primera configuración.' },
-    winQuiz: { title: 'Responde y gana tiempo extra', body: 'El niño gana tiempo extra con respuestas correctas y el bloqueo se levanta.' },
+    ad: { title: 'En el ordenador y en el móvil', body: 'Planificas el tiempo de pantalla en el ordenador Windows y en el móvil Android; tu hijo gana tiempo extra respondiendo preguntas, dentro del límite que fijas.' },
+    firstDay: { title: 'AliKa: ajustes del primer día', body: 'Tiempo diario, plan semanal, modo noche, premio por preguntas y tope diario, tareas e informe semanal.' },
+    winPanel: { title: 'Panel de padres de AliKa en Windows', body: 'Para qué sirve cada pestaña: reglas, apps e internet, tareas, preguntas, informes, seguridad y ajustes.' },
+    andPanel: { title: 'Panel de padres de AliKa en Android', body: 'Para qué sirven la barra inferior y los menús: panel, gestión del tiempo y de apps, reglas, preguntas, informes, dispositivos y perfil.' },
+    homeNetwork: { title: 'Red familiar de AliKa', body: 'Añadir móviles y el ordenador Windows a la red familiar, segundo progenitor, suscripción familiar y gestión de dispositivos desde el móvil de los padres. La parte de TV del vídeo aún está en desarrollo.' },
+    quizShort: { title: 'Más que tiempo de pantalla', body: 'Tu hijo gana tiempo extra respondiendo preguntas; los límites los pones tú.' },
   },
   ages: {
     title: 'El mismo AliKa, contado distinto según la edad',

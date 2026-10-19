@@ -119,8 +119,8 @@ GUIDES = (
         "slug": "windows-cocuk-ekran-suresi-nasil-yonetilir",
         "title": "Windows'ta Çocuk Ekran Süresi Nasıl Yönetilir?",
         "description": "Windows 10 ve 11'de çocuk ekran süresi için aile kuralı oluşturun; Microsoft Family Safety seçeneklerini ve AliKa'nın görünür, yerel-öncelikli akışını karşılaştırın.",
-        "video": "windows-soru-coz",
-        "video_label": "Soru çöz, ek süre kazan · 0:33",
+        "video": "windows-ebeveyn-paneli",
+        "video_label": "AliKa Windows ebeveyn paneli · 2:36",
         "campaign_id": "organic_guide_windows_tr",
         "lede": (
             "Windows'ta ekran süresi yönetimi yalnız bir süre sayısı girmek değildir. "
@@ -201,8 +201,8 @@ GUIDES = (
         ),
         "title": "Soru Çözerek Ekran Süresi Kazanma: AliKa Nasıl Çalışır?",
         "description": "Çocuğun soru çözerek kontrollü ek süre kazanmasını; soru bankası, ödül oranı ve günlük tavan ayarlarıyla adım adım öğrenin.",
-        "video": "windows-soru-coz",
-        "video_label": "Soru çöz, ek süre kazan · 0:33",
+        "video": "alika-reklam",
+        "video_label": "Bilgisayarda da, telefonda da · 0:44",
         "lede": (
             "Ekran süresini yalnızca kesmek yerine bir kısmını öğrenmeyle ilişkilendirmek mümkün. "
             "AliKa’da çocuk, ebeveynin eklediği soru bankasından sorular çözer; doğru cevaplar "
@@ -249,6 +249,9 @@ GUIDES = (
         ),
         "title": "Bulut Hesabı Olmadan Ebeveyn Kontrolü Nasıl Çalışır?",
         "description": "AliKa’nın cihazda kalan verilerle, reklamsız ve zorunlu bulut hesabı olmadan nasıl çalıştığını; yerel aile ağının sınırlarını öğrenin.",
+        "video": "ev-agi",
+        "video_label": "AliKa ev ağı · 3:43",
+        "video_note": "Videodaki Android TV bölümü geliştirme aşamasındadır.",
         "lede": (
             "Bir ebeveyn kontrolü uygulamasında yalnız “ne yapıyor?” değil, “veri nereye gidiyor?” sorusu da önemlidir. "
             "AliKa’nın temel kullanım kayıtları cihazda tutulur; reklam, üçüncü taraf analitik ve zorunlu AliKa bulut hesabı bulunmaz."
@@ -295,8 +298,8 @@ GUIDES = (
         "platform": "both",
         "title": "Ailece Ekran Süresi Planı Nasıl Yapılır? Haftalık Düzen",
         "description": "Çocukla birlikte haftalık ekran planı kurun: okul günü ve hafta sonu süresi, ekranların kapanacağı saat, ekran dışı zaman ve haftalık gözden geçirme.",
-        "video": "windows-ilk-kurulum",
-        "video_label": "AliKa Windows ilk kurulum · 1:35",
+        "video": "ilk-gun-ayarlari",
+        "video_label": "AliKa ilk gün ayarları · 2:06",
         "lede": (
             "Ekran süresi planı, sürenin her akşam yeniden tartışılmaması için önceden ve birlikte yapılır. "
             "Okul günü ile hafta sonunu ayırın, ekranların kapanacağı saati sabitleyin ve planı haftada bir kısa bir konuşmayla gözden geçirin. "
@@ -397,8 +400,8 @@ GUIDES = (
         "platform": "both",
         "title": "Ara Tatilde Ekran Süresi Nasıl Planlanır? 9 Günlük Plan",
         "description": "16–20 Kasım ara tatili için hafta sonlarıyla 9 günlük ekran planı: günlük süre, uyku saati, ekran dışı etkinlik ve okula dönüş. Yazdırılabilir tablo.",
-        "video": "windows-soru-coz",
-        "video_label": "Soru çöz, ek süre kazan · 0:33",
+        "video": "ilk-gun-ayarlari",
+        "video_label": "AliKa ilk gün ayarları · 2:06",
         "lede": (
             "Ara tatil okul düzenini bozar ama ekran süresinin sınırsız olması gerekmez. "
             "Tatil başlamadan günlük bir süre, sabit bir uyku saati ve her gün için bir ekran dışı plan belirleyin; son iki günü okul düzenine dönüşe ayırın. "
@@ -742,8 +745,9 @@ def guide_article_body(guide: dict) -> str:
     )
     # Video dosyası sitede durur ve sayfada oynar; tıklanana kadar yalnız kapak görseli yüklenir.
     video = f'/videos/kurulum/{guide["video"]}' if guide.get("video") else ""
+    video_note = f'<span>{esc(guide["video_note"])}</span>' if guide.get("video_note") else ""
     video_aside = (
-        f'<aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>{esc(guide["video_label"])}</span></div>'
+        f'<aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>{esc(guide["video_label"])}</span>{video_note}</div>'
         f'<video controls preload="none" playsinline poster="{video}.webp"><source src="{video}.mp4" type="video/mp4">'
         f'<track kind="captions" src="{video}.tr.vtt" srclang="tr" label="Türkçe"></video></aside>'
         if video else ""

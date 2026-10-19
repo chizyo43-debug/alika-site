@@ -55,8 +55,8 @@ const fr: HomeCopy = {
     stickyChoose: 'Essayer gratuitement',
   },
   demo: {
-    title: 'AliKa en trente secondes',
-    body: 'Quand le temps est écoulé, l’écran se verrouille. Votre enfant répond à des questions, gagne du temps en plus selon la règle que vous avez fixée, et le verrou se lève.',
+    title: 'AliKa en 45 secondes',
+    body: 'Sur l’ordinateur comme sur le téléphone, c’est vous qui fixez les règles. Quand le temps est écoulé, votre enfant répond à des questions et gagne du temps en plus dans la limite que vous fixez.',
   },
   screens: {
     'win-panel': { label: 'Panneau parent', body: 'La journée en un coup d’œil : temps utilisé et restant, temps supplémentaire en un clic, minutes gagnées en répondant à des questions et tâches qui attendent votre validation.' },
@@ -199,7 +199,12 @@ const fr: HomeCopy = {
   videos: {
     winSetup: { title: 'AliKa pour Windows : première installation', body: 'De l’installation depuis le Microsoft Store jusqu’à la dernière étape de la configuration.' },
     androidSetup: { title: 'AliKa pour Android : première installation', body: 'De l’installation depuis Google Play aux autorisations du téléphone, jusqu’à la dernière étape de la configuration.' },
-    winQuiz: { title: 'Répondre, gagner du temps', body: 'L’enfant gagne du temps avec de bonnes réponses et le verrou se lève.' },
+    ad: { title: 'Sur l’ordinateur et sur le téléphone', body: 'Vous planifiez le temps d’écran sur l’ordinateur Windows et le téléphone Android ; votre enfant gagne du temps en plus en répondant à des questions, dans la limite que vous fixez.' },
+    firstDay: { title: 'AliKa : réglages du premier jour', body: 'Temps quotidien, plan de la semaine, mode nuit, récompense des questions et plafond quotidien, tâches et rapport hebdomadaire.' },
+    winPanel: { title: 'Panneau parent AliKa sous Windows', body: 'À quoi sert chaque onglet : règles, applis et internet, tâches, questions, rapports, sécurité et réglages.' },
+    andPanel: { title: 'Panneau parent AliKa sous Android', body: 'À quoi servent la barre du bas et les menus : panneau, gestion du temps et des applis, règles, questions, rapports, appareils et profil.' },
+    homeNetwork: { title: 'Réseau familial AliKa', body: 'Ajouter les téléphones et l’ordinateur Windows au réseau familial, deuxième parent, abonnement famille et gestion des appareils depuis le téléphone parent. La partie TV de la vidéo est encore en développement.' },
+    quizShort: { title: 'Plus que du temps d’écran', body: 'Votre enfant gagne du temps en plus en répondant à des questions ; c’est vous qui fixez les limites.' },
   },
   ages: {
     title: 'Le même AliKa, raconté autrement selon l’âge',

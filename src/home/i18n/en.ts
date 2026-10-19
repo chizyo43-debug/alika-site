@@ -55,8 +55,8 @@ const en: HomeCopy = {
     stickyChoose: 'Try it free',
   },
   demo: {
-    title: 'AliKa in half a minute',
-    body: 'When time is up, the screen locks. Your child answers questions, earns extra time under the rule you set, and the lock lifts.',
+    title: 'AliKa in 45 seconds',
+    body: 'On the computer and on the phone, you set the rules. When time is up, your child answers questions and earns extra time within the limit you set.',
   },
   screens: {
     'win-panel': { label: 'Parent panel', body: 'The day at a glance: time used and left, extra time in one click, minutes earned by answering questions and tasks waiting for your approval.' },
@@ -199,7 +199,12 @@ const en: HomeCopy = {
   videos: {
     winSetup: { title: 'AliKa for Windows: first setup', body: 'From installing in the Microsoft Store to the last step of first setup.' },
     androidSetup: { title: 'AliKa for Android: first setup', body: 'From installing on Google Play through phone permissions to the last step of first setup.' },
-    winQuiz: { title: 'Answer questions, earn extra time', body: 'The child earns extra time with correct answers and the lock lifts.' },
+    ad: { title: 'On the computer and on the phone', body: 'You plan screen time on the Windows computer and the Android phone; your child answers questions and earns extra time within the limit you set.' },
+    firstDay: { title: 'AliKa first-day settings', body: 'Daily time, weekly plan, night mode, question reward and daily cap, tasks and the weekly report.' },
+    winPanel: { title: 'AliKa Windows parent panel', body: 'What each tab does: rules, apps and internet, tasks, questions, reports, security and settings.' },
+    andPanel: { title: 'AliKa Android parent panel', body: 'What the bottom bar and menus do: panel, time and app management, rules, questions, reports, devices and profile.' },
+    homeNetwork: { title: 'AliKa family network', body: 'Adding phones and the Windows computer to the family network, a second parent, the family subscription and managing devices from the parent phone. The TV part of the video is still in development.' },
+    quizShort: { title: 'More than screen time', body: 'Your child earns extra time by answering questions; you set the limits.' },
   },
   ages: {
     title: 'The same AliKa, told differently for each age',

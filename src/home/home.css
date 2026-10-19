@@ -1902,6 +1902,20 @@ button.videoThumb {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Dikey video (Shorts ve reklamın dikey eşi): 9:16 çerçeve. */
+.videoThumb.vertical {
+  max-width: min(100%, 300px, 39svh);
+  margin-inline: auto;
+  aspect-ratio: 9 / 16;
+}
+
+.screenShot .videoPlayer.vertical {
+  width: auto;
+  height: min(68svh, 620px);
+  aspect-ratio: 9 / 16;
+  border-radius: 22px;
+}
+
 .video:hover .videoThumb img {
   transform: scale(1.04);
 }
@@ -2604,6 +2618,10 @@ button.videoThumb {
 
   .screenBody.phone .screenShot img {
     max-height: 46svh;
+  }
+
+  .screenShot .videoPlayer.vertical {
+    height: 58svh;
   }
 
   .screenText {

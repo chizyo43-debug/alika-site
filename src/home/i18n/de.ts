@@ -55,8 +55,8 @@ const de: HomeCopy = {
     stickyChoose: 'Kostenlos testen',
   },
   demo: {
-    title: 'AliKa in einer halben Minute',
-    body: 'Ist die Zeit um, wird der Bildschirm gesperrt. Ihr Kind beantwortet Fragen, verdient nach Ihrer Regel zusätzliche Zeit, und die Sperre geht auf.',
+    title: 'AliKa in 45 Sekunden',
+    body: 'Am Computer wie am Handy legen Sie die Regeln fest. Ist die Zeit um, beantwortet Ihr Kind Fragen und verdient Zusatzzeit innerhalb der Grenze, die Sie setzen.',
   },
   screens: {
     'win-panel': { label: 'Elternpanel', body: 'Der Tag auf einen Blick: genutzte und verbleibende Zeit, Zusatzzeit mit einem Klick, durch Fragenlösen verdiente Minuten und Aufgaben, die auf Ihre Freigabe warten.' },
@@ -199,7 +199,12 @@ const de: HomeCopy = {
   videos: {
     winSetup: { title: 'AliKa für Windows: Ersteinrichtung', body: 'Von der Installation im Microsoft Store bis zum letzten Schritt der Ersteinrichtung.' },
     androidSetup: { title: 'AliKa für Android: Ersteinrichtung', body: 'Von der Installation bei Google Play über die Handy-Berechtigungen bis zum letzten Schritt der Ersteinrichtung.' },
-    winQuiz: { title: 'Fragen lösen, Zusatzzeit verdienen', body: 'Das Kind verdient mit richtigen Antworten Zusatzzeit, und die Sperre geht auf.' },
+    ad: { title: 'Am Computer und am Handy', body: 'Sie planen die Bildschirmzeit auf dem Windows-Computer und dem Android-Handy; Ihr Kind verdient mit Fragen Zusatzzeit innerhalb Ihrer Grenze.' },
+    firstDay: { title: 'AliKa: Einstellungen am ersten Tag', body: 'Tageszeit, Wochenplan, Nachtmodus, Belohnung für Fragen und Tageslimit, Aufgaben und Wochenbericht.' },
+    winPanel: { title: 'AliKa-Elternpanel unter Windows', body: 'Wofür jeder Reiter da ist: Regeln, Apps und Internet, Aufgaben, Fragen, Berichte, Sicherheit und Einstellungen.' },
+    andPanel: { title: 'AliKa-Elternpanel unter Android', body: 'Wofür die untere Leiste und die Menüs da sind: Übersicht, Zeit- und App-Verwaltung, Regeln, Fragen, Berichte, Geräte und Profil.' },
+    homeNetwork: { title: 'AliKa-Familiennetz', body: 'Handys und den Windows-Computer ins Familiennetz aufnehmen, zweiter Elternteil, Familienabo und Geräteverwaltung vom Elternhandy aus. Der TV-Teil im Video ist noch in Entwicklung.' },
+    quizShort: { title: 'Mehr als Bildschirmzeit', body: 'Ihr Kind verdient mit Fragen Zusatzzeit; die Grenzen legen Sie fest.' },
   },
   ages: {
     title: 'Dasselbe AliKa, je nach Alter anders erzählt',

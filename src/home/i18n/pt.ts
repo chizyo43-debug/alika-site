@@ -55,8 +55,8 @@ const pt: HomeCopy = {
     stickyChoose: 'Teste grátis',
   },
   demo: {
-    title: 'AliKa em meio minuto',
-    body: 'Quando o tempo acaba, a tela é bloqueada. A criança responde perguntas, ganha tempo extra pela regra que você definiu e a tela é desbloqueada.',
+    title: 'AliKa em 45 segundos',
+    body: 'No computador e no celular, quem define as regras é você. Quando o tempo acaba, a criança responde perguntas e ganha tempo extra dentro do limite que você definiu.',
   },
   screens: {
     'win-panel': { label: 'Painel do responsável', body: 'O resumo do dia em uma tela: tempo usado e restante, tempo extra com um clique, minutos ganhos respondendo perguntas e tarefas aguardando sua aprovação.' },
@@ -199,7 +199,12 @@ const pt: HomeCopy = {
   videos: {
     winSetup: { title: 'AliKa para Windows: primeira configuração', body: 'Da instalação pela Microsoft Store até o último passo da primeira configuração.' },
     androidSetup: { title: 'AliKa para Android: primeira configuração', body: 'Da instalação pelo Google Play, passando pelas permissões do celular, até o último passo da primeira configuração.' },
-    winQuiz: { title: 'Responda e ganhe tempo extra', body: 'A criança ganha tempo extra com respostas certas e o bloqueio é liberado.' },
+    ad: { title: 'No computador e no celular', body: 'Você planeja o tempo de tela no computador Windows e no celular Android; a criança ganha tempo extra respondendo perguntas, dentro do limite que você definiu.' },
+    firstDay: { title: 'AliKa: ajustes do primeiro dia', body: 'Tempo diário, plano semanal, modo noturno, recompensa por perguntas e teto diário, tarefas e relatório semanal.' },
+    winPanel: { title: 'Painel do responsável AliKa no Windows', body: 'Para que serve cada aba: regras, apps e internet, tarefas, perguntas, relatórios, segurança e ajustes.' },
+    andPanel: { title: 'Painel do responsável AliKa no Android', body: 'Para que servem a barra inferior e os menus: painel, gestão de tempo e de apps, regras, perguntas, relatórios, dispositivos e perfil.' },
+    homeNetwork: { title: 'Rede familiar AliKa', body: 'Adicionar celulares e o computador Windows à rede familiar, segundo responsável, assinatura familiar e gestão dos dispositivos pelo celular do responsável. A parte de TV do vídeo ainda está em desenvolvimento.' },
+    quizShort: { title: 'Mais do que tempo de tela', body: 'A criança ganha tempo extra respondendo perguntas; os limites são definidos por você.' },
   },
   ages: {
     title: 'O mesmo AliKa, contado de um jeito para cada idade',

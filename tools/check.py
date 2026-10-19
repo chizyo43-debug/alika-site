@@ -30,6 +30,18 @@ STORE_OFFER_MARKERS = {
     "ko": ('"price":"2500"', '"priceCurrency":"KRW"'),
 }
 PLAY_STORE_PACKAGE = "com.alika.parental"
+# Sitede barındırılan kanal videoları (YouTube gömülmez; kanaldan silinen video buradan da çıkar).
+SITE_VIDEOS = (
+    "windows-ilk-kurulum",
+    "android-ilk-kurulum",
+    "ilk-gun-ayarlari",
+    "windows-ebeveyn-paneli",
+    "android-ebeveyn-paneli",
+    "ev-agi",
+    "alika-reklam",
+    "alika-reklam-dikey",
+    "ekran-suresinden-fazlasi",
+)
 GUIDE_SLUGS = (
     "windows-cocuk-ekran-suresi-nasil-yonetilir",
     "windows-11-cocuk-ekran-suresi",
@@ -396,12 +408,19 @@ def main() -> None:
     if (DIST / "assets" / "screenshots").exists():
         errors.append("Obsolete mascot screenshots are still published")
     # Videolar sitede oynar: dosya, kapak ve Türkçe altyazı birlikte yayımlanır.
-    for name in ("windows-ilk-kurulum", "android-ilk-kurulum", "windows-soru-coz"):
+    for name in SITE_VIDEOS:
         for suffix in (".mp4", ".webp", ".tr.vtt"):
             if not (DIST / "videos" / "kurulum" / f"{name}{suffix}").exists():
                 errors.append(f"Site video file is missing: {name}{suffix}")
     if "youtube.com/watch" in home_bundle_text:
         errors.append("Home page videos must play on the site, not link to YouTube")
+    # Kanaldan silinen soru-çöz videosu sitede kalmamalı.
+    if (DIST / "videos" / "kurulum" / "windows-soru-coz.mp4").exists() or "/videos/kurulum/windows-soru-coz" in home_bundle_text:
+        errors.append("The deleted soru-coz video must not be published")
+    for page in (DIST / "rehber").rglob("index.html"):
+        for name in re.findall(r'/videos/kurulum/([a-z0-9-]+)\.mp4', page.read_text(encoding="utf-8")):
+            if name not in SITE_VIDEOS:
+                errors.append(f"Guide links an unknown video: {page.parent.name} -> {name}")
 
     # Eski kitap kapaklı paylaşım görseli yayından kalktı.
     if (DIST / "og.png").exists() or not (DIST / "og.jpg").exists():

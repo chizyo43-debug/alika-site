@@ -11,7 +11,7 @@ export type ControlFeature = 'dailyTime' | 'appRules' | 'webFilter' | 'reports' 
 export type LearningFeature = 'quiz' | 'content' | 'figures' | 'exam' | 'notes';
 export type FamilyFeature = 'tasks' | 'network' | 'messages' | 'sharedPhone';
 export type TvGame = 'rally' | 'station' | 'wheel' | 'nameCity';
-export type VideoKey = 'winSetup' | 'androidSetup' | 'winQuiz';
+export type VideoKey = 'winSetup' | 'androidSetup' | 'ad' | 'firstDay' | 'winPanel' | 'andPanel' | 'homeNetwork' | 'quizShort';
 export type PlanStatus = 'ready' | 'dev' | 'plan';
 
 export interface TitleBody {

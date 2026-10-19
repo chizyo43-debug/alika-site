@@ -55,8 +55,8 @@ const tr: HomeCopy = {
     stickyChoose: 'Ücretsiz deneyin',
   },
   demo: {
-    title: 'Yarım dakikada AliKa',
-    body: 'Süre bitince ekran kilitlenir. Çocuk soru çözer, sizin belirlediğiniz kurala göre ek süre kazanır ve kilit kalkar.',
+    title: '45 saniyede AliKa',
+    body: 'Bilgisayarda da, telefonda da kuralları siz koyarsınız. Süre bitince çocuk soru çözer, sizin belirlediğiniz sınır içinde ek süre kazanır.',
   },
   screens: {
     'win-panel': { label: 'Ebeveyn paneli', body: 'Günün özeti tek ekranda: kullanılan ve kalan süre, tek tıkla ek süre, soru çözerek kazanılan dakikalar ve onayınızı bekleyen görevler.' },
@@ -194,7 +194,12 @@ const tr: HomeCopy = {
   videos: {
     winSetup: { title: 'AliKa Windows ilk kurulum', body: 'Microsoft Store’dan yüklemeden ilk kurulumun son adımına kadar.' },
     androidSetup: { title: 'AliKa Android ilk kurulum', body: 'Google Play’den yüklemeden telefon izinlerine ve ilk kurulumun son adımına kadar.' },
-    winQuiz: { title: 'Soru çöz, ek süre kazan', body: 'Çocuk doğru cevapla ek süre kazanır, kilit kalkar.' },
+    ad: { title: 'Bilgisayarda da, telefonda da', body: 'Windows bilgisayarda ve Android telefonda ekran süresini siz planlarsınız; çocuk soru çözerek, koyduğunuz sınır içinde ek süre kazanır.' },
+    firstDay: { title: 'AliKa ilk gün ayarları', body: 'Günlük süre, haftalık plan, gece modu, soru ödülü ve günlük üst sınır, görevler ve haftalık rapor.' },
+    winPanel: { title: 'AliKa Windows ebeveyn paneli', body: 'Panelin sekmeleri ne işe yarar: kurallar, uygulama ve internet, görevler, sorular, raporlar, güvenlik ve ayarlar.' },
+    andPanel: { title: 'AliKa Android ebeveyn paneli', body: 'Alt menü ve menüler ne işe yarar: panel, zaman ve uygulama yönetimi, kurallar, sorular, raporlar, cihazlar ve profil.' },
+    homeNetwork: { title: 'AliKa ev ağı', body: 'Telefonları ve Windows bilgisayarı aile ağına ekleme, ikinci ebeveyn, aile aboneliği ve ebeveyn telefonundan cihaz yönetimi. Videodaki TV bölümü geliştirme aşamasındadır.' },
+    quizShort: { title: 'Ekran süresinden daha fazlası', body: 'Çocuk soru çözerek ek süre kazanır; sınırları siz koyarsınız.' },
   },
   ages: {
     title: 'Aynı AliKa, yaşa göre farklı anlatım',
