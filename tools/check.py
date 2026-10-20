@@ -487,6 +487,15 @@ def main() -> None:
                 errors.append(f"Site video file is missing: {name}{suffix}")
     if "youtube.com/watch" in home_bundle_text:
         errors.append("Home page videos must play on the site, not link to YouTube")
+    # Destek adresi destek@alika.tr. Eski Gmail adresi yalnız gizlilik metninde, uygulamaların hata raporu
+    # düğmesinin bugünkü hedefi olarak geçer.
+    if "destek@alika.tr" not in home_bundle_text or "alika.destek@gmail.com" in home_bundle_text:
+        errors.append("Home page must use the support address destek@alika.tr")
+    for page in DIST.rglob("*.html"):
+        legal_copy = any(name in page.relative_to(DIST).as_posix() for name in ("privacy", "gizlilik"))
+        if "alika.destek@gmail.com" in page.read_text(encoding="utf-8") and not legal_copy:
+            errors.append(f"Old support address on {page.relative_to(DIST).as_posix()}")
+
     # Kanaldan silinen soru-çöz videosu sitede kalmamalı.
     if (DIST / "videos" / "kurulum" / "windows-soru-coz.mp4").exists() or "/videos/kurulum/windows-soru-coz" in home_bundle_text:
         errors.append("The deleted soru-coz video must not be published")

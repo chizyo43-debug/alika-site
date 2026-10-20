@@ -188,7 +188,7 @@ GUIDES = (
             )),
             ("İlk 7 günde kontrol edilmesi gerekenler", (
                 "Kurulumun tamamlandığını, ilk kuralın doğru saatte çalıştığını, çocuk ekranındaki kalan sürenin anlaşılır olduğunu ve uyku aralığının aile düzeninize uyduğunu kontrol edin.",
-                "Beklenmeyen bir engel veya lisans sorunu görürseniz reklam ya da geniş tanıtım yapmadan önce alika.destek@gmail.com adresine bildirin.",
+                "Beklenmeyen bir engel veya lisans sorunu görürseniz destek@alika.tr adresine bildirin.",
             )),
         ),
     },
@@ -618,7 +618,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
         <a href="{legal_href(lang, 'privacy')}">{esc(words["privacy"])}</a>
         <a href="{legal_href(lang, 'terms')}">{esc(words["terms"])}</a>
       </div>
-      <p>© 2026 ErenKa Software · <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a></p>
+      <p>© 2026 ErenKa Software · <a href="mailto:destek@alika.tr">destek@alika.tr</a></p>
     </footer>
     """
 
@@ -842,7 +842,7 @@ def school_body() -> str:
             "Türkiye ortaokul (5–8. sınıf) için konu anlatımı ve soru paketleri alika.tr’deki Hazır içerik sayfasındadır. Uygulama ücretlidir; deneme ve fiyat bilgisi mağaza sayfalarındadır.",
         )),
         ("İletişim", (
-            "Kaynaklarla ilgili soru ve önerileriniz için alika.destek@gmail.com adresine yazabilirsiniz.",
+            "Kaynaklarla ilgili soru ve önerileriniz için destek@alika.tr adresine yazabilirsiniz.",
         )),
     )
     rendered = "".join(
@@ -959,7 +959,7 @@ def school_kit_document() -> str:
     <ul class="checks">{check_items}</ul>
     <footer>
       <p><strong>Daha fazla rehber ve yazdırılabilir plan:</strong> alika.tr/rehber</p>
-      <p>Bu not, AliKa ebeveyn kontrolü uygulamasının geliştiricisi ErenKa Software tarafından hazırlanmıştır. Planı uygulamak için bir uygulama gerekmez; uygulama kullanmak tamamen isteğe bağlıdır. İletişim: alika.destek@gmail.com</p>
+      <p>Bu not, AliKa ebeveyn kontrolü uygulamasının geliştiricisi ErenKa Software tarafından hazırlanmıştır. Planı uygulamak için bir uygulama gerekmez; uygulama kullanmak tamamen isteğe bağlıdır. İletişim: destek@alika.tr</p>
     </footer>
   </main>
   <p class="print"><button type="button" onclick="window.print()">Yazdır / PDF olarak kaydet</button></p>
@@ -1098,7 +1098,7 @@ def content_page(lang: str, c: dict, catalog: dict) -> str:
             </section>
             <footer class="content-book-contact">
               <p>{esc(book_labels[5])}</p>
-              <a href="mailto:alika.destek@gmail.com">alika.destek@gmail.com</a>
+              <a href="mailto:destek@alika.tr">destek@alika.tr</a>
             </footer>
           </div>
         </div>

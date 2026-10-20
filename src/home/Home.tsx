@@ -3,7 +3,7 @@ import { microsoftStoreUrl, playStoreUrl } from '../store-campaign';
 import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, legalPath, type Lang } from './i18n/langs';
 import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, PlanStatus, ScreenId, TvGame, VideoKey } from './i18n/types';
 
-const SUPPORT_EMAIL = 'alika.destek@gmail.com';
+const SUPPORT_EMAIL = 'destek@alika.tr';
 
 type Theme = 'light' | 'dark';
 
