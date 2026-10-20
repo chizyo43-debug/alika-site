@@ -107,8 +107,8 @@ current Windows user's learning library and local state are stored under
 <code>%LocalAppData%\AliKa\</code>. Android usage history, child profiles, messages,
 learning content, rules and visited-domain history remain on the device or move directly
 between paired family devices on the approved local network.</li>
-<li>Apart from a problem report that the parent chooses to email (see “Problem reports
-sent by the parent” below), AliKa sends only the limited Android family-subscription
+<li>Apart from a problem report or a wrong-question report that is chosen to be emailed (see
+“Problem reports sent by the parent” and “Reporting a wrong question” below), AliKa sends only the limited Android family-subscription
 metadata described below to an AliKa-operated licensing service. It does <strong>not</strong> send child content,
 usage history, messages, visited domains, location, Google account name or email, IMEI or
 Android ID to that service.</li>
@@ -174,6 +174,29 @@ parties. Email delivery is handled by the parent's and ErenKa Software's email p
 kept only as long as needed to resolve the reported problem and is deleted no later than
 12 months after it is received. The parent can ask for earlier deletion by writing to
 destek@alika.tr.</p>
+
+<h3>Reporting a wrong question</h3>
+<p>The question screen has a <strong>Report</strong> button for reporting a mistake in a
+question (for example a wrong answer key or a missing or incorrect choice); on Windows it is
+<strong>Report a wrong question</strong>. It appears only on questions from content packs, not
+on questions the parent wrote. The report contains only:</p>
+<ul>
+<li>the question, content-pack and source-record identifiers;</li>
+<li>language, subject and topic;</li>
+<li>the question and choice text;</li>
+<li>the description that was typed (at most 500 characters).</li>
+</ul>
+<p>The child’s name or profile identifier, their answers, device details and logs are
+<strong>not</strong> included. The whole report is shown on screen before it is saved or sent.
+Please do not write personal information in the description.</p>
+<p>On Windows, after the preview is confirmed, the report opens as a draft addressed to
+<a href="mailto:destek@alika.tr">destek@alika.tr</a> in the default email app (earlier versions address it to alika.destek@gmail.com). On
+Android the report is first kept only on the device (at most 20 reports); the parent can open
+the reports in one email draft, or delete the list, from Parent panel → Help → <strong>Reported
+questions</strong>. AliKa never sends a report by itself; it reaches ErenKa Software only if
+the email is sent. Question reports are used only to fix the reported question and are
+handled under the same terms as problem reports above (email providers, deletion no later than
+12 months, earlier deletion on request).</p>
 
 <h3>Android web filter (local VPN)</h3>
 <p>On Android the web filter uses a <strong>local</strong> VPN (VpnService) on the

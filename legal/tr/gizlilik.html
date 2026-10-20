@@ -109,8 +109,8 @@ Windows ayarları ve raporlar <code>%ProgramData%\AliKa\</code> altında; o anki
 kullanım geçmişi, çocuk profilleri, mesajlar, öğrenme içeriği, kurallar ve ziyaret edilen alan adı
 geçmişi cihazda kalır ya da onaylanan yerel ağda eşleştirilmiş aile cihazları arasında doğrudan
 taşınır.</li>
-<li>Ebeveynin e-postayla göndermeyi seçtiği bir hata raporu dışında (aşağıdaki “Ebeveynin
-gönderdiği hata raporları” bölümüne bakın) AliKa, yalnızca aşağıda açıklanan sınırlı Android aile
+<li>E-postayla gönderilmesi seçilen bir hata raporu ya da hatalı soru bildirimi dışında
+(aşağıdaki “Ebeveynin gönderdiği hata raporları” ve “Hatalı soru bildirimi” bölümlerine bakın) AliKa, yalnızca aşağıda açıklanan sınırlı Android aile
 aboneliği üst verilerini AliKa’nın işlettiği bir lisans hizmetine gönderir. Bu hizmete çocuk içeriği,
 kullanım geçmişi, mesajlar, ziyaret edilen alan adları, konum, Google hesap adı veya e-posta adresi,
 IMEI ya da Android ID <strong>gönderilmez</strong>.</li>
@@ -174,6 +174,29 @@ iletimini ebeveynin ve ErenKa Software’in e-posta sağlayıcıları kendi koş
 (destek@alika.tr, Zoho Mail’in AB veri merkezinde barındırılır; önceki sürümlerin kullandığı alika.destek@gmail.com bir Google Gmail hesabıdır). Bir rapor yalnızca bildirilen sorunu çözmek
 için gerektiği sürece tutulur ve alındıktan en geç 12 ay sonra silinir. Ebeveyn destek@alika.tr adresine yazarak
 daha erken silinmesini isteyebilir.</p>
+
+<h3>Hatalı soru bildirimi</h3>
+<p>Soru ekranında, bir sorudaki hatayı (ör. yanlış cevap anahtarı, eksik ya da hatalı şık)
+bildirmek için <strong>Bildir</strong> düğmesi vardır (Windows’ta <strong>Hatalı soru
+bildir</strong>). Düğme yalnızca içerik paketlerinden gelen sorularda görünür; ebeveynin kendi
+yazdığı sorularda görünmez. Rapor yalnızca şunları içerir:</p>
+<ul>
+<li>soru, içerik paketi ve kaynak kaydı kimlikleri;</li>
+<li>dil, ders ve konu;</li>
+<li>soru ve şık metni;</li>
+<li>yazılan açıklama (en fazla 500 karakter).</li>
+</ul>
+<p>Çocuğun adı veya profil kimliği, verdiği cevaplar, cihaz bilgileri ve günlükler rapora
+<strong>eklenmez</strong>. Raporun tamamı kaydedilmeden ya da gönderilmeden önce ekranda
+gösterilir. Açıklamaya kişisel bilgi yazılmamalıdır.</p>
+<p>Windows’ta rapor, önizleme onaylandıktan sonra varsayılan e-posta uygulamasında <a href="mailto:destek@alika.tr">destek@alika.tr</a>
+adresine yazılmış bir taslak olarak açılır (önceki sürümler alika.destek@gmail.com adresine).
+Android’de rapor önce yalnızca cihazda saklanır (en fazla 20 rapor); ebeveyn, Ebeveyn paneli →
+Yardım → <strong>Bildirilen sorular</strong> bölümünden raporları tek bir e-posta taslağında
+açabilir ya da listeyi silebilir. AliKa raporu kendiliğinden göndermez; rapor ErenKa Software’e
+yalnızca e-posta gönderilirse ulaşır. Gelen soru raporları yalnızca sorudaki hatayı düzeltmek
+için kullanılır ve yukarıdaki hata raporlarıyla aynı koşullarla (e-posta sağlayıcıları, en geç
+12 ay saklama, erken silme talebi) işlenir.</p>
 
 <h3>Android web filtresi (yerel VPN)</h3>
 <p>Android’de web filtresi cihazda <strong>yerel</strong> bir VPN (VpnService) kullanır. Listedeki
