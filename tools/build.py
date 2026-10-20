@@ -116,6 +116,81 @@ REDIRECT_ANCHORS = {
 
 GUIDES = (
     {
+        # R1: metinler Resmî Gazete'den karşılaştırıldı (20 Ekim 2026). Yayın onayı gelince "draft" kalkar,
+        # "updated" yayın gününe çekilir; 31 Mart 2027 öncesi yeniden gözden geçirilir.
+        "slug": "15-yas-alti-sosyal-medya-duzenlemesi",
+        "draft": True,
+        "updated": ("2026-10-20", "20 Ekim 2026"),
+        "campaign_id": "site_rehber_15yas_tr",
+        "platform": "both",
+        "eyebrow": "Gündem · Ebeveynler için sade rehber",
+        "title": "15 Yaş Altı Sosyal Medya Düzenlemesi: 1 Kasım’da Ne Değişiyor?",
+        "description": "15 yaş altına sosyal medya düzenlemesi 1 Kasım 2026’da başlıyor. e-Devlet ile yaş doğrulama, 15–18 yaş hesapları, 31 Mart 2027 tarihi ve ailelerin yapabilecekleri.",
+        "lede": (
+            "1 Kasım 2026’dan itibaren Türkiye’den erişilebilen sosyal ağ sağlayıcıları, 15 yaşını doldurmamış çocuklara hizmet sunamayacak. "
+            "15–18 yaş arasındaki çocukların hesapları ise daha korumalı ayarlarla çalışacak. "
+            "Bu rehber, Resmî Gazete’de yayımlanan metinlerin ailelere dokunan kısmını sade bir dille özetler ve boşalan zaman için bir plan önerir. Hukuki danışmanlık değildir."
+        ),
+        "sections": (
+            ("Düzenleme ne zaman başlıyor, dayanağı ne?", (
+                "Dayanak, 1 Mayıs 2026 tarihli Resmî Gazete’de yayımlanan 7578 sayılı Kanun’dur. Bu Kanun, 5651 sayılı İnternet Kanunu’nun ek 4. maddesini değiştirdi; sosyal ağlarla ilgili hüküm yayımdan altı ay sonra yürürlüğe giriyor.",
+                "Uygulamanın ayrıntıları, Cumhurbaşkanlığı Siber Güvenlik Başkanlığı’nın hazırladığı ve 10 Ekim 2026 tarihli Resmî Gazete’de yayımlanan yönetmelikte yer alıyor. Yönetmelik 1 Kasım 2026’da yürürlüğe giriyor ve Türkiye’den erişilebilen yurt içi ve yurt dışı kaynaklı sosyal ağ sağlayıcılarını kapsıyor.",
+            )),
+            ("15 yaş altı için ne değişiyor?", (
+                "Sosyal ağ sağlayıcı, 15 yaşını doldurmamış çocuklara hizmet sunamaz. Yaş doğrulamasında 15 yaşını doldurmadığı görülen çocukların hesap açma talepleri reddedilir.",
+                "Yayımlanan metinlerde ebeveyn izniyle hesap açmaya yönelik bir istisna yer almıyor. Kural, çocuğun ya da ailenin değil, platformun yükümlülüğü olarak yazılmıştır.",
+            )),
+            ("Mevcut hesaplar: 31 Mart 2027", (
+                "1 Kasım’dan önce açılmış hesapların da 31 Mart 2027’ye kadar en az bir kez yaş doğrulamasından geçmesi gerekiyor. 15 yaşını doldurmadığı görülen çocukların mevcut hesapları, kullanıcıya bilgi verilerek kapatılır.",
+                "Kapatılan hesaba ait veriler, itiraz yoksa gecikmeden; itiraz varsa süreç bittikten sonra silinir. Çocuğunuzun saklamak istediği fotoğraf, video ya da yazışmalar varsa bunları bu tarihten önce birlikte yedeklemeyi konuşabilirsiniz. Platformlar doğrulamayı bu tarihten önce de isteyebilir.",
+            )),
+            ("Yaş nasıl doğrulanacak?", (
+                "Doğrulama e-Devlet Kapısı üzerinden yapılır. Kullanıcı e-Devlet’te kimliğini doğrulayarak bir yaş doğrulama belirteci oluşturur ve bunu ilgili platforma yükler. Belirteç yalnız 15 ve 18 yaş eşiklerinin geçilip geçilmediğini gösterir; ad, kullanıcı adı gibi kişisel bilgi taşımaz ve platform onu yaş doğrulaması dışında kullanamaz.",
+                "İlk doğrulamadan sonra platform kendi yöntemlerini de kullanabilir. Bir hesabın yaş aralığına aykırı kullanıldığına dair makul şüphe olursa hesap askıya alınır ve yeniden belirteçle doğrulama istenir.",
+                "e-Devlet şifrenizi kimseyle paylaşmayın. Yaş doğrulaması gerekçesiyle şifre, kimlik fotoğrafı ya da ödeme isteyen mesaj ve sitelere karşı dikkatli olun; doğrulamayı yalnız platformun kendi uygulamasından ve e-Devlet’in resmî adresinden yapın.",
+            )),
+            ("15–18 yaş: hesaplar nasıl değişiyor?", (
+                "15 yaşını doldurmuş çocukların hesapları varsayılan olarak gizli olur ve herkese açık hale getirilemez. Takipçi ve takip edilen listelerini başkaları göremez. Çocuğa yalnız onun takip ettiği hesaplar mesaj gönderebilir; mesajın görüldü bilgisi karşı tarafa gitmez.",
+                "Bu hesaplarda canlı yayın açılamaz. İçerikleri kaydırarak ya da kendiliğinden art arda sunan tasarımlar kullanılamaz. Çocuğun verileri davranışa göre kişiselleştirme, profilleme ya da kişiselleştirilmiş reklam için kullanılamaz; telefon rehberi gibi kişi listeleriyle eşleştirme yapılmaz ve çocuk hesabı başkalarına takip önerisi olarak gösterilmez.",
+                "Yönetmelik ayrıca bağımlılık geliştirme etkisi doğurabilecek hizmetlerin bu yaş grubuna sunulamayacağını ve çocuğun profil fotoğrafı, paylaşımları ve görsellerinin başkalarınca ekran görüntüsü alınmasına karşı teknik önlem alınacağını söyler.",
+            )),
+            ("Platformların sunacağı ebeveyn kontrol araçları", (
+                "Sosyal ağlar, anne, baba ya da vasi gibi çocuk hakkında karar verme yetkisi olan kişiler için ebeveyn kontrol araçları sunmak zorunda. Bu araçlar en az şunları içerir: hesap ve özellik ayarlarının yönetimi, satın alma ve ücretli üyelik için ebeveyn onayı ve harcama sınırı, kullanım süresinin izlenmesi ve sınırlanması, konum paylaşımının yönetimi.",
+                "Araçlar Türkçe sunulur ve farklı cihazlarda çalışır. Etkinleştirildiğinde çocuğa açıkça bildirilir; çocuk, ebeveynin bilgisi ve güvenlik doğrulaması olmadan bunları kapatamaz. Yönetmelik, araçların çocuğun mahremiyetini orantısız biçimde ortadan kaldırmayacak, gözetimden çok iletişime dayanacak şekilde tasarlanmasını da ister.",
+                "Bu araçları çocuğunuzla birlikte, ona ne göreceğinizi ve neyi görmeyeceğinizi anlatarak açın. Gizli değil, konuşulmuş bir kural daha kolay benimsenir.",
+            )),
+            ("Yanlış sonuç çıkarsa: başvuru ve itiraz", (
+                "Platformlar; yaş doğrulama sonucuna, hesabın askıya alınmasına ya da kapatılmasına ve çocuklara yönelik tedbirlere karşı ücretsiz, Türkçe bir başvuru ve itiraz yolu kurmak zorunda. Başvurular tamamen otomatik sistemlerle sonuçlandırılamaz; bir insan incelemesi yapılır.",
+                "İtiraz sürerken hesaba ait içerik ve kişisel veriler silinmez. Sonuca karşı Siber Güvenlik Başkanlığı’na şikâyet ve yargı yolu açıktır; platform bunları bildirimde belirtmek zorundadır.",
+            )),
+            ("Hangi uygulamalar kapsamda?", (
+                "Yönetmelik uygulama adı saymaz. Sosyal ağ sağlayıcıyı, kullanıcıların sosyal etkileşim amacıyla metin, görüntü, ses ve konum gibi içerikleri oluşturmasına, görüntülemesine ya da paylaşmasına imkân sağlayan kişi veya kuruluşlar olarak tanımlar.",
+                "Belirli bir uygulamanın nasıl etkileneceğini o uygulamanın kendi duyurularından takip edin. Aynı Kanun oyun platformlarına da derecelendirme ve ebeveyn kontrol araçları gibi ayrı yükümlülükler getiriyor; bu rehber onların ayrıntısına girmiyor.",
+            )),
+            ("1 Kasım’dan önce çocukla konuşun", (
+                "Değişikliği çocuğunuz arkadaşlarından ya da bir bildirimden öğrenmeden önce siz anlatın. Bunun bir ceza olmadığını, kuralın bütün platformlar için geçerli olduğunu söyleyin.",
+                "Sosyal medyayı ne için kullandığını sorun: arkadaşlarla konuşmak, video izlemek, bir hobiyi takip etmek. Hangisinin onun için önemli olduğunu bilmek, boşalan zamanı birlikte planlamayı kolaylaştırır. 15 yaşını dolduracak bir çocukla da yeni hesap ayarlarını birlikte gözden geçirin.",
+            )),
+            ("Boşalan zaman için ailece plan", (
+                "Sosyal medyaya ayrılan süre bir anda boşalırsa çocuk bu zamanı başka ekranlarla doldurabilir. Okul günü ve hafta sonu için ayrı bir günlük ekran süresi, sabit bir ekran kapanış saati ve her güne bir ekran dışı etkinlik belirlemek iyi bir başlangıçtır.",
+                "Haftalık planı yazdırılabilir tabloyla birlikte hazırlamak için “Ailece ekran süresi planı” rehberine, 16–20 Kasım ara tatili için “Ara tatil ekran süresi planı” rehberine bakabilirsiniz.",
+            )),
+        ),
+        "related": (
+            ("Ailece ekran süresi planı nasıl yapılır?", "ailece-ekran-suresi-plani"),
+            ("Ara tatilde ekran süresi nasıl planlanır?", "ara-tatil-ekran-suresi-plani"),
+            ("Android telefonda çocuğun ekran süresi nasıl planlanır?", "android-cocuk-ekran-suresi"),
+        ),
+        "product": ("Bu planı otomatik uygulamak isterseniz", (
+            "AliKa ebeveyn kontrolü sosyal medya hesaplarını yönetmez ve yaş doğrulaması yapmaz; bu iş platformlara aittir. AliKa, ailece kararlaştırdığınız ekran planını Windows bilgisayarda ve Android telefonda uygular: günlük süre, uyku saati, uygulama sınırı ve web filtresi.",
+            "Çocuk kalan süresini ekranında görür ve süre dolduğunda hangi kuralın uygulandığını bilir. İsterseniz sizin eklediğiniz sorulardan çözerek, sizin belirlediğiniz günlük üst sınır içinde ek süre kazanabilir. AliKa hesabı açmanız gerekmez.",
+        )),
+        "sources": (
+            ("7578 sayılı Kanun — Resmî Gazete, 1 Mayıs 2026, sayı 33240", "https://www.resmigazete.gov.tr/eskiler/2026/05/20260501-1.htm"),
+            ("Sosyal Ağ Sağlayıcı Tarafından Çocuklara Özgü Ayrıştırılmış Hizmet Sunulmasına ve Yaş Doğrulamaya İlişkin Yönetmelik — Resmî Gazete, 10 Ekim 2026, sayı 33396", "https://www.resmigazete.gov.tr/eskiler/2026/10/20261010-15.pdf"),
+        ),
+    },
+    {
         "slug": "windows-cocuk-ekran-suresi-nasil-yonetilir",
         "title": "Windows'ta Çocuk Ekran Süresi Nasıl Yönetilir?",
         "description": "Windows 10 ve 11'de çocuk ekran süresi için aile kuralı oluşturun; Microsoft Family Safety seçeneklerini ve AliKa'nın görünür, yerel-öncelikli akışını karşılaştırın.",
@@ -673,7 +748,7 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
 
 
 
-def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr", schema_type: str = "Article") -> str:
+def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr", schema_type: str = "Article", updated: tuple[str, str] = GUIDE_UPDATED) -> str:
     article_schema = {
         "@context": "https://schema.org",
         "@type": schema_type,
@@ -683,7 +758,7 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
         "inLanguage": "en-GB" if lang == "en" else "tr-TR",
         "author": {"@type": "Organization", "name": "ErenKa Software"},
         "publisher": {"@type": "Organization", "name": "ErenKa Software"},
-        "dateModified": GUIDE_UPDATED[0],
+        "dateModified": updated[0],
     }
     return f"""<!doctype html>
 <html lang="{lang}">
@@ -778,6 +853,18 @@ def guide_article_body(guide: dict) -> str:
         f'<section><h2>{esc(product[0])}</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in product[1])}</section>'
         if product else ""
     )
+    # Mevzuat rehberlerinde ilgili rehberler ve resmî kaynaklar ayrı listelenir.
+    related = guide.get("related")
+    related_section = (
+        f'<section><h2>İlgili rehberler</h2><ul class="guide-links">{"".join(f"<li><a href=\"/{GUIDE_BASE}/{slug}/\">{esc(label)}</a></li>" for label, slug in related)}</ul></section>'
+        if related else ""
+    )
+    sources = guide.get("sources")
+    sources_section = (
+        f'<section><h2>Kaynaklar</h2><ul class="guide-links">{"".join(f"<li><a href=\"{esc(url)}\" target=\"_blank\" rel=\"noopener noreferrer\">{esc(label)}</a></li>" for label, url in sources)}</ul></section>'
+        if sources else ""
+    )
+    updated = guide.get("updated", GUIDE_UPDATED)
     platform = guide.get("platform", "both" if android_note else "windows")
     store_button = f'<a class="button" href="{microsoft_store_url("tr", guide.get("campaign_id"))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a>'
     if platform == "android":
@@ -813,18 +900,20 @@ def guide_article_body(guide: dict) -> str:
       <article class="guide-article">
         <nav class="guide-breadcrumb" aria-label="Sayfa yolu"><a href="/">AliKa</a><span>›</span><a href="/{GUIDE_BASE}/">Rehberler</a></nav>
         <header>
-          <p class="eyebrow">{eyebrow}</p>
+          <p class="eyebrow">{esc(guide.get("eyebrow", eyebrow))}</p>
           <h1>{esc(guide["title"])}</h1>
           <p class="guide-lede">{esc(guide["lede"])}</p>
-          <p class="guide-updated">Son güncelleme: <time datetime="{GUIDE_UPDATED[0]}">{GUIDE_UPDATED[1]}</time></p>
+          <p class="guide-updated">Son güncelleme: <time datetime="{updated[0]}">{updated[1]}</time></p>
           <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. {disclosure}</p>
         </header>
         {sections}
         {printable_section}
+        {related_section}
         {product_section}
         {android_section}
         {video_aside}
         {cta}
+        {sources_section}
       </article>
     </main>
     """
@@ -1212,7 +1301,7 @@ def build() -> None:
         canonical = f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/"
         write_page(
             DIST / GUIDE_BASE / guide["slug"] / "index.html",
-            guide_document(locales, guide["title"], guide["description"], canonical, guide_article_body(guide)),
+            guide_document(locales, guide["title"], guide["description"], canonical, guide_article_body(guide), updated=guide.get("updated", GUIDE_UPDATED)),
         )
 
     uk_guide_url = f"{BASE_URL}/{UK_GUIDE_PATH}/"
