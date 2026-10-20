@@ -1,6 +1,43 @@
 (() => {
   "use strict";
 
+  // store-cid:start
+  /* Adresteki ?cid= mağaza düğmelerine geçer (src/store-campaign.ts ile aynı desen); geçersizse sabit adlar kalır.
+     İzleyici, çerez ya da depolama yok: yalnız bu sayfadaki bağlantılar yeniden yazılır. */
+  const campaignMatch = /^[a-z0-9][a-z0-9_-]{0,79}$/i;
+  const incomingCid = new URLSearchParams(window.location.search).get("cid");
+  if (incomingCid && campaignMatch.test(incomingCid)) {
+    const cid = incomingCid.toLowerCase();
+    document.querySelectorAll("a[href]").forEach((link) => {
+      let url;
+      try {
+        url = new URL(link.getAttribute("href"), window.location.href);
+      } catch (_) {
+        return;
+      }
+      if (url.hostname === "apps.microsoft.com" && url.pathname.startsWith("/detail/")) {
+        url.searchParams.set("cid", cid);
+      } else if (url.hostname === "play.google.com" && url.searchParams.has("referrer")) {
+        const referrer = new URLSearchParams(url.searchParams.get("referrer") || "");
+        referrer.set("utm_campaign", cid);
+        if (cid.startsWith("linkedin_")) {
+          referrer.set("utm_source", "linkedin");
+          referrer.set("utm_medium", "post");
+        }
+        url.searchParams.set("referrer", referrer.toString());
+      } else if (url.origin === window.location.origin && /^\/(rehber|okullar)\/([^.]*\/)?$/.test(url.pathname)) {
+        // Rehber dizini ve okullar sayfasından açılan rehberler de aynı adı taşır (PDF gibi dosyalara dokunulmaz).
+        url.searchParams.set("cid", cid);
+        link.setAttribute("href", url.pathname + url.search + url.hash);
+        return;
+      } else {
+        return;
+      }
+      link.setAttribute("href", url.href);
+    });
+  }
+  // store-cid:end
+
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const header = document.querySelector("[data-header]");
   const menuButton = document.querySelector("[data-menu]");

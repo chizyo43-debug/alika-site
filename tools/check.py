@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import hashlib
+import html
 import json
 import re
+import shutil
+import subprocess
 import zipfile
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,6 +88,76 @@ def route_exists(value: str) -> bool:
         return (DIST / path.lstrip("/") / "index.html").exists()
     target = DIST / path.lstrip("/")
     return target.exists() or (target / "index.html").exists()
+
+
+# site.js içindeki store-cid bloğunu sahte bir sayfada çalıştırır; bağlantıların son hâlini döndürür.
+STORE_CID_HARNESS = r"""
+const vm = require("node:vm");
+const input = JSON.parse(require("node:fs").readFileSync(0, "utf8"));
+const result = input.cases.map(({ url, hrefs }) => {
+  const links = hrefs.map((href) => ({ href, getAttribute() { return this.href; }, setAttribute(_, value) { this.href = value; } }));
+  vm.runInNewContext(input.code, { window: { location: new URL(url) }, document: { querySelectorAll: () => links }, URL, URLSearchParams });
+  return links.map((link) => link.href);
+});
+process.stdout.write(JSON.stringify(result));
+"""
+
+
+def anchor_hrefs(page: Path) -> list[str]:
+    return [html.unescape(value) for value in re.findall(r'<a\b[^>]*?\bhref="([^"]*)"', page.read_text(encoding="utf-8"))]
+
+
+def run_store_cid(cases: list[tuple[str, list[str]]]) -> list[list[str]]:
+    script = (DIST / "assets" / "site.js").read_text(encoding="utf-8")
+    block = re.search(r"// store-cid:start(.*?)// store-cid:end", script, re.S)
+    node = shutil.which("node")
+    if not block or not node:
+        raise RuntimeError("store-cid block or node is missing")
+    payload = json.dumps({"code": block.group(1), "cases": [{"url": url, "hrefs": hrefs} for url, hrefs in cases]})
+    completed = subprocess.run([node, "-e", STORE_CID_HARNESS], input=payload, capture_output=True, text=True, encoding="utf-8", check=True)
+    return json.loads(completed.stdout)
+
+
+def check_store_cid(errors: list[str]) -> None:
+    """Adresteki geçerli cid rehber düğmelerine ve okullar sayfasındaki rehber bağlantılarına geçer."""
+    guide = DIST / "rehber" / "ailece-ekran-suresi-plani" / "index.html"
+    school = DIST / "okullar" / "index.html"
+    guide_hrefs, school_hrefs = anchor_hrefs(guide), anchor_hrefs(school)
+    base = "https://www.alika.tr"
+    guide_url = f"{base}/rehber/ailece-ekran-suresi-plani/"
+    try:
+        linkedin, other, plain, invalid, schools = run_store_cid([
+            (f"{guide_url}?cid=linkedin_founder_test_tr", guide_hrefs),
+            (f"{guide_url}?cid=YouTube_Profile_TR", guide_hrefs),
+            (guide_url, guide_hrefs),
+            (f"{guide_url}?cid=bad%26campaign", guide_hrefs),
+            (f"{base}/okullar/?cid=linkedin_company_okullar", school_hrefs),
+        ])
+    except (RuntimeError, OSError, subprocess.CalledProcessError, ValueError) as error:
+        errors.append(f"Store CID script could not be checked: {error}")
+        return
+
+    def store_values(hrefs: list[str]) -> tuple[list[str], list[dict[str, list[str]]]]:
+        store = [parse_qs(urlparse(h).query)["cid"][0] for h in hrefs if h.startswith(f"https://apps.microsoft.com/detail/{MICROSOFT_STORE_ID}")]
+        play = [parse_qs(parse_qs(urlparse(h).query)["referrer"][0]) for h in hrefs if h.startswith("https://play.google.com/store/apps/details")]
+        return store, play
+
+    for label, hrefs, campaign, source, medium in (
+        ("LinkedIn cid", linkedin, "linkedin_founder_test_tr", "linkedin", "post"),
+        ("other cid", other, "youtube_profile_tr", "site", "rehber"),
+    ):
+        store, play = store_values(hrefs)
+        if len(store) != 1 or store[0] != campaign:
+            errors.append(f"Guide Store button does not carry the {label}: {store}")
+        if len(play) != 1 or play[0] != {"utm_source": [source], "utm_medium": [medium], "utm_campaign": [campaign]}:
+            errors.append(f"Guide Play referrer does not carry the {label}: {play}")
+    if plain != guide_hrefs or invalid != guide_hrefs:
+        errors.append("Guide links change without a valid cid in the address")
+    school_guides = [h for h in schools if h.startswith("/rehber/")]
+    if not school_guides or any("?cid=linkedin_company_okullar" not in h for h in school_guides):
+        errors.append(f"Schools page guide links do not carry the cid: {school_guides}")
+    if any(".pdf?" in h for h in schools):
+        errors.append("Schools page PDF link must stay unchanged")
 
 
 def main() -> None:
@@ -464,6 +537,8 @@ def main() -> None:
         errors.append("Windows-only Store purchase scope is missing from the Turkish home page")
     if re.search(r'name="robots" content="[^"]*noindex', root_page, re.I):
         errors.append("Turkish home page must not be noindex")
+
+    check_store_cid(errors)
 
     forbidden = re.compile(r"(google-analytics|googletagmanager|facebook\.net|hotjar|segment\.com)", re.I)
     for page in DIST.rglob("*.html"):
