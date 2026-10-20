@@ -116,11 +116,10 @@ REDIRECT_ANCHORS = {
 
 GUIDES = (
     {
-        # R1: metinler Resmî Gazete'den karşılaştırıldı (20 Ekim 2026). Yayın onayı gelince "draft" kalkar,
-        # "updated" yayın gününe çekilir; 31 Mart 2027 öncesi yeniden gözden geçirilir.
+        # R1: metinler Resmî Gazete'den karşılaştırıldı (20 Ekim 2026), 21 Ekim 2026'da yayımlandı;
+        # 31 Mart 2027 öncesi yeniden gözden geçirilir.
         "slug": "15-yas-alti-sosyal-medya-duzenlemesi",
-        "draft": True,
-        "updated": ("2026-10-20", "20 Ekim 2026"),
+        "updated": ("2026-10-21", "21 Ekim 2026"),
         "campaign_id": "site_rehber_15yas_tr",
         "platform": "both",
         "eyebrow": "Gündem · Ebeveynler için sade rehber",
@@ -1292,7 +1291,7 @@ def build() -> None:
         guide_document(
             locales,
             "Türkçe Ebeveyn Rehberleri",
-            "Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
+            "15 yaş altı sosyal medya düzenlemesi, Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
             guide_index_url,
             guide_index_body(),
         ),
