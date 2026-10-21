@@ -730,7 +730,6 @@ GUIDES = (
         # R7: Microsoft yardım sayfaları 21 Ekim 2026'da okundu; AliKa profil davranışı
         # windows/profiles.py (çocuk başına veri takası) ile doğrulandı. Menü adları değişirse gözden geçirilir.
         "slug": "kardesler-bilgisayar-sirasi",
-        "draft": True,
         "updated": ("2026-10-21", "21 Ekim 2026"),
         "campaign_id": "site_rehber_kardes_bilgisayar_tr",
         "eyebrow": "Ortak bilgisayar · Ebeveynler için sade rehber",
@@ -1584,7 +1583,7 @@ def build() -> None:
         guide_document(
             locales,
             "Türkçe Ebeveyn Rehberleri",
-            "15 yaş altı sosyal medya düzenlemesi, çocuğa ilk telefon ve hediye cihaz ayarları, Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
+            "15 yaş altı sosyal medya düzenlemesi, çocuğa ilk telefon ve hediye cihaz ayarları, bilgisayarı paylaşan kardeşler, Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
             guide_index_url,
             guide_index_body(),
         ),

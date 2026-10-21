@@ -354,8 +354,8 @@ const AGE_RANGES = ['5–7', '8–11', '12–14', '15–18'];
 /* Kimler için kartlarından ilgili rehbere: yalnız yayımlanmış rehberler. */
 const AUDIENCE_GUIDES: Partial<Record<Lang, Partial<Record<AudienceId, string>>>> = {
   tr: {
-    kardes: '/rehber/windows-cocuk-ekran-suresi-nasil-yonetilir/',
-    'ilk-telefon': '/rehber/android-cocuk-ekran-suresi/',
+    kardes: '/rehber/kardesler-bilgisayar-sirasi/',
+    'ilk-telefon': '/rehber/cocuga-ilk-telefon/',
     sinav: '/rehber/soru-cozerek-ekran-suresi-kazanma/',
   },
 };
