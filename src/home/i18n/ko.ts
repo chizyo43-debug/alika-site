@@ -86,7 +86,7 @@ const ko: HomeCopy = {
     stats: [
       { value: '5–18', label: '세, 연령별 네 가지 스타일' },
       { value: '2', label: '플랫폼: Windows와 Android' },
-      { value: '0', label: '광고와 추적기' },
+      { value: '0', label: '앱 안의 광고와 추적기' },
       { value: '7–14일', label: '무료 체험: Windows 7일, Android 14일' },
     ],
   },
@@ -222,7 +222,7 @@ const ko: HomeCopy = {
     title: '가족의 데이터는 가족 곁에 남습니다.',
     items: [
       { title: '광고 없음', body: '아이 화면에서 아무것도 팔지 않습니다.' },
-      { title: '추적기 없음', body: '제품 원격 측정도, 제3자 추적도 없습니다.' },
+      { title: '추적기 없음', body: '앱에는 제품 원격 측정도, 제3자 추적도 없습니다.' },
       { title: '클라우드 계정 없음', body: '핵심 데이터는 기기에 남습니다. 가족 기기 사이에는 선택형 암호화 홈 네트워크.' },
     ],
     privacyLink: '개인정보 처리방침 읽기 →',

@@ -86,7 +86,7 @@ const de: HomeCopy = {
     stats: [
       { value: '5–18', label: 'Jahre, vier altersgerechte Darstellungen' },
       { value: '2', label: 'Plattformen: Windows und Android' },
-      { value: '0', label: 'Werbung und Tracker' },
+      { value: '0', label: 'Werbung und Tracker in der App' },
       { value: '7–14 Tage', label: 'kostenlos testen: 7 unter Windows, 14 unter Android' },
     ],
   },
@@ -222,7 +222,7 @@ const de: HomeCopy = {
     title: 'Die Daten Ihrer Familie bleiben in Ihrer Familie.',
     items: [
       { title: 'Keine Werbung', body: 'Auf dem Bildschirm Ihres Kindes wird nichts verkauft.' },
-      { title: 'Keine Tracker', body: 'Keine Produkttelemetrie und kein Tracking durch Dritte.' },
+      { title: 'Keine Tracker', body: 'Keine Produkttelemetrie und kein Tracking durch Dritte in der App.' },
       { title: 'Kein Cloud-Konto', body: 'Die Kerndaten bleiben auf dem Gerät. Optional ein verschlüsseltes Heimnetz zwischen den Familiengeräten.' },
     ],
     privacyLink: 'Datenschutzerklärung lesen →',

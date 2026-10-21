@@ -82,7 +82,7 @@ const tr: HomeCopy = {
     stats: [
       { value: '5–18', label: 'yaş için dört ayrı anlatım' },
       { value: '2', label: 'platform: Windows ve Android' },
-      { value: '0', label: 'reklam ve izleyici' },
+      { value: '0', label: 'uygulamada reklam ve izleyici' },
       { value: '7–14 gün', label: 'ücretsiz deneme: Windows’ta 7, Android’de 14' },
     ],
   },
@@ -217,7 +217,7 @@ const tr: HomeCopy = {
     title: 'Ailenizin verisi, ailenizde kalır.',
     items: [
       { title: 'Reklam yok', body: 'Çocuğunuzun ekranında satış yapılmaz.' },
-      { title: 'İzleyici yok', body: 'Ürün telemetrisi ve üçüncü taraf takip yok.' },
+      { title: 'İzleyici yok', body: 'Uygulamada ürün telemetrisi ve üçüncü taraf takip yok.' },
       { title: 'Bulut hesabı yok', body: 'Temel veriler cihazda kalır. Aile cihazları arasında isteğe bağlı, şifreli ev ağı.' },
     ],
     privacyLink: 'Gizlilik politikasını okuyun →',
