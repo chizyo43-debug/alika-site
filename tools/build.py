@@ -530,6 +530,102 @@ GUIDES = (
             "Çocuk kalan süresini ekranında görür. İsterseniz sizin eklediğiniz sorulardan çözerek, sizin belirlediğiniz günlük üst sınır içinde ek süre kazanabilir.",
         )),
     },
+    {
+        # R5: Google ve Güvenli İnternet sayfaları 21 Ekim 2026'da okundu; yayından önce menü adları yeniden kontrol edilir.
+        "slug": "cocuga-ilk-telefon",
+        "draft": True,
+        "updated": ("2026-10-21", "21 Ekim 2026"),
+        "campaign_id": "site_rehber_ilk_telefon_tr",
+        "platform": "android",
+        "eyebrow": "İlk telefon · Ebeveynler için sade rehber",
+        "title": "Çocuğa İlk Telefon: İlk Hafta Kuralları ve Kurulum Listesi",
+        "description": "Çocuğa ilk telefonu vermeden önce kurulum listesi, ilk hafta kuralları, hesap yaş sınırları ve yazdırılabilir aile sözleşmesi. Android telefonlar için.",
+        "video": "android-ilk-kurulum",
+        "video_label": "AliKa Android ilk kurulum · 1:40",
+        "lede": (
+            "İlk telefon için herkese uyan tek bir yaş yok. Yaş kadar, çocuğun telefona ne için ihtiyaç duyduğu ve telefonun nasıl kurulduğu da önemlidir. "
+            "Bu rehber, telefonu vermeden önce yapılacak kurulumu, ilk haftanın kurallarını ve çocukla yapılacak konuşmayı sırayla anlatır. "
+            "Sonunda çocukla birlikte doldurabileceğiniz yazdırılabilir bir aile sözleşmesi var."
+        ),
+        "sections": (
+            ("Kaç yaşında? Önce ihtiyacı konuşun", (
+                "Karar verirken şu sorular yaştan daha çok yol gösterir: Telefon ne için gerekli: okul dönüşünde haber vermek mi, servis mi, arkadaşlarla konuşmak mı? Çocuk bir kuralı her gün hatırlatılmadan uygulayabiliyor mu? Canını sıkan bir şeyi size anlatıyor mu?",
+                "İhtiyaç yalnız aramak ve mesajlaşmaksa, ilk aşamada az uygulamalı bir telefon yeterli olabilir. Uygulamaları ve süreyi, kurallar oturdukça birlikte artırırsınız.",
+                "Bazı yaş sınırları telefonun değil, hesapların kuralıdır. Google’ın yardım sayfasına göre Türkiye’de kendi Google hesabını yönetmenin alt yaşı 13’tür; daha küçük çocuklar için hesabı ebeveyn Family Link ile açar ve yönetir. 1 Kasım 2026’dan itibaren sosyal ağlar 15 yaşını doldurmamış çocuklara hizmet sunamaz; ayrıntılar “15 yaş altı sosyal medya düzenlemesi” rehberindedir.",
+            )),
+            ("Vermeden önce: telefon kimin, hangi hesapla?", (
+                "Telefonun ve hattın kimin adına olacağını, çocuğun hangi Google hesabını kullanacağını baştan belirleyin. Ebeveynin kendi hesabıyla kurulan bir telefonda çocuk sizin e-postalarınıza, fotoğraflarınıza ve ödeme yönteminize ulaşabilir; çocuğa ayrı bir hesap açmak daha temizdir.",
+                "Hesabın kurtarma bilgilerini (telefon numarası, yedek e-posta) siz tutun. Çocuğun telefonuna banka kartı eklemeyin.",
+            )),
+            ("Kurulum listesi: telefon ve Google Play", (
+                "Güncellemeler ve ekran kilidi: Telefonun yazılım güncellemelerini yapın. Ekran kilidini çocukla birlikte belirleyin; ilk telefonda sizin de bilmeniz konusunda anlaşın. Ekran kilidi, telefon kaybolursa içindekileri korur.",
+                "Uygulama yaş sınırı: Play Store’da profil simgesi > Ayarlar > Aile > İçerik kısıtlamaları > Ebeveyn denetimlerine git yolundan çocuğun tahmin edemeyeceği bir PIN belirleyin ve uygulama ve oyunlar için yaş sınırını seçin. Family Link kullanıyorsanız aynı ayar Family Link’te Denetimler > Google Play bölümündedir.",
+                "Google’ın notuna göre içerik kısıtlamaları, kısıtlanan içeriğin arama sonuçlarında ya da doğrudan bağlantıyla görünmesini engellemez. Bu yüzden yeni uygulamaları birlikte indirme kuralı yine gerekir.",
+                "Satın alma doğrulaması: Play Store’da profil simgesi > Ödemeler ve abonelikler > Satın alma işlemlerini doğrulama yolundan “Her zaman” seçeneğini seçin. Doğrulamayı parmak izi ya da yüz tanımayla yaparsanız telefonda kayıtlı bütün biyometri verileri kullanılabilir; yani çocuğun parmak izi de satın almayı onaylayabilir.",
+                "Az uygulamayla başlayın: İlk gün yalnız gerekenleri bırakın: telefon, mesaj, kamera ve okul için kullanılanlar. Diğerlerini ilk haftadan sonra birlikte değerlendirin.",
+            )),
+            ("Kurulum listesi: hat, internet ve kişiler", (
+                "Hat ayarları: Hattı aldığınız operatöre, faturaya yansıyan mobil ödemelerin ve ek ücretli servislerin kapatılıp kapatılamayacağını sorun. Hazır kart ya da sınırlı bir tarife, ilk telefonda fatura sürprizlerini azaltır.",
+                "Güvenli İnternet: BTK’nın Güvenli İnternet hizmeti internet servis sağlayıcıları tarafından ücretsiz sunulur ve program kurmayı gerektirmez. Çocuk profili yalnız izin verilen siteleri açar, sohbet ve sosyal medya sitelerine izin vermez. Aile profili zararlı içeriği engeller; isterseniz oyun, sohbet ve sosyal medya kategorilerini de kapatır.",
+                "Profil SMS ile, telefonla, bayiden ya da internet üzerinden seçilir ve istendiğinde değiştirilebilir ya da kapatılabilir. Hizmetin çocuğun hattında ya da ev internetinizde nasıl açılacağını sağlayıcınıza sorun.",
+                "Aile kişileri ve acil durum: Ebeveynlerin, yakın akrabaların ve gerekirse okulun numarasını rehbere kaydedin; 112’nin nasıl arandığını birlikte gösterin. Çoğu Android telefonda acil durum bilgileri bölümüne bir yakının numarası eklenebilir.",
+                "Konum paylaşımı: Konumunu görecekseniz bunu çocuğa söyleyin; ne zaman ve neden bakacağınızı anlatın. Konuşulmuş bir kural, sonradan fark edilen bir ayardan daha kolay benimsenir.",
+            )),
+            ("İlk hafta kuralları", (
+                "İlk hafta için az ve açık kural koyun, telefonla birlikte yazılı olarak verin. Aşağıdakiler iyi bir başlangıçtır; sayıları ve saatleri ailece belirleyin.",
+                "Gece şarj yeri: Telefon geceyi yatak odasının dışında, kararlaştırdığınız bir yerde şarjda geçirir.",
+                "Günlük süre: Okul günü için küçük bir günlük süreyle başlayın; hafta sonunu ayrıca konuşun.",
+                "Ekranların kapanış saati: Yatmadan önce sabit bir saat belirleyin ve her gün aynı tutun.",
+                "Ortak alan: İlk hafta telefonu evde ortak alanlarda kullanmayı deneyin.",
+                "Yeni uygulama ve hesap: Yeni bir uygulama indirmeden ya da bir yerde hesap açmadan önce size sorulur.",
+                "Her akşam kısa bir sohbet: Gün içinde neyi kullandığını, hoşuna giden ya da canını sıkan bir şey olup olmadığını konuşun. Sorgu değil, sohbet olsun.",
+                "Hafta sonunda gözden geçirme: Yedinci gün kuralları birlikte gözden geçirin; işleyeni tutun, işlemeyeni değiştirin.",
+            )),
+            ("Sakin bir güvenlik konuşması", (
+                "Korkutmadan, kısa ve somut konuşun. Tanımadığı biri fotoğraf, şifre, adres ya da para isterse cevap vermeden size göstermesini; bir mesaj, oyun ya da video canını sıkarsa telefonu size getirmesini isteyin.",
+                "SMS ile gelen doğrulama kodlarının ve şifrelerin arkadaşlarla bile paylaşılmadığını, gönderilen bir fotoğrafın her zaman geri alınamayabileceğini anlatın.",
+                "En önemli cümle şudur: “Bana anlattığın için ceza almayacaksın.” Telefonunun elinden alınacağını düşünen çocuk, yaşadığı sorunu saklayabilir.",
+            )),
+            ("Sık yapılan hatalar", (
+                "Telefonu ebeveynin hesabıyla kurmak, ilk gün bütün uygulamaları açmak, kuralları sonradan ve söylemeden eklemek ve gece şarj yerini belirlememek en sık görülen sorunlardır.",
+                "Kuralları ilk hafta sonunda gözden geçirme sözü vermek, çocuğun itirazını dinlemenin de bir yolunu açar.",
+            )),
+        ),
+        "printable": {
+            "title": "İlk telefon aile sözleşmesi",
+            "note": "Yazdırın, çocukla birlikte doldurun ve ikiniz de imzalayın. İlk haftanın sonunda birlikte gözden geçirin.",
+            "columns": ("Konu", "Bizim kuralımız"),
+            "rows": (
+                ("Telefon gece burada şarj olur", ""),
+                ("Okul günü ekran süresi", ""),
+                ("Hafta sonu ekran süresi", ""),
+                ("Ekranlar şu saatte kapanır", ""),
+                ("Telefonun kullanılmadığı yerler ve anlar", ""),
+                ("Yeni uygulama ya da hesap için", ""),
+                ("Mesajlaşma ve paylaşım", ""),
+                ("Canımı sıkan bir şey olursa", ""),
+                ("Kural bozulursa", ""),
+                ("Gözden geçirme tarihi", ""),
+                ("İmzalar", ""),
+            ),
+        },
+        "related": (
+            ("Android telefonda çocuğun ekran süresi nasıl planlanır?", "android-cocuk-ekran-suresi"),
+            ("15 yaş altı sosyal medya düzenlemesi: 1 Kasım’da ne değişiyor?", "15-yas-alti-sosyal-medya-duzenlemesi"),
+            ("Ailece ekran süresi planı nasıl yapılır?", "ailece-ekran-suresi-plani"),
+        ),
+        "product": ("Bu planı otomatik uygulamak isterseniz", (
+            "AliKa ebeveyn kontrolü ilk hafta kurallarının bir kısmını Android telefonda uygular: günlük süre, uygulama sınırı, uyku saati ve web filtresi. Web filtresi engellediğiniz siteleri kapatır ve Google, YouTube ve Bing’de güvenli aramayı zorlar; filtreleme telefonun içinde yapılır.",
+            "Çocuk kalan süresini ekranında görür ve süre dolduğunda hangi kuralın uygulandığını bilir. İsterseniz sizin eklediğiniz sorulardan çözerek, sizin belirlediğiniz günlük üst sınır içinde ek süre kazanabilir; yanlış cevap süre kazandırmaz. AliKa hesabı açmanız gerekmez.",
+        )),
+        "sources": (
+            ("Google Hesaplarında yaş şartları — Google Hesabı Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/accounts/answer/1350409?hl=tr"),
+            ("Google Play’de içerik kısıtlamaları ayarlama — Google Play Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/googleplay/answer/1075738?hl=tr"),
+            ("Google Play’de satın alma işlemlerini doğrulama — Google Play Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/googleplay/answer/1626831?hl=tr"),
+            ("Güvenli İnternet Hizmeti — BTK Güvenli İnternet Merkezi, 21 Ekim 2026’da erişildi", "https://www.guvenlinet.org.tr/guvenli-internet-hizmeti"),
+            ("Sosyal Ağ Sağlayıcı Tarafından Çocuklara Özgü Ayrıştırılmış Hizmet Sunulmasına ve Yaş Doğrulamaya İlişkin Yönetmelik — Resmî Gazete, 10 Ekim 2026, sayı 33396", "https://www.resmigazete.gov.tr/eskiler/2026/10/20261010-15.pdf"),
+        ),
+    },
 )
 
 # "draft": True işaretli rehberler yalnız ALIKA_DRAFTS=1 ile derlenir (yayın öncesi önizleme).
