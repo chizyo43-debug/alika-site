@@ -54,6 +54,7 @@ GUIDE_SLUGS = (
     "android-cocuk-ekran-suresi",
     "ara-tatil-ekran-suresi-plani",
     "15-yas-alti-sosyal-medya-duzenlemesi",
+    "cocuga-ilk-telefon",
 )
 SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
 
@@ -282,6 +283,7 @@ def main() -> None:
         "android-cocuk-ekran-suresi": ("site_rehber_android_tr", True),
         "ara-tatil-ekran-suresi-plani": ("site_rehber_ara_tatil_tr", True),
         "15-yas-alti-sosyal-medya-duzenlemesi": ("site_rehber_15yas_tr", True),
+        "cocuga-ilk-telefon": ("site_rehber_ilk_telefon_tr", True),
     }
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
