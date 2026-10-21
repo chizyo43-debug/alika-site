@@ -630,9 +630,9 @@ GUIDES = (
         ),
     },
     {
-        # R6: Google ve Apple yardım sayfaları 21 Ekim 2026'da okundu; yayından önce menü adları yeniden kontrol edilir.
+        # R6: Google ve Apple yardım sayfaları 21 Ekim 2026'da okundu, aynı gün yayımlandı;
+        # Play, Dijital Denge ya da Apple menü adları değişirse yeniden gözden geçirilir.
         "slug": "cocuga-tablet-telefon-hediye",
-        "draft": True,
         "updated": ("2026-10-21", "21 Ekim 2026"),
         "campaign_id": "site_rehber_hediye_cihaz_tr",
         "platform": "android",
@@ -1499,7 +1499,7 @@ def build() -> None:
         guide_document(
             locales,
             "Türkçe Ebeveyn Rehberleri",
-            "15 yaş altı sosyal medya düzenlemesi, çocuğa ilk telefon, Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
+            "15 yaş altı sosyal medya düzenlemesi, çocuğa ilk telefon ve hediye cihaz ayarları, Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
             guide_index_url,
             guide_index_body(),
         ),

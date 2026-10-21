@@ -55,6 +55,7 @@ GUIDE_SLUGS = (
     "ara-tatil-ekran-suresi-plani",
     "15-yas-alti-sosyal-medya-duzenlemesi",
     "cocuga-ilk-telefon",
+    "cocuga-tablet-telefon-hediye",
 )
 SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
 # Sosyal medya hesapları (ana sayfa altlığı, sabit sayfaların altlığı, ana sayfa JSON-LD sameAs).
@@ -385,6 +386,7 @@ def main() -> None:
         "ara-tatil-ekran-suresi-plani": ("site_rehber_ara_tatil_tr", True),
         "15-yas-alti-sosyal-medya-duzenlemesi": ("site_rehber_15yas_tr", True),
         "cocuga-ilk-telefon": ("site_rehber_ilk_telefon_tr", True),
+        "cocuga-tablet-telefon-hediye": ("site_rehber_hediye_cihaz_tr", True),
     }
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
