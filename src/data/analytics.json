@@ -1,4 +1,4 @@
 {
   "_note": "Cloudflare Web Analytics site token for www.alika.tr. It is a public value (it appears in every page's HTML), not a secret. Empty = no beacon on any page. See README.md (Analytics).",
-  "cloudflareWebAnalyticsToken": ""
+  "cloudflareWebAnalyticsToken": "63672d767cf940d58da003986f7bf9b5"
 }
