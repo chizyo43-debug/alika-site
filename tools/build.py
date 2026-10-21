@@ -726,6 +726,91 @@ GUIDES = (
             ("Satın Alma İzni ile çocuğunuzun içeriklerini onaylama — Apple Destek, 21 Ekim 2026’da erişildi", "https://support.apple.com/tr-tr/105055"),
         ),
     },
+    {
+        # R7: Microsoft yardım sayfaları 21 Ekim 2026'da okundu; AliKa profil davranışı
+        # windows/profiles.py (çocuk başına veri takası) ile doğrulandı. Menü adları değişirse gözden geçirilir.
+        "slug": "kardesler-bilgisayar-sirasi",
+        "draft": True,
+        "updated": ("2026-10-21", "21 Ekim 2026"),
+        "campaign_id": "site_rehber_kardes_bilgisayar_tr",
+        "eyebrow": "Ortak bilgisayar · Ebeveynler için sade rehber",
+        "title": "Kardeşler Aynı Bilgisayarı Paylaşınca: Ayrı Süre, Ayrı Kural",
+        "description": "Kardeşler aynı bilgisayarı paylaşınca her çocuğa ayrı Windows hesabı, kişiye bağlı süre ve yazılı sıra. Yaşa göre kural, sık hatalar, sıra çizelgesi.",
+        "video": "windows-ebeveyn-paneli",
+        "video_label": "AliKa Windows ebeveyn paneli · 2:36",
+        "lede": (
+            "Kardeşler aynı bilgisayarı kullanınca tartışma çoğu zaman süreden değil sıradan çıkar: kim önce oturdu, kimin süresi kimin yüzünden bitti. "
+            "Bu rehber Windows 10 ve 11’de her çocuğa ayrı süre ve ayrı kural vermenin dört adımını anlatır. "
+            "Sonunda çocuklarla birlikte doldurup bilgisayarın yanına asabileceğiniz yazdırılabilir bir haftalık sıra çizelgesi var."
+        ),
+        "sections": (
+            ("Önce sorunu adlandırın", (
+                "Tek hesap ve tek süre olduğunda önce oturan çocuk, kardeşinin süresini de harcamış olur. Ödevi olan çocuk bilgisayarı uzun tutar, küçük kardeş bekler; akşam “Ama o daha uzun oynadı” cümlesiyle biter.",
+                "Hedef herkese aynı süreyi vermek değil, herkesin süresinin kendine ait olmasıdır. Çocuklarla oturup üç şeyi birlikte kararlaştırın: kimin ne kadar süresi var, sıra nasıl dönüyor, okul işi nereye giriyor.",
+            )),
+            ("1. Her çocuğa ayrı Windows hesabı", (
+                "Microsoft’a göre bilgisayara birden çok hesap eklendiğinde her kullanıcının kendi ayarları, belgeleri ve uygulamaları olur. Bir kardeşin oyun kaydı, ödev dosyası ya da masaüstü düzeni böylece diğerininkine karışmaz.",
+                "Çocuğu Microsoft aile grubunuza account.microsoft.com/family adresindeki “Aile üyesi ekle” seçeneğiyle, Üye rolünde ekleyin; Windows’ta aile ayarları Ayarlar > Hesaplar > Aile bölümündedir. Çocuğun Microsoft hesabı yoksa bu sırada açılabilir. Çocuk, ülkesindeki yasal yaşın altındaysa hesap için yetişkin onayı istenir.",
+                "Çocuk bilgisayarda kendi Microsoft hesabıyla oturum açtığında bilgisayar aile grubunuzda görünür. Çocuğun hesabını standart kullanıcı olarak bırakın: Microsoft, çocuğun hesabı yönetici olursa aile özelliklerinin düzgün çalışmayabileceğini belirtiyor. Yönetici hesabı ve şifresi yalnız sizde kalsın.",
+                "Windows’ta Microsoft hesabı olmayan yerel bir kullanıcı da eklenebilir. Bu, çocuğa ayrı bir masaüstü verir; ancak aşağıdaki Family Safety süre sınırları, aile grubunuza bağlı çocuk hesabı üzerinden çalışır.",
+            )),
+            ("2. Süreyi kişiye bağlayın, bilgisayara değil", (
+                "Microsoft Family Safety’de ekran süresi sınırı her aile üyesi için ayrı ayarlanır: account.microsoft.com/family adresinde ya da Family Safety uygulamasında çocuğu seçer, Windows sekmesinde gün gün izin verilen saat aralıklarını ve toplam süreyi belirlersiniz. Aynı ayarı bütün günlere de uygulayabilirsiniz.",
+                "Böylece bir çocuğun kullandığı süre kardeşinin süresinden düşmez. Belirli uygulama ve oyunlar için de çocuk başına günlük sınır konabilir; Microsoft’a göre bu süre sınırları web sitelerinde çalışmaz.",
+            )),
+            ("3. Sırayı yazın: kim, ne zaman", (
+                "Ayrı süre tek başına yetmez; iki çocuk aynı saatte bilgisayar isterse tartışma yine çıkar. Hafta içi akşamları saat aralıklarına bölün ve her aralığın kime ait olduğunu yazın. Kimin önce başlayacağını günden güne değiştirin: örneğin tek günlerde biri, çift günlerde diğeri önce başlasın.",
+                "Okul işini baştan konuşun: ödev için bilgisayar gerekiyorsa bu iş sıranın önüne geçer mi, kişisel süreden sayılır mı? Bunu bir kez kararlaştırıp çizelgeye yazmak, her akşam yeniden pazarlık etmekten kolaydır.",
+                "Birlikte oynadıkları zaman için de bir kural koyun: ortak oyun ikisinin süresinden de düşebilir ya da çizelgede ayrı bir “birlikte” aralığı olabilir.",
+            )),
+            ("4. Yaşa göre farklı kural, herkese aynı açıklık", (
+                "Kardeşlerin yaşı farklıysa kuralları da farklı olabilir: büyük çocuğun süresi daha uzun, ekran kapanış saati daha geç olabilir. Farkın nedenini açıkça söyleyin; “Sen de o yaşa gelince süren uzayacak” demek, “O büyük” demekten daha anlaşılırdır.",
+                "Büyük kardeşi süre bekçisi yapmayın. Kuralı uygulamak ebeveynin işidir; kardeşin kardeşi gözetlemesi tartışmayı bilgisayardan kardeş ilişkisine taşır.",
+            )),
+            ("Sıra değişirken: oturumu kapatın", (
+                "Sırası biten çocuk Başlat menüsündeki hesap simgesinden oturumunu kapatsın, sonraki çocuk kendi hesabıyla açsın. Böylece herkes kendi masaüstü ve kendi süresiyle başlar.",
+                "Kendi yönetici hesabınızı açık bırakmayın. Ebeveyn hesabında çocuk sınırları yoktur ve aile ayarları oradan değiştirilebilir.",
+            )),
+            ("Haftada bir gözden geçirin", (
+                "Hafta sonunda on dakika ayırın: sıra adil miydi, kimin süresi hep yetmedi, okul işi sırayı bozdu mu? Bir seferde tek bir kuralı değiştirin ve değişikliği çocukların hepsine birlikte söyleyin.",
+            )),
+            ("Sık yapılan hatalar", (
+                "Bütün çocukları tek hesap ve tek süreyle kullandırmak, çocuğun hesabını yönetici yapmak, ebeveyn hesabını açık bırakmak, büyük kardeşi süre bekçisi yapmak ve bir çocuğun kuralını diğerlerine söylemeden değiştirmek en sık görülen sorunlardır.",
+            )),
+        ),
+        "printable": {
+            "title": "Haftalık bilgisayar sıra çizelgesi",
+            "note": "Yazdırın, çocuklarla birlikte doldurun ve bilgisayarın yanına asın. Kimin önce başlayacağını günden güne değiştirin.",
+            "button": "Çizelgeyi yazdırın",
+            "columns": ("Gün", "1. sıra (ad, saat)", "2. sıra (ad, saat)", "Ekranlar kapanır"),
+            "rows": (
+                ("Pazartesi", "", "", ""),
+                ("Salı", "", "", ""),
+                ("Çarşamba", "", "", ""),
+                ("Perşembe", "", "", ""),
+                ("Cuma", "", "", ""),
+                ("Cumartesi", "", "", ""),
+                ("Pazar", "", "", ""),
+            ),
+        },
+        "related": (
+            ("Windows 11’de çocuk ekran süresi nasıl sınırlandırılır?", "windows-11-cocuk-ekran-suresi"),
+            ("Ailece ekran süresi planı nasıl yapılır?", "ailece-ekran-suresi-plani"),
+            ("Soru çözerek ekran süresi kazanma", "soru-cozerek-ekran-suresi-kazanma"),
+        ),
+        "product": ("Bu planı otomatik uygulamak isterseniz", (
+            "AliKa ebeveyn kontrolü Windows 10 ve 11’de her çocuğa ayrı profil açar: günlük süre, uygulama kuralları, yaş ayarı ve raporlar çocuk başına ayrı tutulur. Bir çocuğun kullandığı süre ya da soru çözerek kazandığı ek süre kardeşine geçmez.",
+            "Sıra değiştiğinde etkin çocuğu ebeveyn panelinden siz değiştirirsiniz; panel ebeveyn PIN’iyle açılır ve anne ile baba ayrı PIN kullanabilir. Okul, tatil ve sınav haftası için takvimle farklı günlük süre tanımlanabilir. AliKa hesabı açmanız gerekmez.",
+        )),
+        "sources": (
+            ("Windows’ta kullanıcı hesaplarını yönetme — Microsoft Destek, 21 Ekim 2026’da erişildi", "https://support.microsoft.com/tr-tr/windows/security/identity-signin/manage-user-accounts-in-windows"),
+            ("Aile grubunuza kişi ekleme — Microsoft Destek, 21 Ekim 2026’da erişildi", "https://support.microsoft.com/tr-tr/family-safety/add-people-to-your-family-group"),
+            ("Ebeveyn izni ve Microsoft çocuk hesapları — Microsoft Destek, 21 Ekim 2026’da erişildi", "https://support.microsoft.com/tr-tr/account-billing/ebeveyn-izni-ve-microsoft-%C3%A7ocuk-hesaplar%C4%B1-c6951746-8ee5-8461-0809-fbd755cd902e"),
+            ("Bir cihazı Microsoft hesabına bağlama — Microsoft Destek, 21 Ekim 2026’da erişildi", "https://support.microsoft.com/tr-tr/family-safety/how-to-connect-a-device-to-a-microsoft-account"),
+            ("Cihazlar arasında ekran süresi sınırlarını ayarlama — Microsoft Destek, 21 Ekim 2026’da erişildi", "https://support.microsoft.com/tr-tr/family-safety/set-screen-time-limits-across-devices"),
+            ("Uygulama ve oyun sınırları ayarlama — Microsoft Destek, 21 Ekim 2026’da erişildi", "https://support.microsoft.com/tr-tr/family-safety/set-app-and-game-limits"),
+        ),
+    },
 )
 
 # "draft": True işaretli rehberler yalnız ALIKA_DRAFTS=1 ile derlenir (yayın öncesi önizleme).
