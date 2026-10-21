@@ -12,6 +12,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const BASE_URL = 'https://www.alika.tr';
 const locales = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'locales.json'), 'utf8'));
+// AliKa'nın sosyal medya hesapları; yapılandırılmış veride uygulamanın sameAs listesi olur (altlıkla aynı liste).
+const socialUrls = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'social.json'), 'utf8')).profiles.map((profile) => profile.url);
 // Paylaşım görselindeki yazı Türkçe; alt metin her dilde görseli anlatır.
 const OG_IMAGE_ALT = {
   tr: 'AliKa logosu, “Kısıtlamıyoruz. Planlıyoruz.” sloganı ve gülümseyen AliKa maskotu. Windows ve Android; Microsoft Store ve Google Play.',
@@ -63,6 +65,7 @@ function schema(lang, copy, canonical, storeUrl) {
     downloadUrl: storeUrl,
     publisher: { '@type': 'Organization', name: 'ErenKa Software' },
     featureList: copy.seo.featureList,
+    sameAs: socialUrls,
   };
   const offer = STORE_OFFERS[lang];
   if (offer) {

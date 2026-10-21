@@ -315,10 +315,17 @@ const ko: HomeCopy = {
     faq: '자주 묻는 질문',
     guides: '가이드',
     content: '준비된 콘텐츠',
-    channel: 'YouTube 채널',
     email: '이메일',
     privacy: '개인정보',
     terms: '이용 약관',
+    follow: 'AliKa 소셜 미디어',
+    social: {
+      instagram: 'AliKa Instagram 계정',
+      facebook: 'AliKa Facebook 계정',
+      x: 'AliKa X 계정',
+      youtube: 'AliKa YouTube 채널',
+      linkedin: 'AliKa LinkedIn 페이지',
+    },
   },
 };
 

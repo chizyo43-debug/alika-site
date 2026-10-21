@@ -1,9 +1,15 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import { microsoftStoreUrl, playStoreUrl } from '../store-campaign';
 import { contentPath, GUIDE_PATHS, homePath, LANG_NAMES, LANGS, legalPath, type Lang } from './i18n/langs';
-import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, PlanStatus, ScreenId, TvGame, VideoKey } from './i18n/types';
+import type { AudienceId, ControlFeature, FamilyFeature, HomeCopy, LearningFeature, PlanStatus, ScreenId, SocialId, TvGame, VideoKey } from './i18n/types';
+import socialData from '../data/social.json';
 
 const SUPPORT_EMAIL = 'destek@alika.tr';
+
+/* AliKa'nın sosyal medya hesapları (src/data/social.json; sabit sayfaların altlığı da aynı listeyi kullanır).
+   Simgeler satır içi SVG'dir: üçüncü taraf betik, yazı tipi ya da istek yoktur. */
+interface SocialProfile { id: SocialId; name: string; url: string; icon: string }
+const SOCIAL_PROFILES = socialData.profiles as SocialProfile[];
 
 type Theme = 'light' | 'dark';
 
@@ -299,7 +305,7 @@ function platforms(t: HomeCopy, storeUrl: string, playUrl: string): Platform[] {
 /* Kanaldaki güncel videoların (19.10.2026, Türkçe) aynı dosyaları sitede barındırılır ve sayfada oynar.
    `file` uzantısız yoldur: .mp4 video, .webp kapak, .tr.vtt Türkçe altyazı. Reklamın dikey eşi
    (`verticalFile`) telefon genişliğinde ve telefon ekranı penceresinde oynar; Shorts videosu yalnız dikeydir. */
-const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@AliKaApp';
+const YOUTUBE_CHANNEL_URL = SOCIAL_PROFILES.find((profile) => profile.id === 'youtube')!.url;
 interface VideoItem {
   key: VideoKey;
   platform: string;
@@ -1128,6 +1134,17 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               <span>AliKa</span>
             </a>
             <p>{t.footer.tagline}</p>
+            <ul className="footSocial" aria-label={t.footer.follow}>
+              {SOCIAL_PROFILES.map((profile) => (
+                <li key={profile.id}>
+                  <a href={profile.url} target="_blank" rel="me noopener" aria-label={t.footer.social[profile.id]}>
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                      <path d={profile.icon} />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
           <nav className="footCols" aria-label={t.a11y.footerMenu}>
             <div>
@@ -1150,7 +1167,6 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               {guides && <a href={guides}>{t.footer.guides}</a>}
               {t.footer.schools && <a href="/okullar/">{t.footer.schools}</a>}
               <a href={contentPath(lang)}>{t.footer.content}</a>
-              <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">{t.footer.channel}</a>
               <a href={`mailto:${SUPPORT_EMAIL}`}>{t.footer.email}</a>
             </div>
             <div>

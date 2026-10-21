@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build:home": "npm run claims:verify && npm run cid:verify && npm run seo:verify && vite build && node tools/build-language-homes.mjs && npm run seo:dist",
+    "build:home": "npm run claims:verify && npm run cid:verify && npm run seo:verify && vite build && node tools/build-language-homes.mjs && node tools/inject-analytics.mjs && npm run seo:dist",
     "claims:verify": "node tools/verify-public-claims.mjs",
     "cid:verify": "node tools/verify-store-cid.mjs",
     "seo:verify": "node tools/verify-seo.mjs --source",

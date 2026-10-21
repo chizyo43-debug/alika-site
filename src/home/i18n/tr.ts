@@ -338,10 +338,17 @@ const tr: HomeCopy = {
     guides: 'Rehberler',
     schools: 'Okullar için',
     content: 'Hazır içerik',
-    channel: 'YouTube kanalı',
     email: 'E-posta',
     privacy: 'Gizlilik',
     terms: 'Kullanım koşulları',
+    follow: 'AliKa sosyal medyada',
+    social: {
+      instagram: 'AliKa Instagram’da',
+      facebook: 'AliKa Facebook’ta',
+      x: 'AliKa X’te',
+      youtube: 'AliKa YouTube’da',
+      linkedin: 'AliKa LinkedIn’de',
+    },
   },
 };
 

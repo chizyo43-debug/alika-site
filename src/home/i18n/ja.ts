@@ -315,10 +315,17 @@ const ja: HomeCopy = {
     faq: 'よくある質問',
     guides: 'ガイド',
     content: '既製の教材',
-    channel: 'YouTubeチャンネル',
     email: 'メール',
     privacy: 'プライバシー',
     terms: '利用規約',
+    follow: 'AliKaのSNS',
+    social: {
+      instagram: 'AliKaのInstagram',
+      facebook: 'AliKaのFacebook',
+      x: 'AliKaのX',
+      youtube: 'AliKaのYouTubeチャンネル',
+      linkedin: 'AliKaのLinkedInページ',
+    },
   },
 };
 

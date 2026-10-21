@@ -1233,7 +1233,8 @@ h3 {
 
 .footer-brand {
   display: flex;
-  align-items: center;
+  /* Logo, sosyal satırla uzayan metnin ortasında değil, başlığın yanında dursun. */
+  align-items: flex-start;
   gap: 16px;
 }
 
@@ -1250,6 +1251,44 @@ h3 {
 .footer-brand span {
   max-width: 500px;
   font-size: 0.88rem;
+}
+
+/* Sosyal medya: satır içi SVG simgeler; dokunma alanı 40 px. */
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--white-line);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.78);
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  border-color: var(--cyan);
+  color: #fff;
+  background: rgba(53, 208, 224, 0.12);
+}
+
+.footer-social a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.footer-social svg {
+  display: block;
+  fill: currentColor;
 }
 
 .footer-links {

@@ -13,6 +13,8 @@ export type FamilyFeature = 'tasks' | 'network' | 'messages' | 'sharedPhone';
 export type TvGame = 'rally' | 'station' | 'wheel' | 'nameCity';
 export type VideoKey = 'winSetup' | 'androidSetup' | 'ad' | 'firstDay' | 'winPanel' | 'andPanel' | 'homeNetwork' | 'quizShort';
 export type PlanStatus = 'ready' | 'dev' | 'plan';
+/* src/data/social.json içindeki hesapların kimlikleri (aynı sıra). */
+export type SocialId = 'instagram' | 'facebook' | 'x' | 'youtube' | 'linkedin';
 
 export interface TitleBody {
   title: string;
@@ -163,9 +165,12 @@ export interface HomeCopy {
     /* Yalnız okullar sayfası olan dilde (tr). */
     schools?: string;
     content: string;
-    channel: string;
     email: string;
     privacy: string;
     terms: string;
+    /* Sosyal medya satırı: listenin adı ve her hesabın erişilebilir adı. Adres ve simge src/data/social.json'da;
+       YouTube kanalı da bu satırdadır. */
+    follow: string;
+    social: Record<SocialId, string>;
   };
 }

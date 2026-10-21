@@ -315,10 +315,17 @@ const de: HomeCopy = {
     faq: 'Häufige Fragen',
     guides: 'Ratgeber',
     content: 'Fertige Inhalte',
-    channel: 'YouTube-Kanal',
     email: 'E-Mail',
     privacy: 'Datenschutz',
     terms: 'Nutzungsbedingungen',
+    follow: 'AliKa in sozialen Medien',
+    social: {
+      instagram: 'AliKa auf Instagram',
+      facebook: 'AliKa auf Facebook',
+      x: 'AliKa auf X',
+      youtube: 'AliKa auf YouTube',
+      linkedin: 'AliKa auf LinkedIn',
+    },
   },
 };
 

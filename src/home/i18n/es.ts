@@ -315,10 +315,17 @@ const es: HomeCopy = {
     faq: 'Preguntas frecuentes',
     guides: 'Guías',
     content: 'Contenido listo',
-    channel: 'Canal de YouTube',
     email: 'Correo',
     privacy: 'Privacidad',
     terms: 'Condiciones de uso',
+    follow: 'AliKa en redes sociales',
+    social: {
+      instagram: 'AliKa en Instagram',
+      facebook: 'AliKa en Facebook',
+      x: 'AliKa en X',
+      youtube: 'AliKa en YouTube',
+      linkedin: 'AliKa en LinkedIn',
+    },
   },
 };
 

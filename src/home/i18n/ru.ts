@@ -315,10 +315,17 @@ const ru: HomeCopy = {
     faq: 'Частые вопросы',
     guides: 'Руководства',
     content: 'Готовые материалы',
-    channel: 'YouTube-канал',
     email: 'Почта',
     privacy: 'Конфиденциальность',
     terms: 'Условия использования',
+    follow: 'AliKa в соцсетях',
+    social: {
+      instagram: 'AliKa в Instagram',
+      facebook: 'AliKa в Facebook',
+      x: 'AliKa в X',
+      youtube: 'AliKa на YouTube',
+      linkedin: 'AliKa в LinkedIn',
+    },
   },
 };
 

@@ -57,6 +57,12 @@ GUIDE_SLUGS = (
     "cocuga-ilk-telefon",
 )
 SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
+# Sosyal medya hesapları (ana sayfa altlığı, sabit sayfaların altlığı, ana sayfa JSON-LD sameAs).
+SOCIAL_IDS = ("instagram", "facebook", "x", "youtube", "linkedin")
+# Tek izinli analiz kaynağı: Cloudflare Web Analytics'in çerezsiz JS işaretçisi (tools/inject-analytics.mjs).
+# Belirteç src/data/analytics.json içinde; boşsa hiçbir sayfada işaretçi olmamalı.
+CLOUDFLARE_BEACON_HOST = "static.cloudflareinsights.com"
+PRIVACY_PAGES = ("privacy.html", "privacy/index.html", "privacy-policy.html", "gizlilik/index.html")
 
 
 class LinkParser(HTMLParser):
@@ -77,6 +83,100 @@ class LinkParser(HTMLParser):
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def analytics_token() -> str:
+    config = json.loads((ROOT / "src" / "data" / "analytics.json").read_text(encoding="utf-8"))
+    return str(config.get("cloudflareWebAnalyticsToken") or "").strip()
+
+
+def beacon_tag(token: str) -> str:
+    """tools/inject-analytics.mjs'in </body> öncesine yazdığı etiketin tam hâli."""
+    return (
+        '<!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" '
+        f"data-cf-beacon='{{\"token\": \"{token}\"}}'></script><!-- End Cloudflare Web Analytics -->\n"
+    )
+
+
+def published_bytes(target: Path, token: str) -> bytes:
+    """Yayımlanan yasal kopya; işaretçi etiketi çıkarılınca kaynakla bayt bayt aynı olmalı."""
+    data = target.read_bytes()
+    return data.replace(beacon_tag(token).encode("utf-8"), b"", 1) if token else data
+
+
+def check_analytics(errors: list[str], token: str) -> str:
+    """Analiz çiti: dış kaynaklı betik yalnız Cloudflare işaretçisi olabilir. Belirteç boşsa hiçbir sayfada
+    işaretçi yok; doluysa yönlendirme dışındaki her sayfada </body> öncesinde tam bir işaretçi var ve
+    gizlilik sayfaları Cloudflare Web Analytics'i anlatıyor."""
+    if token and not re.fullmatch(r"[A-Za-z0-9_-]{8,128}", token):
+        errors.append("analytics.json: Cloudflare Web Analytics token has an unexpected format")
+        return "invalid token"
+    tag = beacon_tag(token) if token else ""
+    tagged = redirects = 0
+    for page in sorted(DIST.rglob("*.html")):
+        text = page.read_text(encoding="utf-8")
+        rel = page.relative_to(DIST).as_posix()
+        for src in re.findall(r"""<script\b[^>]*?\bsrc=["']([^"']+)["']""", text, re.I):
+            host = urlparse(f"https:{src}" if src.startswith("//") else src).hostname
+            if host and host != CLOUDFLARE_BEACON_HOST:
+                errors.append(f"Third-party script from {host} in {rel}")
+        markers = text.count("cloudflareinsights") + text.count("data-cf-beacon")
+        redirect = 'http-equiv="refresh"' in text
+        if not token or redirect:
+            redirects += redirect
+            if markers:
+                reason = "redirect page" if token else "token is empty"
+                errors.append(f"Cloudflare Web Analytics beacon must not be on {rel} ({reason})")
+            continue
+        if text.count(tag) != 1 or markers != 2:
+            errors.append(f"Expected exactly one Cloudflare Web Analytics beacon: {rel}")
+        elif text.count("</body>") != 1 or text.index(tag) + len(tag) != text.index("</body>"):
+            errors.append(f"Cloudflare Web Analytics beacon must sit right before </body>: {rel}")
+        else:
+            tagged += 1
+    if not token:
+        return "Cloudflare Web Analytics off (empty token, no beacon on any page)"
+    for rel in PRIVACY_PAGES:
+        page = DIST / rel
+        if not page.exists() or "Cloudflare Web Analytics" not in page.read_text(encoding="utf-8"):
+            errors.append(f"Privacy page must mention Cloudflare Web Analytics: {rel}")
+    return f"Cloudflare Web Analytics beacon on {tagged} pages, none on {redirects} redirect pages"
+
+
+def check_social(errors: list[str], home_bundle_text: str) -> int:
+    """Sosyal hesaplar: ana sayfa altlığı (React paketi), ana sayfa sameAs ve sabit sayfaların altlığı."""
+    profiles = json.loads((ROOT / "src" / "data" / "social.json").read_text(encoding="utf-8")).get("profiles") or []
+    if tuple(profile.get("id") for profile in profiles) != SOCIAL_IDS:
+        errors.append(f"social.json profiles differ from {SOCIAL_IDS}")
+        return 0
+    urls = [profile["url"] for profile in profiles]
+    for url in urls:
+        # Profil bağlantıları mağaza kampanyası taşımaz.
+        if urlparse(url).scheme != "https" or "cid=" in url or "utm_" in url:
+            errors.append(f"Social profile URL must be a plain https link: {url}")
+        if url not in home_bundle_text:
+            errors.append(f"Home footer social link is missing from the bundle: {url}")
+    for lang in LANGS:
+        home = (DIST if lang == "tr" else DIST / lang) / "index.html"
+        if not home.exists():
+            continue
+        match = re.search(r'<script type="application/ld\+json">(.*?)</script>', home.read_text(encoding="utf-8"), re.S)
+        if not match or json.loads(match.group(1)).get("sameAs") != urls:
+            errors.append(f"Home schema sameAs must list the social profiles: {home}")
+    footer_pages = 0
+    for page in sorted(DIST.rglob("*.html")):
+        text = page.read_text(encoding="utf-8")
+        if '<footer class="site-footer">' not in text:
+            continue
+        footer_pages += 1
+        footer_html = text[text.index('<footer class="site-footer">'):]
+        for url in urls:
+            link = f'<a href="{html.escape(url)}" target="_blank" rel="me noopener" aria-label="'
+            if footer_html.count(link) != 1 or f'{link}"' in footer_html:
+                errors.append(f"Footer social link is missing, repeated or unnamed ({url}): {page.relative_to(DIST).as_posix()}")
+    if footer_pages < 20:
+        errors.append(f"Static footer pages unexpectedly few: {footer_pages}")
+    return footer_pages
 
 
 def route_exists(value: str) -> bool:
@@ -168,6 +268,7 @@ def main() -> None:
     if tuple(locales) != LANGS:
         errors.append(f"Locale order/membership differs: {tuple(locales)}")
 
+    token = analytics_token()
     expected_pages = 0
     for lang in LANGS:
         base = DIST if lang == "tr" else DIST / lang
@@ -296,7 +397,9 @@ def main() -> None:
         play_link = f"details?id={PLAY_STORE_PACKAGE}&amp;hl=tr&amp;referrer=utm_source%3Dsite%26utm_medium%3Drehber%26utm_campaign%3D{campaign}"
         if has_play != (play_link in guide_text):
             errors.append(f"Guide Google Play button is wrong: {page}")
-        if "youtube.com" in guide_text or "youtu.be" in guide_text:
+        # Altlıktaki YouTube kanal bağlantısı video değildir (check_social denetler); yazı gövdesinde YouTube olmaz.
+        guide_body = guide_text.split('<footer class="site-footer">', 1)[0]
+        if "youtube.com" in guide_body or "youtu.be" in guide_body:
             errors.append(f"Guide video must play on the site, not on YouTube: {page}")
 
     # Okullar sayfası: dizinde ve site haritasında; veli notu PDF'i var, yazdırma sayfası noindex.
@@ -455,21 +558,21 @@ def main() -> None:
     for name in ("privacy", "eula"):
         source = ROOT / "legal" / f"{name}.html"
         for target in (DIST / f"{name}.html", DIST / name / "index.html"):
-            if not target.exists() or digest(source) != digest(target):
+            if not target.exists() or published_bytes(target, token) != source.read_bytes():
                 errors.append(f"Legal file changed or missing: {target}")
 
     # Türkçe yasal metinler: kaynakla aynı, İngilizce sürüme bağlı.
     for name, english in (("gizlilik", "privacy"), ("kullanim-kosullari", "eula")):
         target = DIST / name / "index.html"
         source = ROOT / "legal" / "tr" / f"{name}.html"
-        if not target.exists() or digest(source) != digest(target):
+        if not target.exists() or published_bytes(target, token) != source.read_bytes():
             errors.append(f"Turkish legal page changed or missing: {target}")
         elif f'href="/{english}/"' not in target.read_text(encoding="utf-8"):
             errors.append(f"Turkish legal page must link its English version: {target}")
     if 'href="/gizlilik/"' not in (DIST / "content" / "index.html").read_text(encoding="utf-8"):
         errors.append("Turkish pages must link the Turkish privacy policy")
 
-    if (DIST / "privacy-policy.html").read_bytes() != (ROOT / "legal" / "privacy.html").read_bytes():
+    if published_bytes(DIST / "privacy-policy.html", token) != (ROOT / "legal" / "privacy.html").read_bytes():
         errors.append("privacy-policy.html differs from source")
 
     if (DIST / "CNAME").read_text(encoding="utf-8").strip() != "www.alika.tr":
@@ -552,11 +655,13 @@ def main() -> None:
         errors.append("Turkish home page must not be noindex")
 
     check_store_cid(errors)
+    social_footer_pages = check_social(errors, home_bundle_text)
 
     forbidden = re.compile(r"(google-analytics|googletagmanager|facebook\.net|hotjar|segment\.com)", re.I)
-    for page in DIST.rglob("*.html"):
+    for page in (*DIST.rglob("*.html"), *(DIST / "assets").glob("*.js")):
         if forbidden.search(page.read_text(encoding="utf-8")):
             errors.append(f"Tracker marker in {page}")
+    analytics_summary = check_analytics(errors, token)
 
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
@@ -565,6 +670,7 @@ def main() -> None:
         f"OK: {expected_pages} localized pages (9 new homes, 9 catalogues, 72 redirects), "
         f"{len(guide_pages)} Turkish guide pages, verified catalog downloads, fixed legal routes, local links and tracker fence"
     )
+    print(f"OK: social links in 9 home footers + schema sameAs and {social_footer_pages} static page footers; {analytics_summary}")
 
 
 if __name__ == "__main__":

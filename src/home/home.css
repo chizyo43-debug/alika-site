@@ -2161,6 +2161,43 @@ button.videoThumb {
   font-weight: 600;
 }
 
+/* Sosyal medya: satır içi SVG simgeler; dokunma alanı 40 px. */
+.footSocial {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footSocial a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.footSocial a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.footSocial a:focus-visible {
+  border-radius: 50%;
+}
+
+.footSocial svg {
+  display: block;
+  fill: currentColor;
+}
+
 .footCols {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

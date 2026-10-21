@@ -94,6 +94,9 @@ STORE_MARKETS = {
 }
 # Alt sayfaların menüsü ve altlığı yeni ana sayfanın dil dosyalarından okunur (src/home/i18n/{lang}.ts).
 HOME_I18N = SRC / "home" / "i18n"
+# Sosyal medya hesapları: ana sayfa altlığı, ana sayfa JSON-LD sameAs ve tools/check.py ile aynı liste.
+# Erişilebilir adlar dil dosyasındaki footer.social bloğundan okunur.
+SOCIAL_PROFILES = json.loads((SRC / "data" / "social.json").read_text(encoding="utf-8"))["profiles"]
 # Ana sayfadaki GUIDE_PATHS ile aynı: yalnız gerçekten var olan rehberler.
 GUIDE_LINKS = {"tr": "/rehber/", "en": "/en/guides/windows-child-screen-time/"}
 # Yasal metinler: Türkçe sayfalar Türkçe sürüme, diğer diller İngilizceye bağlanır.
@@ -766,6 +769,17 @@ def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
     """
 
 
+def social_links(lang: str) -> str:
+    """AliKa'nın sosyal medya hesapları: satır içi SVG simge, sayfa dilinde erişilebilir ad, yeni sekme."""
+    words = home_copy(lang)["footer"]
+    items = "".join(
+        f'<li><a href="{esc(profile["url"])}" target="_blank" rel="me noopener" aria-label="{esc(words[profile["id"]])}">'
+        f'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="{esc(profile["icon"])}"/></svg></a></li>'
+        for profile in SOCIAL_PROFILES
+    )
+    return f'<ul class="footer-social" aria-label="{esc(words["follow"])}">{items}</ul>'
+
+
 def footer(locales: dict[str, dict], lang: str) -> str:
     words = home_copy(lang)["footer"]
     home = href(lang)
@@ -776,7 +790,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
     <footer class="site-footer">
       <div class="footer-brand">
         <img src="/assets/brand/alika-logo.png" width="52" height="52" alt="">
-        <div><strong>AliKa</strong><span>{esc(words["tagline"])}</span></div>
+        <div><strong>AliKa</strong><span>{esc(words["tagline"])}</span>{social_links(lang)}</div>
       </div>
       <div class="footer-links">
         <a href="{home}#hakkimizda">{esc(words["about"])}</a>
