@@ -629,6 +629,103 @@ GUIDES = (
             ("Sosyal Ağ Sağlayıcı Tarafından Çocuklara Özgü Ayrıştırılmış Hizmet Sunulmasına ve Yaş Doğrulamaya İlişkin Yönetmelik — Resmî Gazete, 10 Ekim 2026, sayı 33396", "https://www.resmigazete.gov.tr/eskiler/2026/10/20261010-15.pdf"),
         ),
     },
+    {
+        # R6: Google ve Apple yardım sayfaları 21 Ekim 2026'da okundu; yayından önce menü adları yeniden kontrol edilir.
+        "slug": "cocuga-tablet-telefon-hediye",
+        "draft": True,
+        "updated": ("2026-10-21", "21 Ekim 2026"),
+        "campaign_id": "site_rehber_hediye_cihaz_tr",
+        "platform": "android",
+        "eyebrow": "Yılbaşı hediyesi · Ebeveynler için sade rehber",
+        "title": "Çocuğa Tablet ya da Telefon Hediye Etmeden Önce 5 Ayar",
+        "description": "Çocuğa tablet ya da telefon hediye etmeden önce 5 ayar: hesap, güncelleme, yaş sınırı, satın alma doğrulaması, süre. Eski telefon ve iPad notu, kurulum listesi.",
+        "video": "android-ilk-kurulum",
+        "video_label": "AliKa Android ilk kurulum · 1:40",
+        "lede": (
+            "Yeni bir tablet ya da telefonun ayarlarını hediyeyi paketlemeden önce yapın; kuralları da hediye günü çocukla birlikte konuşun. "
+            "Bu rehber Android telefon ve tabletler için beş ayarı sırayla anlatır. Kendi eski telefonunuzu verecekseniz ya da iPad hediye edecekseniz ayrı notlar var. "
+            "Sonunda ayarları yaptıkça işaretleyebileceğiniz yazdırılabilir bir kurulum listesi bulunur."
+        ),
+        "sections": (
+            ("Paketlemeden önce bir akşam ayırın", (
+                "Kurulum, ilk yazılım güncellemeleriyle birlikte zaman alabilir. Cihazı şarj edin, ev Wi-Fi’ına bağlayın ve ayarları hediye gününden önce bitirin. Böylece çocuk hediyesini açtığında ilk saati ayar ekranlarında geçmez.",
+                "Ayarları siz yapın, kuralları ise hediye günü çocukla birlikte konuşun. Hangi ayarın neden açık olduğunu bilen çocuk, kuralı daha kolay kabul eder.",
+            )),
+            ("1. Hesap: cihaz kimin, hangi hesapla?", (
+                "Önce cihazın kime ait olacağını belirleyin: yalnız çocuğun kullanacağı bir tablet ya da telefon mu, ailenin ortak tableti mi? Ebeveynin hesabıyla açık bir cihazda çocuk sizin e-postalarınıza, fotoğraflarınıza ve ödeme yönteminize ulaşabilir; çocuğa ayrı bir hesap açmak daha temizdir.",
+                "Google’ın yardım sayfasına göre Türkiye’de kendi Google hesabını yönetmenin alt yaşı 13’tür; daha küçük çocuklar için hesabı ebeveyn Family Link ile açar ve yönetir. Çocuğun zaten bir Google hesabı varsa Family Link ile bu hesaba da gözetim eklenebilir.",
+                "Ortak bir aile tabletinde birden fazla kullanıcı tanımlanabiliyorsa çocuğa ayrı bir kullanıcı açın. Google Play’deki içerik kısıtlamaları her kullanıcı için ayrı belirlenebilir.",
+            )),
+            ("Kendi eski telefonunuzu veriyorsanız", (
+                "Önce fotoğraflarınızı ve verilerinizi Google hesabınıza yedekleyin, sonra telefonu fabrika ayarlarına sıfırlayın. Google’a göre sıfırlama telefondaki bütün verileri siler; yüklü uygulamalar ve verileri de kaldırılır.",
+                "Sıfırlamadan sonra telefonda daha önce kullanılan Google hesabının bilgileri istenebilir. Bu yüzden sıfırlamayı telefonu vermeden önce, hesap bilgileriniz yanınızdayken yapın; ardından telefonu çocuğun hesabıyla baştan kurun. Google, işlemin bir saat kadar sürebileceğini ve pilin en az %70 dolu olmasını öneriyor.",
+            )),
+            ("2. Güncellemeler ve ekran kilidi", (
+                "Cihazın yazılım güncellemelerini hediyeden önce yapın; ilk açılıştaki güncellemeler uzun sürebilir.",
+                "Kurulum sırasında geçici bir ekran kilidi koyun. Hediye günü yeni kilidi çocukla birlikte belirleyin ve sizin de bilmeniz konusunda anlaşın. Ekran kilidi, cihaz kaybolursa içindekileri korur.",
+            )),
+            ("3. Uygulama yaş sınırı", (
+                "Play Store’da profil simgesi > Ayarlar > Aile > İçerik kısıtlamaları > Ebeveyn denetimlerine git yolundan çocuğun bilmeyeceği bir PIN belirleyin ve uygulama ve oyunlar için yaş sınırını seçin. Family Link kullanıyorsanız aynı ayar Family Link’te Denetimler > Google Play bölümündedir.",
+                "Bu denetimler yalnız ayarlandıkları cihazda geçerlidir; çocuğun başka bir telefonu ya da tableti varsa adımları orada da tekrarlayın. PIN’i unutursanız Play Store’un verilerini temizlemeniz gerekir ve kısıtlamalar da sıfırlanır; seçtiğiniz ayarları bir yere not edin.",
+                "Google’ın notuna göre içerik kısıtlamaları, kısıtlanan içeriğin arama sonuçlarında ya da doğrudan bağlantıyla görünmesini engellemez. Bu yüzden yeni uygulamaları birlikte indirme kuralı yine gerekir.",
+            )),
+            ("4. Satın alma doğrulaması", (
+                "Play Store’da profil simgesi > Ödemeler ve abonelikler > Satın alma işlemlerini doğrulama yolundan “Her zaman” seçeneğinin seçili olduğunu kontrol edin. Google’a göre bu seçenek, Google Play faturalandırmasıyla yapılan uygulama içi satın almaları da kapsar.",
+                "Doğrulamayı parmak izi ya da yüz tanımayla yaparsanız cihazda kayıtlı bütün biyometri verileri kullanılabilir; yani çocuğun parmak izi de satın almayı onaylayabilir. Çocuğun cihazına banka kartı eklemeyin.",
+            )),
+            ("5. Günlük süre ve uyku saati", (
+                "Hediye günü ve tatil günleri için süre farklı olacaksa bunu baştan söyleyin. Okul günleri için küçük bir günlük süre ve sabit bir ekran kapanış saati belirleyin; sayıları ve saatleri ailece kararlaştırın.",
+                "Android’de Ayarlar > Dijital Denge bölümünde uygulama zamanlayıcıları ve Uyku Vakti modu bulunur; menü adları üreticiye göre değişebilir. Dijital Denge, cihazı kullanan kişinin kendi süresini yönetmesi içindir. Google, çocuğun cihazını ebeveyn olarak Family Link ile yönetebileceğinizi belirtir.",
+            )),
+            ("iPad ya da iPhone hediye ediyorsanız", (
+                "Apple cihazlarda ebeveyn denetimleri Aile Paylaşımı ile çalışır: çocuğun kendi Apple Hesabı olmalı ve aile grubunuzda yer almalıdır. Denetimleri kendi iPhone ya da iPad’inizde Ayarlar > Aile > çocuğunuzun adı yolundan yönetirsiniz.",
+                "Buradaki İçerik ve Gizlilik Sınırlamaları bölümünden uygulama ve içerik için yaş derecelendirmesi seçilir. Uygulamalar ve Web Siteleri > Sınırlamalar > Satın Alma İzni bölümünde “Satın Alma Onayı Gerektir” açıkken çocuğun indirme ve satın alma istekleri onayınıza gelir.",
+            )),
+            ("Hediye günü: kurallar hediyeyle birlikte", (
+                "Kuralları hediyeyle aynı gün, kısa ve yazılı olarak verin: cihaz gece nerede şarj olur, ekranlar kaçta kapanır, yeni bir uygulama indirmeden önce kime sorulur. Konuşulmuş bir kural, sonradan fark edilen bir ayardan daha kolay benimsenir.",
+                "Bu çocuğun ilk telefonuysa “Çocuğa ilk telefon” rehberindeki ilk hafta kurallarını ve yazdırılabilir aile sözleşmesini kullanabilirsiniz.",
+            )),
+            ("Sık yapılan hatalar", (
+                "Cihazı ebeveynin hesabıyla vermek, eski telefonu sıfırlamadan devretmek, satın alma doğrulamasını kontrol etmemek ve kuralları hediyeden günler sonra, söylemeden eklemek en sık görülen sorunlardır.",
+            )),
+        ),
+        "printable": {
+            "title": "Yeni cihaz kurulum listesi",
+            "note": "Yazdırın, ayarları yaptıkça işaretleyin. Son iki satırı hediye günü çocukla birlikte tamamlayın.",
+            "button": "Listeyi yazdırın",
+            "columns": ("Ayar", "Nerede", "Tamam"),
+            "rows": (
+                ("Çocuğun hesabı (13 yaş altı için Family Link)", "Kurulum ekranı ya da Family Link", ""),
+                ("Eski telefonsa: yedek ve fabrika ayarları", "Ayarlar", ""),
+                ("Yazılım güncellemeleri", "Ayarlar", ""),
+                ("Geçici ekran kilidi", "Ayarlar", ""),
+                ("Uygulama yaş sınırı ve PIN", "Play Store > Ayarlar > Aile", ""),
+                ("Satın alma doğrulaması: Her zaman", "Play Store > Ödemeler ve abonelikler", ""),
+                ("Günlük süre ve uyku saati", "Dijital Denge, Family Link ya da ebeveyn kontrolü uygulaması", ""),
+                ("Hediye günü: yeni ekran kilidi birlikte", "", ""),
+                ("Hediye günü: kurallar yazılı", "", ""),
+            ),
+        },
+        "related": (
+            ("Çocuğa ilk telefon: ilk hafta kuralları ve kurulum listesi", "cocuga-ilk-telefon"),
+            ("Android telefonda çocuğun ekran süresi nasıl planlanır?", "android-cocuk-ekran-suresi"),
+            ("Ailece ekran süresi planı nasıl yapılır?", "ailece-ekran-suresi-plani"),
+        ),
+        "product": ("Bu planı otomatik uygulamak isterseniz", (
+            "AliKa ebeveyn kontrolü yeni Android telefon ya da tablette günlük süreyi, uygulama sınırlarını, uyku saatini ve web filtresini uygular. Çocuk kalan süresini ekranında görür; ayarları ebeveyn PIN’iyle siz değiştirirsiniz. AliKa hesabı açmanız gerekmez.",
+            "Evde AliKa zaten kullanılıyorsa yeni cihaz aynı aile aboneliğine eklenebilir: bir abonelik, ebeveyn telefonu dahil en fazla 10 eşleştirilmiş Android aile cihazında kullanılır. AliKa iPhone ve iPad’de çalışmaz; bu cihazlarda Apple’ın ebeveyn denetimlerini kullanın.",
+        )),
+        "sources": (
+            ("Google Hesaplarında yaş şartları — Google Hesabı Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/accounts/answer/1350409?hl=tr"),
+            ("Çocuğunuzun Google Hesabı’nı Family Link ile yönetme — Google Aile Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/families/answer/7103262?hl=tr"),
+            ("Android cihazınızı fabrika ayarlarına sıfırlama — Android Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/android/answer/6088915?hl=tr"),
+            ("Google Play’de içerik kısıtlamaları ayarlama — Google Play Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/googleplay/answer/1075738?hl=tr"),
+            ("Google Play’de satın almayı doğrulama — Google Play Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/googleplay/answer/1626831?hl=tr"),
+            ("Dijital Denge ile Android telefonunuzda geçirdiğiniz zamanı yönetme — Android Yardım, 21 Ekim 2026’da erişildi", "https://support.google.com/android/answer/9346420?hl=tr"),
+            ("Çocuğunuzun iPhone veya iPad’ini yönetmek için ebeveyn denetimlerini ayarlama — Apple Destek, 21 Ekim 2026’da erişildi", "https://support.apple.com/tr-tr/105121"),
+            ("Satın Alma İzni ile çocuğunuzun içeriklerini onaylama — Apple Destek, 21 Ekim 2026’da erişildi", "https://support.apple.com/tr-tr/105055"),
+        ),
+    },
 )
 
 # "draft": True işaretli rehberler yalnız ALIKA_DRAFTS=1 ile derlenir (yayın öncesi önizleme).
@@ -955,7 +1052,8 @@ def guide_article_body(guide: dict) -> str:
             f'<section class="guide-print" id="yazdir"><h2>{esc(printable["title"])}</h2><p>{esc(printable["note"])}</p>'
             f'<div class="guide-table"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
             '<button class="button guide-print-button" type="button" '
-            'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">Planı yazdırın</button></section>'
+            'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">'
+            f'{esc(printable.get("button", "Planı yazdırın"))}</button></section>'
         )
     product = guide.get("product")
     product_section = (
