@@ -295,6 +295,31 @@ const tr: HomeCopy = {
     all: 'Tüm rehberler',
     items: [
       {
+        href: '/rehber/15-yas-alti-sosyal-medya-duzenlemesi/',
+        title: '15 yaş altı sosyal medya düzenlemesi',
+        body: '1 Kasım 2026’da ne değişiyor? Yaş doğrulama, 15–18 yaş hesapları ve ailelerin yapabilecekleri.',
+      },
+      {
+        href: '/rehber/ara-tatil-ekran-suresi-plani/',
+        title: 'Ara tatilde ekran süresi',
+        body: '16–20 Kasım ara tatili için hafta sonlarıyla 9 günlük plan: yazdırılabilir tabloyla.',
+      },
+      {
+        href: '/rehber/cocuga-tablet-telefon-hediye/',
+        title: 'Tablet ya da telefon hediye etmeden önce',
+        body: 'Hesap, yaş sınırı, satın alma doğrulaması ve günlük süre: paketlemeden önce 5 ayar.',
+      },
+      {
+        href: '/rehber/yariyil-tatili-ekran-suresi/',
+        title: 'Yarıyıl tatilinde ekran süresi',
+        body: 'Karne notuna bağlamadan 16 günlük tatil planı: süre, uyku saati ve okula dönüş.',
+      },
+      {
+        href: '/rehber/ailece-ekran-suresi-plani/',
+        title: 'Ailece ekran süresi planı',
+        body: 'Okul günü, hafta sonu ve ekranların kapanacağı saat: yazdırılabilir haftalık planla birlikte.',
+      },
+      {
         href: '/rehber/windows-cocuk-ekran-suresi-nasil-yonetilir/',
         title: 'Windows’ta çocuk ekran süresi nasıl yönetilir?',
         body: 'Aile kuralı oluşturun; Windows’un kendi seçenekleriyle AliKa’nın görünür akışını karşılaştırın.',
@@ -305,14 +330,9 @@ const tr: HomeCopy = {
         body: 'Günlük süre, uyku saati, web filtresi ve izinler: Android’de kuralı çocukla birlikte kurun.',
       },
       {
-        href: '/rehber/soru-cozerek-ekran-suresi-kazanma/',
-        title: 'Soru çözerek ekran süresi kazanma',
-        body: 'Soru bankası, ödül oranı ve günlük tavanla kontrollü ek süre nasıl çalışır?',
-      },
-      {
-        href: '/rehber/ailece-ekran-suresi-plani/',
-        title: 'Ailece ekran süresi planı',
-        body: 'Okul günü, hafta sonu ve ekranların kapanacağı saat: yazdırılabilir haftalık planla birlikte.',
+        href: '/rehber/bulutsuz-ebeveyn-kontrolu/',
+        title: 'Bulut hesabı olmadan ebeveyn kontrolü',
+        body: 'Zorunlu bulut hesabı olmadan, cihazda kalan verilerle nasıl çalışır? Yerel aile ağının sınırlarıyla birlikte.',
       },
     ],
   },
