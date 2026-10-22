@@ -1757,6 +1757,7 @@ def content_library(catalog: dict, lang: str) -> str:
         {primary_cards}
       </section>""" if primary_cards else ""
     return f"""
+      {lgs_section}
       <div class="content-scope" data-content-scope>
         <p><strong>{esc(scope[0])}</strong> {esc(scope[1])}</p>
         <p class="content-scope-plan"><strong>{esc(scope[2])}</strong> {esc(scope[3])}</p>
@@ -1768,7 +1769,6 @@ def content_library(catalog: dict, lang: str) -> str:
       <p class="honesty-note">{esc(labels[8])}<br>{esc(section['requirements'])}</p>
       <div class="grade-downloads">{grade_cards}</div>
       <div class="package-grid" data-content-grid>{subject_cards}</div>
-      {lgs_section}
       {primary_section}
       {content_games(catalog, lang)}
     """
