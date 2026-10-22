@@ -810,6 +810,92 @@ GUIDES = (
             ("Uygulama ve oyun sınırları ayarlama — Microsoft Destek, 21 Ekim 2026’da erişildi", "https://support.microsoft.com/tr-tr/family-safety/set-app-and-game-limits"),
         ),
     },
+    {
+        # R8: MEB 2026–2027 çalışma takvimi duyurusu 22 Ekim 2026'da okundu. AliKa takvim dönemleri
+        # windows/locales (webpanel.cal_*) ile doğrulandı. Takvim değişirse tarihler ve tablo güncellenir.
+        "slug": "yariyil-tatili-ekran-suresi",
+        "draft": True,
+        "updated": ("2026-10-22", "22 Ekim 2026"),
+        "campaign_id": "site_rehber_yariyil_tr",
+        "platform": "both",
+        "eyebrow": "Karne ve yarıyıl · Ebeveynler için sade rehber",
+        "title": "Yarıyıl Tatilinde Ekran Süresi: Karneye Ödül Yerine Plan",
+        "description": "25 Ocak – 5 Şubat 2027 yarıyıl tatili için ekran planı: süreyi karne notuna bağlamadan günlük süre, uyku saati, ekran dışı plan ve 16 günlük tablo.",
+        "video": "ilk-gun-ayarlari",
+        "video_label": "AliKa ilk gün ayarları · 2:06",
+        "lede": (
+            "Karne günü “Bu tatil istediğin kadar oyna” demek kolaydır; zor olan, iki hafta sonra okul düzenine dönmektir. "
+            "Bu rehber 25 Ocak – 5 Şubat 2027 yarıyıl tatili için ekran süresini karne notuna bağlamadan planlamayı anlatır. "
+            "Sonunda çocukla birlikte doldurabileceğiniz 16 günlük yazdırılabilir bir tatil planı var."
+        ),
+        "sections": (
+            ("Yarıyıl tatili ne zaman?", (
+                "MEB’in 2026–2027 çalışma takvimine göre birinci dönem 22 Ocak 2027 Cuma günü, yani karne günü sona erer. Yarıyıl tatili 25 Ocak Pazartesi başlar, 5 Şubat Cuma biter; ikinci dönem 8 Şubat 2027 Pazartesi başlar.",
+                "Hafta sonlarıyla birlikte tatil 23 Ocak Cumartesi’den 7 Şubat Pazar’a kadar 16 gün sürer. Okulunuzun ya da ilinizin duyurusu farklıysa tabloyu kendi takviminize göre düzenleyin.",
+            )),
+            ("Karne notunu ekran süresine bağlamayın", (
+                "“Notların iyi, tatilde sınırsız” ya da “Notların düşük, tatilde ekran yok” kuralı kolay görünür ama tatili karneye göre başlatır. Ekran süresi ödül olunca ekran, tatilin en büyük ödülü gibi görünmeye başlar; notu düşük çocuk için tatil cezayla başlar, kardeşler arasında da karşılaştırma doğar.",
+                "Karneyi ekran dışı bir şeyle kutlayın: birlikte geçirilen bir gün, çocuğun seçtiği bir yemek ya da uzun zamandır istediği bir etkinlik. Tatildeki ekran süresini ise karneden önce, notlardan bağımsız olarak konuşun.",
+            )),
+            ("Karne hediyesi telefon ya da tablet olacaksa", (
+                "Cihazı karne gününden önce ayarlayın ve kuralları hediyeyle aynı gün konuşun. Hesap, yaş sınırı, satın alma doğrulaması ve günlük süre için “Çocuğa tablet ya da telefon hediye etmeden önce 5 ayar” rehberindeki listeyi kullanabilirsiniz.",
+                "Hediyeyi nota bağlamamak burada da işe yarar: karneye bağlı verilen bir cihaz, sonraki karnede geri alınacakmış gibi algılanabilir. Cihazın kurallarını notlara değil, çocuğun yaşına ve aile düzeninize göre koyun.",
+            )),
+            ("Tatil için ayrı ama önceden belli bir süre", (
+                "Tatil günlerinde ekran süresi okul gününden biraz fazla olabilir; önemli olan bunun tatilden önce belli olmasıdır. Günlük bir toplam ve sabit bir ekran kapanış saati, 16 günün tamamı için yeterli bir çerçevedir.",
+                "Tatili iki haftaya bölmek de işe yarar: ilk hafta daha serbest, ikinci hafta okul düzenine biraz daha yakın. Uyku saatini tatil boyunca çok kaydırmamak, 8 Şubat sabahını kolaylaştırır.",
+            )),
+            ("Her güne bir ekran dışı plan", (
+                "Tablodaki her güne bir ekran dışı etkinlik yazın: kütüphane, müze, akraba ziyareti, birlikte yemek yapmak, kutu oyunu, spor ya da kitap. Büyük planlar gerekmez; günde bir küçük etkinlik yeterlidir.",
+                "Etkinlikleri çocukla birlikte seçin. İki haftalık tatilde bir ya da iki gün için daha büyük bir plan yapmak, örneğin bir gezi, tatilin geri kalanını da daha sakin geçirir.",
+            )),
+            ("Karnedeki zor derse kısa tekrar", (
+                "Karne, hangi derste zorlanıldığını gösterir. O ders için günde kısa bir tekrar ya da okuma zamanı yazın; örneğin 20–30 dakika. Konuyu ve saati çocukla birlikte seçin; tekrar, düşük notun cezası gibi sunulmazsa daha kolay sürer.",
+                "LGS’ye hazırlanan 8. sınıf öğrencisi için tatil, tekrar ve deneme için de bir fırsattır. Programı çocukla birlikte kurun ve dinlenme günlerini de tabloya yazın.",
+            )),
+            ("Son iki gün: ikinci döneme dönüş", (
+                "6–7 Şubat hafta sonunu okul düzenine dönüşe ayırın. Uyku ve ekran kapanış saatini okul günlerindeki saate geri çekin; çantayı ve ödevleri pazar akşamından önce birlikte kontrol edin.",
+            )),
+            ("Sık yapılan hatalar", (
+                "Ekran süresini karne notuna göre vermek ya da almak, kardeşlerin karnelerini karşılaştırmak, tatil boyunca hiç kural koymayıp son gün birden sıkı bir düzene dönmek ve uyku saatini her gün biraz daha geciktirmek en sık görülen sorunlardır.",
+            )),
+        ),
+        "printable": {
+            "title": "Yarıyıl tatili 16 günlük ekran planı",
+            "note": "23 Ocak – 7 Şubat 2027 · Yazdırın, çocukla birlikte doldurun.",
+            "columns": ("Gün", "Ekran süresi", "Ekranlar kapanır", "Ekran dışı plan", "Tekrar / okuma"),
+            "rows": (
+                ("Cumartesi 23 Ocak", "", "", "", ""),
+                ("Pazar 24 Ocak", "", "", "", ""),
+                ("Pazartesi 25 Ocak", "", "", "", ""),
+                ("Salı 26 Ocak", "", "", "", ""),
+                ("Çarşamba 27 Ocak", "", "", "", ""),
+                ("Perşembe 28 Ocak", "", "", "", ""),
+                ("Cuma 29 Ocak", "", "", "", ""),
+                ("Cumartesi 30 Ocak", "", "", "", ""),
+                ("Pazar 31 Ocak", "", "", "", ""),
+                ("Pazartesi 1 Şubat", "", "", "", ""),
+                ("Salı 2 Şubat", "", "", "", ""),
+                ("Çarşamba 3 Şubat", "", "", "", ""),
+                ("Perşembe 4 Şubat", "", "", "", ""),
+                ("Cuma 5 Şubat", "", "", "", ""),
+                ("Cumartesi 6 Şubat · dönüş hazırlığı", "", "", "", ""),
+                ("Pazar 7 Şubat · dönüş hazırlığı", "", "", "", ""),
+            ),
+        },
+        "related": (
+            ("Ara tatilde ekran süresi nasıl planlanır?", "ara-tatil-ekran-suresi-plani"),
+            ("Ailece ekran süresi planı nasıl yapılır?", "ailece-ekran-suresi-plani"),
+            ("Çocuğa tablet ya da telefon hediye etmeden önce 5 ayar", "cocuga-tablet-telefon-hediye"),
+        ),
+        "product": ("Bu planı otomatik uygulamak isterseniz", (
+            "AliKa ebeveyn kontrolü bu planı Windows bilgisayarda ve Android telefonda uygulayabilir. Haftanın günlerine göre ayrı süre ve uyku saati girilebilir. Windows’ta takvime yarıyıl tatilinin tarihlerini girip tatil için ayrı bir günlük süre tanımlayabilirsiniz; tarih aralığı bitince okul düzeniniz geri gelir.",
+            "Çocuk kalan süresini ekranında görür. İsterseniz sizin eklediğiniz sorulardan çözerek, sizin belirlediğiniz günlük üst sınır içinde ek süre kazanabilir; bu süre karne notuna değil, tatildeki çalışmaya bağlıdır. Türkiye ortaokul (5–8. sınıf) için konu anlatımı ve soru paketleri alika.tr’deki Hazır içerik sayfasındadır.",
+        )),
+        "sources": (
+            ("2026–2027 eğitim öğretim yılı takvimi açıklandı — Millî Eğitim Bakanlığı, 13 Haziran 2026; 22 Ekim 2026’da erişildi", "https://www.meb.gov.tr/2026-2027-egitim-ogretim-yili-takvimi-aciklandi/haber/41057/tr"),
+        ),
+    },
 )
 
 # "draft": True işaretli rehberler yalnız ALIKA_DRAFTS=1 ile derlenir (yayın öncesi önizleme).
