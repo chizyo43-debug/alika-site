@@ -1682,7 +1682,7 @@ def content_games(catalog: dict, lang: str) -> str:
             for code, packages in by_lang.items() if code != lang
         )
         cards.append(f"""
-        <article class="game-pack-card">
+        <article class="game-pack-card" data-game="{esc(game['slug'])}">
           <img src="{esc(game['art_url'])}" alt="" width="960" height="540" loading="lazy" decoding="async">
           <div>
             <h3>{esc(name)}</h3>
@@ -1694,7 +1694,7 @@ def content_games(catalog: dict, lang: str) -> str:
     if not cards:
         return ""
     return f"""
-      <section class="content-extra-section" id="oyunlar" aria-labelledby="content-games-title">
+      <section class="content-extra-section game-space" id="oyunlar" aria-labelledby="content-games-title">
         <div class="content-extra-heading">
           <h2 id="content-games-title">{esc(section['games_title'])}</h2>
           <p>{esc(section['games_body'])}</p>

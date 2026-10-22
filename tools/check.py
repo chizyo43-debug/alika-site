@@ -468,7 +468,7 @@ def main() -> None:
         if not catalog.get("grades") or not catalog.get("subjects"):
             errors.append("Content catalog is empty")
         totals = catalog.get("totals") or {}
-        # alika-icerik a41e183: 100 ders + 6 LGS paketi, 1 ilkokul görsel paketi, 2 oyun × 9 dil × 4 yaş grubu.
+        # alika-icerik 0aaf7bd (uzay kapaklı oyun paketleri): 100 ders + 6 LGS paketi, 1 ilkokul görsel paketi, 2 oyun × 9 dil × 4 yaş grubu.
         expected_totals = {
             "countries": 1,
             "gradeGroups": 4,

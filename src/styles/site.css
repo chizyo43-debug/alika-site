@@ -2350,19 +2350,75 @@ h3 {
   white-space: nowrap;
 }
 
-/* Ortak ekran oyun paketleri */
+/* Ortak ekran oyun paketleri: AliKa TV'deki uzay görünümü (bulutsu, metal çerçeve, lambalar).
+   Kart vurgusu oyunun TV amblemiyle aynı renktedir; altın yalnız kazanılmış başarı içindir. */
+.game-space {
+  --space: #060e22;
+  --space-panel: #0b1a3a;
+  --space-text: #f2f6ff;
+  --space-soft: #c9daf2;
+  --space-muted: #9fb3d4;
+  --space-cyan: #00e5ff;
+  --space-ready: #7be495;
+  --metal: linear-gradient(135deg, #e6ecf4, #3a4352 30%, #9aa6b8 55%, #3a4352 80%, #e6ecf4);
+  position: relative;
+  color: var(--space-text);
+  border: 3px solid transparent;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 28% 72%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 47% 9%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(1px 1px at 63% 58%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 82% 26%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 91% 84%, rgba(255, 255, 255, 0.65), transparent),
+    radial-gradient(ellipse 60% 50% at 85% 0%, rgba(140, 124, 255, 0.28), transparent),
+    radial-gradient(ellipse 55% 45% at 0% 100%, rgba(72, 200, 232, 0.24), transparent),
+    linear-gradient(180deg, #122650, var(--space)) padding-box,
+    var(--metal) border-box;
+  box-shadow: 0 24px 60px rgba(7, 17, 38, 0.28);
+}
+
+.game-space .content-extra-heading h2 {
+  color: var(--space-text);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.game-space .content-extra-heading p {
+  color: var(--space-soft);
+}
+
+.content-book-catalog .game-space .honesty-note,
+.game-space .honesty-note {
+  color: var(--space-muted);
+}
+
 .game-pack-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  align-items: start;
+  gap: 18px;
 }
 
 .game-pack-card {
+  --accent: var(--space-cyan);
+  position: relative;
   overflow: hidden;
-  border: 1px solid rgba(15, 33, 73, 0.13);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 9px 20px rgba(15, 33, 73, 0.06);
+  border: 3px solid transparent;
+  border-radius: 22px;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px) padding-box,
+    radial-gradient(420px 260px at 80% 140px, color-mix(in srgb, var(--accent) 26%, transparent), transparent) padding-box,
+    linear-gradient(180deg, rgba(18, 38, 80, 0.95), rgba(5, 12, 32, 0.95)) padding-box,
+    var(--metal) border-box;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.game-pack-card[data-game="name-city"] {
+  --accent: #8c7cff;
+}
+
+.game-pack-card[data-game="word-wheel"] {
+  --accent: #e8609a;
 }
 
 .game-pack-card img {
@@ -2371,56 +2427,106 @@ h3 {
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent);
+  mask-image: linear-gradient(180deg, #000 72%, transparent);
 }
 
 .game-pack-card > div {
-  padding: 20px;
+  position: relative;
+  margin-top: -10px;
+  padding: 0 20px 20px;
 }
 
 .game-pack-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 0 0 6px;
-  color: var(--navy);
+  color: var(--space-text);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+}
+
+/* Oyunun renginde yanan küçük lamba */
+.game-pack-card h3::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, var(--accent) 70%);
+  box-shadow: 0 0 10px 3px color-mix(in srgb, var(--accent) 60%, transparent);
 }
 
 .game-pack-card p {
-  color: var(--muted);
+  color: var(--space-soft);
 }
 
 .game-band-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 10px;
   margin: 14px 0 4px;
 }
 
+/* Yaş grubu düğmeleri TV kumandasının metal tuşları gibi; yeşil lamba = indirmeye hazır */
 .game-band-row a {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 54px;
-  padding: 8px 12px;
-  color: #fff;
-  background: var(--navy);
-  border-radius: 10px;
+  min-height: 56px;
+  padding: 8px 12px 8px 32px;
+  color: var(--space-text);
+  background: linear-gradient(180deg, #1c2f5c, #0e1d40);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 4px 0 #050c20;
   font-size: 0.88rem;
   font-weight: 900;
 }
 
+.game-band-row a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 13px;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, var(--space-ready) 70%);
+  box-shadow: 0 0 8px 2px rgba(123, 228, 149, 0.55);
+}
+
 .game-band-row a small {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--space-muted);
   font-size: 0.74rem;
   font-weight: 700;
 }
 
 .game-band-row a:hover,
 .game-band-row a:focus-visible {
-  color: var(--deep);
-  background: var(--cyan);
+  color: #06152f;
+  background: var(--space-cyan);
+  border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.35), 0 0 22px rgba(0, 229, 255, 0.55);
 }
 
 .game-band-row a:hover small,
 .game-band-row a:focus-visible small {
-  color: var(--deep);
+  color: #06152f;
+}
+
+.game-space .package-files summary {
+  color: var(--space-text);
+}
+
+.game-space .package-files li {
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+.game-space .package-files li > span {
+  color: var(--space-soft);
 }
 
 .game-band-links {
@@ -2431,9 +2537,9 @@ h3 {
 
 .package-files .game-band-links a {
   padding: 4px 8px;
-  color: var(--navy);
-  background: #fff;
-  border: 1px solid var(--line);
+  color: var(--space-text);
+  background: rgba(11, 26, 58, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   font-weight: 700;
   white-space: nowrap;
@@ -2441,7 +2547,9 @@ h3 {
 
 .package-files .game-band-links a:hover,
 .package-files .game-band-links a:focus-visible {
-  border-color: var(--navy);
+  color: #06152f;
+  background: var(--space-cyan);
+  border-color: #fff;
 }
 
 @media (max-width: 760px) {
@@ -2455,7 +2563,21 @@ h3 {
   }
 
   .game-pack-card > div {
-    padding: 18px 16px;
+    padding: 0 16px 18px;
+  }
+
+  /* Dar ekranda lamba sağ üst köşeye geçer; yaş ve sayı tek satırda kalır */
+  .game-band-row a {
+    padding: 8px 22px 8px 12px;
+  }
+
+  .game-band-row a::before {
+    top: 10px;
+    right: 9px;
+    left: auto;
+    width: 8px;
+    height: 8px;
+    margin-top: 0;
   }
 }
 
