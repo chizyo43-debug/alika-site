@@ -814,7 +814,6 @@ GUIDES = (
         # R8: MEB 2026–2027 çalışma takvimi duyurusu 22 Ekim 2026'da okundu. AliKa takvim dönemleri
         # windows/locales (webpanel.cal_*) ile doğrulandı. Takvim değişirse tarihler ve tablo güncellenir.
         "slug": "yariyil-tatili-ekran-suresi",
-        "draft": True,
         "updated": ("2026-10-22", "22 Ekim 2026"),
         "campaign_id": "site_rehber_yariyil_tr",
         "platform": "both",
@@ -1669,7 +1668,7 @@ def build() -> None:
         guide_document(
             locales,
             "Türkçe Ebeveyn Rehberleri",
-            "15 yaş altı sosyal medya düzenlemesi, çocuğa ilk telefon ve hediye cihaz ayarları, bilgisayarı paylaşan kardeşler, Windows ve Android’de ekran süresi, ailece plan, ara tatil, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
+            "15 yaş altı sosyal medya düzenlemesi, çocuğa ilk telefon ve hediye cihaz ayarları, bilgisayarı paylaşan kardeşler, Windows ve Android’de ekran süresi, ailece plan, ara tatil ve yarıyıl tatili, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
             guide_index_url,
             guide_index_body(),
         ),
