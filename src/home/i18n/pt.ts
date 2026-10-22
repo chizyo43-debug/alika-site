@@ -90,7 +90,7 @@ const pt: HomeCopy = {
       { value: '7–14 dias', label: 'de teste grátis: 7 no Windows, 14 no Android' },
     ],
   },
-  rail: { title: 'Plataformas', lead: 'Windows e Android já estão disponíveis. A TV e os jogos em família estão em desenvolvimento.' },
+  rail: { title: 'Plataformas', lead: 'Windows e Android já estão disponíveis. Os jogos em família na Android TV e na tela compartilhada do Windows também estão prontos.' },
   platforms: {
     windows: {
       tags: ['Disponível hoje', 'Windows 10/11', 'Microsoft Store'],
@@ -105,11 +105,12 @@ const pt: HomeCopy = {
       imageAlt: 'Tela inicial da criança no AliKa para Android',
     },
     tv: {
-      tags: ['Em desenvolvimento', 'Android TV'],
+      tags: ['Disponível hoje', 'Android TV', 'Tela compartilhada no Windows'],
       title: 'AliKa TV e jogos em família',
-      body: 'A TV vira a tela compartilhada da família: o Mural da família mostra o perfil da família e a última mensagem da família. Todos entram nos jogos pelo próprio celular, que vira controle.',
-      ready: 'Virá incluído',
-      download: 'Poderá ser baixado',
+      body: 'Uma Android TV ou a tela do computador Windows vira a tela compartilhada da família. Na TV, o Mural da família mostra o perfil da família e a última mensagem da família. Todos entram nos jogos pelo próprio celular, que vira controle.',
+      ready: 'Vem com o app',
+      download: 'Pacote separado',
+      packs: 'Baixar pacotes de jogos',
       games: {
         rally: { name: 'Rali à velocidade da luz', body: 'Responda certo e rápido às perguntas da escola e saia na frente na órbita.' },
         station: { name: 'Estação espacial', body: 'Fale os comandos em voz alta e leve a estação para casa em equipe.' },
@@ -203,7 +204,7 @@ const pt: HomeCopy = {
     firstDay: { title: 'AliKa: ajustes do primeiro dia', body: 'Tempo diário, plano semanal, modo noturno, recompensa por perguntas e teto diário, tarefas e relatório semanal.' },
     winPanel: { title: 'Painel do responsável AliKa no Windows', body: 'Para que serve cada aba: regras, apps e internet, tarefas, perguntas, relatórios, segurança e ajustes.' },
     andPanel: { title: 'Painel do responsável AliKa no Android', body: 'Para que servem a barra inferior e os menus: painel, gestão de tempo e de apps, regras, perguntas, relatórios, dispositivos e perfil.' },
-    homeNetwork: { title: 'Rede familiar AliKa', body: 'Adicionar celulares e o computador Windows à rede familiar, segundo responsável, assinatura familiar e gestão dos dispositivos pelo celular do responsável. A parte de TV do vídeo ainda está em desenvolvimento.' },
+    homeNetwork: { title: 'Rede familiar AliKa', body: 'Adicionar celulares e o computador Windows à rede familiar, segundo responsável, assinatura familiar e gestão dos dispositivos pelo celular do responsável.' },
     quizShort: { title: 'Mais do que tempo de tela', body: 'A criança ganha tempo extra respondendo perguntas; os limites são definidos por você.' },
   },
   ages: {
@@ -249,14 +250,13 @@ const pt: HomeCopy = {
       'Lição de casa pela metade, jogo ainda aberto. Quem desliga a tela quando o tempo acaba vira o vilão, a criança fica emburrada e, na noite seguinte, a mesma negociação recomeça. O AliKa foi pensado a partir dessas cenas que famílias reais vivem toda noite e dos problemas de tempo de tela e de estudo.',
       'O que vimos foi isto: a proibição desliga a tela, mas não acaba com a discussão. Quando a criança não conhece a regra de antemão, cada interrupção vira uma surpresa, e cada surpresa vira uma nova negociação. Estudar acaba parecendo o rival do tempo de tela.',
       'Então fizemos a pergunta ao contrário: se a tela já faz parte da vida, dá para colocá-la ao lado do estudo? No AliKa, a família define a regra junta e a criança vê antes quanto tempo ainda tem; se quiser, responde perguntas e ganha tempo extra dentro do limite que você define. É daí que vem “Não restringimos. Planejamos.”',
-      'O AliKa não é um produto acabado. Seguimos desenvolvendo com a mesma ideia e com o retorno das famílias. O conteúdo escolar pronto começou pelo currículo turco do ensino fundamental II (5º ao 8º ano, em turco); outras séries e países estão em fase de planejamento.',
+      'O AliKa não é um produto acabado. Seguimos desenvolvendo com a mesma ideia e com o retorno das famílias. O conteúdo escolar pronto começou pelo currículo turco do ensino fundamental II (5º ao 8º ano, em turco); depois vieram o pacote de simulados LGS 2027 e atividades visuais para os anos iniciais (versão prévia). Outras séries e países estão em fase de planejamento.',
     ],
     signature: 'Equipe AliKa · ErenKa Software',
     planTitle: 'Onde estamos?',
     plan: [
-      { status: 'ready', label: 'Pronto hoje', items: ['Apps para Windows e Android', 'Explicações de conteúdo e questões do currículo turco do ensino fundamental II (5º ao 8º ano, em turco)', 'Adicionar suas próprias perguntas com Excel ou CSV'] },
-      { status: 'dev', label: 'Em desenvolvimento', items: ['Android TV e jogos em família'] },
-      { status: 'plan', label: 'Em fase de planejamento', items: ['Anos iniciais e ensino médio', 'Currículos de outros países'] },
+      { status: 'ready', label: 'Pronto hoje', items: ['Apps para Windows e Android', 'Explicações de conteúdo e questões do currículo turco do ensino fundamental II (5º ao 8º ano, em turco)', 'Pacote de simulados LGS 2027 (em turco)', 'Atividades visuais para os anos iniciais (6–10 anos, versão prévia)', 'Android TV, tela compartilhada no Windows e jogos em família', 'Adicionar suas próprias perguntas com Excel ou CSV'] },
+      { status: 'plan', label: 'Em fase de planejamento', items: ['Conteúdos dos anos iniciais e do ensino médio', 'Currículos de outros países'] },
     ],
     contentLink: 'Abrir a biblioteca de conteúdo',
   },
@@ -282,7 +282,7 @@ const pt: HomeCopy = {
       },
       {
         q: 'Quais matérias e séries existem?',
-        a: 'Hoje há conteúdo pronto para o currículo turco do ensino fundamental II (5º ao 8º ano, em turco): explicações de conteúdo e questões por matéria, além de um banco de questões misto por ano. Os exercícios de matemática são gerados dentro do app. Anos iniciais, ensino médio e currículos de outros países estão em fase de planejamento; enquanto isso, você adiciona suas próprias perguntas com o modelo do Excel ou com pacotes de conteúdo.',
+        a: 'Hoje há conteúdo pronto para o currículo turco do ensino fundamental II (5º ao 8º ano, em turco): explicações de conteúdo e questões por matéria, além do pacote de simulados LGS 2027 para o 8º ano. Atividades visuais sem leitura para 6 a 10 anos estão disponíveis como versão prévia. Os exercícios de matemática são gerados dentro do app. Conteúdos dos anos iniciais e do ensino médio e currículos de outros países estão em fase de planejamento; enquanto isso, você adiciona suas próprias perguntas com o modelo do Excel ou com pacotes de conteúdo.',
       },
       {
         q: 'O AliKa vigia meu filho em segredo?',

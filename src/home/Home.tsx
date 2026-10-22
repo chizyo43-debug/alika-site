@@ -263,12 +263,13 @@ interface Platform {
   title: string;
   body: string;
   image?: { src: string; alt: string; shape: 'wide' | 'phone' };
-  /* Görseli olmayan kartta (geliştirilen TV) güncel oyun listesi gösterilir. */
+  /* Görseli olmayan kartta (TV ve ortak ekran) güncel oyun listesi gösterilir. */
   games?: { id: TvGame; name: string; body: string; kind: string }[];
   action?: { label: string; href: string; external?: boolean };
 }
 
-/* Oyun listesi Android TV kodundan (TvHomeScreen yerleşik oyunlar + TvGameCatalogClient katalog oyunları). */
+/* Oyun listesi Android TV kodundan (TvHomeScreen yerleşik oyunlar + TvGameCatalogClient katalog oyunları);
+   katalog oyunlarının paketleri /icerik/#oyunlar bölümünden de indirilir. */
 const TV_GAMES: { id: TvGame; ready: boolean }[] = [
   { id: 'rally', ready: true },
   { id: 'station', ready: true },
@@ -276,7 +277,7 @@ const TV_GAMES: { id: TvGame; ready: boolean }[] = [
   { id: 'nameCity', ready: false },
 ];
 
-function platforms(t: HomeCopy, storeUrl: string, playUrl: string): Platform[] {
+function platforms(t: HomeCopy, lang: Lang, storeUrl: string, playUrl: string): Platform[] {
   const { windows, android, tv } = t.platforms;
   return [
     {
@@ -294,10 +295,11 @@ function platforms(t: HomeCopy, storeUrl: string, playUrl: string): Platform[] {
       action: { label: t.store.getPlay, href: playUrl, external: true },
     },
     {
-      id: 'tv', tone: 'p-tv', status: 'dev', tags: tv.tags,
+      id: 'tv', tone: 'p-tv', status: 'ready', tags: tv.tags,
       title: tv.title,
       body: tv.body,
       games: TV_GAMES.map((game) => ({ id: game.id, ...tv.games[game.id], kind: game.ready ? tv.ready : tv.download })),
+      action: { label: tv.packs, href: `${contentPath(lang)}#oyunlar` },
     },
   ];
 }
@@ -861,7 +863,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
           </dl>
         </section>
 
-        <PlatformRail items={platforms(t, storeUrl, playUrl)} t={t} />
+        <PlatformRail items={platforms(t, lang, storeUrl, playUrl)} t={t} />
 
         <section id="kimler" className="section wrap">
           <div className="sectionHead">

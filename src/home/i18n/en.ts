@@ -90,7 +90,7 @@ const en: HomeCopy = {
       { value: '7–14 days', label: 'free trial: 7 on Windows, 14 on Android' },
     ],
   },
-  rail: { title: 'Platforms', lead: 'Windows and Android are available today. TV and family games are in development.' },
+  rail: { title: 'Platforms', lead: 'Windows and Android are available today. Family games on Android TV and the Windows shared screen are ready too.' },
   platforms: {
     windows: {
       tags: ['Available today', 'Windows 10/11', 'Microsoft Store'],
@@ -105,11 +105,12 @@ const en: HomeCopy = {
       imageAlt: 'AliKa for Android child home screen',
     },
     tv: {
-      tags: ['In development', 'Android TV'],
+      tags: ['Available today', 'Android TV', 'Windows shared screen'],
       title: 'AliKa TV and family games',
-      body: 'The TV becomes the family’s shared screen: the Family Board shows the family profile and the latest family message. Everyone joins games from their own phone, which becomes the controller.',
-      ready: 'Will be built in',
-      download: 'Will be downloadable',
+      body: 'An Android TV or the Windows computer’s screen becomes the family’s shared screen. On the TV, the Family Board shows the family profile and the latest family message. Everyone joins games from their own phone, which becomes the controller.',
+      ready: 'Comes with the app',
+      download: 'Separate pack',
+      packs: 'Download game packs',
       games: {
         rally: { name: 'Light Speed Rally', body: 'Answer school questions correctly and fast to pull ahead on the orbit track.' },
         station: { name: 'Space Station', body: 'Call out commands and bring the station home as a crew.' },
@@ -203,7 +204,7 @@ const en: HomeCopy = {
     firstDay: { title: 'AliKa first-day settings', body: 'Daily time, weekly plan, night mode, question reward and daily cap, tasks and the weekly report.' },
     winPanel: { title: 'AliKa Windows parent panel', body: 'What each tab does: rules, apps and internet, tasks, questions, reports, security and settings.' },
     andPanel: { title: 'AliKa Android parent panel', body: 'What the bottom bar and menus do: panel, time and app management, rules, questions, reports, devices and profile.' },
-    homeNetwork: { title: 'AliKa family network', body: 'Adding phones and the Windows computer to the family network, a second parent, the family subscription and managing devices from the parent phone. The TV part of the video is still in development.' },
+    homeNetwork: { title: 'AliKa family network', body: 'Adding phones and the Windows computer to the family network, a second parent, the family subscription and managing devices from the parent phone.' },
     quizShort: { title: 'More than screen time', body: 'Your child earns extra time by answering questions; you set the limits.' },
   },
   ages: {
@@ -249,14 +250,13 @@ const en: HomeCopy = {
       'Homework half done, game still open. The parent who switches the screen off when time is up becomes the bad guy, the child sulks, and the next evening the same negotiation starts again. AliKa was designed around these scenes that real families live through every evening, and around the problems of screen time and studying.',
       'This is what we saw: a ban switches the screen off, but it doesn’t end the argument. When children don’t know the rule in advance, every interruption becomes a surprise, and every surprise becomes a new negotiation. Studying ends up looking like screen time’s rival.',
       'So we asked the question the other way round: if screens are already part of life, can we put them next to studying? In AliKa the family sets the rule together and the child sees the time left in advance; if they want, they answer questions and earn extra time within the limit you set. That is where “We don’t restrict. We plan.” comes from.',
-      'AliKa is not a finished product. We keep developing it around the same idea, guided by feedback from families. Ready-made lessons started with the Turkish middle-school curriculum (grades 5–8, in Turkish); other grades and countries are in the planning stage.',
+      'AliKa is not a finished product. We keep developing it around the same idea, guided by feedback from families. Ready-made lessons started with the Turkish middle-school curriculum (grades 5–8, in Turkish), followed by the LGS 2027 practice exam pack and visual activities for primary-age children (preview); other grades and countries are in the planning stage.',
     ],
     signature: 'The AliKa team · ErenKa Software',
     planTitle: 'Where are we now?',
     plan: [
-      { status: 'ready', label: 'Ready today', items: ['Windows and Android apps', 'Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish)', 'Adding your own questions with Excel or CSV'] },
-      { status: 'dev', label: 'In development', items: ['Android TV and family games'] },
-      { status: 'plan', label: 'In the planning stage', items: ['Primary and high-school grades', 'Curricula for other countries'] },
+      { status: 'ready', label: 'Ready today', items: ['Windows and Android apps', 'Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish)', 'LGS 2027 practice exam pack (in Turkish)', 'Primary visual activities (ages 6–10, preview)', 'Android TV, the Windows shared screen and family games', 'Adding your own questions with Excel or CSV'] },
+      { status: 'plan', label: 'In the planning stage', items: ['Primary and high-school subject content', 'Curricula for other countries'] },
     ],
     contentLink: 'Open the content library',
   },
@@ -282,7 +282,7 @@ const en: HomeCopy = {
       },
       {
         q: 'Which subjects and grades are available?',
-        a: 'Ready-made content is currently available for the Turkish middle-school curriculum (grades 5–8, in Turkish): topic explanations and questions by subject, plus a mixed question bank for each grade. Math practice questions are generated inside the app. Primary and high-school grades and other countries’ curricula are in the planning stage; meanwhile you can add your own questions with the Excel template or content packs.',
+        a: 'Ready-made content is currently available for the Turkish middle-school curriculum (grades 5–8, in Turkish): topic explanations and questions by subject, plus the LGS 2027 practice exam pack for grade 8. Visual activities for ages 6–10 that need no reading are available as a preview. Math practice questions are generated inside the app. Primary and high-school subject content and other countries’ curricula are in the planning stage; meanwhile you can add your own questions with the Excel template or content packs.',
       },
       {
         q: 'Does AliKa secretly monitor my child?',

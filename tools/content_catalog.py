@@ -2,67 +2,42 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 import zipfile
 from collections import defaultdict
 from pathlib import Path
 
 
-COUNTRY_NAMES = {
-    "turkiye": "Türkiye",
-    "JP": "Japonya",
-    "KR": "Kore",
-    "GB": "İngiltere",
-    "RU": "Rusya",
-}
-COUNTRY_SLUGS = {"JP": "japonya", "KR": "kore", "GB": "ingiltere", "RU": "rusya"}
-CONTENT_RELEASE_TAG = "question-banks-2026.09.02-v3"
-GB_CONTENT_RELEASE_TAG = "gb-england-2026.09.02-v1"
-RU_CONTENT_RELEASE_TAG = "ru-2026.09.05-v1"
-CLASS_QUESTION_BANK_RELEASE_TAG = "class-question-banks-2026.09.05-v1"
-COUNTRY_RELEASE_TAGS = {
-    "JP": "question-banks-2026.09.01",
-    "KR": "question-banks-2026.09.01",
-    "GB": GB_CONTENT_RELEASE_TAG,
-    "RU": RU_CONTENT_RELEASE_TAG,
-}
-COUNTRY_ORDER = {"turkiye": 0, "japonya": 1, "kore": 2, "ingiltere": 3, "rusya": 4}
-# Sitede yalnız çalışma verisi hazır olan kapsam yayımlanır: Türkiye ortaokul (5–8).
-# Diğer sınıflar ve ülkeler plan aşamasında; içerik deposunda kalır ama indirme olarak sunulmaz.
+SOURCE_REPOSITORY = "https://github.com/chizyo43-debug/alika-icerik"
+COUNTRY_NAMES = {"turkiye": "Türkiye"}
+# Sitede yalnız çalışma verisi hazır olan ders kapsamı yayımlanır: Türkiye ortaokul (5–8).
+# İlkokul görsel etkinlikleri ve oyun paketleri ders kapsamı değildir; ayrı bölümlerde sunulur.
 PUBLISHED_GRADES = {"turkiye": frozenset({5, 6, 7, 8})}
+# LGS deneme paketi ders paketlerinden ayrıdır (başlıkta assessment.kind: lgs-deneme).
+LGS_FOLDER = "lgs-2027"
+# Ders kartlarının sırası; listede olmayan ders sona, adına göre gelir.
+SUBJECT_ORDER = (
+    "turkce", "matematik", "fen-bilimleri", "sosyal-bilgiler", "inkilap-tarihi", "ingilizce",
+    "din-kulturu-ve-ahlak-bilgisi", "din-kulturu", "bilisim-teknolojileri", "teknoloji-ve-tasarim",
+)
+GAME_SLUGS = ("word-wheel", "name-city")
+GAME_LANGS = ("tr", "en", "de", "es", "fr", "pt", "ru", "ja", "ko")
+GAME_PATH = re.compile(r"^games/(?P<slug>[a-z0-9-]+)/dist/(?P<lang>[a-z]{2})/(?P<band>[a-z]+)\.alika-game$")
+# Uygulama sürüm gereksinimleri (içerik deposu README'si): AMI/şekil ve LGS deneme Android 0.3.11 /
+# Windows 1.2.12 ister; ilkokul visualChoice v3 kartlarını yayımlanmış Android sürümü henüz çizemez.
+REQUIREMENTS = {
+    "lessons": {"windows": "1.2.12", "android": "0.3.11"},
+    "lgs": {"windows": "1.2.12", "android": "0.3.11"},
+    "primary": {"windows": "1.2.12", "android": None},
+    "games": {"windows": "1.2.12", "android_tv": "in-app"},
+}
+QUALITY_DISCLOSURE = "Yapay zekâ ile üretildi ve yapay zekâ ile incelendi; insan incelemesi yapılmadı."
+FIXED_ZIP_TIME = (2026, 9, 1, 0, 0, 0)
 
 
 def _published(country_slug: str, grade: object) -> bool:
     return grade in PUBLISHED_GRADES.get(country_slug, frozenset())
-
-
-
-
-def _grade_group_sort_key(item: tuple[tuple[str, str], list[dict]]) -> tuple[int, float, str]:
-    (country_slug, grade_slug), rows = item
-    grade = rows[0]["grade"]
-    grade_order = float(grade) if isinstance(grade, int) else 11.5
-    return COUNTRY_ORDER.get(country_slug, 99), grade_order, grade_slug
-CONTENT_RELEASE_URL = (
-    "https://github.com/chizyo43-debug/alika-icerik/releases/download/"
-    f"{CONTENT_RELEASE_TAG}"
-)
-FIXED_ZIP_TIME = (2026, 9, 1, 0, 0, 0)
-
-
-def _release_asset_url(country_code: str, filename: str) -> str:
-    tag = COUNTRY_RELEASE_TAGS[country_code]
-    return (
-        "https://github.com/chizyo43-debug/alika-icerik/releases/download/"
-        f"{tag}/{filename}"
-    )
-
-
-def _class_question_bank_asset_url(filename: str) -> str:
-    return (
-        "https://github.com/chizyo43-debug/alika-icerik/releases/download/"
-        f"{CLASS_QUESTION_BANK_RELEASE_TAG}/{filename}"
-    )
 
 
 def _sha256(path: Path) -> str:
@@ -71,10 +46,6 @@ def _sha256(path: Path) -> str:
         while chunk := handle.read(1024 * 1024):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def _sha256_bytes(value: bytes) -> str:
-    return hashlib.sha256(value).hexdigest()
 
 
 def _read_package(path: Path) -> dict:
@@ -94,430 +65,155 @@ def _read_package(path: Path) -> dict:
                 questions += 1
     if not pack:
         raise ValueError(f"Paket satırı yok: {path}")
-    return {
-        "pack": pack,
-        "notes": notes,
-        "questions": questions,
-        "publish_blocked": pack.get("publishBlocked") is True,
-    }
+    return {"pack": pack, "notes": notes, "questions": questions}
 
 
-def _release_subjects(content_root: Path) -> list[dict]:
-    subjects: list[dict] = []
-    pointer_root = content_root / "library" / "curriculum"
-    for country_code in ("JP", "KR", "GB", "RU"):
-        pointer_path = pointer_root / country_code / "current-publish-release.json"
-        if not pointer_path.is_file():
-            continue
-        pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
-        if pointer.get("publishable") is not True or pointer.get("releaseBlockers") != []:
-            raise ValueError(f"Yayımlanamaz ülke işaretçisi: {pointer_path}")
-        catalog_path = content_root / pointer["catalogPath"]
-        audit_path = content_root / pointer["auditPath"]
-        if _sha256(catalog_path) != pointer["catalogSha256"]:
-            raise ValueError(f"Ülke kataloğu hash uyuşmazlığı: {catalog_path}")
-        if _sha256(audit_path) != pointer["auditSha256"]:
-            raise ValueError(f"Ülke denetimi hash uyuşmazlığı: {audit_path}")
-        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
-        audit = json.loads(audit_path.read_text(encoding="utf-8"))
-        if (
-            catalog.get("publishable") is not True
-            or catalog.get("releaseBlockers") != []
-            or audit.get("publishable") is not True
-            or audit.get("status") != "passed"
-            or audit.get("errors") != []
-            or audit.get("catalogSha256") != pointer["catalogSha256"]
-        ):
-            raise ValueError(f"Ülke release kapısı geçmedi: {country_code}")
-
-        entries = catalog.get("packages") or catalog.get("lessonPackages") or []
-        for entry in entries:
-            bundle = content_root / entry["bundlePath"]
-            if not bundle.is_file():
-                raise FileNotFoundError(bundle)
-            if bundle.stat().st_size != entry["bundleBytes"] or _sha256(bundle) != entry["bundleSha256"]:
-                raise ValueError(f"Ders ZIP hash/boyut uyuşmazlığı: {bundle}")
-            if entry.get("publicationStatus") != "publishable-produced-safe-scope" or entry.get("releaseBlockers") != []:
-                raise ValueError(f"Ders ZIP yayımlanabilir değil: {bundle}")
-            with zipfile.ZipFile(bundle) as archive:
-                manifest = json.loads(archive.read("MANIFEST.json"))
-                if manifest.get("publishable") is not True or manifest.get("releaseId") != catalog["releaseId"]:
-                    raise ValueError(f"Ders manifesti release ile eşleşmiyor: {bundle}")
-                package = manifest["packages"][0]
-                payload = archive.read(package["path"])
-                if _sha256_bytes(payload) != package["sha256"]:
-                    raise ValueError(f"Ders JSONL hash uyuşmazlığı: {bundle}")
-                rows = [json.loads(line) for line in payload.decode("utf-8").splitlines()]
-                header = rows[0]
-                notes = sum(row.get("type") == "note" for row in rows[1:])
-                questions = sum(row.get("type") == "question" for row in rows[1:])
-                if header.get("publishable") is not True or header.get("schemaVersion") != "2.3":
-                    raise ValueError(f"Ders paketi sözleşme kapısını geçmedi: {bundle}")
-                if notes != entry["counts"]["notes"] or questions != entry["counts"]["questions"]:
-                    raise ValueError(f"Ders sayımları katalogla eşleşmiyor: {bundle}")
-                for asset in manifest.get("audioAssets") or []:
-                    if _sha256_bytes(archive.read(asset["path"])) != asset["sha256"]:
-                        raise ValueError(f"Ses varlığı hash uyuşmazlığı: {bundle}:{asset['path']}")
-
-            grade = entry["grade"]
-            grade_slug = f"{grade}-sinif" if isinstance(grade, int) else "11-12-sinif-secmeli"
-            country_slug = COUNTRY_SLUGS[country_code]
-            subjects.append({
-                "country_slug": country_slug,
-                "country": COUNTRY_NAMES[country_code],
-                "country_code": country_code,
-                "grade_slug": grade_slug,
-                "grade": grade,
-                "subject_slug": entry["subjectCode"],
-                "subject": entry["subject"],
-                "filename": bundle.name,
-                "download_url": _release_asset_url(country_code, bundle.name),
-                "sha256": entry["bundleSha256"],
-                "size_bytes": entry["bundleBytes"],
-                "notes": notes,
-                "questions": questions,
-                "schema_version": "2.3",
-                "package_version": catalog["releaseId"],
-                "review_status": "passed-critical-codex-self-audit",
-                "human_reviewed": False,
-                "license": "AliKa özgün güvenli-kapsam yayını",
-                "source_kind": "release-bundle",
-                "source_path": bundle,
-                "release_id": catalog["releaseId"],
-            })
-    return subjects
+def _copy(source: Path, target: Path) -> None:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, target)
 
 
-def _legacy_subjects(content_root: Path, data_output: Path) -> tuple[list[dict], list[dict]]:
-    subjects: list[dict] = []
-    excluded: list[dict] = []
-    country_slug = "turkiye"
-    country_root = content_root / country_slug
-    for source in sorted(country_root.glob("*/*/*.jsonl")):
-        rel = source.relative_to(content_root)
-        _, grade_slug, subject_slug, filename = rel.parts
-        if subject_slug == "soru-bankasi":
-            continue
+def _package_label(theme: str, grade: int, subject: str) -> str:
+    """'8. Sınıf Matematik — 1. Dönem — Üslü İfadeler' → '1. Dönem — Üslü İfadeler'."""
+    prefix = f"{grade}. Sınıf {subject} — "
+    return theme[len(prefix):] if theme.startswith(prefix) else theme
+
+
+def _katalog_packages(content_root: Path, data_output: Path) -> list[dict]:
+    """KATALOG.json'daki ders ve LGS paketlerini hash ve sayım denetimiyle okur, siteye kopyalar."""
+    katalog = json.loads((content_root / "KATALOG.json").read_text(encoding="utf-8"))
+    rows: list[dict] = []
+    for entry in katalog["paketler"]:
+        source = content_root / entry["yol"]
+        rel = Path(entry["yol"])
+        country_slug, grade_slug, folder, filename = rel.parts
+        if _sha256(source) != entry["sha256"]:
+            raise ValueError(f"Paket hash'i KATALOG.json ile eşleşmiyor: {rel}")
         parsed = _read_package(source)
-        if parsed["publish_blocked"]:
-            excluded.append({
-                "path": rel.as_posix(),
-                "reason": "publishBlocked=true",
-                "review_status": str(parsed["pack"].get("reviewStatus") or "pending"),
-            })
-            continue
         pack = parsed["pack"]
-        grade = int(pack.get("grade") or grade_slug.split("-")[0])
+        if parsed["questions"] != entry["soru"] or parsed["notes"] != entry["not"]:
+            raise ValueError(f"Paket sayımları KATALOG.json ile eşleşmiyor: {rel}")
+        if pack.get("publishBlocked") is True or pack.get("publishReady") is not True:
+            raise ValueError(f"Paket yayıma hazır değil: {rel}")
+        if pack.get("humanReviewed") is not False or entry["reviewStatus"] != "ai-verified":
+            raise ValueError(f"Paket inceleme beyanı beklenmiyor: {rel}")
+        grade = int(entry["sinif"])
+        is_lgs = folder == LGS_FOLDER
+        if is_lgs and (pack.get("assessment") or {}).get("kind") != "lgs-deneme":
+            raise ValueError(f"LGS paketi deneme olarak işaretli değil: {rel}")
         if not _published(country_slug, grade):
             continue
-        target = data_output / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        subjects.append({
-            "country_slug": country_slug,
-            "country": COUNTRY_NAMES[country_slug],
-            "country_code": str(pack.get("country") or "").upper(),
-            "grade_slug": grade_slug,
-            "grade": grade,
-            "subject_slug": subject_slug,
-            "subject": str(pack.get("subject") or subject_slug.replace("-", " ").title()),
-            "filename": filename,
-            "download_url": f"/icerik/veri/{rel.as_posix()}",
-            "sha256": _sha256(source),
-            "size_bytes": source.stat().st_size,
-            "notes": parsed["notes"],
-            "questions": parsed["questions"],
-            "schema_version": str(pack.get("schemaVersion") or ""),
-            "package_version": str(pack.get("version") or "1"),
-            "review_status": str(pack.get("reviewStatus") or "unreviewed"),
-            "human_reviewed": bool(pack.get("humanReviewed", False)),
-            "license": str(pack.get("license") or ""),
-            "source_kind": "jsonl",
-            "source_path": source,
-            "release_id": "",
-        })
-    return subjects, excluded
-
-
-def _legacy_question_banks(content_root: Path, data_output: Path) -> list[dict]:
-    """Yayıma hazır Türkiye soru bankalarını ders paketlerinden ayrı toplar."""
-    banks: list[dict] = []
-    country_slug = "turkiye"
-    country_root = content_root / country_slug
-    for source in sorted(country_root.glob("*/soru-bankasi/*-2000-soru.jsonl")):
-        rel = source.relative_to(content_root)
-        _, grade_slug, bank_dir, filename = rel.parts
-        if bank_dir != "soru-bankasi":
-            continue
-        if not _published(country_slug, int(grade_slug.split("-")[0])):
-            continue
-        parsed = _read_package(source)
-        pack = parsed["pack"]
-        policy = pack.get("contractPolicy") or {}
-        generation = pack.get("generationPolicy") or {}
-        source_packages = pack.get("sourcePackages") or []
-        if parsed["publish_blocked"] or pack.get("publishReady") is not True:
-            raise ValueError(f"Soru bankası yayıma hazır değil: {source}")
-        if pack.get("reviewStatus") != "ai-verified" or pack.get("humanReviewed") is not False:
-            raise ValueError(f"Soru bankası inceleme beyanı geçersiz: {source}")
-        if parsed["questions"] != 2000 or policy.get("questionCount") != 2000:
-            raise ValueError(f"Soru bankası tam 2.000 soru taşımıyor: {source}")
-        if policy.get("minFamilies") != 2000 or policy.get("maxPerFamily") != 1:
-            raise ValueError(f"Soru bankası özgün aile sözleşmesini karşılamıyor: {source}")
-        if generation.get("sourceQuestionReuse") != "forbidden":
-            raise ValueError(f"Soru bankasında ders sorusu yeniden kullanımı yasak değil: {source}")
-        if not source_packages or any(row.get("questionsUsedAsSemanticInputs") != 0 for row in source_packages):
-            raise ValueError(f"Soru bankası ders sorularından bağımsız değil: {source}")
-
-        grade = int(pack.get("grade") or grade_slug.split("-")[0])
-        target = data_output / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        banks.append({
+        _copy(source, data_output / rel)
+        subject = entry["ders"]
+        rows.append({
             "country_slug": country_slug,
             "country": COUNTRY_NAMES[country_slug],
             "country_code": str(pack.get("country") or "TR").upper(),
             "grade_slug": grade_slug,
             "grade": grade,
-            "bank_slug": "tum-dersler-2000",
-            "scope": "grade-all-subjects",
-            "title": str(pack.get("theme") or f"Türkiye {grade}. Sınıf — 2.000 Soruluk Soru Bankası"),
+            "kind": "lgs" if is_lgs else "lesson",
+            "subject_slug": folder,
+            "subject": subject,
+            "package_id": entry["paketId"],
+            "title": subject if is_lgs else _package_label(str(pack.get("theme") or filename), grade, subject),
             "filename": filename,
             "download_url": f"/icerik/veri/{rel.as_posix()}",
-            "sha256": _sha256(source),
+            "sha256": entry["sha256"],
             "size_bytes": source.stat().st_size,
+            "notes": parsed["notes"],
             "questions": parsed["questions"],
-            "families": policy["minFamilies"],
-            "schema_version": str(pack.get("schemaVersion") or ""),
+            "schema_version": entry["schemaVersion"],
             "package_version": str(pack.get("version") or "1"),
-            "review_status": str(pack.get("reviewStatus")),
+            "curriculum": entry["curriculum"],
+            "review_status": entry["reviewStatus"],
             "human_reviewed": False,
             "license": str(pack.get("license") or ""),
-            "independent_from_subject_packages": True,
-            "source_question_reuse": "forbidden",
+            "source_path": source,
         })
-    return banks
+    return rows
 
 
-def _release_question_banks(content_root: Path) -> list[dict]:
-    """Hash-bound JP/KR subject banks remain separate from lesson bundles."""
-    pointer_path = content_root / "library/registry/current-question-bank-release.json"
-    if not pointer_path.is_file():
-        return []
-    pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
-    catalog_path = content_root / pointer["catalogPath"]
-    audit_path = content_root / pointer["auditPath"]
-    if pointer.get("publishable") is not True or pointer.get("releaseBlockers") != []:
-        raise ValueError(f"Soru bankası release işaretçisi yayımlanamaz: {pointer_path}")
-    if _sha256(catalog_path) != pointer["catalogSha256"] or _sha256(audit_path) != pointer["auditSha256"]:
-        raise ValueError("Soru bankası release pointer hash uyuşmazlığı")
-    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
-    audit = json.loads(audit_path.read_text(encoding="utf-8"))
-    if (
-        catalog.get("publishable") is not True
-        or catalog.get("releaseBlockers") != []
-        or audit.get("publishable") is not True
-        or audit.get("status") != "passed"
-        or audit.get("errors") != []
-        or audit.get("catalogSha256") != pointer["catalogSha256"]
-    ):
-        raise ValueError("Soru bankası release kapısı geçmedi")
-
-    banks: list[dict] = []
-    for entry in catalog.get("packages") or []:
-        bundle = content_root / entry["bundlePath"]
-        if not bundle.is_file() or bundle.stat().st_size != entry["bundleBytes"] or _sha256(bundle) != entry["bundleSha256"]:
-            raise ValueError(f"Soru bankası bundle hash/boyut uyuşmazlığı: {bundle}")
-        if (
-            entry.get("publicationStatus") != "publishable-independent-subject-question-bank"
-            or entry.get("releaseBlockers") != []
-            or entry.get("sourceQuestionReuse") != "forbidden"
-            or entry.get("questionsUsedAsSemanticInputs") != 0
-        ):
-            raise ValueError(f"Soru bankası katalog kaydı geçersiz: {entry.get('cellId')}")
-        with zipfile.ZipFile(bundle) as archive:
-            manifest = json.loads(archive.read("MANIFEST.json"))
-            package = manifest["packages"][0]
-            payload = archive.read(package["path"])
-            if (
-                manifest.get("schema") != "alika-question-bank-bundle/v1"
-                or manifest.get("publishable") is not True
-                or manifest.get("humanReviewed") is not False
-                or _sha256_bytes(payload) != package["sha256"]
-            ):
-                raise ValueError(f"Soru bankası bundle manifesti geçersiz: {bundle}")
-            rows = [json.loads(line) for line in payload.decode("utf-8").splitlines() if line]
-            header = rows[0]
-            questions = sum(row.get("type") == "question" for row in rows[1:])
-            notes = sum(row.get("type") == "note" for row in rows[1:])
-            if (
-                header.get("productType") != "independent-question-bank"
-                or header.get("publishReady") is not True
-                or header.get("generationPolicy", {}).get("sourceQuestionReuse") != "forbidden"
-                or header.get("generationPolicy", {}).get("questionsUsedAsSemanticInputs") != 0
-                or questions != 2000
-                or notes != 23
-            ):
-                raise ValueError(f"Soru bankası JSONL sözleşmesi geçersiz: {bundle}")
-            for asset in manifest.get("audioAssets") or []:
-                data = archive.read(asset["path"])
-                if len(data) != asset["bytes"] or _sha256_bytes(data) != asset["sha256"]:
-                    raise ValueError(f"Soru bankası ses varlığı geçersiz: {bundle}:{asset['path']}")
-
-        country_code = entry["country"]
-        country_slug = COUNTRY_SLUGS[country_code]
-        grade = entry["grade"]
-        banks.append({
-            "country_slug": country_slug,
-            "country": COUNTRY_NAMES[country_code],
-            "country_code": country_code,
-            "grade_slug": f"{grade}-sinif" if isinstance(grade, int) else "11-12-sinif-secmeli",
-            "grade": grade,
-            "bank_slug": f"{entry['subjectCode']}-2000",
-            "scope": "country-grade-subject",
-            "subject_code": entry["subjectCode"],
-            "subject": entry["subject"],
-            "title": entry["title"],
-            "filename": bundle.name,
-            "download_url": f"{CONTENT_RELEASE_URL}/{bundle.name}",
-            "sha256": entry["bundleSha256"],
-            "size_bytes": entry["bundleBytes"],
-            "questions": 2000,
-            "families": 400,
-            "schema_version": "2.3",
-            "package_version": catalog["releaseId"],
+def _primary_packages(content_root: Path, data_output: Path) -> list[dict]:
+    """İlkokul görsel etkinlik paketleri: dilden bağımsız, Question/Note sözleşmesi dışında."""
+    katalog = json.loads((content_root / "KATALOG.json").read_text(encoding="utf-8"))
+    rows: list[dict] = []
+    for entry in katalog.get("ilkokul") or []:
+        source = content_root / entry["yol"]
+        rel = Path(entry["yol"])
+        if _sha256(source) != entry["sha256"]:
+            raise ValueError(f"İlkokul paketi hash'i KATALOG.json ile eşleşmiyor: {rel}")
+        parsed = _read_package(source)
+        if parsed["questions"] != entry["soru"]:
+            raise ValueError(f"İlkokul paketi soru sayısı KATALOG.json ile eşleşmiyor: {rel}")
+        _copy(source, data_output / rel)
+        age_min, age_max = entry["yas"]
+        rows.append({
+            "package_id": entry["paketId"],
+            "kind": entry["tur"],
+            "age_min": age_min,
+            "age_max": age_max,
+            "language": entry["lang"],
+            "filename": rel.name,
+            "download_url": f"/icerik/veri/{rel.as_posix()}",
+            "sha256": entry["sha256"],
+            "size_bytes": source.stat().st_size,
+            "questions": parsed["questions"],
             "review_status": entry["reviewStatus"],
             "human_reviewed": False,
-            "license": "AliKa özgün güvenli-kapsam yayını",
-            "independent_from_subject_packages": True,
-            "source_question_reuse": "forbidden",
+            "child_tested": False,
         })
-    return banks
+    return rows
 
 
-def _country_release_class_question_banks(content_root: Path, country_code: str) -> list[dict]:
-    """Read canonical mixed 2,000-question grade banks from a country release."""
-    pointer_path = (
-        content_root
-        / "library"
-        / "curriculum"
-        / country_code
-        / "current-publish-release.json"
-    )
-    if not pointer_path.is_file():
-        return []
-    pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
-    catalog_path = content_root / pointer["catalogPath"]
-    audit_path = content_root / pointer["auditPath"]
-    if pointer.get("publishable") is not True or pointer.get("releaseBlockers") != []:
-        raise ValueError(f"Soru bankası ülke işaretçisi yayımlanamaz: {pointer_path}")
-    if (
-        _sha256(catalog_path) != pointer["catalogSha256"]
-        or _sha256(audit_path) != pointer["auditSha256"]
-    ):
-        raise ValueError(f"Soru bankası ülke işaretçisi hash uyuşmazlığı: {country_code}")
-
-    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
-    audit = json.loads(audit_path.read_text(encoding="utf-8"))
-    if (
-        catalog.get("publishable") is not True
-        or catalog.get("releaseBlockers") != []
-        or audit.get("publishable") is not True
-        or audit.get("status") != "passed"
-        or audit.get("errors") != []
-        or audit.get("catalogSha256") != pointer["catalogSha256"]
-    ):
-        raise ValueError(f"Soru bankası ülke release kapısı geçmedi: {country_code}")
-
-    banks: list[dict] = []
-    for entry in catalog.get("classQuestionBankPackages") or []:
-        bundle = content_root / entry["bundlePath"]
-        if (
-            not bundle.is_file()
-            or bundle.stat().st_size != entry["bundleBytes"]
-            or _sha256(bundle) != entry["bundleSha256"]
-        ):
-            raise ValueError(f"Soru bankası bundle hash/boyut uyuşmazlığı: {bundle}")
-        if (
-            entry.get("publicationStatus")
-            != "publishable-independent-mixed-class-question-bank"
-            or entry.get("releaseBlockers") != []
-            or entry.get("sourceQuestionReuse") != "forbidden"
-            or entry.get("questionsUsedAsSemanticInputs") != 0
-        ):
-            raise ValueError(f"Soru bankası katalog kaydı geçersiz: {entry.get('cellId')}")
-
-        with zipfile.ZipFile(bundle) as archive:
-            manifest = json.loads(archive.read("MANIFEST.json"))
-            package = manifest["packages"][0]
-            payload = archive.read(package["path"])
-            if (
-                manifest.get("schema")
-                != "alika-mixed-class-question-bank-bundle/v1"
-                or manifest.get("publishable") is not True
-                or manifest.get("humanReviewed") is not False
-                or manifest.get("releaseId") != catalog["releaseId"]
-                or _sha256_bytes(payload) != package["sha256"]
-            ):
-                raise ValueError(f"Soru bankası bundle manifesti geçersiz: {bundle}")
-            rows = [
-                json.loads(line)
-                for line in payload.decode("utf-8").splitlines()
-                if line
-            ]
-            header = rows[0]
-            questions = sum(row.get("type") == "question" for row in rows[1:])
-            notes = sum(row.get("type") == "note" for row in rows[1:])
-            counts = entry["counts"]
-            if (
-                header.get("productType")
-                != "independent-mixed-class-question-bank"
-                or header.get("publishReady") is not True
-                or header.get("generationPolicy", {}).get("sourceQuestionReuse")
-                != "forbidden"
-                or header.get("generationPolicy", {}).get("questionsUsedAsSemanticInputs")
-                != 0
-                or questions != counts.get("questions")
-                or notes != counts.get("notes")
-                or counts.get("questions") != 2000
-                or counts.get("families", 0) < 400
-                or sum(
-                    row.get("questionCount", 0)
-                    for row in entry.get("subjectCoverage") or []
-                )
-                != 2000
-            ):
-                raise ValueError(f"Soru bankası JSONL sözleşmesi geçersiz: {bundle}")
-
-        grade = entry["grade"]
-        country_slug = COUNTRY_SLUGS[country_code]
-        banks.append({
-            "country_slug": country_slug,
-            "country": COUNTRY_NAMES[country_code],
-            "country_code": country_code,
-            "grade_slug": f"{grade}-sinif" if isinstance(grade, int) else "11-12-sinif-secmeli",
-            "grade": grade,
-            "bank_slug": "karma-2000",
-            "scope": "country-grade",
-            "subject_code": "mixed",
-            "subject": "Tüm dersler",
-            "title": f"{COUNTRY_NAMES[country_code]} {grade}. sınıf — Karma 2.000 Soruluk Soru Bankası",
-            "filename": bundle.name,
-            "download_url": _class_question_bank_asset_url(bundle.name),
-            "sha256": entry["bundleSha256"],
-            "size_bytes": entry["bundleBytes"],
-            "questions": counts["questions"],
-            "families": counts["families"],
-            "schema_version": "2.3",
-            "package_version": catalog["releaseId"],
-            "review_status": entry["reviewStatus"],
-            "human_reviewed": False,
-            "license": "AliKa özgün güvenli-kapsam yayını",
-            "independent_from_subject_packages": True,
-            "source_question_reuse": "forbidden",
-            "subject_coverage": entry.get("subjectCoverage") or [],
+def _games(content_root: Path, output: Path) -> list[dict]:
+    """Ortak ekran oyun paketleri (.alika-game): dil × yaş bandı, hash ve boyut denetimli."""
+    games: list[dict] = []
+    for slug in GAME_SLUGS:
+        catalog = json.loads((content_root / "games" / slug / "catalog.json").read_text(encoding="utf-8"))
+        if catalog.get("schema_version") != 1:
+            raise ValueError(f"Oyun kataloğu şeması desteklenmiyor: {slug}")
+        packages: list[dict] = []
+        for entry in catalog["games"]:
+            match = GAME_PATH.fullmatch(entry["path"])
+            if not match or match["slug"] != slug or match["lang"] != entry["language"]:
+                raise ValueError(f"Oyun paketi yolu geçersiz: {entry['path']}")
+            source = content_root / entry["path"]
+            if source.stat().st_size != entry["size_bytes"] or _sha256(source) != entry["sha256"]:
+                raise ValueError(f"Oyun paketi hash/boyut uyuşmazlığı: {entry['path']}")
+            rel = Path(slug) / match["lang"] / source.name
+            _copy(source, output / "oyunlar" / rel)
+            packages.append({
+                "game_id": entry["game_id"],
+                "language": entry["language"],
+                "band": match["band"],
+                "age_min": entry["age_min"],
+                "age_max": entry["age_max"],
+                "name": entry["name"],
+                "title": entry["name"].split(" · ")[0],
+                "items": entry.get("word_count") or entry.get("round_count") or 0,
+                "filename": f"{slug}-{match['lang']}-{source.name}",
+                "download_url": f"/icerik/oyunlar/{rel.as_posix()}",
+                "sha256": entry["sha256"],
+                "size_bytes": entry["size_bytes"],
+            })
+        langs = {row["language"] for row in packages}
+        if langs != set(GAME_LANGS):
+            raise ValueError(f"Oyun paketleri dokuz dili kapsamıyor: {slug} {sorted(langs)}")
+        packages.sort(key=lambda row: (GAME_LANGS.index(row["language"]), row["age_min"]))
+        art = content_root / "games" / "visuals" / slug / "game_art.webp"
+        art_url = ""
+        if art.is_file():
+            _copy(art, output / "oyunlar" / slug / art.name)
+            art_url = f"/icerik/oyunlar/{slug}/{art.name}"
+        games.append({
+            "slug": slug,
+            "item_kind": "words" if slug == "word-wheel" else "rounds",
+            "art_url": art_url,
+            "review_status": str(catalog.get("review_status") or ""),
+            "human_reviewed": catalog.get("human_approved") is True,
+            "packages": packages,
         })
-    return banks
+    return games
 
 
 def _write_member(archive: zipfile.ZipFile, name: str, data: bytes) -> None:
@@ -527,71 +223,48 @@ def _write_member(archive: zipfile.ZipFile, name: str, data: bytes) -> None:
     archive.writestr(info, data)
 
 
-def _write_grade_bundle(zip_path: Path, rows: list[dict]) -> None:
-    packages: list[dict] = []
-    audio_assets: list[dict] = []
-    members: dict[str, bytes] = {}
-    release_ids: set[str] = set()
-
-    for row in rows:
-        source = row["source_path"]
-        if row["source_kind"] == "jsonl":
-            name = f"{row['subject_slug']}/{row['filename']}"
-            data = source.read_bytes()
-            members[name] = data
-            packages.append({
-                "path": name,
-                **{key: row[key] for key in (
-                    "subject", "subject_slug", "filename", "sha256", "notes", "questions",
-                    "review_status", "human_reviewed", "license",
-                )},
-            })
-            continue
-
-        release_ids.add(row["release_id"])
-        with zipfile.ZipFile(source) as source_zip:
-            manifest = json.loads(source_zip.read("MANIFEST.json"))
-            for package in manifest["packages"]:
-                name = package["path"]
-                data = source_zip.read(name)
-                if name in members and members[name] != data:
-                    raise ValueError(f"Sınıf ZIP üye çakışması: {name}")
-                members[name] = data
-                packages.append({**package, "subject": row["subject"], "subject_slug": row["subject_slug"]})
-            for asset in manifest.get("audioAssets") or []:
-                name = asset["path"]
-                data = source_zip.read(name)
-                if name in members and members[name] != data:
-                    raise ValueError(f"Sınıf ZIP varlık çakışması: {name}")
-                members[name] = data
-                audio_assets.append(asset)
-
+def _write_bundle(zip_path: Path, rows: list[dict]) -> dict:
+    """Uygulamanın 'İçerik ekle' akışının okuduğu alika-class-bundle/v1 ZIP'i yazar."""
+    packages = [{
+        "path": f"{row['subject_slug']}/{row['filename']}",
+        **{key: row[key] for key in (
+            "subject", "subject_slug", "filename", "sha256", "notes", "questions",
+            "review_status", "human_reviewed", "license",
+        )},
+    } for row in rows]
     manifest = {
-        "schema": "alika-class-bundle/v2" if audio_assets else "alika-class-bundle/v1",
+        "schema": "alika-class-bundle/v1",
         "country": rows[0]["country"],
         "country_code": rows[0]["country_code"],
         "grade": rows[0]["grade"],
-        "source_repository": "https://github.com/chizyo43-debug/alika-icerik",
-        "source_release_ids": sorted(release_ids),
+        "source_repository": SOURCE_REPOSITORY,
         "publishable": True,
-        "quality_disclosure": "Codex öz-denetimli, makine doğrulamalı güvenli kapsam; kayıtlar insan incelemesi iddiası taşımaz.",
+        "quality_disclosure": QUALITY_DISCLOSURE,
         "packages": packages,
     }
-    if audio_assets:
-        manifest["audioAssets"] = audio_assets
     with zipfile.ZipFile(zip_path, "w") as archive:
-        _write_member(
-            archive,
-            "MANIFEST.json",
-            json.dumps(manifest, ensure_ascii=False, separators=(",", ":")).encode("utf-8"),
-        )
-        for name in sorted(members):
-            _write_member(archive, name, members[name])
+        _write_member(archive, "MANIFEST.json", json.dumps(manifest, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+        for package, row in sorted(zip(packages, rows), key=lambda item: item[0]["path"]):
+            _write_member(archive, package["path"], row["source_path"].read_bytes())
+    return {
+        "download_url": f"/icerik/paketler/{zip_path.name}",
+        "sha256": _sha256(zip_path),
+        "size_bytes": zip_path.stat().st_size,
+    }
+
+
+def _subject_sort_key(row: dict) -> tuple[int, str]:
+    slug = row["subject_slug"]
+    return (SUBJECT_ORDER.index(slug) if slug in SUBJECT_ORDER else len(SUBJECT_ORDER), row["subject"])
+
+
+def _public(row: dict) -> dict:
+    return {key: value for key, value in row.items() if key != "source_path"}
 
 
 def build_content_catalog(content_root: Path, dist: Path) -> dict:
-    """Doğrulanmış içerik deposundan site kataloğu ve sınıf ZIP'leri üretir."""
-    if not content_root.is_dir():
+    """Doğrulanmış içerik deposundan site kataloğu, sınıf/ders/LGS ZIP'leri ve oyun dosyaları üretir."""
+    if not (content_root / "KATALOG.json").is_file():
         raise FileNotFoundError(
             "AliKa içerik deposu bulunamadı. ALIKA_CONTENT_ROOT ayarlayın veya _content yoluna checkout yapın."
         )
@@ -601,29 +274,42 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
     data_output.mkdir(parents=True, exist_ok=True)
     bundle_output.mkdir(parents=True, exist_ok=True)
 
-    legacy_subjects, excluded = _legacy_subjects(content_root, data_output)
-    question_banks = (
-        _legacy_question_banks(content_root, data_output)
-        + _country_release_class_question_banks(content_root, "JP")
-        + _country_release_class_question_banks(content_root, "KR")
-        + _country_release_class_question_banks(content_root, "GB")
-        + _country_release_class_question_banks(content_root, "RU")
-    )
-    question_banks = [row for row in question_banks if _published(row["country_slug"], row["grade"])]
-    subjects = [
-        row for row in legacy_subjects + _release_subjects(content_root)
-        if _published(row["country_slug"], row["grade"])
-    ]
-    grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
-    for subject in subjects:
-        grouped[(subject["country_slug"], subject["grade_slug"])].append(subject)
+    packages = _katalog_packages(content_root, data_output)
+    lessons = [row for row in packages if row["kind"] == "lesson"]
+    lgs = [row for row in packages if row["kind"] == "lgs"]
 
+    by_subject: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
+    for row in lessons:
+        by_subject[(row["country_slug"], row["grade_slug"], row["subject_slug"])].append(row)
+    subjects: list[dict] = []
+    for (country_slug, grade_slug, subject_slug), rows in by_subject.items():
+        rows.sort(key=lambda row: row["filename"])
+        bundle = _write_bundle(bundle_output / f"{country_slug}-{grade_slug}-{subject_slug}.zip", rows)
+        subjects.append({
+            "country_slug": country_slug,
+            "country": rows[0]["country"],
+            "country_code": rows[0]["country_code"],
+            "grade_slug": grade_slug,
+            "grade": rows[0]["grade"],
+            "subject_slug": subject_slug,
+            "subject": rows[0]["subject"],
+            "notes": sum(row["notes"] for row in rows),
+            "questions": sum(row["questions"] for row in rows),
+            **bundle,
+            "packages": [_public(row) for row in rows],
+            "_rows": rows,
+        })
+    subjects.sort(key=lambda row: (row["grade"], *_subject_sort_key(row)))
+
+    by_grade: dict[tuple[str, str], list[dict]] = defaultdict(list)
+    for subject in subjects:
+        by_grade[(subject["country_slug"], subject["grade_slug"])].append(subject)
     grades: list[dict] = []
-    for (country_slug, grade_slug), rows in sorted(grouped.items(), key=_grade_group_sort_key):
-        rows.sort(key=lambda row: (row["subject"], row["subject_slug"]))
-        zip_name = f"{country_slug}-{grade_slug}-tum-dersler.zip"
-        zip_path = bundle_output / zip_name
-        _write_grade_bundle(zip_path, rows)
+    for (country_slug, grade_slug), rows in sorted(by_grade.items(), key=lambda item: item[1][0]["grade"]):
+        bundle = _write_bundle(
+            bundle_output / f"{country_slug}-{grade_slug}-tum-dersler.zip",
+            [package for subject in rows for package in subject["_rows"]],
+        )
         grades.append({
             "country_slug": country_slug,
             "country": rows[0]["country"],
@@ -631,40 +317,56 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
             "grade_slug": grade_slug,
             "grade": rows[0]["grade"],
             "subject_count": len(rows),
-            "notes": sum(row["notes"] for row in rows),
-            "questions": sum(row["questions"] for row in rows),
-            "download_url": f"/icerik/paketler/{zip_name}",
-            "sha256": _sha256(zip_path),
-            "size_bytes": zip_path.stat().st_size,
+            "package_count": sum(len(subject["packages"]) for subject in rows),
+            "notes": sum(subject["notes"] for subject in rows),
+            "questions": sum(subject["questions"] for subject in rows),
+            **bundle,
         })
+    for subject in subjects:
+        del subject["_rows"]
 
-    public_subjects = [
-        {key: value for key, value in row.items() if key not in {"source_kind", "source_path", "release_id"}}
-        for row in subjects
-    ]
+    # LGS paketleri tek klasörde; ders sırası dosya adındaki ders adından (lgs-2027-<ders>.jsonl) gelir.
+    lgs.sort(key=lambda row: _subject_sort_key(
+        {**row, "subject_slug": row["filename"].removesuffix(".jsonl").removeprefix(f"{LGS_FOLDER}-")}
+    ))
+    lgs_section = {
+        "title": "LGS 2027 deneme",
+        "grade": 8,
+        "packages": [_public(row) for row in lgs],
+        "questions": sum(row["questions"] for row in lgs),
+        "notes": sum(row["notes"] for row in lgs),
+        **(_write_bundle(bundle_output / "turkiye-8-sinif-lgs-2027.zip", lgs) if lgs else {}),
+    }
+    primary = _primary_packages(content_root, data_output)
+    games = _games(content_root, output)
+
     catalog = {
-        "schema": "alika-content-catalog/v1",
-        "source_repository": "https://github.com/chizyo43-debug/alika-icerik",
-        "content_release": CONTENT_RELEASE_TAG,
-        "content_releases": COUNTRY_RELEASE_TAGS,
-        "question_bank_release": CLASS_QUESTION_BANK_RELEASE_TAG,
-        "quality_disclosure": "Codex öz-denetimli ve makine doğrulamalı güvenli kapsam; insan incelemesi iddiası yoktur.",
+        "schema": "alika-content-catalog/v2",
+        "source_repository": SOURCE_REPOSITORY,
+        "quality_disclosure": QUALITY_DISCLOSURE,
         "published_scope": {country: sorted(grades_set) for country, grades_set in PUBLISHED_GRADES.items()},
+        "requirements": REQUIREMENTS,
         "grades": grades,
-        "subjects": public_subjects,
-        "question_banks": question_banks,
-        "excluded": excluded,
+        "subjects": subjects,
+        "lgs": lgs_section,
+        "primary": primary,
+        "games": games,
         "totals": {
             "countries": len({row["country_slug"] for row in grades}),
             "gradeGroups": len(grades),
-            "subjects": len(public_subjects),
-            "notes": sum(row["notes"] for row in public_subjects),
-            "questions": sum(row["questions"] for row in public_subjects),
-            "questionBanks": len(question_banks),
-            "questionBankQuestions": sum(row["questions"] for row in question_banks),
+            "subjects": len(subjects),
+            "lessonPackages": len(lessons),
+            "notes": sum(row["notes"] for row in lessons),
+            "questions": sum(row["questions"] for row in lessons),
+            "lgsPackages": len(lgs),
+            "lgsQuestions": lgs_section["questions"],
+            "primaryPackages": len(primary),
+            "primaryQuestions": sum(row["questions"] for row in primary),
+            "games": len(games),
+            "gamePackages": sum(len(game["packages"]) for game in games),
         },
     }
-    (output / "catalog-v1.json").write_text(
+    (output / "catalog-v2.json").write_text(
         json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     return catalog

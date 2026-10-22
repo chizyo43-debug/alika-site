@@ -75,16 +75,21 @@ requireMatch(
   /play\.google\.com\/store\/apps\/details\?id=com\.alika\.parental/,
   'Android must link to its Google Play listing',
 );
+// Android TV (Play 0.3.10) ve Windows ortak ekranı (1.2.12) yayımlandı; aile oyunları bugün kullanılabilir.
 requireMatch(
   home,
-  /id: 'tv', tone: 'p-tv', status: 'dev', tags: tv\.tags/,
-  'Android TV must remain marked as under development',
+  /id: 'tv', tone: 'p-tv', status: 'ready', tags: tv\.tags/,
+  'Android TV and the Windows shared screen must be marked as available',
 );
 requireMatch(
   trCopy,
-  /tv: \{\s*tags: \['Geliştiriliyor'/,
-  'Android TV must remain labelled as under development',
+  /tv: \{\s*tags: \['Bugün kullanılabilir', 'Android TV', 'Windows ortak ekran'\]/,
+  'Android TV and the Windows shared screen must be labelled as available today',
 );
+// İçerik sayfası katalog v2'den üretilir; kaldırılan karma soru bankası metni sayfada kalmamalı.
+if (/karma soru bankası|mixed question bank/i.test([...i18nSources, guideSource].join('\n'))) {
+  errors.push('the per-grade mixed question bank is no longer published; remove it from the copy');
+}
 
 if (errors.length) {
   console.error(errors.join('\n'));

@@ -2270,7 +2270,8 @@ h3 {
   margin-bottom: 26px;
 }
 
-.question-bank-section {
+/* LGS, ilkokul ve oyun paketleri: ders kartlarının altında ayrı bölümler */
+.content-extra-section {
   margin: 30px 0 34px;
   padding: 26px;
   border: 1px solid rgba(15, 33, 73, 0.16);
@@ -2278,25 +2279,184 @@ h3 {
   background: linear-gradient(135deg, rgba(53, 208, 224, 0.13), rgba(246, 168, 0, 0.1));
 }
 
-.question-bank-heading {
+.content-extra-heading {
   max-width: 760px;
   margin-bottom: 20px;
 }
 
-.question-bank-heading h2 {
+.content-extra-heading h2 {
   margin: 4px 0 8px;
   color: var(--navy);
 }
 
-.question-bank-heading p:last-child {
+.content-extra-heading p {
   color: var(--muted);
 }
 
-.content-book-catalog .question-bank-grid article {
-  min-height: 230px;
-  background:
-    linear-gradient(90deg, rgba(53, 208, 224, 0.9) 0 6px, transparent 6px),
-    rgba(255, 255, 255, 0.82);
+.content-book-catalog .content-extra-heading .honesty-note {
+  margin: 10px 0 0;
+}
+
+.content-extra-section .grade-download-card + .package-files {
+  margin-top: 16px;
+}
+
+/* Ders ve LGS paketlerinin JSONL dosyalarını tek tek indirme listesi; açılan liste komşu kartları uzatmaz */
+.content-book-catalog .package-grid {
+  align-items: start;
+}
+
+.package-files {
+  margin-top: 12px;
+  font-size: 0.86rem;
+}
+
+.package-files summary {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  cursor: pointer;
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.package-files ul {
+  display: grid;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.package-files li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+}
+
+.package-files li > a {
+  color: var(--navy);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.package-files li > span {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Ortak ekran oyun paketleri */
+.game-pack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.game-pack-card {
+  overflow: hidden;
+  border: 1px solid rgba(15, 33, 73, 0.13);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 9px 20px rgba(15, 33, 73, 0.06);
+}
+
+.game-pack-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.game-pack-card > div {
+  padding: 20px;
+}
+
+.game-pack-card h3 {
+  margin: 0 0 6px;
+  color: var(--navy);
+}
+
+.game-pack-card p {
+  color: var(--muted);
+}
+
+.game-band-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0 4px;
+}
+
+.game-band-row a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 54px;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--navy);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.game-band-row a small {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.game-band-row a:hover,
+.game-band-row a:focus-visible {
+  color: var(--deep);
+  background: var(--cyan);
+}
+
+.game-band-row a:hover small,
+.game-band-row a:focus-visible small {
+  color: var(--deep);
+}
+
+.game-band-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.package-files .game-band-links a {
+  padding: 4px 8px;
+  color: var(--navy);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.package-files .game-band-links a:hover,
+.package-files .game-band-links a:focus-visible {
+  border-color: var(--navy);
+}
+
+@media (max-width: 760px) {
+  .content-extra-section {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .game-pack-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-pack-card > div {
+    padding: 18px 16px;
+  }
 }
 
 .grade-download-card {

@@ -450,116 +450,102 @@ def main() -> None:
             if not route_exists(value):
                 errors.append(f"Broken {attr} in {page}: {value}")
 
-    catalog_path = DIST / "icerik" / "catalog-v1.json"
+    catalog_path = DIST / "icerik" / "catalog-v2.json"
     alias_path = DIST / "icerik" / "index.html"
     if not alias_path.exists():
         errors.append("Turkish /icerik/ alias is missing")
+    else:
+        alias_text = alias_path.read_text(encoding="utf-8")
+        for section_id in ("lgs", "ilkokul", "oyunlar"):
+            if f'id="{section_id}"' not in alias_text:
+                errors.append(f"Content page section is missing: #{section_id}")
     if not catalog_path.exists():
         errors.append("Content catalog JSON is missing")
     else:
         catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
-        if catalog.get("schema") != "alika-content-catalog/v1":
+        if catalog.get("schema") != "alika-content-catalog/v2":
             errors.append("Content catalog schema is invalid")
         if not catalog.get("grades") or not catalog.get("subjects"):
             errors.append("Content catalog is empty")
-        content_release_tags = set((catalog.get("content_releases") or {}).values())
-        if catalog.get("content_release"):
-            content_release_tags.add(catalog["content_release"])
-        if catalog.get("question_bank_release"):
-            content_release_tags.add(catalog["question_bank_release"])
         totals = catalog.get("totals") or {}
-        if totals != {
+        # alika-icerik a41e183: 100 ders + 6 LGS paketi, 1 ilkokul görsel paketi, 2 oyun × 9 dil × 4 yaş grubu.
+        expected_totals = {
             "countries": 1,
             "gradeGroups": 4,
-            "subjects": 24,
-            "notes": 1029,
-            "questions": 13036,
-            "questionBanks": 4,
-            "questionBankQuestions": 8000,
-        }:
-            errors.append(f"Content catalog totals are unexpected: {totals}")
-        excluded = catalog.get("excluded") or []
-        if excluded:
-            errors.append(f"Ready content is still unexpectedly excluded: {excluded}")
-        for subject in catalog.get("subjects", []):
-            parsed = urlparse(subject["download_url"])
-            if parsed.scheme:
-                if (
-                    parsed.scheme != "https"
-                    or parsed.netloc != "github.com"
-                    or not any(
-                        f"/releases/download/{tag}/" in parsed.path
-                        for tag in content_release_tags
-                    )
-                ):
-                    errors.append(f"External subject artifact URL is not pinned: {subject['download_url']}")
-                if not re.fullmatch(r"[0-9a-f]{64}", subject.get("sha256", "")):
-                    errors.append(f"External subject hash is invalid: {subject.get('filename')}")
-            else:
-                target = DIST / subject["download_url"].lstrip("/")
-                if not target.exists() or digest(target) != subject["sha256"]:
-                    errors.append(f"Subject artifact missing or hash mismatch: {target}")
-        question_banks = catalog.get("question_banks") or []
-        # Yalnız Türkiye ortaokul (5–8) yayımlanır; diğer sınıflar ve ülkeler plan aşamasında.
+            "subjects": 28,
+            "lessonPackages": 100,
+            "lgsPackages": 6,
+            "primaryPackages": 1,
+            "primaryQuestions": 600,
+            "games": 2,
+            "gamePackages": 72,
+        }
+        unexpected = {key: totals.get(key) for key, value in expected_totals.items() if totals.get(key) != value}
+        if unexpected:
+            errors.append(f"Content catalog totals are unexpected: {unexpected}")
+        # Yalnız Türkiye ortaokul (5–8) ders kapsamı yayımlanır; diğer sınıflar ve ülkeler plan aşamasında.
         if catalog.get("published_scope") != {"turkiye": [5, 6, 7, 8]}:
             errors.append(f"Published content scope must be Türkiye 5–8: {catalog.get('published_scope')}")
-        for kind in ("grades", "subjects", "question_banks"):
+        for kind in ("grades", "subjects"):
             for row in catalog.get(kind, []):
                 if row.get("country_slug") != "turkiye" or row.get("grade") not in {5, 6, 7, 8}:
                     errors.append(f"Unpublished scope leaked into {kind}: {row.get('country_slug')} {row.get('grade')}")
-        bank_grades = sorted(bank.get("grade") for bank in question_banks)
-        if bank_grades != [5, 6, 7, 8]:
-            errors.append(f"Expected one independent question bank per grade 5–8, got {bank_grades}")
-        for bank in question_banks:
-            minimum_families = 2000
-            if (
-                bank.get("country_code") != "TR"
-                or bank.get("questions") != 2000
-                or bank.get("families", 0) < minimum_families
-                or bank.get("independent_from_subject_packages") is not True
-                or bank.get("source_question_reuse") != "forbidden"
-            ):
-                errors.append(f"Question bank contract is invalid: {bank.get('filename')}")
-            parsed = urlparse(bank["download_url"])
-            if parsed.scheme:
-                if (
-                    parsed.scheme != "https"
-                    or parsed.netloc != "github.com"
-                    or not any(
-                        f"/releases/download/{tag}/" in parsed.path
-                        for tag in content_release_tags
-                    )
-                    or not re.fullmatch(r"[0-9a-f]{64}", bank.get("sha256", ""))
-                ):
-                    errors.append(f"External question bank URL/hash is invalid: {bank.get('filename')}")
-            else:
-                target = DIST / bank["download_url"].lstrip("/")
-                if not target.exists() or digest(target) != bank["sha256"]:
-                    errors.append(f"Question bank artifact missing or hash mismatch: {target}")
-        for grade in catalog.get("grades", []):
-            target = DIST / grade["download_url"].lstrip("/")
-            if not target.exists() or digest(target) != grade["sha256"]:
-                errors.append(f"Grade artifact missing or hash mismatch: {target}")
+
+        def served_file(row: dict, label: str) -> Path | None:
+            """İndirilen her dosya sitede /icerik/ altında durmalı ve katalogdaki sha256 ile eşleşmeli."""
+            url = row.get("download_url", "")
+            if urlparse(url).scheme or not url.startswith("/icerik/"):
+                errors.append(f"{label} must be served from /icerik/: {url}")
+                return None
+            target = DIST / url.lstrip("/")
+            if not target.exists() or digest(target) != row.get("sha256"):
+                errors.append(f"{label} missing or hash mismatch: {target}")
+                return None
+            return target
+
+        lgs = catalog.get("lgs") or {}
+        bundles = [("Grade", row) for row in catalog.get("grades", [])]
+        bundles += [("Subject", row) for row in catalog.get("subjects", [])]
+        if lgs.get("download_url"):
+            bundles.append(("LGS", lgs))
+        else:
+            errors.append("LGS bundle is missing")
+        for label, row in bundles:
+            target = served_file(row, f"{label} bundle")
+            if target is None:
                 continue
             try:
                 with zipfile.ZipFile(target) as archive:
                     manifest = json.loads(archive.read("MANIFEST.json"))
-                    if manifest.get("schema") not in {"alika-class-bundle/v1", "alika-class-bundle/v2"}:
-                        errors.append(f"Grade bundle manifest schema is invalid: {target}")
-                    declared = {row["path"] for row in manifest.get("packages", [])}
-                    declared.update(row["path"] for row in manifest.get("audioAssets", []))
+                    if manifest.get("schema") != "alika-class-bundle/v1":
+                        errors.append(f"{label} bundle manifest schema is invalid: {target}")
+                    declared = {package["path"] for package in manifest.get("packages", [])}
                     if set(archive.namelist()) != declared | {"MANIFEST.json"}:
-                        errors.append(f"Grade bundle entries differ from manifest: {target}")
+                        errors.append(f"{label} bundle entries differ from manifest: {target}")
                     for package in manifest.get("packages", []):
                         actual = hashlib.sha256(archive.read(package["path"])).hexdigest()
                         if actual != package["sha256"]:
-                            errors.append(f"Grade bundle member hash mismatch: {target}:{package['path']}")
-                    for asset in manifest.get("audioAssets", []):
-                        actual = hashlib.sha256(archive.read(asset["path"])).hexdigest()
-                        if actual != asset["sha256"]:
-                            errors.append(f"Grade bundle asset hash mismatch: {target}:{asset['path']}")
+                            errors.append(f"{label} bundle member hash mismatch: {target}:{package['path']}")
             except (KeyError, json.JSONDecodeError, zipfile.BadZipFile) as exc:
-                errors.append(f"Grade bundle is invalid: {target}: {exc}")
+                errors.append(f"{label} bundle is invalid: {target}: {exc}")
+
+        # Tek tek indirilen ders/LGS/ilkokul paketleri: insan incelemesi iddia edilmez.
+        packages = [package for subject in catalog.get("subjects", []) for package in subject.get("packages", [])]
+        packages += lgs.get("packages", [])
+        packages += catalog.get("primary", [])
+        for package in packages:
+            served_file(package, "Content package")
+            if package.get("human_reviewed") is not False:
+                errors.append(f"Content package must not claim human review: {package.get('filename')}")
+        if any(package.get("kind") != "lgs" for package in lgs.get("packages", [])):
+            errors.append("LGS section contains a non-LGS package")
+        for game in catalog.get("games", []):
+            if not (DIST / game.get("art_url", "").lstrip("/")).exists():
+                errors.append(f"Game art is missing: {game.get('slug')}")
+            if game.get("human_reviewed") is not False:
+                errors.append(f"Game content must not claim human review: {game.get('slug')}")
+            for package in game.get("packages", []):
+                served_file(package, "Game package")
 
     for name in ("privacy", "eula"):
         source = ROOT / "legal" / f"{name}.html"

@@ -90,7 +90,7 @@ const es: HomeCopy = {
       { value: '7–14 días', label: 'de prueba gratis: 7 en Windows, 14 en Android' },
     ],
   },
-  rail: { title: 'Plataformas', lead: 'Windows y Android ya están disponibles. La TV y los juegos familiares están en desarrollo.' },
+  rail: { title: 'Plataformas', lead: 'Windows y Android ya están disponibles. Los juegos en familia en Android TV y en la pantalla compartida de Windows también están listos.' },
   platforms: {
     windows: {
       tags: ['Disponible hoy', 'Windows 10/11', 'Microsoft Store'],
@@ -105,11 +105,12 @@ const es: HomeCopy = {
       imageAlt: 'Pantalla de inicio del niño en AliKa para Android',
     },
     tv: {
-      tags: ['En desarrollo', 'Android TV'],
+      tags: ['Disponible hoy', 'Android TV', 'Pantalla compartida en Windows'],
       title: 'AliKa TV y juegos en familia',
-      body: 'La TV se convierte en la pantalla compartida de la familia: el Tablero familiar muestra el perfil familiar y el último mensaje de la familia. Todos se unen a los juegos desde su propio móvil, que hace de mando.',
-      ready: 'Vendrá incluido',
-      download: 'Se podrá descargar',
+      body: 'Una Android TV o la pantalla del ordenador Windows se convierte en la pantalla compartida de la familia. En la TV, el Tablero familiar muestra el perfil familiar y el último mensaje de la familia. Todos se unen a los juegos desde su propio móvil, que hace de mando.',
+      ready: 'Incluido en la app',
+      download: 'Paquete aparte',
+      packs: 'Descargar paquetes de juegos',
       games: {
         rally: { name: 'Rally a la velocidad de la luz', body: 'Responde bien y rápido a preguntas escolares y adelántate en la órbita.' },
         station: { name: 'Estación espacial', body: 'Di las órdenes en voz alta y lleva la estación a casa en equipo.' },
@@ -203,7 +204,7 @@ const es: HomeCopy = {
     firstDay: { title: 'AliKa: ajustes del primer día', body: 'Tiempo diario, plan semanal, modo noche, premio por preguntas y tope diario, tareas e informe semanal.' },
     winPanel: { title: 'Panel de padres de AliKa en Windows', body: 'Para qué sirve cada pestaña: reglas, apps e internet, tareas, preguntas, informes, seguridad y ajustes.' },
     andPanel: { title: 'Panel de padres de AliKa en Android', body: 'Para qué sirven la barra inferior y los menús: panel, gestión del tiempo y de apps, reglas, preguntas, informes, dispositivos y perfil.' },
-    homeNetwork: { title: 'Red familiar de AliKa', body: 'Añadir móviles y el ordenador Windows a la red familiar, segundo progenitor, suscripción familiar y gestión de dispositivos desde el móvil de los padres. La parte de TV del vídeo aún está en desarrollo.' },
+    homeNetwork: { title: 'Red familiar de AliKa', body: 'Añadir móviles y el ordenador Windows a la red familiar, segundo progenitor, suscripción familiar y gestión de dispositivos desde el móvil de los padres.' },
     quizShort: { title: 'Más que tiempo de pantalla', body: 'Tu hijo gana tiempo extra respondiendo preguntas; los límites los pones tú.' },
   },
   ages: {
@@ -249,14 +250,13 @@ const es: HomeCopy = {
       'Los deberes a medias, el juego todavía abierto. Quien apaga la pantalla cuando se acaba el tiempo queda como el malo, el niño se enfada y a la noche siguiente empieza la misma negociación. AliKa se diseñó pensando en estas escenas que viven las familias reales cada noche y en los problemas del tiempo de pantalla y del estudio.',
       'Esto es lo que vimos: la prohibición apaga la pantalla, pero no termina la discusión. Cuando el niño no conoce la regla de antemano, cada corte se convierte en una sorpresa y cada sorpresa en una nueva negociación. Y estudiar acaba pareciendo el rival del tiempo de pantalla.',
       'Así que planteamos la pregunta al revés: si la pantalla ya forma parte de la vida, ¿podemos ponerla al lado del estudio? En AliKa la familia fija la regla en conjunto y el niño ve de antemano el tiempo que le queda; si quiere, responde preguntas y gana tiempo extra dentro del límite que tú fijas. De ahí viene «No restringimos. Planificamos.»',
-      'AliKa no es un producto terminado. Seguimos desarrollándolo con la misma idea y con los comentarios de las familias. El contenido escolar listo empezó con el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco); otros cursos y países están en fase de planificación.',
+      'AliKa no es un producto terminado. Seguimos desarrollándolo con la misma idea y con los comentarios de las familias. El contenido escolar listo empezó con el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco); después llegaron el paquete de exámenes de práctica LGS 2027 y actividades visuales para primaria (versión preliminar). Otros cursos y países están en fase de planificación.',
     ],
     signature: 'El equipo de AliKa · ErenKa Software',
     planTitle: '¿Dónde estamos?',
     plan: [
-      { status: 'ready', label: 'Listo hoy', items: ['Apps para Windows y Android', 'Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco)', 'Añadir tus propias preguntas con Excel o CSV'] },
-      { status: 'dev', label: 'En desarrollo', items: ['Android TV y juegos en familia'] },
-      { status: 'plan', label: 'En fase de planificación', items: ['Cursos de primaria y bachillerato', 'Planes de estudios de otros países'] },
+      { status: 'ready', label: 'Listo hoy', items: ['Apps para Windows y Android', 'Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco)', 'Paquete de exámenes de práctica LGS 2027 (en turco)', 'Actividades visuales de primaria (6–10 años, versión preliminar)', 'Android TV, pantalla compartida en Windows y juegos en familia', 'Añadir tus propias preguntas con Excel o CSV'] },
+      { status: 'plan', label: 'En fase de planificación', items: ['Contenidos de primaria y bachillerato', 'Planes de estudios de otros países'] },
     ],
     contentLink: 'Abrir la biblioteca de contenido',
   },
@@ -282,7 +282,7 @@ const es: HomeCopy = {
       },
       {
         q: '¿Qué asignaturas y cursos hay?',
-        a: 'Ahora hay contenido listo para el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco): explicaciones de temas y preguntas por asignatura, y un banco de preguntas mixto por curso. Las preguntas de práctica de matemáticas se generan dentro de la app. Los cursos de primaria y bachillerato y los planes de otros países están en fase de planificación; mientras tanto puedes añadir tus propias preguntas con la plantilla de Excel o con paquetes de contenido.',
+        a: 'Ahora hay contenido listo para el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco): explicaciones de temas y preguntas por asignatura, y el paquete de exámenes de práctica LGS 2027 para 8.º curso. Las actividades visuales sin lectura para 6–10 años están disponibles como versión preliminar. Las preguntas de práctica de matemáticas se generan dentro de la app. Los contenidos de primaria y bachillerato y los planes de otros países están en fase de planificación; mientras tanto puedes añadir tus propias preguntas con la plantilla de Excel o con paquetes de contenido.',
       },
       {
         q: '¿AliKa vigila a mi hijo en secreto?',

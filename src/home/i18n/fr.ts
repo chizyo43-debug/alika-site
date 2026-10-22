@@ -90,7 +90,7 @@ const fr: HomeCopy = {
       { value: '7–14 jours', label: 'd’essai gratuit : 7 sur Windows, 14 sur Android' },
     ],
   },
-  rail: { title: 'Plateformes', lead: 'Windows et Android sont disponibles dès aujourd’hui. La TV et les jeux en famille sont en développement.' },
+  rail: { title: 'Plateformes', lead: 'Windows et Android sont disponibles dès aujourd’hui. Les jeux en famille sur Android TV et sur l’écran commun Windows sont prêts aussi.' },
   platforms: {
     windows: {
       tags: ['Disponible aujourd’hui', 'Windows 10/11', 'Microsoft Store'],
@@ -105,11 +105,12 @@ const fr: HomeCopy = {
       imageAlt: 'Écran d’accueil de l’enfant dans AliKa pour Android',
     },
     tv: {
-      tags: ['En développement', 'Android TV'],
+      tags: ['Disponible aujourd’hui', 'Android TV', 'Écran commun Windows'],
       title: 'AliKa TV et jeux en famille',
-      body: 'La TV devient l’écran commun de la famille : le Tableau familial affiche le profil de la famille et le dernier message familial. Chacun rejoint les jeux depuis son propre téléphone, qui sert de manette.',
-      ready: 'Sera intégré',
-      download: 'Sera téléchargeable',
+      body: 'Une Android TV ou l’écran de l’ordinateur Windows devient l’écran commun de la famille. Sur la TV, le Tableau familial affiche le profil de la famille et le dernier message familial. Chacun rejoint les jeux depuis son propre téléphone, qui sert de manette.',
+      ready: 'Inclus dans l’app',
+      download: 'Pack à part',
+      packs: 'Télécharger les packs de jeux',
       games: {
         rally: { name: 'Rallye à la vitesse de la lumière', body: 'Réponds juste et vite aux questions de classe pour prendre la tête sur l’orbite.' },
         station: { name: 'Station spatiale', body: 'Annonce les commandes à voix haute et ramène la station à bon port en équipe.' },
@@ -203,7 +204,7 @@ const fr: HomeCopy = {
     firstDay: { title: 'AliKa : réglages du premier jour', body: 'Temps quotidien, plan de la semaine, mode nuit, récompense des questions et plafond quotidien, tâches et rapport hebdomadaire.' },
     winPanel: { title: 'Panneau parent AliKa sous Windows', body: 'À quoi sert chaque onglet : règles, applis et internet, tâches, questions, rapports, sécurité et réglages.' },
     andPanel: { title: 'Panneau parent AliKa sous Android', body: 'À quoi servent la barre du bas et les menus : panneau, gestion du temps et des applis, règles, questions, rapports, appareils et profil.' },
-    homeNetwork: { title: 'Réseau familial AliKa', body: 'Ajouter les téléphones et l’ordinateur Windows au réseau familial, deuxième parent, abonnement famille et gestion des appareils depuis le téléphone parent. La partie TV de la vidéo est encore en développement.' },
+    homeNetwork: { title: 'Réseau familial AliKa', body: 'Ajouter les téléphones et l’ordinateur Windows au réseau familial, deuxième parent, abonnement famille et gestion des appareils depuis le téléphone parent.' },
     quizShort: { title: 'Plus que du temps d’écran', body: 'Votre enfant gagne du temps en plus en répondant à des questions ; c’est vous qui fixez les limites.' },
   },
   ages: {
@@ -249,14 +250,13 @@ const fr: HomeCopy = {
       'Les devoirs à moitié faits, le jeu encore ouvert. Le parent qui éteint l’écran quand le temps est écoulé passe pour le méchant, l’enfant boude, et le lendemain soir la même négociation recommence. AliKa a été conçu en pensant à ces scènes que vivent de vraies familles chaque soir, et aux problèmes de temps d’écran et de travail scolaire.',
       'Voici ce que nous avons constaté : l’interdiction éteint l’écran, mais elle ne met pas fin à la dispute. Quand l’enfant ne connaît pas la règle à l’avance, chaque coupure devient une surprise, et chaque surprise une nouvelle négociation. Les devoirs finissent par passer pour les rivaux du temps d’écran.',
       'Nous avons donc posé la question à l’envers : si l’écran fait déjà partie de la vie, peut-on le placer à côté des révisions ? Dans AliKa, la famille fixe la règle ensemble et l’enfant voit à l’avance le temps qu’il lui reste ; s’il le souhaite, il répond à des questions et gagne du temps supplémentaire dans la limite que vous fixez. C’est de là que vient « Nous ne restreignons pas. Nous planifions. »',
-      'AliKa n’est pas un produit fini. Nous continuons à le développer avec la même idée et grâce aux retours des familles. Les contenus scolaires prêts ont commencé avec le programme turc du collège (classes 5 à 8, en turc) ; les autres classes et pays sont en phase de planification.',
+      'AliKa n’est pas un produit fini. Nous continuons à le développer avec la même idée et grâce aux retours des familles. Les contenus scolaires prêts ont commencé avec le programme turc du collège (classes 5 à 8, en turc), puis sont arrivés le pack d’examens blancs LGS 2027 et des activités visuelles pour le primaire (préversion) ; les autres classes et pays sont en phase de planification.',
     ],
     signature: 'L’équipe AliKa · ErenKa Software',
     planTitle: 'Où en sommes-nous ?',
     plan: [
-      { status: 'ready', label: 'Prêt aujourd’hui', items: ['Applications Windows et Android', 'Explications de cours et questions du programme turc du collège (classes 5 à 8, en turc)', 'Ajouter vos propres questions avec Excel ou CSV'] },
-      { status: 'dev', label: 'En développement', items: ['Android TV et jeux en famille'] },
-      { status: 'plan', label: 'En phase de planification', items: ['Classes du primaire et du lycée', 'Programmes d’autres pays'] },
+      { status: 'ready', label: 'Prêt aujourd’hui', items: ['Applications Windows et Android', 'Explications de cours et questions du programme turc du collège (classes 5 à 8, en turc)', 'Pack d’examens blancs LGS 2027 (en turc)', 'Activités visuelles pour le primaire (6–10 ans, préversion)', 'Android TV, écran commun Windows et jeux en famille', 'Ajouter vos propres questions avec Excel ou CSV'] },
+      { status: 'plan', label: 'En phase de planification', items: ['Contenus du primaire et du lycée', 'Programmes d’autres pays'] },
     ],
     contentLink: 'Ouvrir la bibliothèque de contenus',
   },
@@ -282,7 +282,7 @@ const fr: HomeCopy = {
       },
       {
         q: 'Quelles matières et quels niveaux sont proposés ?',
-        a: 'Les contenus prêts existent pour l’instant pour le programme turc du collège (classes 5 à 8, en turc) : explications de cours et questions par matière, et une banque de questions mixte par classe. Les exercices de maths sont générés dans l’application. Le primaire, le lycée et les programmes d’autres pays sont en phase de planification ; en attendant, vous ajoutez vos propres questions avec le modèle Excel ou des packs de contenu.',
+        a: 'Les contenus prêts existent pour l’instant pour le programme turc du collège (classes 5 à 8, en turc) : explications de cours et questions par matière, et le pack d’examens blancs LGS 2027 pour la classe 8. Des activités visuelles sans lecture pour les 6–10 ans sont proposées en préversion. Les exercices de maths sont générés dans l’application. Les contenus du primaire et du lycée et les programmes d’autres pays sont en phase de planification ; en attendant, vous ajoutez vos propres questions avec le modèle Excel ou des packs de contenu.',
       },
       {
         q: 'AliKa surveille-t-il mon enfant en secret ?',

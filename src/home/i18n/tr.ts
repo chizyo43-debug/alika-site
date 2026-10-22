@@ -86,7 +86,7 @@ const tr: HomeCopy = {
       { value: '7–14 gün', label: 'ücretsiz deneme: Windows’ta 7, Android’de 14' },
     ],
   },
-  rail: { title: 'Platformlar', lead: 'Windows ve Android bugün hazır. TV ve aile oyunları geliştiriliyor.' },
+  rail: { title: 'Platformlar', lead: 'Windows ve Android bugün hazır. Android TV ve Windows ortak ekranda aile oyunları da hazır.' },
   platforms: {
     windows: {
       tags: ['Bugün kullanılabilir', 'Windows 10/11', 'Microsoft Store'],
@@ -101,11 +101,12 @@ const tr: HomeCopy = {
       imageAlt: 'AliKa Android çocuk ana ekranı',
     },
     tv: {
-      tags: ['Geliştiriliyor', 'Android TV'],
+      tags: ['Bugün kullanılabilir', 'Android TV', 'Windows ortak ekran'],
       title: 'AliKa TV ve aile oyunları',
-      body: 'TV ailenin ortak ekranı olur: Aile Panosu’nda aile profili ve son aile mesajı görünür. Oyunlara herkes kendi telefonundan katılır; telefon kumanda olur.',
-      ready: 'TV ile gelecek',
-      download: 'TV’de indirilecek',
+      body: 'Android TV ya da Windows bilgisayarın ekranı ailenin ortak ekranı olur. TV’deki Aile Panosu’nda aile profili ve son aile mesajı görünür. Oyunlara herkes kendi telefonundan katılır; telefon kumanda olur.',
+      ready: 'Uygulamayla gelir',
+      download: 'Ayrı paketle gelir',
+      packs: 'Oyun paketlerini indir',
       games: {
         rally: { name: 'Işık Hızı Rallisi', body: 'Ders sorularını doğru ve hızlı cevapla, yörüngede öne geç.' },
         station: { name: 'Uzay İstasyonu', body: 'Komutları sesli söyle, istasyonu ekipçe eve getir.' },
@@ -198,7 +199,7 @@ const tr: HomeCopy = {
     firstDay: { title: 'AliKa ilk gün ayarları', body: 'Günlük süre, haftalık plan, gece modu, soru ödülü ve günlük üst sınır, görevler ve haftalık rapor.' },
     winPanel: { title: 'AliKa Windows ebeveyn paneli', body: 'Panelin sekmeleri ne işe yarar: kurallar, uygulama ve internet, görevler, sorular, raporlar, güvenlik ve ayarlar.' },
     andPanel: { title: 'AliKa Android ebeveyn paneli', body: 'Alt menü ve menüler ne işe yarar: panel, zaman ve uygulama yönetimi, kurallar, sorular, raporlar, cihazlar ve profil.' },
-    homeNetwork: { title: 'AliKa ev ağı', body: 'Telefonları ve Windows bilgisayarı aile ağına ekleme, ikinci ebeveyn, aile aboneliği ve ebeveyn telefonundan cihaz yönetimi. Videodaki TV bölümü geliştirme aşamasındadır.' },
+    homeNetwork: { title: 'AliKa ev ağı', body: 'Telefonları ve Windows bilgisayarı aile ağına ekleme, ikinci ebeveyn, aile aboneliği ve ebeveyn telefonundan cihaz yönetimi.' },
     quizShort: { title: 'Ekran süresinden daha fazlası', body: 'Çocuk soru çözerek ek süre kazanır; sınırları siz koyarsınız.' },
   },
   ages: {
@@ -244,14 +245,13 @@ const tr: HomeCopy = {
       'Ödev yarım, oyun açık. Süre bitince ekranı kapatan anne baba kötü, kapatılan çocuk küskün; ertesi akşam aynı pazarlık yeniden başlar. AliKa, gerçek ailelerin her akşam yaşadığı bu sahneler, ekran süresi ve ders çalışma sorunları düşünülerek tasarlandı.',
       'Gördüğümüz şuydu: Yasak ekranı kapatıyor ama tartışmayı bitirmiyor. Çocuk kuralı önceden bilmeyince her kesinti bir sürprize, her sürpriz yeni bir pazarlığa dönüşüyor. Ders çalışmak da ekran süresinin rakibi gibi görülüyor.',
       'Biz soruyu tersinden sorduk: Ekran zaten hayatın içindeyse onu ders çalışmanın yanına koyabilir miyiz? AliKa’da kuralı aile birlikte koyar, çocuk kalan süresini önceden görür; isterse soru çözer ve sizin belirlediğiniz sınır içinde ek süre kazanır. “Kısıtlamıyoruz, planlıyoruz” sözü buradan geliyor.',
-      'AliKa bitmiş bir ürün değil. Aynı ana fikirle, ailelerden gelen geri bildirimlerle geliştirmeye devam ediyoruz. Hazır ders içeriğine Türkiye’deki ortaokul öğrencileriyle başladık; diğer sınıflar ve ülkeler plan aşamasında.',
+      'AliKa bitmiş bir ürün değil. Aynı ana fikirle, ailelerden gelen geri bildirimlerle geliştirmeye devam ediyoruz. Hazır ders içeriğine Türkiye’deki ortaokul öğrencileriyle başladık; ardından LGS 2027 deneme paketi ve ilkokul çağı için görsel etkinlikler (ön sürüm) geldi. Diğer sınıflar ve ülkeler plan aşamasında.',
     ],
     signature: 'AliKa ekibi · ErenKa Software',
     planTitle: 'Nerede duruyoruz?',
     plan: [
-      { status: 'ready', label: 'Bugün hazır', items: ['Windows ve Android uygulaması', 'Türkiye ortaokul (5–8. sınıf) konu anlatımları ve soruları', 'Kendi sorularınızı Excel ya da CSV ile ekleme'] },
-      { status: 'dev', label: 'Geliştiriliyor', items: ['Android TV ve aile oyunları'] },
-      { status: 'plan', label: 'Plan aşamasında', items: ['İlkokul ve lise sınıfları', 'Diğer ülkelerin müfredatları'] },
+      { status: 'ready', label: 'Bugün hazır', items: ['Windows ve Android uygulaması', 'Türkiye ortaokul (5–8. sınıf) konu anlatımları ve soruları', 'LGS 2027 deneme paketi', 'İlkokul görsel etkinlikleri (6–10 yaş, ön sürüm)', 'Android TV, Windows ortak ekran ve aile oyunları', 'Kendi sorularınızı Excel ya da CSV ile ekleme'] },
+      { status: 'plan', label: 'Plan aşamasında', items: ['İlkokul ve lise ders içerikleri', 'Diğer ülkelerin müfredatları'] },
     ],
     contentLink: 'İçerik kütüphanesini aç',
   },
@@ -277,7 +277,7 @@ const tr: HomeCopy = {
       },
       {
         q: 'Hangi dersler ve sınıflar var?',
-        a: 'Şu an hazır içerik Türkiye ortaokul müfredatı (5–8. sınıf) için: derslere göre konu anlatımları ve sorular ile sınıf başına karma soru bankası. Matematik alıştırma soruları uygulamanın içinde üretilir. İlkokul ve lise sınıfları ile diğer ülkelerin müfredatları plan aşamasında; bu arada kendi sorularınızı Excel şablonuyla ya da içerik paketleriyle ekleyebilirsiniz.',
+        a: 'Şu an hazır içerik Türkiye ortaokul müfredatı (5–8. sınıf) için: derslere göre konu anlatımları ve sorular ile 8. sınıf için LGS 2027 deneme paketi. 6–10 yaş için okuma gerektirmeyen görsel etkinlikler ön sürüm olarak indirilebilir. Matematik alıştırma soruları uygulamanın içinde üretilir. İlkokul ve lise ders içerikleri ile diğer ülkelerin müfredatları plan aşamasında; bu arada kendi sorularınızı Excel şablonuyla ya da içerik paketleriyle ekleyebilirsiniz.',
       },
       {
         q: 'AliKa çocuğumu gizlice izler mi?',

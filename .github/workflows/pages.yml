@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: chizyo43-debug/alika-icerik
-          ref: 46dd1bf3cbbf626d3cd75c9c23c2afffcf077fa5
+          ref: a41e18303366f55a7525759b9a729ce25221e471
           path: _content
       - uses: actions/setup-python@v5
         with:
@@ -34,12 +34,9 @@ jobs:
           cache: npm
       - name: Install site dependencies
         run: npm ci
+      # İçerik deposunun kendi kalite kapısı: ders/LGS paketleri, ilkokul görsel paketleri ve KATALOG.json.
       - name: Validate source content packages
-        shell: bash
-        run: |
-          for file in _content/turkiye/*/*/*.jsonl; do
-            python _content/tools/pack_validate.py --strict "$file"
-          done
+        run: python _content/dogrulayici/kontrol.py
       - name: Build
         run: python tools/build.py
       - name: Build home page
