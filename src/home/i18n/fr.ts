@@ -107,6 +107,7 @@ const fr: HomeCopy = {
     tv: {
       tags: ['Disponible aujourd’hui', 'Android TV', 'Écran commun Windows'],
       title: 'AliKa TV et jeux en famille',
+      imageAlt: 'AliKa TV : une question dans le Rallye à la vitesse de la lumière',
       body: 'Une Android TV ou l’écran de l’ordinateur Windows devient l’écran commun de la famille. Sur la TV, le Tableau familial affiche le profil de la famille et le dernier message familial. Chacun rejoint les jeux depuis son propre téléphone, qui sert de manette.',
       ready: 'Inclus dans l’app',
       download: 'Pack à part',

@@ -104,7 +104,7 @@ export interface HomeCopy {
   platforms: {
     windows: PlatformCopy & { imageAlt: string };
     android: PlatformCopy & { imageAlt: string };
-    tv: PlatformCopy & { ready: string; download: string; packs: string; games: Record<TvGame, NameBody> };
+    tv: PlatformCopy & { imageAlt: string; ready: string; download: string; packs: string; games: Record<TvGame, NameBody> };
   };
   audiences: {
     title: string;

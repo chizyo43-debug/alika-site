@@ -653,6 +653,13 @@ def main() -> None:
     for page in (*DIST.rglob("*.html"), *(DIST / "assets").glob("*.js")):
         if forbidden.search(page.read_text(encoding="utf-8")):
             errors.append(f"Tracker marker in {page}")
+
+    # Ziyaretçiyi GitHub deposuna götüren bağlantı ve içerik üretim yöntemi notu sitede yer almaz.
+    # (Nunito lisans metni /assets/brand/OFL.txt kendi kaynak adresini taşır; sayfa değildir.)
+    hidden_mentions = re.compile(r"(github\.com|yapay zekâ ile|prepared with AI|human-reviewed|insan incelemesinden geçtiği|insan incelemesi yapılmadı|insan incelemesi ve)", re.I)
+    for page in (*DIST.rglob("*.html"), *DIST.rglob("*.json"), *(DIST / "assets").glob("*.js")):
+        if hidden_mentions.search(page.read_text(encoding="utf-8")):
+            errors.append(f"GitHub link or AI-production note in {page}")
     analytics_summary = check_analytics(errors, token)
 
     if errors:

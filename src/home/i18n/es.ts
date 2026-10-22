@@ -107,6 +107,7 @@ const es: HomeCopy = {
     tv: {
       tags: ['Disponible hoy', 'Android TV', 'Pantalla compartida en Windows'],
       title: 'AliKa TV y juegos en familia',
+      imageAlt: 'AliKa TV: una pregunta en Rally a la velocidad de la luz',
       body: 'Una Android TV o la pantalla del ordenador Windows se convierte en la pantalla compartida de la familia. En la TV, el Tablero familiar muestra el perfil familiar y el último mensaje de la familia. Todos se unen a los juegos desde su propio móvil, que hace de mando.',
       ready: 'Incluido en la app',
       download: 'Paquete aparte',

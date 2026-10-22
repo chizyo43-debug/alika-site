@@ -107,6 +107,7 @@ const ja: HomeCopy = {
     tv: {
       tags: ['今すぐ使える', 'Android TV', 'Windows共有画面'],
       title: 'AliKa TVと家族向けゲーム',
+      imageAlt: 'AliKa TV：光速ラリーの問題画面',
       body: 'Android TVやWindowsパソコンの画面が家族の共有画面になります。テレビのファミリーボードには家族のプロフィールと最新の家族メッセージが表示されます。ゲームには各自のスマホから参加し、スマホがコントローラーになります。',
       ready: 'アプリに内蔵',
       download: '別パック',

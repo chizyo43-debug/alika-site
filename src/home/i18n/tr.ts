@@ -103,6 +103,7 @@ const tr: HomeCopy = {
     tv: {
       tags: ['Bugün kullanılabilir', 'Android TV', 'Windows ortak ekran'],
       title: 'AliKa TV ve aile oyunları',
+      imageAlt: 'AliKa TV, Işık Hızı Rallisi oyununda bir soru',
       body: 'Android TV ya da Windows bilgisayarın ekranı ailenin ortak ekranı olur. TV’deki Aile Panosu’nda aile profili ve son aile mesajı görünür. Oyunlara herkes kendi telefonundan katılır; telefon kumanda olur.',
       ready: 'Uygulamayla gelir',
       download: 'Ayrı paketle gelir',

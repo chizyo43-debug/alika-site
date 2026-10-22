@@ -107,6 +107,7 @@ const ko: HomeCopy = {
     tv: {
       tags: ['지금 이용 가능', 'Android TV', 'Windows 공유 화면'],
       title: 'AliKa TV와 가족 게임',
+      imageAlt: 'AliKa TV: 광속 랠리의 문제 화면',
       body: 'Android TV나 Windows 컴퓨터 화면이 가족의 공유 화면이 됩니다. TV의 가족 보드에는 가족 프로필과 최근 가족 메시지가 보입니다. 모두 자기 휴대폰으로 게임에 참여하고, 휴대폰이 컨트롤러가 됩니다.',
       ready: '앱에 기본 포함',
       download: '별도 패키지',

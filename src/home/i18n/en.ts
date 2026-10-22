@@ -107,6 +107,7 @@ const en: HomeCopy = {
     tv: {
       tags: ['Available today', 'Android TV', 'Windows shared screen'],
       title: 'AliKa TV and family games',
+      imageAlt: 'AliKa TV: a question in Light Speed Rally',
       body: 'An Android TV or the Windows computer’s screen becomes the family’s shared screen. On the TV, the Family Board shows the family profile and the latest family message. Everyone joins games from their own phone, which becomes the controller.',
       ready: 'Comes with the app',
       download: 'Separate pack',

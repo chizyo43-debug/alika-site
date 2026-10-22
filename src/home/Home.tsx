@@ -263,7 +263,7 @@ interface Platform {
   title: string;
   body: string;
   image?: { src: string; alt: string; shape: 'wide' | 'phone' };
-  /* Görseli olmayan kartta (TV ve ortak ekran) güncel oyun listesi gösterilir. */
+  /* TV kartında ekran görüntüsünün altında güncel oyun listesi gösterilir. */
   games?: { id: TvGame; name: string; body: string; kind: string }[];
   action?: { label: string; href: string; external?: boolean };
 }
@@ -298,6 +298,7 @@ function platforms(t: HomeCopy, lang: Lang, storeUrl: string, playUrl: string): 
       id: 'tv', tone: 'p-tv', status: 'ready', tags: tv.tags,
       title: tv.title,
       body: tv.body,
+      image: { src: '/screens/platform/tv-isik-hizi-rallisi.webp', alt: tv.imageAlt, shape: 'wide' },
       games: TV_GAMES.map((game) => ({ id: game.id, ...tv.games[game.id], kind: game.ready ? tv.ready : tv.download })),
       action: { label: tv.packs, href: `${contentPath(lang)}#oyunlar` },
     },
@@ -517,6 +518,14 @@ function StickyCta({ device, t, storeUrl, playUrl }: CtaProps) {
 }
 
 /* Platform kartları: geniş ekranda dikey kaydırma yatay kaydırmaya dönüşür, dar ekranda kaydırmalı şerit olur. */
+function PlatformShot({ image }: { image: NonNullable<Platform['image']> }) {
+  return (
+    <figure className={`pcardShot ${image.shape}`}>
+      <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+    </figure>
+  );
+}
+
 function PlatformRail({ items, t }: { items: Platform[]; t: HomeCopy }) {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -530,11 +539,32 @@ function PlatformRail({ items, t }: { items: Platform[]; t: HomeCopy }) {
     const pinned = window.matchMedia('(min-width: 861px)');
     let distance = 0;
 
+    // Sayaç, görünen alanın ortasına en yakın kartı gösterir; kaydırma oranından tahmin edilmez.
+    const nearestCard = () => {
+      const view = track.parentElement!.getBoundingClientRect();
+      const center = view.left + view.width / 2;
+      let best = 0;
+      let bestGap = Infinity;
+      Array.from(track.children).forEach((card, i) => {
+        const box = card.getBoundingClientRect();
+        const gap = Math.abs(box.left + box.width / 2 - center);
+        if (gap < bestGap) {
+          best = i;
+          bestGap = gap;
+        }
+      });
+      return best;
+    };
+
     const measure = () => {
-      if (!pinned.matches || prefersReducedMotion()) {
+      // Az hareket isteyen masaüstünde şerit sabitlenmez; telefondaki gibi yana kaydırılır (CSS: .rail.isFree).
+      const free = !pinned.matches || prefersReducedMotion();
+      section.classList.toggle('isFree', free);
+      if (free) {
         section.style.height = '';
         track.style.transform = '';
         distance = 0;
+        onTrackScroll();
         return;
       }
       distance = Math.max(0, track.scrollWidth - track.parentElement!.clientWidth);
@@ -548,15 +578,14 @@ function PlatformRail({ items, t }: { items: Platform[]; t: HomeCopy }) {
       const ratio = Math.min(1, Math.max(0, -top / distance));
       track.style.transform = `translate3d(${-ratio * distance}px,0,0)`;
       setProgress(ratio);
-      setIndex(Math.min(items.length - 1, Math.round(ratio * (items.length - 1))));
+      setIndex(nearestCard());
     };
 
     const onTrackScroll = () => {
       if (distance) return;
       const max = track.scrollWidth - track.clientWidth;
-      const ratio = max > 0 ? track.scrollLeft / max : 0;
-      setProgress(ratio);
-      setIndex(Math.min(items.length - 1, Math.round(ratio * (items.length - 1))));
+      setProgress(max > 0 ? track.scrollLeft / max : 0);
+      setIndex(nearestCard());
     };
 
     measure();
@@ -604,21 +633,19 @@ function PlatformRail({ items, t }: { items: Platform[]; t: HomeCopy }) {
                     </a>
                   )}
                 </div>
-                {item.image && (
-                  <figure className={`pcardShot ${item.image.shape}`}>
-                    <img src={item.image.src} alt={item.image.alt} loading="lazy" decoding="async" />
-                  </figure>
-                )}
+                {item.image && !item.games && <PlatformShot image={item.image} />}
                 {item.games && (
-                  <ul className="pcardGames" aria-label={t.a11y.tvGames}>
-                    {item.games.map((game) => (
-                      <li key={game.id}>
-                        <strong>{game.name}</strong>
-                        <span>{game.body}</span>
-                        <small className="mono">{game.kind}</small>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="pcardMedia">
+                    {item.image && <PlatformShot image={item.image} />}
+                    <ul className="pcardGames" aria-label={t.a11y.tvGames}>
+                      {item.games.map((game) => (
+                        <li key={game.id} title={game.body}>
+                          <strong>{game.name}</strong>
+                          <small className="mono">{game.kind}</small>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </article>
             ))}

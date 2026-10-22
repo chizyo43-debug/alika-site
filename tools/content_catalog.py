@@ -9,7 +9,6 @@ from collections import defaultdict
 from pathlib import Path
 
 
-SOURCE_REPOSITORY = "https://github.com/chizyo43-debug/alika-icerik"
 COUNTRY_NAMES = {"turkiye": "Türkiye"}
 # Sitede yalnız çalışma verisi hazır olan ders kapsamı yayımlanır: Türkiye ortaokul (5–8).
 # İlkokul görsel etkinlikleri ve oyun paketleri ders kapsamı değildir; ayrı bölümlerde sunulur.
@@ -32,7 +31,6 @@ REQUIREMENTS = {
     "primary": {"windows": "1.2.12", "android": None},
     "games": {"windows": "1.2.12", "android_tv": "in-app"},
 }
-QUALITY_DISCLOSURE = "Yapay zekâ ile üretildi ve yapay zekâ ile incelendi; insan incelemesi yapılmadı."
 FIXED_ZIP_TIME = (2026, 9, 1, 0, 0, 0)
 
 
@@ -237,9 +235,7 @@ def _write_bundle(zip_path: Path, rows: list[dict]) -> dict:
         "country": rows[0]["country"],
         "country_code": rows[0]["country_code"],
         "grade": rows[0]["grade"],
-        "source_repository": SOURCE_REPOSITORY,
         "publishable": True,
-        "quality_disclosure": QUALITY_DISCLOSURE,
         "packages": packages,
     }
     with zipfile.ZipFile(zip_path, "w") as archive:
@@ -342,8 +338,6 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
 
     catalog = {
         "schema": "alika-content-catalog/v2",
-        "source_repository": SOURCE_REPOSITORY,
-        "quality_disclosure": QUALITY_DISCLOSURE,
         "published_scope": {country: sorted(grades_set) for country, grades_set in PUBLISHED_GRADES.items()},
         "requirements": REQUIREMENTS,
         "grades": grades,

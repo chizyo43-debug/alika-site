@@ -995,6 +995,29 @@ h2 {
   will-change: transform;
 }
 
+/* Az hareket (Windows'ta animasyon efektleri kapalı) isteyen masaüstü: şerit sabitlenmez, yana kaydırılır. */
+.rail.isFree .railSticky {
+  position: static;
+  min-height: 0;
+}
+
+.rail.isFree .railViewport {
+  overflow: visible;
+}
+
+.rail.isFree .railTrack {
+  width: auto;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: max(16px, (100vw - 1200px) / 2);
+}
+
+.rail.isFree .pcard {
+  flex: none;
+  scroll-snap-align: start;
+}
+
 .pcard {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) 1.2fr;
@@ -1077,8 +1100,18 @@ h2 {
   margin-top: auto;
 }
 
+/* Sağ sütun: ekran görüntüsü; TV kartında altında oyun listesi */
+.pcardMedia {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .pcardShot {
   display: flex;
+  flex: 1;
   min-width: 0;
   min-height: 0;
   align-items: center;
@@ -1094,6 +1127,10 @@ h2 {
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3);
 }
 
+.p-tv .pcardShot img {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 .pcardShot.phone img {
   height: 100%;
   width: auto;
@@ -1104,12 +1141,12 @@ h2 {
   box-shadow: 0 24px 50px rgba(15, 26, 43, 0.3);
 }
 
-/* Geliştirilen TV kartı: ekran görüntüsü yerine güncel oyun listesi */
+/* TV kartı: ekran görüntüsünün altında güncel oyun listesi */
 .pcardGames {
   display: grid;
+  flex: none;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  align-content: center;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1117,30 +1154,24 @@ h2 {
 
 .pcardGames li {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 18px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.07);
 }
 
 .pcardGames strong {
-  font-size: 19px;
+  min-width: 0;
+  font-size: 15px;
   font-weight: 900;
-  line-height: 1.2;
-}
-
-.pcardGames span {
-  color: #b6caea;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.25;
 }
 
 .pcardGames small {
-  align-self: flex-start;
-  margin-top: auto;
+  flex: none;
   padding: 2px 9px;
   border-radius: 999px;
   background: rgba(76, 195, 255, 0.16);
@@ -2369,6 +2400,10 @@ button.videoThumb {
 
   .pcard.p-tv {
     grid-template-rows: auto auto;
+  }
+
+  .p-tv .pcardShot {
+    flex: none;
   }
 
   .peek {

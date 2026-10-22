@@ -28,15 +28,15 @@ LANGUAGE_FLAGS = {
     "pt": "🇵🇹", "ru": "🇷🇺", "ja": "🇯🇵", "ko": "🇰🇷",
 }
 CONTENT_LIBRARY_LABELS = {
-    "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "Yapay zekâ ile hazırlandı · Otomatik kontrol edildi", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf, ders ya da LGS ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
-    "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "Prepared with AI · Automatically checked", "Grade {}", "Do not extract the ZIP. Select the grade, subject or LGS ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
-    "de": ("Land", "Klasse", "Alle Fächer herunterladen", "Fach herunterladen", "Lektionen", "Fragen", "Mit KI erstellt · Automatisch geprüft", "Klasse {}", "ZIP nicht entpacken. Wählen Sie die Klassen-, Fach- oder LGS-ZIP direkt über Inhalte hinzufügen in AliKa oder legen Sie sie im vorbereiteten Ordner ab und starten Sie den Scan."),
-    "es": ("País", "Curso", "Descargar todas las asignaturas", "Descargar asignatura", "lecciones", "preguntas", "Preparado con IA · Revisado automáticamente", "Curso {}", "No extraiga el ZIP. Seleccione directamente el ZIP del curso, de la asignatura o LGS en Añadir contenido de AliKa o colóquelo en la carpeta preparada y analícela."),
-    "fr": ("Pays", "Niveau", "Télécharger toutes les matières", "Télécharger la matière", "leçons", "questions", "Préparé avec l’IA · Vérifié automatiquement", "Niveau {}", "Ne décompressez pas le ZIP. Sélectionnez le ZIP du niveau, de la matière ou LGS directement dans Ajouter du contenu d’AliKa ou placez-le dans le dossier préparé puis lancez l’analyse."),
-    "pt": ("País", "Ano", "Transferir todas as disciplinas", "Transferir disciplina", "lições", "perguntas", "Preparado com IA · Verificado automaticamente", "Ano {}", "Não extraia o ZIP. Selecione o ZIP do ano, da disciplina ou LGS diretamente em Adicionar conteúdo no AliKa ou coloque-o na pasta preparada e faça a leitura."),
-    "ru": ("Страна", "Класс", "Скачать все предметы", "Скачать предмет", "уроков", "вопросов", "Подготовлено с помощью ИИ · Проверено автоматически", "Класс {}", "Не распаковывайте ZIP. Выберите архив класса, предмета или LGS через Добавить материалы в AliKa или поместите его в подготовленную папку и запустите сканирование."),
-    "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "AIで作成・自動チェック済み", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年・教科・LGSのZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
-    "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "AI로 작성 · 자동 검사 완료", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년·과목·LGS ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
+    "tr": ("Ülke", "Sınıf", "Tüm dersleri indir", "Dersi indir", "konu anlatımı", "soru", "", "{}. sınıf", "ZIP'i çıkarmayın. AliKa'da İçerik ekle'yi açıp sınıf, ders ya da LGS ZIP dosyasını doğrudan seçin veya ZIP'i hazır klasöre koyup Hazır klasörü tara'yı kullanın."),
+    "en": ("Country", "Grade", "Download all subjects", "Download subject", "lessons", "questions", "", "Grade {}", "Do not extract the ZIP. Select the grade, subject or LGS ZIP directly from Add content in AliKa, or place it in the prepared folder and scan it."),
+    "de": ("Land", "Klasse", "Alle Fächer herunterladen", "Fach herunterladen", "Lektionen", "Fragen", "", "Klasse {}", "ZIP nicht entpacken. Wählen Sie die Klassen-, Fach- oder LGS-ZIP direkt über Inhalte hinzufügen in AliKa oder legen Sie sie im vorbereiteten Ordner ab und starten Sie den Scan."),
+    "es": ("País", "Curso", "Descargar todas las asignaturas", "Descargar asignatura", "lecciones", "preguntas", "", "Curso {}", "No extraiga el ZIP. Seleccione directamente el ZIP del curso, de la asignatura o LGS en Añadir contenido de AliKa o colóquelo en la carpeta preparada y analícela."),
+    "fr": ("Pays", "Niveau", "Télécharger toutes les matières", "Télécharger la matière", "leçons", "questions", "", "Niveau {}", "Ne décompressez pas le ZIP. Sélectionnez le ZIP du niveau, de la matière ou LGS directement dans Ajouter du contenu d’AliKa ou placez-le dans le dossier préparé puis lancez l’analyse."),
+    "pt": ("País", "Ano", "Transferir todas as disciplinas", "Transferir disciplina", "lições", "perguntas", "", "Ano {}", "Não extraia o ZIP. Selecione o ZIP do ano, da disciplina ou LGS diretamente em Adicionar conteúdo no AliKa ou coloque-o na pasta preparada e faça a leitura."),
+    "ru": ("Страна", "Класс", "Скачать все предметы", "Скачать предмет", "уроков", "вопросов", "", "Класс {}", "Не распаковывайте ZIP. Выберите архив класса, предмета или LGS через Добавить материалы в AliKa или поместите его в подготовленную папку и запустите сканирование."),
+    "ja": ("国", "学年", "全教科をダウンロード", "教科をダウンロード", "レッスン", "問題", "", "{}年生", "ZIPは展開せず、AliKaの「コンテンツを追加」から学年・教科・LGSのZIPを直接選ぶか、準備済みフォルダーに置いてスキャンしてください。"),
+    "ko": ("국가", "학년", "모든 과목 다운로드", "과목 다운로드", "수업", "문제", "", "{}학년", "ZIP을 풀지 마세요. AliKa의 콘텐츠 추가에서 학년·과목·LGS ZIP을 직접 선택하거나 준비 폴더에 넣고 스캔하세요."),
 }
 # İçerik sayfasındaki LGS, ilkokul ve oyun bölümleri. Oyun adları ana sayfadaki tv.games ile aynı;
 # Windows menü yolu uygulamanın kendi metinleri (panel.tab_library › lib.section_games › lib.add_game).
@@ -49,13 +49,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "LGS paketini indir",
         "primary_title": "İlkokul görsel etkinlikleri",
         "primary_body": "Renkli şekil kartlarıyla {} görsel soru: benzerlik, «Sıradaki ne?», «Farklı olanı bul» ve «Tabloyu tamamla». Okuma gerektirmez.",
-        "primary_note": "Ön sürüm: insan incelemesi ve çocuklarla deneme henüz yapılmadı. AliKa Windows 1.2.12 ve sonrası gerekir; yayımlanmış Android sürümü bu kartları henüz göstermiyor.",
+        "primary_note": "Ön sürüm: çocuklarla deneme henüz yapılmadı. AliKa Windows 1.2.12 ve sonrası gerekir; yayımlanmış Android sürümü bu kartları henüz göstermiyor.",
         "primary_download": "Etkinlik paketini indir",
         "age": "{}–{} yaş",
         "games_title": "Ortak ekran oyun paketleri",
         "games_body": "Çarkıfelek ve İsim Şehir için dokuz dilde, dört yaş grubunda ayrı paketler. Ortak ekranda oynanır; herkes kendi telefonundan katılır.",
         "games_install": "Windows’ta paketi Kütüphane › Oyunlar › Oyun ekle ile kurun (AliKa Windows 1.2.12 ve sonrası). Android TV bu paketleri uygulamanın içinden indirir.",
-        "games_note": "Oyun içerikleri yapay zekâ ile hazırlandı; insan incelemesinden geçtiği iddia edilmez.",
         "words": "{} bulmaca",
         "rounds": "{} tur",
         "other_langs": "Diğer diller",
@@ -70,13 +69,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "Download LGS pack",
         "primary_title": "Primary visual activities",
         "primary_body": "{} visual questions with coloured shape cards: similarity, “What comes next?”, “Find the odd one out” and “Complete the grid”. No reading needed.",
-        "primary_note": "Preview: not yet human-reviewed or tried with children. Needs AliKa Windows 1.2.12 or later; the released Android version cannot show these cards yet.",
+        "primary_note": "Preview: not yet tried with children. Needs AliKa Windows 1.2.12 or later; the released Android version cannot show these cards yet.",
         "primary_download": "Download activity pack",
         "age": "Ages {}–{}",
         "games_title": "Shared-screen game packs",
         "games_body": "Separate packs for Word Wheel and Name, Place, Animal in nine languages and four age groups. Played on the shared screen; everyone joins from their own phone.",
         "games_install": "On Windows, install a pack via Library › Games › Add game (AliKa Windows 1.2.12 or later). Android TV downloads these packs inside the app.",
-        "games_note": "Game content was prepared with AI; it is not claimed to be human-reviewed.",
         "words": "{} puzzles",
         "rounds": "{} rounds",
         "other_langs": "Other languages",
@@ -91,13 +89,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "LGS-Paket herunterladen",
         "primary_title": "Visuelle Übungen für die Grundschule",
         "primary_body": "{} visuelle Fragen mit farbigen Formkarten: Ähnlichkeit, „Was kommt als Nächstes?“, „Was passt nicht?“ und „Ergänze die Tabelle“. Lesen ist nicht nötig.",
-        "primary_note": "Vorabversion: noch nicht von Menschen geprüft oder mit Kindern erprobt. Erfordert AliKa Windows 1.2.12 oder neuer; die veröffentlichte Android-Version zeigt diese Karten noch nicht.",
+        "primary_note": "Vorabversion: noch nicht mit Kindern erprobt. Erfordert AliKa Windows 1.2.12 oder neuer; die veröffentlichte Android-Version zeigt diese Karten noch nicht.",
         "primary_download": "Übungspaket herunterladen",
         "age": "{}–{} Jahre",
         "games_title": "Spielpakete für den gemeinsamen Bildschirm",
         "games_body": "Eigene Pakete für Worträtsel-Rad und Stadt, Land, Fluss in neun Sprachen und vier Altersgruppen. Gespielt wird auf dem gemeinsamen Bildschirm; alle machen mit dem eigenen Handy mit.",
         "games_install": "Unter Windows ein Paket über Bibliothek › Spiele › Spiel hinzufügen installieren (AliKa Windows 1.2.12 oder neuer). Android TV lädt diese Pakete in der App herunter.",
-        "games_note": "Die Spielinhalte wurden mit KI erstellt; eine menschliche Prüfung wird nicht behauptet.",
         "words": "{} Rätsel",
         "rounds": "{} Runden",
         "other_langs": "Weitere Sprachen",
@@ -112,13 +109,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "Descargar paquete LGS",
         "primary_title": "Actividades visuales de primaria",
         "primary_body": "{} preguntas visuales con tarjetas de formas de colores: semejanza, «¿Qué sigue?», «Encuentra el diferente» y «Completa la tabla». No hace falta leer.",
-        "primary_note": "Versión preliminar: aún sin revisión humana ni prueba con niños. Requiere AliKa Windows 1.2.12 o posterior; la versión publicada de Android aún no muestra estas tarjetas.",
+        "primary_note": "Versión preliminar: aún sin prueba con niños. Requiere AliKa Windows 1.2.12 o posterior; la versión publicada de Android aún no muestra estas tarjetas.",
         "primary_download": "Descargar paquete de actividades",
         "age": "{}–{} años",
         "games_title": "Paquetes de juegos para la pantalla compartida",
         "games_body": "Paquetes separados de Ruleta de palabras y Stop (Basta) en nueve idiomas y cuatro grupos de edad. Se juega en la pantalla compartida; cada uno participa desde su móvil.",
         "games_install": "En Windows, instale un paquete en Biblioteca › Juegos › Añadir juego (AliKa Windows 1.2.12 o posterior). Android TV descarga estos paquetes dentro de la app.",
-        "games_note": "El contenido de los juegos se preparó con IA; no se afirma que lo haya revisado una persona.",
         "words": "{} acertijos",
         "rounds": "{} rondas",
         "other_langs": "Otros idiomas",
@@ -133,13 +129,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "Télécharger le pack LGS",
         "primary_title": "Activités visuelles pour le primaire",
         "primary_body": "{} questions visuelles avec des cartes de formes colorées : ressemblance, « Et ensuite ? », « Trouve l’intrus » et « Complète le tableau ». Aucune lecture nécessaire.",
-        "primary_note": "Préversion : pas encore relue par une personne ni testée avec des enfants. Nécessite AliKa Windows 1.2.12 ou version ultérieure ; la version Android publiée n’affiche pas encore ces cartes.",
+        "primary_note": "Préversion : pas encore testée avec des enfants. Nécessite AliKa Windows 1.2.12 ou version ultérieure ; la version Android publiée n’affiche pas encore ces cartes.",
         "primary_download": "Télécharger le pack d’activités",
         "age": "{}–{} ans",
         "games_title": "Packs de jeux pour l’écran commun",
         "games_body": "Des packs distincts pour Roue des mots et Petit bac, en neuf langues et quatre tranches d’âge. On joue sur l’écran commun ; chacun participe depuis son téléphone.",
         "games_install": "Sous Windows, installez un pack via Bibliothèque › Jeux › Ajouter un jeu (AliKa Windows 1.2.12 ou version ultérieure). Android TV télécharge ces packs dans l’application.",
-        "games_note": "Le contenu des jeux a été préparé avec l’IA ; aucune relecture humaine n’est revendiquée.",
         "words": "{} énigmes",
         "rounds": "{} manches",
         "other_langs": "Autres langues",
@@ -154,13 +149,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "Transferir pacote LGS",
         "primary_title": "Atividades visuais do 1.º ciclo",
         "primary_body": "{} perguntas visuais com cartões de formas coloridas: semelhança, «O que vem a seguir?», «Encontra o diferente» e «Completa a tabela». Não é preciso ler.",
-        "primary_note": "Pré-visualização: ainda sem revisão humana nem teste com crianças. Requer AliKa Windows 1.2.12 ou posterior; a versão Android publicada ainda não mostra estes cartões.",
+        "primary_note": "Pré-visualização: ainda sem teste com crianças. Requer AliKa Windows 1.2.12 ou posterior; a versão Android publicada ainda não mostra estes cartões.",
         "primary_download": "Transferir pacote de atividades",
         "age": "{}–{} anos",
         "games_title": "Pacotes de jogos para o ecrã partilhado",
         "games_body": "Pacotes separados de Roda das palavras e Stop (Adedonha) em nove línguas e quatro faixas etárias. Joga-se no ecrã partilhado; cada um participa a partir do seu telemóvel.",
         "games_install": "No Windows, instale um pacote em Biblioteca › Jogos › Adicionar jogo (AliKa Windows 1.2.12 ou posterior). O Android TV transfere estes pacotes dentro da app.",
-        "games_note": "O conteúdo dos jogos foi preparado com IA; não se afirma revisão humana.",
         "words": "{} enigmas",
         "rounds": "{} rondas",
         "other_langs": "Outras línguas",
@@ -175,13 +169,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "Скачать пакет LGS",
         "primary_title": "Визуальные задания для начальной школы",
         "primary_body": "{} визуальных вопросов с цветными карточками фигур: сходство, «Что дальше?», «Найди лишнее» и «Заполни таблицу». Читать не нужно.",
-        "primary_note": "Предварительная версия: ещё не проверена человеком и не опробована с детьми. Нужна AliKa для Windows 1.2.12 или новее; опубликованная версия для Android пока не показывает эти карточки.",
+        "primary_note": "Предварительная версия: ещё не опробована с детьми. Нужна AliKa для Windows 1.2.12 или новее; опубликованная версия для Android пока не показывает эти карточки.",
         "primary_download": "Скачать пакет заданий",
         "age": "{}–{} лет",
         "games_title": "Игровые пакеты для общего экрана",
         "games_body": "Отдельные пакеты игр «Колесо слов» и «Имя, город, животное» на девяти языках для четырёх возрастных групп. Играют на общем экране; каждый подключается со своего телефона.",
         "games_install": "В Windows установите пакет через Библиотека › Игры › Добавить игру (AliKa для Windows 1.2.12 или новее). Android TV скачивает эти пакеты внутри приложения.",
-        "games_note": "Игровые материалы подготовлены с помощью ИИ; проверка человеком не заявляется.",
         "words": "{} загадок",
         "rounds": "{} раундов",
         "other_langs": "Другие языки",
@@ -196,13 +189,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "LGSパックをダウンロード",
         "primary_title": "小学生向けビジュアル課題",
         "primary_body": "色付きの図形カードを使った{}問のビジュアル問題：似ているもの、「次は何？」、「仲間はずれを探そう」、「表を完成させよう」。文字を読む必要はありません。",
-        "primary_note": "プレビュー版：人による確認や子どもとの試用はまだです。AliKa Windows 1.2.12 以降が必要です。公開中のAndroid版はまだこのカードを表示できません。",
+        "primary_note": "プレビュー版：子どもとの試用はまだです。AliKa Windows 1.2.12 以降が必要です。公開中のAndroid版はまだこのカードを表示できません。",
         "primary_download": "課題パックをダウンロード",
         "age": "{}〜{}歳",
         "games_title": "共有画面用ゲームパック",
         "games_body": "ことばのルーレットと名前・都市・動物を、9言語・4つの年齢グループ別のパックで用意しています。共有画面で遊び、みんな自分のスマホから参加します。",
         "games_install": "Windowsでは ライブラリ › ゲーム › ゲームを追加 からパックをインストールします（AliKa Windows 1.2.12 以降）。Android TV はアプリ内でこれらのパックをダウンロードします。",
-        "games_note": "ゲームの内容はAIで作成しました。人による確認済みとはしていません。",
         "words": "{}問",
         "rounds": "{}ラウンド",
         "other_langs": "ほかの言語",
@@ -217,13 +209,12 @@ CONTENT_SECTION_LABELS = {
         "lgs_download": "LGS 패키지 다운로드",
         "primary_title": "초등 시각 활동",
         "primary_body": "색깔 도형 카드로 된 시각 문항 {}개: 닮은 것 찾기, ‘다음은 무엇일까?’, ‘다른 하나 찾기’, ‘표 완성하기’. 글을 읽지 않아도 됩니다.",
-        "primary_note": "미리보기: 아직 사람의 검토와 아이들과의 시험 사용을 거치지 않았습니다. AliKa Windows 1.2.12 이상이 필요하며, 출시된 Android 버전은 아직 이 카드를 표시하지 못합니다.",
+        "primary_note": "미리보기: 아직 아이들과의 시험 사용을 거치지 않았습니다. AliKa Windows 1.2.12 이상이 필요하며, 출시된 Android 버전은 아직 이 카드를 표시하지 못합니다.",
         "primary_download": "활동 패키지 다운로드",
         "age": "{}~{}세",
         "games_title": "공유 화면 게임 패키지",
         "games_body": "낱말 돌림판과 이름·도시·동물을 9개 언어, 4개 연령대별 패키지로 제공합니다. 공유 화면에서 하고, 모두 자기 휴대폰으로 참여합니다.",
         "games_install": "Windows에서는 서재 › 게임 › 게임 추가로 패키지를 설치하세요(AliKa Windows 1.2.12 이상). Android TV는 앱 안에서 이 패키지를 내려받습니다.",
-        "games_note": "게임 콘텐츠는 AI로 작성했으며, 사람이 검토했다고 주장하지 않습니다.",
         "words": "{}문제",
         "rounds": "{}라운드",
         "other_langs": "다른 언어",
@@ -246,18 +237,6 @@ CONTENT_SCOPE_LABELS = {
     "ru": ("Сейчас доступно:", "Объяснения тем и вопросы по турецкой программе средней школы (5–8 классы, на турецком языке), пакет пробных экзаменов LGS 2027, визуальные задания для начальной школы (6–10 лет) и игровые пакеты для общего экрана.", "На этапе планирования:", "Предметные материалы для начальной и старшей школы и программы других стран.", "предметов"),
     "ja": ("現在提供中：", "トルコの中学校課程（5〜8年生、トルコ語）の単元解説と問題、LGS 2027 模擬試験パック、小学生向けビジュアル課題（6〜10歳）、共有画面用ゲームパック。", "計画段階：", "小学校・高校の教科コンテンツと、ほかの国のカリキュラム。", "教科"),
     "ko": ("현재 제공:", "튀르키예 중학교 과정(5~8학년, 튀르키예어)의 단원 설명과 문제, LGS 2027 모의고사 패키지, 초등 시각 활동(6~10세), 공유 화면 게임 패키지.", "계획 단계:", "초등학교·고등학교 과목 콘텐츠와 다른 나라 교육과정.", "과목"),
-}
-# İçerik sayfasının altındaki kalite notu (her dilde; katalog JSON alanı makine içindir).
-CONTENT_QUALITY_NOTES = {
-    "tr": "İçerik yapay zekâ ile hazırlandı ve otomatik kontrollerden geçti; insan incelemesinden geçtiği iddia edilmez. Hata görürseniz bize yazın.",
-    "en": "Content was prepared with AI and passed automated checks; it is not claimed to be human-reviewed. If you spot a mistake, tell us.",
-    "de": "Die Inhalte wurden mit KI erstellt und automatisch geprüft; eine menschliche Prüfung wird nicht behauptet. Fehler gefunden? Schreiben Sie uns.",
-    "es": "El contenido se preparó con IA y pasó comprobaciones automáticas; no se afirma que lo haya revisado una persona. Si ve un error, escríbanos.",
-    "fr": "Les contenus ont été préparés avec l’IA et vérifiés automatiquement ; aucune relecture humaine n’est revendiquée. Une erreur ? Écrivez-nous.",
-    "pt": "O conteúdo foi preparado com IA e passou por verificações automáticas; não se afirma revisão humana. Encontrou um erro? Escreva-nos.",
-    "ru": "Материалы подготовлены с помощью ИИ и прошли автоматическую проверку; проверка человеком не заявляется. Нашли ошибку? Напишите нам.",
-    "ja": "教材はAIで作成し、自動チェックを通過しています。人による確認済みとはしていません。誤りを見つけたらお知らせください。",
-    "ko": "콘텐츠는 AI로 작성되었고 자동 검사를 통과했습니다. 사람이 검토했다고 주장하지 않습니다. 오류를 발견하면 알려주세요.",
 }
 THOUSANDS_SEPARATORS = {"tr": ".", "de": ".", "es": ".", "pt": ".", "fr": "\u202f", "ru": "\u00a0"}
 CONTENT_BOOK_LABELS = {
@@ -1701,7 +1680,6 @@ def content_games(catalog: dict, lang: str) -> str:
           <p class="honesty-note">{esc(section['games_install'])}</p>
         </div>
         <div class="game-pack-grid">{"".join(cards)}</div>
-        <p class="honesty-note">{esc(section['games_note'])}</p>
       </section>"""
 
 
@@ -1737,7 +1715,7 @@ def content_library(catalog: dict, lang: str) -> str:
       <article class="grade-download-card" data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
         <div><small>{esc(row['country'])} · {esc(labels[7].format(row['grade']))}</small>
           <h3>{row['subject_count']} {esc(scope[4])} · {format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}</h3>
-          <p>{esc(labels[6])}</p></div>
+          </div>
         <a class="button direct-download" href="{esc(row['download_url'])}" download="{esc(download_name(row))}"
            data-direct-download>{esc(labels[2])}</a>
       </article>""" for row in catalog["grades"])
@@ -1745,7 +1723,7 @@ def content_library(catalog: dict, lang: str) -> str:
       <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
         <small>{esc(row['country_code'])} · {esc(labels[7].format(row['grade']))}</small>
         <h3>{esc(row['subject'])}</h3>
-        <p>{format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}<br>{esc(labels[6])}</p>
+        <p>{format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}</p>
         <a class="package-cta" href="{esc(row['download_url'])}" download="{esc(download_name(row))}">{esc(labels[3])}</a>
         {content_package_list(row['packages'], lang, section['packages'].format(len(row['packages'])))}
       </article>""" for row in catalog["subjects"])
@@ -1759,7 +1737,7 @@ def content_library(catalog: dict, lang: str) -> str:
         <article class="grade-download-card">
           <div><small>{esc(labels[7].format(lgs['grade']))} · LGS 2027</small>
             <h3>{len(lgs['packages'])} {esc(scope[4])} · {format_count(lgs['questions'], lang)} {esc(labels[5])}</h3>
-            <p>{esc(labels[6])}</p></div>
+            </div>
           <a class="button direct-download" href="{esc(lgs['download_url'])}" download="{esc(download_name(lgs))}" data-direct-download>{esc(section['lgs_download'])}</a>
         </article>
         {content_package_list(lgs['packages'], lang, section['packages'].format(len(lgs['packages'])), "subject")}
@@ -1793,7 +1771,6 @@ def content_library(catalog: dict, lang: str) -> str:
       {lgs_section}
       {primary_section}
       {content_games(catalog, lang)}
-      <p class="honesty-note">{esc(CONTENT_QUALITY_NOTES[lang])} · <a href="{esc(catalog['source_repository'])}">GitHub</a></p>
     """
 
 
