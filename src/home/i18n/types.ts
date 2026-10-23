@@ -11,7 +11,7 @@ export type ControlFeature = 'dailyTime' | 'appRules' | 'webFilter' | 'reports' 
 export type LearningFeature = 'quiz' | 'content' | 'figures' | 'exam' | 'notes';
 export type FamilyFeature = 'tasks' | 'network' | 'messages' | 'sharedPhone';
 export type TvGame = 'rally' | 'station' | 'wheel' | 'nameCity';
-export type VideoKey = 'winSetup' | 'androidSetup' | 'ad' | 'firstDay' | 'winPanel' | 'andPanel' | 'homeNetwork' | 'quizShort';
+export type VideoKey = 'winSetup' | 'androidSetup' | 'ad' | 'firstDay' | 'winPanel' | 'andPanel' | 'homeNetwork' | 'addContent' | 'lgs' | 'quizShort';
 export type PlanStatus = 'ready' | 'dev' | 'plan';
 /* src/data/social.json içindeki hesapların kimlikleri (aynı sıra). */
 export type SocialId = 'instagram' | 'facebook' | 'x' | 'youtube' | 'linkedin';

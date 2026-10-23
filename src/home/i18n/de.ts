@@ -206,6 +206,8 @@ const de: HomeCopy = {
     winPanel: { title: 'AliKa-Elternpanel unter Windows', body: 'Wofür jeder Reiter da ist: Regeln, Apps und Internet, Aufgaben, Fragen, Berichte, Sicherheit und Einstellungen.' },
     andPanel: { title: 'AliKa-Elternpanel unter Android', body: 'Wofür die untere Leiste und die Menüs da sind: Übersicht, Zeit- und App-Verwaltung, Regeln, Fragen, Berichte, Geräte und Profil.' },
     homeNetwork: { title: 'AliKa-Familiennetz', body: 'Handys und den Windows-Computer ins Familiennetz aufnehmen, zweiter Elternteil, Familienabo und Geräteverwaltung vom Elternhandy aus.' },
+    addContent: { title: 'Inhalte zu AliKa hinzufügen', body: 'Fach-, LGS-, Grundschul- und Spielpakete auf der Inhaltsseite herunterladen, im Windows-Elternpanel hinzufügen und freigeben.' },
+    lgs: { title: 'LGS-Probe zu Hause', body: 'Das LGS-2027-Probeprüfungspaket: sprachliche und mathematische Sitzung, fünf Probeprüfungen und 450 eigene Fragen, Ergebnisse nach Fach und Einheit.' },
     quizShort: { title: 'Mehr als Bildschirmzeit', body: 'Ihr Kind verdient mit Fragen Zusatzzeit; die Grenzen legen Sie fest.' },
   },
   ages: {

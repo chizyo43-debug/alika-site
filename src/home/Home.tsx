@@ -305,7 +305,7 @@ function platforms(t: HomeCopy, lang: Lang, storeUrl: string, playUrl: string): 
   ];
 }
 
-/* Kanaldaki güncel videoların (19.10.2026, Türkçe) aynı dosyaları sitede barındırılır ve sayfada oynar.
+/* Kanaldaki güncel videoların (23.10.2026, Türkçe) aynı dosyaları sitede barındırılır ve sayfada oynar.
    `file` uzantısız yoldur: .mp4 video, .webp kapak, .tr.vtt Türkçe altyazı. Reklamın dikey eşi
    (`verticalFile`) telefon genişliğinde ve telefon ekranı penceresinde oynar; Shorts videosu yalnız dikeydir. */
 const YOUTUBE_CHANNEL_URL = SOCIAL_PROFILES.find((profile) => profile.id === 'youtube')!.url;
@@ -328,6 +328,8 @@ const VIDEOS: VideoItem[] = [
   { key: 'andPanel', platform: 'Android', duration: '2:19', file: '/videos/kurulum/android-ebeveyn-paneli' },
   { key: 'firstDay', platform: 'Android / Windows', duration: '2:06', file: '/videos/kurulum/ilk-gun-ayarlari' },
   { key: 'homeNetwork', platform: 'Android / Windows', duration: '3:43', file: '/videos/kurulum/ev-agi' },
+  { key: 'addContent', platform: 'Windows', duration: '2:05', file: '/videos/kurulum/icerik-ekleme' },
+  { key: 'lgs', platform: 'Windows', duration: '0:45', file: '/videos/kurulum/lgs-denemesi' },
 ];
 /* Kartlarda olmayanlar: reklam açılıştaki tanıtım videosudur ve soru çözme ekranlarında oynar;
    kısa dikey video Android ödül kuralı ekranında oynar. */

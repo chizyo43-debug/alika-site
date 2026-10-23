@@ -206,6 +206,8 @@ const en: HomeCopy = {
     winPanel: { title: 'AliKa Windows parent panel', body: 'What each tab does: rules, apps and internet, tasks, questions, reports, security and settings.' },
     andPanel: { title: 'AliKa Android parent panel', body: 'What the bottom bar and menus do: panel, time and app management, rules, questions, reports, devices and profile.' },
     homeNetwork: { title: 'AliKa family network', body: 'Adding phones and the Windows computer to the family network, a second parent, the family subscription and managing devices from the parent phone.' },
+    addContent: { title: 'Adding content to AliKa', body: 'Downloading subject, LGS, primary and game packs from the Content page, then adding and enabling them in the Windows parent panel.' },
+    lgs: { title: 'LGS practice at home', body: 'The LGS 2027 practice exam pack: verbal and numerical sessions, five practice exams and 450 original questions, with results by subject and unit.' },
     quizShort: { title: 'More than screen time', body: 'Your child earns extra time by answering questions; you set the limits.' },
   },
   ages: {

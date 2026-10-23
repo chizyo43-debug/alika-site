@@ -42,6 +42,11 @@ CONTENT_LIBRARY_LABELS = {
 # Windows menü yolu uygulamanın kendi metinleri (panel.tab_library › lib.section_games › lib.add_game).
 CONTENT_SECTION_LABELS = {
     "tr": {
+        "tr_name": "Türkçe",
+        "lgs_video": "LGS deneme paketi tanıtımı",
+        "howto_title": "İçerik nasıl eklenir?",
+        "howto_body": "Ders, LGS, ilkokul ve oyun paketlerini indirip Windows ebeveyn panelinden AliKa’ya ekleme ve kullanıma açma adımları.",
+        "video_lang": "",
         "packages": "Paketleri tek tek indir ({})",
         "requirements": "Ders ve LGS paketleri AliKa Windows 1.2.12 ve Android 0.3.11 ya da sonraki sürümlerini gerektirir.",
         "lgs_title": "LGS 2027 deneme paketi",
@@ -62,6 +67,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("İsim Şehir", "Klasik oyun ortak ekranda; her yaş grubuna ayrı sürüm."),
     },
     "en": {
+        "tr_name": "Turkish",
+        "lgs_video": "LGS practice exam pack introduction",
+        "howto_title": "How do I add content?",
+        "howto_body": "Steps for downloading subject, LGS, primary and game packs and adding and enabling them in the AliKa Windows parent panel.",
+        "video_lang": "The video is in Turkish.",
         "packages": "Download packs one by one ({})",
         "requirements": "Subject and LGS packs need AliKa Windows 1.2.12 and Android 0.3.11 or later.",
         "lgs_title": "LGS 2027 practice exam pack",
@@ -82,6 +92,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("Name, Place, Animal", "The classic word game on the shared screen; a separate version for each age group."),
     },
     "de": {
+        "tr_name": "Türkisch",
+        "lgs_video": "Vorstellung des LGS-Probeprüfungspakets",
+        "howto_title": "Wie füge ich Inhalte hinzu?",
+        "howto_body": "Schritte zum Herunterladen von Fach-, LGS-, Grundschul- und Spielpaketen und zum Hinzufügen und Freigeben im AliKa-Elternpanel unter Windows.",
+        "video_lang": "Das Video ist auf Türkisch.",
         "packages": "Pakete einzeln herunterladen ({})",
         "requirements": "Fach- und LGS-Pakete erfordern AliKa Windows 1.2.12 und Android 0.3.11 oder neuer.",
         "lgs_title": "LGS-2027-Probeprüfungspaket",
@@ -102,6 +117,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("Stadt, Land, Fluss", "Der Klassiker auf dem gemeinsamen Bildschirm; eine eigene Version für jede Altersgruppe."),
     },
     "es": {
+        "tr_name": "Turco",
+        "lgs_video": "Presentación del paquete de exámenes LGS",
+        "howto_title": "¿Cómo se añade contenido?",
+        "howto_body": "Pasos para descargar paquetes de asignaturas, LGS, primaria y juegos, y añadirlos y activarlos en el panel de padres de AliKa en Windows.",
+        "video_lang": "El vídeo está en turco.",
         "packages": "Descargar los paquetes uno a uno ({})",
         "requirements": "Los paquetes de asignatura y LGS requieren AliKa Windows 1.2.12 y Android 0.3.11 o posterior.",
         "lgs_title": "Paquete de exámenes de práctica LGS 2027",
@@ -122,6 +142,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("Stop (Basta)", "El juego clásico en la pantalla compartida; una versión distinta para cada edad."),
     },
     "fr": {
+        "tr_name": "Turc",
+        "lgs_video": "Présentation du pack d’examens blancs LGS",
+        "howto_title": "Comment ajouter des contenus ?",
+        "howto_body": "Les étapes pour télécharger les packs de matières, LGS, primaire et jeux, puis les ajouter et les activer dans le panneau parent AliKa sous Windows.",
+        "video_lang": "La vidéo est en turc.",
         "packages": "Télécharger les packs un par un ({})",
         "requirements": "Les packs de matière et LGS nécessitent AliKa Windows 1.2.12 et Android 0.3.11 ou version ultérieure.",
         "lgs_title": "Pack d’examens blancs LGS 2027",
@@ -142,6 +167,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("Petit bac", "Le jeu classique sur l’écran commun ; une version pour chaque tranche d’âge."),
     },
     "pt": {
+        "tr_name": "Turco",
+        "lgs_video": "Apresentação do pacote de simulados LGS",
+        "howto_title": "Como adicionar conteúdo?",
+        "howto_body": "Passos para baixar pacotes de matérias, LGS, anos iniciais e jogos, e adicioná-los e ativá-los no painel do responsável do AliKa no Windows.",
+        "video_lang": "O vídeo está em turco.",
         "packages": "Transferir os pacotes um a um ({})",
         "requirements": "Os pacotes de disciplina e LGS exigem AliKa Windows 1.2.12 e Android 0.3.11 ou posterior.",
         "lgs_title": "Pacote de exames de treino LGS 2027",
@@ -162,6 +192,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("Stop (Adedonha)", "O jogo clássico no ecrã partilhado; uma versão para cada faixa etária."),
     },
     "ru": {
+        "tr_name": "Турецкий",
+        "lgs_video": "Знакомство с пакетом пробных экзаменов LGS",
+        "howto_title": "Как добавить материалы?",
+        "howto_body": "Как скачать пакеты по предметам, LGS, для начальной школы и игр, затем добавить и включить их в родительской панели AliKa в Windows.",
+        "video_lang": "Видео на турецком языке.",
         "packages": "Скачать пакеты по одному ({})",
         "requirements": "Для пакетов предметов и LGS нужны AliKa для Windows 1.2.12 и Android 0.3.11 или новее.",
         "lgs_title": "Пакет пробных экзаменов LGS 2027",
@@ -182,6 +217,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("Имя, город, животное", "Классическая игра на общем экране; своя версия для каждого возраста."),
     },
     "ja": {
+        "tr_name": "トルコ語",
+        "lgs_video": "LGS 模擬試験パックの紹介",
+        "howto_title": "教材の追加方法",
+        "howto_body": "教科・LGS・小学生向け・ゲームのパックをダウンロードし、AliKa の Windows 保護者パネルで追加して有効にする手順。",
+        "video_lang": "動画はトルコ語です。",
         "packages": "パッケージを個別にダウンロード（{}）",
         "requirements": "教科パックとLGSパックには AliKa Windows 1.2.12 以降と Android 0.3.11 以降が必要です。",
         "lgs_title": "LGS 2027 模擬試験パック",
@@ -202,6 +242,11 @@ CONTENT_SECTION_LABELS = {
         "name-city": ("名前・都市・動物", "おなじみの言葉遊びを共有画面で。年齢グループごとに別バージョン。"),
     },
     "ko": {
+        "tr_name": "튀르키예어",
+        "lgs_video": "LGS 모의고사 패키지 소개",
+        "howto_title": "콘텐츠는 어떻게 추가하나요?",
+        "howto_body": "과목·LGS·초등·게임 패키지를 내려받아 AliKa Windows 보호자 패널에서 추가하고 사용하도록 여는 단계.",
+        "video_lang": "영상은 튀르키예어입니다.",
         "packages": "패키지 개별 다운로드 ({})",
         "requirements": "과목 및 LGS 패키지는 AliKa Windows 1.2.12 및 Android 0.3.11 이상이 필요합니다.",
         "lgs_title": "LGS 2027 모의고사 패키지",
@@ -290,6 +335,11 @@ GUIDES = (
         "updated": ("2026-10-21", "21 Ekim 2026"),
         "campaign_id": "site_rehber_15yas_tr",
         "platform": "both",
+        "video": "15-yas-sosyal-medya",
+        "video_heading": "Rehberin video özeti",
+        "video_label": "1 Kasım’da ne değişiyor? Ebeveynler için 5 soru · 2:53",
+        "video_short": "15-yas-bosalan-saatler",
+        "video_short_label": "Boşalan saatleri planlayın · 0:19",
         "eyebrow": "Gündem · Ebeveynler için sade rehber",
         "title": "15 Yaş Altı Sosyal Medya Düzenlemesi: 1 Kasım’da Ne Değişiyor?",
         "description": "15 yaş altına sosyal medya düzenlemesi 1 Kasım 2026’da başlıyor. e-Devlet ile yaş doğrulama, 15–18 yaş hesapları, 31 Mart 2027 tarihi ve ailelerin yapabilecekleri.",
@@ -1360,10 +1410,21 @@ def guide_article_body(guide: dict) -> str:
     # Video dosyası sitede durur ve sayfada oynar; tıklanana kadar yalnız kapak görseli yüklenir.
     video = f'/videos/kurulum/{guide["video"]}' if guide.get("video") else ""
     video_note = f'<span>{esc(guide["video_note"])}</span>' if guide.get("video_note") else ""
+    short = f'/videos/kurulum/{guide["video_short"]}' if guide.get("video_short") else ""
+    short_player = (
+        f'<figure class="guide-video-short"><video controls preload="none" playsinline poster="{short}.webp" aria-label="{esc(guide["video_short_label"])}">'
+        f'<source src="{short}.mp4" type="video/mp4"><track kind="captions" src="{short}.tr.vtt" srclang="tr" label="Türkçe"></video>'
+        f'<figcaption>{esc(guide["video_short_label"])}</figcaption></figure>'
+        if short else ""
+    )
+    player = (
+        f'<video controls preload="none" playsinline poster="{video}.webp" aria-label="{esc(guide["video_label"])}"><source src="{video}.mp4" type="video/mp4">'
+        f'<track kind="captions" src="{video}.tr.vtt" srclang="tr" label="Türkçe"></video>'
+    )
     video_aside = (
-        f'<aside class="guide-video"><div><strong>Gerçek ürün akışını izleyin</strong><span>{esc(guide["video_label"])}</span>{video_note}</div>'
-        f'<video controls preload="none" playsinline poster="{video}.webp"><source src="{video}.mp4" type="video/mp4">'
-        f'<track kind="captions" src="{video}.tr.vtt" srclang="tr" label="Türkçe"></video></aside>'
+        f'<aside class="guide-video"><div><strong>{esc(guide.get("video_heading", "Gerçek ürün akışını izleyin"))}</strong><span>{esc(guide["video_label"])}</span>{video_note}</div>'
+        + (f'<div class="guide-video-pair">{player}{short_player}</div>' if short else player)
+        + "</aside>"
         if video else ""
     )
     # İki platformda geçerli rehber: Android notu ve Play düğmesi.
@@ -1683,6 +1744,17 @@ def content_games(catalog: dict, lang: str) -> str:
       </section>"""
 
 
+def content_video(name: str, label: str, lang: str, extra_class: str = "") -> str:
+    """Kanal videosunun sitedeki dosyası; tıklanana kadar yalnız kapak yüklenir, YouTube'a bağlanılmaz."""
+    file = f"/videos/kurulum/{name}"
+    track_label = CONTENT_SECTION_LABELS[lang]["tr_name"]
+    return (
+        f'<video class="content-video{extra_class}" controls preload="none" playsinline poster="{file}.webp" aria-label="{esc(label)}">'
+        f'<source src="{file}.mp4" type="video/mp4">'
+        f'<track kind="captions" src="{file}.tr.vtt" srclang="tr" label="{esc(track_label)}"></video>'
+    )
+
+
 def content_library(catalog: dict, lang: str) -> str:
     labels = CONTENT_LIBRARY_LABELS[lang]
     section = CONTENT_SECTION_LABELS[lang]
@@ -1728,11 +1800,19 @@ def content_library(catalog: dict, lang: str) -> str:
         {content_package_list(row['packages'], lang, section['packages'].format(len(row['packages'])))}
       </article>""" for row in catalog["subjects"])
     lgs = catalog.get("lgs") or {}
+    video_lang = f'<p class="content-video-lang">{esc(section["video_lang"])}</p>' if section["video_lang"] else ""
     lgs_section = f"""
       <section class="content-extra-section" id="lgs" aria-labelledby="content-lgs-title">
-        <div class="content-extra-heading">
-          <h2 id="content-lgs-title">{esc(section['lgs_title'])}</h2>
-          <p>{esc(section['lgs_body'])}</p>
+        <div class="content-lgs-intro">
+          <div class="content-extra-heading">
+            <h2 id="content-lgs-title">{esc(section['lgs_title'])}</h2>
+            <p>{esc(section['lgs_body'])}</p>
+            {video_lang}
+          </div>
+          <figure class="content-lgs-video">
+            {content_video("lgs-denemesi", section['lgs_video'], lang, " content-video-wide")}
+            {content_video("lgs-denemesi-dikey", section['lgs_video'], lang, " content-video-tall")}
+          </figure>
         </div>
         <article class="grade-download-card">
           <div><small>{esc(labels[7].format(lgs['grade']))} · LGS 2027</small>
@@ -1767,6 +1847,14 @@ def content_library(catalog: dict, lang: str) -> str:
         <label>{esc(labels[1])}<select data-content-grade>{grade_options}</select></label>
       </div>
       <p class="honesty-note">{esc(labels[8])}<br>{esc(section['requirements'])}</p>
+      <aside class="content-howto" aria-labelledby="content-howto-title">
+        <div>
+          <h2 id="content-howto-title">{esc(section['howto_title'])}</h2>
+          <p>{esc(section['howto_body'])}</p>
+          {video_lang}
+        </div>
+        {content_video("icerik-ekleme", section['howto_title'], lang)}
+      </aside>
       <div class="grade-downloads">{grade_cards}</div>
       <div class="package-grid" data-content-grid>{subject_cards}</div>
       {primary_section}

@@ -44,6 +44,11 @@ SITE_VIDEOS = (
     "alika-reklam",
     "alika-reklam-dikey",
     "ekran-suresinden-fazlasi",
+    "icerik-ekleme",
+    "lgs-denemesi",
+    "lgs-denemesi-dikey",
+    "15-yas-sosyal-medya",
+    "15-yas-bosalan-saatler",
 )
 GUIDE_SLUGS = (
     "windows-cocuk-ekran-suresi-nasil-yonetilir",
@@ -459,6 +464,10 @@ def main() -> None:
         for section_id in ("lgs", "ilkokul", "oyunlar"):
             if f'id="{section_id}"' not in alias_text:
                 errors.append(f"Content page section is missing: #{section_id}")
+        # Kanal videoları içerik sayfasında: LGS tanıtımı (yatay + dikey) ve içerik ekleme.
+        for name in ("lgs-denemesi", "lgs-denemesi-dikey", "icerik-ekleme"):
+            if f'src="/videos/kurulum/{name}.mp4"' not in alias_text:
+                errors.append(f"Content page video is missing: {name}")
     if not catalog_path.exists():
         errors.append("Content catalog JSON is missing")
     else:

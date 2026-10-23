@@ -2306,6 +2306,86 @@ h3 {
   margin-top: 16px;
 }
 
+/* İçerik sayfası videoları: kanal videolarının sitedeki dosyaları. LGS bölümünde masaüstünde yatay
+   tanıtım, telefonda dikey Short oynar; içerik ekleme videosu yükleme notunun altında durur. */
+.content-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius-md);
+}
+
+.content-lgs-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content-lgs-intro .content-extra-heading {
+  margin-bottom: 0;
+}
+
+.content-lgs-video {
+  margin: 0;
+}
+
+.content-video-tall {
+  display: none;
+  aspect-ratio: 9 / 16;
+}
+
+.content-book-catalog .content-video-lang {
+  margin-top: 8px;
+  font-size: 0.86rem;
+}
+
+.content-howto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  gap: 24px;
+  align-items: center;
+  margin: 0 0 28px;
+  padding: 22px 24px;
+  color: #fff;
+  background: var(--navy);
+  border-radius: var(--radius-md);
+}
+
+.content-howto h2 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.content-howto p {
+  margin: 0;
+  color: #c8d4e7;
+}
+
+@media (max-width: 760px) {
+  .content-lgs-intro,
+  .content-howto {
+    grid-template-columns: 1fr;
+  }
+
+  .content-howto {
+    padding: 20px 16px;
+  }
+
+  .content-video-wide {
+    display: none;
+  }
+
+  .content-video-tall {
+    display: block;
+    width: min(100%, 300px);
+    margin: 0 auto;
+  }
+}
+
 /* Ders ve LGS paketlerinin JSONL dosyalarını tek tek indirme listesi; açılan liste komşu kartları uzatmaz */
 .content-book-catalog .package-grid {
   align-items: start;
@@ -3218,6 +3298,39 @@ h3 {
   aspect-ratio: 16 / 9;
   background: #000;
   border-radius: var(--radius-md);
+}
+
+/* Uzun video ile dikey kısa video yan yana, aynı yükseklikte (genişlik oranı 256:81). */
+.guide-video .guide-video-pair {
+  grid-template-columns: minmax(0, 256fr) minmax(0, 81fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.guide-video-short {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.guide-video .guide-video-short video {
+  aspect-ratio: 9 / 16;
+}
+
+.guide-video-short figcaption {
+  color: #c8d4e7;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .guide-video .guide-video-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-video-short {
+    width: min(100%, 240px);
+    margin: 0 auto;
+  }
 }
 
 .guide-cta {

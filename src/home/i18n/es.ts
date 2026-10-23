@@ -206,6 +206,8 @@ const es: HomeCopy = {
     winPanel: { title: 'Panel de padres de AliKa en Windows', body: 'Para qué sirve cada pestaña: reglas, apps e internet, tareas, preguntas, informes, seguridad y ajustes.' },
     andPanel: { title: 'Panel de padres de AliKa en Android', body: 'Para qué sirven la barra inferior y los menús: panel, gestión del tiempo y de apps, reglas, preguntas, informes, dispositivos y perfil.' },
     homeNetwork: { title: 'Red familiar de AliKa', body: 'Añadir móviles y el ordenador Windows a la red familiar, segundo progenitor, suscripción familiar y gestión de dispositivos desde el móvil de los padres.' },
+    addContent: { title: 'Añadir contenido a AliKa', body: 'Descargar paquetes de asignaturas, LGS, primaria y juegos desde la página de contenido, y añadirlos y activarlos en el panel de padres de Windows.' },
+    lgs: { title: 'Simulacro de LGS en casa', body: 'El paquete de exámenes de práctica LGS 2027: sesión verbal y numérica, cinco exámenes y 450 preguntas originales, con resultados por asignatura y unidad.' },
     quizShort: { title: 'Más que tiempo de pantalla', body: 'Tu hijo gana tiempo extra respondiendo preguntas; los límites los pones tú.' },
   },
   ages: {
