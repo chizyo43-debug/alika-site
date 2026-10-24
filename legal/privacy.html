@@ -109,7 +109,7 @@ learning content, rules and visited-domain history remain on the device or move 
 between paired family devices on the approved local network.</li>
 <li>Apart from a problem report or a wrong-question report that is chosen to be emailed (see
 “Problem reports sent by the parent” and “Reporting a wrong question” below), AliKa sends only the limited Android family-subscription
-metadata described below to an AliKa-operated licensing service. It does <strong>not</strong> send child content,
+metadata and, if the parent enters one, the free access code described below to an AliKa-operated licensing service. It does <strong>not</strong> send child content,
 usage history, messages, visited domains, location, Google account name or email, IMEI or
 Android ID to that service.</li>
 <li>AliKa does not sell user data or share it with advertising or analytics providers.</li>
@@ -136,6 +136,26 @@ fraud prevention and enforcement of the 10-device limit. Transfers use HTTPS/TLS
 Inactive or expired family-license records and their device records are permanently
 deleted within 90 days. Google Play separately processes purchases under Google's own
 privacy terms.</p>
+
+<h3>Optional free access code</h3>
+<p>AliKa may give a single-use free access code to people it offers free use to (for example,
+educators who test question quality). A code is used only if the parent enters it; nothing is
+sent in the normal purchase or trial flow.</p>
+<ul>
+<li><strong>Android:</strong> the code goes to the same licensing service described above and
+processes the same limited metadata (family identifier, AliKa device identifier, device
+public-key digest).</li>
+<li><strong>Windows:</strong> a code entered under <strong>I have an access code</strong> on the
+licence screen or in Settings is sent once over HTTPS/TLS to the AliKa licensing service,
+together with a one-way identifier computed for this PC (a SHA-256 digest of the Windows
+machine ID; the raw machine ID is not sent). The service returns a signed licence bound to this
+PC, stored under <code>%ProgramData%\AliKa\</code>; after that no connection is needed. No usage,
+profile, learning or other data is sent.</li>
+<li>The service stores only a SHA-256 digest of the code (never the code itself), the device
+identifier it was first bound to and the start and end of the free period. These code records
+are kept so the code cannot be used again; the 90-day deletion rule above does not apply to
+them. You can ask for their deletion at destek@alika.tr.</li>
+</ul>
 
 <h3>Problem reports sent by the parent</h3>
 <p>The parent panel has a <strong>Send a problem report</strong> button (Android: Help;
