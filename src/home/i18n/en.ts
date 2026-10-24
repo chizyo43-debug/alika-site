@@ -62,7 +62,7 @@ const en: HomeCopy = {
     'win-panel': { label: 'Parent panel', body: 'The day at a glance: time used and left, extra time in one click, minutes earned by answering questions and tasks waiting for your approval.' },
     'win-rules': { label: 'Time and rules', body: 'Daily screen time, a daily cap and bedtime. Unused time goes into the Time Pool; your child knows in advance when to stop.' },
     'win-quiz': { label: 'Answer questions, earn time', body: 'You decide how many correct answers make one minute and set the daily cap; your child sees the next step on screen.' },
-    'win-protect': { label: 'Tamper-proof protection', body: 'With Safe Mode on, the child’s account becomes a standard account; AliKa starts automatically at startup and the child cannot stop or uninstall it. Removing it needs administrator approval. Web protection and safe search are on by default as recommended settings at first setup.' },
+    'win-protect': { label: 'Stays on in standard accounts', body: 'With Safe Mode on, the child’s account becomes a standard account; AliKa starts automatically at startup and the child cannot stop or uninstall it. Removing it needs administrator approval. Web protection and safe search are on by default as recommended settings at first setup.' },
     'win-homework': { label: 'Tasks and approval', body: 'Give your child real-world tasks: finishing a book, tidying their room, an off-screen activity. Your child reports it done; when you approve, the reward time is added.' },
     'and-panel': { label: 'Parent panel', body: 'Today at a glance on your phone: daily use and target, bonus time earned by answering questions, and quick actions.' },
     'and-reward': { label: 'Reward rule', body: 'You choose how many correct answers one minute takes, the daily earning cap and the daily question limit. A small time penalty for repeated wrong answers can also be turned on.' },
@@ -158,7 +158,7 @@ const en: HomeCopy = {
         appRules: { name: 'App rules', body: 'Time per app, blocking, and parent approval for new apps.' },
         webFilter: { name: 'Web filter and safe search', body: 'Sites you block stay closed, and inappropriate content is hidden in search results.' },
         reports: { name: 'Reports', body: 'Daily and weekly use, hourly breakdown and event history.' },
-        tamperProof: { name: 'Tamper-proof protection', body: 'From a standard Windows account, your child cannot stop or uninstall AliKa.' },
+        tamperProof: { name: 'Stays on in standard accounts', body: 'From a standard Windows account, your child cannot stop or uninstall AliKa.' },
       },
     },
     learning: {
@@ -273,7 +273,7 @@ const en: HomeCopy = {
       },
       {
         q: 'Do I need to create an account or send data to the cloud?',
-        a: 'No. There is no AliKa account, email sign-up or cloud. Usage, profile and learning data stay on the device. The only exception is a bug report that you send yourself from your own email.',
+        a: 'No. There is no AliKa account or email sign-up. Usage, profile and learning data stay on the device. On Android, only limited license information (such as a random device ID and the subscription status) goes to the AliKa licensing service to verify the family subscription; no child content, usage history or messages are sent. A bug report or wrong-question report reaches us only if you send it yourself from your own email.',
       },
       {
         q: 'Is it paid, and is there a free trial?',

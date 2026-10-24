@@ -62,7 +62,7 @@ const de: HomeCopy = {
     'win-panel': { label: 'Elternpanel', body: 'Der Tag auf einen Blick: genutzte und verbleibende Zeit, Zusatzzeit mit einem Klick, durch Fragenlösen verdiente Minuten und Aufgaben, die auf Ihre Freigabe warten.' },
     'win-rules': { label: 'Zeit und Regeln', body: 'Tägliche Bildschirmzeit, tägliche Obergrenze und Schlafenszeit. Ungenutzte Zeit wandert in den Zeitpool; Ihr Kind weiß vorher, wann Schluss ist.' },
     'win-quiz': { label: 'Fragen lösen, Zeit verdienen', body: 'Sie legen fest, wie viele richtige Antworten eine Minute ergeben, und bestimmen die tägliche Obergrenze; Ihr Kind sieht den nächsten Schritt auf dem Bildschirm.' },
-    'win-protect': { label: 'Manipulationssicherer Schutz', body: 'Mit aktivem Sicheren Modus wird das Kinderkonto zum Standardkonto; AliKa startet automatisch mit Windows, und das Kind kann es weder beenden noch deinstallieren. Zum Entfernen ist eine Administratorfreigabe nötig. Webschutz und sichere Suche sind bei der Ersteinrichtung als empfohlene Einstellung aktiv.' },
+    'win-protect': { label: 'Im Standardkonto nicht abschaltbar', body: 'Mit aktivem Sicheren Modus wird das Kinderkonto zum Standardkonto; AliKa startet automatisch mit Windows, und das Kind kann es weder beenden noch deinstallieren. Zum Entfernen ist eine Administratorfreigabe nötig. Webschutz und sichere Suche sind bei der Ersteinrichtung als empfohlene Einstellung aktiv.' },
     'win-homework': { label: 'Aufgaben und Freigabe', body: 'Geben Sie Ihrem Kind Aufgaben aus dem echten Leben: ein Buch zu Ende lesen, das Zimmer aufräumen, eine Aktivität ohne Bildschirm. Ihr Kind meldet die Erledigung; nach Ihrer Freigabe wird die Belohnungszeit gutgeschrieben.' },
     'and-panel': { label: 'Elternpanel', body: 'Der heutige Tag auf dem Handy: Nutzung und Tagesziel, durch Fragenlösen verdiente Bonuszeit und Schnellaktionen.' },
     'and-reward': { label: 'Belohnungsregel', body: 'Sie wählen, wie viele richtige Antworten eine Minute kostet, die tägliche Verdienstgrenze und das tägliche Fragenlimit. Optional gibt es einen kleinen Zeitabzug bei mehreren falschen Antworten hintereinander.' },
@@ -158,7 +158,7 @@ const de: HomeCopy = {
         appRules: { name: 'App-Regeln', body: 'Zeit pro App, Sperren und Elternfreigabe für neue Apps.' },
         webFilter: { name: 'Webfilter und sichere Suche', body: 'Gesperrte Websites bleiben zu, unangemessene Inhalte werden in Suchergebnissen ausgeblendet.' },
         reports: { name: 'Berichte', body: 'Tägliche und wöchentliche Nutzung, Verteilung nach Stunden und Ereignisverlauf.' },
-        tamperProof: { name: 'Manipulationssicherer Schutz', body: 'Über ein Windows-Standardkonto kann Ihr Kind AliKa weder beenden noch deinstallieren.' },
+        tamperProof: { name: 'Im Standardkonto nicht abschaltbar', body: 'Über ein Windows-Standardkonto kann Ihr Kind AliKa weder beenden noch deinstallieren.' },
       },
     },
     learning: {
@@ -273,7 +273,7 @@ const de: HomeCopy = {
       },
       {
         q: 'Brauche ich ein Konto oder muss ich Daten in die Cloud senden?',
-        a: 'Nein. Es gibt kein AliKa-Konto, keine E-Mail-Registrierung und keine Cloud. Nutzungs-, Profil- und Lerndaten bleiben auf dem Gerät. Einzige Ausnahme ist ein Fehlerbericht, den Sie selbst über Ihre eigene E-Mail senden.',
+        a: 'Nein. Es gibt kein AliKa-Konto und keine E-Mail-Registrierung. Nutzungs-, Profil- und Lerndaten bleiben auf dem Gerät. Unter Android gehen nur begrenzte Lizenzangaben (etwa eine zufällige Geräte-ID und der Abostatus) an den AliKa-Lizenzdienst, um das Familienabo zu prüfen; Inhalte des Kindes, Nutzungsverlauf oder Nachrichten werden nicht gesendet. Einen Fehlerbericht oder eine Meldung zu einer falschen Frage erhalten wir nur, wenn Sie sie selbst über Ihre eigene E-Mail senden.',
       },
       {
         q: 'Ist AliKa kostenpflichtig, und gibt es einen Test?',

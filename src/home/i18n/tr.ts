@@ -62,7 +62,7 @@ const tr: HomeCopy = {
     'win-panel': { label: 'Ebeveyn paneli', body: 'Günün özeti tek ekranda: kullanılan ve kalan süre, tek tıkla ek süre, soru çözerek kazanılan dakikalar ve onayınızı bekleyen görevler.' },
     'win-rules': { label: 'Süre ve kurallar', body: 'Günlük ekran süresi, günlük üst sınır ve uyku saati. Kullanılmayan süre havuza birikir; çocuk ne zaman duracağını önceden bilir.' },
     'win-quiz': { label: 'Soru çöz, süre kazan', body: 'Kaç doğru cevabın bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; çocuk kalan adımı ekranda görür.' },
-    'win-protect': { label: 'Kapatılamaz koruma', body: 'Güvenli Mod açıkken çocuk hesabı standart hesaba geçer; AliKa açılışta kendiliğinden başlar, çocuk onu durduramaz ya da kaldıramaz. Kaldırmak için yönetici onayı gerekir. Web koruması ve güvenli arama ilk kurulumda önerilen ayar olarak açık gelir.' },
+    'win-protect': { label: 'Standart hesapta kapatılamaz', body: 'Güvenli Mod açıkken çocuk hesabı standart hesaba geçer; AliKa açılışta kendiliğinden başlar, çocuk onu durduramaz ya da kaldıramaz. Kaldırmak için yönetici onayı gerekir. Web koruması ve güvenli arama ilk kurulumda önerilen ayar olarak açık gelir.' },
     'win-homework': { label: 'Görevler ve onay', body: 'Çocuğa gerçek dünya görevleri verin: kitap bitirme, oda toplama, ekran dışı etkinlik. Çocuk tamamladığını bildirir; siz onaylayınca ödül süresi eklenir.' },
     'and-panel': { label: 'Ebeveyn paneli', body: 'Bugünün özeti telefonda: günlük kullanım ve hedef, soru çözerek kazanılan bonus süre ve hızlı işlemler.' },
     'and-reward': { label: 'Ödül kuralı', body: 'Bir dakika için kaç doğru gerektiğini, günlük kazanılabilir üst sınırı ve günlük soru sınırını siz seçersiniz. Üst üste yanlışlarda küçük bir süre cezası da açılabilir.' },
@@ -154,7 +154,7 @@ const tr: HomeCopy = {
         appRules: { name: 'Uygulama kuralları', body: 'Uygulama başına süre, engelleme ve yeni uygulamalar için ebeveyn onayı.' },
         webFilter: { name: 'Web filtresi ve güvenli arama', body: 'Engellediğiniz siteler kapanır, arama sonuçlarında uygunsuz içerik gizlenir.' },
         reports: { name: 'Raporlar', body: 'Günlük ve haftalık kullanım, saatlik dağılım ve olay geçmişi.' },
-        tamperProof: { name: 'Kapatılamaz koruma', body: 'Çocuk standart Windows hesabından AliKa’yı durduramaz ya da kaldıramaz.' },
+        tamperProof: { name: 'Standart hesapta kapatılamaz', body: 'Çocuk standart Windows hesabından AliKa’yı durduramaz ya da kaldıramaz.' },
       },
     },
     learning: {
@@ -268,7 +268,7 @@ const tr: HomeCopy = {
       },
       {
         q: 'Hesap açmam ya da verileri buluta göndermem gerekiyor mu?',
-        a: 'Hayır. AliKa hesabı, e-posta kaydı ya da bulut yoktur. Kullanım, profil ve öğrenme verileri cihazda kalır. Tek istisna, sizin kendi e-postanızla gönderdiğiniz hata raporudur.',
+        a: 'Hayır. AliKa hesabı ya da e-posta kaydı yoktur. Kullanım, profil ve öğrenme verileri cihazda kalır. Android’de aile aboneliğini doğrulamak için yalnız sınırlı lisans bilgisi (rastgele cihaz kimliği ve abonelik durumu gibi) AliKa lisans hizmetine gider; çocuğa ait içerik, kullanım geçmişi ya da mesaj gitmez. Hata raporu ya da yanlış soru bildirimi ise yalnız siz kendi e-postanızla gönderirseniz bize ulaşır.',
       },
       {
         q: 'Ücretli mi, deneme süresi var mı?',

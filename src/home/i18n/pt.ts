@@ -62,7 +62,7 @@ const pt: HomeCopy = {
     'win-panel': { label: 'Painel do responsável', body: 'O resumo do dia em uma tela: tempo usado e restante, tempo extra com um clique, minutos ganhos respondendo perguntas e tarefas aguardando sua aprovação.' },
     'win-rules': { label: 'Tempo e regras', body: 'Tempo de tela diário, limite diário e hora de dormir. O tempo não usado vai para o banco de tempo; a criança sabe com antecedência quando parar.' },
     'win-quiz': { label: 'Responda e ganhe tempo', body: 'Você decide quantas respostas certas valem um minuto e define o limite diário; a criança vê o próximo passo na tela.' },
-    'win-protect': { label: 'Proteção que não se desliga', body: 'Com o Modo seguro ativado, a conta da criança passa a ser padrão; o AliKa inicia sozinho junto com o Windows e a criança não consegue pará-lo nem desinstalá-lo. Para removê-lo é preciso aprovação de um administrador. A proteção da web e a pesquisa segura já vêm ativadas na primeira configuração, como ajuste recomendado.' },
+    'win-protect': { label: 'Não desliga em conta padrão', body: 'Com o Modo seguro ativado, a conta da criança passa a ser padrão; o AliKa inicia sozinho junto com o Windows e a criança não consegue pará-lo nem desinstalá-lo. Para removê-lo é preciso aprovação de um administrador. A proteção da web e a pesquisa segura já vêm ativadas na primeira configuração, como ajuste recomendado.' },
     'win-homework': { label: 'Tarefas e aprovação', body: 'Dê à criança tarefas do mundo real: terminar um livro, arrumar o quarto, uma atividade longe da tela. A criança avisa que terminou; quando você aprova, o tempo de recompensa é somado.' },
     'and-panel': { label: 'Painel do responsável', body: 'O resumo de hoje no celular: uso diário e meta, tempo bônus ganho respondendo perguntas e ações rápidas.' },
     'and-reward': { label: 'Regra de recompensa', body: 'Você escolhe quantas respostas certas custa um minuto, o máximo que dá para ganhar por dia e o limite diário de perguntas. Também dá para ativar uma pequena penalidade de tempo para erros seguidos.' },
@@ -158,7 +158,7 @@ const pt: HomeCopy = {
         appRules: { name: 'Regras de apps', body: 'Tempo por app, bloqueio e aprovação do responsável para apps novos.' },
         webFilter: { name: 'Filtro da web e pesquisa segura', body: 'Os sites que você bloquear ficam fechados, e conteúdo impróprio é ocultado nos resultados de pesquisa.' },
         reports: { name: 'Relatórios', body: 'Uso diário e semanal, distribuição por hora e histórico de eventos.' },
-        tamperProof: { name: 'Proteção que não se desliga', body: 'Em uma conta padrão do Windows, a criança não consegue parar nem desinstalar o AliKa.' },
+        tamperProof: { name: 'Não desliga em conta padrão', body: 'Em uma conta padrão do Windows, a criança não consegue parar nem desinstalar o AliKa.' },
       },
     },
     learning: {
@@ -273,7 +273,7 @@ const pt: HomeCopy = {
       },
       {
         q: 'Preciso criar uma conta ou enviar dados para a nuvem?',
-        a: 'Não. Não existe conta AliKa, cadastro por e-mail nem nuvem. Os dados de uso, perfil e aprendizado ficam no aparelho. A única exceção é um relatório de erro que você mesmo envia pelo seu próprio e-mail.',
+        a: 'Não. Não existe conta AliKa nem cadastro por e-mail. Os dados de uso, perfil e aprendizado ficam no aparelho. No Android, só informações de licença limitadas (como um identificador aleatório do aparelho e o status da assinatura) vão para o serviço de licenças do AliKa, para verificar a assinatura familiar; conteúdo da criança, histórico de uso e mensagens não são enviados. Um relatório de erro ou de questão incorreta só chega até nós se você mesmo o enviar pelo seu próprio e-mail.',
       },
       {
         q: 'É pago? Tem teste grátis?',

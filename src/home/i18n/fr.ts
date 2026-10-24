@@ -62,7 +62,7 @@ const fr: HomeCopy = {
     'win-panel': { label: 'Panneau parent', body: 'La journée en un coup d’œil : temps utilisé et restant, temps supplémentaire en un clic, minutes gagnées en répondant à des questions et tâches qui attendent votre validation.' },
     'win-rules': { label: 'Temps et règles', body: 'Temps d’écran quotidien, plafond journalier et heure du coucher. Le temps non utilisé s’accumule dans la réserve de temps ; votre enfant sait à l’avance quand s’arrêter.' },
     'win-quiz': { label: 'Répondre, gagner du temps', body: 'Vous décidez combien de bonnes réponses valent une minute et fixez le plafond journalier ; votre enfant voit l’étape suivante à l’écran.' },
-    'win-protect': { label: 'Protection inviolable', body: 'Avec le Mode sécurisé, le compte de l’enfant devient un compte standard ; AliKa démarre automatiquement au lancement de Windows et l’enfant ne peut ni l’arrêter ni le désinstaller. Le supprimer exige l’accord d’un administrateur. La protection web et la recherche sécurisée sont activées par défaut lors de la première installation, comme réglage recommandé.' },
+    'win-protect': { label: 'Non désactivable en compte standard', body: 'Avec le Mode sécurisé, le compte de l’enfant devient un compte standard ; AliKa démarre automatiquement au lancement de Windows et l’enfant ne peut ni l’arrêter ni le désinstaller. Le supprimer exige l’accord d’un administrateur. La protection web et la recherche sécurisée sont activées par défaut lors de la première installation, comme réglage recommandé.' },
     'win-homework': { label: 'Tâches et validation', body: 'Confiez à votre enfant des tâches de la vraie vie : finir un livre, ranger sa chambre, une activité sans écran. Il signale qu’il a terminé ; dès que vous validez, le temps de récompense est ajouté.' },
     'and-panel': { label: 'Panneau parent', body: 'La journée sur votre téléphone : utilisation et objectif du jour, temps bonus gagné en répondant à des questions et actions rapides.' },
     'and-reward': { label: 'Règle de récompense', body: 'Vous choisissez combien de bonnes réponses coûte une minute, le maximum gagnable par jour et la limite quotidienne de questions. Une petite pénalité de temps après plusieurs erreurs d’affilée peut aussi être activée.' },
@@ -158,7 +158,7 @@ const fr: HomeCopy = {
         appRules: { name: 'Règles des applications', body: 'Temps par application, blocage et validation parentale pour les nouvelles applis.' },
         webFilter: { name: 'Filtre web et recherche sécurisée', body: 'Les sites bloqués restent fermés et les contenus inappropriés sont masqués dans les résultats de recherche.' },
         reports: { name: 'Rapports', body: 'Utilisation quotidienne et hebdomadaire, répartition horaire et historique des événements.' },
-        tamperProof: { name: 'Protection inviolable', body: 'Depuis un compte Windows standard, votre enfant ne peut ni arrêter ni désinstaller AliKa.' },
+        tamperProof: { name: 'Non désactivable en compte standard', body: 'Depuis un compte Windows standard, votre enfant ne peut ni arrêter ni désinstaller AliKa.' },
       },
     },
     learning: {
@@ -273,7 +273,7 @@ const fr: HomeCopy = {
       },
       {
         q: 'Dois-je créer un compte ou envoyer des données dans le cloud ?',
-        a: 'Non. Il n’y a ni compte AliKa, ni inscription par e-mail, ni cloud. Les données d’utilisation, de profil et d’apprentissage restent sur l’appareil. Seule exception : un rapport de bug que vous envoyez vous-même depuis votre propre adresse e-mail.',
+        a: 'Non. Il n’y a ni compte AliKa ni inscription par e-mail. Les données d’utilisation, de profil et d’apprentissage restent sur l’appareil. Sous Android, seules des informations de licence limitées (comme un identifiant aléatoire de l’appareil et l’état de l’abonnement) sont envoyées au service de licences d’AliKa pour vérifier l’abonnement familial ; aucun contenu de l’enfant, historique d’utilisation ni message n’est envoyé. Un rapport de bug ou le signalement d’une question erronée ne nous parvient que si vous l’envoyez vous-même depuis votre propre adresse e-mail.',
       },
       {
         q: 'Est-ce payant ? Y a-t-il un essai gratuit ?',
