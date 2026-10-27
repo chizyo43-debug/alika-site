@@ -207,7 +207,7 @@ const pt: HomeCopy = {
     andPanel: { title: 'Painel do responsável AliKa no Android', body: 'Para que servem a barra inferior e os menus: painel, gestão de tempo e de apps, regras, perguntas, relatórios, dispositivos e perfil.' },
     homeNetwork: { title: 'Rede familiar AliKa', body: 'Adicionar celulares e o computador Windows à rede familiar, segundo responsável, assinatura familiar e gestão dos dispositivos pelo celular do responsável.' },
     addContent: { title: 'Como adicionar conteúdo ao AliKa', body: 'Baixar pacotes de matérias, LGS, anos iniciais e jogos na página de conteúdo, e adicioná-los e ativá-los no painel do responsável no Windows.' },
-    lgs: { title: 'Simulado de LGS em casa', body: 'O pacote de simulados LGS 2027: sessões verbal e numérica, cinco simulados e 450 questões originais, com resultados por matéria e unidade.' },
+    lgs: { title: 'Simulado de LGS em casa', body: 'O pacote de simulados LGS 2027: sessões verbal e numérica, dez simulados e 900 questões originais, com resultados por matéria e unidade.' },
     quizShort: { title: 'Mais do que tempo de tela', body: 'A criança ganha tempo extra respondendo perguntas; os limites são definidos por você.' },
   },
   ages: {
