@@ -202,7 +202,7 @@ const tr: HomeCopy = {
     andPanel: { title: 'AliKa Android ebeveyn paneli', body: 'Alt menü ve menüler ne işe yarar: panel, zaman ve uygulama yönetimi, kurallar, sorular, raporlar, cihazlar ve profil.' },
     homeNetwork: { title: 'AliKa ev ağı', body: 'Telefonları ve Windows bilgisayarı aile ağına ekleme, ikinci ebeveyn, aile aboneliği ve ebeveyn telefonundan cihaz yönetimi.' },
     addContent: { title: 'AliKa’ya içerik ekleme', body: 'Ders, LGS, ilkokul ve oyun paketlerini sitenin İçerik bölümünden indirme, Windows ebeveyn panelinden ekleme ve kullanıma açma.' },
-    lgs: { title: 'Evde LGS provası', body: 'LGS 2027 deneme paketi: sözel ve sayısal oturum, beş deneme ve 450 özgün soru; sonuçlar ders ders ve ünite ünite görünür.' },
+    lgs: { title: 'Evde LGS provası', body: 'LGS 2027 deneme paketi: sözel ve sayısal oturum, on deneme ve 900 özgün soru; sonuçlar ders ders ve ünite ünite görünür.' },
     quizShort: { title: 'Ekran süresinden daha fazlası', body: 'Çocuk soru çözerek ek süre kazanır; sınırları siz koyarsınız.' },
   },
   ages: {
