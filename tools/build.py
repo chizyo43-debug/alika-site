@@ -54,6 +54,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "LGS 2027 deneme paketi",
         "lgs_body": "Altı derste onar deneme formu. Ders paketlerinden ayrıdır; AliKa bu soruları yalnız LGS denemelerinde kullanır.",
         "lgs_download": "LGS paketini indir",
+        "prep_title": "LGS 2028 hazırlık — 7. sınıf",
+        "prep_body": "2028'de LGS'ye girecek 7. sınıflar için bağlam temelli sorular. Deneme paketi beş form içerir; AliKa her formu çocuğun işlediği konulara göre kısaltır. Ünite setleri her ünitenin sonunda çözülür ve konu anlatımıyla gelir.",
+        "prep_exam": "Deneme (5 form)",
+        "prep_units": "Ünite setleri",
+        "prep_exam_download": "Deneme paketini indir",
+        "prep_units_download": "Ünite setlerini indir",
+        "prep_note": "AliKa Windows 1.2.15 ve sonrası gerekir; Android desteği bir sonraki sürümle gelecek. Ünite setleri deneme paketinin takvimiyle açılır, ikisini birlikte kurun. Sorular yapay zekâ ile üretildi ve denetlendi; insan incelemesi yapılmadı. LGS sorusu değildir.",
         "primary_title": "İlkokul görsel etkinlikleri",
         "primary_body": "Renkli şekil kartlarıyla {} görsel soru: benzerlik, «Sıradaki ne?», «Farklı olanı bul» ve «Tabloyu tamamla». Okuma gerektirmez.",
         "primary_note": "Ön sürüm: çocuklarla deneme henüz yapılmadı. AliKa Windows 1.2.12 ve sonrası gerekir; yayımlanmış Android sürümü bu kartları henüz göstermiyor.",
@@ -79,6 +86,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "LGS 2027 practice exam pack",
         "lgs_body": "Ten practice forms in each of six subjects (in Turkish). Kept apart from the subject packs; AliKa uses these questions only in LGS practice exams.",
         "lgs_download": "Download LGS pack",
+        "prep_title": "LGS 2028 preparation — Grade 7",
+        "prep_body": "Context-based questions (in Turkish) for Grade 7 students who will sit the LGS in 2028. The practice pack has five forms; AliKa shortens each form to the topics the child has covered. Unit sets are solved at the end of each unit and come with a lesson.",
+        "prep_exam": "Practice exam (5 forms)",
+        "prep_units": "Unit sets",
+        "prep_exam_download": "Download practice pack",
+        "prep_units_download": "Download unit sets",
+        "prep_note": "Needs AliKa Windows 1.2.15 or later; Android support comes with the next release. Unit sets open on the practice pack's calendar, so install both. Questions were generated and checked by AI; no human review. These are not official LGS questions.",
         "primary_title": "Primary visual activities",
         "primary_body": "{} visual questions with coloured shape cards: similarity, “What comes next?”, “Find the odd one out” and “Complete the grid”. No reading needed.",
         "primary_note": "Preview: not yet tried with children. Needs AliKa Windows 1.2.12 or later; the released Android version cannot show these cards yet.",
@@ -104,6 +118,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "LGS-2027-Probeprüfungspaket",
         "lgs_body": "Zehn Probeformen in jedem von sechs Fächern (auf Türkisch). Getrennt von den Fachpaketen; AliKa nutzt diese Fragen nur in LGS-Probeprüfungen.",
         "lgs_download": "LGS-Paket herunterladen",
+        "prep_title": "LGS-2028-Vorbereitung — Klasse 7",
+        "prep_body": "Kontextbasierte Fragen (auf Türkisch) für Siebtklässler, die 2028 die LGS schreiben. Das Probeprüfungspaket hat fünf Formen; AliKa kürzt jede Form auf die behandelten Themen. Die Einheitensets werden am Ende jeder Einheit gelöst und enthalten eine Lektion.",
+        "prep_exam": "Probeprüfung (5 Formen)",
+        "prep_units": "Einheitensets",
+        "prep_exam_download": "Probeprüfungspaket herunterladen",
+        "prep_units_download": "Einheitensets herunterladen",
+        "prep_note": "Erfordert AliKa Windows 1.2.15 oder neuer; Android-Unterstützung folgt mit der nächsten Version. Die Einheitensets öffnen sich nach dem Kalender des Probeprüfungspakets – installieren Sie beide. Fragen von KI erstellt und geprüft; keine menschliche Prüfung. Keine offiziellen LGS-Fragen.",
         "primary_title": "Visuelle Übungen für die Grundschule",
         "primary_body": "{} visuelle Fragen mit farbigen Formkarten: Ähnlichkeit, „Was kommt als Nächstes?“, „Was passt nicht?“ und „Ergänze die Tabelle“. Lesen ist nicht nötig.",
         "primary_note": "Vorabversion: noch nicht mit Kindern erprobt. Erfordert AliKa Windows 1.2.12 oder neuer; die veröffentlichte Android-Version zeigt diese Karten noch nicht.",
@@ -129,6 +150,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "Paquete de exámenes de práctica LGS 2027",
         "lgs_body": "Diez modelos de examen en cada una de seis asignaturas (en turco). Separado de los paquetes de asignatura; AliKa usa estas preguntas solo en los exámenes de práctica LGS.",
         "lgs_download": "Descargar paquete LGS",
+        "prep_title": "Preparación LGS 2028 — 7.º curso",
+        "prep_body": "Preguntas basadas en contexto (en turco) para alumnos de 7.º que harán el LGS en 2028. El paquete de exámenes tiene cinco modelos; AliKa acorta cada modelo a los temas ya vistos. Los conjuntos de unidad se resuelven al final de cada unidad e incluyen una lección.",
+        "prep_exam": "Exámenes de práctica (5 modelos)",
+        "prep_units": "Conjuntos de unidad",
+        "prep_exam_download": "Descargar paquete de exámenes",
+        "prep_units_download": "Descargar conjuntos de unidad",
+        "prep_note": "Requiere AliKa Windows 1.2.15 o posterior; la compatibilidad con Android llegará en la próxima versión. Los conjuntos de unidad se abren con el calendario del paquete de exámenes; instale ambos. Preguntas generadas y revisadas por IA, sin revisión humana. No son preguntas oficiales del LGS.",
         "primary_title": "Actividades visuales de primaria",
         "primary_body": "{} preguntas visuales con tarjetas de formas de colores: semejanza, «¿Qué sigue?», «Encuentra el diferente» y «Completa la tabla». No hace falta leer.",
         "primary_note": "Versión preliminar: aún sin prueba con niños. Requiere AliKa Windows 1.2.12 o posterior; la versión publicada de Android aún no muestra estas tarjetas.",
@@ -154,6 +182,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "Pack d’examens blancs LGS 2027",
         "lgs_body": "Dix sujets d’entraînement dans chacune des six matières (en turc). Séparé des packs de matière ; AliKa utilise ces questions uniquement pour les examens blancs LGS.",
         "lgs_download": "Télécharger le pack LGS",
+        "prep_title": "Préparation LGS 2028 — 7e année",
+        "prep_body": "Questions en contexte (en turc) pour les élèves de 7e année qui passeront le LGS en 2028. Le pack d’examens blancs compte cinq sujets ; AliKa raccourcit chaque sujet aux thèmes déjà étudiés. Les séries d’unité se font en fin d’unité et sont accompagnées d’une leçon.",
+        "prep_exam": "Examens blancs (5 sujets)",
+        "prep_units": "Séries d’unité",
+        "prep_exam_download": "Télécharger le pack d’examens",
+        "prep_units_download": "Télécharger les séries d’unité",
+        "prep_note": "Nécessite AliKa Windows 1.2.15 ou version ultérieure ; la prise en charge Android arrivera avec la prochaine version. Les séries d’unité s’ouvrent selon le calendrier du pack d’examens : installez les deux. Questions générées et vérifiées par IA, sans relecture humaine. Ce ne sont pas des questions officielles du LGS.",
         "primary_title": "Activités visuelles pour le primaire",
         "primary_body": "{} questions visuelles avec des cartes de formes colorées : ressemblance, « Et ensuite ? », « Trouve l’intrus » et « Complète le tableau ». Aucune lecture nécessaire.",
         "primary_note": "Préversion : pas encore testée avec des enfants. Nécessite AliKa Windows 1.2.12 ou version ultérieure ; la version Android publiée n’affiche pas encore ces cartes.",
@@ -179,6 +214,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "Pacote de exames de treino LGS 2027",
         "lgs_body": "Dez provas de treino em cada uma de seis disciplinas (em turco). Separado dos pacotes de disciplina; o AliKa usa estas perguntas só nos exames de treino LGS.",
         "lgs_download": "Transferir pacote LGS",
+        "prep_title": "Preparação LGS 2028 — 7.º ano",
+        "prep_body": "Perguntas baseadas em contexto (em turco) para alunos do 7.º ano que farão o LGS em 2028. O pacote de exames tem cinco provas; o AliKa encurta cada prova aos temas já estudados. Os conjuntos de unidade resolvem-se no fim de cada unidade e trazem uma lição.",
+        "prep_exam": "Exames de prática (5 provas)",
+        "prep_units": "Conjuntos de unidade",
+        "prep_exam_download": "Transferir pacote de exames",
+        "prep_units_download": "Transferir conjuntos de unidade",
+        "prep_note": "Requer AliKa Windows 1.2.15 ou posterior; o suporte para Android chega na próxima versão. Os conjuntos de unidade abrem segundo o calendário do pacote de exames; instale ambos. Perguntas geradas e verificadas por IA, sem revisão humana. Não são perguntas oficiais do LGS.",
         "primary_title": "Atividades visuais do 1.º ciclo",
         "primary_body": "{} perguntas visuais com cartões de formas coloridas: semelhança, «O que vem a seguir?», «Encontra o diferente» e «Completa a tabela». Não é preciso ler.",
         "primary_note": "Pré-visualização: ainda sem teste com crianças. Requer AliKa Windows 1.2.12 ou posterior; a versão Android publicada ainda não mostra estes cartões.",
@@ -204,6 +246,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "Пакет пробных экзаменов LGS 2027",
         "lgs_body": "По десять пробных вариантов по каждому из шести предметов (на турецком языке). Отделён от предметных пакетов; AliKa использует эти вопросы только в пробных экзаменах LGS.",
         "lgs_download": "Скачать пакет LGS",
+        "prep_title": "Подготовка к LGS 2028 — 7 класс",
+        "prep_body": "Контекстные задания (на турецком) для семиклассников, которые будут сдавать LGS в 2028 году. В пакете пробных экзаменов пять вариантов; AliKa сокращает каждый вариант до пройденных тем. Наборы по разделам решают в конце раздела, к ним прилагается урок.",
+        "prep_exam": "Пробные экзамены (5 вариантов)",
+        "prep_units": "Наборы по разделам",
+        "prep_exam_download": "Скачать пробные экзамены",
+        "prep_units_download": "Скачать наборы по разделам",
+        "prep_note": "Нужна AliKa для Windows 1.2.15 или новее; поддержка Android появится в следующей версии. Наборы по разделам открываются по календарю пакета пробных экзаменов — установите оба. Задания созданы и проверены ИИ, без проверки человеком. Это не официальные задания LGS.",
         "primary_title": "Визуальные задания для начальной школы",
         "primary_body": "{} визуальных вопросов с цветными карточками фигур: сходство, «Что дальше?», «Найди лишнее» и «Заполни таблицу». Читать не нужно.",
         "primary_note": "Предварительная версия: ещё не опробована с детьми. Нужна AliKa для Windows 1.2.12 или новее; опубликованная версия для Android пока не показывает эти карточки.",
@@ -229,6 +278,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "LGS 2027 模擬試験パック",
         "lgs_body": "6教科それぞれに10回分の模擬試験（トルコ語）。教科パックとは別で、AliKaはこれらの問題をLGS模擬試験でのみ使います。",
         "lgs_download": "LGSパックをダウンロード",
+        "prep_title": "LGS 2028 対策 — 7年生",
+        "prep_body": "2028年にLGSを受ける7年生向けの文脈型問題（トルコ語）。模試パックは5回分で、AliKaは子どもが学習済みの単元に合わせて各回を短くします。単元セットは各単元の終わりに解き、解説が付きます。",
+        "prep_exam": "模試（5回分）",
+        "prep_units": "単元セット",
+        "prep_exam_download": "模試パックをダウンロード",
+        "prep_units_download": "単元セットをダウンロード",
+        "prep_note": "AliKa Windows 1.2.15以降が必要です。Androidは次のバージョンで対応予定です。単元セットは模試パックの学習カレンダーで開くため、両方を入れてください。問題はAIが作成・確認しており、人による確認はしていません。公式のLGS問題ではありません。",
         "primary_title": "小学生向けビジュアル課題",
         "primary_body": "色付きの図形カードを使った{}問のビジュアル問題：似ているもの、「次は何？」、「仲間はずれを探そう」、「表を完成させよう」。文字を読む必要はありません。",
         "primary_note": "プレビュー版：子どもとの試用はまだです。AliKa Windows 1.2.12 以降が必要です。公開中のAndroid版はまだこのカードを表示できません。",
@@ -254,6 +310,13 @@ CONTENT_SECTION_LABELS = {
         "lgs_title": "LGS 2027 모의고사 패키지",
         "lgs_body": "6개 과목마다 모의고사 10회분(튀르키예어). 과목 패키지와 별도이며, AliKa는 이 문항을 LGS 모의고사에서만 사용합니다.",
         "lgs_download": "LGS 패키지 다운로드",
+        "prep_title": "LGS 2028 대비 — 7학년",
+        "prep_body": "2028년에 LGS를 볼 7학년을 위한 맥락형 문제(튀르키예어). 모의고사 팩은 5회분이며, AliKa가 아이가 배운 단원에 맞춰 각 회를 줄입니다. 단원 세트는 각 단원이 끝날 때 풀며 설명이 함께 제공됩니다.",
+        "prep_exam": "모의고사 (5회분)",
+        "prep_units": "단원 세트",
+        "prep_exam_download": "모의고사 팩 다운로드",
+        "prep_units_download": "단원 세트 다운로드",
+        "prep_note": "AliKa Windows 1.2.15 이상이 필요합니다. Android는 다음 버전에서 지원됩니다. 단원 세트는 모의고사 팩의 일정에 따라 열리므로 둘 다 설치하세요. 문제는 AI가 만들고 검토했으며 사람의 검토는 없었습니다. 공식 LGS 문제가 아닙니다.",
         "primary_title": "초등 시각 활동",
         "primary_body": "색깔 도형 카드로 된 시각 문항 {}개: 닮은 것 찾기, ‘다음은 무엇일까?’, ‘다른 하나 찾기’, ‘표 완성하기’. 글을 읽지 않아도 됩니다.",
         "primary_note": "미리보기: 아직 아이들과의 시험 사용을 거치지 않았습니다. AliKa Windows 1.2.12 이상이 필요하며, 출시된 Android 버전은 아직 이 카드를 표시하지 못합니다.",
@@ -1828,6 +1891,26 @@ def content_library(catalog: dict, lang: str) -> str:
         </article>
         {content_package_list(lgs['packages'], lang, section['packages'].format(len(lgs['packages'])), "subject")}
       </section>""" if lgs.get("packages") else ""
+    prep = catalog.get("lgs_prep") or {}
+    prep_cards = "".join(f"""
+        <article class="grade-download-card">
+          <div><small>{esc(labels[7].format(prep['grade']))} · {esc(section[label_key])}</small>
+            <h3>{len(part['packages'])} {esc(scope[4])} · {format_count(part['notes'], lang)} {esc(labels[4])} · {format_count(part['questions'], lang)} {esc(labels[5])}</h3>
+            </div>
+          <a class="button direct-download" href="{esc(part['download_url'])}" download="{esc(download_name(part))}" data-direct-download>{esc(section[download_key])}</a>
+        </article>
+        {content_package_list(part['packages'], lang, section['packages'].format(len(part['packages'])), "subject")}"""
+        for key, label_key, download_key in (("exam", "prep_exam", "prep_exam_download"), ("units", "prep_units", "prep_units_download"))
+        if (part := prep.get(key)))
+    prep_section = f"""
+      <section class="content-extra-section" id="lgs-2028" aria-labelledby="content-lgs-prep-title">
+        <div class="content-extra-heading">
+          <h2 id="content-lgs-prep-title">{esc(section['prep_title'])}</h2>
+          <p>{esc(section['prep_body'])}</p>
+          <p>{esc(section['prep_note'])}</p>
+        </div>
+        {prep_cards}
+      </section>""" if prep_cards else ""
     primary_cards = "".join(f"""
         <article class="grade-download-card">
           <div><small>{esc(section['age'].format(row['age_min'], row['age_max']))}</small>
@@ -1844,6 +1927,7 @@ def content_library(catalog: dict, lang: str) -> str:
       </section>""" if primary_cards else ""
     return f"""
       {lgs_section}
+      {prep_section}
       <div class="content-scope" data-content-scope>
         <p><strong>{esc(scope[0])}</strong> {esc(scope[1])}</p>
         <p class="content-scope-plan"><strong>{esc(scope[2])}</strong> {esc(scope[3])}</p>

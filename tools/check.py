@@ -461,7 +461,7 @@ def main() -> None:
         errors.append("Turkish /icerik/ alias is missing")
     else:
         alias_text = alias_path.read_text(encoding="utf-8")
-        for section_id in ("lgs", "ilkokul", "oyunlar"):
+        for section_id in ("lgs", "lgs-2028", "ilkokul", "oyunlar"):
             if f'id="{section_id}"' not in alias_text:
                 errors.append(f"Content page section is missing: #{section_id}")
         # Kanal videoları içerik sayfasında: LGS tanıtımı (yatay + dikey) ve içerik ekleme.
@@ -478,12 +478,15 @@ def main() -> None:
             errors.append("Content catalog is empty")
         totals = catalog.get("totals") or {}
         # alika-icerik 0aaf7bd (uzay kapaklı oyun paketleri): 100 ders + 6 LGS paketi, 1 ilkokul görsel paketi, 2 oyun × 9 dil × 4 yaş grubu.
+        # alika-icerik #77: LGS 2028 hazırlık 7. sınıf, 6 deneme + 6 ünite seti paketi (450 + 327 soru).
         expected_totals = {
             "countries": 1,
             "gradeGroups": 4,
             "subjects": 28,
             "lessonPackages": 100,
             "lgsPackages": 6,
+            "lgsPrepPackages": 12,
+            "lgsPrepQuestions": 777,
             "primaryPackages": 1,
             "primaryQuestions": 600,
             "games": 2,
@@ -519,6 +522,12 @@ def main() -> None:
             bundles.append(("LGS", lgs))
         else:
             errors.append("LGS bundle is missing")
+        prep = catalog.get("lgs_prep") or {}
+        for key in ("exam", "units"):
+            if (prep.get(key) or {}).get("download_url"):
+                bundles.append((f"LGS 2028 {key}", prep[key]))
+            else:
+                errors.append(f"LGS 2028 {key} bundle is missing")
         for label, row in bundles:
             target = served_file(row, f"{label} bundle")
             if target is None:
@@ -548,6 +557,13 @@ def main() -> None:
                 errors.append(f"Content package must not claim human review: {package.get('filename')}")
         if any(package.get("kind") != "lgs" for package in lgs.get("packages", [])):
             errors.append("LGS section contains a non-LGS package")
+        for key, kind in (("exam", "lgs-prep-exam"), ("units", "lgs-prep-units")):
+            for package in (prep.get(key) or {}).get("packages", []):
+                served_file(package, "LGS 2028 package")
+                if package.get("human_reviewed") is not False:
+                    errors.append(f"Content package must not claim human review: {package.get('filename')}")
+                if package.get("kind") != kind:
+                    errors.append(f"LGS 2028 {key} section contains another package: {package.get('filename')}")
         for game in catalog.get("games", []):
             if not (DIST / game.get("art_url", "").lstrip("/")).exists():
                 errors.append(f"Game art is missing: {game.get('slug')}")
