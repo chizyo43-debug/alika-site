@@ -17,6 +17,8 @@ SRC = ROOT / "src"
 DIST = ROOT / "dist"
 PUBLIC = ROOT / "public"
 # Paylaşım görseli: üzerindeki yazı Türkçe; alt metin sayfanın dilinde.
+# Sayfa başlığı ve og:site_name sonundaki marka; Türkçe sayfalarda Türkçe marka adı.
+BRAND_NAME = {"tr": "AliKa Ebeveyn Kontrolü", "en": "AliKa"}
 OG_IMAGE_ALT = {
     "tr": "AliKa logosu, “Kısıtlamıyoruz. Planlıyoruz.” sloganı ve gülümseyen AliKa maskotu. Windows ve Android; Microsoft Store ve Google Play.",
     "en": "AliKa logo, the Turkish slogan “We don’t restrict. We plan.” and the smiling AliKa mascot. Windows and Android; Microsoft Store and Google Play.",
@@ -1320,10 +1322,14 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="icon" href="/assets/brand/alika-logo.png">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="AliKa">
+  <meta property="og:site_name" content="{BRAND_NAME.get(lang, 'AliKa')}">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
+  <meta property="og:image" content="{BASE_URL}/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{esc(OG_IMAGE_ALT['tr' if lang == 'tr' else 'en'])}">
 </head>
 <body{' class="content-route"' if slug == "content" else ''}>
   {header(locales, lang, slug)}
@@ -1355,14 +1361,14 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0A1631">
-  <title>{esc(title)} — AliKa</title>
+  <title>{esc(title)} — {BRAND_NAME["en" if lang == "en" else "tr"]}</title>
   <meta name="description" content="{esc(description)}">
   <link rel="canonical" href="{canonical}">
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="icon" href="/assets/brand/alika-logo.png">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="{'en_GB' if lang == 'en' else 'tr_TR'}">
-  <meta property="og:site_name" content="AliKa">
+  <meta property="og:site_name" content="{BRAND_NAME["en" if lang == "en" else "tr"]}">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
@@ -1989,7 +1995,7 @@ def build() -> None:
         c = locales[lang]
         base = DIST if lang == "tr" else DIST / lang
         title, desc = c["pages"]["content"]
-        write_page(base / "content" / "index.html", document(locales, lang, f"{title} — AliKa", desc, content_page(lang, c, catalog), "content"))
+        write_page(base / "content" / "index.html", document(locales, lang, f"{title} — {BRAND_NAME.get(lang, 'AliKa')}", desc, content_page(lang, c, catalog), "content"))
         for slug in REDIRECT_ANCHORS:
             write_page(base / slug / "index.html", redirect_document(lang, slug))
 

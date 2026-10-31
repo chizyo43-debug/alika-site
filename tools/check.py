@@ -648,6 +648,17 @@ def main() -> None:
     root_page = (DIST / "index.html").read_text(encoding="utf-8")
     if '<script type="application/ld+json">' not in root_page or '"SoftwareApplication"' not in root_page:
         errors.append("SoftwareApplication schema is missing from the Turkish home page")
+    # Arama sonucundaki site adı: Türkçe marka adı WebSite şemasında ve uygulama şemasında.
+    if '"@type":"WebSite","name":"AliKa Ebeveyn Kontrolü"' not in root_page:
+        errors.append("WebSite schema with the Turkish brand name is missing from the Turkish home page")
+    if '"@type":"SoftwareApplication","name":"AliKa Ebeveyn Kontrolü"' not in root_page:
+        errors.append("Turkish home page schema does not use the Turkish brand name")
+    for page in [DIST / "rehber" / "index.html", DIST / "okullar" / "index.html", DIST / "content" / "index.html"]:
+        if page.exists() and "— AliKa Ebeveyn Kontrolü</title>" not in page.read_text(encoding="utf-8"):
+            errors.append(f"Turkish page title does not end with the brand name: {page}")
+    content_text_tr = (DIST / "content" / "index.html").read_text(encoding="utf-8")
+    if '<meta property="og:image" content="https://www.alika.tr/og.jpg"' not in content_text_tr:
+        errors.append("Share image is missing from the content page")
     if "AliKa: Kısıtlamıyoruz, planlıyoruz" not in root_page:
         errors.append("Turkish home page is not pre-rendered with the campaign message")
     if "Windows satın alımı Android’i kapsamaz" not in root_page:

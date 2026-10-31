@@ -55,7 +55,9 @@ function schema(lang, copy, canonical, storeUrl) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'AliKa Parental Control',
+    // Türkçe marka adı Türkçe sayfada; İngilizce ad diğer dillerde ve alternatif ad olarak kalır.
+    name: lang === 'tr' ? 'AliKa Ebeveyn Kontrolü' : 'AliKa Parental Control',
+    alternateName: lang === 'tr' ? ['AliKa', 'AliKa Parental Control'] : ['AliKa'],
     description: copy.seo.schemaDescription,
     inLanguage: lang,
     applicationCategory: 'UtilitiesApplication',
@@ -78,7 +80,17 @@ function schema(lang, copy, canonical, storeUrl) {
     };
   }
   // </script> kaçışı: JSON içinde "<" geçerse etiketi kapatmasın.
-  return `<script type="application/ld+json">${JSON.stringify(data).replaceAll('<', '\\u003c')}</script>`;
+  const ld = (value) => `<script type="application/ld+json">${JSON.stringify(value).replaceAll('<', '\\u003c')}</script>`;
+  if (lang !== 'tr') return ld(data);
+  // Google arama sonucundaki site adını kök ana sayfadaki WebSite şemasından alır.
+  const site = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'AliKa Ebeveyn Kontrolü',
+    alternateName: ['AliKa'],
+    url: `${BASE_URL}/`,
+  };
+  return `${ld(data)}\n    ${ld(site)}`;
 }
 
 function fallback(copy, storeUrl, playUrl) {
