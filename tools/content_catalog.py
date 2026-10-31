@@ -15,6 +15,9 @@ COUNTRY_NAMES = {"turkiye": "Türkiye"}
 PUBLISHED_GRADES = {"turkiye": frozenset({5, 6, 7, 8})}
 # LGS deneme paketi ders paketlerinden ayrıdır (başlıkta assessment.kind: lgs-deneme).
 LGS_FOLDER = "lgs-2027"
+# LGS 2028 hazırlık (7. sınıf) iki parçadır: deneme paketi (assessment.kind: lgs-deneme) ve ünite setleri
+# (assessment yok, sorularda lgsSet). İkisi de ders kapsamına girmez; ayrı bölümde, ayrı ZIP'lerle sunulur.
+LGS_PREP_FOLDERS = {"lgs-2028": "lgs-prep-exam", "lgs-2028-unite-setleri": "lgs-prep-units"}
 # Ders kartlarının sırası; listede olmayan ders sona, adına göre gelir.
 SUBJECT_ORDER = (
     "turkce", "matematik", "fen-bilimleri", "sosyal-bilgiler", "inkilap-tarihi", "ingilizce",
@@ -28,6 +31,8 @@ GAME_PATH = re.compile(r"^games/(?P<slug>[a-z0-9-]+)/dist/(?P<lang>[a-z]{2})/(?P
 REQUIREMENTS = {
     "lessons": {"windows": "1.2.12", "android": "0.3.11"},
     "lgs": {"windows": "1.2.12", "android": "0.3.11"},
+    # İki öbekli TYMM kodları ve lgsSet Windows 1.2.15'te; Android'e bir sonraki Play sürümüyle gelecek.
+    "lgsPrep": {"windows": "1.2.15", "android": None},
     "primary": {"windows": "1.2.12", "android": None},
     "games": {"windows": "1.2.12", "android_tv": "in-app"},
 }
@@ -99,6 +104,11 @@ def _katalog_packages(content_root: Path, data_output: Path) -> list[dict]:
         is_lgs = folder == LGS_FOLDER
         if is_lgs and (pack.get("assessment") or {}).get("kind") != "lgs-deneme":
             raise ValueError(f"LGS paketi deneme olarak işaretli değil: {rel}")
+        prep_kind = LGS_PREP_FOLDERS.get(folder)
+        if prep_kind == "lgs-prep-exam" and (pack.get("assessment") or {}).get("kind") != "lgs-deneme":
+            raise ValueError(f"LGS hazırlık deneme paketi deneme olarak işaretli değil: {rel}")
+        if prep_kind == "lgs-prep-units" and pack.get("assessment"):
+            raise ValueError(f"Ünite seti paketi assessment taşımamalı: {rel}")
         if not _published(country_slug, grade):
             continue
         _copy(source, data_output / rel)
@@ -109,11 +119,11 @@ def _katalog_packages(content_root: Path, data_output: Path) -> list[dict]:
             "country_code": str(pack.get("country") or "TR").upper(),
             "grade_slug": grade_slug,
             "grade": grade,
-            "kind": "lgs" if is_lgs else "lesson",
+            "kind": "lgs" if is_lgs else prep_kind or "lesson",
             "subject_slug": folder,
             "subject": subject,
             "package_id": entry["paketId"],
-            "title": subject if is_lgs else _package_label(str(pack.get("theme") or filename), grade, subject),
+            "title": subject if is_lgs or prep_kind else _package_label(str(pack.get("theme") or filename), grade, subject),
             "filename": filename,
             "download_url": f"/icerik/veri/{rel.as_posix()}",
             "sha256": entry["sha256"],
@@ -333,6 +343,23 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
         "notes": sum(row["notes"] for row in lgs),
         **(_write_bundle(bundle_output / "turkiye-8-sinif-lgs-2027.zip", lgs) if lgs else {}),
     }
+    lgs_prep: dict = {}
+    for folder, kind in LGS_PREP_FOLDERS.items():
+        rows = [row for row in packages if row["kind"] == kind]
+        if not rows:
+            continue
+        rows.sort(key=lambda row: _subject_sort_key(
+            {**row, "subject_slug": row["filename"].removesuffix(".jsonl").removeprefix(f"{folder}-")}
+        ))
+        lgs_prep["exam" if kind == "lgs-prep-exam" else "units"] = {
+            "packages": [_public(row) for row in rows],
+            "questions": sum(row["questions"] for row in rows),
+            "notes": sum(row["notes"] for row in rows),
+            **_write_bundle(bundle_output / f"turkiye-7-sinif-{folder}.zip", rows),
+        }
+    if lgs_prep:
+        lgs_prep = {"title": "LGS 2028 hazırlık", "grade": 7, **lgs_prep}
+    prep_rows = [row for row in packages if row["kind"] in LGS_PREP_FOLDERS.values()]
     primary = _primary_packages(content_root, data_output)
     games = _games(content_root, output)
 
@@ -343,6 +370,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
         "grades": grades,
         "subjects": subjects,
         "lgs": lgs_section,
+        "lgs_prep": lgs_prep,
         "primary": primary,
         "games": games,
         "totals": {
@@ -354,6 +382,8 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
             "questions": sum(row["questions"] for row in lessons),
             "lgsPackages": len(lgs),
             "lgsQuestions": lgs_section["questions"],
+            "lgsPrepPackages": len(prep_rows),
+            "lgsPrepQuestions": sum(row["questions"] for row in prep_rows),
             "primaryPackages": len(primary),
             "primaryQuestions": sum(row["questions"] for row in primary),
             "games": len(games),
