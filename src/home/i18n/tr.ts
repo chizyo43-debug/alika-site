@@ -300,7 +300,7 @@ const tr: HomeCopy = {
       {
         href: '/rehber/15-yas-alti-sosyal-medya-duzenlemesi/',
         title: '15 yaş altı sosyal medya düzenlemesi',
-        body: '1 Kasım 2026’da ne değişiyor? Yaş doğrulama, 15–18 yaş hesapları ve ailelerin yapabilecekleri.',
+        body: '1 Kasım 2026’da ne değişti? Yaş doğrulama, 15–18 yaş hesapları ve ailelerin yapabilecekleri.',
       },
       {
         href: '/rehber/ara-tatil-ekran-suresi-plani/',
