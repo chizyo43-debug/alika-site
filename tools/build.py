@@ -1182,6 +1182,13 @@ PUBLISHED_GUIDES = tuple(guide for guide in GUIDES if SHOW_DRAFTS or not guide.g
 # Rehberlerin görünen ve yapılandırılmış son güncelleme tarihi.
 GUIDE_UPDATED = ("2026-10-17", "17 Ekim 2026")
 SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
+# Veli kiti 1 (ara tatil); 23 Kasım'dan sonra okullar sayfasından kaldırılabilir.
+ARA_TATIL_KIT_PDF = "ara-tatil-ekran-plani-veli-notu.pdf"
+ARA_TATIL_GROUP_MESSAGE = (
+    "Değerli velilerimiz, 16–20 Kasım ara tatili hafta sonlarıyla birlikte 9 gün sürecek. "
+    "Tatildeki ekran süresini çocuğunuzla önceden konuşup birlikte planlamak, tatil boyunca yaşanabilecek tartışmaları azaltabilir. "
+    "Ekteki tek sayfalık notta 9 günlük bir plan tablosu var; isterseniz yazdırıp çocuğunuzla birlikte doldurabilirsiniz. İyi tatiller dileriz."
+)
 
 ACCESS_LABELS = {
     "tr": ("İçeriğe geç", "Menü", "Geç", "Ortak ekran", "Hazır", "Yanıt gizli"),
@@ -1623,6 +1630,13 @@ def school_body() -> str:
           <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu sayfa AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır.</p>
         </header>
         <section>
+          <h2>Ara tatil için veli notu (16–20 Kasım)</h2>
+          <p>Tek sayfalık not, dokuz günlük tatil için dört adım ve çocukla birlikte doldurulacak bir plan tablosu içerir. Alttaki QR kod <a href="/{GUIDE_BASE}/ara-tatil-ekran-suresi-plani/">ara tatil rehberine</a> gider. Okul ve sınıf adı için boş alan bırakılmıştır.</p>
+          <div class="button-row"><a class="button" href="/okullar/{ARA_TATIL_KIT_PDF}" download>Ara tatil notunu indirin (PDF)</a><a class="button" href="/okullar/ara-tatil-veli-notu/">Yazdırılabilir sayfayı açın</a></div>
+          <p><strong>Veli grubuna notla birlikte gönderebileceğiniz kısa metin:</strong></p>
+          <blockquote><p>{esc(ARA_TATIL_GROUP_MESSAGE)}</p></blockquote>
+        </section>
+        <section>
           <h2>Tek sayfalık veli notu</h2>
           <p>Not, ailece ekran planını beş adımda anlatır ve haftalık bir plan tablosu içerir. Okul ve sınıf adı için boş alan bırakılmıştır.</p>
           <div class="button-row"><a class="button" href="/okullar/{SCHOOL_KIT_PDF}" download>Veli notunu indirin (PDF)</a><a class="button" href="/okullar/veli-notu/">Yazdırılabilir sayfayı açın</a></div>
@@ -1657,13 +1671,89 @@ def school_kit_document() -> str:
         "Haftalık gözden geçirme günü belirlendi.",
     )
     check_items = "".join(f"<li>{esc(item)}</li>" for item in checks)
+    body = f"""
+    <header>
+      <img src="/assets/brand/alika-logo.png" alt="">
+      <div><h1>Ailece Ekran Planı</h1><p>Veli bilgilendirme notu · Ortaokul (5–8. sınıf)</p></div>
+    </header>
+    <div class="fields"><span>Okul:</span><span>Sınıf:</span></div>
+    <p>Ekran süresi tartışmaları çoğu zaman süre bittiği anda başlar. Kural önceden, birlikte ve yazılı olarak belirlendiğinde her akşam yeniden pazarlık etmek gerekmez. Bu not evde uygulayabileceğiniz basit bir plan önerir; bunun için bir uygulama kullanmanız gerekmez.</p>
+    <h2>5 adımda aile planı</h2>
+    <ol>{step_items}</ol>
+    <h2>Haftalık planımız</h2>
+    <table>
+      <thead><tr><th scope="col">Gün</th><th scope="col">Ekran süresi</th><th scope="col">Ekranlar kapanır</th><th scope="col">Ekran dışı plan</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+    <h2>Ailemizin kuralları</h2>
+    <ol class="lines"><li></li><li></li><li></li></ol>
+    <h2>İlk hafta kontrolü</h2>
+    <ul class="checks">{check_items}</ul>
+    <footer>
+      <p><strong>Daha fazla rehber ve yazdırılabilir plan:</strong> alika.tr/rehber</p>
+      <p>Bu not, AliKa ebeveyn kontrolü uygulamasının geliştiricisi ErenKa Software tarafından hazırlanmıştır. Planı uygulamak için bir uygulama gerekmez; uygulama kullanmak tamamen isteğe bağlıdır. İletişim: destek@alika.tr</p>
+    </footer>"""
+    return school_kit_sheet("Ailece Ekran Planı — Veli Bilgilendirme Notu", body)
+
+
+def ara_tatil_kit_document() -> str:
+    """Veli kiti 1: ara tatil için tek sayfalık (A4) veli notu; QR ara tatil rehberine gider."""
+    guide = next(g for g in GUIDES if g["slug"] == "ara-tatil-ekran-suresi-plani")
+    printable = guide["printable"]
+    steps = (
+        ("Tatilden önce kısa bir aile konuşması yapın.", "Çocuğunuza tatilde neler yapmak istediğini sorun; ödevleri, ziyaretleri ve yolculukları birlikte takvime yazın."),
+        ("Günlük süreyi ve kapanış saatini önceden belirleyin.", "Tatilde süre okul gününden biraz fazla olabilir; önemli olan bunun önceden belli olmasıdır."),
+        ("Her güne bir ekran dışı plan yazın.", "Park, kütüphane, kutu oyunu, birlikte yemek, spor ya da kitap: günde küçük bir etkinlik yeterlidir."),
+        ("Son iki günü okula dönüşe ayırın.", "21–22 Kasım’da uyku ve ekran kapanış saatini okul günlerindeki saate geri çekin."),
+    )
+    step_items = "".join(f"<li><strong>{esc(title)}</strong> {esc(body)}</li>" for title, body in steps)
+    head = "".join(f'<th scope="col">{esc(column)}</th>' for column in printable["columns"])
+    rows = "".join(
+        f'<tr><th scope="row">{esc(row[0])}</th>{"<td></td>" * (len(row) - 1)}</tr>' for row in printable["rows"]
+    )
+    checks = (
+        "Plan çoğu gün tuttu mu?",
+        "En çok hangi ekran dışı etkinliği sevdik?",
+        "Uyku saati okul düzenine döndü mü?",
+        "Okul haftası için neyi değiştiriyoruz?",
+    )
+    check_items = "".join(f"<li>{esc(item)}</li>" for item in checks)
+    body = f"""
+    <header>
+      <img src="/assets/brand/alika-logo.png" alt="">
+      <div><h1>Ara Tatil Ekran Planı</h1><p>Veli bilgilendirme notu · 14–22 Kasım 2026</p></div>
+    </header>
+    <div class="fields"><span>Okul:</span><span>Sınıf:</span></div>
+    <p>Birinci dönem ara tatili 16–20 Kasım 2026’dadır; hafta sonlarıyla birlikte 14 Kasım Cumartesi’den 22 Kasım Pazar’a kadar dokuz gün sürer. Tatilde ekran süresinin sınırsız olması gerekmez: kural tatil başlamadan, çocukla birlikte belirlendiğinde tatilin ortasında yeni bir tartışma başlamaz. Bu planı uygulamak için bir uygulama gerekmez.</p>
+    <h2>Tatil başlamadan 4 adım</h2>
+    <ol>{step_items}</ol>
+    <h2>9 günlük planımız</h2>
+    <table class="nine">
+      <thead><tr>{head}</tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+    <h2>Tatil bitince birlikte konuşun</h2>
+    <ul class="checks">{check_items}</ul>
+    <footer class="with-qr">
+      <img class="qr" src="/okullar/ara-tatil-qr.svg" alt="Ara tatil rehberinin QR kodu">
+      <div>
+        <p><strong>Ayrıntılı rehber ve yazdırılabilir tablo:</strong> alika.tr/rehber/ara-tatil-ekran-suresi-plani</p>
+        <p>Okulunuzun duyurusu farklıysa tarihleri kendi takviminize göre düzenleyin.</p>
+        <p>Bu not, AliKa ebeveyn kontrolü uygulamasının geliştiricisi ErenKa Software tarafından hazırlanmıştır. Planı uygulamak için bir uygulama gerekmez; uygulama kullanmak tamamen isteğe bağlıdır. İletişim: destek@alika.tr</p>
+      </div>
+    </footer>"""
+    return school_kit_sheet("Ara Tatil Ekran Planı — Veli Bilgilendirme Notu", body)
+
+
+def school_kit_sheet(title: str, body: str) -> str:
+    """Okulda çoğaltılan A4 veli notlarının ortak sayfa kalıbı (noindex)."""
     return f"""<!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Ailece Ekran Planı — Veli Bilgilendirme Notu</title>
+  <title>{esc(title)}</title>
   <link rel="icon" href="/assets/brand/alika-logo.png">
   <style>
     @page {{ size: A4; margin: 14mm 15mm; }}
@@ -1691,6 +1781,11 @@ def school_kit_document() -> str:
     ul.checks li::before {{ content: ''; position: absolute; left: 0; top: 3px; width: 11px; height: 11px; border: 1.5px solid #0a1631; border-radius: 2px; }}
     footer {{ margin-top: 12px; padding-top: 7px; border-top: 1px solid #c9d2e0; color: #4a5872; font-size: 8.8pt; }}
     footer strong {{ color: #0a1631; }}
+    table.nine th, table.nine td {{ height: 8.2mm; font-size: 9.5pt; }}
+    table.nine tbody th {{ width: 33%; }}
+    footer.with-qr {{ display: flex; gap: 12px; align-items: center; }}
+    footer.with-qr .qr {{ flex: none; width: 24mm; height: 24mm; }}
+    footer.with-qr p {{ margin: 2px 0; }}
     .print {{ display: block; width: 210mm; margin: 0 auto 24px; text-align: right; }}
     .print button {{ padding: 10px 18px; border: 0; border-radius: 999px; background: #0a1631; color: #fff; font: 600 11pt 'Segoe UI', sans-serif; cursor: pointer; }}
     @media screen and (max-width: 840px) {{ .sheet, .print {{ width: auto; margin: 8px; min-height: 0; padding: 18px 16px; }} }}
@@ -1698,28 +1793,7 @@ def school_kit_document() -> str:
   </style>
 </head>
 <body>
-  <main class="sheet">
-    <header>
-      <img src="/assets/brand/alika-logo.png" alt="">
-      <div><h1>Ailece Ekran Planı</h1><p>Veli bilgilendirme notu · Ortaokul (5–8. sınıf)</p></div>
-    </header>
-    <div class="fields"><span>Okul:</span><span>Sınıf:</span></div>
-    <p>Ekran süresi tartışmaları çoğu zaman süre bittiği anda başlar. Kural önceden, birlikte ve yazılı olarak belirlendiğinde her akşam yeniden pazarlık etmek gerekmez. Bu not evde uygulayabileceğiniz basit bir plan önerir; bunun için bir uygulama kullanmanız gerekmez.</p>
-    <h2>5 adımda aile planı</h2>
-    <ol>{step_items}</ol>
-    <h2>Haftalık planımız</h2>
-    <table>
-      <thead><tr><th scope="col">Gün</th><th scope="col">Ekran süresi</th><th scope="col">Ekranlar kapanır</th><th scope="col">Ekran dışı plan</th></tr></thead>
-      <tbody>{rows}</tbody>
-    </table>
-    <h2>Ailemizin kuralları</h2>
-    <ol class="lines"><li></li><li></li><li></li></ol>
-    <h2>İlk hafta kontrolü</h2>
-    <ul class="checks">{check_items}</ul>
-    <footer>
-      <p><strong>Daha fazla rehber ve yazdırılabilir plan:</strong> alika.tr/rehber</p>
-      <p>Bu not, AliKa ebeveyn kontrolü uygulamasının geliştiricisi ErenKa Software tarafından hazırlanmıştır. Planı uygulamak için bir uygulama gerekmez; uygulama kullanmak tamamen isteğe bağlıdır. İletişim: destek@alika.tr</p>
-    </footer>
+  <main class="sheet">{body}
   </main>
   <p class="print"><button type="button" onclick="window.print()">Yazdır / PDF olarak kaydet</button></p>
 </body>
@@ -2120,6 +2194,7 @@ def build() -> None:
     )
     # Veli notu yazdırma sayfasıdır (noindex); PDF'i public/okullar/ altındadır.
     write_page(DIST / "okullar" / "veli-notu" / "index.html", school_kit_document())
+    write_page(DIST / "okullar" / "ara-tatil-veli-notu" / "index.html", ara_tatil_kit_document())
 
     write_page(DIST / "404.html", not_found_document(locales))
 
