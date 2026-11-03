@@ -111,7 +111,7 @@ geçmişi cihazda kalır ya da onaylanan yerel ağda eşleştirilmiş aile cihaz
 taşınır.</li>
 <li>E-postayla gönderilmesi seçilen bir hata raporu ya da hatalı soru bildirimi dışında
 (aşağıdaki “Ebeveynin gönderdiği hata raporları” ve “Hatalı soru bildirimi” bölümlerine bakın) AliKa, yalnızca aşağıda açıklanan sınırlı Android aile
-aboneliği üst verilerini AliKa’nın işlettiği bir lisans hizmetine gönderir. Bu hizmete çocuk içeriği,
+aboneliği üst verilerini ve ebeveyn girerse ücretsiz erişim kodunu AliKa’nın işlettiği bir lisans hizmetine gönderir. Bu hizmete çocuk içeriği,
 kullanım geçmişi, mesajlar, ziyaret edilen alan adları, konum, Google hesap adı veya e-posta adresi,
 IMEI ya da Android ID <strong>gönderilmez</strong>.</li>
 <li>AliKa kullanıcı verilerini satmaz; reklam veya analiz sağlayıcılarıyla paylaşmaz.</li>
@@ -136,6 +136,25 @@ saklanmaz. Google hesap adları ve e-posta adresleri lisans hizmeti tarafından 
 10 cihaz sınırının uygulanması için kullanılır. Aktarımlar HTTPS/TLS kullanır. Etkin olmayan veya
 süresi dolmuş aile lisansı kayıtları ve bunlara bağlı cihaz kayıtları 90 gün içinde kalıcı olarak
 silinir. Google Play satın alımları Google’ın kendi gizlilik koşullarına göre ayrıca işler.</p>
+
+<h3>İsteğe bağlı ücretsiz erişim kodu</h3>
+<p>AliKa ücretsiz kullanım verdiği kişilere (örneğin soru kalitesini deneyen eğitimcilere) tek
+kullanımlık bir erişim kodu verebilir. Kod yalnızca ebeveyn onu girerse kullanılır; normal satın
+alma veya deneme akışında hiçbir şey gönderilmez.</p>
+<ul>
+<li><strong>Android:</strong> kod yukarıda açıklanan lisans hizmetine gider ve aynı sınırlı üst
+verileri işler (aile kimliği, AliKa cihaz kimliği, cihaz açık anahtarı özeti).</li>
+<li><strong>Windows:</strong> lisans ekranındaki veya Ayarlar’daki <strong>Erişim kodum var</strong>
+alanına girilen kod, bu bilgisayar için hesaplanan tek yönlü bir kimlikle (Windows makine
+kimliğinin SHA-256 özeti; ham makine kimliği gönderilmez) birlikte bir kez HTTPS/TLS ile AliKa
+lisans hizmetine gönderilir. Hizmet bu bilgisayara bağlı, imzalı bir lisans döndürür; lisans
+<code>%ProgramData%\AliKa\</code> altında saklanır ve sonrasında bağlantı gerekmez. Kullanım,
+profil, öğrenme veya başka bir veri gönderilmez.</li>
+<li>Hizmet kodun kendisini değil, yalnızca SHA-256 özetini, ilk bağlandığı cihaz kimliğini ve
+ücretsiz sürenin başlangıç ve bitişini saklar. Bu kod kayıtları kodun yeniden kullanılmasını
+önlemek için tutulur; yukarıdaki 90 günlük silme kuralı bunlara uygulanmaz. Silinmelerini
+destek@alika.tr adresinden isteyebilirsiniz.</li>
+</ul>
 
 <h3>Ebeveynin gönderdiği hata raporları</h3>
 <p>Ebeveyn panelinde bir <strong>Hata raporu gönder</strong> düğmesi vardır (Android: Yardım;
