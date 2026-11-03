@@ -65,6 +65,7 @@ GUIDE_SLUGS = (
     "yariyil-tatili-ekran-suresi",
 )
 SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
+ARA_TATIL_KIT_PDF = "ara-tatil-ekran-plani-veli-notu.pdf"
 # Sosyal medya hesapları (ana sayfa altlığı, sabit sayfaların altlığı, ana sayfa JSON-LD sameAs).
 SOCIAL_IDS = ("instagram", "facebook", "x", "youtube", "linkedin")
 # Tek izinli analiz kaynağı: Cloudflare Web Analytics'in çerezsiz JS işaretçisi (tools/inject-analytics.mjs).
@@ -424,6 +425,14 @@ def main() -> None:
     kit_page = DIST / "okullar" / "veli-notu" / "index.html"
     if not kit_page.exists() or '<meta name="robots" content="noindex">' not in kit_page.read_text(encoding="utf-8"):
         errors.append("Printable parent note must exist and be noindex")
+    if f'href="/okullar/{ARA_TATIL_KIT_PDF}"' not in school_text or not (DIST / "okullar" / ARA_TATIL_KIT_PDF).exists():
+        errors.append("Schools page or its ara tatil parent-note PDF is missing")
+    ara_tatil_page = DIST / "okullar" / "ara-tatil-veli-notu" / "index.html"
+    ara_tatil_text = ara_tatil_page.read_text(encoding="utf-8") if ara_tatil_page.exists() else ""
+    if '<meta name="robots" content="noindex">' not in ara_tatil_text or 'src="/okullar/ara-tatil-qr.svg"' not in ara_tatil_text:
+        errors.append("Printable ara tatil note must exist, be noindex and show its QR code")
+    if not (DIST / "okullar" / "ara-tatil-qr.svg").exists():
+        errors.append("Ara tatil QR code is missing")
     if 'href="/okullar/"' not in (DIST / "rehber" / "index.html").read_text(encoding="utf-8"):
         errors.append("Guide hub must link the schools page")
 
