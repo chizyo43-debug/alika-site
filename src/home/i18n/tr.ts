@@ -162,7 +162,7 @@ const tr: HomeCopy = {
       lead: 'Ekran başındaki zaman öğrenmeye döner.',
       items: {
         quiz: { name: 'Soru çöz, süre kazan', body: 'Bir dakika için kaç doğru gerektiğini ve günlük üst sınırı siz seçersiniz.' },
-        content: { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik şimdilik Türkiye ortaokul (5–8. sınıf) müfredatı için; ders ve konuya göre seçilir. Kendi sorularınızı Excel ya da CSV ile eklersiniz.' },
+        content: { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik şimdilik Türkiye ortaokul (5–8. sınıf) ve Japonya ortaokul (中学校 1–3, 7–9. sınıf, Japonca) müfredatı için; ders ve konuya göre seçilir. Kendi sorularınızı Excel ya da CSV ile eklersiniz.' },
         figures: { name: 'Şekilli sorular', body: 'Geometri, koordinat düzlemi, grafik, tablo ve devre şemaları net çizilir.' },
         exam: { name: 'Deneme sınavı ve sonuç karnesi', body: 'Planladığınız saatte deneme sınavı. Sonuç karnesi ölçüm içindir, süre ödülü vermez.' },
         notes: { name: 'Ders notları ve Öğrenme Stüdyosu', body: 'Eklediğiniz ders notları bölüm bölüm açılır; çözümlü örnekler ve cevap açıklamalarıyla.' },
@@ -248,13 +248,13 @@ const tr: HomeCopy = {
       'Ödev yarım, oyun açık. Süre bitince ekranı kapatan anne baba kötü, kapatılan çocuk küskün; ertesi akşam aynı pazarlık yeniden başlar. AliKa, gerçek ailelerin her akşam yaşadığı bu sahneler, ekran süresi ve ders çalışma sorunları düşünülerek tasarlandı.',
       'Gördüğümüz şuydu: Yasak ekranı kapatıyor ama tartışmayı bitirmiyor. Çocuk kuralı önceden bilmeyince her kesinti bir sürprize, her sürpriz yeni bir pazarlığa dönüşüyor. Ders çalışmak da ekran süresinin rakibi gibi görülüyor.',
       'Biz soruyu tersinden sorduk: Ekran zaten hayatın içindeyse onu ders çalışmanın yanına koyabilir miyiz? AliKa’da kuralı aile birlikte koyar, çocuk kalan süresini önceden görür; isterse soru çözer ve sizin belirlediğiniz sınır içinde ek süre kazanır. “Kısıtlamıyoruz, planlıyoruz” sözü buradan geliyor.',
-      'AliKa bitmiş bir ürün değil. Aynı ana fikirle, ailelerden gelen geri bildirimlerle geliştirmeye devam ediyoruz. Hazır ders içeriğine Türkiye’deki ortaokul öğrencileriyle başladık; ardından LGS 2027 deneme paketi ve ilkokul çağı için görsel etkinlikler (ön sürüm) geldi. Diğer sınıflar ve ülkeler plan aşamasında.',
+      'AliKa bitmiş bir ürün değil. Aynı ana fikirle, ailelerden gelen geri bildirimlerle geliştirmeye devam ediyoruz. Hazır ders içeriğine Türkiye’deki ortaokul öğrencileriyle başladık; ardından Japonya ortaokul (中学校 1–3, 7–9. sınıf, Japonca) müfredatı, LGS 2027 deneme paketi ve ilkokul çağı için görsel etkinlikler (ön sürüm) geldi. Diğer sınıflar ve ülkeler plan aşamasında.',
     ],
     signature: 'AliKa ekibi · ErenKa Software',
     planTitle: 'Nerede duruyoruz?',
     plan: [
-      { status: 'ready', label: 'Bugün hazır', items: ['Windows ve Android uygulaması', 'Türkiye ortaokul (5–8. sınıf) konu anlatımları ve soruları', 'LGS 2027 deneme paketi', 'İlkokul görsel etkinlikleri (6–10 yaş, ön sürüm)', 'Android TV, Windows ortak ekran ve aile oyunları', 'Kendi sorularınızı Excel ya da CSV ile ekleme'] },
-      { status: 'plan', label: 'Plan aşamasında', items: ['İlkokul ve lise ders içerikleri', 'Diğer ülkelerin müfredatları'] },
+      { status: 'ready', label: 'Bugün hazır', items: ['Windows ve Android uygulaması', 'Türkiye ortaokul (5–8. sınıf) konu anlatımları ve soruları', 'Japonya ortaokul (中学校 1–3, 7–9. sınıf, Japonca) konu anlatımları ve soruları', 'LGS 2027 deneme paketi', 'İlkokul görsel etkinlikleri (6–10 yaş, ön sürüm)', 'Android TV, Windows ortak ekran ve aile oyunları', 'Kendi sorularınızı Excel ya da CSV ile ekleme'] },
+      { status: 'plan', label: 'Plan aşamasında', items: ['İlkokul ve lise ders içerikleri', 'Türkiye ve Japonya dışındaki ülkelerin müfredatları'] },
     ],
     contentLink: 'İçerik kütüphanesini aç',
   },
@@ -280,7 +280,7 @@ const tr: HomeCopy = {
       },
       {
         q: 'Hangi dersler ve sınıflar var?',
-        a: 'Şu an hazır içerik Türkiye ortaokul müfredatı (5–8. sınıf) için: derslere göre konu anlatımları ve sorular ile 8. sınıf için LGS 2027 deneme paketi. 6–10 yaş için okuma gerektirmeyen görsel etkinlikler ön sürüm olarak indirilebilir. Matematik alıştırma soruları uygulamanın içinde üretilir. İlkokul ve lise ders içerikleri ile diğer ülkelerin müfredatları plan aşamasında; bu arada kendi sorularınızı Excel şablonuyla ya da içerik paketleriyle ekleyebilirsiniz.',
+        a: 'Şu an hazır içerik Türkiye ortaokul müfredatı (5–8. sınıf) ve Japonya ortaokul (中学校 1–3, 7–9. sınıf, Japonca) müfredatı için: derslere göre konu anlatımları ve sorular ile Türkiye 8. sınıf için LGS 2027 deneme paketi. 6–10 yaş için okuma gerektirmeyen görsel etkinlikler ön sürüm olarak indirilebilir. Matematik alıştırma soruları uygulamanın içinde üretilir. İlkokul ve lise ders içerikleri ile Türkiye ve Japonya dışındaki ülkelerin müfredatları plan aşamasında; bu arada kendi sorularınızı Excel şablonuyla ya da içerik paketleriyle ekleyebilirsiniz.',
       },
       {
         q: 'AliKa çocuğumu gizlice izler mi?',
@@ -288,7 +288,7 @@ const tr: HomeCopy = {
       },
       {
         q: 'Hangi yaşlar için uygun?',
-        a: '5–18 yaş. Dil, görünüm, maskot ve kutlama dozu yaşa göre değişir; 15–18 yaşta maskotsuz, sade bir görünüm kullanılır. Hazır ders içeriği şimdilik ortaokul (5–8. sınıf) için.',
+        a: '5–18 yaş. Dil, görünüm, maskot ve kutlama dozu yaşa göre değişir; 15–18 yaşta maskotsuz, sade bir görünüm kullanılır. Hazır ders içeriği şimdilik Türkiye ortaokul (5–8. sınıf) ve Japonya ortaokul (中学校 1–3, 7–9. sınıf) için.',
       },
     ],
   },

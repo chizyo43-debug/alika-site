@@ -488,11 +488,12 @@ def main() -> None:
         totals = catalog.get("totals") or {}
         # alika-icerik 0aaf7bd (uzay kapaklı oyun paketleri): 100 ders + 6 LGS paketi, 1 ilkokul görsel paketi, 2 oyun × 9 dil × 4 yaş grubu.
         # alika-icerik #77: LGS 2028 hazırlık 7. sınıf, 6 deneme + 6 ünite seti paketi (450 + 327 soru).
+        # Japonya ortaokul (中学校 1–3 = 7–9. sınıf): 3 sınıf, 18 ders kartı, 28 paket, 9.500 soru, 190 not.
         expected_totals = {
-            "countries": 1,
-            "gradeGroups": 4,
-            "subjects": 28,
-            "lessonPackages": 100,
+            "countries": 2,
+            "gradeGroups": 7,
+            "subjects": 46,
+            "lessonPackages": 128,
             "lgsPackages": 6,
             "lgsPrepPackages": 12,
             "lgsPrepQuestions": 777,
@@ -504,13 +505,32 @@ def main() -> None:
         unexpected = {key: totals.get(key) for key, value in expected_totals.items() if totals.get(key) != value}
         if unexpected:
             errors.append(f"Content catalog totals are unexpected: {unexpected}")
-        # Yalnız Türkiye ortaokul (5–8) ders kapsamı yayımlanır; diğer sınıflar ve ülkeler plan aşamasında.
-        if catalog.get("published_scope") != {"turkiye": [5, 6, 7, 8]}:
-            errors.append(f"Published content scope must be Türkiye 5–8: {catalog.get('published_scope')}")
+        # Yalnız Türkiye ortaokul (5–8) ve Japonya ortaokul (7–9) ders kapsamı yayımlanır; diğer sınıflar ve ülkeler plan aşamasında.
+        published = {"turkiye": [5, 6, 7, 8], "japonya": [7, 8, 9]}
+        if catalog.get("published_scope") != published:
+            errors.append(f"Published content scope must be Türkiye 5–8 and Japonya 7–9: {catalog.get('published_scope')}")
+        country_names = {"turkiye": ("Türkiye", "TR"), "japonya": ("Japonya", "JP")}
         for kind in ("grades", "subjects"):
             for row in catalog.get(kind, []):
-                if row.get("country_slug") != "turkiye" or row.get("grade") not in {5, 6, 7, 8}:
+                if row.get("grade") not in published.get(row.get("country_slug"), []):
                     errors.append(f"Unpublished scope leaked into {kind}: {row.get('country_slug')} {row.get('grade')}")
+                if (row.get("country"), row.get("country_code")) != country_names.get(row.get("country_slug")):
+                    errors.append(f"Country name/code differs from its slug in {kind}: {row.get('country_slug')} {row.get('country')} {row.get('country_code')}")
+        # Japonya: 3 sınıf, 28 paket, 9.500 soru, 190 not; üç 社会 alanı kartlarda ayırt edilebilir.
+        jp_grades = [row for row in catalog.get("grades", []) if row.get("country_slug") == "japonya"]
+        jp_subjects = [row for row in catalog.get("subjects", []) if row.get("country_slug") == "japonya"]
+        jp_packages = [package for subject in jp_subjects for package in subject.get("packages", [])]
+        jp_figures = (
+            len(jp_grades), len(jp_packages),
+            sum(package.get("questions", 0) for package in jp_packages), sum(package.get("notes", 0) for package in jp_packages),
+        )
+        if jp_figures != (3, 28, 9500, 190):
+            errors.append(f"Japonya grades/packages/questions/notes must be 3/28/9500/190: {jp_figures}")
+        if any(package.get("language") != "ja" or package.get("country_code") != "JP" for package in jp_packages):
+            errors.append("Japonya packages must be Japanese-language JP packages")
+        jp_titles = [(row["grade"], row.get("subject_title")) for row in jp_subjects]
+        if len(jp_titles) != len(set(jp_titles)) or not {"社会（地理的分野）", "社会（歴史的分野）", "社会（公民的分野）"} <= {title for _, title in jp_titles}:
+            errors.append(f"Japonya 社会 cards must be distinguishable by field: {jp_titles}")
 
         def served_file(row: dict, label: str) -> Path | None:
             """İndirilen her dosya sitede /icerik/ altında durmalı ve katalogdaki sha256 ile eşleşmeli."""
@@ -546,6 +566,11 @@ def main() -> None:
                     manifest = json.loads(archive.read("MANIFEST.json"))
                     if manifest.get("schema") != "alika-class-bundle/v1":
                         errors.append(f"{label} bundle manifest schema is invalid: {target}")
+                    if label in ("Grade", "Subject") and (
+                        manifest.get("country") != row.get("country") or manifest.get("country_code") != row.get("country_code")
+                        or manifest.get("grade") != row.get("grade")
+                    ):
+                        errors.append(f"{label} bundle manifest country/grade differs from the catalog: {target}")
                     declared = {package["path"] for package in manifest.get("packages", [])}
                     if set(archive.namelist()) != declared | {"MANIFEST.json"}:
                         errors.append(f"{label} bundle entries differ from manifest: {target}")

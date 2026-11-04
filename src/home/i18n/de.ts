@@ -166,7 +166,7 @@ const de: HomeCopy = {
       lead: 'Zeit am Bildschirm wird zu Lernzeit.',
       items: {
         quiz: { name: 'Fragen lösen, Zeit verdienen', body: 'Sie wählen, wie viele richtige Antworten eine Minute kostet, und legen die Tagesgrenze fest.' },
-        content: { name: 'Fertige Inhalte und eigene Fragen', body: 'Fertige Inhalte gibt es derzeit für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch), nach Fach und Thema wählbar. Eigene Fragen fügen Sie per Excel oder CSV hinzu.' },
+        content: { name: 'Fertige Inhalte und eigene Fragen', body: 'Fertige Inhalte gibt es derzeit für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch) und für den japanischen Lehrplan der Mittelstufe (中学校, Jahrgänge 1–3, hier als Klassen 7–9, auf Japanisch), nach Fach und Thema wählbar. Eigene Fragen fügen Sie per Excel oder CSV hinzu.' },
         figures: { name: 'Fragen mit Abbildungen', body: 'Geometrie, Koordinatensysteme, Diagramme, Tabellen und Schaltpläne werden sauber gezeichnet.' },
         exam: { name: 'Übungsprüfung und Ergebnisbericht', body: 'Eine Übungsprüfung zur geplanten Zeit. Der Ergebnisbericht dient der Standortbestimmung und bringt keine Belohnungszeit.' },
         notes: { name: 'Lernnotizen und Lernstudio', body: 'Hinzugefügte Lernnotizen öffnen sich Abschnitt für Abschnitt, mit gelösten Beispielen und Erklärungen zu den Antworten.' },
@@ -253,13 +253,13 @@ const de: HomeCopy = {
       'Hausaufgaben halb fertig, das Spiel noch offen. Wer den Bildschirm ausschaltet, wenn die Zeit um ist, ist der Böse; das Kind ist beleidigt, und am nächsten Abend beginnt dieselbe Verhandlung von vorn. AliKa wurde mit Blick auf diese Szenen entwickelt, die echte Familien jeden Abend erleben – und auf die Probleme rund um Bildschirmzeit und Lernen.',
       'Was wir gesehen haben: Ein Verbot schaltet den Bildschirm aus, beendet aber nicht den Streit. Wenn Kinder die Regel nicht vorher kennen, wird jede Unterbrechung zur Überraschung und jede Überraschung zu einer neuen Verhandlung. Lernen wirkt dann wie der Gegner der Bildschirmzeit.',
       'Also haben wir die Frage umgedreht: Wenn Bildschirme ohnehin zum Leben gehören, können wir sie dann neben das Lernen stellen? In AliKa legt die Familie die Regel gemeinsam fest, und das Kind sieht seine verbleibende Zeit im Voraus; wenn es möchte, beantwortet es Fragen und verdient innerhalb der von Ihnen gesetzten Grenze zusätzliche Zeit. Daher kommt „Wir verbieten nicht. Wir planen.“',
-      'AliKa ist kein fertiges Produkt. Wir entwickeln es mit derselben Grundidee und mit dem Feedback von Familien weiter. Die fertigen Lerninhalte haben mit dem türkischen Lehrplan der Mittelstufe begonnen (Klassen 5–8, auf Türkisch); dazu kamen das LGS-2027-Probeprüfungspaket und visuelle Übungen für Grundschulkinder (Vorabversion). Weitere Klassenstufen und Länder sind in Planung.',
+      'AliKa ist kein fertiges Produkt. Wir entwickeln es mit derselben Grundidee und mit dem Feedback von Familien weiter. Die fertigen Lerninhalte haben mit dem türkischen Lehrplan der Mittelstufe begonnen (Klassen 5–8, auf Türkisch); dazu kamen der japanische Lehrplan der Mittelstufe (中学校, Jahrgänge 1–3, hier als Klassen 7–9, auf Japanisch), das LGS-2027-Probeprüfungspaket und visuelle Übungen für Grundschulkinder (Vorabversion). Weitere Klassenstufen und Länder sind in Planung.',
     ],
     signature: 'Das AliKa-Team · ErenKa Software',
     planTitle: 'Wo stehen wir?',
     plan: [
-      { status: 'ready', label: 'Heute verfügbar', items: ['Apps für Windows und Android', 'Themenerklärungen und Fragen für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch)', 'LGS-2027-Probeprüfungspaket (auf Türkisch)', 'Visuelle Übungen für die Grundschule (6–10 Jahre, Vorabversion)', 'Android TV, gemeinsamer Windows-Bildschirm und Familienspiele', 'Eigene Fragen per Excel oder CSV hinzufügen'] },
-      { status: 'plan', label: 'In Planung', items: ['Fachinhalte für Grundschule und Oberstufe', 'Lehrpläne anderer Länder'] },
+      { status: 'ready', label: 'Heute verfügbar', items: ['Apps für Windows und Android', 'Themenerklärungen und Fragen für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch)', 'Themenerklärungen und Fragen für den japanischen Lehrplan der Mittelstufe (中学校, Jahrgänge 1–3, hier als Klassen 7–9, auf Japanisch)', 'LGS-2027-Probeprüfungspaket (auf Türkisch)', 'Visuelle Übungen für die Grundschule (6–10 Jahre, Vorabversion)', 'Android TV, gemeinsamer Windows-Bildschirm und Familienspiele', 'Eigene Fragen per Excel oder CSV hinzufügen'] },
+      { status: 'plan', label: 'In Planung', items: ['Fachinhalte für Grundschule und Oberstufe', 'Lehrpläne anderer Länder als der Türkei und Japans'] },
     ],
     contentLink: 'Zur Inhaltsbibliothek',
   },
@@ -285,7 +285,7 @@ const de: HomeCopy = {
       },
       {
         q: 'Welche Fächer und Klassenstufen gibt es?',
-        a: 'Fertige Inhalte gibt es derzeit für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch): Themenerklärungen und Fragen nach Fach sowie das LGS-2027-Probeprüfungspaket für Klasse 8. Visuelle Übungen ohne Lesen für 6- bis 10-Jährige gibt es als Vorabversion. Matheübungen erzeugt die App selbst. Fachinhalte für Grundschule und Oberstufe sowie Lehrpläne anderer Länder sind in Planung; bis dahin fügen Sie eigene Fragen mit der Excel-Vorlage oder mit Inhaltspaketen hinzu.',
+        a: 'Fertige Inhalte gibt es derzeit für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch) und für den japanischen Lehrplan der Mittelstufe (中学校, Jahrgänge 1–3, hier als Klassen 7–9, auf Japanisch): Themenerklärungen und Fragen nach Fach sowie das LGS-2027-Probeprüfungspaket für die türkische Klasse 8. Visuelle Übungen ohne Lesen für 6- bis 10-Jährige gibt es als Vorabversion. Matheübungen erzeugt die App selbst. Fachinhalte für Grundschule und Oberstufe sowie Lehrpläne anderer Länder als der Türkei und Japans sind in Planung; bis dahin fügen Sie eigene Fragen mit der Excel-Vorlage oder mit Inhaltspaketen hinzu.',
       },
       {
         q: 'Überwacht AliKa mein Kind heimlich?',
@@ -293,7 +293,7 @@ const de: HomeCopy = {
       },
       {
         q: 'Für welches Alter ist AliKa geeignet?',
-        a: '5 bis 18 Jahre. Sprache, Aussehen, Maskottchen und wie viel gefeiert wird, ändern sich mit dem Alter; von 15 bis 18 gibt es eine schlichte Ansicht ohne Maskottchen. Fertige Lerninhalte gibt es derzeit für die Klassen 5–8 des türkischen Lehrplans.',
+        a: '5 bis 18 Jahre. Sprache, Aussehen, Maskottchen und wie viel gefeiert wird, ändern sich mit dem Alter; von 15 bis 18 gibt es eine schlichte Ansicht ohne Maskottchen. Fertige Lerninhalte gibt es derzeit für die Klassen 5–8 des türkischen Lehrplans und die Mittelstufe des japanischen Lehrplans (中学校, Klassen 7–9).',
       },
     ],
   },

@@ -166,7 +166,7 @@ const en: HomeCopy = {
       lead: 'Time in front of the screen turns into learning.',
       items: {
         quiz: { name: 'Answer questions, earn time', body: 'You choose how many correct answers one minute takes and set the daily cap.' },
-        content: { name: 'Ready-made content and your own questions', body: 'Ready-made content currently covers the Turkish middle-school curriculum (grades 5–8, in Turkish), chosen by subject and topic. You add your own questions with Excel or CSV.' },
+        content: { name: 'Ready-made content and your own questions', body: 'Ready-made content currently covers the Turkish middle-school curriculum (grades 5–8, in Turkish) and the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9, in Japanese), chosen by subject and topic. You add your own questions with Excel or CSV.' },
         figures: { name: 'Questions with figures', body: 'Geometry, coordinate planes, charts, tables and circuit diagrams are drawn clearly.' },
         exam: { name: 'Practice exam and result report', body: 'A practice exam at the time you schedule. The result report is for measuring progress and does not give reward time.' },
         notes: { name: 'Study Notes and Learning Studio', body: 'Study notes you add open section by section, with worked examples and answer explanations.' },
@@ -253,13 +253,13 @@ const en: HomeCopy = {
       'Homework half done, game still open. The parent who switches the screen off when time is up becomes the bad guy, the child sulks, and the next evening the same negotiation starts again. AliKa was designed around these scenes that real families live through every evening, and around the problems of screen time and studying.',
       'This is what we saw: a ban switches the screen off, but it doesn’t end the argument. When children don’t know the rule in advance, every interruption becomes a surprise, and every surprise becomes a new negotiation. Studying ends up looking like screen time’s rival.',
       'So we asked the question the other way round: if screens are already part of life, can we put them next to studying? In AliKa the family sets the rule together and the child sees the time left in advance; if they want, they answer questions and earn extra time within the limit you set. That is where “We don’t restrict. We plan.” comes from.',
-      'AliKa is not a finished product. We keep developing it around the same idea, guided by feedback from families. Ready-made lessons started with the Turkish middle-school curriculum (grades 5–8, in Turkish), followed by the LGS 2027 practice exam pack and visual activities for primary-age children (preview); other grades and countries are in the planning stage.',
+      'AliKa is not a finished product. We keep developing it around the same idea, guided by feedback from families. Ready-made lessons started with the Turkish middle-school curriculum (grades 5–8, in Turkish), followed by the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9, in Japanese), the LGS 2027 practice exam pack and visual activities for primary-age children (preview); other grades and countries are in the planning stage.',
     ],
     signature: 'The AliKa team · ErenKa Software',
     planTitle: 'Where are we now?',
     plan: [
-      { status: 'ready', label: 'Ready today', items: ['Windows and Android apps', 'Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish)', 'LGS 2027 practice exam pack (in Turkish)', 'Primary visual activities (ages 6–10, preview)', 'Android TV, the Windows shared screen and family games', 'Adding your own questions with Excel or CSV'] },
-      { status: 'plan', label: 'In the planning stage', items: ['Primary and high-school subject content', 'Curricula for other countries'] },
+      { status: 'ready', label: 'Ready today', items: ['Windows and Android apps', 'Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish)', 'Topic explanations and questions for the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9, in Japanese)', 'LGS 2027 practice exam pack (in Turkish)', 'Primary visual activities (ages 6–10, preview)', 'Android TV, the Windows shared screen and family games', 'Adding your own questions with Excel or CSV'] },
+      { status: 'plan', label: 'In the planning stage', items: ['Primary and high-school subject content', 'Curricula for countries other than Türkiye and Japan'] },
     ],
     contentLink: 'Open the content library',
   },
@@ -285,7 +285,7 @@ const en: HomeCopy = {
       },
       {
         q: 'Which subjects and grades are available?',
-        a: 'Ready-made content is currently available for the Turkish middle-school curriculum (grades 5–8, in Turkish): topic explanations and questions by subject, plus the LGS 2027 practice exam pack for grade 8. Visual activities for ages 6–10 that need no reading are available as a preview. Math practice questions are generated inside the app. Primary and high-school subject content and other countries’ curricula are in the planning stage; meanwhile you can add your own questions with the Excel template or content packs.',
+        a: 'Ready-made content is currently available for the Turkish middle-school curriculum (grades 5–8, in Turkish) and for the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9, in Japanese): topic explanations and questions by subject, plus the LGS 2027 practice exam pack for Turkish grade 8. Visual activities for ages 6–10 that need no reading are available as a preview. Math practice questions are generated inside the app. Primary and high-school subject content and curricula of countries other than Türkiye and Japan are in the planning stage; meanwhile you can add your own questions with the Excel template or content packs.',
       },
       {
         q: 'Does AliKa secretly monitor my child?',
@@ -293,7 +293,7 @@ const en: HomeCopy = {
       },
       {
         q: 'Which ages is it for?',
-        a: 'Ages 5–18. Language, look, mascot and how much celebration change with age; from 15 to 18, a simple look without the mascot is used. Ready-made lessons currently cover grades 5–8 of the Turkish curriculum.',
+        a: 'Ages 5–18. Language, look, mascot and how much celebration change with age; from 15 to 18, a simple look without the mascot is used. Ready-made lessons currently cover grades 5–8 of the Turkish curriculum and the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9).',
       },
     ],
   },

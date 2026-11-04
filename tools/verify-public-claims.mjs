@@ -43,11 +43,13 @@ if (/Codex/.test(guideSource)) errors.push('public pages must not name internal 
 // Deneme süreleri mağazalardakiyle aynı kalmalı: Play 14 gün, Microsoft Store 7 gün.
 requireMatch(trCopy, /trialPlay: '14 gün ücretsiz/, 'Android trial must stay 14 days as on Google Play');
 requireMatch(trCopy, /trialStore: '7 gün ücretsiz/, 'Windows trial must stay 7 days as on Microsoft Store');
-// Hazır ders içeriği yalnız Türkiye ortaokul (5–8); diğer sınıflar ve ülkeler plan aşamasında.
+// Hazır ders içeriği yalnız Türkiye ortaokul (5–8) ve Japonya ortaokul (中学校 1–3 = 7–9); diğer sınıflar ve ülkeler plan aşamasında.
 requireMatch(trCopy, /Türkiye ortaokul \(5–8\. sınıf\)/, 'ready content scope must say Türkiye ortaokul (5–8. sınıf)');
+requireMatch(trCopy, /Japonya ortaokul \(中学校 1–3, 7–9\. sınıf, Japonca\)/, 'ready content scope must say Japonya ortaokul (中学校 1–3, 7–9. sınıf, Japonca)');
+requireMatch(trCopy, /Türkiye ve Japonya dışındaki ülkelerin müfredatları/, 'planned curricula must exclude Türkiye and Japonya');
 requireMatch(trCopy, /status: 'plan', label: 'Plan aşamasında'/, 'other grades and countries must be shown as Plan aşamasında');
 if (/United Kingdom|Vereinigte Königreich|Reino Unido|Royaume-Uni|Великобритани|イギリス|영국/.test(i18nSources.join(' '))) {
-  errors.push('home copy must not claim content packs for other countries; only Türkiye 5–8 is published');
+  errors.push('home copy must not claim content packs for other countries; only Türkiye 5–8 and Japonya 7–9 are published');
 }
 
 requireMatch(

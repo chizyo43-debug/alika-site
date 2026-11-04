@@ -166,7 +166,7 @@ const es: HomeCopy = {
       lead: 'El tiempo frente a la pantalla se convierte en aprendizaje.',
       items: {
         quiz: { name: 'Responde y gana tiempo', body: 'Tú eliges cuántas respuestas correctas cuesta un minuto y el límite diario.' },
-        content: { name: 'Contenido listo y tus propias preguntas', body: 'Por ahora el contenido listo es del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco) y se elige por asignatura y tema. Tus propias preguntas las añades con Excel o CSV.' },
+        content: { name: 'Contenido listo y tus propias preguntas', body: 'Por ahora el contenido listo es del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco) y del plan de estudios japonés de secundaria inferior (中学校, cursos 1 a 3, mostrados como 7.º a 9.º, en japonés), y se elige por asignatura y tema. Tus propias preguntas las añades con Excel o CSV.' },
         figures: { name: 'Preguntas con figuras', body: 'Geometría, plano cartesiano, gráficos, tablas y esquemas de circuitos se dibujan con claridad.' },
         exam: { name: 'Examen de práctica y boletín de resultados', body: 'Un examen de práctica a la hora que programes. El boletín sirve para medir y no da tiempo de recompensa.' },
         notes: { name: 'Apuntes y Studio de aprendizaje', body: 'Los apuntes que añadas se abren sección por sección, con ejemplos resueltos y explicaciones de las respuestas.' },
@@ -253,13 +253,13 @@ const es: HomeCopy = {
       'Los deberes a medias, el juego todavía abierto. Quien apaga la pantalla cuando se acaba el tiempo queda como el malo, el niño se enfada y a la noche siguiente empieza la misma negociación. AliKa se diseñó pensando en estas escenas que viven las familias reales cada noche y en los problemas del tiempo de pantalla y del estudio.',
       'Esto es lo que vimos: la prohibición apaga la pantalla, pero no termina la discusión. Cuando el niño no conoce la regla de antemano, cada corte se convierte en una sorpresa y cada sorpresa en una nueva negociación. Y estudiar acaba pareciendo el rival del tiempo de pantalla.',
       'Así que planteamos la pregunta al revés: si la pantalla ya forma parte de la vida, ¿podemos ponerla al lado del estudio? En AliKa la familia fija la regla en conjunto y el niño ve de antemano el tiempo que le queda; si quiere, responde preguntas y gana tiempo extra dentro del límite que tú fijas. De ahí viene «No restringimos. Planificamos.»',
-      'AliKa no es un producto terminado. Seguimos desarrollándolo con la misma idea y con los comentarios de las familias. El contenido escolar listo empezó con el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco); después llegaron el paquete de exámenes de práctica LGS 2027 y actividades visuales para primaria (versión preliminar). Otros cursos y países están en fase de planificación.',
+      'AliKa no es un producto terminado. Seguimos desarrollándolo con la misma idea y con los comentarios de las familias. El contenido escolar listo empezó con el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco); después llegaron el plan de estudios japonés de secundaria inferior (中学校, cursos 1 a 3, mostrados como 7.º a 9.º, en japonés), el paquete de exámenes de práctica LGS 2027 y actividades visuales para primaria (versión preliminar). Otros cursos y países están en fase de planificación.',
     ],
     signature: 'El equipo de AliKa · ErenKa Software',
     planTitle: '¿Dónde estamos?',
     plan: [
-      { status: 'ready', label: 'Listo hoy', items: ['Apps para Windows y Android', 'Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco)', 'Paquete de exámenes de práctica LGS 2027 (en turco)', 'Actividades visuales de primaria (6–10 años, versión preliminar)', 'Android TV, pantalla compartida en Windows y juegos en familia', 'Añadir tus propias preguntas con Excel o CSV'] },
-      { status: 'plan', label: 'En fase de planificación', items: ['Contenidos de primaria y bachillerato', 'Planes de estudios de otros países'] },
+      { status: 'ready', label: 'Listo hoy', items: ['Apps para Windows y Android', 'Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco)', 'Explicaciones de temas y preguntas del plan de estudios japonés de secundaria inferior (中学校, cursos 1 a 3, mostrados como 7.º a 9.º, en japonés)', 'Paquete de exámenes de práctica LGS 2027 (en turco)', 'Actividades visuales de primaria (6–10 años, versión preliminar)', 'Android TV, pantalla compartida en Windows y juegos en familia', 'Añadir tus propias preguntas con Excel o CSV'] },
+      { status: 'plan', label: 'En fase de planificación', items: ['Contenidos de primaria y bachillerato', 'Planes de estudios de países distintos de Turquía y Japón'] },
     ],
     contentLink: 'Abrir la biblioteca de contenido',
   },
@@ -285,7 +285,7 @@ const es: HomeCopy = {
       },
       {
         q: '¿Qué asignaturas y cursos hay?',
-        a: 'Ahora hay contenido listo para el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco): explicaciones de temas y preguntas por asignatura, y el paquete de exámenes de práctica LGS 2027 para 8.º curso. Las actividades visuales sin lectura para 6–10 años están disponibles como versión preliminar. Las preguntas de práctica de matemáticas se generan dentro de la app. Los contenidos de primaria y bachillerato y los planes de otros países están en fase de planificación; mientras tanto puedes añadir tus propias preguntas con la plantilla de Excel o con paquetes de contenido.',
+        a: 'Ahora hay contenido listo para el plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco) y para el plan de estudios japonés de secundaria inferior (中学校, cursos 1 a 3, mostrados como 7.º a 9.º, en japonés): explicaciones de temas y preguntas por asignatura, y el paquete de exámenes de práctica LGS 2027 para 8.º curso turco. Las actividades visuales sin lectura para 6–10 años están disponibles como versión preliminar. Las preguntas de práctica de matemáticas se generan dentro de la app. Los contenidos de primaria y bachillerato y los planes de países distintos de Turquía y Japón están en fase de planificación; mientras tanto puedes añadir tus propias preguntas con la plantilla de Excel o con paquetes de contenido.',
       },
       {
         q: '¿AliKa vigila a mi hijo en secreto?',
@@ -293,7 +293,7 @@ const es: HomeCopy = {
       },
       {
         q: '¿Para qué edades es?',
-        a: 'De 5 a 18 años. El lenguaje, el aspecto, la mascota y cuánto se celebra cambian con la edad; de 15 a 18 años se usa un aspecto sencillo y sin mascota. Por ahora el contenido escolar listo es de 5.º a 8.º curso del plan turco.',
+        a: 'De 5 a 18 años. El lenguaje, el aspecto, la mascota y cuánto se celebra cambian con la edad; de 15 a 18 años se usa un aspecto sencillo y sin mascota. Por ahora el contenido escolar listo es de 5.º a 8.º curso del plan turco y de secundaria inferior (中学校, 7.º a 9.º) del plan japonés.',
       },
     ],
   },

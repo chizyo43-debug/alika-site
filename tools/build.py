@@ -51,6 +51,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "",
         "packages": "Paketleri tek tek indir ({})",
         "requirements": "Ders ve LGS paketleri AliKa Windows 1.2.12 ve Android 0.3.11 ya da sonraki sürümlerini gerektirir.",
+        "requirements_jp": "Japonya paketleri, Japonca kuralları destekleyen güncel bir AliKa sürümü gerektirir. Android’de içe aktarma henüz gerçek cihazda denenmedi.",
         "lgs_title": "LGS 2027 deneme paketi",
         "lgs_body": "Altı derste onar deneme formu. Ders paketlerinden ayrıdır; AliKa bu soruları yalnız LGS denemelerinde kullanır.",
         "lgs_download": "LGS paketini indir",
@@ -83,6 +84,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "The video is in Turkish.",
         "packages": "Download packs one by one ({})",
         "requirements": "Subject and LGS packs need AliKa Windows 1.2.12 and Android 0.3.11 or later.",
+        "requirements_jp": "Japan packs need a current AliKa build that supports Japanese rules. Importing them on Android has not yet been tried on a real device.",
         "lgs_title": "LGS 2027 practice exam pack",
         "lgs_body": "Ten practice forms in each of six subjects (in Turkish). Kept apart from the subject packs; AliKa uses these questions only in LGS practice exams.",
         "lgs_download": "Download LGS pack",
@@ -115,6 +117,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "Das Video ist auf Türkisch.",
         "packages": "Pakete einzeln herunterladen ({})",
         "requirements": "Fach- und LGS-Pakete erfordern AliKa Windows 1.2.12 und Android 0.3.11 oder neuer.",
+        "requirements_jp": "Japan-Pakete benötigen eine aktuelle AliKa-Version mit Unterstützung für japanische Regeln. Der Import unter Android wurde noch nicht auf einem echten Gerät getestet.",
         "lgs_title": "LGS-2027-Probeprüfungspaket",
         "lgs_body": "Zehn Probeformen in jedem von sechs Fächern (auf Türkisch). Getrennt von den Fachpaketen; AliKa nutzt diese Fragen nur in LGS-Probeprüfungen.",
         "lgs_download": "LGS-Paket herunterladen",
@@ -147,6 +150,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "El vídeo está en turco.",
         "packages": "Descargar los paquetes uno a uno ({})",
         "requirements": "Los paquetes de asignatura y LGS requieren AliKa Windows 1.2.12 y Android 0.3.11 o posterior.",
+        "requirements_jp": "Los paquetes de Japón requieren una versión actual de AliKa compatible con las reglas del japonés. La importación en Android aún no se ha probado en un dispositivo real.",
         "lgs_title": "Paquete de exámenes de práctica LGS 2027",
         "lgs_body": "Diez modelos de examen en cada una de seis asignaturas (en turco). Separado de los paquetes de asignatura; AliKa usa estas preguntas solo en los exámenes de práctica LGS.",
         "lgs_download": "Descargar paquete LGS",
@@ -179,6 +183,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "La vidéo est en turc.",
         "packages": "Télécharger les packs un par un ({})",
         "requirements": "Les packs de matière et LGS nécessitent AliKa Windows 1.2.12 et Android 0.3.11 ou version ultérieure.",
+        "requirements_jp": "Les packs du Japon nécessitent une version récente d’AliKa qui prend en charge les règles du japonais. L’importation sur Android n’a pas encore été testée sur un appareil réel.",
         "lgs_title": "Pack d’examens blancs LGS 2027",
         "lgs_body": "Dix sujets d’entraînement dans chacune des six matières (en turc). Séparé des packs de matière ; AliKa utilise ces questions uniquement pour les examens blancs LGS.",
         "lgs_download": "Télécharger le pack LGS",
@@ -211,6 +216,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "O vídeo está em turco.",
         "packages": "Transferir os pacotes um a um ({})",
         "requirements": "Os pacotes de disciplina e LGS exigem AliKa Windows 1.2.12 e Android 0.3.11 ou posterior.",
+        "requirements_jp": "Os pacotes do Japão exigem uma versão atual do AliKa com suporte às regras do japonês. A importação no Android ainda não foi testada num dispositivo real.",
         "lgs_title": "Pacote de exames de treino LGS 2027",
         "lgs_body": "Dez provas de treino em cada uma de seis disciplinas (em turco). Separado dos pacotes de disciplina; o AliKa usa estas perguntas só nos exames de treino LGS.",
         "lgs_download": "Transferir pacote LGS",
@@ -243,6 +249,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "Видео на турецком языке.",
         "packages": "Скачать пакеты по одному ({})",
         "requirements": "Для пакетов предметов и LGS нужны AliKa для Windows 1.2.12 и Android 0.3.11 или новее.",
+        "requirements_jp": "Пакеты Японии требуют актуальной версии AliKa с поддержкой правил японского языка. Импорт на Android пока не проверен на реальном устройстве.",
         "lgs_title": "Пакет пробных экзаменов LGS 2027",
         "lgs_body": "По десять пробных вариантов по каждому из шести предметов (на турецком языке). Отделён от предметных пакетов; AliKa использует эти вопросы только в пробных экзаменах LGS.",
         "lgs_download": "Скачать пакет LGS",
@@ -275,6 +282,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "動画はトルコ語です。",
         "packages": "パッケージを個別にダウンロード（{}）",
         "requirements": "教科パックとLGSパックには AliKa Windows 1.2.12 以降と Android 0.3.11 以降が必要です。",
+        "requirements_jp": "日本の教材パックは、日本語のルールに対応した最新のAliKaが必要です。Androidでの取り込みは、まだ実機で確認していません。",
         "lgs_title": "LGS 2027 模擬試験パック",
         "lgs_body": "6教科それぞれに10回分の模擬試験（トルコ語）。教科パックとは別で、AliKaはこれらの問題をLGS模擬試験でのみ使います。",
         "lgs_download": "LGSパックをダウンロード",
@@ -307,6 +315,7 @@ CONTENT_SECTION_LABELS = {
         "video_lang": "영상은 튀르키예어입니다.",
         "packages": "패키지 개별 다운로드 ({})",
         "requirements": "과목 및 LGS 패키지는 AliKa Windows 1.2.12 및 Android 0.3.11 이상이 필요합니다.",
+        "requirements_jp": "일본 패키지는 일본어 규칙을 지원하는 최신 AliKa 버전이 필요합니다. Android에서의 가져오기는 아직 실제 기기에서 확인하지 않았습니다.",
         "lgs_title": "LGS 2027 모의고사 패키지",
         "lgs_body": "6개 과목마다 모의고사 10회분(튀르키예어). 과목 패키지와 별도이며, AliKa는 이 문항을 LGS 모의고사에서만 사용합니다.",
         "lgs_download": "LGS 패키지 다운로드",
@@ -336,18 +345,20 @@ LANGUAGE_NATIVE_NAMES = {
     "tr": "Türkçe", "en": "English", "de": "Deutsch", "es": "Español", "fr": "Français",
     "pt": "Português", "ru": "Русский", "ja": "日本語", "ko": "한국어",
 }
-# Sitede yayımlanan kapsam (tools/content_catalog.py PUBLISHED_GRADES ile aynı): hazır / plan aşamasında / ders sözcüğü.
+# Sitede yayımlanan kapsam (tools/content_catalog.py PUBLISHED_GRADES ile aynı: Türkiye 5–8, Japonya 7–9): hazır / plan aşamasında / ders sözcüğü.
 CONTENT_SCOPE_LABELS = {
-    "tr": ("Şu an hazır:", "Türkiye ortaokul müfredatı (5–8. sınıf) için konu anlatımları ve sorular, LGS 2027 deneme paketi, ilkokul (6–10 yaş) görsel etkinlikleri ve ortak ekran oyun paketleri.", "Plan aşamasında:", "İlkokul ve lise ders içerikleri ile diğer ülkelerin müfredatları.", "ders"),
-    "en": ("Available now:", "Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish), the LGS 2027 practice exam pack, primary visual activities (ages 6–10) and shared-screen game packs.", "In the planning stage:", "Primary and high-school subject content and other countries’ curricula.", "subjects"),
-    "de": ("Jetzt verfügbar:", "Themenerklärungen und Fragen für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch), das LGS-2027-Probeprüfungspaket, visuelle Übungen für die Grundschule (6–10 Jahre) und Spielpakete für den gemeinsamen Bildschirm.", "In Planung:", "Fachinhalte für Grundschule und Oberstufe sowie Lehrpläne anderer Länder.", "Fächer"),
-    "es": ("Disponible ahora:", "Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco), el paquete de exámenes de práctica LGS 2027, actividades visuales de primaria (6–10 años) y paquetes de juegos para la pantalla compartida.", "En fase de planificación:", "Contenidos de asignaturas de primaria y bachillerato y planes de estudios de otros países.", "asignaturas"),
-    "fr": ("Disponible maintenant :", "Explications de cours et questions pour le programme turc du collège (classes 5 à 8, en turc), le pack d’examens blancs LGS 2027, des activités visuelles pour le primaire (6–10 ans) et des packs de jeux pour l’écran commun.", "En phase de planification :", "Les contenus de matières du primaire et du lycée et les programmes d’autres pays.", "matières"),
-    "pt": ("Disponível agora:", "Explicações de temas e perguntas do currículo turco do 5.º ao 8.º ano (em turco), o pacote de exames de treino LGS 2027, atividades visuais do 1.º ciclo (6–10 anos) e pacotes de jogos para o ecrã partilhado.", "Em fase de planeamento:", "Conteúdos de disciplinas do 1.º ciclo e do ensino secundário e os currículos de outros países.", "disciplinas"),
-    "ru": ("Сейчас доступно:", "Объяснения тем и вопросы по турецкой программе средней школы (5–8 классы, на турецком языке), пакет пробных экзаменов LGS 2027, визуальные задания для начальной школы (6–10 лет) и игровые пакеты для общего экрана.", "На этапе планирования:", "Предметные материалы для начальной и старшей школы и программы других стран.", "предметов"),
-    "ja": ("現在提供中：", "トルコの中学校課程（5〜8年生、トルコ語）の単元解説と問題、LGS 2027 模擬試験パック、小学生向けビジュアル課題（6〜10歳）、共有画面用ゲームパック。", "計画段階：", "小学校・高校の教科コンテンツと、ほかの国のカリキュラム。", "教科"),
-    "ko": ("현재 제공:", "튀르키예 중학교 과정(5~8학년, 튀르키예어)의 단원 설명과 문제, LGS 2027 모의고사 패키지, 초등 시각 활동(6~10세), 공유 화면 게임 패키지.", "계획 단계:", "초등학교·고등학교 과목 콘텐츠와 다른 나라 교육과정.", "과목"),
+    "tr": ("Şu an hazır:", "Türkiye ortaokul müfredatı (5–8. sınıf) ve Japonya ortaokul müfredatı (中学校 1–3, 7–9. sınıf, Japonca) için konu anlatımları ve sorular, LGS 2027 deneme paketi, ilkokul (6–10 yaş) görsel etkinlikleri ve ortak ekran oyun paketleri.", "Plan aşamasında:", "İlkokul ve lise ders içerikleri ile Türkiye ve Japonya dışındaki ülkelerin müfredatları.", "ders"),
+    "en": ("Available now:", "Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish) and the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9, in Japanese), the LGS 2027 practice exam pack, primary visual activities (ages 6–10) and shared-screen game packs.", "In the planning stage:", "Primary and high-school subject content and curricula of countries other than Türkiye and Japan.", "subjects"),
+    "de": ("Jetzt verfügbar:", "Themenerklärungen und Fragen für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch) und für den japanischen Lehrplan der Mittelstufe (中学校, Jahrgänge 1–3, hier als Klassen 7–9, auf Japanisch), das LGS-2027-Probeprüfungspaket, visuelle Übungen für die Grundschule (6–10 Jahre) und Spielpakete für den gemeinsamen Bildschirm.", "In Planung:", "Fachinhalte für Grundschule und Oberstufe sowie Lehrpläne anderer Länder als der Türkei und Japans.", "Fächer"),
+    "es": ("Disponible ahora:", "Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco) y del plan de estudios japonés de secundaria inferior (中学校, cursos 1 a 3, mostrados como 7.º a 9.º, en japonés), el paquete de exámenes de práctica LGS 2027, actividades visuales de primaria (6–10 años) y paquetes de juegos para la pantalla compartida.", "En fase de planificación:", "Contenidos de asignaturas de primaria y bachillerato y planes de estudios de países distintos de Turquía y Japón.", "asignaturas"),
+    "fr": ("Disponible maintenant :", "Explications de cours et questions pour le programme turc du collège (classes 5 à 8, en turc) et le programme japonais du collège (中学校, années 1 à 3, présentées comme classes 7 à 9, en japonais), le pack d’examens blancs LGS 2027, des activités visuelles pour le primaire (6–10 ans) et des packs de jeux pour l’écran commun.", "En phase de planification :", "Les contenus de matières du primaire et du lycée et les programmes de pays autres que la Turquie et le Japon.", "matières"),
+    "pt": ("Disponível agora:", "Explicações de temas e perguntas do currículo turco do 5.º ao 8.º ano (em turco) e do currículo japonês do 7.º ao 9.º ano (中学校 1–3, em japonês), o pacote de exames de treino LGS 2027, atividades visuais do 1.º ciclo (6–10 anos) e pacotes de jogos para o ecrã partilhado.", "Em fase de planeamento:", "Conteúdos de disciplinas do 1.º ciclo e do ensino secundário e os currículos de países além da Turquia e do Japão.", "disciplinas"),
+    "ru": ("Сейчас доступно:", "Объяснения тем и вопросы по турецкой программе средней школы (5–8 классы, на турецком языке) и японской программе средней школы (中学校, годы 1–3, показаны как 7–9 классы, на японском языке), пакет пробных экзаменов LGS 2027, визуальные задания для начальной школы (6–10 лет) и игровые пакеты для общего экрана.", "На этапе планирования:", "Предметные материалы для начальной и старшей школы и программы стран, кроме Турции и Японии.", "предметов"),
+    "ja": ("現在提供中：", "トルコの中学校課程（5〜8年生、トルコ語）と日本の中学校課程（中学1〜3年、サイト上は7〜9年生、日本語）の単元解説と問題、LGS 2027 模擬試験パック、小学生向けビジュアル課題（6〜10歳）、共有画面用ゲームパック。", "計画段階：", "小学校・高校の教科コンテンツと、トルコ・日本以外の国のカリキュラム。", "教科"),
+    "ko": ("현재 제공:", "튀르키예 중학교 과정(5~8학년, 튀르키예어)과 일본 중학교 과정(중학교 1~3학년, 사이트에서는 7~9학년, 일본어)의 단원 설명과 문제, LGS 2027 모의고사 패키지, 초등 시각 활동(6~10세), 공유 화면 게임 패키지.", "계획 단계:", "초등학교·고등학교 과목 콘텐츠와 튀르키예·일본 외 다른 나라 교육과정.", "과목"),
 }
+# İçerik sayfasında ülke seçicinin açıldığı ülke: Japonca sayfa Japonya paketleriyle, diğerleri Türkiye ile açılır.
+CONTENT_DEFAULT_COUNTRY = {"ja": "japonya"}
 THOUSANDS_SEPARATORS = {"tr": ".", "de": ".", "es": ".", "pt": ".", "fr": "\u202f", "ru": "\u00a0"}
 CONTENT_BOOK_LABELS = {
     "tr": ("Ana sayfaya dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
@@ -1828,11 +1839,17 @@ def download_name(row: dict) -> str:
     return row["download_url"].rsplit("/", 1)[-1]
 
 
+def lang_attr(row: dict) -> str:
+    """Paket dili sayfa dilinden bağımsızdır (Japonya paketleri Japonca); Türkçe dışı başlıkları lang ile işaretler."""
+    language = row.get("language", "tr")
+    return "" if language == "tr" else f' lang="{esc(language)}"'
+
+
 def content_package_list(rows: list[dict], lang: str, summary: str, label_key: str = "title") -> str:
     """Bir dersin ya da LGS paketinin JSONL dosyalarını açılır listede tek tek indirme bağlantısı olarak verir."""
     labels = CONTENT_LIBRARY_LABELS[lang]
     items = "".join(
-        f"""<li><a href="{esc(row['download_url'])}" download="{esc(row['filename'])}">{esc(row[label_key])}</a>"""
+        f"""<li><a href="{esc(row['download_url'])}" download="{esc(row['filename'])}"{lang_attr(row)}>{esc(row[label_key])}</a>"""
         f"""<span>{format_count(row['questions'], lang)} {esc(labels[5])}</span></li>"""
         for row in rows
     )
@@ -1921,7 +1938,11 @@ def content_library(catalog: dict, lang: str) -> str:
             item[1],
         ),
     )
-    country_options = "".join(f'<option value="{esc(slug)}">{esc(name)}</option>' for slug, name in countries)
+    default_country = CONTENT_DEFAULT_COUNTRY.get(lang, "turkiye")
+    country_options = "".join(
+        f'<option value="{esc(slug)}"{" selected" if slug == default_country else ""}>{esc(name)}</option>'
+        for slug, name in countries
+    )
     grade_options = "".join(
         f'<option value="{esc(grade_slug)}" data-country-option="{esc(country)}">{esc(labels[7].format(grade))}</option>'
         for country, grade_slug, grade in grades
@@ -1937,11 +1958,14 @@ def content_library(catalog: dict, lang: str) -> str:
     subject_cards = "".join(f"""
       <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
         <small>{esc(row['country_code'])} · {esc(labels[7].format(row['grade']))}</small>
-        <h3>{esc(row['subject'])}</h3>
+        <h3{lang_attr(row)}>{esc(row['subject_title'])}</h3>
         <p>{format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}</p>
         <a class="package-cta" href="{esc(row['download_url'])}" download="{esc(download_name(row))}">{esc(labels[3])}</a>
         {content_package_list(row['packages'], lang, section['packages'].format(len(row['packages'])))}
       </article>""" for row in catalog["subjects"])
+    requirements_jp = (
+        f"<br>{esc(section['requirements_jp'])}" if any(row["country_slug"] == "japonya" for row in catalog["grades"]) else ""
+    )
     lgs = catalog.get("lgs") or {}
     video_lang = f'<p class="content-video-lang">{esc(section["video_lang"])}</p>' if section["video_lang"] else ""
     lgs_section = f"""
@@ -2010,7 +2034,7 @@ def content_library(catalog: dict, lang: str) -> str:
         <label>{esc(labels[0])}<select data-content-country>{country_options}</select></label>
         <label>{esc(labels[1])}<select data-content-grade>{grade_options}</select></label>
       </div>
-      <p class="honesty-note">{esc(labels[8])}<br>{esc(section['requirements'])}</p>
+      <p class="honesty-note">{esc(labels[8])}<br>{esc(section['requirements'])}{requirements_jp}</p>
       <aside class="content-howto" aria-labelledby="content-howto-title">
         <div>
           <h2 id="content-howto-title">{esc(section['howto_title'])}</h2>

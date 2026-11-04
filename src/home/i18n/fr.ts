@@ -166,7 +166,7 @@ const fr: HomeCopy = {
       lead: 'Le temps devant l’écran devient du temps pour apprendre.',
       items: {
         quiz: { name: 'Répondre, gagner du temps', body: 'Vous choisissez combien de bonnes réponses coûte une minute et fixez le plafond du jour.' },
-        content: { name: 'Contenus prêts et vos propres questions', body: 'Les contenus prêts couvrent pour l’instant le programme turc du collège (classes 5 à 8, en turc) et se choisissent par matière et thème ; vous ajoutez vos questions avec Excel ou CSV.' },
+        content: { name: 'Contenus prêts et vos propres questions', body: 'Les contenus prêts couvrent pour l’instant le programme turc du collège (classes 5 à 8, en turc) et le programme japonais du collège (中学校, années 1 à 3, présentées comme classes 7 à 9, en japonais), et se choisissent par matière et thème ; vous ajoutez vos questions avec Excel ou CSV.' },
         figures: { name: 'Questions avec figures', body: 'Géométrie, repère cartésien, graphiques, tableaux et schémas électriques sont tracés avec netteté.' },
         exam: { name: 'Examen d’entraînement et bulletin de résultats', body: 'Un examen d’entraînement à l’heure que vous planifiez. Le bulletin sert à mesurer et ne donne pas de temps de récompense.' },
         notes: { name: 'Fiches de cours et Studio d’apprentissage', body: 'Les fiches que vous ajoutez s’ouvrent partie par partie, avec des exemples corrigés et des explications des réponses.' },
@@ -253,13 +253,13 @@ const fr: HomeCopy = {
       'Les devoirs à moitié faits, le jeu encore ouvert. Le parent qui éteint l’écran quand le temps est écoulé passe pour le méchant, l’enfant boude, et le lendemain soir la même négociation recommence. AliKa a été conçu en pensant à ces scènes que vivent de vraies familles chaque soir, et aux problèmes de temps d’écran et de travail scolaire.',
       'Voici ce que nous avons constaté : l’interdiction éteint l’écran, mais elle ne met pas fin à la dispute. Quand l’enfant ne connaît pas la règle à l’avance, chaque coupure devient une surprise, et chaque surprise une nouvelle négociation. Les devoirs finissent par passer pour les rivaux du temps d’écran.',
       'Nous avons donc posé la question à l’envers : si l’écran fait déjà partie de la vie, peut-on le placer à côté des révisions ? Dans AliKa, la famille fixe la règle ensemble et l’enfant voit à l’avance le temps qu’il lui reste ; s’il le souhaite, il répond à des questions et gagne du temps supplémentaire dans la limite que vous fixez. C’est de là que vient « Nous ne restreignons pas. Nous planifions. »',
-      'AliKa n’est pas un produit fini. Nous continuons à le développer avec la même idée et grâce aux retours des familles. Les contenus scolaires prêts ont commencé avec le programme turc du collège (classes 5 à 8, en turc), puis sont arrivés le pack d’examens blancs LGS 2027 et des activités visuelles pour le primaire (préversion) ; les autres classes et pays sont en phase de planification.',
+      'AliKa n’est pas un produit fini. Nous continuons à le développer avec la même idée et grâce aux retours des familles. Les contenus scolaires prêts ont commencé avec le programme turc du collège (classes 5 à 8, en turc), puis sont arrivés le programme japonais du collège (中学校, années 1 à 3, présentées comme classes 7 à 9, en japonais), le pack d’examens blancs LGS 2027 et des activités visuelles pour le primaire (préversion) ; les autres classes et pays sont en phase de planification.',
     ],
     signature: 'L’équipe AliKa · ErenKa Software',
     planTitle: 'Où en sommes-nous ?',
     plan: [
-      { status: 'ready', label: 'Prêt aujourd’hui', items: ['Applications Windows et Android', 'Explications de cours et questions du programme turc du collège (classes 5 à 8, en turc)', 'Pack d’examens blancs LGS 2027 (en turc)', 'Activités visuelles pour le primaire (6–10 ans, préversion)', 'Android TV, écran commun Windows et jeux en famille', 'Ajouter vos propres questions avec Excel ou CSV'] },
-      { status: 'plan', label: 'En phase de planification', items: ['Contenus du primaire et du lycée', 'Programmes d’autres pays'] },
+      { status: 'ready', label: 'Prêt aujourd’hui', items: ['Applications Windows et Android', 'Explications de cours et questions du programme turc du collège (classes 5 à 8, en turc)', 'Explications de cours et questions du programme japonais du collège (中学校, années 1 à 3, présentées comme classes 7 à 9, en japonais)', 'Pack d’examens blancs LGS 2027 (en turc)', 'Activités visuelles pour le primaire (6–10 ans, préversion)', 'Android TV, écran commun Windows et jeux en famille', 'Ajouter vos propres questions avec Excel ou CSV'] },
+      { status: 'plan', label: 'En phase de planification', items: ['Contenus du primaire et du lycée', 'Programmes de pays autres que la Turquie et le Japon'] },
     ],
     contentLink: 'Ouvrir la bibliothèque de contenus',
   },
@@ -285,7 +285,7 @@ const fr: HomeCopy = {
       },
       {
         q: 'Quelles matières et quels niveaux sont proposés ?',
-        a: 'Les contenus prêts existent pour l’instant pour le programme turc du collège (classes 5 à 8, en turc) : explications de cours et questions par matière, et le pack d’examens blancs LGS 2027 pour la classe 8. Des activités visuelles sans lecture pour les 6–10 ans sont proposées en préversion. Les exercices de maths sont générés dans l’application. Les contenus du primaire et du lycée et les programmes d’autres pays sont en phase de planification ; en attendant, vous ajoutez vos propres questions avec le modèle Excel ou des packs de contenu.',
+        a: 'Les contenus prêts existent pour l’instant pour le programme turc du collège (classes 5 à 8, en turc) et pour le programme japonais du collège (中学校, années 1 à 3, présentées comme classes 7 à 9, en japonais) : explications de cours et questions par matière, et le pack d’examens blancs LGS 2027 pour la classe 8 turque. Des activités visuelles sans lecture pour les 6–10 ans sont proposées en préversion. Les exercices de maths sont générés dans l’application. Les contenus du primaire et du lycée et les programmes de pays autres que la Turquie et le Japon sont en phase de planification ; en attendant, vous ajoutez vos propres questions avec le modèle Excel ou des packs de contenu.',
       },
       {
         q: 'AliKa surveille-t-il mon enfant en secret ?',
@@ -293,7 +293,7 @@ const fr: HomeCopy = {
       },
       {
         q: 'Pour quels âges ?',
-        a: 'De 5 à 18 ans. Le langage, l’apparence, la mascotte et l’intensité des félicitations changent avec l’âge ; de 15 à 18 ans, l’affichage est sobre et sans mascotte. Les contenus scolaires prêts couvrent pour l’instant les classes 5 à 8 du programme turc.',
+        a: 'De 5 à 18 ans. Le langage, l’apparence, la mascotte et l’intensité des félicitations changent avec l’âge ; de 15 à 18 ans, l’affichage est sobre et sans mascotte. Les contenus scolaires prêts couvrent pour l’instant les classes 5 à 8 du programme turc et le collège du programme japonais (中学校, classes 7 à 9).',
       },
     ],
   },
