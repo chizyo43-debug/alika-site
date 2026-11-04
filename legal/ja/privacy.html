@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://www.alika.tr/ja/privacy/">
+<link rel="alternate" hreflang="ja" href="https://www.alika.tr/ja/privacy/">
+<link rel="alternate" hreflang="en" href="https://www.alika.tr/privacy/">
+<link rel="alternate" hreflang="tr" href="https://www.alika.tr/gizlilik/">
+<title>プライバシーポリシー — AliKa</title>
+<style>
+body{font-family:'Segoe UI','Hiragino Sans','Yu Gothic UI',Meiryo,system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#1a1a2e;line-height:1.8}
+h1,h2{color:#1e3a5f}a{color:#1e6fd9}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px;text-align:left}
+th{background:#f0f4f8}
+.meta{color:#555}
+.note{background:#f0f4f8;border-left:4px solid #1e6fd9;padding:10px 14px}
+footer{margin-top:48px;color:#777;font-size:.9em;border-top:1px solid #ddd;padding-top:12px}
+</style>
+</head>
+<body>
+<p><a href="/ja/">← AliKa</a> · <a href="/privacy/" hreflang="en" lang="en">English</a> · <a href="/gizlilik/" hreflang="tr" lang="tr">Türkçe</a></p>
+<h1>プライバシーポリシー — AliKa</h1>
+<p class="meta"><strong>最終更新日：</strong>2026年11月4日<br>
+<strong>事業者：</strong>ErenKa Software（代表者：Ercan Güler、所在国：トルコ共和国）<br>
+<strong>お問い合わせ：</strong><a href="mailto:destek@alika.tr">destek@alika.tr</a></p>
+
+<p class="note">このページは、英語版プライバシーポリシー（<a href="/privacy/">Privacy Policy</a>）の内容を日本語でまとめたものです。日本語版と英語版の内容に違いがある場合は、英語版が優先します。</p>
+
+<h2>1. AliKa について</h2>
+<p>AliKa は、保護者がお子さまの端末の利用時間を管理するための、<strong>隠れずに動作する</strong>ペアレンタルコントロールアプリです。アプリは端末上に表示され、ロック画面や通知もお子さまに見える形で表示されます。</p>
+<p>AliKa は、端末の所有者または保護者が、<strong>お子さまに知らせたうえで</strong>インストールしてください。本人の同意なく他人の端末でひそかに使うことは禁止しています。</p>
+<p>Android 版は、Google Play にペアレンタルコントロール（見守り）ツールとして申告しています。アイコンは隠れず、保護中は常時通知が表示されます。Google Play プロテクトが、見守りアプリがインストールされていることを端末の利用者に知らせる場合があります。</p>
+
+<h2>2. 端末内で扱うデータ</h2>
+<p>次のデータは、保護者の管理機能のために<strong>端末内（ローカル）でのみ</strong>扱います。</p>
+<table>
+<tr><th>データ</th><th>目的</th></tr>
+<tr><td>使用したアプリの名前と利用時間</td><td>利用レポート、時間制限</td></tr>
+<tr><td>閲覧した Web サイト・動画のタイトルとアドレス</td><td>保護者による確認、フィルタリング</td></tr>
+<tr><td>ロック・制限・ブロックのイベント</td><td>イベント履歴</td></tr>
+<tr><td>保護者 PIN（ハッシュ値のみ保存）</td><td>設定の保護</td></tr>
+<tr><td>ペアリングした家族の端末間のメッセージ</td><td>家族の連絡</td></tr>
+<tr><td>スピーキング問題でお子さまが録音した短い音声（一時的）</td><td>自分の発音を聞き直すため</td></tr>
+<tr><td>技術的な診断情報（クラッシュ、再起動、権限の変更、失敗した処理など）</td><td>問題の報告を作るために端末内に8日間保存。保護者が問題の報告を送った場合のみ端末の外に出ます（第4節）</td></tr>
+</table>
+<p>これらのデータは端末内、または保護者が許可した家庭内ネットワーク上で、ペアリングした家族の端末間を暗号化して直接やり取りします。AliKa が運営するクラウドは経由しません。</p>
+
+<h2>3. AliKa のサーバーに送られるもの</h2>
+<p>お子さまの利用履歴、プロフィール、学習内容、メッセージ、閲覧したドメイン、位置情報は、AliKa のサーバーに送りません。サーバーに送られるのは次の場合だけです。</p>
+<ul>
+<li><strong>Android ファミリーサブスクリプションの確認：</strong>1つのサブスクリプションを最大10台で使うために、ランダムな家族 ID と端末 ID、端末公開鍵の SHA-256 ハッシュ、端末の役割、失効状態、Google Play の商品・購読状態・支払い済み期間の終了日時を扱います。購入トークンは SHA-256 ハッシュとしてのみ保存します。Google アカウント名やメールアドレスは扱いません。利用されていない、または期限切れの家族の記録は90日以内に削除します。</li>
+<li><strong>無料アクセスコード（任意）：</strong>保護者がコードを入力した場合だけ送信します。Windows ではコードと、この PC から計算した一方向の識別子（Windows のマシン ID の SHA-256 ハッシュ。マシン ID そのものは送りません）を送ります。サーバーにはコードのハッシュ、最初に結び付いた端末の識別子、無料期間の開始日と終了日だけを保存します。コードの再利用を防ぐため、この記録は90日の削除の対象外です。削除をご希望の場合は destek@alika.tr までご連絡ください。</li>
+</ul>
+<p>通信は HTTPS/TLS で暗号化します。Google Play での購入は、Google のプライバシー規約に基づいて Google が扱います。</p>
+
+<h2>4. 保護者が送る問題の報告</h2>
+<p>保護者パネルの「問題を報告」ボタンを押すと、端末内で ZIP ファイルが作られ、保護者ご自身のメールアプリで destek@alika.tr 宛ての下書きが開きます。自動で送られることはありません。保護者がメールを送った場合だけ、ErenKa Software に届きます。</p>
+<p>報告には過去7日分の端末・システム情報、AliKa のバージョンと設定、権限の状態、クラッシュの記録、イベント履歴、アプリごとの利用時間が含まれます。PIN とそのハッシュ、パスワード、トークン、お子さまの名前、閲覧履歴、家族のメッセージ、録音、写真、位置情報、連絡先は含まれません。メールの送信者アドレスと本文は ErenKa Software に届きます。</p>
+<p>問題のある問題（誤った正解など）を報告する「報告」ボタンも同じ扱いです。報告には問題とパックの識別子、問題文と選択肢、入力された説明（500文字まで）だけが含まれ、お子さまの名前や解答は含まれません。</p>
+<p>報告は AliKa の問題を見つけて直し、保護者に返信するためだけに使い、受け取ってから12か月以内に削除します。早めの削除も destek@alika.tr で受け付けます。</p>
+
+<h2>5. 利用する外部事業者と国</h2>
+<p>ErenKa Software はトルコ共和国の事業者です。上記のデータは、トルコのほか、次の事業者を通じて次の国で扱われます。</p>
+<table>
+<tr><th>事業者</th><th>国</th><th>用途</th></tr>
+<tr><td>Google LLC（Google Cloud、フランクフルト リージョン）</td><td>米国の事業者。データはドイツで保存</td><td>Android サブスクリプション確認と無料アクセスコードのサーバー</td></tr>
+<tr><td>Google LLC（Gmail）</td><td>米国</td><td>サポート用メールの受信箱</td></tr>
+<tr><td>ImprovMX Incorporated</td><td>米国</td><td>@alika.tr 宛てのメールの転送</td></tr>
+<tr><td>Anthropic PBC（Claude）</td><td>米国</td><td>ErenKa Software が実行したときだけ、サポートメールを読んで要約し返信案を作る AI 作業。要約に送信者の名前とアドレスは含めません。返信はすべて人が確認して送ります。</td></tr>
+<tr><td>Zoho（EU データセンター）</td><td>EU</td><td>destek@alika.tr からの返信の送信のみ</td></tr>
+<tr><td>Cloudflare, Inc.</td><td>米国</td><td>Web サイト www.alika.tr のアクセス集計のみ（第7節）</td></tr>
+</table>
+<p>各国の個人情報保護制度については、個人情報保護委員会が公表している外国の制度の情報もご参照ください。アプリには広告ネットワークや第三者の分析 SDK は入っていません。データを販売したり、広告や分析の事業者と共有したりすることはありません。</p>
+
+<h2>6. お子さまのデータ</h2>
+<p>AliKa は、保護者に代わって、ご自身のお子さまの端末を管理する目的だけでデータを扱います。マーケティング、プロファイリング、第三者との共有には使いません。</p>
+
+<h2>7. Web サイト（www.alika.tr）</h2>
+<p>この節は Web サイトだけに当てはまり、アプリには当てはまりません。アクセス数を数えるために Cloudflare Web Analytics を使っています。Cloudflare によると、このサービスは指標の収集に Cookie やローカルストレージを使わず、IP アドレスなどによる閲覧者の識別も行いません。ErenKa Software が見るのは、ページビュー数、参照元、国、端末の種類などの集計値だけです。</p>
+
+<h2>8. 開示・訂正・削除などのご請求</h2>
+<ul>
+<li><strong>端末内のデータ：</strong>保護者パネルで確認でき、履歴や取り込んだ教材は保護者パネルから削除できます。AliKa をアンインストールすると、Android ではアプリのデータが削除されます。Windows では再インストールに備えて <code>%ProgramData%\AliKa\</code> と <code>%LocalAppData%\AliKa\</code> が残るため、すべて消すにはアンインストール後にこの2つのフォルダーを削除してください。</li>
+<li><strong>サーバーの記録（Android）：</strong>件名を「AliKa Android data deletion request」として destek@alika.tr にメールし、アプリのサブスクリプション画面に表示される家族 ID と端末 ID をお知らせください。他人による削除を防ぐため、端末での確認をお願いする場合があります。お子さまの名前、PIN、購入トークンは送らないでください。</li>
+<li><strong>問題の報告：</strong>報告を送ったアドレスから destek@alika.tr に削除をご依頼ください。</li>
+<li>保有する個人データの利用目的の通知、開示、訂正、利用停止、削除などのご請求や、取り扱いに関するご相談も destek@alika.tr で受け付けます。日本語でも英語でもご連絡いただけます。</li>
+</ul>
+
+<h2>9. 安全管理</h2>
+<p>端末内の設定は保護者 PIN で守られ、PIN は PBKDF2-HMAC-SHA256 でハッシュ化して保存します。サーバーとの通信は HTTPS/TLS、端末の公開鍵、ハッシュ化したトークンを使い、本番の記録にアクセスできるのは確認と削除に必要なサービスだけです。端末自体の安全（ディスクの暗号化や OS の更新）は利用者の責任となります。</p>
+
+<h2>10. 変更</h2>
+<p>このポリシーを変更する場合は、このページを更新し、アプリまたはストアのページでお知らせします。</p>
+
+<h2>11. お問い合わせ</h2>
+<p><a href="mailto:destek@alika.tr">destek@alika.tr</a> — ErenKa Software（トルコ共和国）。このアドレス宛てのメールは、第5節の事業者を通じて扱われます。</p>
+
+<footer>ErenKa Software · AliKa</footer>
+</body>
+</html>
