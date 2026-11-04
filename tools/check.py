@@ -71,7 +71,7 @@ SOCIAL_IDS = ("instagram", "facebook", "x", "youtube", "linkedin")
 # Tek izinli analiz kaynağı: Cloudflare Web Analytics'in çerezsiz JS işaretçisi (tools/inject-analytics.mjs).
 # Belirteç src/data/analytics.json içinde; boşsa hiçbir sayfada işaretçi olmamalı.
 CLOUDFLARE_BEACON_HOST = "static.cloudflareinsights.com"
-PRIVACY_PAGES = ("privacy.html", "privacy/index.html", "privacy-policy.html", "gizlilik/index.html")
+PRIVACY_PAGES = ("privacy.html", "privacy/index.html", "privacy-policy.html", "gizlilik/index.html", "ja/privacy/index.html")
 
 
 class LinkParser(HTMLParser):
@@ -622,6 +622,14 @@ def main() -> None:
             errors.append(f"Turkish legal page must link its English version: {target}")
     if 'href="/gizlilik/"' not in (DIST / "content" / "index.html").read_text(encoding="utf-8"):
         errors.append("Turkish pages must link the Turkish privacy policy")
+    # Japonca gizlilik özeti: kaynakla aynı, İngilizce sürüme bağlı; Japonca sayfalar ona bağlanır.
+    ja_privacy = DIST / "ja" / "privacy" / "index.html"
+    if not ja_privacy.exists() or published_bytes(ja_privacy, token) != (ROOT / "legal" / "ja" / "privacy.html").read_bytes():
+        errors.append(f"Japanese privacy page changed or missing: {ja_privacy}")
+    elif 'href="/privacy/"' not in ja_privacy.read_text(encoding="utf-8"):
+        errors.append("Japanese privacy page must link its English version")
+    if 'href="/ja/privacy/"' not in (DIST / "ja" / "content" / "index.html").read_text(encoding="utf-8"):
+        errors.append("Japanese pages must link the Japanese privacy policy")
 
     if published_bytes(DIST / "privacy-policy.html", token) != (ROOT / "legal" / "privacy.html").read_bytes():
         errors.append("privacy-policy.html differs from source")

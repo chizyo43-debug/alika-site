@@ -1239,6 +1239,8 @@ def format_count(value: int, lang: str) -> str:
 def legal_href(lang: str, kind: str) -> str:
     if lang == "tr":
         return "/gizlilik/" if kind == "privacy" else "/kullanim-kosullari/"
+    if lang == "ja" and kind == "privacy":
+        return "/ja/privacy/"
     return "/privacy/" if kind == "privacy" else "/eula/"
 
 
@@ -2237,6 +2239,9 @@ def build() -> None:
         target = DIST / name
         target.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / "legal" / "tr" / f"{name}.html", target / "index.html")
+    # Japonca gizlilik: İngilizce metnin özeti, /ja/privacy/ adresinde.
+    (DIST / "ja" / "privacy").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "legal" / "ja" / "privacy.html", DIST / "ja" / "privacy" / "index.html")
 
     urls = [f"{BASE_URL}/"]
     for lang in LANGS:
@@ -2244,6 +2249,7 @@ def build() -> None:
         urls.append(f"{BASE_URL}{href(lang, 'content')}")
     urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
     urls.extend(f"{BASE_URL}/{name}/" for name in LEGAL_TR)
+    urls.append(f"{BASE_URL}/ja/privacy/")
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
     urls.append(school_url)
     urls.append(uk_guide_url)
