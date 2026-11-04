@@ -9,10 +9,11 @@ from collections import defaultdict
 from pathlib import Path
 
 
-COUNTRY_NAMES = {"turkiye": "Türkiye"}
-# Sitede yalnız çalışma verisi hazır olan ders kapsamı yayımlanır: Türkiye ortaokul (5–8).
-# İlkokul görsel etkinlikleri ve oyun paketleri ders kapsamı değildir; ayrı bölümlerde sunulur.
-PUBLISHED_GRADES = {"turkiye": frozenset({5, 6, 7, 8})}
+COUNTRY_NAMES = {"turkiye": "Türkiye", "japonya": "Japonya"}
+# Sitede yalnız çalışma verisi hazır olan ders kapsamı yayımlanır: Türkiye ortaokul (5–8) ve
+# Japonya ortaokul (中学校 1–3 = 7–9. sınıf). İlkokul görsel etkinlikleri ve oyun paketleri ders
+# kapsamı değildir; ayrı bölümlerde sunulur.
+PUBLISHED_GRADES = {"turkiye": frozenset({5, 6, 7, 8}), "japonya": frozenset({7, 8, 9})}
 # LGS deneme paketi ders paketlerinden ayrıdır (başlıkta assessment.kind: lgs-deneme).
 LGS_FOLDER = "lgs-2027"
 # LGS 2028 hazırlık (7. sınıf) iki parçadır: deneme paketi (assessment.kind: lgs-deneme) ve ünite setleri
@@ -22,7 +23,15 @@ LGS_PREP_FOLDERS = {"lgs-2028": "lgs-prep-exam", "lgs-2028-unite-setleri": "lgs-
 SUBJECT_ORDER = (
     "turkce", "matematik", "fen-bilimleri", "sosyal-bilgiler", "inkilap-tarihi", "ingilizce",
     "din-kulturu-ve-ahlak-bilgisi", "din-kulturu", "bilisim-teknolojileri", "teknoloji-ve-tasarim",
+    "sugaku", "rika", "kokugo", "eigo", "shakai-chiri", "shakai-rekishi", "shakai-komin",
 )
+# Japonya'da 社会'nin üç alanı ayrı klasör ve pakettir ama paket başlığındaki ders aynıdır (社会);
+# kartlarda ayırt edilebilmeleri için alan adıyla gösterilir. MANIFEST ve paket başlığı değişmez.
+SUBJECT_TITLES = {
+    "shakai-chiri": "社会（地理的分野）",
+    "shakai-rekishi": "社会（歴史的分野）",
+    "shakai-komin": "社会（公民的分野）",
+}
 GAME_SLUGS = ("word-wheel", "name-city")
 GAME_LANGS = ("tr", "en", "de", "es", "fr", "pt", "ru", "ja", "ko")
 GAME_PATH = re.compile(r"^games/(?P<slug>[a-z0-9-]+)/dist/(?P<lang>[a-z]{2})/(?P<band>[a-z]+)\.alika-game$")
@@ -76,10 +85,20 @@ def _copy(source: Path, target: Path) -> None:
     shutil.copy2(source, target)
 
 
-def _package_label(theme: str, grade: int, subject: str) -> str:
-    """'8. Sınıf Matematik — 1. Dönem — Üslü İfadeler' → '1. Dönem — Üslü İfadeler'."""
+def _package_label(theme: str, grade: int, subject: str, subject_title: str | None = None) -> str:
+    """'8. Sınıf Matematik — 1. Dönem — Üslü İfadeler' → '1. Dönem — Üslü İfadeler'.
+
+    Japonya: '数学 中1（前半）：正の数と負の数' → '中1（前半）：正の数と負の数'; '社会 地理的分野 中1：…' → '中1：…'
+    (alan adı kart başlığında 社会（地理的分野）olarak durur).
+    """
     prefix = f"{grade}. Sınıf {subject} — "
-    return theme[len(prefix):] if theme.startswith(prefix) else theme
+    if theme.startswith(prefix):
+        return theme[len(prefix):]
+    if not theme.startswith(f"{subject} ") or subject_title is None:
+        return theme
+    rest = theme[len(subject) + 1:]
+    field = subject_title[len(subject) + 1:-1] if subject_title != subject else ""
+    return rest[len(field) + 1:] if field and rest.startswith(f"{field} ") else rest
 
 
 def _katalog_packages(content_root: Path, data_output: Path) -> list[dict]:
@@ -113,6 +132,7 @@ def _katalog_packages(content_root: Path, data_output: Path) -> list[dict]:
             continue
         _copy(source, data_output / rel)
         subject = entry["ders"]
+        subject_title = SUBJECT_TITLES.get(folder, subject) if country_slug == "japonya" else subject
         rows.append({
             "country_slug": country_slug,
             "country": COUNTRY_NAMES[country_slug],
@@ -122,8 +142,12 @@ def _katalog_packages(content_root: Path, data_output: Path) -> list[dict]:
             "kind": "lgs" if is_lgs else prep_kind or "lesson",
             "subject_slug": folder,
             "subject": subject,
+            "subject_title": subject_title,
+            "language": str(pack.get("lang") or "tr"),
             "package_id": entry["paketId"],
-            "title": subject if is_lgs or prep_kind else _package_label(str(pack.get("theme") or filename), grade, subject),
+            "title": subject if is_lgs or prep_kind else _package_label(
+                str(pack.get("theme") or filename), grade, subject, subject_title if country_slug == "japonya" else None
+            ),
             "filename": filename,
             "download_url": f"/icerik/veri/{rel.as_posix()}",
             "sha256": entry["sha256"],
@@ -259,6 +283,11 @@ def _write_bundle(zip_path: Path, rows: list[dict]) -> dict:
     }
 
 
+def _country_rank(country_slug: str) -> int:
+    names = list(COUNTRY_NAMES)
+    return names.index(country_slug) if country_slug in names else len(names)
+
+
 def _subject_sort_key(row: dict) -> tuple[int, str]:
     slug = row["subject_slug"]
     return (SUBJECT_ORDER.index(slug) if slug in SUBJECT_ORDER else len(SUBJECT_ORDER), row["subject"])
@@ -299,19 +328,23 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
             "grade": rows[0]["grade"],
             "subject_slug": subject_slug,
             "subject": rows[0]["subject"],
+            "subject_title": rows[0]["subject_title"],
+            "language": rows[0]["language"],
             "notes": sum(row["notes"] for row in rows),
             "questions": sum(row["questions"] for row in rows),
             **bundle,
             "packages": [_public(row) for row in rows],
             "_rows": rows,
         })
-    subjects.sort(key=lambda row: (row["grade"], *_subject_sort_key(row)))
+    subjects.sort(key=lambda row: (_country_rank(row["country_slug"]), row["grade"], *_subject_sort_key(row)))
 
     by_grade: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for subject in subjects:
         by_grade[(subject["country_slug"], subject["grade_slug"])].append(subject)
     grades: list[dict] = []
-    for (country_slug, grade_slug), rows in sorted(by_grade.items(), key=lambda item: item[1][0]["grade"]):
+    for (country_slug, grade_slug), rows in sorted(
+        by_grade.items(), key=lambda item: (_country_rank(item[0][0]), item[1][0]["grade"])
+    ):
         bundle = _write_bundle(
             bundle_output / f"{country_slug}-{grade_slug}-tum-dersler.zip",
             [package for subject in rows for package in subject["_rows"]],
