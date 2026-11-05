@@ -321,6 +321,7 @@ const ja: HomeCopy = {
     email: 'メール',
     privacy: 'プライバシー',
     terms: '利用規約',
+    tokushoho: '特定商取引法に基づく表記',
     follow: 'AliKaのSNS',
     social: {
       instagram: 'AliKaのInstagram',

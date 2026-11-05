@@ -1204,6 +1204,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               <h3>{t.footer.legal}</h3>
               <a href={legalPath(lang, 'privacy')}>{t.footer.privacy}</a>
               <a href={legalPath(lang, 'terms')}>{t.footer.terms}</a>
+              {t.footer.tokushoho && <a href="/ja/tokushoho/">{t.footer.tokushoho}</a>}
             </div>
           </nav>
         </div>
