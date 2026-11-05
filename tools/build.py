@@ -1351,6 +1351,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
     guide = GUIDE_LINKS.get(lang)
     guide_link = f'<a href="{guide}">{esc(words["guides"])}</a>' if guide else ""
     school_link = f'<a href="/okullar/">{esc(words["schools"])}</a>' if words.get("schools") else ""
+    tokushoho_link = '<a href="/ja/tokushoho/">特定商取引法に基づく表記</a>' if lang == "ja" else ""
     return f"""
     <footer class="site-footer">
       <div class="footer-brand">
@@ -1366,6 +1367,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
         <a href="{home}#iletisim">{esc(words["support"])}</a>
         <a href="{legal_href(lang, 'privacy')}">{esc(words["privacy"])}</a>
         <a href="{legal_href(lang, 'terms')}">{esc(words["terms"])}</a>
+        {tokushoho_link}
       </div>
       <p>© 2026 ErenKa Software · <a href="mailto:destek@alika.tr">destek@alika.tr</a></p>
     </footer>
@@ -2242,6 +2244,9 @@ def build() -> None:
     # Japonca gizlilik: İngilizce metnin özeti, /ja/privacy/ adresinde.
     (DIST / "ja" / "privacy").mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "legal" / "ja" / "privacy.html", DIST / "ja" / "privacy" / "index.html")
+    # 特定商取引法に基づく表記: yalnız Japonca, /ja/tokushoho/ adresinde.
+    (DIST / "ja" / "tokushoho").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "legal" / "ja" / "tokushoho.html", DIST / "ja" / "tokushoho" / "index.html")
 
     urls = [f"{BASE_URL}/"]
     for lang in LANGS:
@@ -2250,6 +2255,7 @@ def build() -> None:
     urls.extend((f"{BASE_URL}/privacy/", f"{BASE_URL}/eula/", guide_index_url))
     urls.extend(f"{BASE_URL}/{name}/" for name in LEGAL_TR)
     urls.append(f"{BASE_URL}/ja/privacy/")
+    urls.append(f"{BASE_URL}/ja/tokushoho/")
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
     urls.append(school_url)
     urls.append(uk_guide_url)

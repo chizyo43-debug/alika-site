@@ -168,6 +168,8 @@ export interface HomeCopy {
     email: string;
     privacy: string;
     terms: string;
+    /* Yalnız Japonca: 特定商取引法に基づく表記 (/ja/tokushoho/). */
+    tokushoho?: string;
     /* Sosyal medya satırı: listenin adı ve her hesabın erişilebilir adı. Adres ve simge src/data/social.json'da;
        YouTube kanalı da bu satırdadır. */
     follow: string;

@@ -630,6 +630,16 @@ def main() -> None:
         errors.append("Japanese privacy page must link its English version")
     if 'href="/ja/privacy/"' not in (DIST / "ja" / "content" / "index.html").read_text(encoding="utf-8"):
         errors.append("Japanese pages must link the Japanese privacy policy")
+    # 特定商取引法に基づく表記: kaynakla aynı; Japonca katalog ve gizlilik özeti ona bağlanır
+    # (ana sayfa altlığı React ile çizilir; bağlantı src/home/i18n/ja.ts footer.tokushoho'dan gelir).
+    ja_tokushoho = DIST / "ja" / "tokushoho" / "index.html"
+    if not ja_tokushoho.exists() or published_bytes(ja_tokushoho, token) != (ROOT / "legal" / "ja" / "tokushoho.html").read_bytes():
+        errors.append(f"Japanese tokushoho page changed or missing: {ja_tokushoho}")
+    if "tokushoho: '" not in (ROOT / "src" / "home" / "i18n" / "ja.ts").read_text(encoding="utf-8"):
+        errors.append("Japanese home footer must link /ja/tokushoho/ (footer.tokushoho in ja.ts)")
+    for page in (DIST / "ja" / "content" / "index.html", ja_privacy):
+        if page.exists() and 'href="/ja/tokushoho/"' not in page.read_text(encoding="utf-8"):
+            errors.append(f"Japanese page must link /ja/tokushoho/: {page}")
 
     if published_bytes(DIST / "privacy-policy.html", token) != (ROOT / "legal" / "privacy.html").read_bytes():
         errors.append("privacy-policy.html differs from source")
