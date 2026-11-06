@@ -566,6 +566,8 @@ def main() -> None:
                     manifest = json.loads(archive.read("MANIFEST.json"))
                     if manifest.get("schema") != "alika-class-bundle/v1":
                         errors.append(f"{label} bundle manifest schema is invalid: {target}")
+                    if manifest.get("id") != target.name:
+                        errors.append(f"{label} bundle manifest id must equal the published file name: {target}")
                     if label in ("Grade", "Subject") and (
                         manifest.get("country") != row.get("country") or manifest.get("country_code") != row.get("country_code")
                         or manifest.get("grade") != row.get("grade")
