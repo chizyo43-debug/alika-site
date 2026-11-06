@@ -264,8 +264,13 @@ def _write_bundle(zip_path: Path, rows: list[dict]) -> dict:
             "review_status", "human_reviewed", "license",
         )},
     } for row in rows]
+    # id: Android çok dersli ZIP'in paket kimliğini manifest "id"sinden, yoksa seçilen dosyanın adından
+    # kurar (LibraryImportRepository). Tarayıcı ikinci indirmeyi "… (1).zip" diye adlandırınca yeni sürüm
+    # eskisinin yerine geçmiyordu. id olarak yayın adı yazılır: önceden dosya adıyla kurulmuş paketlerin
+    # kimliği aynı kalır (geçişte kopya oluşmaz). Windows her dersi kendi pack id'siyle alır, id'yi okumaz.
     manifest = {
         "schema": "alika-class-bundle/v1",
+        "id": zip_path.name,
         "country": rows[0]["country"],
         "country_code": rows[0]["country_code"],
         "grade": rows[0]["grade"],
