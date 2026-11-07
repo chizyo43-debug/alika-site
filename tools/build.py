@@ -16,13 +16,26 @@ ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
 DIST = ROOT / "dist"
 PUBLIC = ROOT / "public"
-# Paylaşım görseli: üzerindeki yazı Türkçe; alt metin sayfanın dilinde.
+# Paylaşım görseli: ortak og.jpg'nin yazısı Türkçe, og-ja.jpg'ninki Japonca; alt metin sayfanın dilinde.
 # Sayfa başlığı ve og:site_name sonundaki marka; Türkçe sayfalarda Türkçe marka adı.
 BRAND_NAME = {"tr": "AliKa Ebeveyn Kontrolü", "en": "AliKa"}
 OG_IMAGE_ALT = {
     "tr": "AliKa logosu, “Kısıtlamıyoruz. Planlıyoruz.” sloganı ve gülümseyen AliKa maskotu. Windows ve Android; Microsoft Store ve Google Play.",
     "en": "AliKa logo, the Turkish slogan “We don’t restrict. We plan.” and the smiling AliKa mascot. Windows and Android; Microsoft Store and Google Play.",
+    "ja": "AliKaのロゴ、スローガン「制限しない。計画する。」、笑顔のAliKaマスコット。WindowsとAndroid、Microsoft StoreとGoogle Play。",
 }
+# Japonca sayfalar yazısı Japonca olan ayrı görseli kullanır; diğer diller ortak og.jpg.
+OG_IMAGE_FILE = {"ja": "og-ja.jpg"}
+
+
+def og_image_url(lang: str) -> str:
+    return f"{BASE_URL}/{OG_IMAGE_FILE.get(lang, 'og.jpg')}"
+
+
+def og_image_alt(lang: str) -> str:
+    return OG_IMAGE_ALT.get(lang, OG_IMAGE_ALT["en"])
+
+
 BASE_URL = "https://www.alika.tr"
 LANGS = ("tr", "en", "de", "es", "fr", "pt", "ru", "ja", "ko")
 LANGUAGE_FLAGS = {
@@ -1534,10 +1547,10 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{BASE_URL}/og.jpg">
+  <meta property="og:image" content="{og_image_url(lang)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="{esc(OG_IMAGE_ALT['tr' if lang == 'tr' else 'en'])}">
+  <meta property="og:image:alt" content="{esc(og_image_alt(lang))}">
 </head>
 <body{' class="content-route"' if slug == "content" else ''}>
   {header(locales, lang, slug)}
@@ -1580,10 +1593,10 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{BASE_URL}/og.jpg">
+  <meta property="og:image" content="{og_image_url(lang)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="{esc(OG_IMAGE_ALT['tr' if lang == 'tr' else 'en'])}">
+  <meta property="og:image:alt" content="{esc(og_image_alt(lang))}">
   <script type="application/ld+json">{json.dumps(article_schema, ensure_ascii=False, separators=(",", ":"))}</script>
 </head>
 <body>

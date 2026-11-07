@@ -14,7 +14,9 @@ const BASE_URL = 'https://www.alika.tr';
 const locales = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'locales.json'), 'utf8'));
 // AliKa'nın sosyal medya hesapları; yapılandırılmış veride uygulamanın sameAs listesi olur (altlıkla aynı liste).
 const socialUrls = JSON.parse(fs.readFileSync(path.join(root, 'src', 'data', 'social.json'), 'utf8')).profiles.map((profile) => profile.url);
-// Paylaşım görselindeki yazı Türkçe; alt metin her dilde görseli anlatır.
+// Ortak paylaşım görselindeki yazı Türkçe; Japonca sayfa yazısı Japonca olan og-ja.jpg'yi kullanır.
+// Alt metin her dilde o dilin gördüğü görseli anlatır.
+const OG_IMAGE_FILE = { ja: 'og-ja.jpg' };
 const OG_IMAGE_ALT = {
   tr: 'AliKa logosu, “Kısıtlamıyoruz. Planlıyoruz.” sloganı ve gülümseyen AliKa maskotu. Windows ve Android; Microsoft Store ve Google Play.',
   en: 'AliKa logo, the Turkish slogan “We don’t restrict. We plan.” and the smiling AliKa mascot. Windows and Android; Microsoft Store and Google Play.',
@@ -23,7 +25,7 @@ const OG_IMAGE_ALT = {
   fr: 'Logo AliKa, le slogan en turc « Nous ne restreignons pas. Nous planifions. » et la mascotte AliKa souriante. Windows et Android ; Microsoft Store et Google Play.',
   pt: 'Logotipo da AliKa, o slogan em turco “Não restringimos. Planejamos.” e o mascote sorridente da AliKa. Windows e Android; Microsoft Store e Google Play.',
   ru: 'Логотип AliKa, слоган на турецком «Мы не запрещаем. Мы планируем.» и улыбающийся талисман AliKa. Windows и Android; Microsoft Store и Google Play.',
-  ja: 'AliKaのロゴ、トルコ語のスローガン「制限しない。計画する。」、笑顔のAliKaマスコット。WindowsとAndroid、Microsoft StoreとGoogle Play。',
+  ja: 'AliKaのロゴ、スローガン「制限しない。計画する。」、笑顔のAliKaマスコット。WindowsとAndroid、Microsoft StoreとGoogle Play。',
   ko: 'AliKa 로고, 튀르키예어 슬로건 “막지 않습니다. 계획합니다.”, 웃고 있는 AliKa 마스코트. Windows와 Android, Microsoft Store와 Google Play.',
 };
 const OG_LOCALES = {
@@ -138,6 +140,9 @@ for (const lang of LANGS) {
   html = setMeta(html, 'property', 'og:description', seo.seo_description);
   html = setMeta(html, 'name', 'twitter:title', seo.seo_title);
   html = setMeta(html, 'name', 'twitter:description', seo.seo_description);
+  const ogImage = `${BASE_URL}/${OG_IMAGE_FILE[lang] ?? 'og.jpg'}`;
+  html = setMeta(html, 'property', 'og:image', ogImage);
+  html = setMeta(html, 'name', 'twitter:image', ogImage);
   html = setMeta(html, 'property', 'og:image:alt', OG_IMAGE_ALT[lang]);
   html = setMeta(html, 'name', 'twitter:image:alt', OG_IMAGE_ALT[lang]);
   html = replaceOnce(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/, schema(lang, copy, canonical, storeUrl), 'ld+json');

@@ -332,7 +332,8 @@ def main() -> None:
             # Açılış cümlesi ürünün ne olduğunu söyler; arama motoru da aynısını görmeli.
             if lang == "tr" and "Windows ve Android için ebeveyn kontrolü." not in home_text:
                 errors.append(f"Home pitch is missing from the summary: {home_page}")
-            if '<meta property="og:image" content="https://www.alika.tr/og.jpg"' not in home_text or 'property="og:image:alt"' not in home_text:
+            share_image = "og-ja.jpg" if lang == "ja" else "og.jpg"
+            if f'<meta property="og:image" content="https://www.alika.tr/{share_image}"' not in home_text or 'property="og:image:alt"' not in home_text:
                 errors.append(f"Share image is missing: {home_page}")
             if "/assets/screenshots/" in home_text or "ALTIN" in home_text:
                 errors.append(f"Obsolete mascot screenshot remains: {home_page}")
@@ -685,6 +686,8 @@ def main() -> None:
     # Eski kitap kapaklı paylaşım görseli yayından kalktı.
     if (DIST / "og.png").exists() or not (DIST / "og.jpg").exists():
         errors.append("Share image must be og.jpg; the old og.png must not be published")
+    if not (DIST / "og-ja.jpg").exists():
+        errors.append("Japanese share image og-ja.jpg is missing")
     for page in DIST.rglob("*.html"):
         page_text = page.read_text(encoding="utf-8")
         if "/og.png" in page_text:
