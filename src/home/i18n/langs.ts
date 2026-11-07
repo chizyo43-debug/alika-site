@@ -37,4 +37,5 @@ export function legalPath(lang: Lang, kind: 'privacy' | 'terms'): string {
 export const GUIDE_PATHS: Partial<Record<Lang, string>> = {
   tr: '/rehber/',
   en: '/en/guides/windows-child-screen-time/',
+  ja: '/ja/guides/family-screen-time-rules/',
 };

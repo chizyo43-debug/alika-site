@@ -384,13 +384,70 @@ HOME_I18N = SRC / "home" / "i18n"
 # Erişilebilir adlar dil dosyasındaki footer.social bloğundan okunur.
 SOCIAL_PROFILES = json.loads((SRC / "data" / "social.json").read_text(encoding="utf-8"))["profiles"]
 # Ana sayfadaki GUIDE_PATHS ile aynı: yalnız gerçekten var olan rehberler.
-GUIDE_LINKS = {"tr": "/rehber/", "en": "/en/guides/windows-child-screen-time/"}
+GUIDE_LINKS = {"tr": "/rehber/", "en": "/en/guides/windows-child-screen-time/", "ja": "/ja/guides/family-screen-time-rules/"}
 # Yasal metinler: Türkçe sayfalar Türkçe sürüme, diğer diller İngilizceye bağlanır.
 LEGAL_TR = {"gizlilik": "gizlilik", "kullanim-kosullari": "kullanim-kosullari"}
 GUIDE_BASE = "rehber"
 UK_GUIDE_PATH = "en/guides/windows-child-screen-time"
 UK_LANDING_PATH = "en/uk-windows-screen-time"
 UK_CAMPAIGN_ID = "community_guide_windows_uk_v1"
+# Japonya planı Aşama 1.1: Japonca ilk rehber (medya/japonya-tanitim-2026-11/PLAN.md).
+# Rakamlar こども家庭庁 令和7年度 調査結果（概要, 2026-03-27）'den; yeni yıl yayımlanınca güncellenir.
+JA_GUIDE_SOURCE = "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/9a55b57d-cd9d-4cf6-8ed4-3da8efa12d63/67f41585/20260327_policies_youth-kankyou_internet_research_results-etc_21.pdf"
+JA_GUIDE = {
+    "path": "ja/guides/family-screen-time-rules",
+    "campaign_id": "site_guide_rules_ja",
+    "updated": ("2026-11-07", "2026年11月7日"),
+    "title": "子どものスクリーンタイム、家族でルールを決める4つの質問",
+    "description": "平日と休日の時間、終わる時刻と使う場所、例外とふり返り。中学生くらいのお子さまがいる家庭向けに、話し合いで使える4つの質問と、印刷できる1週間の計画表を紹介します。",
+    "lede": (
+        "スクリーンタイムのルールは、時間をめぐってもめる前に、落ち着いているときに家族で決めておくと続けやすくなります。"
+        "このガイドでは、中学生くらいのお子さまがいる家庭向けに、話し合いで使える4つの質問と、印刷して一緒に書き込める1週間の計画表を紹介します。"
+    ),
+    "sections": (
+        ("調査から：ルールの「つもり」のずれ", (
+            "こども家庭庁の令和7年度「青少年のインターネット利用環境実態調査」によると、インターネットを利用している10〜17歳の平日1日あたりの平均利用時間は約5時間27分、中学生では約5時間24分でした。勉強や趣味など、すべての目的と機器の合計です。",
+            "同じ調査で、家庭にインターネット利用のルールがあると答えた中学生は74.5%、中学生の保護者は81.9%でした。保護者は「ある」と思っていても、子どもにはそう伝わっていない家庭があるということです。高校生では、それぞれ44.3%と58.3%でした。",
+            "ルールは決めるだけでなく、子どもと同じ言葉で確認しておくことが大切です。次の4つの質問を、家族で順番に話してみてください。",
+        )),
+        ("質問1：何のために使っている？", (
+            "まず、お子さまが画面を何に使っているかを聞いてみましょう。宿題や調べもの、友だちとの連絡、動画、ゲーム。どれが本人にとって大事かが分かると、ルールの理由も説明しやすくなります。",
+            "学校の端末で宿題をする時間を1日の時間に含めるかどうかも、ここで決めておきます。中学生なら自分の案を出せる年齢です。最後に決めるのは保護者でも、本人の案を聞いておくと、ルールに納得しやすくなります。",
+        )),
+        ("質問2：平日と休日、1日どのくらい？", (
+            "平日は部活や塾、宿題、睡眠で時間が限られ、休日は少し余裕があります。平日と休日で別々の1日の時間を決めるほうが、多くの家庭では現実的です。",
+            "最初の週は、今の使い方に近い、守れそうな時間から始めましょう。いきなり大きく減らすより、週1回のふり返りで少しずつ調整するほうが続けやすくなります。",
+        )),
+        ("質問3：何時に終わる？どこで使う？", (
+            "1日の合計と同じくらい大切なのが、夜何時に画面を終えるかです。平日の終わる時刻を決めておきましょう。休日は少し遅くてもかまいません。",
+            "食卓や寝室など、画面を使わない場所を決めるのも一つの方法です。家族みんなが同じルールを守ると、子どもも受け入れやすくなります。",
+        )),
+        ("質問4：例外のときは？いつ見直す？", (
+            "誕生日、長い休み、テスト前、課題の多い日などは、いつものルールを一時的に変えることがあります。そのとき誰が決めるのか、追加の時間をどう渡すのかを前もって話しておきましょう。一度の例外で毎日のルールが変わるわけではないことも、はっきり伝えます。",
+            "週に1回、たとえば日曜の夜に10分ほど、計画がうまくいったかを一緒にふり返ります。変えるのは1週間に1つだけにすると、何が効いたのかが分かりやすくなります。冬休みや新学期の前は、ルールを見直すよいタイミングです。",
+        )),
+        ("つまずきやすいところ", (
+            "つまずきやすいのは、もめている最中にルールを決める、一度にたくさんのルールを始める、子どもに伝えずにルールを変える、紙に書かずに口約束だけにする、といった場面です。",
+            "スクリーンタイムをいつもごほうびや罰として使うと、計画の目的があいまいになりがちです。計画の目的は、1日の流れを前もって分かるようにすることです。",
+        )),
+    ),
+    "printable": {
+        "title": "1週間の家族スクリーンタイム計画表",
+        "note": "印刷して、お子さまと一緒に書き込み、見える場所に貼りましょう。",
+        "columns": ("曜日", "画面の時間", "終わる時刻", "画面以外の予定"),
+        "rows": tuple((day, "", "", "") for day in ("月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日", "日曜日")),
+        "button": "計画表を印刷する",
+    },
+    "product": ("決めた計画を端末で続けたいときは", (
+        "AliKaペアレンタルコントロールは、家族で決めた計画をWindowsパソコンとAndroidスマホ・タブレットで実行します。曜日ごとの時間と就寝時刻を設定でき、お子さまは画面で残り時間といつ終わるかを確認できます。",
+        "希望すれば、保護者が追加した問題に答えて、保護者が決めた上限の範囲で追加時間を獲得することもできます。何問正解で1分になるか、1日の上限をどうするかは保護者が決めます。AliKaのアカウントは不要です。",
+        "iPhone、iPad、Mac版はありません。",
+    )),
+    "sources": (
+        ("こども家庭庁「令和7年度 青少年のインターネット利用環境実態調査 調査結果（概要）」（PDF）", JA_GUIDE_SOURCE),
+        ("こども家庭庁「青少年のインターネット利用環境実態調査」調査票・調査結果等", "https://www.cfa.go.jp/policies/youth-kankyou/internet_research/results-etc"),
+    ),
+}
 # Eski alt sayfalar yeni ana sayfanın bölümlerine yönlenir; yalnız içerik kataloğu ayrı sayfa kalır.
 REDIRECT_ANCHORS = {
     "how-it-works": "nasil",
@@ -1435,7 +1492,7 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
         "headline": title,
         "description": description,
         "mainEntityOfPage": canonical,
-        "inLanguage": "en-GB" if lang == "en" else "tr-TR",
+        "inLanguage": {"en": "en-GB", "ja": "ja-JP"}.get(lang, "tr-TR"),
         "author": {"@type": "Organization", "name": "ErenKa Software"},
         "publisher": {"@type": "Organization", "name": "ErenKa Software"},
         "dateModified": updated[0],
@@ -1446,21 +1503,21 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0A1631">
-  <title>{esc(title)} — {BRAND_NAME["en" if lang == "en" else "tr"]}</title>
+  <title>{esc(title)} — {BRAND_NAME["tr" if lang == "tr" else "en"]}</title>
   <meta name="description" content="{esc(description)}">
   <link rel="canonical" href="{canonical}">
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="icon" href="/assets/brand/alika-logo.png">
   <meta property="og:type" content="article">
-  <meta property="og:locale" content="{'en_GB' if lang == 'en' else 'tr_TR'}">
-  <meta property="og:site_name" content="{BRAND_NAME["en" if lang == "en" else "tr"]}">
+  <meta property="og:locale" content="{ {'en': 'en_GB', 'ja': 'ja_JP'}.get(lang, 'tr_TR') }">
+  <meta property="og:site_name" content="{BRAND_NAME["tr" if lang == "tr" else "en"]}">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{canonical}">
   <meta property="og:image" content="{BASE_URL}/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="{esc(OG_IMAGE_ALT['en' if lang == 'en' else 'tr'])}">
+  <meta property="og:image:alt" content="{esc(OG_IMAGE_ALT['tr' if lang == 'tr' else 'en'])}">
   <script type="application/ld+json">{json.dumps(article_schema, ensure_ascii=False, separators=(",", ":"))}</script>
 </head>
 <body>
@@ -2095,6 +2152,56 @@ def content_page(lang: str, c: dict, catalog: dict) -> str:
     """
 
 
+def ja_guide_body(guide: dict) -> str:
+    """Japonca rehber: Türkçe rehberlerle aynı düzen, Japonca etiketler ve iki mağaza düğmesi."""
+    def paragraphs(items: tuple[str, ...]) -> str:
+        return "".join(f"<p>{esc(paragraph)}</p>" for paragraph in items)
+
+    sections = "".join(f"<section><h2>{esc(heading)}</h2>{paragraphs(items)}</section>" for heading, items in guide["sections"])
+    printable = guide["printable"]
+    head = "".join(f'<th scope="col">{esc(column)}</th>' for column in printable["columns"])
+    rows = "".join(
+        f'<tr><th scope="row">{esc(row[0])}</th>{"".join(f"<td>{esc(cell)}</td>" for cell in row[1:])}</tr>'
+        for row in printable["rows"]
+    )
+    printable_section = (
+        f'<section class="guide-print" id="print"><h2>{esc(printable["title"])}</h2><p>{esc(printable["note"])}</p>'
+        f'<div class="guide-table"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
+        '<button class="button guide-print-button" type="button" '
+        'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">'
+        f'{esc(printable["button"])}</button></section>'
+    )
+    product_heading, product_items = guide["product"]
+    sources = "".join(
+        f'<li><a href="{esc(url)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a></li>' for label, url in guide["sources"]
+    )
+    updated = guide["updated"]
+    store_href = microsoft_store_url("ja", guide["campaign_id"])
+    play_href = esc(play_store_url("ja", guide["campaign_id"], "guide"))
+    return f"""
+    <main id="main" class="guide-main">
+      <article class="guide-article">
+        <nav class="guide-breadcrumb" aria-label="現在の位置"><a href="/ja/">AliKa</a><span>›</span><span aria-current="page">ガイド</span></nav>
+        <header>
+          <p class="eyebrow">Windows・Android · 保護者向けガイド</p>
+          <h1>{esc(guide["title"])}</h1>
+          <p class="guide-lede">{esc(guide["lede"])}</p>
+          <p class="guide-updated">最終更新：<time datetime="{updated[0]}">{updated[1]}</time></p>
+          <p class="guide-disclosure"><strong>作成者について：</strong>このガイドは、AliKaの開発元であるErenKa Softwareが作成しました。AliKaはWindowsとAndroid向けの有料アプリです。</p>
+        </header>
+        {sections}
+        {printable_section}
+        <section><h2>{esc(product_heading)}</h2>{paragraphs(product_items)}</section>
+        <section class="guide-cta"><h2>Windowsでも、Androidでも試せます。</h2>
+          <p>Windows版はMicrosoft Storeで7日間無料で試せます。Androidのファミリー定期購入はGoogle Playで14日間の無料体験から始まります。Windows版の購入にAndroidは含まれません。最新の価格はストアのページで確認できます。</p>
+          <div class="button-row"><a class="button" href="{store_href}" target="_blank" rel="noopener noreferrer">Microsoft Storeで見る</a><a class="button" href="{play_href}" target="_blank" rel="noopener noreferrer">Google Playで見る</a></div>
+        </section>
+        <section><h2>出典</h2><ul class="guide-links">{sources}</ul></section>
+      </article>
+    </main>
+    """
+
+
 def redirect_document(lang: str, slug: str) -> str:
     return redirect_to(lang, page_href(lang, slug))
 
@@ -2208,6 +2315,12 @@ def build() -> None:
     # İngiltere hazırlık sayfası yayından kalktı (iç taslak notları vardı); eski adres rehbere yönlenir.
     write_page(DIST / UK_LANDING_PATH / "index.html", redirect_to("en", f"/{UK_GUIDE_PATH}/"))
 
+    ja_guide_url = f"{BASE_URL}/{JA_GUIDE['path']}/"
+    write_page(
+        DIST / JA_GUIDE["path"] / "index.html",
+        guide_document(locales, JA_GUIDE["title"], JA_GUIDE["description"], ja_guide_url, ja_guide_body(JA_GUIDE), "ja", updated=JA_GUIDE["updated"]),
+    )
+
     school_url = f"{BASE_URL}/okullar/"
     write_page(
         DIST / "okullar" / "index.html",
@@ -2259,6 +2372,7 @@ def build() -> None:
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
     urls.append(school_url)
     urls.append(uk_guide_url)
+    urls.append(ja_guide_url)
     unique_urls = list(dict.fromkeys(urls))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join(f"  <url><loc>{esc(url)}</loc></url>\n" for url in unique_urls)
