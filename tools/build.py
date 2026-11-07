@@ -398,6 +398,7 @@ JA_GUIDE = {
     "path": "ja/guides/family-screen-time-rules",
     "campaign_id": "site_guide_rules_ja",
     "updated": ("2026-11-07", "2026年11月7日"),
+    "eyebrow": "Windows・Android · 保護者向けガイド",
     "title": "子どものスクリーンタイム、家族でルールを決める4つの質問",
     "description": "平日と休日の時間、終わる時刻と使う場所、例外とふり返り。中学生くらいのお子さまがいる家庭向けに、話し合いで使える4つの質問と、印刷できる1週間の計画表を紹介します。",
     "lede": (
@@ -447,7 +448,72 @@ JA_GUIDE = {
         ("こども家庭庁「令和7年度 青少年のインターネット利用環境実態調査 調査結果（概要）」（PDF）", JA_GUIDE_SOURCE),
         ("こども家庭庁「青少年のインターネット利用環境実態調査」調査票・調査結果等", "https://www.cfa.go.jp/policies/youth-kankyou/internet_research/results-etc"),
     ),
+    "related": (("Windowsパソコンで子どもの利用時間を管理する方法", "/ja/guides/windows-child-screen-time/"),),
 }
+# Japonya planı Aşama 1.2: Windows rehberi. Family Safety bilgileri Microsoft'un Japonca
+# yardım sayfalarından (7 Kasım 2026); arayüz değişirse metin yeniden kontrol edilir.
+JA_GUIDE_WINDOWS = {
+    "path": "ja/guides/windows-child-screen-time",
+    "campaign_id": "site_guide_windows_ja",
+    "updated": ("2026-11-07", "2026年11月7日"),
+    "eyebrow": "Windows 10・11 · 保護者向けガイド",
+    "title": "Windowsパソコンで子どもの利用時間を管理する方法",
+    "description": "Windows 10・11のパソコンで子どもの利用時間を管理する2つの方法、無料のMicrosoft Family SafetyとAliKaを比べます。必要なもの、できること、向いている家庭を紹介します。",
+    "lede": (
+        "家族で使うWindowsパソコンで、子どもの利用時間を管理する方法は1つではありません。"
+        "このガイドでは、Microsoftが無料で提供している「Microsoft Family Safety（ファミリー セーフティ）」と、AliKaの2つの方法について、必要なもの、できること、向いている家庭を順に紹介します。"
+    ),
+    "sections": (
+        ("まず、家族で何を決めるか", (
+            "設定を始める前に、平日と休日の1日の時間、夜に画面を終える時刻、ゲームや動画などアプリごとの扱いを家族で決めておきましょう。ツールは、決めたルールを続けるための手段です。",
+            "ルールの決め方は、ガイド「子どものスクリーンタイム、家族でルールを決める4つの質問」で紹介しています。このページの最後にリンクがあります。",
+        )),
+        ("方法1：Microsoft Family Safety（無料）", (
+            "Microsoft Family Safetyは、Microsoftが無料で提供している家族向けの機能です。Windowsパソコンのほか、XboxやAndroid端末の利用時間にも使えます。",
+            "使うには、保護者とお子さまのそれぞれにMicrosoftアカウントが必要です。保護者がファミリー グループを作ってお子さまを追加し、お子さまは自分のMicrosoftアカウントでWindowsにサインインします。利用時間の制限は、ファミリー グループに接続された端末にだけ設定できます。",
+            "設定は、Webサイト（account.microsoft.com/family）か、Microsoft Family Safetyアプリで行います。曜日ごとに、端末を使える時間帯と1日の合計時間を決められます。アプリやゲームごとの制限、Webサイトと検索のフィルターもあります。",
+            "Webと検索のフィルターは、お子さまが自分のMicrosoftアカウントでサインインしたMicrosoft Edgeで働きます。フィルターをオンにすると、ほかのブラウザーはブロックされます。画面や手順は変わることがあるため、設定の前にMicrosoftの最新のヘルプを確認してください。",
+        )),
+        ("方法2：AliKa（有料・無料体験あり）", (
+            "AliKaは、WindowsとAndroid向けのペアレンタルコントロールアプリです。AliKaのアカウントも、お子さまのMicrosoftアカウントも必要ありません。設定は、パソコンの保護者用画面でPINを入力して行います。",
+            "曜日ごとの1日の時間、就寝時間（夜9時から朝7時のように日付をまたぐ設定もできます）、アプリごとの1日の時間またはブロック、Webサイトごとの1日の時間、Webフィルター（ブロックリストとセーフサーチ）を設定できます。Webのルールを有効にするとき、Windowsが管理者の許可を求めることがあります。",
+            "お子さまは画面で残り時間を確認できます。時間が終わるとロック画面が表示され、どのルールで止まったのかと、次に何をすればよいかが分かります。必要なときは、保護者が一時的に時間を許可することもできます。",
+            "希望すれば、保護者が追加した問題に答えて、保護者が決めた上限の範囲で追加時間を獲得することもできます。何問正解で1分になるか、1日の上限をどうするかは保護者が決めます。iPhone、iPad、Mac版はありません。",
+        )),
+    ),
+    "comparison": {
+        "title": "2つの方法を比べる",
+        "note": "2026年11月7日時点の情報です。Microsoft Family Safetyの機能や手順は変わることがあります。",
+        "columns": ("", "Microsoft Family Safety", "AliKa"),
+        "rows": (
+            ("料金", "無料", "有料（Windows版は7日間の無料体験あり）"),
+            ("必要なアカウント", "保護者とお子さまのMicrosoftアカウント、ファミリー グループ", "AliKaのアカウントは不要。お子さまのMicrosoftアカウントも不要"),
+            ("設定する場所", "Webサイトまたはアプリ", "お子さまのパソコンの保護者用画面（PINで保護）"),
+            ("時間の決め方", "曜日ごとの使える時間帯と合計時間", "曜日ごとの1日の時間と就寝時間"),
+            ("アプリ・ゲーム", "アプリとゲームごとの制限", "アプリごとの1日の時間、またはブロック"),
+            ("Web", "Microsoft Edgeでのフィルター（ほかのブラウザーはブロック）", "Webサイトごとの時間、ブロックリスト、セーフサーチ"),
+            ("時間を増やす方法", "保護者が時間を追加", "保護者の一時的な許可、または問題に答えて獲得（任意・上限は保護者が決定）"),
+            ("対応端末", "Windows、Xbox、Android", "Windows 10・11、Android"),
+        ),
+    },
+    "after_sections": (
+        ("どちらが合う？", (
+            "家族ですでにMicrosoftアカウントを使っている、Xboxの時間も同じ場所で管理したい、費用をかけたくない、という家庭には、Microsoft Family Safetyが自然な選択です。まず無料の方法から試すのもよいでしょう。",
+            "お子さまのMicrosoftアカウントを作らずに管理したい、パソコンの画面でルールと残り時間をお子さまに見せたい、問題に答えて時間を増やす仕組みを使いたい、という家庭には、AliKaが合うかもしれません。",
+            "どちらを使う場合も、何を設定したのかをお子さまに説明しておきましょう。ルールが見えていると、時間が来たときにもめにくくなります。",
+        )),
+        ("最初の1週間で確認すること", (
+            "決めた時刻にルールが動くか、お子さまが残り時間を理解できているか、就寝時間が家庭の生活に合っているかを確認します。",
+            "思わぬところで止まったときは、まず家族でルールを見直しましょう。変える設定を1週間に1つにすると、何が効いたのかが分かりやすくなります。",
+        )),
+    ),
+    "sources": (
+        ("Microsoft サポート「デバイス間で画面の時間制限を設定する」", "https://support.microsoft.com/ja-jp/family-safety/set-screen-time-limits-across-devices"),
+        ("Microsoft サポート「Microsoft Family Safety を使用して Web サイトや検索結果をフィルター処理する」", "https://support.microsoft.com/ja-jp/family-safety/filter-websites-and-searches-using-microsoft-family-safety"),
+    ),
+    "related": (("子どものスクリーンタイム、家族でルールを決める4つの質問", "/ja/guides/family-screen-time-rules/"),),
+}
+JA_GUIDES = (JA_GUIDE, JA_GUIDE_WINDOWS)
 # Eski alt sayfalar yeni ana sayfanın bölümlerine yönlenir; yalnız içerik kataloğu ayrı sayfa kalır.
 REDIRECT_ANCHORS = {
     "how-it-works": "nasil",
@@ -2157,21 +2223,43 @@ def ja_guide_body(guide: dict) -> str:
     def paragraphs(items: tuple[str, ...]) -> str:
         return "".join(f"<p>{esc(paragraph)}</p>" for paragraph in items)
 
-    sections = "".join(f"<section><h2>{esc(heading)}</h2>{paragraphs(items)}</section>" for heading, items in guide["sections"])
-    printable = guide["printable"]
-    head = "".join(f'<th scope="col">{esc(column)}</th>' for column in printable["columns"])
-    rows = "".join(
-        f'<tr><th scope="row">{esc(row[0])}</th>{"".join(f"<td>{esc(cell)}</td>" for cell in row[1:])}</tr>'
-        for row in printable["rows"]
-    )
-    printable_section = (
-        f'<section class="guide-print" id="print"><h2>{esc(printable["title"])}</h2><p>{esc(printable["note"])}</p>'
-        f'<div class="guide-table"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
-        '<button class="button guide-print-button" type="button" '
-        'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">'
-        f'{esc(printable["button"])}</button></section>'
-    )
-    product_heading, product_items = guide["product"]
+    def section_list(items: tuple) -> str:
+        return "".join(f"<section><h2>{esc(heading)}</h2>{paragraphs(texts)}</section>" for heading, texts in items)
+
+    def table(spec: dict) -> str:
+        head = "".join(f'<th scope="col">{esc(column)}</th>' for column in spec["columns"])
+        rows = "".join(
+            f'<tr><th scope="row">{esc(row[0])}</th>{"".join(f"<td>{esc(cell)}</td>" for cell in row[1:])}</tr>'
+            for row in spec["rows"]
+        )
+        return f'<div class="guide-table"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
+
+    sections = section_list(guide["sections"])
+    comparison_section = ""
+    if "comparison" in guide:
+        comparison = guide["comparison"]
+        comparison_section = (
+            f'<section id="compare"><h2>{esc(comparison["title"])}</h2>{table(comparison)}<p>{esc(comparison["note"])}</p></section>'
+        )
+    after_sections = section_list(guide.get("after_sections", ()))
+    printable_section = ""
+    if "printable" in guide:
+        printable = guide["printable"]
+        printable_section = (
+            f'<section class="guide-print" id="print"><h2>{esc(printable["title"])}</h2><p>{esc(printable["note"])}</p>'
+            f"{table(printable)}"
+            '<button class="button guide-print-button" type="button" '
+            'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">'
+            f'{esc(printable["button"])}</button></section>'
+        )
+    product_section = ""
+    if "product" in guide:
+        product_heading, product_items = guide["product"]
+        product_section = f"<section><h2>{esc(product_heading)}</h2>{paragraphs(product_items)}</section>"
+    related_section = ""
+    if guide.get("related"):
+        related_links = "".join(f'<li><a href="{esc(url)}">{esc(label)}</a></li>' for label, url in guide["related"])
+        related_section = f'<section><h2>関連ガイド</h2><ul class="guide-links">{related_links}</ul></section>'
     sources = "".join(
         f'<li><a href="{esc(url)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a></li>' for label, url in guide["sources"]
     )
@@ -2183,19 +2271,22 @@ def ja_guide_body(guide: dict) -> str:
       <article class="guide-article">
         <nav class="guide-breadcrumb" aria-label="現在の位置"><a href="/ja/">AliKa</a><span>›</span><span aria-current="page">ガイド</span></nav>
         <header>
-          <p class="eyebrow">Windows・Android · 保護者向けガイド</p>
+          <p class="eyebrow">{esc(guide["eyebrow"])}</p>
           <h1>{esc(guide["title"])}</h1>
           <p class="guide-lede">{esc(guide["lede"])}</p>
           <p class="guide-updated">最終更新：<time datetime="{updated[0]}">{updated[1]}</time></p>
           <p class="guide-disclosure"><strong>作成者について：</strong>このガイドは、AliKaの開発元であるErenKa Softwareが作成しました。AliKaはWindowsとAndroid向けの有料アプリです。</p>
         </header>
         {sections}
+        {comparison_section}
+        {after_sections}
         {printable_section}
-        <section><h2>{esc(product_heading)}</h2>{paragraphs(product_items)}</section>
+        {product_section}
         <section class="guide-cta"><h2>Windowsでも、Androidでも試せます。</h2>
           <p>Windows版はMicrosoft Storeで7日間無料で試せます。Androidのファミリー定期購入はGoogle Playで14日間の無料体験から始まります。Windows版の購入にAndroidは含まれません。最新の価格はストアのページで確認できます。</p>
           <div class="button-row"><a class="button" href="{store_href}" target="_blank" rel="noopener noreferrer">Microsoft Storeで見る</a><a class="button" href="{play_href}" target="_blank" rel="noopener noreferrer">Google Playで見る</a></div>
         </section>
+        {related_section}
         <section><h2>出典</h2><ul class="guide-links">{sources}</ul></section>
       </article>
     </main>
@@ -2315,11 +2406,14 @@ def build() -> None:
     # İngiltere hazırlık sayfası yayından kalktı (iç taslak notları vardı); eski adres rehbere yönlenir.
     write_page(DIST / UK_LANDING_PATH / "index.html", redirect_to("en", f"/{UK_GUIDE_PATH}/"))
 
-    ja_guide_url = f"{BASE_URL}/{JA_GUIDE['path']}/"
-    write_page(
-        DIST / JA_GUIDE["path"] / "index.html",
-        guide_document(locales, JA_GUIDE["title"], JA_GUIDE["description"], ja_guide_url, ja_guide_body(JA_GUIDE), "ja", updated=JA_GUIDE["updated"]),
-    )
+    ja_guide_urls = []
+    for ja_guide in JA_GUIDES:
+        ja_guide_url = f"{BASE_URL}/{ja_guide['path']}/"
+        ja_guide_urls.append(ja_guide_url)
+        write_page(
+            DIST / ja_guide["path"] / "index.html",
+            guide_document(locales, ja_guide["title"], ja_guide["description"], ja_guide_url, ja_guide_body(ja_guide), "ja", updated=ja_guide["updated"]),
+        )
 
     school_url = f"{BASE_URL}/okullar/"
     write_page(
@@ -2372,7 +2466,7 @@ def build() -> None:
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
     urls.append(school_url)
     urls.append(uk_guide_url)
-    urls.append(ja_guide_url)
+    urls.extend(ja_guide_urls)
     unique_urls = list(dict.fromkeys(urls))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join(f"  <url><loc>{esc(url)}</loc></url>\n" for url in unique_urls)
