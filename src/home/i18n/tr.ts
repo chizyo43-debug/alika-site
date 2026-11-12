@@ -337,11 +337,6 @@ const tr: HomeCopy = {
         title: 'Android telefonda çocuğun ekran süresi',
         body: 'Günlük süre, uyku saati, web filtresi ve izinler: Android’de kuralı çocukla birlikte kurun.',
       },
-      {
-        href: '/rehber/bulutsuz-ebeveyn-kontrolu/',
-        title: 'Bulut hesabı olmadan ebeveyn kontrolü',
-        body: 'Zorunlu bulut hesabı olmadan, cihazda kalan verilerle nasıl çalışır? Yerel aile ağının sınırlarıyla birlikte.',
-      },
     ],
   },
   contact: {
