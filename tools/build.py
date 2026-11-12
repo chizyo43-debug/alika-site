@@ -1007,6 +1007,89 @@ GUIDES = (
         ),
     },
     {
+        # LGS açılış sayfası: sayılar içerik kataloğundan (LGS 2027: 10 form, 6 ders, 900 soru; LGS 2028: 450 + 327 soru),
+        # oturum düzeni paketin "assessment.fullForm" bloğundan, ekran adları uygulamanın lgs.* metinlerinden alındı.
+        # Paket ya da uygulama metni değişirse bu sayfa ve İçerik sayfasındaki LGS bölümü birlikte güncellenir.
+        # "short_path": alika.tr/lgs/ kısa adresi bu rehbere yönlenir.
+        "draft": True,
+        "slug": "evde-lgs-denemesi",
+        "short_path": "lgs",
+        "updated": ("2026-11-12", "12 Kasım 2026"),
+        "campaign_id": "site_rehber_lgs_tr",
+        "platform": "both",
+        "eyebrow": "LGS 2027 · 8. sınıf ve 7. sınıf velileri için",
+        "title": "Evde LGS Denemesi: İki Oturumlu, Süreli Prova Nasıl Yapılır?",
+        "description": "8. sınıf öğrencisi evde sınav düzeninde LGS denemesi çözebilir: sözel ve sayısal oturum, süre, ara ve net hesabı. LGS 2027 paketi, kurulum ve sonucu okuma.",
+        "video": "lgs-denemesi",
+        "video_label": "Evde LGS provası · 0:45",
+        "video_heading": "Denemeyi videoda görün",
+        "video_note": "Videoda söylenen sayılar paketin önceki sürümüne aittir. Güncel LGS 2027 paketinde on deneme formu ve 900 soru vardır.",
+        "video_short": "lgs-denemesi-dikey",
+        "video_short_label": "Kısa sürüm · 0:30",
+        "lede": (
+            "Evde deneme çözdürmek kolaydır; zor olan, bunu sınav düzeninde yapmaktır: iki oturum, süre, ara ve yanlışların doğruyu götürdüğü net hesabı. "
+            "Bu rehber, AliKa’nın LGS 2027 deneme paketiyle evde böyle bir provanın nasıl kurulduğunu, sonucun nasıl okunduğunu ve paketin neleri yapmadığını anlatır."
+        ),
+        "sections": (
+            ("Kısa cevap", (
+                "AliKa’nın LGS 2027 deneme paketinde 8. sınıflar için on deneme formu vardır: altı ders, toplam 900 soru. Her form iki oturumdur: 50 soruluk sözel oturum 75 dakika, 40 soruluk sayısal oturum 80 dakika sürer.",
+                "Denemeyi siz ebeveyn panelinden takvime eklersiniz; saati gelince çocuk kendi ekranından başlatır. Deneme bitince ders ders net, ağırlıklı net, ünite ünite doğru ve yanlış dökümü ile açıklamalı çözümler görünür.",
+                "Paketi İçerik sayfasından indirirsiniz; AliKa’nın Windows ve Android sürümlerinde çalışır.",
+            )),
+            ("Bir deneme formunda ne var?", (
+                "Sözel oturum: Türkçe 20, T.C. İnkılap Tarihi ve Atatürkçülük 10, Din Kültürü ve Ahlak Bilgisi 10, İngilizce 10 soru. Sayısal oturum: Matematik 20, Fen Bilimleri 20 soru. Toplam 90 soru.",
+                "Sorular ve sıraları paketten gelir; uygulama soru seçmez ve sırayı karıştırmaz. Çocuk önceki soruya dönebilir ve soruyu boş bırakabilir.",
+                "Bu sorular yalnız LGS denemesinde görünür; günlük ek süre sorularının arasına karışmaz. Her form bir kez çözülür; böylece on formun her biri ayrı bir ölçüm olur.",
+            )),
+            ("Konular bitmeden deneme: “İşlenen konular”", (
+                "Yıl ortasında çözülen tam bir deneme, çocuğun henüz görmediği konulardan da soru sorar ve sonucu okumayı zorlaştırır. Bu yüzden denemeyi kurarken kapsamı siz seçersiniz.",
+                "“İşlenen konular” kapsamında işlenmemiş kazanımların soruları formdan çıkarılır; deneme kısalır ve süre soru sayısına göre azalır. Hangi konuların işlendiğini siz işaretleyebilirsiniz; işaret yoksa paketin takvimine göre o güne kadar işlenmesi gereken kazanımlar kullanılır.",
+                "“Tam LGS” kapsamında formun bütün soruları gerçek LGS süreleriyle gelir. Paneldeki “Bugünkü kapsamla önizleme”, her oturumda kaç soru ve kaç dakika olacağını önceden gösterir. Seçilen kapsamda 10’dan az soru kalıyorsa deneme başlamaz.",
+            )),
+            ("Deneme günü nasıl geçer?", (
+                "Ebeveyn panelindeki “LGS denemesi” kartında formu, kapsamı ve oturumlar arası arayı seçip “Takvime ekle”ye basarsınız. Deneme saati gelince çocuk kendi ekranından başlatır.",
+                "Önce sözel oturum çözülür. Ara seçtiyseniz sayısal oturum ara bitince kendiliğinden açılır. İsterseniz “Ara yok” seçip iki oturumu art arda çözdürebilirsiniz.",
+                "Deneme başlamadan önce net kuralı çocuğa hatırlatılır: üç yanlış bir doğruyu götürür. Çocuk oturumu erken bitirmek isterse kaç sorunun boş kaldığı gösterilir ve onayı istenir.",
+            )),
+            ("Sonuç nasıl okunur?", (
+                "Her ders için doğru, yanlış, boş ve net görünür. Net = doğru − yanlış ÷ 3.",
+                "Ağırlıklı net; Türkçe, Matematik ve Fen Bilimleri netlerini 4 kat, diğer derslerin netlerini 1 kat sayarak toplar. Bu bir LGS puanı tahmini değildir; denemeleri birbiriyle karşılaştırmanız için tek bir sayıdır.",
+                "“Ünite ve seviye” dökümü hangi ünitede kaç doğru, yanlış ve boş olduğunu gösterir; tekrar edilecek konu buradan çıkar. “Çözümleri gör” ile her sorunun doğru cevabı ve açıklaması açılır.",
+                "Çözülen formların ağırlıklı netleri panelde “LGS sonuçları” başlığı altında birikir.",
+            )),
+            ("7. sınıflar için: LGS 2028 hazırlık", (
+                "2028’de sınava girecek 7. sınıflar için ayrı bir paket vardır: beş deneme formu (450 soru) ve ünite sonlarında çözülen ünite setleri (327 soru). İkisi de konu anlatımıyla gelir. Ünite setleri deneme paketinin takvimiyle açıldığı için ikisi birlikte kurulur.",
+                "Bu paket şimdilik yalnız Windows’ta çalışır: AliKa Windows 1.2.15 ve sonrası gerekir.",
+            )),
+            ("Kurulum", (
+                "AliKa’yı Windows bilgisayara ya da Android telefona kurun. LGS 2027 paketi için AliKa Windows 1.2.12 ya da Android 0.3.11 ve sonraki bir sürüm gerekir.",
+                "İçerik sayfasından LGS paketini indirin. ZIP dosyasını çıkarmayın: AliKa’da “İçerik ekle”yi açıp ZIP dosyasını doğrudan seçin ya da ZIP’i hazır klasöre koyup “Hazır klasörü tara”yı kullanın.",
+                "Paket eklenince formlar ebeveyn panelindeki “LGS denemesi” kartında görünür.",
+            )),
+            ("Bu paketin yapmadıkları", (
+                "Sorular AliKa için hazırlanmış özgün sorulardır; MEB’in çıkmış LGS soruları değildir. AliKa’nın Millî Eğitim Bakanlığı ile bir bağı yoktur.",
+                "Deneme bir ölçümdür; ders ya da kurs değildir. Eksik konuyu gösterir; o konuyu çalışmak yine çocuğa ve öğretmenine kalır.",
+                "Sonuçlar cihazınızda kalır; Türkiye geneli sıralama ya da yüzdelik dilim hesaplanmaz. Okulun ya da kursun denemelerinin yerini tutmaz; evde sınav düzenine alışmak için ek bir provadır.",
+            )),
+        ),
+        "links": ("Paketler", (
+            ("LGS 2027 deneme paketi (8. sınıf) — İçerik sayfası", "/content/#lgs"),
+            ("LGS 2028 hazırlık paketi (7. sınıf) — İçerik sayfası", "/content/#lgs-2028"),
+        )),
+        "printable": {
+            "title": "LGS deneme takip tablosu",
+            "note": "Yazdırın, her denemeden sonra çocukla birlikte doldurun. Netleri AliKa’daki sonuç ekranından yazabilirsiniz.",
+            "button": "Tabloyu yazdırın",
+            "columns": ("Form", "Tarih", "Kapsam", "Sözel net", "Sayısal net", "Ağırlıklı net", "Tekrar edilecek üniteler"),
+            "rows": tuple((f"Form {n}", "", "", "", "", "", "") for n in range(1, 11)),
+        },
+        "related": (
+            ("Soru çözerek ekran süresi kazanma: AliKa nasıl çalışır?", "soru-cozerek-ekran-suresi-kazanma"),
+            ("Ailece ekran süresi planı nasıl yapılır?", "ailece-ekran-suresi-plani"),
+            ("Ara tatilde ekran süresi planı", "ara-tatil-ekran-suresi-plani"),
+        ),
+    },
+    {
         "slug": "ara-tatil-ekran-suresi-plani",
         "campaign_id": "site_rehber_ara_tatil_tr",
         "platform": "both",
@@ -1788,6 +1871,12 @@ def guide_article_body(guide: dict) -> str:
             'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">'
             f'{esc(printable.get("button", "Planı yazdırın"))}</button></section>'
         )
+    # Site içindeki başka bir sayfaya bağlantı listesi (ör. paketin indirildiği İçerik bölümü).
+    links = guide.get("links")
+    links_section = (
+        f'<section><h2>{esc(links[0])}</h2><ul class="guide-links">{"".join(f"<li><a href=\"{esc(href)}\">{esc(label)}</a></li>" for label, href in links[1])}</ul></section>'
+        if links else ""
+    )
     product = guide.get("product")
     product_section = (
         f'<section><h2>{esc(product[0])}</h2>{"".join(f"<p>{esc(paragraph)}</p>" for paragraph in product[1])}</section>'
@@ -1847,6 +1936,7 @@ def guide_article_body(guide: dict) -> str:
           <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. {disclosure}</p>
         </header>
         {sections}
+        {links_section}
         {printable_section}
         {related_section}
         {product_section}
@@ -2525,6 +2615,9 @@ def build() -> None:
             DIST / GUIDE_BASE / guide["slug"] / "index.html",
             guide_document(locales, guide["title"], guide["description"], canonical, guide_article_body(guide), updated=guide.get("updated", GUIDE_UPDATED)),
         )
+        # Kısa adres (ör. /lgs/) rehbere yönlenir; dizine girmez, site haritasında yer almaz.
+        if guide.get("short_path"):
+            write_page(DIST / guide["short_path"] / "index.html", redirect_to("tr", f"/{GUIDE_BASE}/{guide['slug']}/"))
 
     uk_guide_url = f"{BASE_URL}/{UK_GUIDE_PATH}/"
     write_page(DIST / UK_GUIDE_PATH / "index.html", guide_document(locales, "Windows child screen time: a clear family routine", "A practical UK guide to agreeing screen-time rules on a Windows 10 or Windows 11 family PC, with Microsoft Family Safety context and AliKa's visible, local-first approach.", uk_guide_url, uk_guide_body(), "en"))
