@@ -1011,7 +1011,6 @@ GUIDES = (
         # oturum düzeni paketin "assessment.fullForm" bloğundan, ekran adları uygulamanın lgs.* metinlerinden alındı.
         # Paket ya da uygulama metni değişirse bu sayfa ve İçerik sayfasındaki LGS bölümü birlikte güncellenir.
         # "short_path": alika.tr/lgs/ kısa adresi bu rehbere yönlenir.
-        "draft": True,
         "slug": "evde-lgs-denemesi",
         "short_path": "lgs",
         "updated": ("2026-11-12", "12 Kasım 2026"),

@@ -64,6 +64,7 @@ GUIDE_SLUGS = (
     "kardesler-bilgisayar-sirasi",
     "yariyil-tatili-ekran-suresi",
     "family-link-alika-farki",
+    "evde-lgs-denemesi",
 )
 SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
 ARA_TATIL_KIT_PDF = "ara-tatil-ekran-plani-veli-notu.pdf"
@@ -407,6 +408,7 @@ def main() -> None:
         "kardesler-bilgisayar-sirasi": ("site_rehber_kardes_bilgisayar_tr", False),
         "yariyil-tatili-ekran-suresi": ("site_rehber_yariyil_tr", True),
         "family-link-alika-farki": ("site_rehber_family_link_tr", True),
+        "evde-lgs-denemesi": ("site_rehber_lgs_tr", True),
     }
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"
@@ -423,6 +425,12 @@ def main() -> None:
         guide_body = guide_text.split('<footer class="site-footer">', 1)[0]
         if "youtube.com" in guide_body or "youtu.be" in guide_body:
             errors.append(f"Guide video must play on the site, not on YouTube: {page}")
+
+    # Kısa adres /lgs/ LGS rehberine yönlenir; dizine girmez.
+    lgs_short = DIST / "lgs" / "index.html"
+    lgs_short_text = lgs_short.read_text(encoding="utf-8") if lgs_short.exists() else ""
+    if 'url=/rehber/evde-lgs-denemesi/' not in lgs_short_text or 'content="noindex"' not in lgs_short_text:
+        errors.append("Short address /lgs/ must redirect to the LGS guide and stay noindex")
 
     # Okullar sayfası: dizinde ve site haritasında; veli notu PDF'i var, yazdırma sayfası noindex.
     school_page = DIST / "okullar" / "index.html"
