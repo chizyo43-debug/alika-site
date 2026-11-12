@@ -44,7 +44,7 @@ const de: HomeCopy = {
     live: 'Erhältlich für Windows und Android',
   },
   cta: {
-    pitch: 'Kindersicherung für Windows und Android. Planen Sie die Bildschirmzeit gemeinsam; Ihr Kind verdient mit beantworteten Fragen zusätzliche Zeit, innerhalb der Grenze, die Sie festlegen.',
+    pitch: 'Ihr Kind beantwortet Fragen und verdient sich zusätzliche Bildschirmzeit; die Grenze legen Sie fest. Kindersicherung für Windows und Android.',
     trialPlay: '14 Tage kostenlos testen',
     trialStore: '7 Tage kostenlos testen',
     alsoStore: 'Microsoft Store für Windows-PCs',

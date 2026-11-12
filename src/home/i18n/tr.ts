@@ -44,7 +44,7 @@ const tr: HomeCopy = {
     live: 'Windows ve Android’de yayında',
   },
   cta: {
-    pitch: 'Windows ve Android için ebeveyn kontrolü. Ekran süresini birlikte planlayın; çocuğunuz soru çözerek, sizin koyduğunuz sınır içinde ek süre kazansın.',
+    pitch: 'Çocuğunuz soru çözer, ek ekran süresini kendi kazanır; sınırı siz koyarsınız. Windows ve Android için ebeveyn kontrolü.',
     trialPlay: '14 gün ücretsiz deneyin',
     trialStore: '7 gün ücretsiz deneyin',
     alsoStore: 'Windows bilgisayar için Microsoft Store',
