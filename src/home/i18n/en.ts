@@ -44,7 +44,7 @@ const en: HomeCopy = {
     live: 'Available on Windows and Android',
   },
   cta: {
-    pitch: 'Parental control for Windows and Android. Plan screen time together; your child earns extra time by answering questions, within the limit you set.',
+    pitch: 'Your child answers questions and earns extra screen time; you set the limit. Parental control for Windows and Android.',
     trialPlay: 'Try free for 14 days',
     trialStore: 'Try free for 7 days',
     alsoStore: 'Microsoft Store for Windows PCs',

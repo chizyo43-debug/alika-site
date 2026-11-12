@@ -44,7 +44,7 @@ const pt: HomeCopy = {
     live: 'Disponível no Windows e no Android',
   },
   cta: {
-    pitch: 'Controle parental para Windows e Android. Planeje o tempo de tela em família; a criança ganha tempo extra respondendo perguntas, dentro do limite que você define.',
+    pitch: 'A criança responde perguntas e ganha tempo de tela extra; o limite é você quem define. Controle parental para Windows e Android.',
     trialPlay: 'Teste grátis por 14 dias',
     trialStore: 'Teste grátis por 7 dias',
     alsoStore: 'Microsoft Store para PCs com Windows',

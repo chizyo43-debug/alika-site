@@ -44,7 +44,7 @@ const ja: HomeCopy = {
     live: 'WindowsとAndroidで配信中',
   },
   cta: {
-    pitch: 'WindowsとAndroidのためのペアレンタルコントロール。画面時間を家族で計画し、お子さまは問題に答えて、保護者が決めた上限の範囲で追加時間を獲得します。',
+    pitch: 'お子さまは問題に答えて、追加の画面時間を自分で獲得します。上限は保護者が決めます。WindowsとAndroidのためのペアレンタルコントロール。',
     trialPlay: '14日間無料で試す',
     trialStore: '7日間無料で試す',
     alsoStore: 'Windowsパソコン用：Microsoft Store',

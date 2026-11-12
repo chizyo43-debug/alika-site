@@ -44,7 +44,7 @@ const ko: HomeCopy = {
     live: 'Windows와 Android에서 이용 가능',
   },
   cta: {
-    pitch: 'Windows와 Android를 위한 자녀 보호 앱. 화면 시간을 함께 계획하고, 아이는 문제를 풀어 보호자가 정한 한도 안에서 추가 시간을 얻습니다.',
+    pitch: '아이는 문제를 풀어 추가 화면 시간을 스스로 얻고, 한도는 보호자가 정합니다. Windows와 Android를 위한 자녀 보호 앱.',
     trialPlay: '14일 무료 체험',
     trialStore: '7일 무료 체험',
     alsoStore: 'Windows PC용 Microsoft Store',
