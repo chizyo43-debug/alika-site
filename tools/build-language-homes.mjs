@@ -219,6 +219,8 @@ for (const lang of LANGS) {
   html = setMeta(html, 'name', 'description', seo.seo_description);
   html = setMeta(html, 'property', 'og:locale', OG_LOCALES[lang]);
   html = setMeta(html, 'property', 'og:url', canonical);
+  // Türkçe sayfada Türkçe marka adı; diğer dillerde kısa ad (statik sayfalarla aynı).
+  html = setMeta(html, 'property', 'og:site_name', lang === 'tr' ? 'AliKa Ebeveyn Kontrolü' : 'AliKa');
   html = setMeta(html, 'property', 'og:title', seo.seo_title);
   html = setMeta(html, 'property', 'og:description', seo.seo_description);
   html = setMeta(html, 'name', 'twitter:title', seo.seo_title);

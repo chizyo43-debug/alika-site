@@ -296,7 +296,8 @@ def main() -> None:
                 errors.append(f"Wrong lang in {page}: {parser.lang}")
             if '<link rel="canonical"' not in text:
                 errors.append(f"No canonical: {page}")
-            if text.count('rel="alternate" hreflang=') != len(LANGS):
+            # Her dil için bir satır ve dili eşleşmeyen ziyaretçi için x-default (İngilizce).
+            if text.count('rel="alternate" hreflang=') != len(LANGS) + 1 or 'hreflang="x-default"' not in text:
                 errors.append(f"Bad hreflang count: {page}")
             if re.search(r'name="robots" content="[^"]*noindex', text, re.I):
                 errors.append(f"Indexable page is noindex: {page}")
