@@ -63,6 +63,7 @@ GUIDE_SLUGS = (
     "cocuga-tablet-telefon-hediye",
     "kardesler-bilgisayar-sirasi",
     "yariyil-tatili-ekran-suresi",
+    "family-link-alika-farki",
 )
 SCHOOL_KIT_PDF = "aile-ekran-plani-veli-notu.pdf"
 ARA_TATIL_KIT_PDF = "ara-tatil-ekran-plani-veli-notu.pdf"
@@ -405,6 +406,7 @@ def main() -> None:
         "cocuga-tablet-telefon-hediye": ("site_rehber_hediye_cihaz_tr", True),
         "kardesler-bilgisayar-sirasi": ("site_rehber_kardes_bilgisayar_tr", False),
         "yariyil-tatili-ekran-suresi": ("site_rehber_yariyil_tr", True),
+        "family-link-alika-farki": ("site_rehber_family_link_tr", True),
     }
     for slug in GUIDE_SLUGS:
         page = DIST / "rehber" / slug / "index.html"

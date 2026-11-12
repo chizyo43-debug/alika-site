@@ -913,6 +913,100 @@ GUIDES = (
         ),
     },
     {
+        # Karşılaştırma rehberi: Family Link bilgileri Google'ın yardım sayfalarından (12 Kasım 2026) alındı;
+        # AliKa tarafı ana sayfa metni, gizlilik politikası ve Android izin listesiyle karşılaştırıldı.
+        # Google yardım sayfaları değişirse tablo ve "Kaynaklar" birlikte güncellenir.
+        "slug": "family-link-alika-farki",
+        "updated": ("2026-11-12", "12 Kasım 2026"),
+        "campaign_id": "site_rehber_family_link_tr",
+        "platform": "android",
+        "eyebrow": "Karşılaştırma · Android telefon ve tablet",
+        "title": "Google Family Link ile AliKa Arasındaki Fark Nedir?",
+        "description": "Google Family Link ile AliKa’yı yan yana görün: ücret, hesap, uzaktan yönetim, konum, verinin yeri ve soru çözerek ek süre. Hangi aileye hangisi uyar?",
+        "video": "android-ebeveyn-paneli",
+        "video_label": "AliKa Android ebeveyn paneli · 2:19",
+        "lede": (
+            "Family Link, Google’ın ücretsiz ebeveyn denetimi uygulamasıdır ve birçok aile için yeterlidir. "
+            "AliKa ise ücretlidir, hesap açtırmaz ve çocuk soru çözerek ek süre kazanır. "
+            "Bu rehber ikisinin ne yaptığını, ne yapmadığını ve hangi aileye hangisinin uyduğunu yan yana anlatır. "
+            "Family Link bilgileri Google’ın kendi yardım sayfalarından alınmıştır."
+        ),
+        "sections": (
+            ("Kısa cevap", (
+                "Çocuğunuzun telefonunu evden uzaktayken de yönetmek, konumunu görmek ya da Google Play’den indirdiği uygulamaları onaya bağlamak istiyorsanız Family Link bunları ücretsiz yapar.",
+                "Çocuğunuza Google Hesabı açmadan başlamak, verilerin telefonda kalmasını ve çocuğun ders sorusu çözerek ek süre kazanmasını istiyorsanız AliKa bu ihtiyaca göre tasarlandı.",
+                "İkisinde de günlük süre, uyku saati ve uygulama sınırı vardır. Fark; hesapta, verinin durduğu yerde, uzaktan yönetimde ve ek sürenin nasıl geldiğinde ortaya çıkar.",
+            )),
+            ("Family Link ne yapar?", (
+                "Google’ın yardım sayfalarına göre Family Link ile çocuğun Android cihazına ya da Chromebook’una günlük sınır koyabilir, Dinlenme zamanı ve Okul vakti programları kurabilir, uygulama başına süre verebilir ya da bir uygulamayı engelleyebilirsiniz. Süre dolduğunda ebeveyn kendi telefonundan Bonus süre ekleyebilir, cihazı kilitleyebilir ya da kilidini açabilir.",
+                "Ayrıca Google Play’den yeni uygulama indirmeyi ve satın almayı onaya bağlayabilir; Chrome, Google Play, YouTube ve Arama için ebeveyn denetimlerini ayarlayabilir ve çocuğun Android cihazının konumunu görebilirsiniz.",
+                "Ebeveyn bu ayarları kendi Android telefonundan ya da iPhone’undan yönetir; bazı ayarlar web’den de yapılır. Değişiklikler çocuğun cihazına internet üzerinden ulaşır. Family Link uygulaması Google Play’de ücretsizdir.",
+            )),
+            ("Family Link için ne gerekir?", (
+                "Hem ebeveynin hem çocuğun Google Hesabı olmalıdır. 13 yaşın (ya da ülkedeki geçerli yaş sınırının) altındaki çocuk için hesabı ebeveyn açar. Çocuğun zaten bir hesabı varsa gözetim bu hesaba eklenir ve çocuğun bunu kabul etmesi gerekir.",
+                "Çocuğun cihazı Android 6.0 ve sonrası bir telefon ya da tablet, ya da bir Chromebook olmalıdır; uygulama sınırları ve programlar için Android 7 ve sonrası gerekir. Google’a göre iPhone, iPad ve Chromebook dışındaki bilgisayarlar gözetim altına alınamaz.",
+                "Günlük sınır, çocuğun kullandığı her cihazda ayrı ayrı sayılır: iki saatlik sınır, her cihazda iki saat demektir. Çocuk, ülkesindeki yaş sınırına ulaşana kadar gözetimi kendisi durduramaz; 18 yaşından küçükse durdurmak için ebeveyninin onayı gerekir.",
+            )),
+            ("AliKa ne yapar?", (
+                "AliKa’da da günlük süre, haftalık plan, gece modu, uygulama başına süre, uygulama engelleme, isteğe bağlı yeni uygulama onayı, web filtresi ve güvenli arama vardır. Kurallar çocuğun ekranında görünür: çocuk kalan süresini ve ne zaman duracağını önceden bilir.",
+                "Asıl fark öğrenme tarafındadır. Çocuk, sizin seçtiğiniz derslerden soru çözer ve doğru cevaplarla ek süre kazanır. Kaç doğrunun bir dakika ettiğini ve günlük üst sınırı siz belirlersiniz; ek süre bu sınırı aşmaz. Ekran dışı görevler de sizin onayınızla ek süreye dönüşebilir.",
+                "AliKa için hesap açılmaz ve çocuğa Google Hesabı açmanız gerekmez; uygulamayı indirmek için telefonda Google Play’in çalışması yeterlidir. Kullanım, profil ve öğrenme verileri telefonda kalır. Android’de aile aboneliğini doğrulamak için yalnız sınırlı lisans bilgisi AliKa’nın lisans hizmetine gider. Uygulamada reklam yoktur.",
+                "Seçtiğiniz mesajlaşma uygulamaları süre bitince de açık kalır; arama ve SMS her zaman açıktır.",
+            )),
+            ("AliKa’nın yapmadıkları", (
+                "AliKa çocuğun konumunu izlemez; böyle bir özelliği ve konum izni yoktur. Çocuğunuzun nerede olduğunu görmek sizin için önemliyse bunu Family Link yapar.",
+                "Ev dışından, internet üzerinden uzaktan yönetim yoktur. Ebeveyn telefonu çocuğun cihazını aynı Wi‑Fi ağındayken yönetir. Kurallar telefonun içinde çalıştığı için çocuk dışarıdayken de geçerlidir, ama o sırada ayarı uzaktan değiştiremezsiniz.",
+                "AliKa Google Play’deki satın almaları onaya bağlamaz; bunu Play Store’un kendi “Satın alma işlemlerini doğrulama” ayarından açarsınız. AliKa iPhone ve iPad’de çalışmaz.",
+                "AliKa ücretlidir: Android’de 14 günlük ücretsiz denemeden sonra aile aboneliği gerekir. Bir abonelik 10 eşleştirilmiş aile cihazında geçerlidir.",
+            )),
+            ("Hangi aileye hangisi uyar?", (
+                "Family Link size daha uygun olabilir: çocuğunuz evden uzakta çok vakit geçiriyorsa ve ayarı uzaktan değiştirmek ya da konumunu görmek istiyorsanız, ailede herkes zaten Google Hesabı kullanıyorsa, çocuğun cihazı bir Chromebook ise ya da ücret ödemek istemiyorsanız.",
+                "AliKa size daha uygun olabilir: her akşamki süre pazarlığını ders çalışmayla birleştirmek istiyorsanız, çocuğunuza hesap açmak istemiyorsanız, verilerin telefonda kalmasını önemsiyorsanız, evde aynı planı Windows bilgisayarda da kurmak istiyorsanız (Windows sürümü ayrı satın alınır) ya da kendi telefonunuzu ara sıra çocuğunuza veriyorsanız.",
+                "Emin değilseniz önce ücretsiz olanı deneyin. Size eksik gelen şey çocuğun süreyi kendi emeğiyle kazanması ya da hesapsız kullanım olursa AliKa’yı 14 gün ücretsiz deneyebilirsiniz.",
+            )),
+            ("Bu karşılaştırma nasıl hazırlandı?", (
+                "Family Link ile ilgili her bilgi, aşağıda bağlantısı verilen Google yardım sayfalarından 12 Kasım 2026’da okunmuştur. Google özellikleri ve menü adlarını değiştirebilir; karar vermeden önce güncel sayfalara bakın.",
+                "Google, Android, Google Play, Chromebook ve Family Link, Google LLC’nin ticari markalarıdır. AliKa’nın Google ile bir bağı yoktur.",
+            )),
+        ),
+        "printable": {
+            "title": "Yan yana: Family Link ve AliKa",
+            "note": "Family Link sütunu Google’ın yardım sayfalarına dayanır (12 Kasım 2026). AliKa sütunu Android sürümünü anlatır.",
+            "button": "Tabloyu yazdırın",
+            # Karşılaştırma tablosudur, aile planı değil: okullar sayfasındaki plan listesine girmez.
+            "fit": True,
+            "columns": ("", "Google Family Link", "AliKa (Android)"),
+            "rows": (
+                ("Ücret", "Ücretsiz", "14 gün ücretsiz deneme, sonra aile aboneliği"),
+                ("Hesap", "Ebeveyn ve çocuk için Google Hesabı", "AliKa hesabı yok; çocuğa hesap açılmaz"),
+                ("Günlük süre ve uyku saati", "Var: Günlük sınır, Dinlenme zamanı, Okul vakti", "Var: günlük süre, haftalık plan, gece modu"),
+                ("Uygulama süresi ve engelleme", "Var", "Var"),
+                ("Yeni uygulama onayı", "Var: Google Play indirmeleri", "Var: isteğe bağlı"),
+                ("Web ve arama filtresi", "Chrome ve Arama için ebeveyn denetimleri", "Telefonun içinde çalışan web filtresi ve güvenli arama"),
+                ("Konum", "Var", "Yok"),
+                ("Ev dışından uzaktan yönetim", "Var: internet üzerinden", "Yok: aynı Wi‑Fi ağında"),
+                ("Ek süre nasıl gelir?", "Ebeveyn Bonus süre ekler", "Çocuk soru çözerek ya da onayladığınız görevle kazanır; üst sınırı siz koyarsınız"),
+                ("Verinin yeri", "Çocuğun Google Hesabı üzerinden çalışır", "Telefonda kalır; yalnız sınırlı lisans bilgisi lisans hizmetine gider"),
+                ("Çocuğun cihazı", "Android telefon ve tablet, Chromebook", "Android telefon ve tablet; Windows için ayrı sürüm"),
+                ("Ebeveynin cihazı", "Android telefon, iPhone; bazı ayarlar web’den", "Aynı Wi‑Fi ağındaki Android telefon ya da çocuğun telefonunda ebeveyn PIN’i"),
+            ),
+        },
+        "related": (
+            ("Android telefonda çocuğun ekran süresi nasıl planlanır?", "android-cocuk-ekran-suresi"),
+            ("Soru çözerek ekran süresi kazanma: AliKa nasıl çalışır?", "soru-cozerek-ekran-suresi-kazanma"),
+            ("Bulut hesabı olmadan ebeveyn kontrolü nasıl çalışır?", "bulutsuz-ebeveyn-kontrolu"),
+            ("Çocuğa ilk telefon: ilk hafta kuralları ve kurulum listesi", "cocuga-ilk-telefon"),
+        ),
+        "sources": (
+            ("Family Link’i kullanmaya başlama — Google For Families Yardım, 12 Kasım 2026’da erişildi", "https://support.google.com/families/answer/7101025?hl=tr"),
+            ("Çocuğunuzun ekran başında kalma süresini yönetme — Google For Families Yardım, 12 Kasım 2026’da erişildi", "https://support.google.com/families/answer/7103340?hl=tr"),
+            ("Çocuğunuzun cihazında program belirleme — Google For Families Yardım, 12 Kasım 2026’da erişildi", "https://support.google.com/families/answer/15938652?hl=tr"),
+            ("Çocuğunuzun Google Play uygulamalarını yönetme — Google For Families Yardım, 12 Kasım 2026’da erişildi", "https://support.google.com/families/answer/7103028?hl=tr"),
+            ("Mevcut bir Google Hesabı’na gözetim ekleme ve gözetimi yönetme — Google For Families Yardım, 12 Kasım 2026’da erişildi", "https://support.google.com/families/answer/9055704?hl=tr"),
+            ("Google’dan Family Link — tanıtım sayfası, 12 Kasım 2026’da erişildi", "https://families.google/intl/tr_ALL/familylink/"),
+        ),
+    },
+    {
         "slug": "ara-tatil-ekran-suresi-plani",
         "campaign_id": "site_rehber_ara_tatil_tr",
         "platform": "both",
@@ -1688,7 +1782,8 @@ def guide_article_body(guide: dict) -> str:
         # Düğme yalnız tabloyu yazdırır (print-plan sınıfı); sayfanın geri kalanı baskıda gizlenir.
         printable_section = (
             f'<section class="guide-print" id="yazdir"><h2>{esc(printable["title"])}</h2><p>{esc(printable["note"])}</p>'
-            f'<div class="guide-table"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
+            # "fit": karşılaştırma tablosu; telefonda yana kaydırmadan bütün sütunlar görünür.
+            f'<div class="guide-table{" guide-table-fit" if printable.get("fit") else ""}"><table><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
             '<button class="button guide-print-button" type="button" '
             'onclick="document.body.classList.add(\'print-plan\');window.print();document.body.classList.remove(\'print-plan\')">'
             f'{esc(printable.get("button", "Planı yazdırın"))}</button></section>'
@@ -1785,7 +1880,7 @@ def school_body() -> str:
     )
     plans = "".join(
         f'<li><a href="/{GUIDE_BASE}/{guide["slug"]}/#yazdir">{esc(guide["printable"]["title"])}</a></li>'
-        for guide in PUBLISHED_GUIDES if guide.get("printable")
+        for guide in PUBLISHED_GUIDES if guide.get("printable") and not guide["printable"].get("fit")
     )
     return f"""
     <main id="main" class="guide-main">
