@@ -916,7 +916,6 @@ GUIDES = (
         # Karşılaştırma rehberi: Family Link bilgileri Google'ın yardım sayfalarından (12 Kasım 2026) alındı;
         # AliKa tarafı ana sayfa metni, gizlilik politikası ve Android izin listesiyle karşılaştırıldı.
         # Google yardım sayfaları değişirse tablo ve "Kaynaklar" birlikte güncellenir.
-        "draft": True,
         "slug": "family-link-alika-farki",
         "updated": ("2026-11-12", "12 Kasım 2026"),
         "campaign_id": "site_rehber_family_link_tr",
@@ -974,6 +973,7 @@ GUIDES = (
             "title": "Yan yana: Family Link ve AliKa",
             "note": "Family Link sütunu Google’ın yardım sayfalarına dayanır (12 Kasım 2026). AliKa sütunu Android sürümünü anlatır.",
             "button": "Tabloyu yazdırın",
+            # Karşılaştırma tablosudur, aile planı değil: okullar sayfasındaki plan listesine girmez.
             "fit": True,
             "columns": ("", "Google Family Link", "AliKa (Android)"),
             "rows": (
@@ -1880,7 +1880,7 @@ def school_body() -> str:
     )
     plans = "".join(
         f'<li><a href="/{GUIDE_BASE}/{guide["slug"]}/#yazdir">{esc(guide["printable"]["title"])}</a></li>'
-        for guide in PUBLISHED_GUIDES if guide.get("printable")
+        for guide in PUBLISHED_GUIDES if guide.get("printable") and not guide["printable"].get("fit")
     )
     return f"""
     <main id="main" class="guide-main">
