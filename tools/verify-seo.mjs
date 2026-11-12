@@ -34,7 +34,9 @@ if (mode === '--source') {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   checkHomeHead('tr', html, 'index.html');
   if (!html.includes('<link rel="canonical" href="https://www.alika.tr/" />')) errors.push('index.html: canonical is missing');
-  if ((html.match(/rel="alternate" hreflang=/g) || []).length !== Object.keys(locales).length) errors.push('index.html: hreflang set is incomplete');
+  // Her dil için bir satır ve dili eşleşmeyen ziyaretçi için x-default (İngilizce).
+  if ((html.match(/rel="alternate" hreflang=/g) || []).length !== Object.keys(locales).length + 1) errors.push('index.html: hreflang set is incomplete');
+  if (!html.includes('<link rel="alternate" hreflang="x-default" href="https://www.alika.tr/en/" />')) errors.push('index.html: x-default hreflang is missing');
   if (/alt=""/.test(html)) errors.push('home shell images must have descriptive alt text');
 } else if (mode === '--dist') {
   for (const language of Object.keys(locales)) {

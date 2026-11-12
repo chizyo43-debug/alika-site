@@ -19,6 +19,21 @@ PUBLIC = ROOT / "public"
 # Paylaşım görseli: ortak og.jpg'nin yazısı Türkçe, og-ja.jpg'ninki Japonca; alt metin sayfanın dilinde.
 # Sayfa başlığı ve og:site_name sonundaki marka; Türkçe sayfalarda Türkçe marka adı.
 BRAND_NAME = {"tr": "AliKa Ebeveyn Kontrolü", "en": "AliKa"}
+
+# İçerik sayfasının arama sonucundaki açıklaması; sayfada görünen kısa giriş cümlesi locales.json'da kalır.
+CONTENT_SEO_DESCRIPTION = {
+    "tr": "AliKa için hazır içerik paketleri: 5–8. sınıf konu anlatımı ve soruları, LGS 2027 deneme paketi, ilkokul görsel etkinlikleri ve aile oyunları. Doğrudan indirin.",
+    "en": "Ready-made learning packs for AliKa: lessons and questions for Türkiye (grades 5–8) and Japan (grades 7–9), LGS 2027 mock exams, visual activities and games.",
+    "de": "Fertige Lernpakete für AliKa: Lektionen und Fragen für die Türkei (Klasse 5–8) und Japan (Klasse 7–9), LGS-2027-Probeprüfungen, Bildaufgaben und Familienspiele.",
+    "es": "Paquetes de aprendizaje listos para AliKa: lecciones y preguntas de Turquía (5.º–8.º) y Japón (7.º–9.º), simulacros LGS 2027, actividades visuales y juegos.",
+    "fr": "Packs prêts pour AliKa : leçons et questions pour la Turquie (5e–8e année) et le Japon (7e–9e année), examens blancs LGS 2027, activités visuelles et jeux.",
+    "pt": "Pacotes prontos para a AliKa: lições e perguntas da Turquia (5.º–8.º ano) e do Japão (7.º–9.º ano), simulados LGS 2027, atividades visuais e jogos em família.",
+    "ru": "Готовые учебные пакеты для AliKa: уроки и вопросы для Турции (5–8 классы) и Японии (7–9 классы), пробные экзамены LGS 2027, визуальные задания и семейные игры.",
+    "ja": "AliKa用の教材パック：日本の中学校1〜3年とトルコの5〜8年生向けの解説と問題、LGS 2027模擬試験、小学生向けの視覚アクティビティ、家族で遊べるゲーム。直接ダウンロードできます。",
+    "ko": "AliKa용 학습 패키지: 튀르키예 5–8학년과 일본 중학교 1–3학년 과정의 설명과 문제, LGS 2027 모의고사, 초등 시각 활동, 가족 게임을 바로 내려받으세요.",
+}
+# Dili eşleşmeyen ziyaretçi için varsayılan dil (hreflang x-default).
+X_DEFAULT_LANG = "en"
 OG_IMAGE_ALT = {
     "tr": "AliKa logosu, “Kısıtlamıyoruz. Planlıyoruz.” sloganı ve gülümseyen AliKa maskotu. Windows ve Android; Microsoft Store ve Google Play.",
     "en": "AliKa logo, the Turkish slogan “We don’t restrict. We plan.” and the smiling AliKa mascot. Windows and Android; Microsoft Store and Google Play.",
@@ -1528,7 +1543,7 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
     alternates = "\n".join(
         f'<link rel="alternate" hreflang="{code}" href="{BASE_URL}{href(code, slug)}">'
         for code in LANGS
-    )
+    ) + f'\n<link rel="alternate" hreflang="x-default" href="{BASE_URL}{href(X_DEFAULT_LANG, slug)}">'
     canonical = f"{BASE_URL}{href(lang, slug)}"
     return f"""<!doctype html>
 <html lang="{lang}">
@@ -1542,6 +1557,7 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
   {alternates}
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="icon" href="/assets/brand/alika-logo.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{BRAND_NAME.get(lang, 'AliKa')}">
   <meta property="og:title" content="{esc(title)}">
@@ -1587,6 +1603,7 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <link rel="canonical" href="{canonical}">
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="icon" href="/assets/brand/alika-logo.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="{ {'en': 'en_GB', 'ja': 'ja_JP'}.get(lang, 'tr_TR') }">
   <meta property="og:site_name" content="{BRAND_NAME["tr" if lang == "tr" else "en"]}">
@@ -2392,7 +2409,7 @@ def build() -> None:
         c = locales[lang]
         base = DIST if lang == "tr" else DIST / lang
         title, desc = c["pages"]["content"]
-        write_page(base / "content" / "index.html", document(locales, lang, f"{title} — {BRAND_NAME.get(lang, 'AliKa')}", desc, content_page(lang, c, catalog), "content"))
+        write_page(base / "content" / "index.html", document(locales, lang, f"{title} — {BRAND_NAME.get(lang, 'AliKa')}", CONTENT_SEO_DESCRIPTION[lang], content_page(lang, c, catalog), "content"))
         for slug in REDIRECT_ANCHORS:
             write_page(base / slug / "index.html", redirect_document(lang, slug))
 
@@ -2482,7 +2499,13 @@ def build() -> None:
     urls.extend(ja_guide_urls)
     unique_urls = list(dict.fromkeys(urls))
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    sitemap += "".join(f"  <url><loc>{esc(url)}</loc></url>\n" for url in unique_urls)
+    # lastmod yalnız gerçek güncelleme tarihi bilinen sayfalara (rehberler) yazılır; derleme günü yazılmaz.
+    lastmod = {f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/": guide.get("updated", GUIDE_UPDATED)[0] for guide in PUBLISHED_GUIDES}
+    lastmod.update({f"{BASE_URL}/{ja_guide['path']}/": ja_guide["updated"][0] for ja_guide in JA_GUIDES})
+    sitemap += "".join(
+        f"  <url><loc>{esc(url)}</loc>{'<lastmod>' + lastmod[url] + '</lastmod>' if url in lastmod else ''}</url>\n"
+        for url in unique_urls
+    )
     sitemap += "</urlset>\n"
     write_page(DIST / "sitemap.xml", sitemap)
     write_page(DIST / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n")
