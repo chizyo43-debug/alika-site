@@ -3413,6 +3413,32 @@ h3 {
   font-weight: 800;
 }
 
+/* Karşılaştırma tablosu: telefonda yana kaydırmadan bütün sütunlar birlikte görünür. */
+.guide-table-fit table {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.guide-table-fit th,
+.guide-table-fit td {
+  overflow-wrap: anywhere;
+}
+
+.guide-table-fit thead th:first-child {
+  width: 26%;
+}
+
+@media (max-width: 640px) {
+  .guide-table-fit table {
+    font-size: 0.84rem;
+  }
+
+  .guide-table-fit th,
+  .guide-table-fit td {
+    padding: 8px;
+  }
+}
+
 .guide-print-button {
   margin-top: 18px;
   border: 0;
