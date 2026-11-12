@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { homePath, LANGS } from '../src/home/i18n/langs.ts';
+import { contentPath, GUIDE_PATHS, homePath, LANGS, legalPath } from '../src/home/i18n/langs.ts';
 import { microsoftStoreUrl, playStoreUrl } from '../src/store-campaign.ts';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -95,15 +95,98 @@ function schema(lang, copy, canonical, storeUrl) {
   return `${ld(data)}\n    ${ld(site)}`;
 }
 
-function fallback(copy, storeUrl, playUrl) {
-  return `<section class="seoFallback">
-        <h1>${esc(copy.seo.h1)}</h1>
-        <p>${esc(copy.cta.pitch)}</p>
-        <p>${esc(copy.intro.lead.join(''))}</p>
-        <p>${esc(copy.seo.pricing)}</p>
-        <a href="${esc(storeUrl)}">Microsoft Store</a>
-        <a href="${esc(playUrl)}">Google Play</a>
-      </section>`;
+const SUPPORT_EMAIL = 'destek@alika.tr';
+
+// JavaScript çalıştırmayan okuyucu (bazı arama motorları, yapay zekâ asistanlarının tarayıcıları, önizleme araçları)
+// sayfanın yazısını buradan okur: React'in çizdiği bölümlerle aynı metin, aynı sırayla, dil dosyasından üretilir.
+// React açılınca bu blok silinir. İç içe <section> kullanılmaz; kabuktaki blok ilk </section>'a kadar değiştirilir.
+function fallback(lang, copy, storeUrl, playUrl) {
+  const h2 = (text) => `<h2>${esc(text)}</h2>`;
+  const h3 = (text) => `<h3>${esc(text)}</h3>`;
+  const p = (text) => `<p>${esc(text)}</p>`;
+  const ul = (items) => `<ul>${items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`;
+  const link = (href, text) => `<a href="${esc(href)}">${esc(text.replace(/\s*[→↗]\s*$/, ''))}</a>`;
+  const pairs = (items) => `<dl>${items.map((item) => `<dt>${esc(item.title ?? item.name)}</dt><dd>${esc(item.body)}</dd>`).join('')}</dl>`;
+  const featureGroup = (group) => [h3(group.title), p(group.lead), pairs(Object.values(group.items))];
+  const offer = (side) => [h3(`${side.title}: ${side.trial}`), ul(side.points)];
+  const { platforms } = copy;
+  const guidesIndex = GUIDE_PATHS[lang];
+
+  const parts = [
+    `<h1>${esc(copy.seo.h1)}</h1>`,
+    p(copy.cta.pitch),
+    p(copy.intro.lead.join('')),
+    p(copy.seo.pricing),
+    `<a href="${esc(storeUrl)}">Microsoft Store</a>`,
+    `<a href="${esc(playUrl)}">Google Play</a>`,
+    p(copy.cta.trustLine),
+    p(copy.cta.appleNote),
+    pairs(copy.intro.stats.map((stat) => ({ title: stat.value, body: stat.label }))),
+
+    h2(copy.rail.title),
+    p(copy.rail.lead),
+    ...[platforms.windows, platforms.android, platforms.tv].flatMap((platform) => [h3(platform.title), p(platform.body)]),
+    pairs(Object.values(platforms.tv.games)),
+    link(`${contentPath(lang)}#oyunlar`, platforms.tv.packs),
+
+    h2(copy.audiences.title),
+    p(copy.audiences.lead),
+    ...Object.values(copy.audiences.items).flatMap((item) => [h3(item.title), p(item.body), ul(item.points)]),
+
+    h2(copy.features.title),
+    p(copy.features.lead),
+    ...featureGroup(copy.features.control),
+    ...featureGroup(copy.features.learning),
+    ...featureGroup(copy.features.family),
+
+    h2(copy.how.title),
+    p(copy.how.lead),
+    `<ol>${copy.how.steps.map((step) => `<li><strong>${esc(step.title)}</strong> ${esc(step.body)}</li>`).join('')}</ol>`,
+
+    h2(copy.ages.title),
+    p(copy.ages.lead),
+    pairs(copy.ages.items),
+
+    h2(copy.trust.title),
+    pairs(copy.trust.items),
+    link(legalPath(lang, 'privacy'), copy.trust.privacyLink),
+
+    h2(copy.about.title),
+    ...copy.about.story.map(p),
+    p(copy.about.signature),
+    h3(copy.about.planTitle),
+    ...copy.about.plan.flatMap((group) => [`<h4>${esc(group.label)}</h4>`, ul(group.items)]),
+    link(contentPath(lang), copy.about.contentLink),
+
+    h2(copy.offer.title),
+    p(copy.offer.lead),
+    ...offer(copy.offer.windows),
+    ...offer(copy.offer.android),
+    p(copy.offer.note),
+
+    h2(copy.faq.title),
+    ...copy.faq.items.flatMap((item) => [h3(item.q), p(item.a)]),
+  ];
+
+  if (copy.guides) {
+    parts.push(
+      h2(copy.guides.title),
+      p(copy.guides.lead),
+      `<ul>${copy.guides.items.map((guide) => `<li>${link(guide.href, guide.title)}: ${esc(guide.body)}</li>`).join('')}</ul>`,
+    );
+    if (guidesIndex) parts.push(link(guidesIndex, copy.guides.all));
+  }
+
+  parts.push(
+    h2(copy.contact.title),
+    p(copy.contact.lead),
+    `<a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>`,
+    link(legalPath(lang, 'terms'), copy.footer.terms),
+  );
+  if (copy.footer.schools) parts.push(link('/okullar/', copy.footer.schools));
+  if (copy.footer.tokushoho) parts.push(link('/ja/tokushoho/', copy.footer.tokushoho));
+
+  return `<section class="seoFallback">\n        ${parts.join('\n        ')}\n      </section>`;
 }
 
 function languageChunks() {
@@ -146,7 +229,7 @@ for (const lang of LANGS) {
   html = setMeta(html, 'property', 'og:image:alt', OG_IMAGE_ALT[lang]);
   html = setMeta(html, 'name', 'twitter:image:alt', OG_IMAGE_ALT[lang]);
   html = replaceOnce(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/, schema(lang, copy, canonical, storeUrl), 'ld+json');
-  html = replaceOnce(html, /<section class="seoFallback">[\s\S]*?<\/section>/, fallback(copy, storeUrl, playUrl), 'seo fallback');
+  html = replaceOnce(html, /<section class="seoFallback">[\s\S]*?<\/section>/, fallback(lang, copy, storeUrl, playUrl), 'seo fallback');
   if (chunks[lang]) {
     html = replaceOnce(html, /<\/head>/, `  <link rel="modulepreload" crossorigin href="${chunks[lang]}" />\n  </head>`, 'head end');
   }

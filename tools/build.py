@@ -542,9 +542,9 @@ REDIRECT_ANCHORS = {
 GUIDES = (
     {
         # R1: metinler Resmî Gazete'den karşılaştırıldı (20 Ekim 2026), 21 Ekim 2026'da yayımlandı;
-        # 2 Kasım 2026'da yürürlük (1 Kasım 2026) sonrası geçmiş zamana çevrildi; 31 Mart 2027 öncesi yeniden gözden geçirilir.
+        # 12 Kasım 2026'da yürürlük (1 Kasım 2026) sonrası geçmiş zamana çevrilmiş hali yayımlandı; 31 Mart 2027 öncesi yeniden gözden geçirilir.
         "slug": "15-yas-alti-sosyal-medya-duzenlemesi",
-        "updated": ("2026-11-02", "2 Kasım 2026"),
+        "updated": ("2026-11-12", "12 Kasım 2026"),
         "campaign_id": "site_rehber_15yas_tr",
         "platform": "both",
         "video": "15-yas-sosyal-medya",

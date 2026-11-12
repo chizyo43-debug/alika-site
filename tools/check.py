@@ -329,6 +329,12 @@ def main() -> None:
                 errors.append(f"Google Play link is missing: {home_page}")
             if '<section class="seoFallback">' not in home_text or "<h1>" not in home_text:
                 errors.append(f"Pre-rendered home summary is missing: {home_page}")
+            # JS çalıştırmayan okuyucu bölümleri ve sık sorulanları da görmeli; JS kapalıyken özet görünür olmalı.
+            fallback_html = home_text.split('<section class="seoFallback">', 1)[-1].split("</section>", 1)[0]
+            if fallback_html.count("<h2>") < 10 or fallback_html.count("<h3>") < 15:
+                errors.append(f"Pre-rendered home sections are missing: {home_page}")
+            if "<noscript>" not in home_text:
+                errors.append(f"No-JavaScript style for the home summary is missing: {home_page}")
             # Açılış cümlesi ürünün ne olduğunu söyler; arama motoru da aynısını görmeli.
             if lang == "tr" and "Windows ve Android için ebeveyn kontrolü." not in home_text:
                 errors.append(f"Home pitch is missing from the summary: {home_page}")
