@@ -298,14 +298,14 @@ const tr: HomeCopy = {
     all: 'Tüm rehberler',
     items: [
       {
-        href: '/rehber/15-yas-alti-sosyal-medya-duzenlemesi/',
-        title: '15 yaş altı sosyal medya düzenlemesi',
-        body: '1 Kasım 2026’da ne değişti? Yaş doğrulama, 15–18 yaş hesapları ve ailelerin yapabilecekleri.',
-      },
-      {
         href: '/rehber/ara-tatil-ekran-suresi-plani/',
         title: 'Ara tatilde ekran süresi',
         body: '16–20 Kasım ara tatili için hafta sonlarıyla 9 günlük plan: yazdırılabilir tabloyla.',
+      },
+      {
+        href: '/rehber/15-yas-alti-sosyal-medya-duzenlemesi/',
+        title: '15 yaş altı sosyal medya düzenlemesi',
+        body: '1 Kasım 2026’da ne değişti? Yaş doğrulama, 15–18 yaş hesapları ve ailelerin yapabilecekleri.',
       },
       {
         href: '/rehber/cocuga-tablet-telefon-hediye/',
