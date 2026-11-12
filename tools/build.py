@@ -2603,7 +2603,7 @@ def build() -> None:
         guide_document(
             locales,
             "Türkçe Ebeveyn Rehberleri",
-            "15 yaş altı sosyal medya düzenlemesi, çocuğa ilk telefon ve hediye cihaz ayarları, bilgisayarı paylaşan kardeşler, Windows ve Android’de ekran süresi, ailece plan, ara tatil ve yarıyıl tatili, soru çözerek süre kazanma ve bulutsuz ebeveyn kontrolü için Türkçe rehberler.",
+            "Türkçe ebeveyn rehberleri: Windows ve Android’de ekran süresi, ailece plan, tatiller, ilk telefon, 15 yaş düzenlemesi, Family Link farkı ve evde LGS denemesi.",
             guide_index_url,
             guide_index_body(),
         ),
