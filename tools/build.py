@@ -542,9 +542,9 @@ REDIRECT_ANCHORS = {
 GUIDES = (
     {
         # R1: metinler Resmî Gazete'den karşılaştırıldı (20 Ekim 2026), 21 Ekim 2026'da yayımlandı;
-        # 31 Mart 2027 öncesi yeniden gözden geçirilir.
+        # 12 Kasım 2026'da yürürlük (1 Kasım 2026) sonrası geçmiş zamana çevrilmiş hali yayımlandı; 31 Mart 2027 öncesi yeniden gözden geçirilir.
         "slug": "15-yas-alti-sosyal-medya-duzenlemesi",
-        "updated": ("2026-10-21", "21 Ekim 2026"),
+        "updated": ("2026-11-12", "12 Kasım 2026"),
         "campaign_id": "site_rehber_15yas_tr",
         "platform": "both",
         "video": "15-yas-sosyal-medya",
@@ -553,19 +553,19 @@ GUIDES = (
         "video_short": "15-yas-bosalan-saatler",
         "video_short_label": "Boşalan saatleri planlayın · 0:19",
         "eyebrow": "Gündem · Ebeveynler için sade rehber",
-        "title": "15 Yaş Altı Sosyal Medya Düzenlemesi: 1 Kasım’da Ne Değişiyor?",
-        "description": "15 yaş altına sosyal medya düzenlemesi 1 Kasım 2026’da başlıyor. e-Devlet ile yaş doğrulama, 15–18 yaş hesapları, 31 Mart 2027 tarihi ve ailelerin yapabilecekleri.",
+        "title": "15 Yaş Altı Sosyal Medya Düzenlemesi: 1 Kasım’da Ne Değişti?",
+        "description": "15 yaş altına sosyal medya düzenlemesi 1 Kasım 2026’da başladı. e-Devlet ile yaş doğrulama, 15–18 yaş hesapları, 31 Mart 2027 tarihi ve ailelerin yapabilecekleri.",
         "lede": (
-            "1 Kasım 2026’dan itibaren Türkiye’den erişilebilen sosyal ağ sağlayıcıları, 15 yaşını doldurmamış çocuklara hizmet sunamayacak. "
-            "15–18 yaş arasındaki çocukların hesapları ise daha korumalı ayarlarla çalışacak. "
+            "1 Kasım 2026’dan bu yana Türkiye’den erişilebilen sosyal ağ sağlayıcıları, 15 yaşını doldurmamış çocuklara hizmet sunamıyor. "
+            "15–18 yaş arasındaki çocukların hesapları ise daha korumalı ayarlarla çalışıyor. "
             "Bu rehber, Resmî Gazete’de yayımlanan metinlerin ailelere dokunan kısmını sade bir dille özetler ve boşalan zaman için bir plan önerir. Hukuki danışmanlık değildir."
         ),
         "sections": (
-            ("Düzenleme ne zaman başlıyor, dayanağı ne?", (
-                "Dayanak, 1 Mayıs 2026 tarihli Resmî Gazete’de yayımlanan 7578 sayılı Kanun’dur. Bu Kanun, 5651 sayılı İnternet Kanunu’nun ek 4. maddesini değiştirdi; sosyal ağlarla ilgili hüküm yayımdan altı ay sonra yürürlüğe giriyor.",
-                "Uygulamanın ayrıntıları, Cumhurbaşkanlığı Siber Güvenlik Başkanlığı’nın hazırladığı ve 10 Ekim 2026 tarihli Resmî Gazete’de yayımlanan yönetmelikte yer alıyor. Yönetmelik 1 Kasım 2026’da yürürlüğe giriyor ve Türkiye’den erişilebilen yurt içi ve yurt dışı kaynaklı sosyal ağ sağlayıcılarını kapsıyor.",
+            ("Düzenleme ne zaman başladı, dayanağı ne?", (
+                "Dayanak, 1 Mayıs 2026 tarihli Resmî Gazete’de yayımlanan 7578 sayılı Kanun’dur. Bu Kanun, 5651 sayılı İnternet Kanunu’nun ek 4. maddesini değiştirdi; sosyal ağlarla ilgili hüküm yayımdan altı ay sonra yürürlüğe girdi.",
+                "Uygulamanın ayrıntıları, Cumhurbaşkanlığı Siber Güvenlik Başkanlığı’nın hazırladığı ve 10 Ekim 2026 tarihli Resmî Gazete’de yayımlanan yönetmelikte yer alıyor. Yönetmelik 1 Kasım 2026’da yürürlüğe girdi ve Türkiye’den erişilebilen yurt içi ve yurt dışı kaynaklı sosyal ağ sağlayıcılarını kapsıyor.",
             )),
-            ("15 yaş altı için ne değişiyor?", (
+            ("15 yaş altı için ne değişti?", (
                 "Sosyal ağ sağlayıcı, 15 yaşını doldurmamış çocuklara hizmet sunamaz. Yaş doğrulamasında 15 yaşını doldurmadığı görülen çocukların hesap açma talepleri reddedilir.",
                 "Yayımlanan metinlerde ebeveyn izniyle hesap açmaya yönelik bir istisna yer almıyor. Kural, çocuğun ya da ailenin değil, platformun yükümlülüğü olarak yazılmıştır.",
             )),
@@ -578,7 +578,7 @@ GUIDES = (
                 "İlk doğrulamadan sonra platform kendi yöntemlerini de kullanabilir. Bir hesabın yaş aralığına aykırı kullanıldığına dair makul şüphe olursa hesap askıya alınır ve yeniden belirteçle doğrulama istenir.",
                 "e-Devlet şifrenizi kimseyle paylaşmayın. Yaş doğrulaması gerekçesiyle şifre, kimlik fotoğrafı ya da ödeme isteyen mesaj ve sitelere karşı dikkatli olun; doğrulamayı yalnız platformun kendi uygulamasından ve e-Devlet’in resmî adresinden yapın.",
             )),
-            ("15–18 yaş: hesaplar nasıl değişiyor?", (
+            ("15–18 yaş: hesaplar nasıl değişti?", (
                 "15 yaşını doldurmuş çocukların hesapları varsayılan olarak gizli olur ve herkese açık hale getirilemez. Takipçi ve takip edilen listelerini başkaları göremez. Çocuğa yalnız onun takip ettiği hesaplar mesaj gönderebilir; mesajın görüldü bilgisi karşı tarafa gitmez.",
                 "Bu hesaplarda canlı yayın açılamaz. İçerikleri kaydırarak ya da kendiliğinden art arda sunan tasarımlar kullanılamaz. Çocuğun verileri davranışa göre kişiselleştirme, profilleme ya da kişiselleştirilmiş reklam için kullanılamaz; telefon rehberi gibi kişi listeleriyle eşleştirme yapılmaz ve çocuk hesabı başkalarına takip önerisi olarak gösterilmez.",
                 "Yönetmelik ayrıca bağımlılık geliştirme etkisi doğurabilecek hizmetlerin bu yaş grubuna sunulamayacağını ve çocuğun profil fotoğrafı, paylaşımları ve görsellerinin başkalarınca ekran görüntüsü alınmasına karşı teknik önlem alınacağını söyler.",
@@ -596,8 +596,8 @@ GUIDES = (
                 "Yönetmelik uygulama adı saymaz. Sosyal ağ sağlayıcıyı, kullanıcıların sosyal etkileşim amacıyla metin, görüntü, ses ve konum gibi içerikleri oluşturmasına, görüntülemesine ya da paylaşmasına imkân sağlayan kişi veya kuruluşlar olarak tanımlar.",
                 "Belirli bir uygulamanın nasıl etkileneceğini o uygulamanın kendi duyurularından takip edin. Aynı Kanun oyun platformlarına da derecelendirme ve ebeveyn kontrol araçları gibi ayrı yükümlülükler getiriyor; bu rehber onların ayrıntısına girmiyor.",
             )),
-            ("1 Kasım’dan önce çocukla konuşun", (
-                "Değişikliği çocuğunuz arkadaşlarından ya da bir bildirimden öğrenmeden önce siz anlatın. Bunun bir ceza olmadığını, kuralın bütün platformlar için geçerli olduğunu söyleyin.",
+            ("Çocuğunuzla konuşun", (
+                "Değişikliği çocuğunuzla açıkça konuşun; bunu bir bildirimden ya da arkadaşlarından değil sizden duyması daha iyidir. Bunun bir ceza olmadığını, kuralın bütün platformlar için geçerli olduğunu söyleyin.",
                 "Sosyal medyayı ne için kullandığını sorun: arkadaşlarla konuşmak, video izlemek, bir hobiyi takip etmek. Hangisinin onun için önemli olduğunu bilmek, boşalan zamanı birlikte planlamayı kolaylaştırır. 15 yaşını dolduracak bir çocukla da yeni hesap ayarlarını birlikte gözden geçirin.",
             )),
             ("Boşalan zaman için ailece plan", (
@@ -1040,7 +1040,7 @@ GUIDES = (
         },
         "related": (
             ("Android telefonda çocuğun ekran süresi nasıl planlanır?", "android-cocuk-ekran-suresi"),
-            ("15 yaş altı sosyal medya düzenlemesi: 1 Kasım’da ne değişiyor?", "15-yas-alti-sosyal-medya-duzenlemesi"),
+            ("15 yaş altı sosyal medya düzenlemesi: 1 Kasım’da ne değişti?", "15-yas-alti-sosyal-medya-duzenlemesi"),
             ("Ailece ekran süresi planı nasıl yapılır?", "ailece-ekran-suresi-plani"),
         ),
         "product": ("Bu planı otomatik uygulamak isterseniz", (

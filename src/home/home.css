@@ -431,15 +431,32 @@ a {
 .c-bl { bottom: 28px; left: max(16px, (100% - 1200px) / 2); }
 .c-br { bottom: 28px; right: max(16px, (100% - 1200px) / 2); background-position: right bottom; }
 
-/* Sahne: maskot ortada, ekran düğmeleri iki yanda yüzü ve gövdeyi boş bırakan kavislerde. */
+/* Sahne: maskot ortada, ekran düğmeleri iki yanda yüzü ve gövdeyi boş bırakan kavislerde.
+   Kısa ekranda sahne küçülür ki deneme düğmesi ilk ekranda kalsın. Simgeler üst üste binmesin diye
+   kavisin yüksekliği (--ry) belli bir değerin altına inmez, simge boyu (--tile) aralığa göre küçülür. */
 .stage {
-  --h: clamp(340px, calc(100svh - 520px), 580px);
-  --cy: calc(var(--h) * 0.46);
-  --rx: min(calc(50% - 40px), calc(var(--h) * 0.36 + 96px));
-  --ry: calc(var(--h) * 0.62);
+  --h: clamp(250px, calc(100svh - 520px), 580px);
+  --rx: min(calc(50% - 40px), max(calc(var(--h) * 0.36 + 96px), 215px));
+  --ry: max(calc(var(--h) * 0.62), 180px);
+  --tile: clamp(40px, calc(var(--ry) * 0.282 - 6px), 62px);
+  --cy: max(calc(var(--h) * 0.46), calc(var(--ry) * 0.574 + var(--tile) / 2));
   position: relative;
   width: min(1200px, 100%);
   height: var(--h);
+}
+
+/* Kısa ekranda (küçük dizüstü, yatay tablet) üst boşluk azalır; deneme düğmesi ilk ekranda kalır.
+   1060 pikselin altında sahnenin üstünde Windows/Android etiketleri durduğu için boşluk daha az kısılır. */
+@media (min-width: 641px) and (max-height: 760px) {
+  .hero {
+    padding-top: 60px;
+  }
+}
+
+@media (min-width: 1061px) and (max-height: 760px) {
+  .hero {
+    padding-top: 40px;
+  }
 }
 
 .glow,
@@ -529,11 +546,11 @@ a {
 .tile {
   position: relative;
   display: grid;
-  width: 62px;
-  height: 62px;
+  width: var(--tile);
+  height: var(--tile);
   place-items: center;
   border: 3px solid #ffffff;
-  border-radius: 19px;
+  border-radius: calc(var(--tile) * 0.3);
   box-shadow: var(--shadow);
   color: #ffffff;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -589,7 +606,8 @@ a {
 .sideTag {
   position: absolute;
   z-index: 3;
-  top: calc(var(--cy) - var(--ry) * 0.82);
+  /* Küçük sahnede etiket, zıplayan en üst simgenin üstünde kalır. */
+  top: min(calc(var(--cy) - var(--ry) * 0.82), calc(var(--cy) - var(--ry) * 0.574 - var(--tile) / 2 - 28px));
   padding: 4px 12px;
   border-radius: 999px;
   background: var(--ink);
@@ -2467,7 +2485,7 @@ button.videoThumb {
 
   .hero {
     min-height: auto;
-    padding: 72px 16px 80px;
+    padding: 48px 16px 80px;
   }
 
   .corner {
@@ -2484,9 +2502,29 @@ button.videoThumb {
     bottom: 16px;
   }
 
+  /* Telefonda başlık, cümle ve deneme düğmesi ilk ekrana sığacak kadar yer sahneden alınır. */
   .stage {
-    --h: clamp(330px, calc(100svh - 400px), 400px);
+    --h: clamp(236px, calc(100svh - 440px), 400px);
     --rx: calc(50% - 28px);
+    --ry: max(calc(var(--h) * 0.62), 160px);
+    --tile: clamp(38px, calc(var(--ry) * 0.282 - 5px), 46px);
+    /* Üstteki simge, sahnenin üstündeki Windows/Android etiketine değmesin. */
+    --cy: max(calc(var(--h) * 0.46), calc(var(--ry) * 0.574 + var(--tile) / 2 + 8px));
+    margin-top: 30px;
+  }
+
+  .wordmark {
+    font-size: clamp(60px, 10.5svh, 76px);
+  }
+
+  .tagline {
+    margin: 10px 0 8px;
+  }
+
+  .pitch {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.45;
   }
 
   .mascot {
@@ -2498,15 +2536,12 @@ button.videoThumb {
   }
 
   .tile {
-    width: 46px;
-    height: 46px;
     border-width: 2px;
-    border-radius: 14px;
   }
 
   .tile svg {
-    width: 22px;
-    height: 22px;
+    width: calc(var(--tile) * 0.48);
+    height: calc(var(--tile) * 0.48);
   }
 
   .tile .dot {
