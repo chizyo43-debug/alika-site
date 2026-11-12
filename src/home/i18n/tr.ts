@@ -308,6 +308,11 @@ const tr: HomeCopy = {
         body: '1 Kasım 2026’da ne değişti? Yaş doğrulama, 15–18 yaş hesapları ve ailelerin yapabilecekleri.',
       },
       {
+        href: '/rehber/evde-lgs-denemesi/',
+        title: 'Evde LGS denemesi',
+        body: 'İki oturumlu, süreli prova: LGS 2027 deneme paketi, kapsam seçimi ve sonucu okuma.',
+      },
+      {
         href: '/rehber/cocuga-tablet-telefon-hediye/',
         title: 'Tablet ya da telefon hediye etmeden önce',
         body: 'Hesap, yaş sınırı, satın alma doğrulaması ve günlük süre: paketlemeden önce 5 ayar.',
@@ -331,11 +336,6 @@ const tr: HomeCopy = {
         href: '/rehber/android-cocuk-ekran-suresi/',
         title: 'Android telefonda çocuğun ekran süresi',
         body: 'Günlük süre, uyku saati, web filtresi ve izinler: Android’de kuralı çocukla birlikte kurun.',
-      },
-      {
-        href: '/rehber/bulutsuz-ebeveyn-kontrolu/',
-        title: 'Bulut hesabı olmadan ebeveyn kontrolü',
-        body: 'Zorunlu bulut hesabı olmadan, cihazda kalan verilerle nasıl çalışır? Yerel aile ağının sınırlarıyla birlikte.',
       },
     ],
   },
