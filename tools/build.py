@@ -1529,7 +1529,7 @@ ARA_TATIL_GROUP_MESSAGE = (
 )
 
 HOWTO_PATH = "nasil-kullanilir"
-HOWTO_UPDATED = ("2026-11-13", "13 Kasım 2026")
+HOWTO_UPDATED = ("2026-11-14", "14 Kasım 2026")
 # "AliKa Nasıl Kullanılır?" videoları YouTube'da durur (13 Kasım 2026 kararı: video dosyaları depoyu büyütmesin).
 # Sayfa açılınca yalnız sitedeki kapak görseli yüklenir; oynat düğmesine basılınca oynatıcı
 # youtube-nocookie.com adresinden açılır (src/scripts/site.js). "youtube" alanı boş olan video sayfaya çıkmaz.
