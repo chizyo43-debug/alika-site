@@ -33,7 +33,8 @@ STORE_OFFER_MARKERS = {
     "ko": ('"price":"2500"', '"priceCurrency":"KRW"'),
 }
 PLAY_STORE_PACKAGE = "com.alika.parental"
-# Sitede barındırılan kanal videoları (YouTube gömülmez; kanaldan silinen video buradan da çıkar).
+# Sitede barındırılan kanal videoları (bunlar sitede oynar; kanaldan silinen video buradan da çıkar).
+# "Nasıl kullanılır" videoları ise YouTube'dadır ve tıklanınca yüklenir (aşağıda denetlenir).
 SITE_VIDEOS = (
     "windows-ilk-kurulum",
     "android-ilk-kurulum",
@@ -440,6 +441,35 @@ def main() -> None:
         errors.append("Schools page or its parent-note PDF is missing")
     if "/okullar/</loc>" not in sitemap_text or "veli-notu" in sitemap_text:
         errors.append("Sitemap must list /okullar/ and leave out the printable parent note")
+    # Nasıl kullanılır: dizinde ve site haritasında. Videoları YouTube'dadır ve tıklanınca yüklenir:
+    # sayfa kaynağında iframe yoktur, her videonun kapağı sitededir, oynatıcı adresi youtube-nocookie.com'dur
+    # ve gizlilik metni bunu anlatır.
+    howto_page = DIST / "nasil-kullanilir" / "index.html"
+    if not howto_page.exists():
+        errors.append("How-to page /nasil-kullanilir/ is missing")
+    else:
+        howto_text = howto_page.read_text(encoding="utf-8")
+        howto_ids = re.findall(r'<div class="yt-embed" data-youtube="([^"]*)"', howto_text)
+        howto_posters = re.findall(r'<img src="(/videos/nasil-kullanilir/[a-z0-9-]+\.webp)"', howto_text)
+        if not howto_ids or any(not re.fullmatch(r"[A-Za-z0-9_-]{11}", video_id) for video_id in howto_ids):
+            errors.append("How-to page needs at least one video, each with a valid YouTube id")
+        if len(howto_posters) != len(howto_ids) or any(not (DIST / poster.lstrip("/")).exists() for poster in howto_posters):
+            errors.append("How-to page: every video needs its own poster image on the site")
+        if "<iframe" in howto_text or "youtube.com/embed" in howto_text:
+            errors.append("How-to page must not load the YouTube player before a click")
+        if howto_text.count('"@type":"VideoObject"') != len(howto_ids):
+            errors.append("How-to page: VideoObject schema count does not match the videos")
+        if "/nasil-kullanilir/</loc>" not in sitemap_text:
+            errors.append("Sitemap must list /nasil-kullanilir/")
+        if "— AliKa Ebeveyn Kontrolü</title>" not in howto_text:
+            errors.append("How-to page title does not end with the brand name")
+        if "https://www.youtube-nocookie.com/embed/" not in (DIST / "assets" / "site.js").read_text(encoding="utf-8"):
+            errors.append("site.js must open how-to videos from youtube-nocookie.com")
+        for name in ("privacy/index.html", "gizlilik/index.html"):
+            if "youtube-nocookie.com" not in (DIST / name).read_text(encoding="utf-8"):
+                errors.append(f"Privacy policy must describe the YouTube player on the how-to page: {name}")
+        if 'href="/nasil-kullanilir/"' not in (DIST / "rehber" / "index.html").read_text(encoding="utf-8"):
+            errors.append("Guide index must link the how-to page")
     kit_page = DIST / "okullar" / "veli-notu" / "index.html"
     if not kit_page.exists() or '<meta name="robots" content="noindex">' not in kit_page.read_text(encoding="utf-8"):
         errors.append("Printable parent note must exist and be noindex")

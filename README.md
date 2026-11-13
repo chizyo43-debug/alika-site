@@ -17,6 +17,14 @@ The generated GitHub Pages output is written to `dist/` (same steps as
 external CDN, AI assistant, or application connection. Its only third-party
 script is the optional Cloudflare Web Analytics beacon described below.
 
+One page embeds third-party content: `/nasil-kullanilir/` (Turkish how-to videos).
+Those videos live on YouTube so that video files do not grow this repository. The
+page ships only a local poster image per video; the player is created on click from
+`youtube-nocookie.com` (`src/scripts/site.js`), and both privacy policies describe it.
+Videos and ids are listed in `HOWTO_GROUPS` in `tools/build.py`; `tools/check.py`
+fails if the page would load the player before a click. The older setup videos on
+the home page, guides and content page are still MP4 files in `public/videos/`.
+
 ## Analytics (Cloudflare Web Analytics)
 
 The site can use Cloudflare Web Analytics, a cookieless JS beacon. The DNS for
