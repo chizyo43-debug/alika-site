@@ -227,4 +227,23 @@
     grade.addEventListener("change", refresh);
     refresh();
   });
+
+  // Nasıl kullanılır videoları: sayfada yalnız kapak görseli durur; oynat düğmesine basılınca
+  // oynatıcı youtube-nocookie.com adresinden yüklenir. Betik çalışmazsa bağlantı videoyu YouTube'da açar.
+  document.querySelectorAll("[data-youtube]").forEach((box) => {
+    const id = box.dataset.youtube || "";
+    const link = box.querySelector("[data-yt-play]");
+    if (!/^[A-Za-z0-9_-]{11}$/.test(id) || !link) return;
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const frame = document.createElement("iframe");
+      frame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      frame.title = box.dataset.title || "";
+      frame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      frame.allowFullscreen = true;
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      box.replaceChildren(frame);
+      frame.focus();
+    });
+  });
 })();

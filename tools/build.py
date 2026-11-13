@@ -1528,6 +1528,34 @@ ARA_TATIL_GROUP_MESSAGE = (
     "Ekteki tek sayfalık notta 9 günlük bir plan tablosu var; isterseniz yazdırıp çocuğunuzla birlikte doldurabilirsiniz. İyi tatiller dileriz."
 )
 
+HOWTO_PATH = "nasil-kullanilir"
+HOWTO_UPDATED = ("2026-11-13", "13 Kasım 2026")
+# "AliKa Nasıl Kullanılır?" videoları YouTube'da durur (13 Kasım 2026 kararı: video dosyaları depoyu büyütmesin).
+# Sayfa açılınca yalnız sitedeki kapak görseli yüklenir; oynat düğmesine basılınca oynatıcı
+# youtube-nocookie.com adresinden açılır (src/scripts/site.js). "youtube" alanı boş olan video sayfaya çıkmaz.
+# Her videonun kapağı public/videos/nasil-kullanilir/<code>.webp dosyasıdır (960x540).
+HOWTO_GROUPS = (
+    {"key": "baslangic", "title": "Başlangıç", "lead": "AliKa’nın nasıl çalıştığı, kurulum ve ebeveyn panelinin ana bölümleri.", "videos": (
+        {
+            "code": "a1",
+            "title": "AliKa nasıl çalışır? Genel bakış",
+            "youtube": "6HGZH_5-seA",
+            "duration": ("1:39", "PT1M40S"),
+            "published": "2026-11-13",
+            "summary": "Ebeveyn paneli ve çocuğun gördüğü ekranlar, günlük süre, kilit ekranı, soru çözerek ek süre kazanma, süre hesabı ve kalan süreden bağımsız kurallar. Sonunda Windows ve Android’de hangi işin hangi bölümde olduğu.",
+            "where": (
+                ("Windows", "Bugün: günün özeti ve ek süre verme. Kurallar: günlük süre, haftalık tablo, uyku saati. Sorular: soru ayarları. Rapor: kullanım."),
+                ("Android", "Panel: günün özeti ve hızlı işlemler. Cihazlar: aile cihazları. Kurallar: süre, uyku saati, uygulamalar. Profil: ayarlar, yardım, ek özellikler."),
+            ),
+        },
+    )},
+    {"key": "sure-ve-kurallar", "title": "Süre ve kurallar", "lead": "Günlük süre, haftalık tablo, uyku saati, takvim ve uygulama kuralları.", "videos": ()},
+    {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
+    {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
+    {"key": "aile-ve-cihazlar", "title": "Aile ve cihazlar", "lead": "Cihaz ekleme, ebeveyn telefonundan yönetim ve kardeş profilleri.", "videos": ()},
+    {"key": "guvenlik-ve-hesap", "title": "Güvenlik ve hesap", "lead": "Ebeveyn PIN’i, kurtarma kodu, yedekleme ve abonelik.", "videos": ()},
+)
+
 ACCESS_LABELS = {
     "tr": ("İçeriğe geç", "Menü", "Geç", "Ortak ekran", "Hazır", "Yanıt gizli"),
     "en": ("Skip to content", "Menu", "Skip", "Shared screen", "Ready", "Answer hidden"),
@@ -1678,6 +1706,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
     guide = GUIDE_LINKS.get(lang)
     guide_link = f'<a href="{guide}">{esc(words["guides"])}</a>' if guide else ""
     school_link = f'<a href="/okullar/">{esc(words["schools"])}</a>' if words.get("schools") else ""
+    howto_link = f'<a href="/{HOWTO_PATH}/">{esc(words["howto"])}</a>' if words.get("howto") else ""
     tokushoho_link = '<a href="/ja/tokushoho/">特定商取引法に基づく表記</a>' if lang == "ja" else ""
     return f"""
     <footer class="site-footer">
@@ -1690,6 +1719,7 @@ def footer(locales: dict[str, dict], lang: str) -> str:
         <a href="{home}#sss">{esc(words["faq"])}</a>
         {guide_link}
         {school_link}
+        {howto_link}
         <a href="{content_href(lang)}">{esc(words["content"])}</a>
         <a href="{home}#iletisim">{esc(words["support"])}</a>
         <a href="{legal_href(lang, 'privacy')}">{esc(words["privacy"])}</a>
@@ -1817,6 +1847,7 @@ def guide_index_body() -> str:
       </header>
       <section class="article-grid" aria-label="Türkçe ebeveyn rehberleri">{cards}</section>
       <p class="guide-links-note"><strong>Okullar ve rehber öğretmenler için:</strong> veli toplantısında dağıtılabilecek tek sayfalık not ve yazdırılabilir planlar <a href="/okullar/">Okullar sayfasında</a>.</p>
+      <p class="guide-links-note"><strong>Uygulamanın kullanımı için:</strong> kısa kullanım videoları <a href="/{HOWTO_PATH}/">Nasıl kullanılır sayfasında</a>.</p>
       <aside class="guide-disclosure"><strong>Açıklık notu:</strong> Bu rehberler AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. AliKa Windows ve Android için ücretli bir uygulamadır. Windows sürümü Microsoft Store’da 7 günlük denemeyle, Android aile aboneliği Google Play’de 14 günlük denemeyle sunulur; güncel fiyatı mağaza sayfası gösterir.</aside>
     </main>
     """
@@ -2151,6 +2182,72 @@ def school_kit_sheet(title: str, body: str) -> str:
 </body>
 </html>
 """
+
+
+def howto_videos() -> list[dict]:
+    return [video for group in HOWTO_GROUPS for video in group["videos"] if video["youtube"]]
+
+
+def howto_embed(video: dict) -> str:
+    """Kapak görseli + oynat düğmesi. JavaScript yoksa bağlantı videoyu YouTube'da açar."""
+    code, youtube = video["code"], video["youtube"]
+    return (
+        f'<div class="yt-embed" data-youtube="{esc(youtube)}" data-title="{esc(video["title"])}">'
+        f'<a class="yt-poster" href="https://www.youtube.com/watch?v={esc(youtube)}" target="_blank" rel="noopener" data-yt-play>'
+        f'<img src="/videos/{HOWTO_PATH}/{code}.webp" width="960" height="540" alt="" loading="lazy" decoding="async">'
+        f'<span class="yt-play" aria-hidden="true"></span>'
+        f'<span class="yt-label">Videoyu oynatın · {esc(video["duration"][0])}</span></a></div>'
+    )
+
+
+def howto_body() -> str:
+    """Nasıl kullanılır: başlık başlık kullanım videoları ve her videonun altında "hangi iş nerede" özeti."""
+    groups = ""
+    for group in HOWTO_GROUPS:
+        videos = [video for video in group["videos"] if video["youtube"]]
+        items = ""
+        for video in videos:
+            where = "".join(f"<li><strong>{esc(platform)}</strong> {esc(text)}</li>" for platform, text in video["where"])
+            schema = {
+                "@context": "https://schema.org",
+                "@type": "VideoObject",
+                "name": video["title"],
+                "description": video["summary"],
+                "thumbnailUrl": f"{BASE_URL}/videos/{HOWTO_PATH}/{video['code']}.webp",
+                "uploadDate": f"{video['published']}T10:00:00+03:00",
+                "duration": video["duration"][1],
+                "embedUrl": f"https://www.youtube-nocookie.com/embed/{video['youtube']}",
+                "inLanguage": "tr-TR",
+            }
+            items += f"""
+        <article class="howto-video" id="{video['code']}">
+          <h3>{esc(video['title'])}</h3>
+          {howto_embed(video)}
+          <p class="yt-note">Oynat düğmesine bastığınızda video YouTube’dan yüklenir. <a href="/gizlilik/">Gizlilik</a></p>
+          <p>{esc(video['summary'])}</p>
+          <h4>Hangi iş nerede?</h4>
+          <ul class="howto-where">{where}</ul>
+          <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":"))}</script>
+        </article>"""
+        if not items:
+            items = """
+        <p class="howto-pending">Bu başlığın videoları hazırlanıyor.</p>"""
+        groups += f"""
+      <section class="howto-group" id="{group['key']}">
+        <h2>{esc(group['title'])}</h2>
+        <p class="howto-lead">{esc(group['lead'])}</p>{items}
+      </section>"""
+    return f"""
+    <main id="main" class="guide-main">
+      <header class="guide-index-hero">
+        <p class="eyebrow">Windows ve Android · Kullanım</p>
+        <h1>AliKa nasıl kullanılır?</h1>
+        <p>Her konuyu ayrı, kısa bir videoda anlatıyoruz: ne işe yarar, nasıl kullanılır, hangi iş nereden yapılır. Videolar Türkçedir.</p>
+      </header>{groups}
+      <p class="guide-links-note"><strong>Kurulum videoları:</strong> Windows ve Android ilk kurulum videoları <a href="/#videolar">ana sayfadaki Videolar bölümünde</a>. Ekran süresi planı için <a href="/{GUIDE_BASE}/">ebeveyn rehberlerine</a> bakabilirsiniz.</p>
+      <aside class="guide-disclosure"><strong>Not:</strong> Videolardaki ekranlar uygulama arayüzünden örnek verilerle alınmıştır; gerçek aile verisi içermez. Sayılar ve saatler örnektir, kuralları aileniz belirler. Sorularınız için <a href="mailto:destek@alika.tr">destek@alika.tr</a>. Son güncelleme: {HOWTO_UPDATED[1]}.</aside>
+    </main>
+    """
 
 
 def uk_guide_body() -> str:
@@ -2648,6 +2745,21 @@ def build() -> None:
     write_page(DIST / "okullar" / "veli-notu" / "index.html", school_kit_document())
     write_page(DIST / "okullar" / "ara-tatil-veli-notu" / "index.html", ara_tatil_kit_document())
 
+    # Nasıl kullanılır: YouTube'daki kullanım videoları, tıklanınca yüklenen oynatıcıyla.
+    howto_url = f"{BASE_URL}/{HOWTO_PATH}/"
+    write_page(
+        DIST / HOWTO_PATH / "index.html",
+        guide_document(
+            locales,
+            "AliKa Nasıl Kullanılır? Kullanım Videoları",
+            "AliKa ebeveyn kontrolünün kullanım videoları: günlük süre, kilit ekranı, soru çözerek süre kazanma ve Windows ile Android’de hangi işin nereden yapıldığı.",
+            howto_url,
+            howto_body(),
+            schema_type="WebPage",
+            updated=HOWTO_UPDATED,
+        ),
+    )
+
     write_page(DIST / "404.html", not_found_document(locales))
 
     # Uygulamadaki sabit, Türkçe ve anlaşılır içerik adresi.
@@ -2682,6 +2794,7 @@ def build() -> None:
     urls.append(f"{BASE_URL}/ja/tokushoho/")
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
     urls.append(school_url)
+    urls.append(howto_url)
     urls.append(uk_guide_url)
     urls.extend(ja_guide_urls)
     unique_urls = list(dict.fromkeys(urls))
@@ -2689,6 +2802,7 @@ def build() -> None:
     # lastmod yalnız gerçek güncelleme tarihi bilinen sayfalara (rehberler) yazılır; derleme günü yazılmaz.
     lastmod = {f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/": guide.get("updated", GUIDE_UPDATED)[0] for guide in PUBLISHED_GUIDES}
     lastmod.update({f"{BASE_URL}/{ja_guide['path']}/": ja_guide["updated"][0] for ja_guide in JA_GUIDES})
+    lastmod[howto_url] = HOWTO_UPDATED[0]
     sitemap += "".join(
         f"  <url><loc>{esc(url)}</loc>{'<lastmod>' + lastmod[url] + '</lastmod>' if url in lastmod else ''}</url>\n"
         for url in unique_urls

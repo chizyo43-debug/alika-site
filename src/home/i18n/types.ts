@@ -129,6 +129,8 @@ export interface HomeCopy {
     usage: string;
     /* Videolar Türkçe; diğer dillerde bunu söyleyen kısa not. */
     videoNote?: string;
+    /* Yalnız tr: /nasil-kullanilir/ sayfasına bağlantı metni. */
+    howto?: string;
   };
   videos: Record<VideoKey, TitleBody>;
   ages: { title: string; lead: string; unit: string; items: TitleBody[] };
@@ -164,6 +166,8 @@ export interface HomeCopy {
     guides: string;
     /* Yalnız okullar sayfası olan dilde (tr). */
     schools?: string;
+    /* Yalnız "Nasıl kullanılır" sayfası olan dilde (tr). */
+    howto?: string;
     content: string;
     email: string;
     privacy: string;

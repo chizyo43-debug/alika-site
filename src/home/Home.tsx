@@ -988,6 +988,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
             <a className="textLink" href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener">{t.how.channel}</a>
           </div>
           {t.how.videoNote && <p className="videoNote">{t.how.videoNote}</p>}
+          {t.how.howto && <p className="videoNote"><a className="textLink" href="/nasil-kullanilir/">{t.how.howto}</a></p>}
           <div className="installGrid">
             {VIDEOS.map((video) => (
               <article key={video.key} className="install">
@@ -1197,6 +1198,7 @@ export default function Home({ lang, t }: { lang: Lang; t: HomeCopy }) {
               <a href="#sss">{t.footer.faq}</a>
               {guides && <a href={guides}>{t.footer.guides}</a>}
               {t.footer.schools && <a href="/okullar/">{t.footer.schools}</a>}
+              {t.footer.howto && <a href="/nasil-kullanilir/">{t.footer.howto}</a>}
               <a href={contentPath(lang)}>{t.footer.content}</a>
               <a href={`mailto:${SUPPORT_EMAIL}`}>{t.footer.email}</a>
             </div>
