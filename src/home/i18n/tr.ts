@@ -80,7 +80,7 @@ const tr: HomeCopy = {
     ],
     watchVideos: 'Videoları izle',
     stats: [
-      { value: '5–18', label: 'yaş için dört ayrı anlatım' },
+      { value: '5–18', label: 'yaşa göre ekran görünümü' },
       { value: '2', label: 'platform: Windows ve Android' },
       { value: '0', label: 'uygulamada reklam ve izleyici' },
       { value: '7–14 gün', label: 'ücretsiz deneme: Windows’ta 7, Android’de 14' },
