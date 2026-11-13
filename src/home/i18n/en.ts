@@ -84,7 +84,7 @@ const en: HomeCopy = {
     ],
     watchVideos: 'Watch the videos',
     stats: [
-      { value: '5–18', label: 'years, with four age-based styles' },
+      { value: '5–18', label: 'years, screen look adapted to age' },
       { value: '2', label: 'platforms: Windows and Android' },
       { value: '0', label: 'ads and trackers in the app' },
       { value: '7–14 days', label: 'free trial: 7 on Windows, 14 on Android' },

@@ -84,7 +84,7 @@ const ru: HomeCopy = {
     ],
     watchVideos: 'Смотреть видео',
     stats: [
-      { value: '5–18', label: 'лет, четыре стиля по возрасту' },
+      { value: '5–18', label: 'лет, вид экрана по возрасту' },
       { value: '2', label: 'платформы: Windows и Android' },
       { value: '0', label: 'рекламы и трекеров в приложении' },
       { value: '7–14 дней', label: 'бесплатно: 7 на Windows, 14 на Android' },

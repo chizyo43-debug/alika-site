@@ -84,7 +84,7 @@ const ja: HomeCopy = {
     ],
     watchVideos: '動画を見る',
     stats: [
-      { value: '5–18', label: '歳まで、年齢に合わせた4つの見せ方' },
+      { value: '5–18', label: '歳まで、年齢に合わせた画面表示' },
       { value: '2', label: 'プラットフォーム：WindowsとAndroid' },
       { value: '0', label: 'アプリ内の広告とトラッカー' },
       { value: '7–14日', label: '無料体験：Windowsは7日、Androidは14日' },

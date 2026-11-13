@@ -84,7 +84,7 @@ const ko: HomeCopy = {
     ],
     watchVideos: '동영상 보기',
     stats: [
-      { value: '5–18', label: '세, 연령별 네 가지 스타일' },
+      { value: '5–18', label: '세, 연령에 맞춘 화면 구성' },
       { value: '2', label: '플랫폼: Windows와 Android' },
       { value: '0', label: '앱 안의 광고와 추적기' },
       { value: '7–14일', label: '무료 체험: Windows 7일, Android 14일' },

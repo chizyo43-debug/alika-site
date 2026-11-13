@@ -84,7 +84,7 @@ const es: HomeCopy = {
     ],
     watchVideos: 'Ver los vídeos',
     stats: [
-      { value: '5–18', label: 'años, con cuatro estilos según la edad' },
+      { value: '5–18', label: 'años, pantalla adaptada a la edad' },
       { value: '2', label: 'plataformas: Windows y Android' },
       { value: '0', label: 'anuncios y rastreadores en la app' },
       { value: '7–14 días', label: 'de prueba gratis: 7 en Windows, 14 en Android' },

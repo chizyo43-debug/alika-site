@@ -84,7 +84,7 @@ const pt: HomeCopy = {
     ],
     watchVideos: 'Assistir aos vídeos',
     stats: [
-      { value: '5–18', label: 'anos, com quatro estilos por idade' },
+      { value: '5–18', label: 'anos, tela adaptada à idade' },
       { value: '2', label: 'plataformas: Windows e Android' },
       { value: '0', label: 'anúncios e rastreadores no app' },
       { value: '7–14 dias', label: 'de teste grátis: 7 no Windows, 14 no Android' },
