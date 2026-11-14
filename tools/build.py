@@ -1559,6 +1559,17 @@ HOWTO_GROUPS = (
                 ("Windows", "Kurulum sihirbazı uygulamayı ilk açtığınızda kendiliğinden başlar. Sonradan: sol menünün altındaki Kurulum sihirbazı düğmesi. Atladığınız adımlar: Bugün sayfasındaki Kurulumu tamamlayın kartı."),
             ),
         },
+        {
+            "code": "a3",
+            "title": "Android’e kurulum: “Bu telefon kimin?” ve izinler",
+            "youtube": "_FH-lVWxcLQ",
+            "duration": ("2:21", "PT2M21S"),
+            "published": "2026-11-14",
+            "summary": "Çocuğun telefonunda kurulumun 10 adımı: dil ve “Bu telefon kimin?” sorusu, ebeveyn PIN’i ve kurtarma kodu, açık bilgilendirme, çocuğunuzun adı ve sınıfı, ekran süresi ve uyku saati, soru çözerek süre kazanma, uygulama ve internet korumaları, gerekli izinler, diğer cihazlar ve özet. Sonunda ebeveyn telefonundaki 6 adımlı kurulum.",
+            "where": (
+                ("Android", "Kurulum uygulamayı ilk açtığınızda kendiliğinden başlar. Atladığınız adımlar: Panel ana ekranındaki Kurulumu tamamlayın kartı. “Bu telefon kimin?” seçimini sonradan Profil → Ayarlar’dan PIN ile değiştirebilirsiniz."),
+            ),
+        },
     )},
     {"key": "sure-ve-kurallar", "title": "Süre ve kurallar", "lead": "Günlük süre, haftalık tablo, uyku saati, takvim ve uygulama kuralları.", "videos": ()},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
