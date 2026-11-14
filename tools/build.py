@@ -1570,6 +1570,17 @@ HOWTO_GROUPS = (
                 ("Android", "Kurulum uygulamayı ilk açtığınızda kendiliğinden başlar. Atladığınız adımlar: Panel ana ekranındaki Kurulumu tamamlayın kartı. “Bu telefon kimin?” seçimini sonradan Profil → Ayarlar’dan PIN ile değiştirebilirsiniz."),
             ),
         },
+        {
+            "code": "a4",
+            "title": "Windows ebeveyn paneli: hangi iş hangi menüde?",
+            "youtube": "tc7fwZvUw5s",
+            "duration": ("2:05", "PT2M5S"),
+            "published": "2026-11-14",
+            "summary": "Sol menünün 18 bölümü sırayla: Bugün, Kurallar, Takvim ve misafir, Uygulama ve internet, Görevler, Çalışma planı, Sorular, Deneme sınavı, Ödüller, Kütüphane, Öğrenme, Rapor, Bildirimler, Aile sohbeti, Cihaz ve mesajlar, Aile ve Profiller, Ayarlar ve Güvenlik. Sonunda menünün altındaki dört düğme.",
+            "where": (
+                ("Windows", "Paneli açmak için görev çubuğundaki AliKa simgesine sağ tıklayıp Ebeveyn Panelini Aç’ı seçin, PIN’inizi girin. Sol menünün altında Cihaz ekle, Kurulum sihirbazı, Gelişmiş (bütün bölümler tek listede) ve Paneli kilitle düğmeleri var."),
+            ),
+        },
     )},
     {"key": "sure-ve-kurallar", "title": "Süre ve kurallar", "lead": "Günlük süre, haftalık tablo, uyku saati, takvim ve uygulama kuralları.", "videos": ()},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
