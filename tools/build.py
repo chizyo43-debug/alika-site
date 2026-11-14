@@ -1548,6 +1548,17 @@ HOWTO_GROUPS = (
                 ("Android", "Panel: günün özeti ve hızlı işlemler. Cihazlar: aile cihazları. Kurallar: süre, uyku saati, uygulamalar. Profil: ayarlar, yardım, ek özellikler."),
             ),
         },
+        {
+            "code": "a2",
+            "title": "Windows’a kurulum, adım adım",
+            "youtube": "y0oX2gJOqkA",
+            "duration": ("2:04", "PT2M5S"),
+            "published": "2026-11-14",
+            "summary": "Kurulum sihirbazının 10 adımı: dil, ebeveyn PIN’i ve kurtarma kodu, rıza ve gizlilik, çocuğunuzun adı ve sınıfı, ekran süresi ve uyku saati, soru çözerek süre kazanma, uygulama ve internet korumaları, Güvenli Mod, diğer cihazları bağlama ve özet.",
+            "where": (
+                ("Windows", "Kurulum sihirbazı uygulamayı ilk açtığınızda kendiliğinden başlar. Sonradan: sol menünün altındaki Kurulum sihirbazı düğmesi. Atladığınız adımlar: Bugün sayfasındaki Kurulumu tamamlayın kartı."),
+            ),
+        },
     )},
     {"key": "sure-ve-kurallar", "title": "Süre ve kurallar", "lead": "Günlük süre, haftalık tablo, uyku saati, takvim ve uygulama kuralları.", "videos": ()},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
