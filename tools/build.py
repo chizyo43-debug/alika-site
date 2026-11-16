@@ -1529,7 +1529,7 @@ ARA_TATIL_GROUP_MESSAGE = (
 )
 
 HOWTO_PATH = "nasil-kullanilir"
-HOWTO_UPDATED = ("2026-11-14", "14 Kasım 2026")
+HOWTO_UPDATED = ("2026-11-16", "16 Kasım 2026")
 # "AliKa Nasıl Kullanılır?" videoları YouTube'da durur (13 Kasım 2026 kararı: video dosyaları depoyu büyütmesin).
 # Sayfa açılınca yalnız sitedeki kapak görseli yüklenir; oynat düğmesine basılınca oynatıcı
 # youtube-nocookie.com adresinden açılır (src/scripts/site.js). "youtube" alanı boş olan video sayfaya çıkmaz.
@@ -1579,6 +1579,17 @@ HOWTO_GROUPS = (
             "summary": "Sol menünün 18 bölümü sırayla: Bugün, Kurallar, Takvim ve misafir, Uygulama ve internet, Görevler, Çalışma planı, Sorular, Deneme sınavı, Ödüller, Kütüphane, Öğrenme, Rapor, Bildirimler, Aile sohbeti, Cihaz ve mesajlar, Aile ve Profiller, Ayarlar ve Güvenlik. Sonunda menünün altındaki dört düğme.",
             "where": (
                 ("Windows", "Paneli açmak için görev çubuğundaki AliKa simgesine sağ tıklayıp Ebeveyn Panelini Aç’ı seçin, PIN’inizi girin. Sol menünün altında Cihaz ekle, Kurulum sihirbazı, Gelişmiş (bütün bölümler tek listede) ve Paneli kilitle düğmeleri var."),
+            ),
+        },
+        {
+            "code": "a5",
+            "title": "Android ebeveyn paneli: hangi iş hangi menüde?",
+            "youtube": "SK4fiQ2Y0u0",
+            "duration": ("1:43", "PT1M43S"),
+            "published": "2026-11-16",
+            "summary": "Alt çubuktaki dört bölüm sırayla: Panel (günün özeti, hızlı işlemler, öğrenme, süre hediye etme, görevler), Cihazlar (Aileye Katıl, Cihaz Ekle), Kurallar (kural özeti ve ayrıntıları) ve Profil (rozetler, ebeveyn araçları, Ek özellikler, Ayarlar). Sonunda ebeveyn telefonundaki farklar.",
+            "where": (
+                ("Android", "Paneli açmak için AliKa’nın ana ekranındaki Ebeveyn paneli düğmesine dokunun, PIN’inizi girin. Ek özellikler ve Ayarlar, Profil’deki Ebeveyn araçları listesinde. Ebeveyn telefonunda Kurallar bölümü yok; Cihazlar’da Uzaktan Yönetim, Profil’de Paylaşım var."),
             ),
         },
     )},
