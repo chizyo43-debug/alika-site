@@ -1529,7 +1529,7 @@ ARA_TATIL_GROUP_MESSAGE = (
 )
 
 HOWTO_PATH = "nasil-kullanilir"
-HOWTO_UPDATED = ("2026-11-16", "16 Kasım 2026")
+HOWTO_UPDATED = ("2026-11-17", "17 Kasım 2026")
 # "AliKa Nasıl Kullanılır?" videoları YouTube'da durur (13 Kasım 2026 kararı: video dosyaları depoyu büyütmesin).
 # Sayfa açılınca yalnız sitedeki kapak görseli yüklenir; oynat düğmesine basılınca oynatıcı
 # youtube-nocookie.com adresinden açılır (src/scripts/site.js). "youtube" alanı boş olan video sayfaya çıkmaz.
@@ -1593,7 +1593,20 @@ HOWTO_GROUPS = (
             ),
         },
     )},
-    {"key": "sure-ve-kurallar", "title": "Süre ve kurallar", "lead": "Günlük süre, haftalık tablo, uyku saati, takvim ve uygulama kuralları.", "videos": ()},
+    {"key": "sure-ve-kurallar", "title": "Süre ve kurallar", "lead": "Günlük süre, haftalık tablo, uyku saati, takvim ve uygulama kuralları.", "videos": (
+        {
+            "code": "b1",
+            "title": "Günlük süre ve haftalık tablo",
+            "youtube": "FCvu-D6oh7E",
+            "duration": ("1:30", "PT1M30S"),
+            "published": "2026-11-17",
+            "summary": "Çocuğunuzun günlük ekran süresini ve her güne ayrı süre veren haftalık tabloyu ayarlama: önce Windows’ta, sonra Android’de. Windows’ta günün üst sınırı da anlatılıyor. Sonunda günün süresinin nerede görüldüğü.",
+            "where": (
+                ("Windows", "Kurallar sayfası → Günlük ekran süresi kartı: Her gün verilen süre, Bir günde en fazla ve Haftalık tablo kullan anahtarı. Değişiklikler Kaydet’e bastığınızda uygulanır. Günün süresi Bugün sayfasında."),
+                ("Android", "Kurallar → Günlük limit → Günlük toplam süre kartı (dakika + Kaydet) ve Haftalık tavan kartı (her güne dakika + kartın Kaydet düğmesi). Günün süresi Panel’deki Bugünkü kullanım kartında."),
+            ),
+        },
+    )},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
     {"key": "aile-ve-cihazlar", "title": "Aile ve cihazlar", "lead": "Cihaz ekleme, ebeveyn telefonundan yönetim ve kardeş profilleri.", "videos": ()},
