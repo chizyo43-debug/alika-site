@@ -3661,6 +3661,28 @@ h3 {
   color: var(--navy);
 }
 
+/* AliKa Ders: ünite başlığı ve her videonun altındaki kısa bilgi satırı. */
+.ders-unit {
+  margin: 30px 0 0;
+}
+
+.ders-unit h3 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  color: var(--navy);
+}
+
+.ders-unit .howto-video h4 {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+}
+
+.ders-meta {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .yt-embed {
   position: relative;
   aspect-ratio: 16 / 9;
