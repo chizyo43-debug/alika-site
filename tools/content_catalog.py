@@ -9,11 +9,18 @@ from collections import defaultdict
 from pathlib import Path
 
 
-COUNTRY_NAMES = {"turkiye": "Türkiye", "japonya": "Japonya"}
-# Sitede yalnız çalışma verisi hazır olan ders kapsamı yayımlanır: Türkiye ortaokul (5–8) ve
-# Japonya ortaokul (中学校 1–3 = 7–9. sınıf). İlkokul görsel etkinlikleri ve oyun paketleri ders
-# kapsamı değildir; ayrı bölümlerde sunulur.
-PUBLISHED_GRADES = {"turkiye": frozenset({5, 6, 7, 8}), "japonya": frozenset({7, 8, 9})}
+COUNTRY_NAMES = {"turkiye": "Türkiye", "japonya": "Japonya", "kore": "Güney Kore"}
+# Sitede yalnız çalışma verisi hazır olan ders kapsamı yayımlanır: Türkiye ortaokul (5–8),
+# Japonya ortaokul (中学校 1–3 = 7–9. sınıf) ve Güney Kore ortaokul (중학교 1–3 = 7–9. sınıf).
+# İlkokul görsel etkinlikleri ve oyun paketleri ders kapsamı değildir; ayrı bölümlerde sunulur.
+PUBLISHED_GRADES = {
+    "turkiye": frozenset({5, 6, 7, 8}),
+    "japonya": frozenset({7, 8, 9}),
+    "kore": frozenset({7, 8, 9}),
+}
+# Ön hazırlık sınıfları: Güney Kore 9. sınıf (중3) 2022 programına Mart 2027'de (2027학년도) geçer;
+# 2026'da 중3 hâlâ 2015 programıyla okur. Paketler yayımlanır ama sayfada ön hazırlık notuyla gösterilir.
+PREVIEW_GRADES = {"kore": frozenset({9})}
 # LGS deneme paketi ders paketlerinden ayrıdır (başlıkta assessment.kind: lgs-deneme).
 LGS_FOLDER = "lgs-2027"
 # LGS 2028 hazırlık (7. sınıf) iki parçadır: deneme paketi (assessment.kind: lgs-deneme) ve ünite setleri
@@ -24,6 +31,7 @@ SUBJECT_ORDER = (
     "turkce", "matematik", "fen-bilimleri", "sosyal-bilgiler", "inkilap-tarihi", "ingilizce",
     "din-kulturu-ve-ahlak-bilgisi", "din-kulturu", "bilisim-teknolojileri", "teknoloji-ve-tasarim",
     "sugaku", "rika", "kokugo", "eigo", "shakai-chiri", "shakai-rekishi", "shakai-komin",
+    "suhak", "gwahak", "gugeo", "yeongeo", "sahoe", "yeoksa",
 )
 # Japonya'da 社会'nin üç alanı ayrı klasör ve pakettir ama paket başlığındaki ders aynıdır (社会);
 # kartlarda ayırt edilebilmeleri için alan adıyla gösterilir. MANIFEST ve paket başlığı değişmez.
@@ -50,6 +58,11 @@ FIXED_ZIP_TIME = (2026, 9, 1, 0, 0, 0)
 
 def _published(country_slug: str, grade: object) -> bool:
     return grade in PUBLISHED_GRADES.get(country_slug, frozenset())
+
+
+def _preview_flag(country_slug: str, grade: object) -> dict:
+    """Ön hazırlık sınıfının kartlarına "preview": true ekler; diğer kayıtlar (Türkiye, Japonya) değişmez."""
+    return {"preview": True} if grade in PREVIEW_GRADES.get(country_slug, frozenset()) else {}
 
 
 def _sha256(path: Path) -> str:
@@ -90,6 +103,7 @@ def _package_label(theme: str, grade: int, subject: str, subject_title: str | No
 
     Japonya: '数学 中1（前半）：正の数と負の数' → '中1（前半）：正の数と負の数'; '社会 地理的分野 中1：…' → '中1：…'
     (alan adı kart başlığında 社会（地理的分野）olarak durur).
+    Güney Kore: '수학 중1 · 1' → '중1 · 1'; '수학 중3 · 1 · 2027학년도 미리 보기' → '중3 · 1 · 2027학년도 미리 보기'.
     """
     prefix = f"{grade}. Sınıf {subject} — "
     if theme.startswith(prefix):
@@ -146,7 +160,8 @@ def _katalog_packages(content_root: Path, data_output: Path) -> list[dict]:
             "language": str(pack.get("lang") or "tr"),
             "package_id": entry["paketId"],
             "title": subject if is_lgs or prep_kind else _package_label(
-                str(pack.get("theme") or filename), grade, subject, subject_title if country_slug == "japonya" else None
+                str(pack.get("theme") or filename), grade, subject,
+                subject_title if country_slug in ("japonya", "kore") else None,
             ),
             "filename": filename,
             "download_url": f"/icerik/veri/{rel.as_posix()}",
@@ -335,6 +350,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
             "subject": rows[0]["subject"],
             "subject_title": rows[0]["subject_title"],
             "language": rows[0]["language"],
+            **_preview_flag(country_slug, rows[0]["grade"]),
             "notes": sum(row["notes"] for row in rows),
             "questions": sum(row["questions"] for row in rows),
             **bundle,
@@ -360,6 +376,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
             "country_code": rows[0]["country_code"],
             "grade_slug": grade_slug,
             "grade": rows[0]["grade"],
+            **_preview_flag(country_slug, rows[0]["grade"]),
             "subject_count": len(rows),
             "package_count": sum(len(subject["packages"]) for subject in rows),
             "notes": sum(subject["notes"] for subject in rows),
@@ -404,6 +421,7 @@ def build_content_catalog(content_root: Path, dist: Path) -> dict:
     catalog = {
         "schema": "alika-content-catalog/v2",
         "published_scope": {country: sorted(grades_set) for country, grades_set in PUBLISHED_GRADES.items()},
+        "preview_scope": {country: sorted(grades_set) for country, grades_set in PREVIEW_GRADES.items()},
         "requirements": REQUIREMENTS,
         "grades": grades,
         "subjects": subjects,

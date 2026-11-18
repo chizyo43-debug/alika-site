@@ -23,14 +23,14 @@ BRAND_NAME = {"tr": "AliKa Ebeveyn Kontrolü", "en": "AliKa"}
 # İçerik sayfasının arama sonucundaki açıklaması; sayfada görünen kısa giriş cümlesi locales.json'da kalır.
 CONTENT_SEO_DESCRIPTION = {
     "tr": "AliKa için hazır içerik paketleri: 5–8. sınıf konu anlatımı ve soruları, LGS 2027 deneme paketi, ilkokul görsel etkinlikleri ve aile oyunları. Doğrudan indirin.",
-    "en": "Ready-made learning packs for AliKa: lessons and questions for Türkiye (grades 5–8) and Japan (grades 7–9), LGS 2027 mock exams, visual activities and games.",
-    "de": "Fertige Lernpakete für AliKa: Lektionen und Fragen für die Türkei (Klasse 5–8) und Japan (Klasse 7–9), LGS-2027-Probeprüfungen, Bildaufgaben und Familienspiele.",
-    "es": "Paquetes de aprendizaje listos para AliKa: lecciones y preguntas de Turquía (5.º–8.º) y Japón (7.º–9.º), simulacros LGS 2027, actividades visuales y juegos.",
-    "fr": "Packs prêts pour AliKa : leçons et questions pour la Turquie (5e–8e année) et le Japon (7e–9e année), examens blancs LGS 2027, activités visuelles et jeux.",
-    "pt": "Pacotes prontos para a AliKa: lições e perguntas da Turquia (5.º–8.º ano) e do Japão (7.º–9.º ano), simulados LGS 2027, atividades visuais e jogos em família.",
-    "ru": "Готовые учебные пакеты для AliKa: уроки и вопросы для Турции (5–8 классы) и Японии (7–9 классы), пробные экзамены LGS 2027, визуальные задания и семейные игры.",
-    "ja": "AliKa用の教材パック：日本の中学校1〜3年とトルコの5〜8年生向けの解説と問題、LGS 2027模擬試験、小学生向けの視覚アクティビティ、家族で遊べるゲーム。直接ダウンロードできます。",
-    "ko": "AliKa용 학습 패키지: 튀르키예 5–8학년과 일본 중학교 1–3학년 과정의 설명과 문제, LGS 2027 모의고사, 초등 시각 활동, 가족 게임을 바로 내려받으세요.",
+    "en": "AliKa learning packs: lessons and questions for Türkiye (grades 5–8), Japan and South Korea (grades 7–9), LGS 2027 mock exams, activities and games.",
+    "de": "AliKa-Lernpakete: Lektionen und Fragen für die Türkei (Klasse 5–8), Japan und Südkorea (Klasse 7–9), LGS-2027-Probeprüfungen, Bildaufgaben und Spiele.",
+    "es": "Paquetes listos para AliKa: lecciones y preguntas de Turquía (5.º–8.º), Japón y Corea del Sur (7.º–9.º), simulacros LGS 2027, actividades visuales y juegos.",
+    "fr": "Packs AliKa : leçons et questions pour la Turquie (5e–8e année), le Japon et la Corée du Sud (7e–9e année), examens blancs LGS 2027, activités et jeux.",
+    "pt": "Pacotes prontos para a AliKa: lições e perguntas da Turquia (5.º–8.º ano), do Japão e da Coreia do Sul (7.º–9.º ano), simulados LGS 2027, atividades e jogos.",
+    "ru": "Готовые учебные пакеты для AliKa: уроки и вопросы для Турции (5–8 классы), Японии и Южной Кореи (7–9 классы), пробные экзамены LGS 2027, задания и игры.",
+    "ja": "AliKa用の教材パック：日本と韓国の中学校1〜3年、トルコの5〜8年生向けの解説と問題、LGS 2027模擬試験、小学生向けの視覚アクティビティ、家族で遊べるゲーム。直接ダウンロードできます。",
+    "ko": "AliKa용 학습 패키지: 한국·일본 중학교 1–3학년과 튀르키예 5–8학년 과정의 설명과 문제, LGS 2027 모의고사, 초등 시각 활동, 가족 게임을 바로 내려받으세요.",
 }
 # Dili eşleşmeyen ziyaretçi için varsayılan dil (hreflang x-default).
 X_DEFAULT_LANG = "en"
@@ -80,6 +80,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "Paketleri tek tek indir ({})",
         "requirements": "Ders ve LGS paketleri AliKa Windows 1.2.12 ve Android 0.3.11 ya da sonraki sürümlerini gerektirir.",
         "requirements_jp": "Japonya paketleri, Japonca kuralları destekleyen güncel bir AliKa sürümü gerektirir. Android’de içe aktarma henüz gerçek cihazda denenmedi.",
+        "requirements_kr": "Güney Kore paketleri, Korece kuralları destekleyen güncel bir AliKa sürümü gerektirir; Windows’ta ve gerçek bir Android cihazda denendi.",
+        "kr_preview": "ön hazırlık",
+        "kr_preview_note": "9. sınıf ön hazırlıktır: 2022 programı 중3’e Mart 2027’de geçer; 2026’da 중3 hâlâ 2015 programıyla okur.",
         "lgs_title": "LGS 2027 deneme paketi",
         "lgs_body": "Altı derste onar deneme formu. Ders paketlerinden ayrıdır; AliKa bu soruları yalnız LGS denemelerinde kullanır.",
         "lgs_download": "LGS paketini indir",
@@ -113,6 +116,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "Download packs one by one ({})",
         "requirements": "Subject and LGS packs need AliKa Windows 1.2.12 and Android 0.3.11 or later.",
         "requirements_jp": "Japan packs need a current AliKa build that supports Japanese rules. Importing them on Android has not yet been tried on a real device.",
+        "requirements_kr": "South Korea packs need a current AliKa build that supports Korean rules; they were tested on Windows and on a real Android device.",
+        "kr_preview": "preview",
+        "kr_preview_note": "Grade 9 (중3) is a preview: the 2022 revised curriculum reaches 중3 only in March 2027 (the 2027 school year); in 2026, 중3 still follows the 2015 curriculum.",
         "lgs_title": "LGS 2027 practice exam pack",
         "lgs_body": "Ten practice forms in each of six subjects (in Turkish). Kept apart from the subject packs; AliKa uses these questions only in LGS practice exams.",
         "lgs_download": "Download LGS pack",
@@ -146,6 +152,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "Pakete einzeln herunterladen ({})",
         "requirements": "Fach- und LGS-Pakete erfordern AliKa Windows 1.2.12 und Android 0.3.11 oder neuer.",
         "requirements_jp": "Japan-Pakete benötigen eine aktuelle AliKa-Version mit Unterstützung für japanische Regeln. Der Import unter Android wurde noch nicht auf einem echten Gerät getestet.",
+        "requirements_kr": "Südkorea-Pakete benötigen eine aktuelle AliKa-Version mit Unterstützung für koreanische Regeln; sie wurden unter Windows und auf einem echten Android-Gerät getestet.",
+        "kr_preview": "Vorschau",
+        "kr_preview_note": "Klasse 9 (중3) ist eine Vorschau: Der Lehrplan von 2022 gilt für 중3 erst ab März 2027 (Schuljahr 2027); 2026 lernt 중3 noch nach dem Lehrplan von 2015.",
         "lgs_title": "LGS-2027-Probeprüfungspaket",
         "lgs_body": "Zehn Probeformen in jedem von sechs Fächern (auf Türkisch). Getrennt von den Fachpaketen; AliKa nutzt diese Fragen nur in LGS-Probeprüfungen.",
         "lgs_download": "LGS-Paket herunterladen",
@@ -179,6 +188,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "Descargar los paquetes uno a uno ({})",
         "requirements": "Los paquetes de asignatura y LGS requieren AliKa Windows 1.2.12 y Android 0.3.11 o posterior.",
         "requirements_jp": "Los paquetes de Japón requieren una versión actual de AliKa compatible con las reglas del japonés. La importación en Android aún no se ha probado en un dispositivo real.",
+        "requirements_kr": "Los paquetes de Corea del Sur requieren una versión actual de AliKa compatible con las reglas del coreano; se probaron en Windows y en un dispositivo Android real.",
+        "kr_preview": "versión preliminar",
+        "kr_preview_note": "El curso 9 (중3) es una versión preliminar: el plan de estudios de 2022 llega a 중3 en marzo de 2027 (curso escolar 2027); en 2026, 중3 sigue con el plan de 2015.",
         "lgs_title": "Paquete de exámenes de práctica LGS 2027",
         "lgs_body": "Diez modelos de examen en cada una de seis asignaturas (en turco). Separado de los paquetes de asignatura; AliKa usa estas preguntas solo en los exámenes de práctica LGS.",
         "lgs_download": "Descargar paquete LGS",
@@ -212,6 +224,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "Télécharger les packs un par un ({})",
         "requirements": "Les packs de matière et LGS nécessitent AliKa Windows 1.2.12 et Android 0.3.11 ou version ultérieure.",
         "requirements_jp": "Les packs du Japon nécessitent une version récente d’AliKa qui prend en charge les règles du japonais. L’importation sur Android n’a pas encore été testée sur un appareil réel.",
+        "requirements_kr": "Les packs de Corée du Sud nécessitent une version récente d’AliKa qui prend en charge les règles du coréen ; ils ont été testés sous Windows et sur un appareil Android réel.",
+        "kr_preview": "aperçu",
+        "kr_preview_note": "Le niveau 9 (중3) est un aperçu : le programme de 2022 ne s’applique au 중3 qu’à partir de mars 2027 (année scolaire 2027) ; en 2026, le 중3 suit encore le programme de 2015.",
         "lgs_title": "Pack d’examens blancs LGS 2027",
         "lgs_body": "Dix sujets d’entraînement dans chacune des six matières (en turc). Séparé des packs de matière ; AliKa utilise ces questions uniquement pour les examens blancs LGS.",
         "lgs_download": "Télécharger le pack LGS",
@@ -245,6 +260,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "Transferir os pacotes um a um ({})",
         "requirements": "Os pacotes de disciplina e LGS exigem AliKa Windows 1.2.12 e Android 0.3.11 ou posterior.",
         "requirements_jp": "Os pacotes do Japão exigem uma versão atual do AliKa com suporte às regras do japonês. A importação no Android ainda não foi testada num dispositivo real.",
+        "requirements_kr": "Os pacotes da Coreia do Sul exigem uma versão atual do AliKa com suporte às regras do coreano; foram testados no Windows e num dispositivo Android real.",
+        "kr_preview": "pré-visualização",
+        "kr_preview_note": "O ano 9 (중3) é uma pré-visualização: o currículo de 2022 só chega ao 중3 em março de 2027 (ano letivo de 2027); em 2026, o 중3 ainda segue o currículo de 2015.",
         "lgs_title": "Pacote de exames de treino LGS 2027",
         "lgs_body": "Dez provas de treino em cada uma de seis disciplinas (em turco). Separado dos pacotes de disciplina; o AliKa usa estas perguntas só nos exames de treino LGS.",
         "lgs_download": "Transferir pacote LGS",
@@ -278,6 +296,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "Скачать пакеты по одному ({})",
         "requirements": "Для пакетов предметов и LGS нужны AliKa для Windows 1.2.12 и Android 0.3.11 или новее.",
         "requirements_jp": "Пакеты Японии требуют актуальной версии AliKa с поддержкой правил японского языка. Импорт на Android пока не проверен на реальном устройстве.",
+        "requirements_kr": "Пакеты Южной Кореи требуют актуальной версии AliKa с поддержкой правил корейского языка; они проверены в Windows и на реальном устройстве Android.",
+        "kr_preview": "предварительная версия",
+        "kr_preview_note": "9 класс (중3) — предварительная версия: программа 2022 года вводится в 중3 только в марте 2027 года (2027 учебный год); в 2026 году 중3 ещё учится по программе 2015 года.",
         "lgs_title": "Пакет пробных экзаменов LGS 2027",
         "lgs_body": "По десять пробных вариантов по каждому из шести предметов (на турецком языке). Отделён от предметных пакетов; AliKa использует эти вопросы только в пробных экзаменах LGS.",
         "lgs_download": "Скачать пакет LGS",
@@ -311,6 +332,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "パッケージを個別にダウンロード（{}）",
         "requirements": "教科パックとLGSパックには AliKa Windows 1.2.12 以降と Android 0.3.11 以降が必要です。",
         "requirements_jp": "日本の教材パックは、日本語のルールに対応した最新のAliKaが必要です。Androidでの取り込みは、まだ実機で確認していません。",
+        "requirements_kr": "韓国の教材パックは、韓国語のルールに対応した最新のAliKaが必要です。Windowsと実機のAndroidで確認済みです。",
+        "kr_preview": "先行版",
+        "kr_preview_note": "9年生（韓国の中学3年、중3）は、2027学年度から適用される2022改訂教育課程の先行版です。2026年の중3はまだ2015改訂教育課程で学んでいます。",
         "lgs_title": "LGS 2027 模擬試験パック",
         "lgs_body": "6教科それぞれに10回分の模擬試験（トルコ語）。教科パックとは別で、AliKaはこれらの問題をLGS模擬試験でのみ使います。",
         "lgs_download": "LGSパックをダウンロード",
@@ -344,6 +368,9 @@ CONTENT_SECTION_LABELS = {
         "packages": "패키지 개별 다운로드 ({})",
         "requirements": "과목 및 LGS 패키지는 AliKa Windows 1.2.12 및 Android 0.3.11 이상이 필요합니다.",
         "requirements_jp": "일본 패키지는 일본어 규칙을 지원하는 최신 AliKa 버전이 필요합니다. Android에서의 가져오기는 아직 실제 기기에서 확인하지 않았습니다.",
+        "requirements_kr": "한국 패키지는 한국어 규칙을 지원하는 최신 AliKa 버전이 필요합니다. Windows와 실제 Android 기기에서 확인했습니다.",
+        "kr_preview": "미리 보기",
+        "kr_preview_note": "9학년(중3)은 2027학년도 적용 예정인 2022 개정 교육과정의 미리 보기입니다. 2026학년도 중3은 아직 2015 개정 교육과정으로 배웁니다.",
         "lgs_title": "LGS 2027 모의고사 패키지",
         "lgs_body": "6개 과목마다 모의고사 10회분(튀르키예어). 과목 패키지와 별도이며, AliKa는 이 문항을 LGS 모의고사에서만 사용합니다.",
         "lgs_download": "LGS 패키지 다운로드",
@@ -373,20 +400,20 @@ LANGUAGE_NATIVE_NAMES = {
     "tr": "Türkçe", "en": "English", "de": "Deutsch", "es": "Español", "fr": "Français",
     "pt": "Português", "ru": "Русский", "ja": "日本語", "ko": "한국어",
 }
-# Sitede yayımlanan kapsam (tools/content_catalog.py PUBLISHED_GRADES ile aynı: Türkiye 5–8, Japonya 7–9): hazır / plan aşamasında / ders sözcüğü.
+# Sitede yayımlanan kapsam (tools/content_catalog.py PUBLISHED_GRADES ile aynı: Türkiye 5–8, Japonya 7–9, Güney Kore 7–9; Kore 9. sınıf ön hazırlık): hazır / plan aşamasında / ders sözcüğü.
 CONTENT_SCOPE_LABELS = {
-    "tr": ("Şu an hazır:", "Türkiye ortaokul müfredatı (5–8. sınıf) ve Japonya ortaokul müfredatı (中学校 1–3, 7–9. sınıf, Japonca) için konu anlatımları ve sorular, LGS 2027 deneme paketi, ilkokul (6–10 yaş) görsel etkinlikleri ve ortak ekran oyun paketleri.", "Plan aşamasında:", "İlkokul ve lise ders içerikleri ile Türkiye ve Japonya dışındaki ülkelerin müfredatları.", "ders"),
-    "en": ("Available now:", "Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish) and the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9, in Japanese), the LGS 2027 practice exam pack, primary visual activities (ages 6–10) and shared-screen game packs.", "In the planning stage:", "Primary and high-school subject content and curricula of countries other than Türkiye and Japan.", "subjects"),
-    "de": ("Jetzt verfügbar:", "Themenerklärungen und Fragen für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch) und für den japanischen Lehrplan der Mittelstufe (中学校, Jahrgänge 1–3, hier als Klassen 7–9, auf Japanisch), das LGS-2027-Probeprüfungspaket, visuelle Übungen für die Grundschule (6–10 Jahre) und Spielpakete für den gemeinsamen Bildschirm.", "In Planung:", "Fachinhalte für Grundschule und Oberstufe sowie Lehrpläne anderer Länder als der Türkei und Japans.", "Fächer"),
-    "es": ("Disponible ahora:", "Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco) y del plan de estudios japonés de secundaria inferior (中学校, cursos 1 a 3, mostrados como 7.º a 9.º, en japonés), el paquete de exámenes de práctica LGS 2027, actividades visuales de primaria (6–10 años) y paquetes de juegos para la pantalla compartida.", "En fase de planificación:", "Contenidos de asignaturas de primaria y bachillerato y planes de estudios de países distintos de Turquía y Japón.", "asignaturas"),
-    "fr": ("Disponible maintenant :", "Explications de cours et questions pour le programme turc du collège (classes 5 à 8, en turc) et le programme japonais du collège (中学校, années 1 à 3, présentées comme classes 7 à 9, en japonais), le pack d’examens blancs LGS 2027, des activités visuelles pour le primaire (6–10 ans) et des packs de jeux pour l’écran commun.", "En phase de planification :", "Les contenus de matières du primaire et du lycée et les programmes de pays autres que la Turquie et le Japon.", "matières"),
-    "pt": ("Disponível agora:", "Explicações de temas e perguntas do currículo turco do 5.º ao 8.º ano (em turco) e do currículo japonês do 7.º ao 9.º ano (中学校 1–3, em japonês), o pacote de exames de treino LGS 2027, atividades visuais do 1.º ciclo (6–10 anos) e pacotes de jogos para o ecrã partilhado.", "Em fase de planeamento:", "Conteúdos de disciplinas do 1.º ciclo e do ensino secundário e os currículos de países além da Turquia e do Japão.", "disciplinas"),
-    "ru": ("Сейчас доступно:", "Объяснения тем и вопросы по турецкой программе средней школы (5–8 классы, на турецком языке) и японской программе средней школы (中学校, годы 1–3, показаны как 7–9 классы, на японском языке), пакет пробных экзаменов LGS 2027, визуальные задания для начальной школы (6–10 лет) и игровые пакеты для общего экрана.", "На этапе планирования:", "Предметные материалы для начальной и старшей школы и программы стран, кроме Турции и Японии.", "предметов"),
-    "ja": ("現在提供中：", "トルコの中学校課程（5〜8年生、トルコ語）と日本の中学校課程（中学1〜3年、サイト上は7〜9年生、日本語）の単元解説と問題、LGS 2027 模擬試験パック、小学生向けビジュアル課題（6〜10歳）、共有画面用ゲームパック。", "計画段階：", "小学校・高校の教科コンテンツと、トルコ・日本以外の国のカリキュラム。", "教科"),
-    "ko": ("현재 제공:", "튀르키예 중학교 과정(5~8학년, 튀르키예어)과 일본 중학교 과정(중학교 1~3학년, 사이트에서는 7~9학년, 일본어)의 단원 설명과 문제, LGS 2027 모의고사 패키지, 초등 시각 활동(6~10세), 공유 화면 게임 패키지.", "계획 단계:", "초등학교·고등학교 과목 콘텐츠와 튀르키예·일본 외 다른 나라 교육과정.", "과목"),
+    "tr": ("Şu an hazır:", "Türkiye ortaokul müfredatı (5–8. sınıf), Japonya ortaokul müfredatı (中学校 1–3, 7–9. sınıf, Japonca) ve Güney Kore ortaokul müfredatı (중학교 1–3, 7–9. sınıf, Korece; 9. sınıf ön hazırlık) için konu anlatımları ve sorular, LGS 2027 deneme paketi, ilkokul (6–10 yaş) görsel etkinlikleri ve ortak ekran oyun paketleri.", "Plan aşamasında:", "İlkokul ve lise ders içerikleri ile Türkiye, Japonya ve Güney Kore dışındaki ülkelerin müfredatları.", "ders"),
+    "en": ("Available now:", "Topic explanations and questions for the Turkish middle-school curriculum (grades 5–8, in Turkish), the Japanese middle-school curriculum (中学校 years 1–3, shown as grades 7–9, in Japanese) and the South Korean middle-school curriculum (중학교 years 1–3, shown as grades 7–9, in Korean; grade 9 is a preview), the LGS 2027 practice exam pack, primary visual activities (ages 6–10) and shared-screen game packs.", "In the planning stage:", "Primary and high-school subject content and curricula of countries other than Türkiye, Japan and South Korea.", "subjects"),
+    "de": ("Jetzt verfügbar:", "Themenerklärungen und Fragen für den türkischen Lehrplan der Mittelstufe (Klassen 5–8, auf Türkisch), für den japanischen Lehrplan der Mittelstufe (中学校, Jahrgänge 1–3, hier als Klassen 7–9, auf Japanisch) und für den südkoreanischen Lehrplan der Mittelstufe (중학교, Jahrgänge 1–3, hier als Klassen 7–9, auf Koreanisch; Klasse 9 als Vorschau), das LGS-2027-Probeprüfungspaket, visuelle Übungen für die Grundschule (6–10 Jahre) und Spielpakete für den gemeinsamen Bildschirm.", "In Planung:", "Fachinhalte für Grundschule und Oberstufe sowie Lehrpläne anderer Länder als der Türkei, Japans und Südkoreas.", "Fächer"),
+    "es": ("Disponible ahora:", "Explicaciones de temas y preguntas del plan de estudios turco de secundaria inferior (5.º a 8.º curso, en turco), del plan de estudios japonés de secundaria inferior (中学校, cursos 1 a 3, mostrados como 7.º a 9.º, en japonés) y del plan de estudios surcoreano de secundaria inferior (중학교, cursos 1 a 3, mostrados como 7.º a 9.º, en coreano; el 9.º es una versión preliminar), el paquete de exámenes de práctica LGS 2027, actividades visuales de primaria (6–10 años) y paquetes de juegos para la pantalla compartida.", "En fase de planificación:", "Contenidos de asignaturas de primaria y bachillerato y planes de estudios de países distintos de Turquía, Japón y Corea del Sur.", "asignaturas"),
+    "fr": ("Disponible maintenant :", "Explications de cours et questions pour le programme turc du collège (classes 5 à 8, en turc), le programme japonais du collège (中学校, années 1 à 3, présentées comme classes 7 à 9, en japonais) et le programme sud-coréen du collège (중학교, années 1 à 3, présentées comme classes 7 à 9, en coréen ; la classe 9 est un aperçu), le pack d’examens blancs LGS 2027, des activités visuelles pour le primaire (6–10 ans) et des packs de jeux pour l’écran commun.", "En phase de planification :", "Les contenus de matières du primaire et du lycée et les programmes de pays autres que la Turquie, le Japon et la Corée du Sud.", "matières"),
+    "pt": ("Disponível agora:", "Explicações de temas e perguntas do currículo turco do 5.º ao 8.º ano (em turco), do currículo japonês do 7.º ao 9.º ano (中学校 1–3, em japonês) e do currículo sul-coreano do 7.º ao 9.º ano (중학교 1–3, em coreano; o 9.º ano é uma pré-visualização), o pacote de exames de treino LGS 2027, atividades visuais do 1.º ciclo (6–10 anos) e pacotes de jogos para o ecrã partilhado.", "Em fase de planeamento:", "Conteúdos de disciplinas do 1.º ciclo e do ensino secundário e os currículos de países além da Turquia, do Japão e da Coreia do Sul.", "disciplinas"),
+    "ru": ("Сейчас доступно:", "Объяснения тем и вопросы по турецкой программе средней школы (5–8 классы, на турецком языке), японской программе средней школы (中学校, годы 1–3, показаны как 7–9 классы, на японском языке) и южнокорейской программе средней школы (중학교, годы 1–3, показаны как 7–9 классы, на корейском языке; 9 класс — предварительная версия), пакет пробных экзаменов LGS 2027, визуальные задания для начальной школы (6–10 лет) и игровые пакеты для общего экрана.", "На этапе планирования:", "Предметные материалы для начальной и старшей школы и программы стран, кроме Турции, Японии и Южной Кореи.", "предметов"),
+    "ja": ("現在提供中：", "トルコの中学校課程（5〜8年生、トルコ語）、日本の中学校課程（中学1〜3年、サイト上は7〜9年生、日本語）と韓国の中学校課程（中学1〜3年、サイト上は7〜9年生、韓国語。9年生は先行版）の単元解説と問題、LGS 2027 模擬試験パック、小学生向けビジュアル課題（6〜10歳）、共有画面用ゲームパック。", "計画段階：", "小学校・高校の教科コンテンツと、トルコ・日本・韓国以外の国のカリキュラム。", "教科"),
+    "ko": ("현재 제공:", "튀르키예 중학교 과정(5~8학년, 튀르키예어), 일본 중학교 과정(중학교 1~3학년, 사이트에서는 7~9학년, 일본어)과 한국 중학교 과정(중학교 1~3학년, 사이트에서는 7~9학년, 한국어, 9학년은 미리 보기)의 단원 설명과 문제, LGS 2027 모의고사 패키지, 초등 시각 활동(6~10세), 공유 화면 게임 패키지.", "계획 단계:", "초등학교·고등학교 과목 콘텐츠와 튀르키예·일본·한국 외 다른 나라 교육과정.", "과목"),
 }
-# İçerik sayfasında ülke seçicinin açıldığı ülke: Japonca sayfa Japonya paketleriyle, diğerleri Türkiye ile açılır.
-CONTENT_DEFAULT_COUNTRY = {"ja": "japonya"}
+# İçerik sayfasında ülke seçicinin açıldığı ülke: Japonca sayfa Japonya, Korece sayfa Güney Kore paketleriyle, diğerleri Türkiye ile açılır.
+CONTENT_DEFAULT_COUNTRY = {"ja": "japonya", "ko": "kore"}
 THOUSANDS_SEPARATORS = {"tr": ".", "de": ".", "es": ".", "pt": ".", "fr": "\u202f", "ru": "\u00a0"}
 CONTENT_BOOK_LABELS = {
     "tr": ("Ana sayfaya dön", "Hazır içerik defteri", "Ülke", "Sınıf paketi", "Ders paketi", "Hata, geliştirme fikri veya eleştiriniz mi var? Bize yazın."),
@@ -2335,7 +2362,7 @@ def download_name(row: dict) -> str:
 
 
 def lang_attr(row: dict) -> str:
-    """Paket dili sayfa dilinden bağımsızdır (Japonya paketleri Japonca); Türkçe dışı başlıkları lang ile işaretler."""
+    """Paket dili sayfa dilinden bağımsızdır (Japonya paketleri Japonca, Güney Kore paketleri Korece); Türkçe dışı başlıkları lang ile işaretler."""
     language = row.get("language", "tr")
     return "" if language == "tr" else f' lang="{esc(language)}"'
 
@@ -2438,21 +2465,31 @@ def content_library(catalog: dict, lang: str) -> str:
         f'<option value="{esc(slug)}"{" selected" if slug == default_country else ""}>{esc(name)}</option>'
         for slug, name in countries
     )
+    # Ön hazırlık sınıfı (Güney Kore 9. sınıf, 2027학년도 programı): seçicide, kartlarda ve notta görünür.
+    preview_grades = {(row["country_slug"], row["grade_slug"]) for row in catalog["grades"] if row.get("preview")}
+
+    def grade_label(country: str, grade_slug: str, grade: object) -> str:
+        label = labels[7].format(grade)
+        return f"{label} · {section['kr_preview']}" if (country, grade_slug) in preview_grades else label
+
+    def preview_note(row: dict) -> str:
+        return f"\n          <p>{esc(section['kr_preview_note'])}</p>" if row.get("preview") else ""
+
     grade_options = "".join(
-        f'<option value="{esc(grade_slug)}" data-country-option="{esc(country)}">{esc(labels[7].format(grade))}</option>'
+        f'<option value="{esc(grade_slug)}" data-country-option="{esc(country)}">{esc(grade_label(country, grade_slug, grade))}</option>'
         for country, grade_slug, grade in grades
     )
     grade_cards = "".join(f"""
       <article class="grade-download-card" data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
-        <div><small>{esc(row['country'])} · {esc(labels[7].format(row['grade']))}</small>
-          <h3>{row['subject_count']} {esc(scope[4])} · {format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}</h3>
+        <div><small>{esc(row['country'])} · {esc(grade_label(row['country_slug'], row['grade_slug'], row['grade']))}</small>
+          <h3>{row['subject_count']} {esc(scope[4])} · {format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}</h3>{preview_note(row)}
           </div>
         <a class="button direct-download" href="{esc(row['download_url'])}" download="{esc(download_name(row))}"
            data-direct-download>{esc(labels[2])}</a>
       </article>""" for row in catalog["grades"])
     subject_cards = "".join(f"""
       <article data-content-item data-country="{esc(row['country_slug'])}" data-grade="{esc(row['grade_slug'])}">
-        <small>{esc(row['country_code'])} · {esc(labels[7].format(row['grade']))}</small>
+        <small>{esc(row['country_code'])} · {esc(grade_label(row['country_slug'], row['grade_slug'], row['grade']))}</small>
         <h3{lang_attr(row)}>{esc(row['subject_title'])}</h3>
         <p>{format_count(row['notes'], lang)} {esc(labels[4])} · {format_count(row['questions'], lang)} {esc(labels[5])}</p>
         <a class="package-cta" href="{esc(row['download_url'])}" download="{esc(download_name(row))}">{esc(labels[3])}</a>
@@ -2461,6 +2498,9 @@ def content_library(catalog: dict, lang: str) -> str:
     requirements_jp = (
         f"<br>{esc(section['requirements_jp'])}" if any(row["country_slug"] == "japonya" for row in catalog["grades"]) else ""
     )
+    requirements_kr = (
+        f"<br>{esc(section['requirements_kr'])}" if any(row["country_slug"] == "kore" for row in catalog["grades"]) else ""
+    ) + (f" {esc(section['kr_preview_note'])}" if preview_grades else "")
     lgs = catalog.get("lgs") or {}
     video_lang = f'<p class="content-video-lang">{esc(section["video_lang"])}</p>' if section["video_lang"] else ""
     lgs_section = f"""
@@ -2529,7 +2569,7 @@ def content_library(catalog: dict, lang: str) -> str:
         <label>{esc(labels[0])}<select data-content-country>{country_options}</select></label>
         <label>{esc(labels[1])}<select data-content-grade>{grade_options}</select></label>
       </div>
-      <p class="honesty-note">{esc(labels[8])}<br>{esc(section['requirements'])}{requirements_jp}</p>
+      <p class="honesty-note">{esc(labels[8])}<br>{esc(section['requirements'])}{requirements_jp}{requirements_kr}</p>
       <aside class="content-howto" aria-labelledby="content-howto-title">
         <div>
           <h2 id="content-howto-title">{esc(section['howto_title'])}</h2>
