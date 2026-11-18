@@ -470,6 +470,34 @@ def main() -> None:
                 errors.append(f"Privacy policy must describe the YouTube player on the how-to page: {name}")
         if 'href="/nasil-kullanilir/"' not in (DIST / "rehber" / "index.html").read_text(encoding="utf-8"):
             errors.append("Guide index must link the how-to page")
+    # AliKa Ders: konu anlatımı videoları da tıklanınca yüklenir; çocuk da açabileceği için satış dili ve mağaza bağlantısı yoktur.
+    ders_page = DIST / "ders" / "index.html"
+    if not ders_page.exists():
+        errors.append("Lesson videos page /ders/ is missing")
+    else:
+        ders_text = ders_page.read_text(encoding="utf-8")
+        ders_ids = re.findall(r'<div class="yt-embed" data-youtube="([^"]*)"', ders_text)
+        ders_posters = re.findall(r'<img src="(/videos/ders/[a-z0-9-]+\.webp)"', ders_text)
+        if not ders_ids or any(not re.fullmatch(r"[A-Za-z0-9_-]{11}", video_id) for video_id in ders_ids):
+            errors.append("Lesson page needs at least one video, each with a valid YouTube id")
+        if len(set(ders_ids)) != len(ders_ids):
+            errors.append("Lesson page lists the same video twice")
+        if len(ders_posters) != len(ders_ids) or any(not (DIST / poster.lstrip("/")).exists() for poster in ders_posters):
+            errors.append("Lesson page: every video needs its own poster image on the site")
+        if "<iframe" in ders_text or "youtube.com/embed" in ders_text:
+            errors.append("Lesson page must not load the YouTube player before a click")
+        if ders_text.count('"@type":"VideoObject"') != len(ders_ids):
+            errors.append("Lesson page: VideoObject schema count does not match the videos")
+        if "/ders/</loc>" not in sitemap_text:
+            errors.append("Sitemap must list /ders/")
+        main_part = ders_text.split('<main id="main"', 1)[-1].split("</main>", 1)[0]
+        if re.search(r"apps\.microsoft\.com|play\.google\.com|ücretsiz dene|deneyin|indirin", main_part, re.I) or "#deneme" in ders_text:
+            errors.append("Lesson page must not carry store links, a trial button or sales language (kids can open it)")
+        for name in ("privacy/index.html", "gizlilik/index.html"):
+            if "Konu anlatımı videoları" not in (DIST / name).read_text(encoding="utf-8"):
+                errors.append(f"Privacy policy must name the lesson videos page: {name}")
+        if 'href="/ders/"' not in school_text:
+            errors.append("Schools page must link the lesson videos page")
     kit_page = DIST / "okullar" / "veli-notu" / "index.html"
     if not kit_page.exists() or '<meta name="robots" content="noindex">' not in kit_page.read_text(encoding="utf-8"):
         errors.append("Printable parent note must exist and be noindex")

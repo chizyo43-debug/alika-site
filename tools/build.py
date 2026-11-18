@@ -1640,6 +1640,92 @@ HOWTO_GROUPS = (
     {"key": "guvenlik-ve-hesap", "title": "Güvenlik ve hesap", "lead": "Ebeveyn PIN’i, kurtarma kodu, yedekleme ve abonelik.", "videos": ()},
 )
 
+DERS_PATH = "ders"
+DERS_UPDATED = ("2026-11-18", "18 Kasım 2026")
+DERS_CHANNEL_URL = "https://www.youtube.com/@AliKaDers"
+# AliKa Ders: YouTube'daki AliKa Ders kanalının konu anlatımı videoları, sınıf › ders › ünite sırasıyla.
+# Kanal "çocuklar için" ayarlıdır; bu sayfayı çocuk da açabilir. Bu yüzden sayfada deneme düğmesi,
+# mağaza bağlantısı ve satış dili yoktur (AliKa Ders kanal kiti §7). Videolar "Nasıl kullanılır"
+# sayfasındaki gibi tıklanınca youtube-nocookie.com'dan yüklenir; kapaklar public/videos/ders/<code>.webp (960x540).
+DERS_SECTIONS = (
+    {"key": "7-sinif-fen", "title": "7. Sınıf Fen Bilimleri", "units": (
+        {"key": "uzay-cagi", "title": "1. Ünite: Uzay Çağı", "videos": (
+            {
+                "code": "f7-t01",
+                "title": "Uzay teknolojileri: roket, uydu, sonda ve istasyon",
+                "youtube": "iWRzSiN_C_o",
+                "duration": ("11:37", "PT11M37S"),
+                "published": "2026-11-11",
+                "outcome": "FB.7.1.1",
+                "questions": 4,
+                "summary": "Bir astronot yörüngede uzun süre deney yapmak istiyor; kurye ona uygun aracı arıyor. Roket, uydu, uzay sondası, uzay istasyonu, uzay mekiği ve teleskobu ne işe yaradığına, nerede çalıştığına ve insan taşıyıp taşımadığına göre ayırıyoruz.",
+            },
+            {
+                "code": "f7-t02",
+                "title": "Gözlem aracını modelleme: teleskop ve bilimsel model",
+                "youtube": "vi4nL7MntmU",
+                "duration": ("11:22", "PT11M22S"),
+                "published": "2026-11-12",
+                "outcome": "FB.7.1.2",
+                "questions": 4,
+                "summary": "Maketçi kâğıttan bir teleskop yapıyor ama kâğıt boru ışık toplamıyor. Bu yine de bilimsel bir model mi? Model nedir, parçalar neyi gösterir, kanıt modeli nasıl değiştirir sorularıyla iyi bir modeli kuruyoruz.",
+            },
+            {
+                "code": "f7-t03",
+                "title": "Uzay atığı ve uzay kirliliği: problem, veri ve çözüm",
+                "youtube": "3P2b8zfABSM",
+                "duration": ("12:53", "PT12M53S"),
+                "published": "2026-11-12",
+                "outcome": "FB.7.1.3",
+                "questions": 5,
+                "summary": "Yörüngede boş bir taşıma kutusu kaldı. Uzay atığının ne olduğunu ve ışık kirliliğinden farkını, veriden temkinli tahmin yapmayı, önleme ve izleme önerilerini karşılaştırmayı öğreniyor, kanıta dayalı kısa bir rapor yazıyoruz.",
+            },
+            {
+                "code": "f7-t04",
+                "title": "Yıldızların yaşam döngüsü: bulutsu, kütle, süpernova",
+                "youtube": "jMg2Fa5VLj4",
+                "duration": ("12:43", "PT12M43S"),
+                "published": "2026-11-13",
+                "outcome": "FB.7.1.4",
+                "questions": 5,
+                "summary": "Güneş bir gün kara deliğe dönüşecek mi? Yıldızların bulutsudan nasıl oluştuğunu, yollarının kütleye göre nasıl iki kola ayrıldığını ve görünüşün (renk, büyük görünme, ışık yılı, takımyıldız) bize ne söylediğini öğreniyoruz.",
+            },
+            {
+                "code": "f7-t05",
+                "title": "Kozmik adresimiz: yıldız, galaksi, evren ve uzay",
+                "youtube": "UgMzWnBzGHk",
+                "duration": ("11:28", "PT11M28S"),
+                "published": "2026-11-11",
+                "outcome": "FB.7.1.5",
+                "questions": 5,
+                "summary": "Uzaydan gelen bir mektubun zarfında yalnız “Dünya” yazıyor. Dünya’nın kozmik adresini satır satır kuruyoruz: Dünya, Güneş Sistemi, Samanyolu, evren. Yıldız, galaksi, evren ve uzay arasındaki farkı öğreniyoruz.",
+            },
+        )},
+        {"key": "kuvvet-ve-enerji", "title": "2. Ünite: Kuvvet ve Enerjiyi Keşfedelim", "videos": (
+            {
+                "code": "f7-t06",
+                "title": "Fiziksel iş: kuvvet, yer değiştirme, joule",
+                "youtube": "XFoxUDgDve8",
+                "duration": ("12:58", "PT12M58S"),
+                "published": "2026-11-14",
+                "outcome": "FB.7.2.1",
+                "questions": 5,
+                "summary": "Kutuyu yerinden oynatmadan uzun süre tutmak fiziksel iş midir? Fiziksel işin ne olduğunu, kuvvetin ne zaman iş yapmadığını ve işi neyin değiştirdiğini öğreniyoruz. İşin birimi joule.",
+            },
+            {
+                "code": "f7-t07",
+                "title": "Kinetik ve potansiyel enerji: çekim ve esneklik",
+                "youtube": "gJUEXvGoNFE",
+                "duration": ("12:58", "PT12M58S"),
+                "published": "2026-11-14",
+                "outcome": "FB.7.2.2",
+                "questions": 5,
+                "summary": "Rampanın üstünde kıpırdamadan duran bir kaykaycının enerjisi var mı? Kinetik enerjiyi, çekim ve esneklik potansiyel enerjisini tanıyor; yüksekliği neye göre ölçtüğümüzü ve üç enerjiyi nasıl ayırdığımızı öğreniyoruz. Karşılaştırmalar nitel, hesap yok.",
+            },
+        )},
+    )},
+)
+
 ACCESS_LABELS = {
     "tr": ("İçeriğe geç", "Menü", "Geç", "Ortak ekran", "Hazır", "Yanıt gizli"),
     "en": ("Skip to content", "Menu", "Skip", "Shared screen", "Ready", "Answer hidden"),
@@ -1732,7 +1818,7 @@ def language_menu(locales: dict[str, dict], lang: str, slug: str = "") -> str:
     return "".join(links)
 
 
-def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
+def header(locales: dict[str, dict], lang: str, slug: str = "", offer: bool = True) -> str:
     c = locales[lang]
     access = ACCESS_LABELS[lang]
     words = home_copy(lang)["nav"]
@@ -1747,8 +1833,9 @@ def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
         (f"{home}#sss", words["faq"], ""),
     )
     nav = "".join(f'<a href="{link}"{attr}>{esc(label)}</a>' for link, label, attr in nav_items)
-    # Telefonda sağdaki deneme düğmesi gizlenir; menüde görünür.
-    nav += f'<a class="nav-offer" href="{home}#deneme">{esc(words["offer"])}</a>'
+    # Telefonda sağdaki deneme düğmesi gizlenir; menüde görünür. Çocukların da açtığı sayfalarda (offer=False) hiç yoktur.
+    if offer:
+        nav += f'<a class="nav-offer" href="{home}#deneme">{esc(words["offer"])}</a>'
     return f"""
     <a class="skip-link" href="#main">{esc(access[0])}</a>
     <header class="site-header" data-header>
@@ -1767,7 +1854,7 @@ def header(locales: dict[str, dict], lang: str, slug: str = "") -> str:
           <summary aria-label="Language"><span aria-hidden="true">{LANGUAGE_FLAGS[lang]}</span><span>{esc(c["name"])}</span></summary>
           <div class="language-list">{language_menu(locales, lang, slug)}</div>
         </details>
-        <a class="button button-small" href="{href(lang)}#deneme">{esc(words["offer"])}</a>
+        {f'<a class="button button-small" href="{href(lang)}#deneme">{esc(words["offer"])}</a>' if offer else ""}
       </div>
     </header>
     """
@@ -1870,7 +1957,7 @@ def document(locales: dict[str, dict], lang: str, title: str, description: str, 
 
 
 
-def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr", schema_type: str = "Article", updated: tuple[str, str] = GUIDE_UPDATED) -> str:
+def guide_document(locales: dict[str, dict], title: str, description: str, canonical: str, body: str, lang: str = "tr", schema_type: str = "Article", updated: tuple[str, str] = GUIDE_UPDATED, offer: bool = True) -> str:
     article_schema = {
         "@context": "https://schema.org",
         "@type": schema_type,
@@ -1907,7 +1994,7 @@ def guide_document(locales: dict[str, dict], title: str, description: str, canon
   <script type="application/ld+json">{json.dumps(article_schema, ensure_ascii=False, separators=(",", ":"))}</script>
 </head>
 <body>
-  {header(locales, lang)}
+  {header(locales, lang, offer=offer)}
   {body}
   {footer(locales, lang)}
   <script src="/assets/site.js" defer></script>
@@ -2113,6 +2200,10 @@ def school_body() -> str:
           <p>Aileler bu planları evde çocukla birlikte doldurur. Her plan ilgili rehberin içinde yazdırılabilir tablo olarak yer alır.</p>
           <ul class="guide-links">{plans}</ul>
         </section>
+        <section>
+          <h2>Konu anlatımı videoları</h2>
+          <p>Öğrencilerinizle paylaşabileceğiniz 7. sınıf Fen Bilimleri konu anlatımı videoları ve çözümlü yazılı soruları <a href="/{DERS_PATH}/">Konu anlatımı videoları sayfasında</a>.</p>
+        </section>
         {rendered}
       </article>
     </main>
@@ -2272,13 +2363,13 @@ def howto_videos() -> list[dict]:
     return [video for group in HOWTO_GROUPS for video in group["videos"] if video["youtube"]]
 
 
-def howto_embed(video: dict) -> str:
+def howto_embed(video: dict, folder: str = HOWTO_PATH) -> str:
     """Kapak görseli + oynat düğmesi. JavaScript yoksa bağlantı videoyu YouTube'da açar."""
     code, youtube = video["code"], video["youtube"]
     return (
         f'<div class="yt-embed" data-youtube="{esc(youtube)}" data-title="{esc(video["title"])}">'
         f'<a class="yt-poster" href="https://www.youtube.com/watch?v={esc(youtube)}" target="_blank" rel="noopener" data-yt-play>'
-        f'<img src="/videos/{HOWTO_PATH}/{code}.webp" width="960" height="540" alt="" loading="lazy" decoding="async">'
+        f'<img src="/videos/{folder}/{code}.webp" width="960" height="540" alt="" loading="lazy" decoding="async">'
         f'<span class="yt-play" aria-hidden="true"></span>'
         f'<span class="yt-label">Videoyu oynatın · {esc(video["duration"][0])}</span></a></div>'
     )
@@ -2330,6 +2421,56 @@ def howto_body() -> str:
       </header>{groups}
       <p class="guide-links-note"><strong>Kurulum videoları:</strong> Windows ve Android ilk kurulum videoları <a href="/#videolar">ana sayfadaki Videolar bölümünde</a>. Ekran süresi planı için <a href="/{GUIDE_BASE}/">ebeveyn rehberlerine</a> bakabilirsiniz.</p>
       <aside class="guide-disclosure"><strong>Not:</strong> Videolardaki ekranlar uygulama arayüzünden örnek verilerle alınmıştır; gerçek aile verisi içermez. Sayılar ve saatler örnektir, kuralları aileniz belirler. Sorularınız için <a href="mailto:destek@alika.tr">destek@alika.tr</a>. Son güncelleme: {HOWTO_UPDATED[1]}.</aside>
+    </main>
+    """
+
+
+def ders_body() -> str:
+    """AliKa Ders: sınıf › ders › ünite sırasıyla konu anlatımı videoları. Çocuk da açabilir; satış dili yok."""
+    sections = ""
+    for section in DERS_SECTIONS:
+        units = ""
+        for unit in section["units"]:
+            items = ""
+            for video in unit["videos"]:
+                schema = {
+                    "@context": "https://schema.org",
+                    "@type": "VideoObject",
+                    "name": f"{section['title']}: {video['title']}",
+                    "description": video["summary"],
+                    "thumbnailUrl": f"{BASE_URL}/videos/{DERS_PATH}/{video['code']}.webp",
+                    "uploadDate": f"{video['published']}T10:00:00+03:00",
+                    "duration": video["duration"][1],
+                    "embedUrl": f"https://www.youtube-nocookie.com/embed/{video['youtube']}",
+                    "inLanguage": "tr-TR",
+                    "educationalLevel": "7. sınıf",
+                    "learningResourceType": "Konu anlatımı",
+                }
+                items += f"""
+          <article class="howto-video" id="{video['code']}">
+            <h4>{esc(video['title'])}</h4>
+            {howto_embed(video, DERS_PATH)}
+            <p class="yt-note">Oynat düğmesine bastığınızda video YouTube’dan yüklenir. <a href="/gizlilik/">Gizlilik</a></p>
+            <p>{esc(video['summary'])}</p>
+            <p class="ders-meta">Konu anlatımı + {video['questions']} yazılı sorusu · {esc(video['duration'][0])} · Öğrenme çıktısı {esc(video['outcome'])}</p>
+            <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":"))}</script>
+          </article>"""
+            units += f"""
+        <section class="ders-unit" id="{unit['key']}">
+          <h3>{esc(unit['title'])}</h3>{items}
+        </section>"""
+        sections += f"""
+      <section class="howto-group" id="{section['key']}">
+        <h2>{esc(section['title'])}</h2>{units}
+      </section>"""
+    return f"""
+    <main id="main" class="guide-main">
+      <header class="guide-index-hero">
+        <p class="eyebrow">AliKa Ders · Konu anlatımı</p>
+        <h1>Konu anlatımı videoları</h1>
+        <p>Her videoda bir konuyu kısa bir hikâye ve görsellerle anlatıyor, ardından yazılı sorularını adım adım çözüyoruz. Videolar sınıf, ders ve ünite sırasıyla dizildi. Hepsi YouTube’daki <a href="{DERS_CHANNEL_URL}" target="_blank" rel="noopener">AliKa Ders kanalında</a>.</p>
+      </header>{sections}
+      <aside class="guide-disclosure"><strong>Not:</strong> Konu anlatımları Türkiye Yüzyılı Maarif Modeli öğretim programına göre hazırlanır. Sorular AliKa’nın kendi örnekleridir, herhangi bir sınavdan alınmamıştır; puanlamayı okul belirler. Hata bulursanız <a href="mailto:destek@alika.tr">destek@alika.tr</a> adresine yazabilirsiniz. Son güncelleme: {DERS_UPDATED[1]}.</aside>
     </main>
     """
 
@@ -2857,6 +2998,22 @@ def build() -> None:
         ),
     )
 
+    # AliKa Ders: konu anlatımı videoları (YouTube'daki AliKa Ders kanalı), tıklanınca yüklenen oynatıcıyla.
+    ders_url = f"{BASE_URL}/{DERS_PATH}/"
+    write_page(
+        DIST / DERS_PATH / "index.html",
+        guide_document(
+            locales,
+            "Konu Anlatımı Videoları: 7. Sınıf Fen Bilimleri",
+            "7. sınıf Fen Bilimleri konu anlatımı videoları: Uzay Çağı ve Kuvvet ve Enerjiyi Keşfedelim üniteleri, her konuda çözümlü yazılı soruları.",
+            ders_url,
+            ders_body(),
+            schema_type="WebPage",
+            updated=DERS_UPDATED,
+            offer=False,
+        ),
+    )
+
     write_page(DIST / "404.html", not_found_document(locales))
 
     # Uygulamadaki sabit, Türkçe ve anlaşılır içerik adresi.
@@ -2892,6 +3049,7 @@ def build() -> None:
     urls.extend(f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/" for guide in PUBLISHED_GUIDES)
     urls.append(school_url)
     urls.append(howto_url)
+    urls.append(ders_url)
     urls.append(uk_guide_url)
     urls.extend(ja_guide_urls)
     unique_urls = list(dict.fromkeys(urls))
@@ -2900,6 +3058,7 @@ def build() -> None:
     lastmod = {f"{BASE_URL}/{GUIDE_BASE}/{guide['slug']}/": guide.get("updated", GUIDE_UPDATED)[0] for guide in PUBLISHED_GUIDES}
     lastmod.update({f"{BASE_URL}/{ja_guide['path']}/": ja_guide["updated"][0] for ja_guide in JA_GUIDES})
     lastmod[howto_url] = HOWTO_UPDATED[0]
+    lastmod[ders_url] = DERS_UPDATED[0]
     sitemap += "".join(
         f"  <url><loc>{esc(url)}</loc>{'<lastmod>' + lastmod[url] + '</lastmod>' if url in lastmod else ''}</url>\n"
         for url in unique_urls

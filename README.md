@@ -17,7 +17,9 @@ The generated GitHub Pages output is written to `dist/` (same steps as
 external CDN, AI assistant, or application connection. Its only third-party
 script is the optional Cloudflare Web Analytics beacon described below.
 
-One page embeds third-party content: `/nasil-kullanilir/` (Turkish how-to videos).
+Two pages embed third-party content: `/nasil-kullanilir/` (Turkish how-to videos) and
+`/ders/` (AliKa Ders lesson videos, listed in `DERS_SECTIONS`; kids may open it, so it has
+no trial button, store link or sales copy).
 Those videos live on YouTube so that video files do not grow this repository. The
 page ships only a local poster image per video; the player is created on click from
 `youtube-nocookie.com` (`src/scripts/site.js`), and both privacy policies describe it.
