@@ -537,11 +537,12 @@ def main() -> None:
         # alika-icerik 0aaf7bd (uzay kapaklı oyun paketleri): 100 ders + 6 LGS paketi, 1 ilkokul görsel paketi, 2 oyun × 9 dil × 4 yaş grubu.
         # alika-icerik #77: LGS 2028 hazırlık 7. sınıf, 6 deneme + 6 ünite seti paketi (450 + 327 soru).
         # Japonya ortaokul (中学校 1–3 = 7–9. sınıf): 3 sınıf, 18 ders kartı, 28 paket, 9.500 soru, 190 not.
+        # Güney Kore ortaokul (중학교 1–3 = 7–9. sınıf, alika-icerik #83): 3 sınıf, 16 ders kartı, 24 paket, 8.600 soru, 172 not.
         expected_totals = {
-            "countries": 2,
-            "gradeGroups": 7,
-            "subjects": 46,
-            "lessonPackages": 128,
+            "countries": 3,
+            "gradeGroups": 10,
+            "subjects": 62,
+            "lessonPackages": 152,
             "lgsPackages": 6,
             "lgsPrepPackages": 12,
             "lgsPrepQuestions": 777,
@@ -553,17 +554,22 @@ def main() -> None:
         unexpected = {key: totals.get(key) for key, value in expected_totals.items() if totals.get(key) != value}
         if unexpected:
             errors.append(f"Content catalog totals are unexpected: {unexpected}")
-        # Yalnız Türkiye ortaokul (5–8) ve Japonya ortaokul (7–9) ders kapsamı yayımlanır; diğer sınıflar ve ülkeler plan aşamasında.
-        published = {"turkiye": [5, 6, 7, 8], "japonya": [7, 8, 9]}
+        # Yalnız Türkiye ortaokul (5–8), Japonya ortaokul (7–9) ve Güney Kore ortaokul (7–9) ders kapsamı yayımlanır;
+        # diğer sınıflar ve ülkeler plan aşamasında. Güney Kore 9. sınıf ön hazırlıktır (2022 programı 중3'e Mart 2027'de geçer).
+        published = {"turkiye": [5, 6, 7, 8], "japonya": [7, 8, 9], "kore": [7, 8, 9]}
         if catalog.get("published_scope") != published:
-            errors.append(f"Published content scope must be Türkiye 5–8 and Japonya 7–9: {catalog.get('published_scope')}")
-        country_names = {"turkiye": ("Türkiye", "TR"), "japonya": ("Japonya", "JP")}
+            errors.append(f"Published content scope must be Türkiye 5–8, Japonya 7–9 and Güney Kore 7–9: {catalog.get('published_scope')}")
+        if catalog.get("preview_scope") != {"kore": [9]}:
+            errors.append(f"Preview scope must be Güney Kore 9: {catalog.get('preview_scope')}")
+        country_names = {"turkiye": ("Türkiye", "TR"), "japonya": ("Japonya", "JP"), "kore": ("Güney Kore", "KR")}
         for kind in ("grades", "subjects"):
             for row in catalog.get(kind, []):
                 if row.get("grade") not in published.get(row.get("country_slug"), []):
                     errors.append(f"Unpublished scope leaked into {kind}: {row.get('country_slug')} {row.get('grade')}")
                 if (row.get("country"), row.get("country_code")) != country_names.get(row.get("country_slug")):
                     errors.append(f"Country name/code differs from its slug in {kind}: {row.get('country_slug')} {row.get('country')} {row.get('country_code')}")
+                if bool(row.get("preview")) != (row.get("country_slug") == "kore" and row.get("grade") == 9):
+                    errors.append(f"Only Güney Kore grade 9 may be marked as preview in {kind}: {row.get('country_slug')} {row.get('grade')}")
         # Japonya: 3 sınıf, 28 paket, 9.500 soru, 190 not; üç 社会 alanı kartlarda ayırt edilebilir.
         jp_grades = [row for row in catalog.get("grades", []) if row.get("country_slug") == "japonya"]
         jp_subjects = [row for row in catalog.get("subjects", []) if row.get("country_slug") == "japonya"]
@@ -579,6 +585,29 @@ def main() -> None:
         jp_titles = [(row["grade"], row.get("subject_title")) for row in jp_subjects]
         if len(jp_titles) != len(set(jp_titles)) or not {"社会（地理的分野）", "社会（歴史的分野）", "社会（公民的分野）"} <= {title for _, title in jp_titles}:
             errors.append(f"Japonya 社会 cards must be distinguishable by field: {jp_titles}")
+        # Güney Kore: 3 sınıf, 24 paket, 8.600 soru, 172 not; Korece KR paketleri; 9. sınıf paket adları önizleme olduğunu söyler.
+        kr_grades = [row for row in catalog.get("grades", []) if row.get("country_slug") == "kore"]
+        kr_subjects = [row for row in catalog.get("subjects", []) if row.get("country_slug") == "kore"]
+        kr_packages = [package for subject in kr_subjects for package in subject.get("packages", [])]
+        kr_figures = (
+            len(kr_grades), len(kr_packages),
+            sum(package.get("questions", 0) for package in kr_packages), sum(package.get("notes", 0) for package in kr_packages),
+        )
+        if kr_figures != (3, 24, 8600, 172):
+            errors.append(f"Güney Kore grades/packages/questions/notes must be 3/24/8600/172: {kr_figures}")
+        if any(package.get("language") != "ko" or package.get("country_code") != "KR" for package in kr_packages):
+            errors.append("Güney Kore packages must be Korean-language KR packages")
+        if any(not package.get("title", "").endswith("2027학년도 미리 보기") for package in kr_packages if package.get("grade") == 9):
+            errors.append("Güney Kore grade 9 package titles must say 2027학년도 미리 보기")
+        # Korece içerik sayfası Güney Kore ile açılır; her dilde 9. sınıf kartı ön hazırlık notunu taşır.
+        for content_page in [DIST / "content" / "index.html", *sorted(DIST.glob("*/content/index.html"))]:
+            page_text = content_page.read_text(encoding="utf-8") if content_page.exists() else ""
+            card = re.search(r'<article class="grade-download-card" data-content-item data-country="kore" data-grade="9-sinif">(.*?)</article>', page_text, re.S)
+            if not card or "<p>" not in card.group(1) or "2027" not in card.group(1):
+                errors.append(f"Güney Kore grade 9 card must carry the preview note: {content_page}")
+        ko_content = DIST / "ko" / "content" / "index.html"
+        if not ko_content.exists() or '<option value="kore" selected>' not in ko_content.read_text(encoding="utf-8"):
+            errors.append("Korean content page must open with Güney Kore selected")
 
         def served_file(row: dict, label: str) -> Path | None:
             """İndirilen her dosya sitede /icerik/ altında durmalı ve katalogdaki sha256 ile eşleşmeli."""
