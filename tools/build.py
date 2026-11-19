@@ -1669,6 +1669,18 @@ HOWTO_GROUPS = (
                 ("Android", "Kurallar → Haftalık program ve uyku → Misafir modu kartı: Misafir süresi (15–720 dk) yazıp Misafir modunu başlat; erken kapatmak için aynı kartta Misafir modunu bitir."),
             ),
         },
+        {
+            "code": "b5",
+            "title": "Süre bitmeden uyarı, yumuşak iniş, göz molası",
+            "youtube": "5ZLXCONhIQ4",
+            "duration": ("1:10", "PT1M10S"),
+            "published": "2026-11-19",
+            "summary": "Günlük süre bitmeye yaklaşınca çocuğa önceden haber verin: yumuşak inişte son dakikalarda ekran dokunmayı engellemeden yavaşça kararır ve bir bildirim gelir; göz molası belirli aralıklarla 20 saniye uzağa bakmayı hatırlatır, ekranı kilitlemez. Kalan süre köşede sayaçla ya da baloncukla görünür. Önce Windows’ta, sonra Android’de.",
+            "where": (
+                ("Windows", "Ayarlar sayfası → İyi Oluş ve Öğrenme kartı: Yumuşak iniş ve Kararma eşiği, Göz molası hatırlatması ve Hatırlatma aralığı; sonra Kaydet. Genel kartında Kalan süre sayacını ekranda göster. Süre dolmadan önce uyarı bildirimleri de kendiliğinden gelir."),
+                ("Android", "Profil → Ebeveyn araçları → Ayarlar → İyi oluş kartı: Yumuşak iniş ve Kararma eşiği (dakika), Göz molası hatırlatması ve Hatırlatma aralığı (dakika); her alanın kendi Kaydet düğmesi var. Yüzen süre baloncuğu kartında Baloncuğu göster."),
+            ),
+        },
     )},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
