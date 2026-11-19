@@ -1645,6 +1645,18 @@ HOWTO_GROUPS = (
                 ("Android", "Uyku saatinin adı Gece modu: Kurallar → Haftalık program ve uyku → Gece modu kartı (anahtar, saatler, kartın Kaydet düğmesi). Okul saati: önce Profil → Ebeveyn araçları → Ek özellikler’de Çalışma planı’nı açın, sonra Sorular → Çalışma planı ve haftalık takvim → Takvim dilimi ekle, türü Okul, Kaydet."),
             ),
         },
+        {
+            "code": "b3",
+            "title": "Takvim: tatil ve sınav haftası için ayrı süre",
+            "youtube": "hm3cuTF-JW4",
+            "duration": ("1:16", "PT1M16S"),
+            "published": "2026-11-19",
+            "summary": "Okul, tatil ve sınav haftası için ayrı günlük süre: profil takvimini açma, dönem sürelerini ve takvim dışındaki günleri seçme, tarih aralığı ekleme. Önce Windows’ta, sonra Android’de. Dönemler çakışırsa önce Sınav haftası, sonra Tatil geçerli olur.",
+            "where": (
+                ("Windows", "Takvim ve misafir sayfası → Profil takvimi anahtarı → Dönemlere göre günlük süre (Okul, Tatil, Sınav haftası) ve Takvimde tarih yokken. Tarih aralıkları kartında Dönem, Başlangıç ve Bitiş seçip Tarih aralığı ekle; sonra Kaydet."),
+                ("Android", "Kurallar → Haftalık program ve uyku → Profil takvimi kartı: Profil takvimini kullan, Takvim dışında kullanılacak profil ve üç günlük tavan (dk). Tarih aralığı ekle bölümünde dönemi seçip tarihleri YYYY-AA-GG yazın, ekleyin; sonra kartın Kaydet düğmesi."),
+            ),
+        },
     )},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
