@@ -1657,6 +1657,18 @@ HOWTO_GROUPS = (
                 ("Android", "Kurallar → Haftalık program ve uyku → Profil takvimi kartı: Profil takvimini kullan, Takvim dışında kullanılacak profil ve üç günlük tavan (dk). Tarih aralığı ekle bölümünde dönemi seçip tarihleri YYYY-AA-GG yazın, ekleyin; sonra kartın Kaydet düğmesi."),
             ),
         },
+        {
+            "code": "b4",
+            "title": "Misafir modu",
+            "youtube": "996w1_WVjyU",
+            "duration": ("1:01", "PT1M1S"),
+            "published": "2026-11-19",
+            "summary": "Misafir geldiğinde ya da özel bir günde süre kurallarını kısa bir süre duraklatın: günlük süre, uygulama süreleri, uyku saati ve okul saati durur; engelli uygulamalar, web güvenliği, görev kapısı ve ebeveyn kilidi çalışmaya devam eder. En fazla 12 saat. Önce Windows’ta, sonra Android’de.",
+            "where": (
+                ("Windows", "Takvim ve misafir sayfası → Misafir modu kartı: Misafir süresini eksi ve artı ile seçip Misafir modunu başlat. Bu düğme sayfanın Kaydet’ini beklemez. Açıkken kart bitiş saatini ve kalan süreyi gösterir; erken kapatmak için Misafir modunu bitir."),
+                ("Android", "Kurallar → Haftalık program ve uyku → Misafir modu kartı: Misafir süresi (15–720 dk) yazıp Misafir modunu başlat; erken kapatmak için aynı kartta Misafir modunu bitir."),
+            ),
+        },
     )},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
