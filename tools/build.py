@@ -1556,7 +1556,7 @@ ARA_TATIL_GROUP_MESSAGE = (
 )
 
 HOWTO_PATH = "nasil-kullanilir"
-HOWTO_UPDATED = ("2026-11-17", "17 Kasım 2026")
+HOWTO_UPDATED = ("2026-11-19", "19 Kasım 2026")
 # "AliKa Nasıl Kullanılır?" videoları YouTube'da durur (13 Kasım 2026 kararı: video dosyaları depoyu büyütmesin).
 # Sayfa açılınca yalnız sitedeki kapak görseli yüklenir; oynat düğmesine basılınca oynatıcı
 # youtube-nocookie.com adresinden açılır (src/scripts/site.js). "youtube" alanı boş olan video sayfaya çıkmaz.
@@ -1631,6 +1631,18 @@ HOWTO_GROUPS = (
             "where": (
                 ("Windows", "Kurallar sayfası → Günlük ekran süresi kartı: Her gün verilen süre, Bir günde en fazla ve Haftalık tablo kullan anahtarı. Değişiklikler Kaydet’e bastığınızda uygulanır. Günün süresi Bugün sayfasında."),
                 ("Android", "Kurallar → Günlük limit → Günlük toplam süre kartı (dakika + Kaydet) ve Haftalık tavan kartı (her güne dakika + kartın Kaydet düğmesi). Günün süresi Panel’deki Bugünkü kullanım kartında."),
+            ),
+        },
+        {
+            "code": "b2",
+            "title": "Uyku saati ve okul saati",
+            "youtube": "9AYjtdcKoq8",
+            "duration": ("1:16", "PT1M16S"),
+            "published": "2026-11-19",
+            "summary": "Uyku saatinde ve okul saatinde ekran kilitlenir; okul saatinde soru çözerek kazanılan süre de bu kilidi açmaz. Önce Windows’ta uyku saati ve haftalık takvimde “Okul” dilimleri, sonra Android’de Gece modu ve çalışma planı.",
+            "where": (
+                ("Windows", "Kurallar sayfası → Uyku saati kartı: anahtar, Başlangıç / Bitiş ve PIN ile açınca kilitsiz süre. Okul saati: Çalışma planı sayfası → Çalışma Planı anahtarı → Haftalık takvim → Takvim dilimi ekle, türü Okul. Değişiklikler Kaydet’e bastığınızda uygulanır."),
+                ("Android", "Uyku saatinin adı Gece modu: Kurallar → Haftalık program ve uyku → Gece modu kartı (anahtar, saatler, kartın Kaydet düğmesi). Okul saati: önce Profil → Ebeveyn araçları → Ek özellikler’de Çalışma planı’nı açın, sonra Sorular → Çalışma planı ve haftalık takvim → Takvim dilimi ekle, türü Okul, Kaydet."),
             ),
         },
     )},
