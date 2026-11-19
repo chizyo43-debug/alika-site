@@ -1681,6 +1681,18 @@ HOWTO_GROUPS = (
                 ("Android", "Profil → Ebeveyn araçları → Ayarlar → İyi oluş kartı: Yumuşak iniş ve Kararma eşiği (dakika), Göz molası hatırlatması ve Hatırlatma aralığı (dakika); her alanın kendi Kaydet düğmesi var. Yüzen süre baloncuğu kartında Baloncuğu göster."),
             ),
         },
+        {
+            "code": "b6",
+            "title": "Uygulama kuralları: limit, engelleme, yeni uygulama onayı",
+            "youtube": "L3DI7nF6jTs",
+            "duration": ("1:18", "PT1M18S"),
+            "published": "2026-11-19",
+            "summary": "Tek tek uygulamalara kural koyun: bir uygulamaya günlük süre verdiğinizde süre dolunca o uygulama o gün kapanır; engellediğiniz uygulama ebeveyn PIN’i olmadan açılmaz. Yeni uygulama onayı açıkken bundan sonra kurulan her uygulama siz serbest bırakana kadar kilitli kalır; şu an kurulu olanlar etkilenmez. Önce Windows’ta, sonra Android’de.",
+            "where": (
+                ("Windows", "Uygulama ve internet sayfası → Uygulama limitleri kartında Uygulama ekle (listeden seçin, süreyi eksi/artı ile ayarlayın); Engelli uygulamalar kartında Uygulama engelle ve Yeni uygulamalar onayımı beklesin; sonra Kaydet. Yeni kurulan uygulama engelli listesinde görünür; serbest bırakmak için listeden silin."),
+                ("Android", "Kurallar → Kurulum izni: Uygulama süre limitleri kartında Uygulama limiti ekle ve Süreyi değiştir; Yeni kurulan uygulamalar kartında Yeni uygulamalar onayımı beklesin; Engelli uygulamalar kartında Engelli uygulama ekle. Değişiklikler hemen kaydedilir."),
+            ),
+        },
     )},
     {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
