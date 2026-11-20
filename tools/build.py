@@ -1731,6 +1731,18 @@ HOWTO_GROUPS = (
                 ("Android", "Kilit ekranındaki ve çocuğun ana ekranındaki “Soru çöz, süre kazan” düğmesi soru ekranını açar. Soru ekranından çıkınca süre yetiyorsa kilit kapanır."),
             ),
         },
+        {
+            "code": "c3",
+            "title": "İçerik ekleme ve Kütüphane",
+            "youtube": "4TfOUfUZgbA",
+            "duration": ("1:25", "PT1M25S"),
+            "published": "2026-11-20",
+            "summary": "Çocuğunuzun çözeceği soruları ve okuyacağı konu anlatımlarını Kütüphane’ye eklersiniz. Dosyayla eklenen içerik siz onaylamadan çocuğa gitmez; onaylanan sorular kilit ekranındaki soru çözmede kullanılır. Yapay zekânın hazırladığı soruları kullanıma açmadan önce gözden geçirin. Önce Windows’ta, sonra Android’de.",
+            "where": (
+                ("Windows", "Ebeveyn paneli → Kütüphane → İçerik Ekle: doğrulanmış içerik indirme, ChatGPT ile soru bankası ya da “İçe Aktar” ile CSV dosyası. Eklenen içerik Onay Bekleyenler’e düşer; “Kullanıma aç” ya da “Reddet”. Kendi sorularınız için Sorular → Soru bankası → “Soru ekle” ya da “Toplu ekle”."),
+                ("Android", "Profil → Ebeveyn araçları → Sorular → Kütüphane ve içerik: kartın istem hazırlayıcısı ülkeye, sınıfa ve derse göre istem hazırlar; “CSV ile konu anlatımı ve soru ekle” dosyaları alır. Önizlemede “Onayla ve Kütüphane’ye ekle”. Çocuk “Kütüphanemi aç” ile okur."),
+            ),
+        },
     )},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
     {"key": "aile-ve-cihazlar", "title": "Aile ve cihazlar", "lead": "Cihaz ekleme, ebeveyn telefonundan yönetim ve kardeş profilleri.", "videos": ()},
