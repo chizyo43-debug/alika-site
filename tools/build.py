@@ -1706,7 +1706,20 @@ HOWTO_GROUPS = (
             ),
         },
     )},
-    {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": ()},
+    {"key": "soru-coz", "title": "Soru çöz, süre kazan", "lead": "Soru çözerek ek süre kazanma ayarları, içerik ekleme ve deneme sınavı.", "videos": (
+        {
+            "code": "c1",
+            "title": "Soru çözerek süre kazanma: oran, günlük tavan, yanlış kuralı",
+            "youtube": "SrqHlCZ0dXg",
+            "duration": ("1:08", "PT1M8S"),
+            "published": "2026-11-20",
+            "summary": "Çocuk soru çözdükçe ek süre kazanır; kaç doğru cevabın bir dakika kazandıracağını siz belirlersiniz. Günlük sınır, bir günde soruyla kazanılacak en fazla süreyi ve en fazla soru sayısını belirler. Yanlış cevap kuralı açıksa, seçtiğiniz sayıda yanlışta kazanılan süreden dakika düşülür; günlük süre bunun altına inmez. Önce Windows’ta, sonra Android’de.",
+            "where": (
+                ("Windows", "Sorular sayfası → Soru ayarları kartında anahtar; Kaç doğru cevap 1 dakika kazandırır, Günde en fazla kazanılan ve Günlük en fazla soru (eksi/artı). Yanlış cevap kuralı kartında Kaç yanlışta ceza ve Cezada düşülecek süre (0 = ceza yok); sonra Kaydet."),
+                ("Android", "Profil → Ebeveyn araçları → Sorular → Soru sistemi kartında Soru çözerek süre kazanma anahtarı; 1 dakika için gereken doğru sayısı, Günlük kazanılabilir üst sınır (dk), Günlük soru üst sınırı ve yanlış cezası kutuları; sonra kartın Kaydet düğmesi."),
+            ),
+        },
+    )},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
     {"key": "aile-ve-cihazlar", "title": "Aile ve cihazlar", "lead": "Cihaz ekleme, ebeveyn telefonundan yönetim ve kardeş profilleri.", "videos": ()},
     {"key": "guvenlik-ve-hesap", "title": "Güvenlik ve hesap", "lead": "Ebeveyn PIN’i, kurtarma kodu, yedekleme ve abonelik.", "videos": ()},
