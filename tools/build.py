@@ -1556,7 +1556,7 @@ ARA_TATIL_GROUP_MESSAGE = (
 )
 
 HOWTO_PATH = "nasil-kullanilir"
-HOWTO_UPDATED = ("2026-11-19", "19 Kasım 2026")
+HOWTO_UPDATED = ("2026-11-20", "20 Kasım 2026")
 # "AliKa Nasıl Kullanılır?" videoları YouTube'da durur (13 Kasım 2026 kararı: video dosyaları depoyu büyütmesin).
 # Sayfa açılınca yalnız sitedeki kapak görseli yüklenir; oynat düğmesine basılınca oynatıcı
 # youtube-nocookie.com adresinden açılır (src/scripts/site.js). "youtube" alanı boş olan video sayfaya çıkmaz.
@@ -1691,6 +1691,18 @@ HOWTO_GROUPS = (
             "where": (
                 ("Windows", "Uygulama ve internet sayfası → Uygulama limitleri kartında Uygulama ekle (listeden seçin, süreyi eksi/artı ile ayarlayın); Engelli uygulamalar kartında Uygulama engelle ve Yeni uygulamalar onayımı beklesin; sonra Kaydet. Yeni kurulan uygulama engelli listesinde görünür; serbest bırakmak için listeden silin."),
                 ("Android", "Kurallar → Kurulum izni: Uygulama süre limitleri kartında Uygulama limiti ekle ve Süreyi değiştir; Yeni kurulan uygulamalar kartında Yeni uygulamalar onayımı beklesin; Engelli uygulamalar kartında Engelli uygulama ekle. Değişiklikler hemen kaydedilir."),
+            ),
+        },
+        {
+            "code": "b7",
+            "title": "İnternet kuralları: web filtresi, güvenli arama, site süresi",
+            "youtube": "Wnl7jdLJBgg",
+            "duration": ("1:14", "PT1M14S"),
+            "published": "2026-11-20",
+            "summary": "Web filtresi, engel listesine eklediğiniz siteleri açtırmaz. Güvenli arama, arama motorlarında ve YouTube’da uygunsuz sonuçları gizler; web filtresi açıkken çalışır. Site süre limiti yalnız Windows’ta var: süre dolunca site gün sonuna kadar bütün tarayıcılarda kapanır. Önce Windows’ta, sonra Android’de.",
+            "where": (
+                ("Windows", "Uygulama ve internet sayfası → Site süre limitleri kartında adresi yazıp Site ekle (süreyi eksi/artı ile ayarlayın); Web filtresi kartında anahtar, Güvenli arama ve Engelli siteler → Ekle; sonra Kaydet. Engel listesi doluyken filtre kapalıysa panel uyarır."),
+                ("Android", "Kurallar → İnternet filtresi: Web filtresi kartında Web filtresi açık (açıklamayı onaylayın, telefonun VPN iznini verin), Güvenli arama ve Alan adı → Siteyi engelle. Değişiklikler hemen kaydedilir; telefonda başka bir VPN açıksa filtre çalışmayabilir."),
             ),
         },
     )},
