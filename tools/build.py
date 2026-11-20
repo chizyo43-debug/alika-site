@@ -1719,6 +1719,18 @@ HOWTO_GROUPS = (
                 ("Android", "Profil → Ebeveyn araçları → Sorular → Soru sistemi kartında Soru çözerek süre kazanma anahtarı; 1 dakika için gereken doğru sayısı, Günlük kazanılabilir üst sınır (dk), Günlük soru üst sınırı ve yanlış cezası kutuları; sonra kartın Kaydet düğmesi."),
             ),
         },
+        {
+            "code": "c2",
+            "title": "Çocuk tarafı: kilit ekranından soru çözme",
+            "youtube": "_v90alvR530",
+            "duration": ("1:18", "PT1M18S"),
+            "published": "2026-11-20",
+            "summary": "Günlük süre dolunca kilit ekranı açılır. Soru çözme açıksa çocuk buradan soru çözmeye başlar ve doğru cevaplarla ek süre kazanır; kazandığı süre yetince kilit kendiliğinden açılır. Yanlış cevapta doğru şık ve varsa çözüm gösterilir, o soru daha sonra yeniden sorulur. Ekrandaki oran örnektir; oranı ve sınırları ebeveyn panelinden siz seçersiniz. Önce Windows’ta, sonra Android’de.",
+            "where": (
+                ("Windows", "Kilit ekranında “Soru çöz — süre kazan” düğmesi soru ekranını açar. Doğru cevaplar süre kazandırır; süre yetince “Süre kazandın! Kilit açılıyor…” yazar."),
+                ("Android", "Kilit ekranındaki ve çocuğun ana ekranındaki “Soru çöz, süre kazan” düğmesi soru ekranını açar. Soru ekranından çıkınca süre yetiyorsa kilit kapanır."),
+            ),
+        },
     )},
     {"key": "gorev-ve-odul", "title": "Görev ve ödül", "lead": "Görevler, odak modu, süre hediye etme ve raporlar.", "videos": ()},
     {"key": "aile-ve-cihazlar", "title": "Aile ve cihazlar", "lead": "Cihaz ekleme, ebeveyn telefonundan yönetim ve kardeş profilleri.", "videos": ()},
