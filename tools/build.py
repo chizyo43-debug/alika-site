@@ -1807,6 +1807,16 @@ DERS_SECTIONS = (
                 "questions": 5,
                 "summary": "Rampanın üstünde kıpırdamadan duran bir kaykaycının enerjisi var mı? Kinetik enerjiyi, çekim ve esneklik potansiyel enerjisini tanıyor; yüksekliği neye göre ölçtüğümüzü ve üç enerjiyi nasıl ayırdığımızı öğreniyoruz. Karşılaştırmalar nitel, hesap yok.",
             },
+            {
+                "code": "f7-t08",
+                "title": "Enerji dönüşümü ve enerjinin korunumu",
+                "youtube": "0Q4KK3QJJDA",
+                "duration": ("13:33", "PT13M33S"),
+                "published": "2026-11-20",
+                "outcome": "FB.7.2.3",
+                "questions": 5,
+                "summary": "Hız treni vagonu aynı yükseklikteki ikinci tepeye neden çıkamıyor? Konum ve hızın birlikte nasıl değiştiğini, kinetik ve potansiyel enerjinin birbirine dönüşmesini, mekanik enerjiyi ve sürtünmede enerjinin ısı yoluyla çevreye aktarılmasını öğreniyoruz. Çubuklar nitel, hesap yok.",
+            },
         )},
     )},
 )
