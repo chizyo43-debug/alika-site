@@ -299,9 +299,19 @@ const tr: HomeCopy = {
     all: 'Tüm rehberler',
     items: [
       {
-        href: '/rehber/ara-tatil-ekran-suresi-plani/',
-        title: 'Ara tatilde ekran süresi',
-        body: '16–20 Kasım ara tatili için hafta sonlarıyla 9 günlük plan: yazdırılabilir tabloyla.',
+        href: '/rehber/cocuga-tablet-telefon-hediye/',
+        title: 'Tablet ya da telefon hediye etmeden önce',
+        body: 'Hesap, yaş sınırı, satın alma doğrulaması ve günlük süre: paketlemeden önce 5 ayar.',
+      },
+      {
+        href: '/rehber/cocuga-ilk-telefon/',
+        title: 'Çocuğa ilk telefon',
+        body: 'İlk telefonu vermeden önce kurulum listesi, ilk hafta kuralları ve yazdırılabilir aile sözleşmesi.',
+      },
+      {
+        href: '/rehber/yariyil-tatili-ekran-suresi/',
+        title: 'Yarıyıl tatilinde ekran süresi',
+        body: 'Karne notuna bağlamadan 16 günlük tatil planı: süre, uyku saati ve okula dönüş.',
       },
       {
         href: '/rehber/15-yas-alti-sosyal-medya-duzenlemesi/',
@@ -312,16 +322,6 @@ const tr: HomeCopy = {
         href: '/rehber/evde-lgs-denemesi/',
         title: 'Evde LGS denemesi',
         body: 'İki oturumlu, süreli prova: LGS 2027 deneme paketi, kapsam seçimi ve sonucu okuma.',
-      },
-      {
-        href: '/rehber/cocuga-tablet-telefon-hediye/',
-        title: 'Tablet ya da telefon hediye etmeden önce',
-        body: 'Hesap, yaş sınırı, satın alma doğrulaması ve günlük süre: paketlemeden önce 5 ayar.',
-      },
-      {
-        href: '/rehber/yariyil-tatili-ekran-suresi/',
-        title: 'Yarıyıl tatilinde ekran süresi',
-        body: 'Karne notuna bağlamadan 16 günlük tatil planı: süre, uyku saati ve okula dönüş.',
       },
       {
         href: '/rehber/ailece-ekran-suresi-plani/',

@@ -1118,6 +1118,7 @@ GUIDES = (
     {
         "slug": "ara-tatil-ekran-suresi-plani",
         "campaign_id": "site_rehber_ara_tatil_tr",
+        "notice": ("Bu yılın ara tatili geçti. Sıradaki tatil için", "yarıyıl tatili planına", "/rehber/yariyil-tatili-ekran-suresi/", "bakın."),
         "platform": "both",
         "title": "Ara Tatilde Ekran Süresi Nasıl Planlanır? 9 Günlük Plan",
         "description": "16–20 Kasım ara tatili için hafta sonlarıyla 9 günlük ekran planı: günlük süre, uyku saati, ekran dışı etkinlik ve okula dönüş. Yazdırılabilir tablo.",
@@ -2213,6 +2214,12 @@ def guide_article_body(guide: dict) -> str:
         f'<section><h2>Kaynaklar</h2><ul class="guide-links">{"".join(f"<li><a href=\"{esc(url)}\" target=\"_blank\" rel=\"noopener noreferrer\">{esc(label)}</a></li>" for label, url in sources)}</ul></section>'
         if sources else ""
     )
+    # Süresi geçmiş mevsimlik rehberler: URL kalır, başta güncel rehbere yönlendiren kısa not.
+    notice = guide.get("notice")
+    notice_html = (
+        f'<p class="guide-notice">{esc(notice[0])} <a href="{esc(notice[2])}">{esc(notice[1])}</a> {esc(notice[3])}</p>'
+        if notice else ""
+    )
     updated = guide.get("updated", GUIDE_UPDATED)
     platform = guide.get("platform", "both" if android_note else "windows")
     store_button = f'<a class="button" href="{microsoft_store_url("tr", guide.get("campaign_id"))}" target="_blank" rel="noopener noreferrer">Microsoft Store’da 7 günlük denemeyi açın</a>'
@@ -2251,6 +2258,7 @@ def guide_article_body(guide: dict) -> str:
         <header>
           <p class="eyebrow">{esc(guide.get("eyebrow", eyebrow))}</p>
           <h1>{esc(guide["title"])}</h1>
+          {notice_html}
           <p class="guide-lede">{esc(guide["lede"])}</p>
           <p class="guide-updated">Son güncelleme: <time datetime="{updated[0]}">{updated[1]}</time></p>
           <p class="guide-disclosure"><strong>Açıklık notu:</strong> Bu içerik AliKa’nın geliştiricisi ErenKa Software tarafından hazırlanmıştır. {disclosure}</p>

@@ -3232,6 +3232,19 @@ h3 {
   border-radius: var(--radius-sm);
 }
 
+.guide-notice {
+  margin: 0 0 18px;
+  padding: 14px 18px;
+  color: var(--navy);
+  background: #fff6dc;
+  border-left: 4px solid #f2b705;
+  border-radius: var(--radius-sm);
+}
+
+.guide-notice a {
+  font-weight: 700;
+}
+
 .guide-breadcrumb {
   display: flex;
   gap: 10px;
