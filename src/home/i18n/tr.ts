@@ -162,7 +162,7 @@ const tr: HomeCopy = {
       lead: 'Ekran başındaki zaman öğrenmeye döner.',
       items: {
         quiz: { name: 'Soru çöz, süre kazan', body: 'Bir dakika için kaç doğru gerektiğini ve günlük üst sınırı siz seçersiniz.' },
-        content: { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik şimdilik Türkiye ortaokul (5–8. sınıf), Japonya ortaokul (中学校 1–3, 7–9. sınıf, Japonca) ve Güney Kore ortaokul (중학교 1–3, 7–9. sınıf, Korece; 9. sınıf ön hazırlık) müfredatı için; ders ve konuya göre seçilir. Kendi sorularınızı Excel ya da CSV ile eklersiniz.' },
+        content: { name: 'Hazır içerik ve kendi sorularınız', body: 'Hazır içerik şimdilik Türkiye ortaokul (5–8. sınıf), Japonya ortaokul (中学校 1–3, 7–9. sınıf, Japonca) ve Güney Kore ortaokul (중학교 1–3, 7–9. sınıf, Korece; 9. sınıf ön hazırlık) müfredatı için; ders ve konuya göre seçilir. Kendi sorularınızı Excel ya da CSV ile eklersiniz; Android’de AliKa yapay zekâ için hazır istem de oluşturur.' },
         figures: { name: 'Şekilli sorular', body: 'Geometri, koordinat düzlemi, grafik, tablo ve devre şemaları net çizilir.' },
         exam: { name: 'Deneme sınavı ve sonuç karnesi', body: 'Planladığınız saatte deneme sınavı. Sonuç karnesi ölçüm içindir, süre ödülü vermez.' },
         notes: { name: 'Ders notları ve Öğrenme Stüdyosu', body: 'Eklediğiniz ders notları bölüm bölüm açılır; çözümlü örnekler ve cevap açıklamalarıyla.' },

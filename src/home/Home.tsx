@@ -408,8 +408,8 @@ const FAMILY: { key: FamilyFeature; on: FeaturePlatform[] }[] = [
 function featureGroups(t: HomeCopy) {
   const { control, learning, family } = t.features;
   return [
-    { id: 'kontrol', title: control.title, lead: control.lead, items: CONTROL.map((item) => ({ ...control.items[item.key], on: item.on })) },
     { id: 'ogrenme', title: learning.title, lead: learning.lead, items: LEARNING.map((item) => ({ ...learning.items[item.key], on: item.on })) },
+    { id: 'kontrol', title: control.title, lead: control.lead, items: CONTROL.map((item) => ({ ...control.items[item.key], on: item.on })) },
     { id: 'aile', title: family.title, lead: family.lead, items: FAMILY.map((item) => ({ ...family.items[item.key], on: item.on })) },
   ];
 }
